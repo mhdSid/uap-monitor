@@ -1,0 +1,1 @@
+export { renderSection } from './section'

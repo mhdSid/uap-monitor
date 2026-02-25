@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta -->
+    <title>UAP Monitor — Real-Time Global UAP/UFO Sighting Intelligence</title>
+    <meta name="title" content="UAP Monitor — Real-Time Global UAP/UFO Sighting Intelligence" />
+    <meta name="description" content="Live UAP/UFO sighting dashboard aggregating NUFORC, CJK, and Russian intelligence sources. Credibility scoring, shape analysis, and flight cross-referencing in one view." />
+    <meta name="keywords" content="UAP, UFO, sighting monitor, NUFORC, real-time, CJK intelligence, OSINT, aerial phenomena, sighting tracker, credibility scoring, Japan UFO, China UAP, Korea UFO" />
+    <meta name="author" content="Sippi" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="robots" content="index, follow" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- App Discovery -->
+    <meta name="application-name" content="UAP Monitor" />
+    <meta name="subject" content="Real-Time UAP/UFO Sighting Intelligence" />
+    <meta name="classification" content="OSINT Dashboard, UAP Research Tool" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://uap-monitor.vercel.app/" />
+    <meta property="og:title" content="UAP Monitor — Real-Time Global UAP/UFO Sighting Intelligence" />
+    <meta property="og:description" content="Live UAP/UFO sighting dashboard aggregating NUFORC, CJK, and Russian intelligence sources with credibility scoring and flight cross-referencing." />
+    <meta property="og:site_name" content="UAP Monitor" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://uap-monitor.vercel.app/" />
+    <meta name="twitter:title" content="UAP Monitor — Real-Time UAP/UFO Sighting Intelligence" />
+    <meta name="twitter:description" content="Live UAP/UFO sighting dashboard with CJK + Russia intelligence layer. Credibility scoring, shape analysis, cross-referencing." />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "UAP Monitor",
+      "alternateName": "UAP MON",
+      "url": "https://uap-monitor.vercel.app/",
+      "description": "Real-time UAP/UFO sighting monitor aggregating global intelligence sources with credibility scoring and cross-referencing.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "Real-time NUFORC sighting aggregation",
+        "CJK language source intelligence",
+        "Credibility scoring system",
+        "Shape and pattern analysis",
+        "Flight data cross-referencing",
+        "Region-grouped data grids",
+        "Offline-capable PWA"
+      ],
+      "keywords": "UAP, UFO, NUFORC, OSINT, sighting tracker, CJK intelligence"
+    }
+    </script>
+
+    <!-- App Shell: inline critical CSS for instant first paint -->
+    <style>
+      body{margin:0;background:#0a0a0a;font-family:'Menlo','Monaco','Cascadia Mono','Courier New',monospace}
+      .shell{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;color:#555}
+      .shell svg{display:block;margin-bottom:16px}
+      .shell__hand{transform-origin:40px 40px;animation:rs 2s linear infinite}
+      .shell__text{font-size:11px;letter-spacing:2px}
+      @keyframes rs{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    </style>
+  </head>
+  <body>
+    <!-- App Shell: visible instantly before JS loads -->
+    <div id="app">
+      <div class="shell" aria-label="Loading UAP Monitor">
+        <svg viewBox="0 0 80 80" width="80" height="80" fill="none" role="img" aria-hidden="true">
+          <circle cx="40" cy="40" r="36" stroke="#1e1e1e" stroke-width="1"/>
+          <circle cx="40" cy="40" r="24" stroke="#1e1e1e" stroke-width="1"/>
+          <circle cx="40" cy="40" r="12" stroke="#1e1e1e" stroke-width="1"/>
+          <circle cx="40" cy="40" r="2.5" fill="#00ff41"/>
+          <line x1="40" y1="40" x2="40" y2="6" stroke="#00ff41" stroke-width="1.5" stroke-linecap="round" class="shell__hand"/>
+        </svg>
+        <div class="shell__text">INITIALIZING...</div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
