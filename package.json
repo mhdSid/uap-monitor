@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "data:nuforc": "node scripts/process-nuforc.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -15,6 +16,5 @@
     "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.2.0"
-  },
-  "packageManager": "yarn@4.12.0"
+  }
 }

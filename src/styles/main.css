@@ -182,65 +182,6 @@ body {
   50% { opacity: 0.2; }
 }
 
-/* ===== DATA GRID ===== */
-.data-grid {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: var(--font-mono);
-  font-size: 11px;
-}
-
-.data-grid__th {
-  padding: 4px 0;
-  color: var(--color-muted);
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-align: left;
-}
-
-.data-grid__th--right { text-align: right; }
-.data-grid__th--center { text-align: center; }
-
-.data-grid__row {
-  border-top: 1px solid #111;
-}
-
-.data-grid__row--clickable {
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.data-grid__row--clickable:hover {
-  background: rgba(0, 255, 65, 0.03);
-}
-
-.data-grid__td {
-  padding: 8px 4px 8px 0;
-  vertical-align: middle;
-}
-
-.data-grid__td--right { text-align: right; }
-.data-grid__td--center { text-align: center; }
-
-.data-grid__empty {
-  padding: 24px;
-  text-align: center;
-  color: var(--color-muted);
-}
-
-/* ===== CELL HELPERS ===== */
-.cell-region {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.cell-region__name { color: var(--color-text-strong); }
-.cell-region__coords { font-size: 9px; color: var(--color-dim); }
-
-.cell-type { color: var(--color-cyan); }
-.cell-time { font-size: 9px; color: var(--color-dim); }
 
 /* ===== CREDIBILITY BAR ===== */
 .credibility-bar {
@@ -519,6 +460,232 @@ body {
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== YEAR SELECTOR ===== */
+.year-selector {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.year-selector__label {
+  font-size: 9px;
+  color: var(--color-muted);
+  letter-spacing: 2px;
+}
+
+.year-selector__select {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 6px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+}
+
+.year-selector__select:focus {
+  border-color: var(--color-green);
+}
+
+.year-selector__separator {
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.year-selector__count {
+  margin-left: auto;
+  font-size: 9px;
+  color: var(--color-dim);
+  letter-spacing: 1px;
+}
+
+/* ===== FILTER TOOLBAR ===== */
+.filter-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-toolbar__search {
+  flex: 1;
+  min-width: 140px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 8px;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+
+.filter-toolbar__search::placeholder {
+  color: var(--color-dim);
+  letter-spacing: 1px;
+  font-size: 9px;
+}
+
+.filter-toolbar__search:focus {
+  border-color: var(--color-green);
+}
+
+.filter-toolbar__selects {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-toolbar__select {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 4px 6px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-toolbar__select:focus {
+  border-color: var(--color-green);
+}
+
+/* ===== DATA GRID ===== */
+.data-grid__wrapper {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.data-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  table-layout: fixed;
+}
+
+.data-grid__th {
+  color: var(--color-muted);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background: #0e0e0e;
+  z-index: 1;
+  border-bottom: 1px solid var(--color-border);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.data-grid__th--right { text-align: right; }
+.data-grid__th--center { text-align: center; }
+
+.data-grid__th--sortable {
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.data-grid__th--sortable:hover {
+  color: var(--color-green);
+}
+
+.data-grid__th--sorted {
+  color: var(--color-green);
+}
+
+.data-grid__row {
+  border-top: 1px solid #111;
+}
+
+.data-grid__row--clickable {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.data-grid__row--clickable:hover {
+  background: rgba(0, 255, 65, 0.03);
+}
+
+.data-grid__td {
+  vertical-align: middle;
+}
+
+.data-grid__td--right { text-align: right; }
+.data-grid__td--center { text-align: center; }
+
+.data-grid__empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.data-grid__sentinel {
+  height: 1px;
+}
+
+/* ===== CELL: REPORT (summary primary, region secondary) ===== */
+.cell-report {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cell-report__summary {
+  color: var(--color-text);
+  font-size: 11px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.cell-report__meta {
+  font-size: 9px;
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== CELL HELPERS ===== */
+.cell-type { color: var(--color-cyan); }
+.cell-time { font-size: 10px; color: var(--color-dim); white-space: nowrap; }
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.empty-state__text {
+  font-size: 11px;
+  color: var(--color-muted);
+  letter-spacing: 2px;
+  text-align: center;
 }
 
 /* ===== RESPONSIVE ===== */

@@ -24,6 +24,22 @@ export default defineConfig({
         navigateFallbackAllowlist: [/^\/$/],
         runtimeCaching: [
           {
+            urlPattern: /\/data\/nuforc-.*\.json$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'nuforc-data',
+              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            },
+          },
+          {
+            urlPattern: /\/data\/nuforc-manifest\.json$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'nuforc-manifest',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 },
+            },
+          },
+          {
             urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com/,
             handler: 'StaleWhileRevalidate',
             options: { cacheName: 'fonts', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } },

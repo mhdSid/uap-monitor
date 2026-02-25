@@ -2,6 +2,7 @@ import type {
   Continent,
   DataSourceId,
   DataSourceStatus,
+  SightingCharacteristic,
   SightingShape,
   SightingStatus,
   TagVariant,
@@ -14,18 +15,71 @@ export interface Coordinates {
   lng: number
 }
 
+/**
+ * A UAP sighting record.
+ *
+ * Fields fall into three categories:
+ *   1. NUFORC-native  — directly from the source data
+ *   2. Geocoded       — derived from location string (lat/lng, country, continent)
+ *   3. Computed       — calculated by our pipeline (credibility, status)
+ */
 export interface Sighting {
+  /** Unique identifier (NUFORC sighting number as string) */
   id: string
-  coordinates: Coordinates
-  region: string
-  country: string
-  continent: Continent
-  shape: SightingShape
-  status: SightingStatus
-  credibility: number
-  reportedAt: string
-  summary: string
+
+  /** Source database */
   source: DataSourceId
+
+  // ─── NUFORC-native fields ────────────────────────────────────────
+
+  /** When the sighting occurred (ISO 8601) */
+  occurredAt: string
+
+  /** When the sighting was reported to NUFORC (ISO 8601) */
+  reportedAt: string
+
+  /** When the report was posted/published (ISO 8601) */
+  postedAt: string
+
+  /** Raw location string from source (e.g. "Basye, VA, USA") */
+  location: string
+
+  /** Shape classification */
+  shape: SightingShape
+
+  /** Duration as reported (free text, e.g. "2 min", "several seconds") */
+  duration: string
+
+  /** Number of witnesses (0 = unknown) */
+  observers: number
+
+  /** First ~200 chars of the witness summary */
+  summary: string
+
+  /** Observable characteristics reported */
+  characteristics: SightingCharacteristic[]
+
+  // ─── Geocoded fields (nullable until geocoded) ───────────────────
+
+  /** Resolved coordinates (null if geocoding failed) */
+  coordinates: Coordinates | null
+
+  /** City / region name parsed from location */
+  region: string
+
+  /** Country parsed from location */
+  country: string
+
+  /** Continent (derived from country) */
+  continent: Continent
+
+  // ─── Computed fields ─────────────────────────────────────────────
+
+  /** Investigation status */
+  status: SightingStatus
+
+  /** Credibility score 0-100 (computed from observers, characteristics, etc.) */
+  credibility: number
 }
 
 export interface RegionStats {
@@ -58,6 +112,29 @@ export interface DataSource {
   status: DataSourceStatus
 }
 
+// ─── NUFORC data layer ──────────────────────────────────────────────
+
+export interface YearChunkMeta {
+  count: number
+  file: string
+  sizeKB: number
+}
+
+export interface NuforcManifest {
+  generatedAt: string
+  totalRecords: number
+  skippedRecords: number
+  years: Record<string, YearChunkMeta>
+}
+
+export interface SightingFilter {
+  search?: string
+  shape?: SightingShape
+  continent?: Continent
+  minCredibility?: number
+  country?: string
+}
+
 // ─── UI state ────────────────────────────────────────────────────────
 
 export interface AsyncState<T> {
@@ -84,6 +161,8 @@ export interface DataGridColumn<T> {
   key: keyof T | string
   label: string
   align?: 'left' | 'right' | 'center'
+  width?: string
+  sortable?: boolean
   render?: (row: T) => HTMLElement | string
 }
 

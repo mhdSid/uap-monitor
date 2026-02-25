@@ -1,10 +1,9 @@
 import { DataSourceId, DataSourceStatus } from '@/enums'
 import type { DataSource, Sighting } from '@/types'
-import { useAsyncAction } from './use-async-action'
-import { getSightings } from '@/data/sightings'
+import { useNuforc } from './use-nuforc'
 
 const SOURCE_REGISTRY: DataSource[] = [
-  { id: DataSourceId.NUFORC, label: 'NUFORC', status: DataSourceStatus.ONLINE },
+  { id: DataSourceId.NUFORC, label: 'NUFORC', status: DataSourceStatus.SYNCING },
   { id: DataSourceId.ENIGMA, label: 'ENIGMA', status: DataSourceStatus.DISABLED },
   { id: DataSourceId.NASA_CNEOS, label: 'NASA CNEOS', status: DataSourceStatus.DISABLED },
   { id: DataSourceId.OPENSKY, label: 'OPENSKY', status: DataSourceStatus.DISABLED },
@@ -14,20 +13,25 @@ const SOURCE_REGISTRY: DataSource[] = [
   { id: DataSourceId.AARO, label: 'AARO', status: DataSourceStatus.DISABLED },
 ]
 
-function simulateLatency<T>(data: T, ms = 800): Promise<T> {
-  return new Promise((resolve) => setTimeout(() => resolve(data), ms))
-}
-
 export function useDataSource() {
-  const sightingsAction = useAsyncAction<Sighting[]>()
+  const nuforc = useNuforc()
 
   async function fetchSightings(): Promise<Sighting[]> {
-    let result: Sighting[] = []
-    await sightingsAction.execute(
-      () => simulateLatency(getSightings()),
-      (data) => { result = data },
-    )
-    return result
+    const sightings = await nuforc.loadDefault()
+
+    // Update NUFORC source status based on result
+    const nuforcSource = SOURCE_REGISTRY.find((s) => s.id === DataSourceId.NUFORC)
+    if (nuforcSource) {
+      nuforcSource.status = sightings.length > 0
+        ? DataSourceStatus.ONLINE
+        : DataSourceStatus.OFFLINE
+    }
+
+    return sightings
+  }
+
+  async function fetchYearRange(from: number, to: number): Promise<Sighting[]> {
+    return nuforc.loadYearRange(from, to)
   }
 
   function getSources(): DataSource[] {
@@ -36,7 +40,8 @@ export function useDataSource() {
 
   return {
     fetchSightings,
+    fetchYearRange,
     getSources,
-    sightingsState: sightingsAction.state,
+    nuforc,
   }
 }

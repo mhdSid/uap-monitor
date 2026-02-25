@@ -41,6 +41,22 @@ export enum SightingShape {
   UNKNOWN = 'Unknown',
 }
 
+export enum SightingCharacteristic {
+  LIGHTS_ON_OBJECT = 'Lights on object',
+  AURA_OR_HAZE = 'Aura or haze around object',
+  AIRCRAFT_NEARBY = 'Aircraft nearby',
+  ANIMALS_REACTED = 'Animals reacted',
+  LEFT_A_TRAIL = 'Left a trail',
+  EMITTED_OTHER_OBJECTS = 'Emitted other objects',
+  CHANGED_COLOR = 'Changed Color',
+  EMITTED_BEAMS = 'Emitted beams',
+  ELECTRICAL_OR_MAGNETIC = 'Electrical or magnetic effects',
+  POSSIBLE_ABDUCTION = 'Possible abduction',
+  MISSING_TIME = 'Missing Time',
+  MARKS_ON_BODY = 'Marks found on body afterwards',
+  LANDED = 'Landed',
+}
+
 export enum DataSourceId {
   NUFORC = 'NUFORC',
   ENIGMA = 'ENIGMA',
