@@ -3,12 +3,15 @@ import { h, addClass, removeClass, setAttrs } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
 
 let activeModal: HTMLElement | null = null
+let triggerElement: HTMLElement | null = null
 
 export function openModal(slots: ModalSlots): void {
   closeModal()
 
+  // Remember what element opened the modal so we can return focus
+  triggerElement = document.activeElement as HTMLElement | null
+
   const closeIcon = iconClose(14)
-  closeIcon.style.color = 'var(--color-muted)'
 
   const closeBtn = h('button', {
     className: 'modal__close',
@@ -41,6 +44,12 @@ export function openModal(slots: ModalSlots): void {
   document.body.appendChild(overlay)
   activeModal = overlay
   setAttrs(document.body, { 'aria-hidden': 'true' })
+
+  document.addEventListener('keydown', handleEscape)
+
+  // Focus the close button
+  closeBtn.focus()
+
   requestAnimationFrame(() => addClass(overlay, 'modal-overlay--visible'))
 }
 
@@ -48,7 +57,25 @@ export function closeModal(): void {
   if (!activeModal) return
   removeClass(activeModal, 'modal-overlay--visible')
   setAttrs(document.body, { 'aria-hidden': null })
+
+  document.removeEventListener('keydown', handleEscape)
+
   const ref = activeModal
-  setTimeout(() => ref.remove(), 200)
+  const returnTarget = triggerElement
+
   activeModal = null
+  triggerElement = null
+
+  setTimeout(() => {
+    ref.remove()
+
+    // Restore focus to the element that triggered the modal
+    if (returnTarget && returnTarget.isConnected) {
+      returnTarget.focus()
+    }
+  }, 200)
+}
+
+function handleEscape(e: KeyboardEvent): void {
+  if (e.key === 'Escape') closeModal()
 }

@@ -90,9 +90,10 @@ function renderYearSelector(props: YearSelectorProps): HTMLElement {
     )
   }
 
-  function makeSelect(selected: number): HTMLSelectElement {
+  function makeSelect(selected: number, label: string): HTMLSelectElement {
     const sel = document.createElement('select')
     sel.className = 'year-selector__select'
+    sel.setAttribute('aria-label', label)
     for (const y of availableYears) {
       const opt = document.createElement('option')
       opt.value = String(y)
@@ -103,8 +104,8 @@ function renderYearSelector(props: YearSelectorProps): HTMLElement {
     return sel
   }
 
-  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom))
-  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo))
+  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom), 'From year')
+  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo), 'To year')
 
   const countEl = h('span', { className: 'year-selector__count' }, '')
 
@@ -151,6 +152,7 @@ function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   searchInput.type = 'text'
   searchInput.className = 'filter-toolbar__search'
   searchInput.placeholder = 'SEARCH REPORTS...'
+  searchInput.setAttribute('aria-label', 'Search sighting reports')
   searchInput.addEventListener('input', () => {
     const val = searchInput.value.trim()
     currentFilter.search = val || undefined
@@ -161,6 +163,7 @@ function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   // Shape filter
   const shapeSelect = document.createElement('select')
   shapeSelect.className = 'filter-toolbar__select'
+  shapeSelect.setAttribute('aria-label', 'Filter by shape')
   const shapeAll = document.createElement('option')
   shapeAll.value = ''
   shapeAll.textContent = 'ALL SHAPES'
@@ -181,6 +184,7 @@ function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   // Continent filter
   const continentSelect = document.createElement('select')
   continentSelect.className = 'filter-toolbar__select'
+  continentSelect.setAttribute('aria-label', 'Filter by region')
   const contAll = document.createElement('option')
   contAll.value = ''
   contAll.textContent = 'ALL REGIONS'
@@ -206,7 +210,7 @@ function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
     emit()
   })
 
-  return h('div', { className: 'filter-toolbar' },
+  return h('div', { className: 'filter-toolbar', role: 'search', 'aria-label': 'Filter sighting reports' },
     searchInput,
     h('div', { className: 'filter-toolbar__selects' },
       shapeSelect,
@@ -339,6 +343,8 @@ export async function createApp(root: HTMLElement): Promise<void> {
 
   async function applyFilterAndRender(): Promise<void> {
     const version = ++renderVersion
+
+    showLoader()
 
     const filtered = await filterSightings(allSightings, activeFilter)
 

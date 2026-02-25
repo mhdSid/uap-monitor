@@ -6,13 +6,13 @@
   --color-border-strong: #333;
   --color-text: #c0c0c0;
   --color-text-strong: #e0e0e0;
-  --color-muted: #555;
-  --color-dim: #333;
+  --color-muted: #777;
+  --color-dim: #555;
   --color-green: #00ff41;
   --color-amber: #f59e0b;
-  --color-red: #ef4444;
-  --color-cyan: #06b6d4;
-  --color-purple: #8b5cf6;
+  --color-red: #f87171;
+  --color-cyan: #22d3ee;
+  --color-purple: #a78bfa;
   --font-mono: 'Menlo', 'Monaco', 'Cascadia Mono', 'Courier New', monospace;
   --radius-sm: 2px;
 }
@@ -83,6 +83,24 @@ body {
   font-size: 11px;
   color: var(--color-muted);
   letter-spacing: 2px;
+}
+
+.app-header__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-header__github {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  color: var(--color-muted);
+  transition: color 0.15s;
+}
+
+.app-header__github:hover {
+  color: var(--color-text-strong);
 }
 
 /* ===== MAIN ===== */
@@ -354,9 +372,11 @@ body {
   cursor: pointer;
   padding: 4px;
   display: flex;
+  color: var(--color-muted);
 }
 
-.modal__close:hover svg {
+.modal__close:hover,
+.modal__close:focus-visible {
   color: var(--color-text-strong);
 }
 
@@ -489,10 +509,9 @@ body {
   padding: 3px 6px;
   letter-spacing: 1px;
   cursor: pointer;
-  outline: none;
 }
 
-.year-selector__select:focus {
+.year-selector__select:focus-visible {
   border-color: var(--color-green);
 }
 
@@ -530,7 +549,6 @@ body {
   font-size: 11px;
   padding: 4px 8px;
   letter-spacing: 0.5px;
-  outline: none;
 }
 
 .filter-toolbar__search::placeholder {
@@ -539,7 +557,7 @@ body {
   font-size: 9px;
 }
 
-.filter-toolbar__search:focus {
+.filter-toolbar__search:focus-visible {
   border-color: var(--color-green);
 }
 
@@ -557,10 +575,9 @@ body {
   padding: 4px 6px;
   letter-spacing: 1px;
   cursor: pointer;
-  outline: none;
 }
 
-.filter-toolbar__select:focus {
+.filter-toolbar__select:focus-visible {
   border-color: var(--color-green);
 }
 
@@ -613,7 +630,7 @@ body {
 }
 
 .data-grid__row {
-  border-top: 1px solid #111;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .data-grid__row--clickable {
@@ -623,6 +640,12 @@ body {
 
 .data-grid__row--clickable:hover {
   background: rgba(0, 255, 65, 0.03);
+}
+
+.data-grid__row--clickable:focus-visible {
+  outline: none;
+  background: rgba(0, 255, 65, 0.06);
+  box-shadow: inset 2px 0 0 var(--color-green);
 }
 
 .data-grid__td {
@@ -686,6 +709,18 @@ body {
   color: var(--color-muted);
   letter-spacing: 2px;
   text-align: center;
+}
+
+/* ===== FOCUS RING (a11y) ===== */
+:focus-visible {
+  outline: 1px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+/* Inputs and selects use border-color change — suppress outline to avoid double ring */
+input:focus-visible,
+select:focus-visible {
+  outline: none;
 }
 
 /* ===== RESPONSIVE ===== */

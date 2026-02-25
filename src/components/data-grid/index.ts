@@ -63,7 +63,20 @@ function renderRow<T>(
 
   if (onRowClick) {
     addClass(tr, 'data-grid__row--clickable')
+    tr.tabIndex = 0
+    tr.setAttribute('role', 'button')
+
+    // Store ID for focus return after modal close
+    const id = (row as Record<string, unknown>).id
+    if (id != null) tr.dataset.sightingId = String(id)
+
     tr.addEventListener('click', () => onRowClick(row))
+    tr.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onRowClick(row)
+      }
+    })
   }
 
   return tr

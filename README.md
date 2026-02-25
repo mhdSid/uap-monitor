@@ -1,13 +1,13 @@
 # UAP Monitor
 
-**Real-time UAP/UFO sighting dashboard** — aggregating UAP/UFO sighting data from every open source, unlocking the missing CJK + Russia region, and cross-referencing reports against known objects.
+**Real-time UAP/UFO sighting dashboard** — aggregating open-source UAP/UFO sighting data, unlocking the missing CJK + Russia region, and cross-referencing reports against known objects.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-> **Status: Work in Progress** — Core UI and component architecture complete. Data integration in progress.
+> **Status: Active Development** — NUFORC data pipeline complete. 147K sightings searchable. CJK + Russia integration next.
 
 ---
 
@@ -23,30 +23,44 @@ Enigma Labs — the largest modern sighting platform — has **510 Japan, 315 Ch
 
 Meanwhile, the tools that do exist are broken in other ways:
 
-- **Fragmented** — NUFORC, MUFON, GEIPAN, Enigma Labs, NASA fireballs, GDELT news all sit in separate silos with incompatible formats. No unified operational view exists.
-- **No cross-referencing** — A sighting 2km from a commercial flight path could be debunked in seconds with OpenSky ADS-B data. Nobody does this automatically.
-- **Stuck in the 90s** — The primary research interfaces are static HTML tables and paywalled desktop apps. There is no real-time, filterable, credibility-scored dashboard for the phenomenon that now has congressional hearings and a dedicated Pentagon office.
+- **Fragmented** — NUFORC, MUFON, GEIPAN, Enigma Labs, NASA fireballs, GDELT news all sit in separate silos with incompatible formats
+- **No cross-referencing** — A sighting 2km from a commercial flight path could be debunked in seconds with OpenSky ADS-B data. Nobody does this automatically
+- **Stuck in the 90s** — The primary research interfaces are static HTML tables and paywalled desktop apps
 
-UAP Monitor exists to solve all three: **aggregate every open source into one view**, **unlock the CJK + Russia data that Western researchers can't access**, and **cross-reference sightings against known objects** so researchers can focus on the cases that actually matter.
+UAP Monitor exists to solve all three.
 
 ---
 
-## What It Does
+## Features
 
-A terminal-aesthetic PWA dashboard that displays UAP/UFO sighting data grouped by continent, with credibility scoring, shape classification, status tracking, and a news feed aggregating UAP-related reporting from CJK and Russian sources.
+### Data Pipeline
+- **NUFORC integration** — 147K sightings processed from the HuggingFace dataset via build-time Node script
+- **Year-chunked static JSON** — Raw 191MB dataset stripped, normalized, and split into per-year files (~20-30MB total)
+- **Naive credibility scoring** — Computed from observer count, characteristics detail, and report specificity
+- **Location parsing** — Free-text location strings resolved to country, region, and continent
 
-### Current Features
-
-- **Continent-grouped sighting grids** — Asia-Pacific, Europe, Americas with clickable detail modals
+### Dashboard
+- **Year range selector** — FROM/TO dropdowns to load any time range on demand
+- **Search + filters** — Full-text search across summaries/locations, shape and continent dropdowns
+- **Continent-grouped grids** — Sightings grouped by Asia-Pacific, Europe, Americas, Oceania, Africa
+- **Sortable columns** — Click any header to sort ascending/descending
+- **Infinite scroll** — 100 rows per grid initially, more loaded on scroll via IntersectionObserver
+- **Sighting detail modals** — Full report with shape, duration, observers, characteristics, credibility
 - **25 NUFORC shape classifications** — Orb, Triangle, Disk, Cigar, Fireball, Formation, and 19 more
-- **Credibility scoring** — Color-coded bars (green >80, amber >65, muted below)
+- **Credibility bars** — Color-coded (green >80, amber >65)
 - **Status tracking** — VERIFIED, PENDING, ANALYZING, DEBUNKED per sighting
-- **UAP news feed** — Aggregated reporting from NHK, Xinhua, Yonhap, TASS, Kyodo
-- **Data source status panel** — Live indicators for each connected source
-- **CRT terminal aesthetic** — Scanlines, monospace, radar loader, typing ticker
-- **Offline-capable PWA** — Installable, service worker with offline fallback
+- **Data source panel** — Live status indicators for each connected source
+
+### Technical
+- **Vanilla TypeScript** — No framework. 26KB gzipped JS, 2.4KB gzipped CSS. Builds in <700ms
+- **Component architecture** — Every UI element is a typed `render(props): HTMLElement` function
+- **DOM utility layer** — `h()`, `safeHtml()`, class/visibility helpers. Zero raw DOM calls outside `utils/dom.ts`
+- **Non-blocking rendering** — `requestAnimationFrame` batching + chunked filtering with `setTimeout` yields
+- **PWA** — Installable, service worker with offline fallback, CacheFirst for data chunks
 - **App shell** — Inline critical CSS + SVG loader renders before JS loads
-- **Component architecture** — Every UI element is a typed `render(props)` component
+- **WCAG AA contrast** — All text colors meet 4.5:1 minimum contrast ratio against the dark background
+- **Keyboard accessible** — Focus-visible outlines, Escape to close modals, aria labels on all controls
+- **CRT aesthetic** — Scanlines, monospace, radar loader, typing ticker
 
 ---
 
@@ -55,36 +69,85 @@ A terminal-aesthetic PWA dashboard that displays UAP/UFO sighting data grouped b
 ```
 src/
 ├── components/
-│   ├── header/              renderHeader()
+│   ├── header/              renderHeader() — clock, GitHub link
 │   ├── footer/              renderFooter()
-│   ├── ticker/              renderTicker(props)
-│   ├── loader/              renderLoader()
+│   ├── ticker/              renderTicker(props) — typing animation
+│   ├── loader/              renderLoader() — radar sweep SVG
 │   ├── tags/                renderTag / renderStatusTag / renderLiveTag
-│   ├── data-grid/           renderDataGrid<T>(props)
+│   ├── data-grid/           renderDataGrid<T>(props) — sortable, infinite scroll
 │   ├── credibility-bar/     renderCredibilityBar(props)
 │   ├── data-sources/        renderDataSources(props)
-│   ├── news-feed/           renderNewsFeed(props)
+│   ├── news-feed/           renderNewsFeed(props) — ready for GDELT
 │   ├── sighting-modal/      openSightingModal(sighting)
-│   ├── modal/               openModal / closeModal
+│   ├── modal/               openModal / closeModal — Escape key, focus trap
 │   ├── toast/               renderToast / useToast
 │   ├── layout/              renderSection(props, content)
-│   └── icons/               iconRadar / iconClose / iconChevron / ...
-├── composables/             useAsyncAction, useDataSource
-├── data/                    Mock sighting data (replaced by real sources)
-├── enums/                   Continent, SightingShape, SightingStatus, ...
-├── types/                   Full TypeScript interfaces for all props
+│   └── icons/               iconRadar / iconClose / iconGithub / ...
+├── composables/
+│   ├── use-nuforc.ts        Manifest + year chunk fetch, cache, filter engine
+│   ├── use-data-source.ts   Source registry, delegates to useNuforc
+│   ├── use-infinite-scroll.ts IntersectionObserver pagination
+│   └── use-async-action.ts  Generic async state + toast errors
+├── data/
+│   └── sightings.ts         groupByContinent utility (no mock data)
+├── enums/                   Continent, SightingShape, SightingStatus, SightingCharacteristic, ...
+├── types/                   Full TypeScript interfaces — Sighting, NuforcManifest, SightingFilter, ...
 ├── utils/
-│   └── dom.ts               h(), el(), fragment(), text(), show/hide,
-│                             addClass/removeClass, safeHtml(), qs/qsa,
-│                             mount(), replaceChildren(), generateId()
-├── styles/                  Single CSS file, CSS variables, responsive
-├── app.ts                   Orchestration only (~140 lines)
+│   └── dom.ts               h(), el(), fragment(), safeHtml(), qs/qsa, mount(), show/hide, ...
+├── styles/                  Single CSS file, CSS variables, WCAG AA colors
+├── app.ts                   Orchestration — year selector, filter toolbar, grid rendering
 └── main.ts                  Entry point
 ```
 
-**Tech stack**: Vite + vanilla TypeScript + PWA. No framework. 19KB gzipped JS, 2KB gzipped CSS. Builds in under 500ms.
+---
 
-**Zero raw DOM calls** outside `utils/dom.ts` — every component uses the `h()` builder or utility functions. The only `document.body` references are for top-level overlays (modal, toast).
+## Getting Started
+
+```bash
+git clone https://github.com/mhdSid/uap-monitor.git
+cd uap-monitor
+yarn install
+yarn dev          # http://localhost:5173 — loads with test data
+```
+
+### Load Real Data (147K NUFORC Sightings)
+
+```bash
+# Download the dataset (~191MB)
+curl -L -o nuforc.json https://huggingface.co/datasets/kcimc/NUFORC/resolve/main/nuforc.json
+
+# Process into year-chunked static JSON
+yarn data:nuforc
+
+# Start dev server — grids now populated with real data
+yarn dev
+```
+
+### Commands
+
+| Command | Description |
+|---|---|
+| `yarn dev` | Vite dev server with HMR |
+| `yarn build` | TypeScript check + production build |
+| `yarn preview` | Preview production build locally |
+| `yarn data:nuforc` | Process raw NUFORC JSON into year chunks |
+
+### Environment Variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `VITE_REPO_URL` | `https://github.com/mhdSid/uap-monitor` | GitHub repo link in header |
+| `VITE_BASE_URL` | `/` | Base URL path (set to `/uap-monitor/` for GitHub Pages) |
+
+### Deploy to GitHub Pages
+
+The repo includes a GitHub Actions workflow at `.github/workflows/deploy.yml`. To enable:
+
+1. Go to **Settings → Pages** in your GitHub repo
+2. Under **Build and deployment → Source**, select **GitHub Actions**
+3. Push to `main` — the workflow runs automatically
+
+The workflow sets `VITE_BASE_URL=/uap-monitor/` so all asset paths resolve correctly under the repo subpath. If you have NUFORC data committed as `nuforc.json`, it will be processed during the build.
 
 ---
 
@@ -92,73 +155,52 @@ src/
 
 ### Connected
 
-| Source | Type | Status | Notes |
+| Source | Status | Records | Notes |
 |---|---|---|---|
-| **NUFORC** | Sighting database | 🟡 Pending | 170K+ reports. ToS forbids scraping — emailed CTO for data access. HuggingFace dump available for POC |
+| **NUFORC (HuggingFace)** | ✅ Active | 147K | Build-time processing via `scripts/process-nuforc.mjs` |
 
-### Planned Integration
+### Planned
 
-| Source | Type | What It Provides | Integration Path |
-|---|---|---|---|
-| **NUFORC (HuggingFace)** | Pre-scraped dataset | 147K sightings with lat/lng, shape, date, summary | JSON/CSV import — immediate |
-| **Enigma Labs** | Scored sighting DB | 270K+ sightings with credibility scores | Partner API — request access via SCU |
-| **NASA Fireball API** | Bolide events | Date, coordinates, energy, velocity for atmospheric fireballs | Public REST API — `ssd-api.jpl.nasa.gov` |
-| **NASA CNEOS** | Near-earth objects | Fireball and bolide event data | Public REST API |
-| **GEIPAN** | French gov UAP DB | 3,200+ classified cases (A/B/C/D ratings) | Public database — scraper needed |
-| **OpenSky Network** | Flight tracking | Real-time ADS-B aircraft positions for cross-referencing | Public REST API — `opensky-network.org` |
-| **GDELT** | Global news | 100+ languages, 15-min updates, geo-tagged UAP articles | Public API — `api.gdeltproject.org` |
-| **MUFON** | Sighting database | Detailed investigation reports with witness data | RapidAPI — limited free tier |
-| **AARO** | US gov UAP office | Official reports, declassified data | Manual integration — PDF/report parsing |
+| Source | What It Provides | Integration Path |
+|---|---|---|
+| **NASA Fireball API** | Atmospheric bolide events with coordinates | Public REST API |
+| **OpenSky Network** | Real-time ADS-B flight tracking for cross-referencing | Public REST API |
+| **GDELT** | CJK/Russian UAP news articles, 15-min updates | Public API |
+| **Enigma Labs** | 270K+ scored sightings | Partner API via SCU |
+| **GEIPAN** | 3,200+ French gov classified cases | Scraper |
+| **MUFON** | Detailed investigation reports | RapidAPI |
 
 ### CJK + Russia Sources (The Data Moat)
 
 | Region | Sources | Scale |
 |---|---|---|
-| **Japan** | MUFON Japan chapter, International UFO Laboratory (Fukushima, 3000+ materials), Mu Monthly magazine, SDF protocols, 80-member parliamentary UAP group | Active research community, gov interest since 2020 |
-| **China** | CURO (3,500+ members), Purple Mountain Observatory (2,000+ analyzed), PLA AI tracking system | State-level interest, academic research |
-| **Korea** | Korean UFO Investigation Analysis Center, documented military encounters (1976 Seoul incident) | Small but active community |
-| **Russia** | Soviet "Network" program (~3,000 Academy of Sciences + Defense Ministry reports) | Historic archive, ongoing military sightings |
-
----
-
-## Getting Started
-
-```bash
-git clone https://github.com/your-username/uap-monitor.git
-cd uap-monitor
-yarn
-yarn dev        # http://localhost:5173
-```
-
-### Build
-
-```bash
-yarn build      # TypeScript check + Vite production build
-```
-
-### Project Commands
-
-| Command | Description |
-|---|---|
-| `yarn dev` | Vite dev server with HMR |
-| `yarn build` | TypeScript + production build |
-| `yarn preview` | Preview production build locally |
+| **Japan** | MUFON Japan, International UFO Laboratory (3,000+ materials), Mu Monthly, 80-member parliamentary UAP group | Active community, gov interest since 2020 |
+| **China** | CURO (3,500+ members), Purple Mountain Observatory (2,000+ analyzed), PLA AI tracking | State-level interest |
+| **Korea** | Korean UFO Investigation Analysis Center, documented military encounters | Small but active community |
+| **Russia** | Soviet "Network" program (~3,000 Academy of Sciences reports) | Historic archive |
 
 ---
 
 ## Roadmap
 
 - [x] Component architecture with typed `render(props)` pattern
-- [x] DOM utility layer (`h()`, `safeHtml()`, class/visibility helpers)
-- [x] Continent-grouped sighting grids with clickable modals
-- [x] Credibility scoring with visual indicators
+- [x] DOM utility layer — `h()`, `safeHtml()`, class/visibility helpers
+- [x] NUFORC data pipeline — 147K sightings processed into year chunks
+- [x] Year range selector with FROM/TO dropdowns
+- [x] Full-text search + shape/continent filters
+- [x] Sortable grid columns
+- [x] Infinite scroll via IntersectionObserver (100 rows per page)
+- [x] Non-blocking rendering (rAF batching + chunked filtering)
+- [x] Continent-grouped sighting grids with detail modals
+- [x] Credibility scoring with color-coded bars
 - [x] 25 NUFORC shape classifications
-- [x] CRT terminal aesthetic (scanlines, radar loader, typing ticker)
-- [x] Installable PWA with offline fallback
+- [x] CRT terminal aesthetic — scanlines, radar loader, typing ticker
+- [x] PWA — installable, offline fallback, CacheFirst for data chunks
 - [x] App shell for instant first paint
-- [x] SEO meta tags, Open Graph, JSON-LD structured data
-- [x] Full accessibility attributes (aria-modal, aria-live, roles)
-- [ ] Integrate NUFORC HuggingFace dataset (147K real sightings)
+- [x] SEO meta tags — Open Graph, Twitter Card, JSON-LD
+- [x] WCAG AA color contrast compliance
+- [x] Keyboard accessibility — focus-visible, Escape key, aria labels
+- [ ] Location geocoding (lat/lng from NUFORC location strings)
 - [ ] NASA Fireball API integration
 - [ ] OpenSky flight cross-referencing
 - [ ] GDELT CJK news feed aggregation
@@ -166,22 +208,18 @@ yarn build      # TypeScript check + Vite production build
 - [ ] Real-time WebSocket updates
 - [ ] CJK language source scraper pipeline
 - [ ] AI credibility scoring (LLM-based report analysis)
-- [ ] Serverless functions for data aggregation
-- [ ] Weekly NUFORC incremental update cron
 
 ---
 
-## Related Efforts
+## Related Projects
 
-- **[SCU](https://www.explorescu.org/)** — Scientific Coalition for UAP Studies. Built a similar tool 2 years ago; identified CJK data gap as the key missing piece
-- **[NUFORC](https://nuforc.org/)** — National UFO Reporting Center. 170K+ reports since 1974. The gold standard sighting database
-- **[Enigma Labs](https://enigmalabs.io/)** — 270K+ scored sightings. Modern UX but English-only sources
-- **[AARO](https://www.aaro.mil/)** — US gov All-domain Anomaly Resolution Office. Designated western Japan–China corridor as a hotspot
+- **[SCU](https://www.explorescu.org/)** — Scientific Coalition for UAP Studies
+- **[NUFORC](https://nuforc.org/)** — National UFO Reporting Center, 170K+ reports since 1974
+- **[Enigma Labs](https://enigmalabs.io/)** — 270K+ scored sightings
+- **[AARO](https://www.aaro.mil/)** — US gov All-domain Anomaly Resolution Office
 
 ---
 
 ## License
 
 MIT
-
----

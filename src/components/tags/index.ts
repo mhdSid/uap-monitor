@@ -3,11 +3,11 @@ import type { TagProps, StatusTagProps } from '@/types'
 import { h, text } from '@/utils/dom'
 
 const TAG_STYLES: Record<TagVariant, { color: string, bg: string }> = {
-  [TagVariant.ALERT]: { color: '#000', bg: '#ef4444' },
-  [TagVariant.USO]: { color: '#000', bg: '#8b5cf6' },
-  [TagVariant.LIVE]: { color: '#00ff41', bg: 'transparent' },
-  [TagVariant.NEW]: { color: '#000', bg: '#f59e0b' },
-  [TagVariant.DISABLED]: { color: '#555', bg: 'transparent' },
+  [TagVariant.ALERT]: { color: '#000', bg: 'var(--color-red)' },
+  [TagVariant.USO]: { color: '#000', bg: 'var(--color-purple)' },
+  [TagVariant.LIVE]: { color: 'var(--color-green)', bg: 'transparent' },
+  [TagVariant.NEW]: { color: '#000', bg: 'var(--color-amber)' },
+  [TagVariant.DISABLED]: { color: 'var(--color-muted)', bg: 'transparent' },
 }
 
 export function renderTag(props: TagProps): HTMLElement {
@@ -31,12 +31,12 @@ export function renderLiveTag(): HTMLElement {
 
 export function renderStatusTag(props: StatusTagProps): HTMLElement {
   const colorMap: Record<string, string> = {
-    VERIFIED: '#00ff41',
-    PENDING: '#f59e0b',
-    ANALYZING: '#06b6d4',
-    DEBUNKED: '#ef4444',
+    VERIFIED: 'var(--color-green)',
+    PENDING: 'var(--color-amber)',
+    ANALYZING: 'var(--color-cyan)',
+    DEBUNKED: 'var(--color-red)',
   }
-  const color = colorMap[props.status] ?? '#555'
+  const color = colorMap[props.status] ?? 'var(--color-muted)'
   return h('span', {
     className: 'tag',
     style: { color, borderColor: color },
