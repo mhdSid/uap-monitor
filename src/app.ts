@@ -46,6 +46,7 @@ function sightingColumns(): DataGridColumn<Sighting>[] {
           h('span', { className: 'cell-report__meta' },
             `${row.region}${row.country ? ', ' + row.country : ''} · ${row.shape}`,
           ),
+          h('span', { className: 'cell-report__date' }, formatDate(row.occurredAt)),
         ),
     },
     {

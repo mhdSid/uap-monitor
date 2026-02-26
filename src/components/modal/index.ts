@@ -43,6 +43,7 @@ export function openModal(slots: ModalSlots): void {
 
   document.body.appendChild(overlay)
   activeModal = overlay
+  addClass(document.body, 'modal-open')
   setAttrs(document.body, { 'aria-hidden': 'true' })
 
   document.addEventListener('keydown', handleEscape)
@@ -56,6 +57,7 @@ export function openModal(slots: ModalSlots): void {
 export function closeModal(): void {
   if (!activeModal) return
   removeClass(activeModal, 'modal-overlay--visible')
+  removeClass(document.body, 'modal-open')
   setAttrs(document.body, { 'aria-hidden': null })
 
   document.removeEventListener('keydown', handleEscape)

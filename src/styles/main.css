@@ -413,6 +413,7 @@ body {
 .modal-sighting__row {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
   padding: 6px 0;
   border-bottom: 1px solid #111;
 }
@@ -421,11 +422,16 @@ body {
   font-size: 9px;
   color: var(--color-muted);
   letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .modal-sighting__value {
   font-size: 11px;
   color: var(--color-text-strong);
+  text-align: right;
+  word-break: break-word;
+  min-width: 0;
 }
 
 .modal-sighting__summary-label {
@@ -629,6 +635,11 @@ body {
   color: var(--color-green);
 }
 
+.data-grid__sort-hint {
+  color: var(--color-dim);
+  font-size: 8px;
+}
+
 .data-grid__row {
   border-bottom: 1px solid var(--color-border);
 }
@@ -693,6 +704,13 @@ body {
   white-space: nowrap;
 }
 
+.cell-report__date {
+  display: none;
+  font-size: 9px;
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
 /* ===== CELL HELPERS ===== */
 .cell-type { color: var(--color-cyan); }
 .cell-time { font-size: 10px; color: var(--color-dim); white-space: nowrap; }
@@ -723,9 +741,47 @@ select:focus-visible {
   outline: none;
 }
 
+/* ===== BODY SCROLL LOCK (when modal open) ===== */
+body.modal-open {
+  overflow: hidden;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
   .data-grid { font-size: 10px; }
   .app-header__clock { display: none; }
   .section__body { padding: 8px; }
+
+  /* Grid: hide STATUS and DATE columns on mobile */
+  .data-grid__th:nth-child(3),
+  .data-grid__td:nth-child(3),
+  .data-grid__th:nth-child(4),
+  .data-grid__td:nth-child(4) {
+    display: none;
+  }
+
+  /* Show inline date in report cell instead */
+  .cell-report__date {
+    display: block;
+  }
+
+  .cell-report__summary {
+    -webkit-line-clamp: 3;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .cell-report__meta {
+    font-size: 10px;
+  }
+
+  /* Modal characteristics: stack label above value for long text */
+  .modal-sighting__row {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .modal-sighting__value {
+    text-align: left;
+  }
 }

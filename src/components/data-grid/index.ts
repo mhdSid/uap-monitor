@@ -17,6 +17,8 @@ const SORT_INDICATORS: Record<SortDirection, string> = {
   desc: ' ▼',
 }
 
+const DEFAULT_SORT_HINT = ' ⇅'
+
 const PAGE_SIZE = 100
 const BATCH_SIZE = 50
 
@@ -162,6 +164,7 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
 
     if (col.sortable !== false && col.label) {
       addClass(th, 'data-grid__th--sortable')
+      th.innerHTML = col.label + `<span class="data-grid__sort-hint">${DEFAULT_SORT_HINT}</span>`
       th.addEventListener('click', () => handleSort(col.key as string, th))
     }
 
@@ -211,13 +214,20 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
 
     // Update header indicators
     for (let i = 0; i < headerCells.length; i++) {
-      headerCells[i].textContent = columns[i].label
+      const label = columns[i].label
+      const isSortable = columns[i].sortable !== false && label
       removeClass(headerCells[i], 'data-grid__th--sorted')
+
+      if (isSortable) {
+        headerCells[i].innerHTML = label + `<span class="data-grid__sort-hint">${DEFAULT_SORT_HINT}</span>`
+      } else {
+        headerCells[i].textContent = label
+      }
     }
 
     if (newDir !== 'none') {
       const idx = headerCells.indexOf(clickedTh)
-      clickedTh.textContent = columns[idx].label + SORT_INDICATORS[newDir]
+      clickedTh.innerHTML = columns[idx].label + SORT_INDICATORS[newDir]
       addClass(clickedTh, 'data-grid__th--sorted')
     }
 
