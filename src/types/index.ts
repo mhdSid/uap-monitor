@@ -178,6 +178,12 @@ export interface DataGridProps<T> {
   emptyText?: string
 }
 
+export interface DataGridHandle<T> {
+  el: HTMLElement
+  /** Scroll to and highlight the first item matching the predicate. Returns true if found. */
+  scrollToItem: (predicate: (item: T) => boolean) => boolean
+}
+
 export interface SectionProps {
   title: string
   live?: boolean

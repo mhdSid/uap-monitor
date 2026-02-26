@@ -6,7 +6,7 @@ import { renderDataGrid } from '@/components/data-grid'
 import { openSightingModal } from '@/components/sighting-modal'
 import { groupByContinent } from '@/data/sightings'
 import { sightingColumns } from './columns'
-import type { Sighting } from '@/types'
+import type { Sighting, DataGridHandle } from '@/types'
 
 const CONTINENT_TOOLTIPS: Record<string, string> = {
   [Continent.AMERICAS]: 'Sightings from North, Central, and South America. NUFORC is US-based so this region has the highest volume.',
@@ -35,6 +35,9 @@ const CONTINENT_EMPTY: Record<string, string> = {
  */
 let currentRenderVersion = 0
 
+/** Active grid handles from the most recent render, keyed by continent. */
+let activeGrids: DataGridHandle<Sighting>[] = []
+
 /**
  * Render sighting data grouped by continent into section panels.
  * Always renders all 7 continents — empty ones show a status message.
@@ -48,6 +51,7 @@ export async function renderSightingGrids(
   const version = ++currentRenderVersion
 
   clearChildren(container)
+  activeGrids = []
 
   if (sightings.length === 0) {
     container.appendChild(
@@ -65,28 +69,54 @@ export async function renderSightingGrids(
     // Abort if a newer render has started
     if (version !== currentRenderVersion) return
 
-    const body = group.count > 0
-      ? renderDataGrid<Sighting>({
-          columns,
-          data: group.items,
-          onRowClick: openSightingModal,
-        })
-      : h('div', { className: 'empty-state empty-state--compact' },
-          h('span', { className: 'empty-state__text' },
-            CONTINENT_EMPTY[group.continent] ?? 'No sightings for current filters.',
-          ),
-        )
+    if (group.count > 0) {
+      const grid = renderDataGrid<Sighting>({
+        columns,
+        data: group.items,
+        onRowClick: openSightingModal,
+      })
+      activeGrids.push(grid)
 
-    container.appendChild(
-      renderSection(
-        {
-          title: group.label,
-          count: group.count,
-          tooltip: CONTINENT_TOOLTIPS[group.continent],
-        },
-        body,
-      ),
-    )
+      container.appendChild(
+        renderSection(
+          {
+            title: group.label,
+            count: group.count,
+            tooltip: CONTINENT_TOOLTIPS[group.continent],
+          },
+          grid.el,
+        ),
+      )
+    } else {
+      container.appendChild(
+        renderSection(
+          {
+            title: group.label,
+            count: group.count,
+            tooltip: CONTINENT_TOOLTIPS[group.continent],
+          },
+          h('div', { className: 'empty-state empty-state--compact' },
+            h('span', { className: 'empty-state__text' },
+              CONTINENT_EMPTY[group.continent] ?? 'No sightings for current filters.',
+            ),
+          ),
+        ),
+      )
+    }
+
     await yieldThread()
   }
+}
+
+/**
+ * Scroll to and highlight a sighting by its ID across all active continent grids.
+ * Returns true if the sighting was found and scrolled to.
+ */
+export function scrollToSighting(sightingId: string): boolean {
+  for (const grid of activeGrids) {
+    if (grid.scrollToItem(s => s.id === sightingId)) {
+      return true
+    }
+  }
+  return false
 }

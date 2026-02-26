@@ -19,7 +19,6 @@ const SORT_ICON_FACTORIES: Record<SortDirection, (() => SVGSVGElement) | null> =
 }
 
 const PAGE_SIZE = 100
-const BATCH_SIZE = 50
 
 // ─── Cell padding constant (shared by th and td) ────────────────────
 
@@ -102,35 +101,6 @@ function renderRow<T>(
   return tr
 }
 
-// ─── Non-blocking batch append ──────────────────────────────────────
-
-function batchAppendRows<T>(
-  tbody: HTMLTableSectionElement,
-  rows: T[],
-  columns: DataGridColumn<T>[],
-  onRowClick?: (row: T, trigger: HTMLElement) => void,
-): void {
-  let index = 0
-
-  function renderBatch(): void {
-    const frag = document.createDocumentFragment()
-    const end = Math.min(index + BATCH_SIZE, rows.length)
-
-    for (let i = index; i < end; i++) {
-      frag.appendChild(renderRow(rows[i], columns, onRowClick))
-    }
-
-    tbody.appendChild(frag)
-    index = end
-
-    if (index < rows.length) {
-      requestAnimationFrame(renderBatch)
-    }
-  }
-
-  requestAnimationFrame(renderBatch)
-}
-
 // ─── Sort logic ─────────────────────────────────────────────────────
 
 function compareValues<T>(a: T, b: T, key: string): number {
@@ -150,11 +120,16 @@ function compareValues<T>(a: T, b: T, key: string): number {
 
 // ─── Main component ─────────────────────────────────────────────────
 
-export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
+import type { DataGridHandle } from '@/types'
+
+export function renderDataGrid<T>(props: DataGridProps<T>): DataGridHandle<T> {
   const { columns, data, onRowClick, emptyText } = props
 
   let sortState: SortState = { key: '', direction: 'none' }
   let currentData = [...data]
+
+  // Map from data item to its rendered <tr> element
+  const rowMap = new WeakMap<object, HTMLTableRowElement>()
 
   // Scrollable wrapper
   const wrapper = h('div', { className: 'data-grid__wrapper' })
@@ -218,7 +193,16 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
       return
     }
 
-    batchAppendRows(tbody, items, columns, onRowClick)
+    // Synchronous render so rows are immediately available for scrollToItem
+    const frag = document.createDocumentFragment()
+    for (const item of items) {
+      const tr = renderRow(item, columns, onRowClick)
+      if (typeof item === 'object' && item !== null) {
+        rowMap.set(item as object, tr)
+      }
+      frag.appendChild(tr)
+    }
+    tbody.appendChild(frag)
   }
 
   function handleSort(key: string, clickedTh: HTMLTableCellElement): void {
@@ -262,6 +246,43 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
     scroll.setItems(currentData)
   }
 
+  /**
+   * Find the first item matching the predicate, expand infinite scroll
+   * if needed, scroll it into view, and focus it.
+   */
+  function scrollToItem(predicate: (item: T) => boolean): boolean {
+    const idx = currentData.findIndex(predicate)
+    if (idx === -1) return false
+
+    // Expand infinite scroll to include this item
+    scroll.expandTo(idx)
+
+    // The row should now be rendered — find its <tr>
+    const item = currentData[idx]
+    const tr = (typeof item === 'object' && item !== null)
+      ? rowMap.get(item as object)
+      : undefined
+
+    if (!tr) return false
+
+    // Scroll the section container into viewport first
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+    // After the page scroll settles, scroll the row within the grid and focus it
+    setTimeout(() => {
+      tr.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+      // Focus the row — the :focus style provides the persistent green accent
+      // tabIndex ensures focusability even if not a clickable row
+      if (!tr.hasAttribute('tabindex')) {
+        tr.setAttribute('tabindex', '-1')
+      }
+      tr.focus({ preventScroll: true })
+    }, 400)
+
+    return true
+  }
+
   // ─ Assemble ─
   table.appendChild(thead)
   table.appendChild(tbody)
@@ -274,5 +295,5 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
   // Observe sentinel with the wrapper as scroll root
   requestAnimationFrame(() => scroll.observe(sentinel, wrapper))
 
-  return wrapper
+  return { el: wrapper, scrollToItem }
 }

@@ -3,8 +3,13 @@ import type { Continent } from '@/enums'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
-/** A ticker message: 1–2 lines, each rendered with a `//` prefix. */
-export type TickerMessage = [string] | [string, string]
+/** A ticker message with optional linked sighting for click-to-scroll. */
+export interface TickerMessage {
+  /** 1–2 display lines (rendered with // prefix). */
+  lines: [string] | [string, string]
+  /** Optional sighting ID — if set, clicking the ticker scrolls to this sighting. */
+  sightingId?: string
+}
 
 export interface UseTickerReturn {
   /** Get the default loading-phase messages. */
@@ -28,11 +33,11 @@ const CONTINENT_NAMES: Record<string, string> = {
 // ─── Default messages (shown during loading) ────────────────────────
 
 const DEFAULT_MESSAGES: TickerMessage[] = [
-  ['Scanning open-source intelligence feeds for new UAP reports...'],
-  ['Aggregating reports from NUFORC database...'],
-  ['Processing witness accounts and credibility scores...'],
-  ['Cross-referencing flight data with sighting coordinates...'],
-  ['Monitoring CJK and Russian language sources', 'for new activity...'],
+  { lines: ['Scanning open-source intelligence feeds for new UAP reports...'] },
+  { lines: ['Aggregating reports from NUFORC database...'] },
+  { lines: ['Processing witness accounts and credibility scores...'] },
+  { lines: ['Cross-referencing flight data with sighting coordinates...'] },
+  { lines: ['Monitoring CJK and Russian language sources', 'for new activity...'] },
 ]
 
 // ─── Message generators ─────────────────────────────────────────────
@@ -66,7 +71,7 @@ function countByShape(sightings: Sighting[]): Map<string, number> {
 const recentSighting: MessageGenerator = (sightings) => {
   const s = pick(sightings)
   const summary = s.summary.length > 60 ? s.summary.slice(0, 57) + '...' : s.summary
-  return [`${s.region}, ${s.country}:`, `"${summary}"`]
+  return { lines: [`${s.region}, ${s.country}:`, `"${summary}"`], sightingId: s.id }
 }
 
 /** Report top shape in dataset. */
@@ -78,7 +83,9 @@ const topShape: MessageGenerator = (sightings) => {
   }
   if (!top) return null
   const pct = ((max / sightings.length) * 100).toFixed(1)
-  return [`Most reported shape: ${top}`, `${pct}% of ${sightings.length.toLocaleString()} sightings`]
+  // Link to a random sighting of the top shape
+  const sample = sightings.find(s => s.shape === top)
+  return { lines: [`Most reported shape: ${top}`, `${pct}% of ${sightings.length.toLocaleString()} sightings`], sightingId: sample?.id }
 }
 
 /** Report continent with most activity. */
@@ -89,7 +96,9 @@ const topContinent: MessageGenerator = (sightings) => {
     if (count > max) { top = continent; max = count }
   }
   const name = CONTINENT_NAMES[top] ?? top
-  return [`Highest activity region: ${name}`, `${max.toLocaleString()} reports in dataset`]
+  // Link to a random sighting from the top continent
+  const sample = sightings.find(s => s.continent === (top as Continent))
+  return { lines: [`Highest activity region: ${name}`, `${max.toLocaleString()} reports in dataset`], sightingId: sample?.id }
 }
 
 /** Report high-credibility count. */
@@ -97,7 +106,8 @@ const highCredibility: MessageGenerator = (sightings) => {
   const high = sightings.filter(s => s.credibility > 80).length
   if (high === 0) return null
   const pct = ((high / sightings.length) * 100).toFixed(1)
-  return [`${high.toLocaleString()} sightings with credibility >80`, `${pct}% of total reports`]
+  const sample = pick(sightings.filter(s => s.credibility > 80))
+  return { lines: [`${high.toLocaleString()} sightings with credibility >80`, `${pct}% of total reports`], sightingId: sample?.id }
 }
 
 /** Report a random characteristic found in data. */
@@ -106,14 +116,15 @@ const randomCharacteristic: MessageGenerator = (sightings) => {
   if (withChars.length === 0) return null
   const s = pick(withChars)
   const char = pick(s.characteristics)
-  return [`${s.region}, ${s.country}:`, `Witness reported "${char}" during ${s.shape.toLowerCase()} sighting`]
+  return { lines: [`${s.region}, ${s.country}:`, `Witness reported "${char}" during ${s.shape.toLowerCase()} sighting`], sightingId: s.id }
 }
 
 /** Total dataset stats. */
 const datasetStats: MessageGenerator = (sightings) => {
   const countries = new Set(sightings.map(s => s.country)).size
   const continents = new Set(sightings.map(s => s.continent)).size
-  return [`Monitoring ${sightings.length.toLocaleString()} reports`, `across ${countries} countries and ${continents} regions`]
+  const sample = pick(sightings)
+  return { lines: [`Monitoring ${sightings.length.toLocaleString()} reports`, `across ${countries} countries and ${continents} regions`], sightingId: sample?.id }
 }
 
 const GENERATORS: MessageGenerator[] = [

@@ -10,7 +10,7 @@ import { renderAlert } from '@/components/alert'
 import { renderFooter } from '@/components/footer'
 import { renderYearSelector } from '@/components/year-selector'
 import { renderFilterToolbar } from '@/components/filter-toolbar'
-import { renderSightingGrids } from '@/components/sighting-grid'
+import { renderSightingGrids, scrollToSighting } from '@/components/sighting-grid'
 import type { Sighting, SightingFilter } from '@/types'
 
 // ─── App entry ──────────────────────────────────────────────────────
@@ -20,7 +20,9 @@ export async function createApp(root: HTMLElement): Promise<void> {
     h('div', { className: 'app-loader' }, renderLoader()),
   )
 
-  const ticker = renderTicker()
+  const ticker = renderTicker({
+    onClick: (sightingId) => scrollToSighting(sightingId),
+  })
   const { generateMessages } = useTicker()
 
   const app = h('div', { className: 'app' },

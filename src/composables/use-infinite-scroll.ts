@@ -12,6 +12,8 @@ export interface InfiniteScrollState<T> {
 export interface InfiniteScrollActions<T> {
   setItems: (items: T[]) => void
   loadMore: () => void
+  /** Expand visible items to include at least up to the given index. */
+  expandTo: (index: number) => void
   getState: () => InfiniteScrollState<T>
   observe: (sentinel: HTMLElement, scrollRoot: HTMLElement) => void
   destroy: () => void
@@ -48,6 +50,13 @@ export function useInfiniteScroll<T>(
     onUpdate?.(getState())
   }
 
+  function expandTo(index: number): void {
+    const target = index + 1 // need the item at index to be visible
+    if (target <= visibleCount) return
+    visibleCount = Math.min(target + pageSize, allItems.length) // add buffer
+    onUpdate?.(getState())
+  }
+
   function observe(sentinel: HTMLElement, scrollRoot: HTMLElement): void {
     destroy()
     observer = new IntersectionObserver(
@@ -66,5 +75,5 @@ export function useInfiniteScroll<T>(
     observer = null
   }
 
-  return { setItems, loadMore, getState, observe, destroy }
+  return { setItems, loadMore, expandTo, getState, observe, destroy }
 }

@@ -2,9 +2,9 @@ import type { TickerMessage } from '@/composables/use-ticker'
 import { h } from '@/utils/dom'
 
 const DEFAULT_MESSAGES: TickerMessage[] = [
-  ['Scanning open-source intelligence feeds for new UAP reports...'],
-  ['Aggregating reports from NUFORC database...'],
-  ['Processing witness accounts and credibility scores...'],
+  { lines: ['Scanning open-source intelligence feeds for new UAP reports...'] },
+  { lines: ['Aggregating reports from NUFORC database...'] },
+  { lines: ['Processing witness accounts and credibility scores...'] },
 ]
 
 export interface TickerHandle {
@@ -12,51 +12,83 @@ export interface TickerHandle {
   setMessages: (messages: TickerMessage[]) => void
 }
 
-const PREFIX = '// '
+export interface TickerOptions {
+  onClick?: (sightingId: string) => void
+}
 
-export function renderTicker(): TickerHandle {
+const PREFIX = '// '
+const GHOST_TEXT = '// ─────'
+
+export function renderTicker(options?: TickerOptions): TickerHandle {
   let messages: TickerMessage[] = [...DEFAULT_MESSAGES]
+
   const contentEl = h('div', { className: 'ticker__content' })
   const cursorEl = h('span', { className: 'ticker__cursor' }, '█')
-  const ticker = h('div', { className: 'ticker', role: 'marquee', 'aria-live': 'off' }, contentEl)
+
+  // Ghost lines: subtle placeholders visible when real content doesn't fill both rows
+  const ghostEl = h('div', { className: 'ticker__ghost' },
+    h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
+    h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
+  )
+
+  const ticker = h('div', {
+    className: 'ticker',
+    role: 'button',
+    tabIndex: 0,
+    'aria-label': 'Click to scroll to this sighting in the grid',
+  },
+    contentEl,
+    ghostEl,
+  )
 
   let msgIdx = 0
   let lineIdx = 0
   let charIdx = 0
   let timer: ReturnType<typeof setTimeout> | null = null
   let phase: 'typing' | 'holding' = 'typing'
+  let dataLoaded = false
 
-  /** Flatten current message lines with prefix into typed segments. */
+  /** Get current sighting ID if available. */
+  function getCurrentSightingId(): string | undefined {
+    return messages[msgIdx % messages.length]?.sightingId
+  }
+
+  /** Flatten current message lines with prefix. */
   function getCurrentLines(): string[] {
-    const msg = messages[msgIdx % messages.length]!
-    return msg.map(line => PREFIX + line)
+    const msg = messages[msgIdx % messages.length]
+    if (!msg) return [PREFIX + '...']
+    return msg.lines.map(line => PREFIX + line)
+  }
+
+  /** Update CSS class tracking how many lines are rendered. */
+  function updateLineClass(count: number): void {
+    ticker.classList.toggle('ticker--lines-2', count >= 2)
   }
 
   function render(): void {
     const lines = getCurrentLines()
-
-    // Clear content
     contentEl.textContent = ''
 
-    // Build completed lines + current typing line
+    let renderedCount = 0
+
     for (let i = 0; i <= lineIdx && i < lines.length; i++) {
       const lineEl = h('div', { className: 'ticker__line' })
 
       if (i < lineIdx) {
-        // Completed line
         lineEl.textContent = lines[i]
       } else if (phase === 'holding') {
-        // Last line, done typing
         lineEl.textContent = lines[i]
         lineEl.appendChild(cursorEl)
       } else {
-        // Currently typing this line
         lineEl.textContent = lines[i].slice(0, charIdx)
         lineEl.appendChild(cursorEl)
       }
 
       contentEl.appendChild(lineEl)
+      renderedCount++
     }
+
+    updateLineClass(renderedCount)
   }
 
   function tick(): void {
@@ -66,7 +98,6 @@ export function renderTicker(): TickerHandle {
     if (phase === 'typing') {
       const currentLine = lines[lineIdx]
       if (!currentLine) {
-        // Safety: advance to next message
         advanceMessage()
         return
       }
@@ -77,12 +108,10 @@ export function renderTicker(): TickerHandle {
         charIdx++
         timer = setTimeout(tick, 25)
       } else if (lineIdx < lines.length - 1) {
-        // Move to next line
         lineIdx++
         charIdx = 0
         timer = setTimeout(tick, 25)
       } else {
-        // All lines typed — hold with blinking cursor
         phase = 'holding'
         cursorEl.classList.add('ticker__cursor--blink')
         render()
@@ -99,8 +128,26 @@ export function renderTicker(): TickerHandle {
     lineIdx = 0
     charIdx = 0
     phase = 'typing'
+    updateLineClass(0)
     tick()
   }
+
+  function handleClick(): void {
+    if (!dataLoaded) return
+    const id = getCurrentSightingId()
+    if (id && options?.onClick) {
+      options.onClick(id)
+    }
+  }
+
+  ticker.addEventListener('click', handleClick)
+  ticker.addEventListener('keydown', (e: Event) => {
+    const ke = e as KeyboardEvent
+    if (ke.key === 'Enter' || ke.key === ' ') {
+      ke.preventDefault()
+      handleClick()
+    }
+  })
 
   function setMessages(newMessages: TickerMessage[]): void {
     if (newMessages.length === 0) return
@@ -109,6 +156,9 @@ export function renderTicker(): TickerHandle {
     lineIdx = 0
     charIdx = 0
     phase = 'typing'
+    dataLoaded = true
+    ticker.classList.add('ticker--clickable')
+    updateLineClass(0)
     if (timer) clearTimeout(timer)
     tick()
   }
