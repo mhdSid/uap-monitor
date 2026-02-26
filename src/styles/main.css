@@ -595,6 +595,11 @@ a.data-sources__item:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== CONTROLS FORM ===== */
+.controls-form {
+  display: contents;
+}
+
 /* ===== YEAR SELECTOR ===== */
 .year-selector {
   display: flex;

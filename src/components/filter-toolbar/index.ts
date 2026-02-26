@@ -20,7 +20,10 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   // Search input
   const searchInput = h('input', {
     className: 'filter-toolbar__search',
+    id: 'filter-search',
+    name: 'filter-search',
     type: 'text',
+    autocomplete: 'off',
     placeholder: FILTER.SEARCH_PLACEHOLDER,
     'aria-label': ARIA.SEARCH,
     onInput: () => {
@@ -34,6 +37,9 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   // Shape filter
   const shapeSelect = h('select', {
     className: 'filter-toolbar__select',
+    id: 'filter-shape',
+    name: 'filter-shape',
+    autocomplete: 'off',
     'aria-label': ARIA.FILTER_SHAPE,
     onChange: () => {
       const val = (shapeSelect as HTMLSelectElement).value
@@ -50,6 +56,9 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   // Continent filter
   const continentSelect = h('select', {
     className: 'filter-toolbar__select',
+    id: 'filter-region',
+    name: 'filter-region',
+    autocomplete: 'off',
     'aria-label': ARIA.FILTER_REGION,
     onChange: () => {
       const val = (continentSelect as HTMLSelectElement).value

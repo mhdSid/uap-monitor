@@ -141,14 +141,23 @@ export async function createApp(root: HTMLElement): Promise<void> {
     tooltip: SECTION.DATA_SOURCES_TOOLTIP,
   }, sourcesBody)
 
+  // ─ Wrap controls in a form (prevents browser autofill warnings) ─
+  const controlsForm = h('form', {
+    className: 'controls-form',
+    autocomplete: 'off',
+    onSubmit: (e: Event) => e.preventDefault(),
+  },
+    yearSelector,
+    filterToolbar,
+  )
+
   // ─ Assemble complete layout skeleton at once ─
   // Loader goes into gridsContainer BEFORE appending to DOM
   // so the container has height from the first paint
   gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
 
   clearChildren(main)
-  main.appendChild(yearSelector)
-  main.appendChild(filterToolbar)
+  main.appendChild(controlsForm)
   main.appendChild(gridsContainer)
   main.appendChild(sourcesSection)
   main.appendChild(renderFooter())

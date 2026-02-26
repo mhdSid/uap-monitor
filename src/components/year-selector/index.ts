@@ -17,9 +17,12 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
     )
   }
 
-  function makeSelect(selected: number, label: string): HTMLSelectElement {
+  function makeSelect(selected: number, label: string, id: string): HTMLSelectElement {
     const sel = h('select', {
       className: 'year-selector__select',
+      id,
+      name: id,
+      autocomplete: 'off',
       'aria-label': label,
     }) as HTMLSelectElement
     for (const y of availableYears) {
@@ -30,8 +33,8 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
     return sel
   }
 
-  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom), ARIA.YEAR_FROM)
-  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo), ARIA.YEAR_TO)
+  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom), ARIA.YEAR_FROM, 'year-from')
+  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo), ARIA.YEAR_TO, 'year-to')
 
   const countEl = h('span', { className: 'year-selector__count' }, '')
 
