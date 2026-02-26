@@ -32,7 +32,7 @@ const CELL_PAD_COMPACT = '4px'
 function renderRow<T>(
   row: T,
   columns: DataGridColumn<T>[],
-  onRowClick?: (row: T) => void,
+  onRowClick?: (row: T, trigger: HTMLElement) => void,
 ): HTMLTableRowElement {
   const tr = document.createElement('tr')
   tr.className = 'data-grid__row'
@@ -72,11 +72,11 @@ function renderRow<T>(
     const id = (row as Record<string, unknown>).id
     if (id != null) tr.dataset.sightingId = String(id)
 
-    tr.addEventListener('click', () => onRowClick(row))
+    tr.addEventListener('click', () => onRowClick(row, tr))
     tr.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
-        onRowClick(row)
+        onRowClick(row, tr)
       }
     })
   }
@@ -90,7 +90,7 @@ function batchAppendRows<T>(
   tbody: HTMLTableSectionElement,
   rows: T[],
   columns: DataGridColumn<T>[],
-  onRowClick?: (row: T) => void,
+  onRowClick?: (row: T, trigger: HTMLElement) => void,
 ): void {
   let index = 0
 

@@ -4,7 +4,7 @@ import { h } from '@/utils/dom'
 import { renderStatusTag, renderTag } from '@/components/tags'
 import { openModal } from '@/components/modal'
 
-export function openSightingModal(sighting: Sighting): void {
+export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): void {
   openModal({
     header: () =>
       h('div', { className: 'modal-sighting__header' },
@@ -67,5 +67,5 @@ export function openSightingModal(sighting: Sighting): void {
       h('div', { className: 'modal-sighting__footer' },
         renderTag({ variant: TagVariant.DISABLED, label: `SOURCE: ${sighting.source}` }),
       ),
-  })
+  }, trigger)
 }

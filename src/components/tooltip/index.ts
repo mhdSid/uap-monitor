@@ -5,7 +5,7 @@ export interface TooltipProps {
   ariaLabel?: string
 }
 
-const POPUP_WIDTH = 240
+const POPUP_WIDTH = 260
 const GAP = 6
 
 /**

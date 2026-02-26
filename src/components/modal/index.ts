@@ -5,11 +5,26 @@ import { iconClose } from '@/components/icons'
 let activeModal: HTMLElement | null = null
 let triggerElement: HTMLElement | null = null
 
-export function openModal(slots: ModalSlots): void {
+/**
+ * Query all focusable elements inside the modal dialog.
+ */
+function getFocusableElements(dialog: HTMLElement): HTMLElement[] {
+  const selectors = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  return Array.from(dialog.querySelectorAll<HTMLElement>(selectors))
+}
+
+/**
+ * Open a modal dialog with focus trap, sticky header, and scrollable content.
+ * Follows WAI-ARIA Dialog (Modal) pattern.
+ *
+ * @param slots - Content slots for header, content, and footer
+ * @param trigger - The element that triggered the modal (for focus return)
+ */
+export function openModal(slots: ModalSlots, trigger?: HTMLElement | null): void {
   closeModal()
 
-  // Remember what element opened the modal so we can return focus
-  triggerElement = document.activeElement as HTMLElement | null
+  // Store the trigger explicitly, fall back to activeElement
+  triggerElement = trigger ?? (document.activeElement as HTMLElement | null)
 
   const closeIcon = iconClose(14)
 
@@ -29,6 +44,14 @@ export function openModal(slots: ModalSlots): void {
     'aria-modal': 'true',
   }, headerBar)
 
+  // aria-labelledby: point to the title element if present
+  const titleEl = headerBar.querySelector('.modal-sighting__title, .modal__title')
+  if (titleEl) {
+    const titleId = titleEl.id || `modal-title-${Date.now()}`
+    titleEl.id = titleId
+    dialog.setAttribute('aria-labelledby', titleId)
+  }
+
   if (slots.content) {
     dialog.appendChild(h('div', { className: 'modal__content' }, slots.content()))
   }
@@ -46,7 +69,7 @@ export function openModal(slots: ModalSlots): void {
   addClass(document.body, 'modal-open')
   setAttrs(document.body, { 'aria-hidden': 'true' })
 
-  document.addEventListener('keydown', handleEscape)
+  document.addEventListener('keydown', handleKeydown)
 
   // Focus the close button
   closeBtn.focus()
@@ -60,7 +83,7 @@ export function closeModal(): void {
   removeClass(document.body, 'modal-open')
   setAttrs(document.body, { 'aria-hidden': null })
 
-  document.removeEventListener('keydown', handleEscape)
+  document.removeEventListener('keydown', handleKeydown)
 
   const ref = activeModal
   const returnTarget = triggerElement
@@ -78,6 +101,33 @@ export function closeModal(): void {
   }, 200)
 }
 
-function handleEscape(e: KeyboardEvent): void {
-  if (e.key === 'Escape') closeModal()
+function handleKeydown(e: KeyboardEvent): void {
+  if (e.key === 'Escape') {
+    closeModal()
+    return
+  }
+
+  // Focus trap: cycle Tab/Shift+Tab within modal
+  if (e.key === 'Tab' && activeModal) {
+    const dialog = activeModal.querySelector<HTMLElement>('[role="dialog"]')
+    if (!dialog) return
+
+    const focusable = getFocusableElements(dialog)
+    if (focusable.length === 0) return
+
+    const first = focusable[0]!
+    const last = focusable[focusable.length - 1]!
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+  }
 }

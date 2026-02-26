@@ -174,7 +174,7 @@ export interface DataGridColumn<T> {
 export interface DataGridProps<T> {
   columns: DataGridColumn<T>[]
   data: T[]
-  onRowClick?: (row: T) => void
+  onRowClick?: (row: T, trigger: HTMLElement) => void
   emptyText?: string
 }
 
