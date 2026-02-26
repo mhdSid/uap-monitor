@@ -157,7 +157,7 @@ The workflow sets `VITE_BASE_URL=/uap-monitor/` so all asset paths resolve corre
 
 | Source | Status | Records | Notes |
 |---|---|---|---|
-| **NUFORC (HuggingFace)** | ✅ Active | 147K | Build-time processing via `scripts/process-nuforc.mjs` |
+| **[NUFORC Sightings Dataset](https://huggingface.co/datasets/kcimc/NUFORC)** | ✅ Active | 147K | Originally compiled by [Kyle McDonald](https://github.com/kcimc). Raw JSON (~191MB) processed at build time into year-chunked static files via `scripts/process-nuforc.mjs` |
 
 ### Planned
 
