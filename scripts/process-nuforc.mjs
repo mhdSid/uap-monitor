@@ -271,6 +271,14 @@ function truncateSummary(text, maxLen = 200) {
   return text.slice(0, maxLen).replace(/\s+\S*$/, '') + '…'
 }
 
+function truncateDescription(text, maxLen = 1200) {
+  if (!text) return ''
+  // Normalize newlines to spaces for cleaner display
+  const cleaned = text.replace(/\n+/g, '\n').trim()
+  if (cleaned.length <= maxLen) return cleaned
+  return cleaned.slice(0, maxLen).replace(/\s+\S*$/, '') + '…'
+}
+
 // ─── Main ────────────────────────────────────────────────────────────
 
 function main() {
@@ -334,6 +342,7 @@ function main() {
       duration: record.Duration || '',
       observers: record['No of observers'] || 0,
       summary: truncateSummary(record.Summary),
+      description: truncateDescription(record.Text),
       characteristics,
       coordinates: null,
       region: loc.region,

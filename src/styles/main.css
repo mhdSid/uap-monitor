@@ -448,6 +448,17 @@ body {
   line-height: 1.6;
 }
 
+.modal-sighting__description {
+  font-size: 11px;
+  color: var(--color-muted);
+  line-height: 1.7;
+  white-space: pre-line;
+  max-height: 240px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
 .modal-sighting__footer {
   display: flex;
 }
@@ -758,6 +769,21 @@ body.modal-open {
   .data-grid__th:nth-child(4),
   .data-grid__td:nth-child(4) {
     display: none;
+  }
+
+  /* Report cell takes remaining space, cred column shrinks to fit */
+  .data-grid__th:nth-child(1),
+  .data-grid__td:nth-child(1) {
+    width: auto !important;
+  }
+
+  .data-grid__th:nth-child(2),
+  .data-grid__td:nth-child(2) {
+    width: 72px !important;
+  }
+
+  .credibility-bar__track {
+    width: 32px;
   }
 
   /* Show inline date in report cell instead */

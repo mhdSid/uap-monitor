@@ -56,6 +56,9 @@ export interface Sighting {
   /** First ~200 chars of the witness summary */
   summary: string
 
+  /** Full witness account / description text */
+  description: string
+
   /** Observable characteristics reported */
   characteristics: SightingCharacteristic[]
 

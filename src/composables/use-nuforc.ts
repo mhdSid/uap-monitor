@@ -115,6 +115,7 @@ function parseSighting(raw: unknown): Sighting | null {
     duration: typeof r.duration === 'string' ? r.duration : '',
     observers: typeof r.observers === 'number' ? r.observers : 0,
     summary: typeof r.summary === 'string' ? r.summary : '',
+    description: typeof r.description === 'string' ? r.description : '',
     characteristics: Array.isArray(r.characteristics) ? r.characteristics : [],
     coordinates,
     region: typeof r.region === 'string' ? r.region : '',
@@ -144,6 +145,7 @@ function applyFilters(sightings: Sighting[], filter: SightingFilter): Sighting[]
     const q = filter.search.toLowerCase()
     result = result.filter((s) =>
       s.summary.toLowerCase().includes(q) ||
+      s.description.toLowerCase().includes(q) ||
       s.region.toLowerCase().includes(q) ||
       s.country.toLowerCase().includes(q) ||
       s.location.toLowerCase().includes(q) ||

@@ -35,16 +35,32 @@ export function openSightingModal(sighting: Sighting): void {
         rows.push(['Characteristics', sighting.characteristics.join(', ')])
       }
 
-      return h('div', { className: 'modal-sighting__content' },
+      const children: HTMLElement[] = [
         ...rows.map(([label, value]) =>
           h('div', { className: 'modal-sighting__row' },
             h('span', { className: 'modal-sighting__label' }, label),
             h('span', { className: 'modal-sighting__value' }, value),
           ),
         ),
-        h('div', { className: 'modal-sighting__summary-label' }, 'SUMMARY'),
-        h('p', { className: 'modal-sighting__summary' }, sighting.summary),
-      )
+      ]
+
+      // Summary
+      if (sighting.summary) {
+        children.push(
+          h('div', { className: 'modal-sighting__summary-label' }, 'SUMMARY'),
+          h('p', { className: 'modal-sighting__summary' }, sighting.summary),
+        )
+      }
+
+      // Full description / witness account
+      if (sighting.description) {
+        children.push(
+          h('div', { className: 'modal-sighting__summary-label' }, 'WITNESS ACCOUNT'),
+          h('p', { className: 'modal-sighting__description' }, sighting.description),
+        )
+      }
+
+      return h('div', { className: 'modal-sighting__content' }, ...children)
     },
 
     footer: () =>
