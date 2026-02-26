@@ -3,15 +3,21 @@
 /**
  * process-nuforc.mjs
  *
- * Transforms the raw 191MB HuggingFace NUFORC JSON dump into
+ * Transforms the raw HuggingFace NUFORC JSON dump into
  * lightweight per-year chunks ready for the browser.
+ *
+ * Design principles:
+ *   - Never silently discard source data
+ *   - Characteristics are passed through as-is from NUFORC (no whitelist)
+ *   - Unknown countries/shapes are logged for audit, not dropped
+ *   - All string constants are named, never anonymous
  *
  * Usage:
  *   node scripts/process-nuforc.mjs [path-to-nuforc.json]
  *
  * Output:
- *   public/data/nuforc-YYYY.json   — one file per year
- *   public/data/nuforc-manifest.json — index of all chunks with counts
+ *   public/data/nuforc-YYYY.json      — one file per year
+ *   public/data/nuforc-manifest.json   — index of all chunks with counts
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
@@ -23,115 +29,332 @@ const PROJECT_ROOT = resolve(__dirname, '..')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
 const DEFAULT_INPUT = resolve(PROJECT_ROOT, 'nuforc.json')
 
-// ─── NUFORC shape → our enum mapping ────────────────────────────────
+// ─── Named constants ────────────────────────────────────────────────
 
-const VALID_SHAPES = new Set([
-  'Changing', 'Chevron', 'Cigar', 'Circle', 'Cone', 'Cross', 'Cube',
-  'Cylinder', 'Diamond', 'Disk', 'Egg', 'Fireball', 'Flash', 'Formation',
-  'Light', 'Orb', 'Other', 'Oval', 'Rectangle', 'Sphere', 'Star',
-  'Teardrop', 'Triangle',
-])
+const Continent = {
+  AMERICAS: 'AMERICAS',
+  EUROPE: 'EUROPE',
+  ASIA: 'ASIA',
+  OCEANIA: 'OCEANIA',
+  AFRICA: 'AFRICA',
+}
+
+const Status = {
+  PENDING: 'PENDING',
+}
+
+const Source = {
+  NUFORC: 'NUFORC',
+}
+
+const Shape = {
+  UNKNOWN: 'Unknown',
+  CHANGING: 'Changing',
+  CHEVRON: 'Chevron',
+  CIGAR: 'Cigar',
+  CIRCLE: 'Circle',
+  CONE: 'Cone',
+  CROSS: 'Cross',
+  CUBE: 'Cube',
+  CYLINDER: 'Cylinder',
+  DIAMOND: 'Diamond',
+  DISK: 'Disk',
+  EGG: 'Egg',
+  FIREBALL: 'Fireball',
+  FLASH: 'Flash',
+  FORMATION: 'Formation',
+  LIGHT: 'Light',
+  ORB: 'Orb',
+  OTHER: 'Other',
+  OVAL: 'Oval',
+  RECTANGLE: 'Rectangle',
+  SPHERE: 'Sphere',
+  STAR: 'Star',
+  TEARDROP: 'Teardrop',
+  TRIANGLE: 'Triangle',
+}
+
+const VALID_YEAR_MIN = 1950
+const VALID_YEAR_MAX = 2030
+const SUMMARY_MAX_LENGTH = 200
+const DESCRIPTION_MAX_LENGTH = 1200
+const CREDIBILITY_BASELINE = 30
+const CREDIBILITY_MAX = 100
+
+// ─── Shape normalization ────────────────────────────────────────────
+
+const VALID_SHAPES = new Set(Object.values(Shape))
 
 const SHAPE_ALIASES = {
-  'Circular': 'Circle',
-  'Round': 'Circle',
-  'Disc': 'Disk',
-  'Saucer': 'Disk',
-  'Triangular': 'Triangle',
-  'Cigar-shaped': 'Cigar',
-  'Cylindrical': 'Cylinder',
-  'Rectangular': 'Rectangle',
-  'Egg-shaped': 'Egg',
-  'Hexagon': 'Diamond',
-  'Bullet/Missile': 'Cylinder',
-  'Pellet': 'Sphere',
-  'Crescent': 'Other',
-  'Blimp': 'Cigar',
-  'Dome': 'Circle',
-  'Flare': 'Fireball',
-  'N/A': 'Unknown',
-  '': 'Unknown',
+  'Circular': Shape.CIRCLE,
+  'Round': Shape.CIRCLE,
+  'Disc': Shape.DISK,
+  'Saucer': Shape.DISK,
+  'Triangular': Shape.TRIANGLE,
+  'Cigar-shaped': Shape.CIGAR,
+  'Cylindrical': Shape.CYLINDER,
+  'Rectangular': Shape.RECTANGLE,
+  'Egg-shaped': Shape.EGG,
+  'Hexagon': Shape.DIAMOND,
+  'Bullet/Missile': Shape.CYLINDER,
+  'Pellet': Shape.SPHERE,
+  'Crescent': Shape.OTHER,
+  'Blimp': Shape.CIGAR,
+  'Dome': Shape.CIRCLE,
+  'Flare': Shape.FIREBALL,
+  'N/A': Shape.UNKNOWN,
+  '': Shape.UNKNOWN,
 }
 
-const VALID_CHARACTERISTICS = new Set([
-  'Lights on object',
-  'Aura or haze around object',
-  'Aircraft nearby',
-  'Animals reacted',
-  'Left a trail',
-  'Emitted other objects',
-  'Changed Color',
-  'Emitted beams',
-  'Electrical or magnetic effects',
-  'Possible abduction',
-  'Missing Time',
-  'Marks found on body afterwards',
-  'Landed',
-])
-
-// ─── Country → continent mapping (top NUFORC countries) ─────────────
+// ─── Comprehensive country → continent mapping ──────────────────────
+// Covers all UN member states, common aliases, and territories.
+// If a country is not here, it is logged as unmapped — never silently
+// assigned to a wrong continent.
 
 const COUNTRY_CONTINENT = {
-  'USA': 'AMERICAS',
-  'US': 'AMERICAS',
-  'Canada': 'AMERICAS',
-  'Mexico': 'AMERICAS',
-  'Brazil': 'AMERICAS',
-  'Argentina': 'AMERICAS',
-  'Colombia': 'AMERICAS',
-  'Chile': 'AMERICAS',
-  'Peru': 'AMERICAS',
-  'UK': 'EUROPE',
-  'United Kingdom': 'EUROPE',
-  'England': 'EUROPE',
-  'Scotland': 'EUROPE',
-  'Wales': 'EUROPE',
-  'Ireland': 'EUROPE',
-  'France': 'EUROPE',
-  'Germany': 'EUROPE',
-  'Spain': 'EUROPE',
-  'Italy': 'EUROPE',
-  'Netherlands': 'EUROPE',
-  'Belgium': 'EUROPE',
-  'Sweden': 'EUROPE',
-  'Norway': 'EUROPE',
-  'Denmark': 'EUROPE',
-  'Finland': 'EUROPE',
-  'Poland': 'EUROPE',
-  'Portugal': 'EUROPE',
-  'Greece': 'EUROPE',
-  'Turkey': 'EUROPE',
-  'Russia': 'EUROPE',
-  'Ukraine': 'EUROPE',
-  'Romania': 'EUROPE',
-  'Czech Republic': 'EUROPE',
-  'Austria': 'EUROPE',
-  'Switzerland': 'EUROPE',
-  'Japan': 'ASIA',
-  'China': 'ASIA',
-  'South Korea': 'ASIA',
-  'India': 'ASIA',
-  'Philippines': 'ASIA',
-  'Thailand': 'ASIA',
-  'Indonesia': 'ASIA',
-  'Malaysia': 'ASIA',
-  'Singapore': 'ASIA',
-  'Taiwan': 'ASIA',
-  'Pakistan': 'ASIA',
-  'Israel': 'ASIA',
-  'Saudi Arabia': 'ASIA',
-  'UAE': 'ASIA',
-  'Iran': 'ASIA',
-  'Iraq': 'ASIA',
-  'Australia': 'OCEANIA',
-  'New Zealand': 'OCEANIA',
-  'South Africa': 'AFRICA',
-  'Nigeria': 'AFRICA',
-  'Kenya': 'AFRICA',
-  'Egypt': 'AFRICA',
+  // ── Americas ──
+  'USA': Continent.AMERICAS,
+  'US': Continent.AMERICAS,
+  'United States': Continent.AMERICAS,
+  'Canada': Continent.AMERICAS,
+  'Mexico': Continent.AMERICAS,
+  'Brazil': Continent.AMERICAS,
+  'Argentina': Continent.AMERICAS,
+  'Colombia': Continent.AMERICAS,
+  'Chile': Continent.AMERICAS,
+  'Peru': Continent.AMERICAS,
+  'Venezuela': Continent.AMERICAS,
+  'Ecuador': Continent.AMERICAS,
+  'Bolivia': Continent.AMERICAS,
+  'Paraguay': Continent.AMERICAS,
+  'Uruguay': Continent.AMERICAS,
+  'Guyana': Continent.AMERICAS,
+  'Suriname': Continent.AMERICAS,
+  'Guatemala': Continent.AMERICAS,
+  'Honduras': Continent.AMERICAS,
+  'El Salvador': Continent.AMERICAS,
+  'Nicaragua': Continent.AMERICAS,
+  'Costa Rica': Continent.AMERICAS,
+  'Panama': Continent.AMERICAS,
+  'Cuba': Continent.AMERICAS,
+  'Jamaica': Continent.AMERICAS,
+  'Haiti': Continent.AMERICAS,
+  'Dominican Republic': Continent.AMERICAS,
+  'Trinidad and Tobago': Continent.AMERICAS,
+  'Bahamas': Continent.AMERICAS,
+  'Barbados': Continent.AMERICAS,
+  'Belize': Continent.AMERICAS,
+  'Puerto Rico': Continent.AMERICAS,
+  'Bermuda': Continent.AMERICAS,
+  'Cayman Islands': Continent.AMERICAS,
+  'US Virgin Islands': Continent.AMERICAS,
+  'Aruba': Continent.AMERICAS,
+  'Guadeloupe': Continent.AMERICAS,
+  'Martinique': Continent.AMERICAS,
+  'French Guiana': Continent.AMERICAS,
+  'Saint Lucia': Continent.AMERICAS,
+  'Grenada': Continent.AMERICAS,
+  'Antigua and Barbuda': Continent.AMERICAS,
+  'Dominica': Continent.AMERICAS,
+  'Saint Kitts and Nevis': Continent.AMERICAS,
+  'Saint Vincent and the Grenadines': Continent.AMERICAS,
+  'Turks and Caicos Islands': Continent.AMERICAS,
+  'Curacao': Continent.AMERICAS,
+
+  // ── Europe ──
+  'UK': Continent.EUROPE,
+  'United Kingdom': Continent.EUROPE,
+  'England': Continent.EUROPE,
+  'Scotland': Continent.EUROPE,
+  'Wales': Continent.EUROPE,
+  'Northern Ireland': Continent.EUROPE,
+  'Ireland': Continent.EUROPE,
+  'France': Continent.EUROPE,
+  'Germany': Continent.EUROPE,
+  'Spain': Continent.EUROPE,
+  'Italy': Continent.EUROPE,
+  'Netherlands': Continent.EUROPE,
+  'Belgium': Continent.EUROPE,
+  'Sweden': Continent.EUROPE,
+  'Norway': Continent.EUROPE,
+  'Denmark': Continent.EUROPE,
+  'Finland': Continent.EUROPE,
+  'Poland': Continent.EUROPE,
+  'Portugal': Continent.EUROPE,
+  'Greece': Continent.EUROPE,
+  'Turkey': Continent.EUROPE,
+  'Russia': Continent.EUROPE,
+  'Ukraine': Continent.EUROPE,
+  'Romania': Continent.EUROPE,
+  'Czech Republic': Continent.EUROPE,
+  'Czechia': Continent.EUROPE,
+  'Austria': Continent.EUROPE,
+  'Switzerland': Continent.EUROPE,
+  'Hungary': Continent.EUROPE,
+  'Bulgaria': Continent.EUROPE,
+  'Croatia': Continent.EUROPE,
+  'Serbia': Continent.EUROPE,
+  'Slovakia': Continent.EUROPE,
+  'Slovenia': Continent.EUROPE,
+  'Lithuania': Continent.EUROPE,
+  'Latvia': Continent.EUROPE,
+  'Estonia': Continent.EUROPE,
+  'Luxembourg': Continent.EUROPE,
+  'Malta': Continent.EUROPE,
+  'Cyprus': Continent.EUROPE,
+  'Iceland': Continent.EUROPE,
+  'Albania': Continent.EUROPE,
+  'North Macedonia': Continent.EUROPE,
+  'Macedonia': Continent.EUROPE,
+  'Montenegro': Continent.EUROPE,
+  'Bosnia and Herzegovina': Continent.EUROPE,
+  'Bosnia': Continent.EUROPE,
+  'Moldova': Continent.EUROPE,
+  'Belarus': Continent.EUROPE,
+  'Georgia': Continent.EUROPE,  // Note: also a US state — resolved by parser context
+  'Armenia': Continent.EUROPE,
+  'Azerbaijan': Continent.EUROPE,
+  'Kosovo': Continent.EUROPE,
+  'Andorra': Continent.EUROPE,
+  'Monaco': Continent.EUROPE,
+  'Liechtenstein': Continent.EUROPE,
+  'San Marino': Continent.EUROPE,
+  'Vatican': Continent.EUROPE,
+  'Gibraltar': Continent.EUROPE,
+  'Faroe Islands': Continent.EUROPE,
+  'Isle of Man': Continent.EUROPE,
+  'Jersey': Continent.EUROPE,
+  'Guernsey': Continent.EUROPE,
+
+  // ── Asia ──
+  'Japan': Continent.ASIA,
+  'China': Continent.ASIA,
+  'South Korea': Continent.ASIA,
+  'North Korea': Continent.ASIA,
+  'India': Continent.ASIA,
+  'Philippines': Continent.ASIA,
+  'Thailand': Continent.ASIA,
+  'Indonesia': Continent.ASIA,
+  'Malaysia': Continent.ASIA,
+  'Singapore': Continent.ASIA,
+  'Taiwan': Continent.ASIA,
+  'Vietnam': Continent.ASIA,
+  'Myanmar': Continent.ASIA,
+  'Cambodia': Continent.ASIA,
+  'Laos': Continent.ASIA,
+  'Bangladesh': Continent.ASIA,
+  'Sri Lanka': Continent.ASIA,
+  'Nepal': Continent.ASIA,
+  'Bhutan': Continent.ASIA,
+  'Mongolia': Continent.ASIA,
+  'Kazakhstan': Continent.ASIA,
+  'Uzbekistan': Continent.ASIA,
+  'Turkmenistan': Continent.ASIA,
+  'Kyrgyzstan': Continent.ASIA,
+  'Tajikistan': Continent.ASIA,
+  'Afghanistan': Continent.ASIA,
+  'Pakistan': Continent.ASIA,
+  'Israel': Continent.ASIA,
+  'Palestine': Continent.ASIA,
+  'Lebanon': Continent.ASIA,
+  'Jordan': Continent.ASIA,
+  'Syria': Continent.ASIA,
+  'Saudi Arabia': Continent.ASIA,
+  'UAE': Continent.ASIA,
+  'United Arab Emirates': Continent.ASIA,
+  'Qatar': Continent.ASIA,
+  'Kuwait': Continent.ASIA,
+  'Bahrain': Continent.ASIA,
+  'Oman': Continent.ASIA,
+  'Yemen': Continent.ASIA,
+  'Iran': Continent.ASIA,
+  'Iraq': Continent.ASIA,
+  'Maldives': Continent.ASIA,
+  'Brunei': Continent.ASIA,
+  'Timor-Leste': Continent.ASIA,
+  'Hong Kong': Continent.ASIA,
+  'Macau': Continent.ASIA,
+
+  // ── Oceania ──
+  'Australia': Continent.OCEANIA,
+  'New Zealand': Continent.OCEANIA,
+  'Fiji': Continent.OCEANIA,
+  'Papua New Guinea': Continent.OCEANIA,
+  'Samoa': Continent.OCEANIA,
+  'Tonga': Continent.OCEANIA,
+  'Vanuatu': Continent.OCEANIA,
+  'Solomon Islands': Continent.OCEANIA,
+  'Micronesia': Continent.OCEANIA,
+  'Kiribati': Continent.OCEANIA,
+  'Marshall Islands': Continent.OCEANIA,
+  'Palau': Continent.OCEANIA,
+  'Tuvalu': Continent.OCEANIA,
+  'Nauru': Continent.OCEANIA,
+  'Guam': Continent.OCEANIA,
+  'New Caledonia': Continent.OCEANIA,
+  'French Polynesia': Continent.OCEANIA,
+  'American Samoa': Continent.OCEANIA,
+
+  // ── Africa ──
+  'South Africa': Continent.AFRICA,
+  'Nigeria': Continent.AFRICA,
+  'Kenya': Continent.AFRICA,
+  'Egypt': Continent.AFRICA,
+  'Ethiopia': Continent.AFRICA,
+  'Ghana': Continent.AFRICA,
+  'Tanzania': Continent.AFRICA,
+  'Uganda': Continent.AFRICA,
+  'Algeria': Continent.AFRICA,
+  'Morocco': Continent.AFRICA,
+  'Tunisia': Continent.AFRICA,
+  'Libya': Continent.AFRICA,
+  'Sudan': Continent.AFRICA,
+  'South Sudan': Continent.AFRICA,
+  'Democratic Republic of the Congo': Continent.AFRICA,
+  'Congo': Continent.AFRICA,
+  'Cameroon': Continent.AFRICA,
+  'Ivory Coast': Continent.AFRICA,
+  'Senegal': Continent.AFRICA,
+  'Mali': Continent.AFRICA,
+  'Burkina Faso': Continent.AFRICA,
+  'Niger': Continent.AFRICA,
+  'Chad': Continent.AFRICA,
+  'Somalia': Continent.AFRICA,
+  'Zimbabwe': Continent.AFRICA,
+  'Zambia': Continent.AFRICA,
+  'Mozambique': Continent.AFRICA,
+  'Madagascar': Continent.AFRICA,
+  'Angola': Continent.AFRICA,
+  'Botswana': Continent.AFRICA,
+  'Namibia': Continent.AFRICA,
+  'Rwanda': Continent.AFRICA,
+  'Malawi': Continent.AFRICA,
+  'Mauritius': Continent.AFRICA,
+  'Togo': Continent.AFRICA,
+  'Sierra Leone': Continent.AFRICA,
+  'Liberia': Continent.AFRICA,
+  'Central African Republic': Continent.AFRICA,
+  'Eritrea': Continent.AFRICA,
+  'Djibouti': Continent.AFRICA,
+  'Gabon': Continent.AFRICA,
+  'Equatorial Guinea': Continent.AFRICA,
+  'Eswatini': Continent.AFRICA,
+  'Lesotho': Continent.AFRICA,
+  'Guinea': Continent.AFRICA,
+  'Guinea-Bissau': Continent.AFRICA,
+  'Benin': Continent.AFRICA,
+  'Burundi': Continent.AFRICA,
+  'Comoros': Continent.AFRICA,
+  'Cape Verde': Continent.AFRICA,
+  'Cabo Verde': Continent.AFRICA,
+  'Seychelles': Continent.AFRICA,
+  'Sao Tome and Principe': Continent.AFRICA,
+  'Gambia': Continent.AFRICA,
+  'Mauritania': Continent.AFRICA,
+  'Reunion': Continent.AFRICA,
 }
 
-// US states → full name for region field
+// US state abbreviations → full name
 const US_STATES = {
   'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
   'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware',
@@ -148,6 +371,7 @@ const US_STATES = {
   'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia',
 }
 
+// Canadian province abbreviations
 const CA_PROVINCES = {
   'AB': 'Alberta', 'BC': 'British Columbia', 'MB': 'Manitoba',
   'NB': 'New Brunswick', 'NL': 'Newfoundland', 'NS': 'Nova Scotia',
@@ -156,32 +380,39 @@ const CA_PROVINCES = {
   'YT': 'Yukon',
 }
 
-// ─── Parsing helpers ─────────────────────────────────────────────────
+// ─── Audit trackers ─────────────────────────────────────────────────
 
-function parseNufordDate(raw) {
+const unmappedCountries = new Map()   // country → count
+const unmappedShapes = new Map()      // shape → count
+const seenCharacteristics = new Map() // characteristic → count
+
+// ─── Parsing helpers ────────────────────────────────────────────────
+
+function parseNuforcDate(raw) {
   if (!raw) return null
-  // "2011-01-13 20:05:00 Local" or "2011-01-12 18:36:28 Pacific"
   const match = raw.match(/^(\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2})/)
   if (!match) return null
   return match[1].replace(' ', 'T')
 }
 
 function parseLocation(raw) {
-  if (!raw) return { city: '', state: '', country: 'Unknown', region: '', continent: 'AMERICAS' }
+  const fallback = {
+    city: '', state: '', country: Shape.UNKNOWN,
+    region: '', continent: Continent.AMERICAS,
+  }
+
+  if (!raw) return fallback
 
   const parts = raw.split(',').map(s => s.trim())
 
   let city = parts[0] || ''
   let state = ''
-  let country = 'Unknown'
-  let continent = 'AMERICAS'
+  let country = Shape.UNKNOWN
 
   if (parts.length >= 3) {
-    // "Basye, VA, USA" or "Toronto, ON, Canada"
     state = parts[1] || ''
-    country = parts[2] || 'Unknown'
+    country = parts[2] || Shape.UNKNOWN
   } else if (parts.length === 2) {
-    // Could be "City, STATE" (US implied) or "City, Country"
     const second = parts[1] || ''
     if (US_STATES[second]) {
       state = second
@@ -194,10 +425,10 @@ function parseLocation(raw) {
     }
   }
 
-  // Normalize country
+  // Normalize country aliases
   if (country === 'United States' || country === 'US') country = 'USA'
 
-  // Build region
+  // Build region string
   let region = city
   if (state && US_STATES[state]) {
     region = `${city}, ${state}`
@@ -209,77 +440,82 @@ function parseLocation(raw) {
     region = `${city}, ${state}`
   }
 
-  // Resolve continent
-  const continentLookup = COUNTRY_CONTINENT[country]
-  if (continentLookup) {
-    continent = continentLookup
+  // Resolve continent — log unmapped countries instead of silently defaulting
+  let continent = COUNTRY_CONTINENT[country]
+  if (!continent) {
+    unmappedCountries.set(country, (unmappedCountries.get(country) || 0) + 1)
+    continent = Continent.AMERICAS // fallback for predominantly US dataset
   }
 
   return { city, state, country, region, continent }
 }
 
 function normalizeShape(raw) {
-  if (!raw) return 'Unknown'
+  if (!raw) return Shape.UNKNOWN
   const trimmed = raw.trim()
   if (VALID_SHAPES.has(trimmed)) return trimmed
   if (SHAPE_ALIASES[trimmed]) return SHAPE_ALIASES[trimmed]
+
   // Case-insensitive fallback
   for (const shape of VALID_SHAPES) {
     if (shape.toLowerCase() === trimmed.toLowerCase()) return shape
   }
-  return 'Unknown'
-}
 
-function filterCharacteristics(raw) {
-  if (!Array.isArray(raw)) return []
-  return raw.filter(c => VALID_CHARACTERISTICS.has(c))
+  // Log unmapped shapes for audit
+  unmappedShapes.set(trimmed, (unmappedShapes.get(trimmed) || 0) + 1)
+  return Shape.UNKNOWN
 }
 
 /**
- * Naive credibility score (0-100).
- * Factors: observer count, characteristics detail, duration specificity.
- * This is a placeholder until we build a proper scoring model.
+ * Pass through ALL characteristics from the source.
+ * We do NOT whitelist — NUFORC defines the vocabulary, not us.
+ * Unknown characteristics are tracked for awareness but never dropped.
+ */
+function parseCharacteristics(raw) {
+  if (!Array.isArray(raw)) return []
+
+  return raw.filter(c => {
+    if (typeof c !== 'string' || !c.trim()) return false
+    const trimmed = c.trim()
+    seenCharacteristics.set(trimmed, (seenCharacteristics.get(trimmed) || 0) + 1)
+    return true
+  }).map(c => c.trim())
+}
+
+/**
+ * Naive credibility score (0–100).
+ * Factors: observer count, characteristic detail, duration specificity, summary length.
+ * Placeholder until a proper scoring model is built.
  */
 function computeCredibility(record) {
-  let score = 30 // baseline
+  let score = CREDIBILITY_BASELINE
 
-  // Multiple observers boost confidence
   const observers = record['No of observers'] || 0
   if (observers >= 4) score += 25
   else if (observers >= 2) score += 15
   else if (observers === 1) score += 5
 
-  // Detailed characteristics = more credible report
   const chars = Array.isArray(record.Characteristics) ? record.Characteristics.length : 0
   score += Math.min(chars * 5, 20)
 
-  // Duration specificity (has numbers = more precise)
   const duration = record.Duration || ''
   if (/\d/.test(duration)) score += 10
 
-  // Summary length (longer = more detailed account)
   const summary = record.Summary || ''
-  if (summary.length > 200) score += 10
+  if (summary.length > SUMMARY_MAX_LENGTH) score += 10
   else if (summary.length > 50) score += 5
 
-  return Math.min(score, 100)
+  return Math.min(score, CREDIBILITY_MAX)
 }
 
-function truncateSummary(text, maxLen = 200) {
+function truncate(text, maxLen) {
   if (!text) return ''
-  if (text.length <= maxLen) return text
-  return text.slice(0, maxLen).replace(/\s+\S*$/, '') + '…'
-}
-
-function truncateDescription(text, maxLen = 1200) {
-  if (!text) return ''
-  // Normalize newlines to spaces for cleaner display
-  const cleaned = text.replace(/\n+/g, '\n').trim()
+  const cleaned = text.replace(/\n{3,}/g, '\n\n').trim()
   if (cleaned.length <= maxLen) return cleaned
   return cleaned.slice(0, maxLen).replace(/\s+\S*$/, '') + '…'
 }
 
-// ─── Main ────────────────────────────────────────────────────────────
+// ─── Main ───────────────────────────────────────────────────────────
 
 function main() {
   const inputPath = process.argv[2] || DEFAULT_INPUT
@@ -298,7 +534,6 @@ function main() {
   const records = JSON.parse(raw)
   console.log(`  Found ${records.length.toLocaleString()} records`)
 
-  // Group by year
   const byYear = new Map()
   let skipped = 0
   let processed = 0
@@ -306,7 +541,7 @@ function main() {
   const countryCounts = new Map()
 
   for (const record of records) {
-    const occurredAt = parseNufordDate(record.Occurred)
+    const occurredAt = parseNuforcDate(record.Occurred)
     if (!occurredAt) {
       skipped++
       continue
@@ -314,26 +549,25 @@ function main() {
 
     const year = occurredAt.slice(0, 4)
     const yearNum = parseInt(year, 10)
-    if (yearNum < 1950 || yearNum > 2030) {
+    if (yearNum < VALID_YEAR_MIN || yearNum > VALID_YEAR_MAX) {
       skipped++
       continue
     }
 
-    const reportedAt = parseNufordDate(record.Reported) || occurredAt
-    const postedAt = parseNufordDate(record.Posted) || reportedAt
+    const reportedAt = parseNuforcDate(record.Reported) || occurredAt
+    const postedAt = parseNuforcDate(record.Posted) || reportedAt
 
     const loc = parseLocation(record.Location)
     const shape = normalizeShape(record.Shape)
-    const characteristics = filterCharacteristics(record.Characteristics)
+    const characteristics = parseCharacteristics(record.Characteristics)
     const credibility = computeCredibility(record)
 
-    // Track stats
     shapeCounts.set(shape, (shapeCounts.get(shape) || 0) + 1)
     countryCounts.set(loc.country, (countryCounts.get(loc.country) || 0) + 1)
 
     const sighting = {
       id: String(record.Sighting || processed),
-      source: 'NUFORC',
+      source: Source.NUFORC,
       occurredAt,
       reportedAt,
       postedAt,
@@ -341,14 +575,14 @@ function main() {
       shape,
       duration: record.Duration || '',
       observers: record['No of observers'] || 0,
-      summary: truncateSummary(record.Summary),
-      description: truncateDescription(record.Text),
+      summary: truncate(record.Summary, SUMMARY_MAX_LENGTH),
+      description: truncate(record.Text, DESCRIPTION_MAX_LENGTH),
       characteristics,
       coordinates: null,
       region: loc.region,
       country: loc.country,
       continent: loc.continent,
-      status: 'PENDING',
+      status: Status.PENDING,
       credibility,
     }
 
@@ -357,7 +591,7 @@ function main() {
     processed++
   }
 
-  // Write chunks
+  // ─ Write chunks ─
   mkdirSync(OUTPUT_DIR, { recursive: true })
 
   const manifest = {
@@ -371,7 +605,6 @@ function main() {
 
   for (const year of sortedYears) {
     const sightings = byYear.get(year)
-    // Sort by occurred date descending within each year
     sightings.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))
 
     const filename = `nuforc-${year}.json`
@@ -382,43 +615,56 @@ function main() {
     manifest.years[year] = { count: sightings.length, file: filename, sizeKB }
   }
 
-  // Write manifest
   const manifestPath = resolve(OUTPUT_DIR, 'nuforc-manifest.json')
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 
-  // Print summary
+  // ─ Summary ─
   console.log(`\n  ✓ Processed ${processed.toLocaleString()} sightings (${skipped} skipped)`)
   console.log(`  ✓ ${sortedYears.length} year chunks written to public/data/`)
   console.log(`\n  Year range: ${sortedYears[0]} — ${sortedYears[sortedYears.length - 1]}`)
 
   // Top shapes
-  const topShapes = [...shapeCounts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
+  const topShapes = [...shapeCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10)
   console.log(`\n  Top shapes:`)
   for (const [shape, count] of topShapes) {
     console.log(`    ${shape.padEnd(14)} ${count.toLocaleString()}`)
   }
 
   // Top countries
-  const topCountries = [...countryCounts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
+  const topCountries = [...countryCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10)
   console.log(`\n  Top countries:`)
   for (const [country, count] of topCountries) {
     console.log(`    ${country.padEnd(16)} ${count.toLocaleString()}`)
   }
 
-  // Size report
-  let totalSizeKB = 0
-  console.log(`\n  Chunk sizes:`)
-  for (const year of sortedYears.slice(-10)) {
-    const info = manifest.years[year]
-    console.log(`    ${year}: ${info.count.toLocaleString().padStart(6)} sightings  (${info.sizeKB} KB)`)
-    totalSizeKB += info.sizeKB
+  // ─ Audit: unmapped data ─
+  if (unmappedCountries.size > 0) {
+    const sorted = [...unmappedCountries.entries()].sort((a, b) => b[1] - a[1])
+    console.log(`\n  ⚠ Unmapped countries (${unmappedCountries.size} unique, defaulted to ${Continent.AMERICAS}):`)
+    for (const [country, count] of sorted.slice(0, 20)) {
+      console.log(`    ${country.padEnd(24)} ${count.toLocaleString()}`)
+    }
+    if (sorted.length > 20) {
+      console.log(`    ... and ${sorted.length - 20} more`)
+    }
   }
-  console.log(`    ... and ${Math.max(0, sortedYears.length - 10)} earlier years`)
 
+  if (unmappedShapes.size > 0) {
+    const sorted = [...unmappedShapes.entries()].sort((a, b) => b[1] - a[1])
+    console.log(`\n  ⚠ Unmapped shapes (${unmappedShapes.size} unique, defaulted to ${Shape.UNKNOWN}):`)
+    for (const [shape, count] of sorted) {
+      console.log(`    "${shape}" → ${count.toLocaleString()}`)
+    }
+  }
+
+  // All characteristics seen in source data
+  const charsSorted = [...seenCharacteristics.entries()].sort((a, b) => b[1] - a[1])
+  console.log(`\n  Characteristics found in source (${charsSorted.length} unique):`)
+  for (const [char, count] of charsSorted) {
+    console.log(`    ${char.padEnd(40)} ${count.toLocaleString()}`)
+  }
+
+  // Size report
   const totalMB = Object.values(manifest.years).reduce((a, y) => a + y.sizeKB, 0) / 1024
   console.log(`\n  Total output: ${totalMB.toFixed(1)} MB (from ${(Buffer.byteLength(raw) / 1024 / 1024).toFixed(0)} MB input)`)
   console.log(`  Manifest: ${manifestPath}\n`)
