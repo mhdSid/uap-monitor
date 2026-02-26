@@ -1,14 +1,23 @@
-import { TagVariant } from '@/enums'
+import { TagVariant, SightingStatus } from '@/enums'
 import type { TagProps, StatusTagProps } from '@/types'
 import { h, text } from '@/utils/dom'
 
-const TAG_STYLES: Record<TagVariant, { color: string, bg: string }> = {
+const TAG_STYLES: Record<TagVariant, { color: string; bg: string }> = {
   [TagVariant.ALERT]: { color: '#000', bg: 'var(--color-red)' },
   [TagVariant.USO]: { color: '#000', bg: 'var(--color-purple)' },
   [TagVariant.LIVE]: { color: 'var(--color-green)', bg: 'transparent' },
   [TagVariant.NEW]: { color: '#000', bg: 'var(--color-amber)' },
   [TagVariant.DISABLED]: { color: 'var(--color-muted)', bg: 'transparent' },
 }
+
+const STATUS_COLORS: Record<SightingStatus, string> = {
+  [SightingStatus.VERIFIED]: 'var(--color-green)',
+  [SightingStatus.PENDING]: 'var(--color-amber)',
+  [SightingStatus.ANALYZING]: 'var(--color-cyan)',
+  [SightingStatus.DEBUNKED]: 'var(--color-red)',
+}
+
+const STATUS_FALLBACK_COLOR = 'var(--color-muted)'
 
 export function renderTag(props: TagProps): HTMLElement {
   const style = TAG_STYLES[props.variant]
@@ -30,13 +39,7 @@ export function renderLiveTag(): HTMLElement {
 }
 
 export function renderStatusTag(props: StatusTagProps): HTMLElement {
-  const colorMap: Record<string, string> = {
-    VERIFIED: 'var(--color-green)',
-    PENDING: 'var(--color-amber)',
-    ANALYZING: 'var(--color-cyan)',
-    DEBUNKED: 'var(--color-red)',
-  }
-  const color = colorMap[props.status] ?? 'var(--color-muted)'
+  const color = STATUS_COLORS[props.status as SightingStatus] ?? STATUS_FALLBACK_COLOR
   return h('span', {
     className: 'tag',
     style: { color, borderColor: color },

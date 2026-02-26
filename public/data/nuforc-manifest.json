@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-26T02:54:38.515Z",
+  "generatedAt": "2026-02-26T05:38:53.758Z",
   "totalRecords": 147373,
   "skippedRecords": 517,
   "years": {
@@ -131,7 +131,7 @@
     "1975": {
       "count": 418,
       "file": "nuforc-1975.json",
-      "sizeKB": 565
+      "sizeKB": 566
     },
     "1976": {
       "count": 379,
@@ -191,7 +191,7 @@
     "1987": {
       "count": 301,
       "file": "nuforc-1987.json",
-      "sizeKB": 406
+      "sizeKB": 407
     },
     "1988": {
       "count": 319,
@@ -211,7 +211,7 @@
     "1991": {
       "count": 320,
       "file": "nuforc-1991.json",
-      "sizeKB": 435
+      "sizeKB": 436
     },
     "1992": {
       "count": 357,
@@ -236,7 +236,7 @@
     "1996": {
       "count": 1059,
       "file": "nuforc-1996.json",
-      "sizeKB": 1181
+      "sizeKB": 1182
     },
     "1997": {
       "count": 1528,
@@ -266,17 +266,17 @@
     "2002": {
       "count": 3730,
       "file": "nuforc-2002.json",
-      "sizeKB": 4411
+      "sizeKB": 4412
     },
     "2003": {
       "count": 4450,
       "file": "nuforc-2003.json",
-      "sizeKB": 5422
+      "sizeKB": 5423
     },
     "2004": {
       "count": 4782,
       "file": "nuforc-2004.json",
-      "sizeKB": 5702
+      "sizeKB": 5703
     },
     "2005": {
       "count": 4547,
@@ -286,12 +286,12 @@
     "2006": {
       "count": 4198,
       "file": "nuforc-2006.json",
-      "sizeKB": 4953
+      "sizeKB": 4954
     },
     "2007": {
       "count": 4770,
       "file": "nuforc-2007.json",
-      "sizeKB": 5802
+      "sizeKB": 5803
     },
     "2008": {
       "count": 5346,
@@ -306,7 +306,7 @@
     "2010": {
       "count": 4853,
       "file": "nuforc-2010.json",
-      "sizeKB": 5776
+      "sizeKB": 5777
     },
     "2011": {
       "count": 5695,
@@ -316,17 +316,17 @@
     "2012": {
       "count": 8212,
       "file": "nuforc-2012.json",
-      "sizeKB": 9259
+      "sizeKB": 9260
     },
     "2013": {
       "count": 7888,
       "file": "nuforc-2013.json",
-      "sizeKB": 8741
+      "sizeKB": 8742
     },
     "2014": {
       "count": 8797,
       "file": "nuforc-2014.json",
-      "sizeKB": 9354
+      "sizeKB": 9355
     },
     "2015": {
       "count": 7033,
@@ -336,12 +336,12 @@
     "2016": {
       "count": 5794,
       "file": "nuforc-2016.json",
-      "sizeKB": 5926
+      "sizeKB": 5927
     },
     "2017": {
       "count": 5174,
       "file": "nuforc-2017.json",
-      "sizeKB": 5208
+      "sizeKB": 5209
     },
     "2018": {
       "count": 3572,
@@ -356,7 +356,7 @@
     "2020": {
       "count": 7452,
       "file": "nuforc-2020.json",
-      "sizeKB": 6544
+      "sizeKB": 6545
     },
     "2021": {
       "count": 3698,
@@ -366,7 +366,7 @@
     "2022": {
       "count": 5173,
       "file": "nuforc-2022.json",
-      "sizeKB": 5129
+      "sizeKB": 5130
     },
     "2023": {
       "count": 4178,

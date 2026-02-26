@@ -29,15 +29,13 @@ export async function createApp(root: HTMLElement): Promise<void> {
 
   mount(root, app)
 
-  // ─ Fetch initial data (progressive — render as each year loads) ─
+  // ─ Fetch manifest ─
   const { fetchYearRange, fetchProgressive, getSources, nuforc } = useDataSource()
 
   await nuforc.loadManifest()
   const availableYears = nuforc.getAvailableYears()
   const newest = availableYears[0] ?? new Date().getFullYear()
   const defaultFrom = newest - 1
-
-  clearChildren(main)
 
   // ─ State ─
   let allSightings: Sighting[] = []
@@ -60,16 +58,36 @@ export async function createApp(root: HTMLElement): Promise<void> {
     gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
   }
 
+  /**
+   * Smoothly transition the grids container height when content changes,
+   * preventing sections below from jumping.
+   */
+  function preserveHeight(container: HTMLElement, fn: () => void): void {
+    const prevHeight = container.offsetHeight
+    if (prevHeight > 0) {
+      container.style.minHeight = `${prevHeight}px`
+    }
+
+    fn()
+
+    // Release the min-height after content has rendered
+    requestAnimationFrame(() => {
+      container.style.minHeight = ''
+    })
+  }
+
   async function applyFilterAndRender(): Promise<void> {
     const version = ++renderVersion
 
-    showLoader()
+    preserveHeight(gridsContainer, showLoader)
 
     const filtered = await filterSightings(allSightings, activeFilter)
 
     if (version !== renderVersion) return
 
-    await renderSightingGrids(gridsContainer, filtered)
+    preserveHeight(gridsContainer, () => {
+      renderSightingGrids(gridsContainer, filtered)
+    })
     updateCount(filtered.length)
   }
 
@@ -98,23 +116,7 @@ export async function createApp(root: HTMLElement): Promise<void> {
     },
   })
 
-  // ─ Assemble layout ─
-  main.appendChild(yearSelector)
-  main.appendChild(filterToolbar)
-  main.appendChild(gridsContainer)
-
-  gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
-
-  // Progressive load — render each year's data as it arrives
-  const finalSightings = await fetchProgressive(defaultFrom, newest, (partial) => {
-    allSightings = partial
-    renderSightingGrids(gridsContainer, partial)
-    updateCount(partial.length)
-  })
-
-  allSightings = finalSightings
-
-  // ─ Data sources panel ─
+  // ─ Data sources panel (built now, part of initial skeleton) ─
   const sourcesBody = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } })
 
   sourcesBody.appendChild(
@@ -128,7 +130,31 @@ export async function createApp(root: HTMLElement): Promise<void> {
 
   sourcesBody.appendChild(renderDataSources({ sources: getSources() }))
 
-  main.appendChild(renderSection({ title: 'DATA SOURCES' }, sourcesBody))
+  const sourcesSection = renderSection({
+    title: 'DATA SOURCES',
+    tooltip: 'Open-source intelligence feeds aggregated by UAP Monitor. Green = live, amber = syncing, grey = planned. Click any source to visit its website.',
+  }, sourcesBody)
 
+  // ─ Assemble complete layout skeleton at once ─
+  // Loader goes into gridsContainer BEFORE appending to DOM
+  // so the container has height from the first paint
+  gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
+
+  clearChildren(main)
+  main.appendChild(yearSelector)
+  main.appendChild(filterToolbar)
+  main.appendChild(gridsContainer)
+  main.appendChild(sourcesSection)
   main.appendChild(renderFooter())
+
+  // ─ Progressive load — render each year's data as it arrives ─
+  const finalSightings = await fetchProgressive(defaultFrom, newest, (partial) => {
+    allSightings = partial
+    preserveHeight(gridsContainer, () => {
+      renderSightingGrids(gridsContainer, partial)
+    })
+    updateCount(partial.length)
+  })
+
+  allSightings = finalSightings
 }

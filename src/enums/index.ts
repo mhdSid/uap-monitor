@@ -1,7 +1,9 @@
 export enum Continent {
-  ASIA = 'ASIA',
-  EUROPE = 'EUROPE',
   AMERICAS = 'AMERICAS',
+  EUROPE = 'EUROPE',
+  EURASIA = 'EURASIA',
+  ASIA_MIDDLE_EAST = 'ASIA_MIDDLE_EAST',
+  ASIA_PACIFIC = 'ASIA_PACIFIC',
   OCEANIA = 'OCEANIA',
   AFRICA = 'AFRICA',
 }
@@ -91,4 +93,10 @@ export enum AlertVariant {
   WARNING = 'warning',
   ERROR = 'error',
   NEUTRAL = 'neutral',
+}
+
+export enum ToastVariant {
+  ERROR = 'error',
+  SUCCESS = 'success',
+  INFO = 'info',
 }

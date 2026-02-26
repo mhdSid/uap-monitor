@@ -2,13 +2,31 @@ import { Continent } from '@/enums'
 import type { ContinentGroup } from '@/types'
 
 const CONTINENT_LABELS: Record<Continent, string> = {
-  [Continent.ASIA]: 'ASIA-PACIFIC',
-  [Continent.EUROPE]: 'EUROPE',
   [Continent.AMERICAS]: 'AMERICAS',
+  [Continent.EUROPE]: 'EUROPE',
+  [Continent.EURASIA]: 'EURASIA',
+  [Continent.ASIA_MIDDLE_EAST]: 'ASIA — MIDDLE EAST',
+  [Continent.ASIA_PACIFIC]: 'ASIA — PACIFIC',
   [Continent.OCEANIA]: 'OCEANIA',
   [Continent.AFRICA]: 'AFRICA',
 }
 
+/** Fixed display order — highest-volume regions first. */
+const CONTINENT_ORDER: Continent[] = [
+  Continent.AMERICAS,
+  Continent.EUROPE,
+  Continent.EURASIA,
+  Continent.ASIA_MIDDLE_EAST,
+  Continent.ASIA_PACIFIC,
+  Continent.OCEANIA,
+  Continent.AFRICA,
+]
+
+/**
+ * Group items by continent.
+ * Always returns all 5 continents in a stable order,
+ * even if some have zero items.
+ */
 export function groupByContinent<T extends { continent: Continent }>(items: T[]): ContinentGroup<T>[] {
   const grouped = new Map<Continent, T[]>()
 
@@ -18,10 +36,13 @@ export function groupByContinent<T extends { continent: Continent }>(items: T[])
     grouped.set(item.continent, list)
   }
 
-  return Array.from(grouped.entries()).map(([continent, groupItems]) => ({
-    continent,
-    label: CONTINENT_LABELS[continent],
-    items: groupItems,
-    count: groupItems.length,
-  }))
+  return CONTINENT_ORDER.map((continent) => {
+    const groupItems = grouped.get(continent) ?? []
+    return {
+      continent,
+      label: CONTINENT_LABELS[continent],
+      items: groupItems,
+      count: groupItems.length,
+    }
+  })
 }

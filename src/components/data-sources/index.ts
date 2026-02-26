@@ -2,14 +2,18 @@ import type { DataSourcesProps } from '@/types'
 import { DataSourceStatus } from '@/enums'
 import { h } from '@/utils/dom'
 
+const STATUS_DOT_COLORS: Record<DataSourceStatus, string> = {
+  [DataSourceStatus.ONLINE]: 'var(--color-green)',
+  [DataSourceStatus.SYNCING]: 'var(--color-amber)',
+  [DataSourceStatus.OFFLINE]: 'var(--color-muted)',
+  [DataSourceStatus.DISABLED]: 'var(--color-muted)',
+}
+
 export function renderDataSources(props: DataSourcesProps): HTMLElement {
   const wrapper = h('div', { className: 'data-sources' })
 
   for (const source of props.sources) {
-    let dotColor = 'var(--color-muted)'
-    if (source.status === DataSourceStatus.ONLINE) dotColor = 'var(--color-green)'
-    else if (source.status === DataSourceStatus.SYNCING) dotColor = 'var(--color-amber)'
-
+    const dotColor = STATUS_DOT_COLORS[source.status]
     const isDisabled = source.status === DataSourceStatus.DISABLED
 
     const dot = h('span', {

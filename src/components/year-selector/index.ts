@@ -36,7 +36,7 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
   const countEl = h('span', { className: 'year-selector__count' }, '')
 
   function fireChange(): void {
-    let from = Number(fromSelect.value)
+    const from = Number(fromSelect.value)
     let to = Number(toSelect.value)
     if (from > to) {
       to = from

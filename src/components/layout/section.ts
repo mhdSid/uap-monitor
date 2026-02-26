@@ -1,6 +1,7 @@
 import type { SectionProps } from '@/types'
 import { h } from '@/utils/dom'
 import { renderLiveTag } from '@/components/tags'
+import { renderTooltip } from '@/components/tooltip'
 
 export function renderSection(props: SectionProps, content: HTMLElement): HTMLElement {
   const header = h('div', { className: 'section__header' },
@@ -9,6 +10,9 @@ export function renderSection(props: SectionProps, content: HTMLElement): HTMLEl
 
   if (props.live) {
     header.appendChild(renderLiveTag())
+  }
+  if (props.tooltip) {
+    header.appendChild(renderTooltip({ content: props.tooltip, ariaLabel: `About ${props.title}` }))
   }
   if (props.tag) {
     header.appendChild(props.tag)

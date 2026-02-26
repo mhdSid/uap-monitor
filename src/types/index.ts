@@ -2,10 +2,10 @@ import type {
   Continent,
   DataSourceId,
   DataSourceStatus,
-  SightingCharacteristic,
   SightingShape,
   SightingStatus,
   TagVariant,
+  ToastVariant,
 } from '@/enums'
 
 // ─── Core domain ─────────────────────────────────────────────────────
@@ -59,8 +59,8 @@ export interface Sighting {
   /** Full witness account / description text */
   description: string
 
-  /** Observable characteristics reported */
-  characteristics: SightingCharacteristic[]
+  /** Observable characteristics reported (passthrough from source, not restricted to enum) */
+  characteristics: string[]
 
   // ─── Geocoded fields (nullable until geocoded) ───────────────────
 
@@ -151,7 +151,7 @@ export interface AsyncState<T> {
 export interface ToastMessage {
   id: string
   text: string
-  type: 'error' | 'success' | 'info'
+  variant: ToastVariant
 }
 
 // ─── Component props ─────────────────────────────────────────────────
@@ -183,6 +183,7 @@ export interface SectionProps {
   live?: boolean
   count?: number
   tag?: HTMLElement
+  tooltip?: string
 }
 
 export interface TagProps {

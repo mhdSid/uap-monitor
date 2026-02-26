@@ -8,8 +8,10 @@ export interface FilterToolbarProps {
 
 const CONTINENT_LABELS: Record<string, string> = {
   [Continent.AMERICAS]: 'AMERICAS',
-  [Continent.ASIA]: 'ASIA-PACIFIC',
   [Continent.EUROPE]: 'EUROPE',
+  [Continent.EURASIA]: 'EURASIA',
+  [Continent.ASIA_MIDDLE_EAST]: 'ASIA — MIDDLE EAST',
+  [Continent.ASIA_PACIFIC]: 'ASIA — PACIFIC',
   [Continent.OCEANIA]: 'OCEANIA',
   [Continent.AFRICA]: 'AFRICA',
 }
@@ -17,7 +19,7 @@ const CONTINENT_LABELS: Record<string, string> = {
 export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
   const { onFilterChange } = props
 
-  let currentFilter: SightingFilter = {}
+  const currentFilter: SightingFilter = {}
   let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
   function emit(): void {
