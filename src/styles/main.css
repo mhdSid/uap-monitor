@@ -783,6 +783,11 @@ a.data-sources__item:hover {
   transition: background 0.15s;
 }
 
+.data-grid__row--clickable {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
 .data-grid__row--clickable:hover {
   background: rgba(0, 255, 65, 0.03);
 }
@@ -790,6 +795,7 @@ a.data-sources__item:hover {
 /* Unified focus style for both SP (touch → focus) and PC (keyboard/click → focus-visible) */
 .data-grid__row--clickable:focus-visible,
 .data-grid__row--clickable:focus,
+.data-grid__row--clickable:active,
 .data-grid__row:focus {
   outline: none;
   background: rgba(0, 255, 65, 0.08);

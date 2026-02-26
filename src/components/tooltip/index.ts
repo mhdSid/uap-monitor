@@ -55,6 +55,8 @@ function positionPopup(popup: HTMLElement, trigger: HTMLElement): void {
 
 /**
  * Renders a "?" button that toggles a viewport-positioned tooltip popup on click.
+ * Popup is appended to document.body to escape any containing blocks
+ * (e.g. content-visibility: auto on ancestor sections).
  * Repositions on resize/scroll. Clicking anywhere else dismisses it.
  */
 export function renderTooltip(props: TooltipProps): HTMLElement {
@@ -70,6 +72,10 @@ export function renderTooltip(props: TooltipProps): HTMLElement {
     className: 'tooltip__popup',
     role: 'tooltip',
   }, props.content)
+
+  // Append popup to body so `position: fixed` works regardless of
+  // ancestor containing blocks (content-visibility, transforms, etc.)
+  document.body.appendChild(popup)
 
   let isOpen = false
 
@@ -87,7 +93,7 @@ export function renderTooltip(props: TooltipProps): HTMLElement {
   }
 
   function handleOutsideClick(e: Event): void {
-    if (!wrapper.contains(e.target as Node)) {
+    if (!wrapper.contains(e.target as Node) && !popup.contains(e.target as Node)) {
       close()
     }
   }
@@ -107,7 +113,6 @@ export function renderTooltip(props: TooltipProps): HTMLElement {
   })
 
   wrapper.appendChild(trigger)
-  wrapper.appendChild(popup)
 
   return wrapper
 }
