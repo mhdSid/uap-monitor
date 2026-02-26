@@ -113,6 +113,8 @@ export interface DataSource {
   id: DataSourceId
   label: string
   status: DataSourceStatus
+  url?: string
+  description?: string
 }
 
 // ─── NUFORC data layer ──────────────────────────────────────────────

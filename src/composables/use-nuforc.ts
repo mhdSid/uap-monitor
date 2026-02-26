@@ -311,11 +311,43 @@ export function useNuforc() {
     return count
   }
 
+  /**
+   * Progressively load a year range, calling onChunk after each year finishes.
+   * Returns the full merged set when complete. Most recent year loads first.
+   */
+  async function loadProgressive(
+    fromYear: number,
+    toYear: number,
+    onChunk: (sightings: Sighting[]) => void,
+  ): Promise<Sighting[]> {
+    const m = await loadManifest()
+    if (!m) return []
+
+    // Most recent first so user sees newest data immediately
+    const years: string[] = []
+    for (let y = toYear; y >= fromYear; y--) {
+      const key = String(y)
+      if (m.years[key]) years.push(key)
+    }
+
+    let all: Sighting[] = []
+
+    for (const year of years) {
+      const chunk = await loadYear(year)
+      all = [...all, ...chunk]
+      all.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))
+      onChunk(all)
+    }
+
+    return all
+  }
+
   return {
     loadManifest,
     loadYear,
     loadYearRange,
     loadDefault,
+    loadProgressive,
     getCached,
     getAvailableYears,
     isYearLoaded,

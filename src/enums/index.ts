@@ -82,3 +82,13 @@ export enum TagVariant {
   NEW = 'NEW',
   DISABLED = 'DISABLED',
 }
+
+export enum AlertVariant {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning',
+  ERROR = 'error',
+  NEUTRAL = 'neutral',
+}

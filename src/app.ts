@@ -1,6 +1,6 @@
 import { h, mount, clearChildren } from '@/utils/dom'
 import { useDataSource } from '@/composables'
-import { Continent, SightingShape } from '@/enums'
+import { AlertVariant, Continent, SightingShape } from '@/enums'
 import { renderHeader } from '@/components/header'
 import { renderTicker } from '@/components/ticker'
 import { renderLoader } from '@/components/loader'
@@ -9,6 +9,7 @@ import { renderDataGrid } from '@/components/data-grid'
 import { renderStatusTag } from '@/components/tags'
 import { renderCredibilityBar } from '@/components/credibility-bar'
 import { renderDataSources } from '@/components/data-sources'
+import { renderAlert } from '@/components/alert'
 import { renderFooter } from '@/components/footer'
 import { openSightingModal } from '@/components/sighting-modal'
 import { groupByContinent } from '@/data/sightings'
@@ -316,14 +317,19 @@ export async function createApp(root: HTMLElement): Promise<void> {
 
   mount(root, app)
 
-  // ─ Fetch initial data ─
-  const { fetchSightings, fetchYearRange, getSources, nuforc } = useDataSource()
-  const initialSightings = await fetchSightings()
+  // ─ Fetch initial data (progressive — render as each year loads) ─
+  const { fetchSightings, fetchYearRange, fetchProgressive, getSources, nuforc } = useDataSource()
+
+  // Load manifest first to get year info
+  await nuforc.loadManifest()
+  const availableYears = nuforc.getAvailableYears()
+  const newest = availableYears[0] ?? new Date().getFullYear()
+  const defaultFrom = newest - 1
 
   clearChildren(main)
 
   // ─ State ─
-  let allSightings: Sighting[] = initialSightings
+  let allSightings: Sighting[] = []
   let activeFilter: SightingFilter = {}
   let isLoading = false
   let renderVersion = 0 // guards stale renders
@@ -358,10 +364,6 @@ export async function createApp(root: HTMLElement): Promise<void> {
   }
 
   // ─ Year selector ─
-  const availableYears = nuforc.getAvailableYears()
-  const newest = availableYears[0] ?? new Date().getFullYear()
-  const defaultFrom = newest - 1
-
   const yearSelector = renderYearSelector({
     availableYears,
     defaultFrom,
@@ -391,17 +393,33 @@ export async function createApp(root: HTMLElement): Promise<void> {
   main.appendChild(filterToolbar)
   main.appendChild(gridsContainer)
 
-  // Initial render
-  await renderSightingGrids(gridsContainer, initialSightings)
-  updateCount(initialSightings.length)
+  // Show loader while first chunk loads
+  gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
+
+  // Progressive load — render each year's data as it arrives
+  const finalSightings = await fetchProgressive(defaultFrom, newest, (partial) => {
+    allSightings = partial
+    renderSightingGrids(gridsContainer, partial)
+    updateCount(partial.length)
+  })
+
+  allSightings = finalSightings
 
   // Data sources panel
-  main.appendChild(
-    renderSection(
-      { title: 'DATA SOURCES' },
-      renderDataSources({ sources: getSources() }),
-    ),
+  const sourcesBody = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } })
+
+  sourcesBody.appendChild(
+    renderAlert({
+      variant: AlertVariant.INFO,
+      title: 'INTELLIGENCE SOURCES',
+      content: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.',
+      dismissible: true,
+    }),
   )
+
+  sourcesBody.appendChild(renderDataSources({ sources: getSources() }))
+
+  main.appendChild(renderSection({ title: 'DATA SOURCES' }, sourcesBody))
 
   main.appendChild(renderFooter())
 }

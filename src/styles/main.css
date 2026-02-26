@@ -273,6 +273,12 @@ body {
   padding: 3px 8px;
   border: 1px solid var(--color-border);
   font-size: 9px;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+a.data-sources__item:hover {
+  border-color: var(--color-dim);
 }
 
 .data-sources__item--disabled {
@@ -738,6 +744,58 @@ body {
   color: var(--color-muted);
   letter-spacing: 2px;
   text-align: center;
+}
+
+/* ===== ALERT ===== */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  transition: opacity 0.2s;
+}
+
+.alert__icon {
+  flex-shrink: 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.alert__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert__title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.alert__content {
+  font-size: 10px;
+  color: var(--color-muted);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+.alert__close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.alert__close:hover {
+  color: var(--color-text-strong);
 }
 
 /* ===== FOCUS RING (a11y) ===== */
