@@ -65,35 +65,36 @@ export async function createApp(root: HTMLElement): Promise<void> {
   }
 
   /**
-   * Smoothly transition the grids container height when content changes,
-   * preventing sections below from jumping.
+   * Lock container height during content changes to prevent layout shift.
+   * Returns a release function to call when the operation completes.
    */
-  function preserveHeight(container: HTMLElement, fn: () => void): void {
+  function lockHeight(container: HTMLElement): () => void {
     const prevHeight = container.offsetHeight
     if (prevHeight > 0) {
       container.style.minHeight = `${prevHeight}px`
     }
-
-    fn()
-
-    // Release the min-height after content has rendered
-    requestAnimationFrame(() => {
-      container.style.minHeight = ''
-    })
+    return () => {
+      requestAnimationFrame(() => { container.style.minHeight = '' })
+    }
   }
 
   async function applyFilterAndRender(): Promise<void> {
     const version = ++renderVersion
 
-    preserveHeight(gridsContainer, showLoader)
+    const releaseLoader = lockHeight(gridsContainer)
+    showLoader()
 
     const filtered = await filterSightings(allSightings, activeFilter)
 
-    if (version !== renderVersion) return
+    if (version !== renderVersion) {
+      releaseLoader()
+      return
+    }
 
-    preserveHeight(gridsContainer, () => {
-      renderSightingGrids(gridsContainer, filtered)
-    })
+    const releaseRender = lockHeight(gridsContainer)
+    await renderSightingGrids(gridsContainer, filtered, true)
+    releaseRender()
+    releaseLoader()
     updateCount(filtered.length)
   }
 
@@ -122,25 +123,6 @@ export async function createApp(root: HTMLElement): Promise<void> {
     },
   })
 
-  // ─ Data sources panel (built now, part of initial skeleton) ─
-  const sourcesBody = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } })
-
-  sourcesBody.appendChild(
-    renderAlert({
-      variant: AlertVariant.INFO,
-      title: SECTION.INTEL_TITLE,
-      content: SECTION.INTEL_CONTENT,
-      dismissible: true,
-    }),
-  )
-
-  sourcesBody.appendChild(renderDataSources({ sources: getSources() }))
-
-  const sourcesSection = renderSection({
-    title: SECTION.DATA_SOURCES,
-    tooltip: SECTION.DATA_SOURCES_TOOLTIP,
-  }, sourcesBody)
-
   // ─ Wrap controls in a form (prevents browser autofill warnings) ─
   const controlsForm = h('form', {
     className: 'controls-form',
@@ -159,17 +141,38 @@ export async function createApp(root: HTMLElement): Promise<void> {
   clearChildren(main)
   main.appendChild(controlsForm)
   main.appendChild(gridsContainer)
-  main.appendChild(sourcesSection)
-  main.appendChild(renderFooter())
+  // NOTE: sourcesSection and footer are appended AFTER progressive loading
+  // completes, preventing CLS from grids pushing them down during load.
 
   // ─ Progressive load — render each year's data as it arrives ─
   const finalSightings = await fetchProgressive(defaultFrom, newest, (partial) => {
     allSightings = partial
-    preserveHeight(gridsContainer, () => {
-      renderSightingGrids(gridsContainer, partial)
-    })
+    renderSightingGrids(gridsContainer, partial)
     updateCount(partial.length)
   })
+
+  // ─ Build and append below-fold content after grids are fully rendered ─
+  // Deferred to avoid blocking initial render with unnecessary DOM construction.
+  const sourcesBody = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } })
+
+  sourcesBody.appendChild(
+    renderAlert({
+      variant: AlertVariant.INFO,
+      title: SECTION.INTEL_TITLE,
+      content: SECTION.INTEL_CONTENT,
+      dismissible: true,
+    }),
+  )
+
+  sourcesBody.appendChild(renderDataSources({ sources: getSources() }))
+
+  const sourcesSection = renderSection({
+    title: SECTION.DATA_SOURCES,
+    tooltip: SECTION.DATA_SOURCES_TOOLTIP,
+  }, sourcesBody)
+
+  main.appendChild(sourcesSection)
+  main.appendChild(renderFooter())
 
   allSightings = finalSightings
 

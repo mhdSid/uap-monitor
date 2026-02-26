@@ -19,7 +19,7 @@ const SORT_ICON_FACTORIES: Record<SortDirection, (() => SVGSVGElement) | null> =
   desc: iconSortDesc,
 }
 
-const PAGE_SIZE = 100
+const PAGE_SIZE = 20
 
 // ─── Cell padding constant (shared by th and td) ────────────────────
 

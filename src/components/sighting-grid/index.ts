@@ -8,6 +8,13 @@ import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, FILTER } from '@/data/strings'
 import { sightingColumns } from './columns'
 import type { Sighting, DataGridHandle } from '@/types'
 
+/** Cached column definitions — reused across renders. */
+let _columns: ReturnType<typeof sightingColumns> | null = null
+function getColumns() {
+  if (!_columns) _columns = sightingColumns()
+  return _columns
+}
+
 /**
  * Monotonically increasing render version.
  * Each call to renderSightingGrids increments this;
@@ -21,12 +28,14 @@ let activeGrids: DataGridHandle<Sighting>[] = []
 /**
  * Render sighting data grouped by continent into section panels.
  * Always renders all 7 continents — empty ones show a status message.
- * Yields between groups to keep UI responsive during large datasets.
- * Automatically cancels if a newer render starts mid-flight.
+ *
+ * Uses a DocumentFragment to batch all sections into a single DOM write,
+ * preventing layout shift. On re-renders, yields between groups for responsiveness.
  */
 export async function renderSightingGrids(
   container: HTMLElement,
   sightings: Sighting[],
+  isRerender = false,
 ): Promise<void> {
   const version = ++currentRenderVersion
 
@@ -42,8 +51,11 @@ export async function renderSightingGrids(
     return
   }
 
-  const columns = sightingColumns()
+  const columns = getColumns()
   const groups = groupByContinent(sightings)
+
+  // Build all sections into a fragment for single DOM write (eliminates CLS)
+  const frag = document.createDocumentFragment()
 
   for (const group of groups) {
     // Abort if a newer render has started
@@ -57,7 +69,7 @@ export async function renderSightingGrids(
       })
       activeGrids.push(grid)
 
-      container.appendChild(
+      frag.appendChild(
         renderSection(
           {
             title: group.label,
@@ -68,7 +80,7 @@ export async function renderSightingGrids(
         ),
       )
     } else {
-      container.appendChild(
+      frag.appendChild(
         renderSection(
           {
             title: group.label,
@@ -84,8 +96,14 @@ export async function renderSightingGrids(
       )
     }
 
-    await yieldThread()
+    // Yield on re-renders to keep UI responsive during filter/year changes
+    if (isRerender) {
+      await yieldThread()
+    }
   }
+
+  // Single DOM write: all sections appear at once
+  container.appendChild(frag)
 }
 
 /**
