@@ -49,7 +49,6 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
   toSelect.addEventListener('change', fireChange)
 
   return h('div', { className: 'year-selector' },
-    h('span', { className: 'year-selector__label' }, 'RANGE'),
     fromSelect,
     h('span', { className: 'year-selector__separator' }, '~'),
     toSelect,

@@ -1,5 +1,5 @@
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, filterSightings } from '@/composables'
+import { useDataSource, filterSightings, useTicker } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { renderHeader } from '@/components/header'
 import { renderTicker } from '@/components/ticker'
@@ -20,10 +20,13 @@ export async function createApp(root: HTMLElement): Promise<void> {
     h('div', { className: 'app-loader' }, renderLoader()),
   )
 
+  const ticker = renderTicker()
+  const { generateMessages } = useTicker()
+
   const app = h('div', { className: 'app' },
     h('div', { className: 'scanlines' }),
     renderHeader(),
-    renderTicker(),
+    ticker.el,
     main,
   )
 
@@ -157,4 +160,7 @@ export async function createApp(root: HTMLElement): Promise<void> {
   })
 
   allSightings = finalSightings
+
+  // ─ Feed real sighting data to ticker ─
+  ticker.setMessages(generateMessages(allSightings))
 }

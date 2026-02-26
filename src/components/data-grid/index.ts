@@ -1,6 +1,7 @@
 import type { DataGridProps, DataGridColumn } from '@/types'
 import { h, addClass, removeClass, clearChildren } from '@/utils/dom'
 import { useInfiniteScroll } from '@/composables/use-infinite-scroll'
+import { iconSortDefault, iconSortAsc, iconSortDesc } from '@/components/icons'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -11,13 +12,11 @@ interface SortState {
   direction: SortDirection
 }
 
-const SORT_INDICATORS: Record<SortDirection, string> = {
-  none: '',
-  asc: ' ▲',
-  desc: ' ▼',
+const SORT_ICON_FACTORIES: Record<SortDirection, (() => SVGSVGElement) | null> = {
+  none: null,
+  asc: iconSortAsc,
+  desc: iconSortDesc,
 }
-
-const DEFAULT_SORT_HINT = ' ⇅'
 
 const PAGE_SIZE = 100
 const BATCH_SIZE = 50
@@ -26,6 +25,25 @@ const BATCH_SIZE = 50
 
 const CELL_PAD = '8px'
 const CELL_PAD_COMPACT = '4px'
+
+// ─── Sort icon helpers ──────────────────────────────────────────────
+
+/** Replace the sort icon inside a header cell (DOM-based, no innerHTML). */
+function setSortIcon(th: HTMLTableCellElement, label: string, direction: SortDirection | 'hint'): void {
+  th.textContent = label
+  if (direction === 'hint') {
+    const icon = iconSortDefault()
+    icon.classList.add('data-grid__sort-icon', 'data-grid__sort-icon--hint')
+    th.appendChild(icon)
+  } else {
+    const factory = SORT_ICON_FACTORIES[direction]
+    if (factory) {
+      const icon = factory()
+      icon.classList.add('data-grid__sort-icon')
+      th.appendChild(icon)
+    }
+  }
+}
 
 // ─── Row rendering ──────────────────────────────────────────────────
 
@@ -164,7 +182,7 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
 
     if (col.sortable !== false && col.label) {
       addClass(th, 'data-grid__th--sortable')
-      th.innerHTML = col.label + `<span class="data-grid__sort-hint">${DEFAULT_SORT_HINT}</span>`
+      setSortIcon(th, col.label, 'hint')
       th.addEventListener('click', () => handleSort(col.key as string, th))
     }
 
@@ -219,7 +237,7 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
       removeClass(headerCells[i], 'data-grid__th--sorted')
 
       if (isSortable) {
-        headerCells[i].innerHTML = label + `<span class="data-grid__sort-hint">${DEFAULT_SORT_HINT}</span>`
+        setSortIcon(headerCells[i], label, 'hint')
       } else {
         headerCells[i].textContent = label
       }
@@ -227,7 +245,7 @@ export function renderDataGrid<T>(props: DataGridProps<T>): HTMLElement {
 
     if (newDir !== 'none') {
       const idx = headerCells.indexOf(clickedTh)
-      clickedTh.innerHTML = columns[idx].label + SORT_INDICATORS[newDir]
+      setSortIcon(clickedTh, columns[idx].label, newDir)
       addClass(clickedTh, 'data-grid__th--sorted')
     }
 

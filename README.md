@@ -1,6 +1,6 @@
 # UAP Monitor
 
-**Real-time UAP/UFO sighting dashboard** — aggregating open-source UAP/UFO sighting data, unlocking the missing CJK + Russia region, and cross-referencing reports against known objects.
+**Real-time UAP/UFO sighting dashboard** — aggregating open-source sighting data, unlocking the missing CJK + Russia region, and cross-referencing reports against known objects.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -157,7 +157,7 @@ The workflow sets `VITE_BASE_URL=/uap-monitor/` so all asset paths resolve corre
 
 | Source | Status | Records | Notes |
 |---|---|---|---|
-| **[NUFORC Sightings Dataset](https://huggingface.co/datasets/kcimc/NUFORC)** | ✅ Active | 147K | Originally compiled by [Kyle McDonald](https://github.com/kcimc). Raw JSON (~191MB) processed at build time into year-chunked static files via `scripts/process-nuforc.mjs` |
+| **NUFORC (HuggingFace)** | ✅ Active | 147K | Build-time processing via `scripts/process-nuforc.mjs` |
 
 ### Planned
 

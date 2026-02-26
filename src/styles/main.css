@@ -310,10 +310,31 @@ a.data-sources__item:hover {
   padding: 6px 12px;
   background: #050505;
   border-bottom: 1px solid var(--color-border);
-  white-space: nowrap;
-  overflow: hidden;
   min-height: 24px;
   letter-spacing: 0.5px;
+}
+
+.ticker__content {
+  line-height: 1.5;
+}
+
+.ticker__line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticker__cursor {
+  font-weight: bold;
+}
+
+.ticker__cursor--blink {
+  animation: cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* ===== RADAR LOADER ===== */
@@ -531,7 +552,8 @@ a.data-sources__item:hover {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .year-selector__label {
@@ -580,14 +602,13 @@ a.data-sources__item:hover {
 }
 
 .filter-toolbar__search {
-  flex: 1;
-  min-width: 140px;
+  flex: 1 1 100%;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-text);
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
-  padding: 4px 8px;
+  padding: 6px 8px;
   letter-spacing: 0.5px;
 }
 
@@ -604,16 +625,19 @@ a.data-sources__item:hover {
 .filter-toolbar__selects {
   display: flex;
   gap: 6px;
+  flex: 1 1 100%;
 }
 
 .filter-toolbar__select {
+  flex: 1;
+  min-width: 0;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-muted);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
-  padding: 4px 6px;
-  letter-spacing: 1px;
+  padding: 6px 6px;
+  letter-spacing: 0.5px;
   cursor: pointer;
 }
 
@@ -669,9 +693,21 @@ a.data-sources__item:hover {
   color: var(--color-green);
 }
 
-.data-grid__sort-hint {
+.data-grid__sort-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.data-grid__sort-icon--hint {
   color: var(--color-dim);
-  font-size: var(--fs-xxs);
+  opacity: 0.6;
+}
+
+.data-grid__th--sortable:hover .data-grid__sort-icon--hint {
+  opacity: 1;
 }
 
 .data-grid__row {
@@ -952,10 +988,7 @@ body.modal-open {
   }
 
   /* Prevent iOS auto-zoom on input focus (triggers below 16px) */
-  .filter-toolbar__search,
-  .filter-toolbar__select,
-  .year-selector__select,
-  input, select, textarea {
+  .filter-toolbar__search {
     font-size: 16px !important;
   }
 
