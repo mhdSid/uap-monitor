@@ -1,7 +1,8 @@
 import type { DataGridProps, DataGridColumn } from '@/types'
-import { h, addClass, removeClass, clearChildren } from '@/utils/dom'
+import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment } from '@/utils/dom'
 import { useInfiniteScroll } from '@/composables/use-infinite-scroll'
 import { iconSortDefault, iconSortAsc, iconSortDesc } from '@/components/icons'
+import { FILTER } from '@/data/strings'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -32,13 +33,13 @@ function setSortIcon(th: HTMLTableCellElement, label: string, direction: SortDir
   th.textContent = label
   if (direction === 'hint') {
     const icon = iconSortDefault()
-    icon.classList.add('data-grid__sort-icon', 'data-grid__sort-icon--hint')
+    addClass(icon, 'data-grid__sort-icon', 'data-grid__sort-icon--hint')
     th.appendChild(icon)
   } else {
     const factory = SORT_ICON_FACTORIES[direction]
     if (factory) {
       const icon = factory()
-      icon.classList.add('data-grid__sort-icon')
+      addClass(icon, 'data-grid__sort-icon')
       th.appendChild(icon)
     }
   }
@@ -51,12 +52,10 @@ function renderRow<T>(
   columns: DataGridColumn<T>[],
   onRowClick?: (row: T, trigger: HTMLElement) => void,
 ): HTMLTableRowElement {
-  const tr = document.createElement('tr')
-  tr.className = 'data-grid__row'
+  const tr = el('tr', { className: 'data-grid__row' })
 
   for (const col of columns) {
-    const td = document.createElement('td')
-    td.className = 'data-grid__td'
+    const td = el('td', { className: 'data-grid__td' })
 
     if (col.align === 'right') addClass(td, 'data-grid__td--right')
     else if (col.align === 'center') addClass(td, 'data-grid__td--center')
@@ -82,8 +81,7 @@ function renderRow<T>(
 
   if (onRowClick) {
     addClass(tr, 'data-grid__row--clickable')
-    tr.tabIndex = 0
-    tr.setAttribute('role', 'button')
+    setAttrs(tr, { tabindex: '0', role: 'button' })
 
     // Store ID for focus return after modal close
     const id = (row as Record<string, unknown>).id
@@ -134,16 +132,14 @@ export function renderDataGrid<T>(props: DataGridProps<T>): DataGridHandle<T> {
   // Scrollable wrapper
   const wrapper = h('div', { className: 'data-grid__wrapper' })
 
-  const table = document.createElement('table')
-  table.className = 'data-grid'
+  const table = el('table', { className: 'data-grid' })
 
   // ─ Header ─
-  const thead = document.createElement('thead')
-  const headerRow = document.createElement('tr')
+  const thead = el('thead')
+  const headerRow = el('tr')
 
   const headerCells: HTMLTableCellElement[] = columns.map((col) => {
-    const th = document.createElement('th')
-    th.className = 'data-grid__th'
+    const th = el('th', { className: 'data-grid__th' })
 
     if (col.align === 'right') addClass(th, 'data-grid__th--right')
     else if (col.align === 'center') addClass(th, 'data-grid__th--center')
@@ -168,7 +164,7 @@ export function renderDataGrid<T>(props: DataGridProps<T>): DataGridHandle<T> {
   thead.appendChild(headerRow)
 
   // ─ Body ─
-  const tbody = document.createElement('tbody')
+  const tbody = el('tbody')
 
   // ─ Sentinel for infinite scroll ─
   const sentinel = h('div', { className: 'data-grid__sentinel' })
@@ -183,18 +179,16 @@ export function renderDataGrid<T>(props: DataGridProps<T>): DataGridHandle<T> {
     clearChildren(tbody)
 
     if (items.length === 0) {
-      const emptyCell = document.createElement('td')
-      emptyCell.className = 'data-grid__empty'
-      emptyCell.colSpan = columns.length
-      emptyCell.textContent = emptyText ?? 'No data'
-      const emptyRow = document.createElement('tr')
+      const emptyCell = el('td', { className: 'data-grid__empty', colSpan: String(columns.length) })
+      emptyCell.textContent = emptyText ?? FILTER.EMPTY_DEFAULT
+      const emptyRow = el('tr')
       emptyRow.appendChild(emptyCell)
       tbody.appendChild(emptyRow)
       return
     }
 
     // Synchronous render so rows are immediately available for scrollToItem
-    const frag = document.createDocumentFragment()
+    const frag = fragment()
     for (const item of items) {
       const tr = renderRow(item, columns, onRowClick)
       if (typeof item === 'object' && item !== null) {
@@ -275,7 +269,7 @@ export function renderDataGrid<T>(props: DataGridProps<T>): DataGridHandle<T> {
       // Focus the row — the :focus style provides the persistent green accent
       // tabIndex ensures focusability even if not a clickable row
       if (!tr.hasAttribute('tabindex')) {
-        tr.setAttribute('tabindex', '-1')
+        setAttrs(tr, { tabindex: '-1' })
       }
       tr.focus({ preventScroll: true })
     }, 400)

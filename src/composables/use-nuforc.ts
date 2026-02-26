@@ -1,3 +1,4 @@
+import { ERRORS } from '@/data/strings'
 import type { NuforcManifest, Sighting, SightingFilter, YearChunkMeta } from '@/types'
 import { Continent, DataSourceId, SightingShape, SightingStatus } from '@/enums'
 import { useToast } from '@/components/toast'
@@ -185,13 +186,13 @@ export function useNuforc() {
       const data = await fetchJson<unknown>(dataUrl(MANIFEST_FILE))
 
       if (!isValidManifest(data)) {
-        throw new Error('Malformed NUFORC manifest')
+        throw new Error(ERRORS.NUFORC_MANIFEST)
       }
 
       manifest = data
       return manifest
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to load NUFORC manifest'
+      const message = err instanceof Error ? err.message : ERRORS.NUFORC_LOAD
       manifestError = message
       toast.error(message)
       return null

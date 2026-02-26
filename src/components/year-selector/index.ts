@@ -1,4 +1,5 @@
 import { h } from '@/utils/dom'
+import { FILTER, ARIA } from '@/data/strings'
 
 export interface YearSelectorProps {
   availableYears: number[]
@@ -12,26 +13,25 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
 
   if (availableYears.length === 0) {
     return h('div', { className: 'year-selector' },
-      h('span', { className: 'year-selector__label' }, 'NO DATA'),
+      h('span', { className: 'year-selector__label' }, FILTER.NO_DATA),
     )
   }
 
   function makeSelect(selected: number, label: string): HTMLSelectElement {
-    const sel = document.createElement('select')
-    sel.className = 'year-selector__select'
-    sel.setAttribute('aria-label', label)
+    const sel = h('select', {
+      className: 'year-selector__select',
+      'aria-label': label,
+    }) as HTMLSelectElement
     for (const y of availableYears) {
-      const opt = document.createElement('option')
-      opt.value = String(y)
-      opt.textContent = String(y)
-      if (y === selected) opt.selected = true
+      const opt = h('option', { value: String(y) }, String(y))
+      if (y === selected) (opt as HTMLOptionElement).selected = true
       sel.appendChild(opt)
     }
     return sel
   }
 
-  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom), 'From year')
-  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo), 'To year')
+  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom), ARIA.YEAR_FROM)
+  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo), ARIA.YEAR_TO)
 
   const countEl = h('span', { className: 'year-selector__count' }, '')
 

@@ -1,4 +1,5 @@
 import { h, rawHtml } from '@/utils/dom'
+import { ARIA } from '@/data/strings'
 
 export function renderLoader(): HTMLElement {
   const sweep = h('div', { className: 'radar-loader__sweep' })
@@ -15,7 +16,7 @@ export function renderLoader(): HTMLElement {
   return h('div', {
     className: 'radar-loader',
     role: 'status',
-    'aria-label': 'Loading sighting data',
+    'aria-label': ARIA.LOADING,
   },
     sweep,
     h('div', { className: 'radar-loader__text' }, 'Loading...'),

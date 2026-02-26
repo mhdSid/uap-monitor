@@ -1,7 +1,8 @@
-import { h } from '@/utils/dom'
+import { h, setAttrs } from '@/utils/dom'
 import { iconRadar, iconGithub } from '@/components/icons'
+import { APP_NAME, APP_VERSION, APP_REPO_FALLBACK, ARIA } from '@/data/strings'
 
-const REPO_URL = import.meta.env.VITE_REPO_URL ?? 'https://github.com/mhdSid/uap-monitor'
+const REPO_URL = import.meta.env.VITE_REPO_URL ?? APP_REPO_FALLBACK
 
 export function renderHeader(): HTMLElement {
   const radar = iconRadar(16)
@@ -9,20 +10,19 @@ export function renderHeader(): HTMLElement {
 
   const left = h('div', { className: 'app-header__left' },
     radar,
-    h('span', { className: 'app-header__title' }, 'UAP MONITOR'),
-    h('span', { className: 'app-header__version' }, 'v0.1.0'),
+    h('span', { className: 'app-header__title' }, APP_NAME),
+    h('span', { className: 'app-header__version' }, APP_VERSION),
   )
 
   const clock = h('time', {
     className: 'app-header__clock',
-    'aria-label': 'Current UTC time',
+    'aria-label': ARIA.CLOCK,
   })
 
   function updateClock(): void {
     const now = new Date()
     const pad = (n: number) => String(n).padStart(2, '0')
-    const iso = now.toISOString()
-    clock.setAttribute('datetime', iso)
+    setAttrs(clock, { datetime: now.toISOString() })
     clock.textContent =
       `${now.getUTCFullYear()}-${pad(now.getUTCMonth() + 1)}-${pad(now.getUTCDate())} ` +
       `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())} UTC`
@@ -38,7 +38,7 @@ export function renderHeader(): HTMLElement {
     href: REPO_URL,
     target: '_blank',
     rel: 'noopener noreferrer',
-    'aria-label': 'View source on GitHub',
+    'aria-label': ARIA.GITHUB,
   }, githubIcon)
 
   const right = h('div', { className: 'app-header__right' },

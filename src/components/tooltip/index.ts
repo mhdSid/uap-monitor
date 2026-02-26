@@ -1,4 +1,5 @@
 import { h, addClass, removeClass } from '@/utils/dom'
+import { ARIA } from '@/data/strings'
 
 export interface TooltipProps {
   content: string
@@ -61,7 +62,7 @@ export function renderTooltip(props: TooltipProps): HTMLElement {
 
   const trigger = h('button', {
     className: 'tooltip__trigger',
-    'aria-label': props.ariaLabel || 'More info',
+    'aria-label': props.ariaLabel || ARIA.TOOLTIP,
     type: 'button',
   }, '?')
 

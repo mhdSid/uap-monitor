@@ -1,6 +1,7 @@
 import type { ModalSlots } from '@/types'
 import { h, addClass, removeClass, setAttrs } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
+import { ARIA } from '@/data/strings'
 
 let activeModal: HTMLElement | null = null
 let triggerElement: HTMLElement | null = null
@@ -30,7 +31,7 @@ export function openModal(slots: ModalSlots, trigger?: HTMLElement | null): void
 
   const closeBtn = h('button', {
     className: 'modal__close',
-    'aria-label': 'Close modal',
+    'aria-label': ARIA.CLOSE_MODAL,
     onClick: closeModal,
   }, closeIcon)
 

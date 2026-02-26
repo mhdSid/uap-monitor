@@ -1,3 +1,4 @@
+import { ARIA } from '@/data/strings'
 import { AlertVariant } from '@/enums'
 import { h } from '@/utils/dom'
 
@@ -59,7 +60,7 @@ export function renderAlert(props: AlertProps): HTMLElement {
   if (props.dismissible) {
     const closeBtn = h('button', {
       className: 'alert__close',
-      'aria-label': 'Dismiss alert',
+      'aria-label': ARIA.DISMISS_ALERT,
       onClick: () => {
         alert.style.opacity = '0'
         setTimeout(() => alert.remove(), 200)

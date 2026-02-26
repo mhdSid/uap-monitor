@@ -1,5 +1,6 @@
 import type { Sighting } from '@/types'
 import type { Continent } from '@/enums'
+import { CONTINENT_DISPLAY_NAMES } from '@/data/strings'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -16,18 +17,6 @@ export interface UseTickerReturn {
   getDefaultMessages: () => TickerMessage[]
   /** Generate randomized messages from loaded sighting data. */
   generateMessages: (sightings: Sighting[]) => TickerMessage[]
-}
-
-// ─── Continent display names ────────────────────────────────────────
-
-const CONTINENT_NAMES: Record<string, string> = {
-  AMERICAS: 'Americas',
-  EUROPE: 'Europe',
-  EURASIA: 'Eurasia',
-  ASIA_MIDDLE_EAST: 'Middle East',
-  ASIA_PACIFIC: 'Asia-Pacific',
-  OCEANIA: 'Oceania',
-  AFRICA: 'Africa',
 }
 
 // ─── Default messages (shown during loading) ────────────────────────
@@ -95,7 +84,7 @@ const topContinent: MessageGenerator = (sightings) => {
   for (const [continent, count] of continents) {
     if (count > max) { top = continent; max = count }
   }
-  const name = CONTINENT_NAMES[top] ?? top
+  const name = CONTINENT_DISPLAY_NAMES[top] ?? top
   // Link to a random sighting from the top continent
   const sample = sightings.find(s => s.continent === (top as Continent))
   return { lines: [`Highest activity region: ${name}`, `${max.toLocaleString()} reports in dataset`], sightingId: sample?.id }

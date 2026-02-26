@@ -11,6 +11,7 @@ import { renderFooter } from '@/components/footer'
 import { renderYearSelector } from '@/components/year-selector'
 import { renderFilterToolbar } from '@/components/filter-toolbar'
 import { renderSightingGrids, scrollToSighting } from '@/components/sighting-grid'
+import { SECTION } from '@/data/strings'
 import type { Sighting, SightingFilter } from '@/types'
 
 // ─── App entry ──────────────────────────────────────────────────────
@@ -127,8 +128,8 @@ export async function createApp(root: HTMLElement): Promise<void> {
   sourcesBody.appendChild(
     renderAlert({
       variant: AlertVariant.INFO,
-      title: 'INTELLIGENCE SOURCES',
-      content: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.',
+      title: SECTION.INTEL_TITLE,
+      content: SECTION.INTEL_CONTENT,
       dismissible: true,
     }),
   )
@@ -136,8 +137,8 @@ export async function createApp(root: HTMLElement): Promise<void> {
   sourcesBody.appendChild(renderDataSources({ sources: getSources() }))
 
   const sourcesSection = renderSection({
-    title: 'DATA SOURCES',
-    tooltip: 'Open-source intelligence feeds aggregated by UAP Monitor. Green = live, amber = syncing, grey = planned. Click any source to visit its website.',
+    title: SECTION.DATA_SOURCES,
+    tooltip: SECTION.DATA_SOURCES_TOOLTIP,
   }, sourcesBody)
 
   // ─ Assemble complete layout skeleton at once ─

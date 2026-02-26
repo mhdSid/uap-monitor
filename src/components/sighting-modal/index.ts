@@ -3,6 +3,7 @@ import { TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
 import { renderStatusTag, renderTag } from '@/components/tags'
 import { openModal } from '@/components/modal'
+import { MODAL } from '@/data/strings'
 
 export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): void {
   openModal({
@@ -20,19 +21,19 @@ export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): vo
         : sighting.location
 
       const rows: [string, string][] = [
-        ['Shape', sighting.shape],
-        ['Location', coordsStr],
-        ['Duration', sighting.duration || '—'],
-        ['Observers', sighting.observers ? String(sighting.observers) : '—'],
-        ['Credibility', `${sighting.credibility}/100`],
-        ['Occurred', sighting.occurredAt],
-        ['Reported', sighting.reportedAt],
-        ['Source', sighting.source],
-        ['Continent', sighting.continent],
+        [MODAL.SHAPE, sighting.shape],
+        [MODAL.LOCATION, coordsStr],
+        [MODAL.DURATION, sighting.duration || MODAL.EMPTY_VALUE],
+        [MODAL.OBSERVERS, sighting.observers ? String(sighting.observers) : MODAL.EMPTY_VALUE],
+        [MODAL.CREDIBILITY, `${sighting.credibility}/100`],
+        [MODAL.OCCURRED, sighting.occurredAt],
+        [MODAL.REPORTED, sighting.reportedAt],
+        [MODAL.SOURCE, sighting.source],
+        [MODAL.CONTINENT, sighting.continent],
       ]
 
       if (sighting.characteristics.length > 0) {
-        rows.push(['Characteristics', sighting.characteristics.join(', ')])
+        rows.push([MODAL.CHARACTERISTICS, sighting.characteristics.join(', ')])
       }
 
       const children: HTMLElement[] = [
@@ -47,7 +48,7 @@ export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): vo
       // Summary
       if (sighting.summary) {
         children.push(
-          h('div', { className: 'modal-sighting__summary-label' }, 'SUMMARY'),
+          h('div', { className: 'modal-sighting__summary-label' }, MODAL.SUMMARY),
           h('p', { className: 'modal-sighting__summary' }, sighting.summary),
         )
       }
@@ -55,7 +56,7 @@ export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): vo
       // Full description / witness account
       if (sighting.description) {
         children.push(
-          h('div', { className: 'modal-sighting__summary-label' }, 'WITNESS ACCOUNT'),
+          h('div', { className: 'modal-sighting__summary-label' }, MODAL.WITNESS_ACCOUNT),
           h('p', { className: 'modal-sighting__description' }, sighting.description),
         )
       }
@@ -65,7 +66,7 @@ export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): vo
 
     footer: () =>
       h('div', { className: 'modal-sighting__footer' },
-        renderTag({ variant: TagVariant.DISABLED, label: `SOURCE: ${sighting.source}` }),
+        renderTag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${sighting.source}` }),
       ),
   }, trigger)
 }

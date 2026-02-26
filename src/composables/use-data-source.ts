@@ -1,6 +1,7 @@
 import { DataSourceId, DataSourceStatus } from '@/enums'
 import type { DataSource, Sighting } from '@/types'
 import { useNuforc } from './use-nuforc'
+import { DATA_SOURCE_DESCRIPTIONS } from '@/data/strings'
 
 const SOURCE_REGISTRY: DataSource[] = [
   // ── Active ──
@@ -9,7 +10,7 @@ const SOURCE_REGISTRY: DataSource[] = [
     label: 'NUFORC',
     status: DataSourceStatus.SYNCING,
     url: 'https://nuforc.org',
-    description: 'National UFO Reporting Center — US-based sighting reports since 1974',
+    description: DATA_SOURCE_DESCRIPTIONS.NUFORC,
   },
   // ── Planned (ordered by integration priority) ──
   {
@@ -17,48 +18,48 @@ const SOURCE_REGISTRY: DataSource[] = [
     label: 'NASA CNEOS',
     status: DataSourceStatus.DISABLED,
     url: 'https://cneos.jpl.nasa.gov/fireballs/',
-    description: 'NASA Center for Near Earth Object Studies — fireball and bolide data',
+    description: DATA_SOURCE_DESCRIPTIONS.NASA_CNEOS,
   },
   {
     id: DataSourceId.OPENSKY,
     label: 'OPENSKY',
     status: DataSourceStatus.DISABLED,
     url: 'https://opensky-network.org',
-    description: 'Open flight tracking network — cross-reference sightings with known aircraft',
+    description: DATA_SOURCE_DESCRIPTIONS.OPENSKY,
   },
   {
     id: DataSourceId.GDELT,
     label: 'GDELT',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.gdeltproject.org',
-    description: 'Global Database of Events — UAP-related news from CJK and Russian media',
+    description: DATA_SOURCE_DESCRIPTIONS.GDELT,
   },
   {
     id: DataSourceId.AARO,
     label: 'AARO',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.aaro.mil',
-    description: 'All-domain Anomaly Resolution Office — US DoD official UAP investigations',
+    description: DATA_SOURCE_DESCRIPTIONS.AARO,
   },
   {
     id: DataSourceId.GEIPAN,
     label: 'GEIPAN',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.cnes.fr/en/geipan',
-    description: 'French space agency UAP research unit — European sighting database',
+    description: DATA_SOURCE_DESCRIPTIONS.GEIPAN,
   },
   {
     id: DataSourceId.ENIGMA,
     label: 'ENIGMA',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.intcat.co.uk',
-    description: 'International catalogue of UFO events and encounter classifications',
+    description: DATA_SOURCE_DESCRIPTIONS.ENIGMA,
   },
   {
     id: DataSourceId.CJK_SCRAPER,
     label: 'CJK SCRAPER',
     status: DataSourceStatus.DISABLED,
-    description: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news',
+    description: DATA_SOURCE_DESCRIPTIONS.CJK_SCRAPER,
   },
 ]
 

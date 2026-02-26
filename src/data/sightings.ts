@@ -1,15 +1,6 @@
 import { Continent } from '@/enums'
+import { CONTINENT_LABELS } from '@/data/strings'
 import type { ContinentGroup } from '@/types'
-
-const CONTINENT_LABELS: Record<Continent, string> = {
-  [Continent.AMERICAS]: 'AMERICAS',
-  [Continent.EUROPE]: 'EUROPE',
-  [Continent.EURASIA]: 'EURASIA',
-  [Continent.ASIA_MIDDLE_EAST]: 'ASIA — MIDDLE EAST',
-  [Continent.ASIA_PACIFIC]: 'ASIA — PACIFIC',
-  [Continent.OCEANIA]: 'OCEANIA',
-  [Continent.AFRICA]: 'AFRICA',
-}
 
 /** Fixed display order — highest-volume regions first. */
 const CONTINENT_ORDER: Continent[] = [

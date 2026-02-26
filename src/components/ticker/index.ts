@@ -1,5 +1,6 @@
 import type { TickerMessage } from '@/composables/use-ticker'
-import { h } from '@/utils/dom'
+import { h, addClass, removeClass, toggleClass } from '@/utils/dom'
+import { TICKER, ARIA } from '@/data/strings'
 
 const DEFAULT_MESSAGES: TickerMessage[] = [
   { lines: ['Scanning open-source intelligence feeds for new UAP reports...'] },
@@ -16,8 +17,8 @@ export interface TickerOptions {
   onClick?: (sightingId: string) => void
 }
 
-const PREFIX = '// '
-const GHOST_TEXT = '// ─────'
+const PREFIX = TICKER.PREFIX
+const GHOST_TEXT = TICKER.GHOST_TEXT
 
 export function renderTicker(options?: TickerOptions): TickerHandle {
   let messages: TickerMessage[] = [...DEFAULT_MESSAGES]
@@ -35,7 +36,7 @@ export function renderTicker(options?: TickerOptions): TickerHandle {
     className: 'ticker',
     role: 'button',
     tabIndex: 0,
-    'aria-label': 'Click to scroll to this sighting in the grid',
+    'aria-label': ARIA.TICKER,
   },
     contentEl,
     ghostEl,
@@ -62,7 +63,7 @@ export function renderTicker(options?: TickerOptions): TickerHandle {
 
   /** Update CSS class tracking how many lines are rendered. */
   function updateLineClass(count: number): void {
-    ticker.classList.toggle('ticker--lines-2', count >= 2)
+    toggleClass(ticker, 'ticker--lines-2', count >= 2)
   }
 
   function render(): void {
@@ -103,7 +104,7 @@ export function renderTicker(options?: TickerOptions): TickerHandle {
       }
 
       if (charIdx <= currentLine.length) {
-        cursorEl.classList.remove('ticker__cursor--blink')
+        removeClass(cursorEl, 'ticker__cursor--blink')
         render()
         charIdx++
         timer = setTimeout(tick, 25)
@@ -113,7 +114,7 @@ export function renderTicker(options?: TickerOptions): TickerHandle {
         timer = setTimeout(tick, 25)
       } else {
         phase = 'holding'
-        cursorEl.classList.add('ticker__cursor--blink')
+        addClass(cursorEl, 'ticker__cursor--blink')
         render()
         timer = setTimeout(tick, 3000)
       }
@@ -123,7 +124,7 @@ export function renderTicker(options?: TickerOptions): TickerHandle {
   }
 
   function advanceMessage(): void {
-    cursorEl.classList.remove('ticker__cursor--blink')
+    removeClass(cursorEl, 'ticker__cursor--blink')
     msgIdx = (msgIdx + 1) % messages.length
     lineIdx = 0
     charIdx = 0
@@ -157,7 +158,7 @@ export function renderTicker(options?: TickerOptions): TickerHandle {
     charIdx = 0
     phase = 'typing'
     dataLoaded = true
-    ticker.classList.add('ticker--clickable')
+    addClass(ticker, 'ticker--clickable')
     updateLineClass(0)
     if (timer) clearTimeout(timer)
     tick()
