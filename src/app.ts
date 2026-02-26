@@ -242,6 +242,7 @@ async function filterSightings(
       if (searchLower) {
         const match =
           s.summary.toLowerCase().includes(searchLower) ||
+          s.description.toLowerCase().includes(searchLower) ||
           s.region.toLowerCase().includes(searchLower) ||
           s.country.toLowerCase().includes(searchLower) ||
           s.location.toLowerCase().includes(searchLower) ||
