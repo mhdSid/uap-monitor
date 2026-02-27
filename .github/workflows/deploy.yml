@@ -38,6 +38,12 @@ jobs:
           if [ -f nuforc.json ]; then
             yarn data:nuforc
           fi
+      
+      - name: Process HATCH_UDB data (if present)
+        run: |
+          if [ -f hatch_udb.json ]; then
+            yarn data:hatch
+          fi
 
       - name: Build
         env:
