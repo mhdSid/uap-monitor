@@ -1,4 +1,5 @@
-import type { DataSourcesProps } from '@/types'
+import { Component } from '@/core'
+import type { DataSourcesProps, DataSource } from '@/types'
 import { DataSourceStatus } from '@/enums'
 import { h } from '@/utils/dom'
 
@@ -9,10 +10,18 @@ const STATUS_DOT_COLORS: Record<DataSourceStatus, string> = {
   [DataSourceStatus.DISABLED]: 'var(--color-muted)',
 }
 
-export function renderDataSources(props: DataSourcesProps): HTMLElement {
-  const wrapper = h('div', { className: 'data-sources' })
+export class DataSources extends Component<DataSourcesProps> {
+  protected create(): HTMLElement {
+    const wrapper = h('div', { className: 'data-sources' })
 
-  for (const source of props.sources) {
+    for (const source of this.props.sources) {
+      wrapper.appendChild(this.renderItem(source))
+    }
+
+    return wrapper
+  }
+
+  private renderItem(source: DataSource): HTMLElement {
     const dotColor = STATUS_DOT_COLORS[source.status]
     const isDisabled = source.status === DataSourceStatus.DISABLED
 
@@ -29,22 +38,23 @@ export function renderDataSources(props: DataSourcesProps): HTMLElement {
 
     const itemContent: HTMLElement[] = [dot, label]
 
-    // Add raw data link badge for sources that expose their JSON
+    // Raw data link badge
     if (source.dataUrl && !isDisabled) {
-      const dataLink = h('a', {
-        className: 'data-sources__data-link',
-        href: source.dataUrl,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        title: 'View raw JSON data',
-        'aria-label': `Raw JSON data for ${source.label}`,
-        onClick: (e: Event) => e.stopPropagation(),
-      }, 'JSON')
-      itemContent.push(dataLink)
+      itemContent.push(
+        h('a', {
+          className: 'data-sources__data-link',
+          href: source.dataUrl,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          title: 'View raw data',
+          'aria-label': `Raw data for ${source.label}`,
+          onClick: (e: Event) => e.stopPropagation(),
+        }, source.dataLabel || 'JSON'),
+      )
     }
 
     if (source.url) {
-      const link = h('a', {
+      return h('a', {
         className: itemClass,
         href: source.url,
         target: '_blank',
@@ -52,17 +62,11 @@ export function renderDataSources(props: DataSourcesProps): HTMLElement {
         title: source.description || source.label,
         'aria-label': `${source.label} — ${source.description || ''}`,
       }, ...itemContent)
-
-      wrapper.appendChild(link)
-    } else {
-      const item = h('div', {
-        className: itemClass,
-        title: source.description || source.label,
-      }, ...itemContent)
-
-      wrapper.appendChild(item)
     }
-  }
 
-  return wrapper
+    return h('div', {
+      className: itemClass,
+      title: source.description || source.label,
+    }, ...itemContent)
+  }
 }

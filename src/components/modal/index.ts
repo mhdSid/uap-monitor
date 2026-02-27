@@ -1,133 +1,156 @@
+/* ------------------------------------------------------------------ *
+ *  Modal — singleton dialog with focus trap & WAI-ARIA compliance     *
+ *                                                                     *
+ *  Usage:                                                             *
+ *    Modal.open({ header, content, footer }, triggerEl)               *
+ *    Modal.close()                                                    *
+ *                                                                     *
+ *  Only one modal can be open at a time. Opening a new one closes     *
+ *  the previous. Focus is trapped and returned on close.              *
+ * ------------------------------------------------------------------ */
+
 import type { ModalSlots } from '@/types'
 import { h, addClass, removeClass, setAttrs } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 
-let activeModal: HTMLElement | null = null
-let triggerElement: HTMLElement | null = null
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+const TRANSITION_MS = 200
 
-/**
- * Query all focusable elements inside the modal dialog.
- */
-function getFocusableElements(dialog: HTMLElement): HTMLElement[] {
-  const selectors = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-  return Array.from(dialog.querySelectorAll<HTMLElement>(selectors))
-}
+export class Modal {
+  // ─── Singleton state ────────────────────────────────────────────
+  private static overlay: HTMLElement | null = null
+  private static dialog: HTMLElement | null = null
+  private static trigger: HTMLElement | null = null
+  private static onKeydown: ((e: KeyboardEvent) => void) | null = null
+  private static onCloseCallback: (() => void) | null = null
 
-/**
- * Open a modal dialog with focus trap, sticky header, and scrollable content.
- * Follows WAI-ARIA Dialog (Modal) pattern.
- *
- * @param slots - Content slots for header, content, and footer
- * @param trigger - The element that triggered the modal (for focus return)
- */
-export function openModal(slots: ModalSlots, trigger?: HTMLElement | null): void {
-  closeModal()
+  // ─── Public API ─────────────────────────────────────────────────
 
-  // Store the trigger explicitly, fall back to activeElement
-  triggerElement = trigger ?? (document.activeElement as HTMLElement | null)
+  static open(slots: ModalSlots, trigger?: HTMLElement | null): void {
+    Modal.close()
 
-  const closeIcon = iconClose(14)
+    Modal.trigger = trigger ?? (document.activeElement as HTMLElement | null)
 
-  const closeBtn = h('button', {
-    className: 'modal__close',
-    'aria-label': ARIA.CLOSE_MODAL,
-    onClick: closeModal,
-  }, closeIcon)
+    const closeBtn = h('button', {
+      className: 'modal__close',
+      'aria-label': ARIA.CLOSE_MODAL,
+      onClick: () => Modal.close(),
+    }, iconClose(14))
 
-  const headerBar = h('div', { className: 'modal__header' })
-  if (slots.header) headerBar.appendChild(slots.header())
-  headerBar.appendChild(closeBtn)
+    const headerBar = h('div', { className: 'modal__header' })
+    if (slots.header) headerBar.appendChild(slots.header())
+    headerBar.appendChild(closeBtn)
 
-  const dialog = h('div', {
-    className: 'modal',
-    role: 'dialog',
-    'aria-modal': 'true',
-  }, headerBar)
+    const dialog = h('div', {
+      className: 'modal',
+      role: 'dialog',
+      'aria-modal': 'true',
+    }, headerBar)
 
-  // aria-labelledby: point to the title element if present
-  const titleEl = headerBar.querySelector('.modal-sighting__title, .modal__title')
-  if (titleEl) {
-    const titleId = titleEl.id || `modal-title-${Date.now()}`
-    titleEl.id = titleId
-    dialog.setAttribute('aria-labelledby', titleId)
-  }
-
-  if (slots.content) {
-    dialog.appendChild(h('div', { className: 'modal__content' }, slots.content()))
-  }
-  if (slots.footer) {
-    dialog.appendChild(h('div', { className: 'modal__footer' }, slots.footer()))
-  }
-
-  const overlay = h('div', { className: 'modal-overlay' }, dialog)
-  overlay.addEventListener('click', (e: Event) => {
-    if (e.target === overlay) closeModal()
-  })
-
-  document.body.appendChild(overlay)
-  activeModal = overlay
-  addClass(document.body, 'modal-open')
-  setAttrs(document.body, { 'aria-hidden': 'true' })
-
-  document.addEventListener('keydown', handleKeydown)
-
-  // Focus the close button
-  closeBtn.focus()
-
-  requestAnimationFrame(() => addClass(overlay, 'modal-overlay--visible'))
-}
-
-export function closeModal(): void {
-  if (!activeModal) return
-  removeClass(activeModal, 'modal-overlay--visible')
-  removeClass(document.body, 'modal-open')
-  setAttrs(document.body, { 'aria-hidden': null })
-
-  document.removeEventListener('keydown', handleKeydown)
-
-  const ref = activeModal
-  const returnTarget = triggerElement
-
-  activeModal = null
-  triggerElement = null
-
-  setTimeout(() => {
-    ref.remove()
-
-    // Restore focus to the element that triggered the modal
-    if (returnTarget && returnTarget.isConnected) {
-      returnTarget.focus()
+    const titleEl = headerBar.querySelector('.modal-sighting__title, .modal__title, .welcome__title')
+    if (titleEl) {
+      const titleId = titleEl.id || `modal-title-${Date.now()}`
+      titleEl.id = titleId
+      dialog.setAttribute('aria-labelledby', titleId)
     }
-  }, 200)
-}
 
-function handleKeydown(e: KeyboardEvent): void {
-  if (e.key === 'Escape') {
-    closeModal()
-    return
+    if (slots.content) {
+      dialog.appendChild(h('div', { className: 'modal__content' }, slots.content()))
+    }
+    if (slots.footer) {
+      dialog.appendChild(h('div', { className: 'modal__footer' }, slots.footer()))
+    }
+
+    const overlay = h('div', { className: 'modal-overlay' }, dialog)
+    overlay.addEventListener('click', (e: Event) => {
+      if (e.target === overlay) Modal.close()
+    })
+
+    document.body.appendChild(overlay)
+    Modal.overlay = overlay
+    Modal.dialog = dialog
+    Modal.onCloseCallback = slots.onClose ?? null
+
+    addClass(document.body, 'modal-open')
+
+    // Hide app content from assistive tech (not body — overlay is a body child)
+    const appRoot = document.getElementById('app')
+    if (appRoot) setAttrs(appRoot, { 'aria-hidden': 'true' })
+
+    Modal.onKeydown = Modal.handleKeydown.bind(Modal)
+    document.addEventListener('keydown', Modal.onKeydown)
+
+    const firstFocusable = Modal.getFocusable(dialog)[0] ?? closeBtn
+    firstFocusable.focus()
+
+    requestAnimationFrame(() => addClass(overlay, 'modal-overlay--visible'))
   }
 
-  // Focus trap: cycle Tab/Shift+Tab within modal
-  if (e.key === 'Tab' && activeModal) {
-    const dialog = activeModal.querySelector<HTMLElement>('[role="dialog"]')
-    if (!dialog) return
+  static close(): void {
+    if (!Modal.overlay) return
 
-    const focusable = getFocusableElements(dialog)
-    if (focusable.length === 0) return
+    removeClass(Modal.overlay, 'modal-overlay--visible')
+    removeClass(document.body, 'modal-open')
 
-    const first = focusable[0]!
-    const last = focusable[focusable.length - 1]!
+    const appRoot = document.getElementById('app')
+    if (appRoot) setAttrs(appRoot, { 'aria-hidden': null })
 
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        e.preventDefault()
-        last.focus()
-      }
-    } else {
-      if (document.activeElement === last) {
-        e.preventDefault()
-        first.focus()
+    if (Modal.onKeydown) {
+      document.removeEventListener('keydown', Modal.onKeydown)
+      Modal.onKeydown = null
+    }
+
+    const ref = Modal.overlay
+    const returnTarget = Modal.trigger
+    const closeCallback = Modal.onCloseCallback
+
+    Modal.overlay = null
+    Modal.dialog = null
+    Modal.trigger = null
+    Modal.onCloseCallback = null
+
+    if (closeCallback) closeCallback()
+
+    setTimeout(() => {
+      ref.remove()
+      if (returnTarget?.isConnected) returnTarget.focus()
+    }, TRANSITION_MS)
+  }
+
+  static get isOpen(): boolean {
+    return Modal.overlay !== null
+  }
+
+  // ─── Internal ───────────────────────────────────────────────────
+
+  private static getFocusable(root: HTMLElement): HTMLElement[] {
+    return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE))
+  }
+
+  private static handleKeydown(e: KeyboardEvent): void {
+    if (e.key === 'Escape') {
+      Modal.close()
+      return
+    }
+
+    if (e.key === 'Tab' && Modal.dialog) {
+      const focusable = Modal.getFocusable(Modal.dialog)
+      if (focusable.length === 0) return
+
+      const first = focusable[0]!
+      const last = focusable[focusable.length - 1]!
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
       }
     }
   }

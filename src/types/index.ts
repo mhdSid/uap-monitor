@@ -128,6 +128,8 @@ export interface DataSource {
   description?: string
   /** Direct link to the raw JSON data file (shown as secondary link) */
   dataUrl?: string
+  /** Label for the data badge (defaults to 'JSON') */
+  dataLabel?: string
 }
 
 // ─── NUFORC data layer ──────────────────────────────────────────────
@@ -176,6 +178,7 @@ export interface ModalSlots {
   header?: () => HTMLElement
   content?: () => HTMLElement
   footer?: () => HTMLElement
+  onClose?: () => void
 }
 
 export interface DataGridColumn<T> {

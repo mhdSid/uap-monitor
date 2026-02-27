@@ -1,3 +1,10 @@
+/* ------------------------------------------------------------------ *
+ *  Icons — SVG factory functions                                      *
+ *                                                                     *
+ *  Each function returns a fresh SVGSVGElement.                       *
+ *  All icons are aria-hidden and sized via the `size` parameter.      *
+ * ------------------------------------------------------------------ */
+
 function createSvg(innerHTML: string, size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('width', String(size))
@@ -19,9 +26,12 @@ export function iconRadar(size = 16): SVGSVGElement {
 }
 
 export function iconClose(size = 16): SVGSVGElement {
+  // Symmetric margins: 3px inset from each edge
+  const p = 3
+  const end = size - p
   return createSvg(`
-    <line x1="3" y1="3" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="13" y1="3" x2="3" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="${p}" y1="${p}" x2="${end}" y2="${end}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="${end}" y1="${p}" x2="${p}" y2="${end}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
   `, size)
 }
 
@@ -56,7 +66,6 @@ export function iconGithub(size = 16): SVGSVGElement {
   return svg
 }
 
-/** Sort unsorted indicator: up/down chevrons. */
 export function iconSortDefault(size = 10): SVGSVGElement {
   return createSvg(`
     <path d="M3 4L5 1.5L7 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -64,14 +73,12 @@ export function iconSortDefault(size = 10): SVGSVGElement {
   `, size)
 }
 
-/** Sort ascending indicator: up chevron. */
 export function iconSortAsc(size = 10): SVGSVGElement {
   return createSvg(`
     <path d="M2.5 6.5L5 3L7.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   `, size)
 }
 
-/** Sort descending indicator: down chevron. */
 export function iconSortDesc(size = 10): SVGSVGElement {
   return createSvg(`
     <path d="M2.5 3.5L5 7L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>

@@ -1,120 +1,111 @@
+/* ------------------------------------------------------------------ *
+ *  SightingGrids — continent-grouped grids with infinite scroll       *
+ *                                                                     *
+ *  Renders sightings grouped by continent into collapsible sections.  *
+ *  Supports progressive rendering with version-based cancellation.    *
+ * ------------------------------------------------------------------ */
+
+import { Component } from '@/core'
 import { h, clearChildren } from '@/utils/dom'
-import { renderSection } from '@/components/layout'
-import { renderDataGrid } from '@/components/data-grid'
-import { openSightingModal } from '@/components/sighting-modal'
+import { Section } from '@/components/layout'
+import { DataGrid } from '@/components/data-grid'
+import { SightingModal } from '@/components/sighting-modal'
 import { groupByContinent } from '@/data/sightings'
 import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, FILTER } from '@/data/strings'
 import { useAppStore, yieldThread } from '@/composables'
 import { sightingColumns } from './columns'
-import type { Sighting, DataGridHandle } from '@/types'
+import type { Sighting, DataGridColumn } from '@/types'
 
-/** Cached column definitions — reused across renders. */
-let _columns: ReturnType<typeof sightingColumns> | null = null
-function getColumns() {
-  if (!_columns) _columns = sightingColumns()
-  return _columns
-}
+export class SightingGrids extends Component {
+  private columns!: DataGridColumn<Sighting>[]
+  private renderVersion = 0
+  private activeGrids!: DataGrid<Sighting>[]
 
-/**
- * Monotonically increasing render version.
- * Each call to renderSightingGrids increments this;
- * if a yield resumes and the version has changed, the render aborts.
- */
-let currentRenderVersion = 0
-
-/** Active grid handles from the most recent render, keyed by continent. */
-let activeGrids: DataGridHandle<Sighting>[] = []
-
-/**
- * Render sighting data grouped by continent into section panels.
- *
- * Reads `selectedContinent` from the store:
- * - undefined (ALL REGIONS): renders all 7 continents including empty ones.
- * - Specific continent: renders only that region's grid, hides empty grids.
- *
- * @param isRerender  Yield between groups on re-renders for responsiveness.
- */
-export async function renderSightingGrids(
-  container: HTMLElement,
-  sightings: Sighting[],
-  isRerender = false,
-): Promise<void> {
-  const store = useAppStore()
-  const selected = store.selectedContinent.get()
-  const version = ++currentRenderVersion
-
-  clearChildren(container)
-  activeGrids = []
-
-  if (sightings.length === 0) {
-    container.appendChild(
-      h('div', { className: 'empty-state' },
-        h('span', { className: 'empty-state__text' }, FILTER.NO_RESULTS),
-      ),
-    )
-    return
+  protected create(): HTMLElement {
+    this.columns = sightingColumns()
+    this.activeGrids = []
+    return h('div', { className: 'grids-container' })
   }
 
-  const columns = getColumns()
-  const groups = groupByContinent(sightings)
+  // ─── Public API ─────────────────────────────────────────────────
 
-  const frag = document.createDocumentFragment()
+  async render(sightings: Sighting[], isRerender = false): Promise<void> {
+    const store = useAppStore()
+    const selected = store.selectedContinent.get()
+    const version = ++this.renderVersion
 
-  for (const group of groups) {
-    if (version !== currentRenderVersion) return
+    clearChildren(this.el)
+    this.activeGrids = []
 
-    if (group.count > 0) {
-      const grid = renderDataGrid<Sighting>({
-        columns,
-        data: group.items,
-        onRowClick: openSightingModal,
-      })
-      activeGrids.push(grid)
-
-      frag.appendChild(
-        renderSection(
-          {
-            title: group.label,
-            count: group.count,
-            tooltip: CONTINENT_TOOLTIPS[group.continent],
-          },
-          grid.el,
+    if (sightings.length === 0) {
+      this.el.appendChild(
+        h('div', { className: 'empty-state' },
+          h('span', { className: 'empty-state__text' }, FILTER.NO_RESULTS),
         ),
       )
-    } else if (!selected) {
-      // Show empty continent placeholders only when viewing ALL regions
-      frag.appendChild(
-        renderSection(
-          {
+      return
+    }
+
+    const groups = groupByContinent(sightings)
+    const frag = document.createDocumentFragment()
+
+    for (const group of groups) {
+      if (version !== this.renderVersion) return
+
+      if (group.count > 0) {
+        const grid = new DataGrid<Sighting>({
+          columns: this.columns,
+          data: group.items,
+          onRowClick: (s, trigger) => SightingModal.open(s, trigger),
+        })
+        this.activeGrids.push(grid)
+
+        frag.appendChild(
+          new Section({
             title: group.label,
             count: group.count,
             tooltip: CONTINENT_TOOLTIPS[group.continent],
-          },
-          h('div', { className: 'empty-state empty-state--compact' },
-            h('span', { className: 'empty-state__text' },
-              CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT,
+            content: grid.el,
+          }).el,
+        )
+      } else if (!selected) {
+        frag.appendChild(
+          new Section({
+            title: group.label,
+            count: group.count,
+            tooltip: CONTINENT_TOOLTIPS[group.continent],
+            content: h('div', { className: 'empty-state empty-state--compact' },
+              h('span', { className: 'empty-state__text' },
+                CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT,
+              ),
             ),
-          ),
-        ),
-      )
+          }).el,
+        )
+      }
+
+      if (isRerender) await yieldThread()
     }
 
-    if (isRerender) {
-      await yieldThread()
-    }
+    this.el.appendChild(frag)
   }
 
-  container.appendChild(frag)
-}
+  scrollToSighting(sightingId: string): boolean {
+    for (const grid of this.activeGrids) {
+      if (grid.scrollToItem(s => s.id === sightingId)) return true
+    }
+    return false
+  }
 
-/**
- * Scroll to and highlight a sighting by its ID across all active continent grids.
- */
-export function scrollToSighting(sightingId: string): boolean {
-  for (const grid of activeGrids) {
-    if (grid.scrollToItem(s => s.id === sightingId)) {
-      return true
+  showLoader(loader: HTMLElement): void {
+    clearChildren(this.el)
+    this.el.appendChild(loader)
+  }
+
+  lockHeight(): () => void {
+    const prev = this.el.offsetHeight
+    if (prev > 0) this.el.style.minHeight = `${prev}px`
+    return () => {
+      requestAnimationFrame(() => { this.el.style.minHeight = '' })
     }
   }
-  return false
 }

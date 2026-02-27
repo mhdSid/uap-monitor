@@ -1,5 +1,6 @@
-import { ARIA } from '@/data/strings'
+import { Component } from '@/core'
 import { AlertVariant } from '@/enums'
+import { ARIA } from '@/data/strings'
 import { h } from '@/utils/dom'
 
 export interface AlertProps {
@@ -19,55 +20,56 @@ const VARIANT_COLORS: Record<AlertVariant, { border: string; text: string; icon:
   [AlertVariant.NEUTRAL]: { border: 'var(--color-dim)', text: 'var(--color-muted)', icon: '—' },
 }
 
-export function renderAlert(props: AlertProps): HTMLElement {
-  const colors = VARIANT_COLORS[props.variant]
+export class Alert extends Component<AlertProps> {
+  protected create(): HTMLElement {
+    const colors = VARIANT_COLORS[this.props.variant]
 
-  const alert = h('div', {
-    className: `alert alert--${props.variant}`,
-    role: 'alert',
-    style: {
-      borderColor: colors.border,
-    },
-  })
+    const alert = h('div', {
+      className: `alert alert--${this.props.variant}`,
+      role: 'alert',
+      style: { borderColor: colors.border },
+    })
 
-  const icon = h('span', {
-    className: 'alert__icon',
-    style: { color: colors.text },
-  }, colors.icon)
+    const icon = h('span', {
+      className: 'alert__icon',
+      style: { color: colors.text },
+    }, colors.icon)
 
-  const body = h('div', { className: 'alert__body' })
+    const body = h('div', { className: 'alert__body' })
 
-  if (props.title) {
-    body.appendChild(
-      h('div', {
-        className: 'alert__title',
-        style: { color: colors.text },
-      }, props.title),
-    )
+    if (this.props.title) {
+      body.appendChild(
+        h('div', {
+          className: 'alert__title',
+          style: { color: colors.text },
+        }, this.props.title),
+      )
+    }
+
+    const content = h('div', { className: 'alert__content' })
+    if (typeof this.props.content === 'string') {
+      content.textContent = this.props.content
+    } else {
+      content.appendChild(this.props.content)
+    }
+    body.appendChild(content)
+
+    alert.appendChild(icon)
+    alert.appendChild(body)
+
+    if (this.props.dismissible) {
+      alert.appendChild(
+        h('button', {
+          className: 'alert__close',
+          'aria-label': ARIA.DISMISS_ALERT,
+          onClick: () => {
+            alert.style.opacity = '0'
+            setTimeout(() => alert.remove(), 200)
+          },
+        }, '×'),
+      )
+    }
+
+    return alert
   }
-
-  const content = h('div', { className: 'alert__content' })
-  if (typeof props.content === 'string') {
-    content.textContent = props.content
-  } else {
-    content.appendChild(props.content)
-  }
-  body.appendChild(content)
-
-  alert.appendChild(icon)
-  alert.appendChild(body)
-
-  if (props.dismissible) {
-    const closeBtn = h('button', {
-      className: 'alert__close',
-      'aria-label': ARIA.DISMISS_ALERT,
-      onClick: () => {
-        alert.style.opacity = '0'
-        setTimeout(() => alert.remove(), 200)
-      },
-    }, '×')
-    alert.appendChild(closeBtn)
-  }
-
-  return alert
 }

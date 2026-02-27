@@ -1,30 +1,33 @@
+import { Component } from '@/core'
 import type { SectionProps } from '@/types'
 import { h } from '@/utils/dom'
-import { renderLiveTag } from '@/components/tags'
-import { renderTooltip } from '@/components/tooltip'
+import { LiveTag } from '@/components/tags'
+import { Tooltip } from '@/components/tooltip'
 
-export function renderSection(props: SectionProps, content: HTMLElement): HTMLElement {
-  const header = h('div', { className: 'section__header' },
-    h('span', { className: 'section__title' }, props.title),
-  )
+export interface SectionCreateProps extends SectionProps {
+  content: HTMLElement
+}
 
-  if (props.live) {
-    header.appendChild(renderLiveTag())
-  }
-  if (props.tooltip) {
-    header.appendChild(renderTooltip({ content: props.tooltip, ariaLabel: `About ${props.title}` }))
-  }
-  if (props.tag) {
-    header.appendChild(props.tag)
-  }
-  if (props.count !== undefined) {
-    header.appendChild(
-      h('span', { className: 'section__count' }, String(props.count)),
+export class Section extends Component<SectionCreateProps> {
+  protected create(): HTMLElement {
+    const { title, live, tooltip, tag, count, content } = this.props
+
+    const header = h('div', { className: 'section__header' },
+      h('span', { className: 'section__title' }, title),
+    )
+
+    if (live) header.appendChild(new LiveTag({}).el)
+    if (tooltip) header.appendChild(new Tooltip({ content: tooltip, ariaLabel: `About ${title}` }).el)
+    if (tag) header.appendChild(tag)
+    if (count !== undefined) {
+      header.appendChild(
+        h('span', { className: 'section__count' }, String(count)),
+      )
+    }
+
+    return h('div', { className: 'section' },
+      header,
+      h('div', { className: 'section__body' }, content),
     )
   }
-
-  return h('div', { className: 'section' },
-    header,
-    h('div', { className: 'section__body' }, content),
-  )
 }

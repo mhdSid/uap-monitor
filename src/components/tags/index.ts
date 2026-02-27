@@ -1,3 +1,4 @@
+import { Component } from '@/core'
 import { TagVariant, SightingStatus } from '@/enums'
 import type { TagProps, StatusTagProps } from '@/types'
 import { h, text } from '@/utils/dom'
@@ -19,29 +20,35 @@ const STATUS_COLORS: Record<SightingStatus, string> = {
 
 const STATUS_FALLBACK_COLOR = 'var(--color-muted)'
 
-export function renderTag(props: TagProps): HTMLElement {
-  const style = TAG_STYLES[props.variant]
-  return h('span', {
-    className: 'tag',
-    style: {
-      color: style.color,
-      borderColor: style.bg === 'transparent' ? style.color : style.bg,
-      backgroundColor: style.bg,
-    },
-  }, props.label ?? props.variant)
+export class Tag extends Component<TagProps> {
+  protected create(): HTMLElement {
+    const style = TAG_STYLES[this.props.variant]
+    return h('span', {
+      className: 'tag',
+      style: {
+        color: style.color,
+        borderColor: style.bg === 'transparent' ? style.color : style.bg,
+        backgroundColor: style.bg,
+      },
+    }, this.props.label ?? this.props.variant)
+  }
 }
 
-export function renderLiveTag(): HTMLElement {
-  return h('span', { className: 'tag tag--live' },
-    h('span', { className: 'tag__dot tag__dot--blink' }),
-    text('LIVE'),
-  )
+export class LiveTag extends Component {
+  protected create(): HTMLElement {
+    return h('span', { className: 'tag tag--live' },
+      h('span', { className: 'tag__dot tag__dot--blink' }),
+      text('LIVE'),
+    )
+  }
 }
 
-export function renderStatusTag(props: StatusTagProps): HTMLElement {
-  const color = STATUS_COLORS[props.status as SightingStatus] ?? STATUS_FALLBACK_COLOR
-  return h('span', {
-    className: 'tag',
-    style: { color, borderColor: color },
-  }, props.status)
+export class StatusTag extends Component<StatusTagProps> {
+  protected create(): HTMLElement {
+    const color = STATUS_COLORS[this.props.status as SightingStatus] ?? STATUS_FALLBACK_COLOR
+    return h('span', {
+      className: 'tag',
+      style: { color, borderColor: color },
+    }, this.props.status)
+  }
 }

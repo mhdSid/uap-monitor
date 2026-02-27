@@ -1,6 +1,18 @@
+/* ------------------------------------------------------------------ *
+ *  Ticker — typing-animation status bar with click-to-scroll          *
+ *                                                                     *
+ *  Displays auto-cycling messages with a terminal-style typing effect.*
+ *  Once data loads, clicking scrolls to the referenced sighting.      *
+ * ------------------------------------------------------------------ */
+
+import { Component } from '@/core'
 import type { TickerMessage } from '@/composables/use-ticker'
 import { h, addClass, removeClass, toggleClass } from '@/utils/dom'
 import { TICKER, ARIA } from '@/data/strings'
+
+export interface TickerProps {
+  onClick?: (sightingId: string) => void
+}
 
 const DEFAULT_MESSAGES: TickerMessage[] = [
   { lines: ['Scanning open-source intelligence feeds for new UAP reports...'] },
@@ -8,163 +20,176 @@ const DEFAULT_MESSAGES: TickerMessage[] = [
   { lines: ['Processing witness accounts and credibility scores...'] },
 ]
 
-export interface TickerHandle {
-  el: HTMLElement
-  setMessages: (messages: TickerMessage[]) => void
-}
-
-export interface TickerOptions {
-  onClick?: (sightingId: string) => void
-}
-
 const PREFIX = TICKER.PREFIX
 const GHOST_TEXT = TICKER.GHOST_TEXT
 
-export function renderTicker(options?: TickerOptions): TickerHandle {
-  let messages: TickerMessage[] = [...DEFAULT_MESSAGES]
+type Phase = 'typing' | 'holding'
 
-  const contentEl = h('div', { className: 'ticker__content' })
-  const cursorEl = h('span', { className: 'ticker__cursor' }, '█')
+export class Ticker extends Component<TickerProps> {
+  // All fields initialized in create() — field initializers run AFTER super(),
+  // but create()/didMount() run DURING super().
+  private messages!: TickerMessage[]
+  private contentEl!: HTMLElement
+  private cursorEl!: HTMLElement
+  private ghostEl!: HTMLElement
 
-  // Ghost lines: subtle placeholders visible when real content doesn't fill both rows
-  const ghostEl = h('div', { className: 'ticker__ghost' },
-    h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
-    h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
-  )
+  private msgIdx!: number
+  private lineIdx!: number
+  private charIdx!: number
+  private phase!: Phase
+  private timer!: ReturnType<typeof setTimeout> | null
+  private dataLoaded!: boolean
 
-  const ticker = h('div', {
-    className: 'ticker',
-    role: 'button',
-    tabIndex: 0,
-    'aria-label': ARIA.TICKER,
-  },
-    contentEl,
-    ghostEl,
-  )
+  // ─── Lifecycle ──────────────────────────────────────────────────
 
-  let msgIdx = 0
-  let lineIdx = 0
-  let charIdx = 0
-  let timer: ReturnType<typeof setTimeout> | null = null
-  let phase: 'typing' | 'holding' = 'typing'
-  let dataLoaded = false
+  protected create(): HTMLElement {
+    this.messages = [...DEFAULT_MESSAGES]
+    this.msgIdx = 0
+    this.lineIdx = 0
+    this.charIdx = 0
+    this.phase = 'typing'
+    this.timer = null
+    this.dataLoaded = false
 
-  /** Get current sighting ID if available. */
-  function getCurrentSightingId(): string | undefined {
-    return messages[msgIdx % messages.length]?.sightingId
+    this.contentEl = h('div', { className: 'ticker__content' })
+    this.cursorEl = h('span', { className: 'ticker__cursor' }, '█')
+
+    this.ghostEl = h('div', { className: 'ticker__ghost' },
+      h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
+      h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
+    )
+
+    return h('div', {
+      className: 'ticker',
+      role: 'button',
+      tabIndex: 0,
+      'aria-label': ARIA.TICKER,
+    }, this.contentEl, this.ghostEl)
   }
 
-  /** Flatten current message lines with prefix. */
-  function getCurrentLines(): string[] {
-    const msg = messages[msgIdx % messages.length]
+  protected didMount(): void {
+    this.el.addEventListener('click', () => this.handleClick())
+    this.el.addEventListener('keydown', (e: Event) => {
+      const ke = e as KeyboardEvent
+      if (ke.key === 'Enter' || ke.key === ' ') {
+        ke.preventDefault()
+        this.handleClick()
+      }
+    })
+
+    this.tick()
+  }
+
+  destroy(): void {
+    if (this.timer) clearTimeout(this.timer)
+    super.destroy()
+  }
+
+  // ─── Public API ─────────────────────────────────────────────────
+
+  setMessages(messages: TickerMessage[]): void {
+    if (messages.length === 0) return
+
+    this.messages = messages
+    this.msgIdx = 0
+    this.lineIdx = 0
+    this.charIdx = 0
+    this.phase = 'typing'
+    this.dataLoaded = true
+
+    addClass(this.el, 'ticker--clickable')
+    this.updateLineClass(0)
+
+    if (this.timer) clearTimeout(this.timer)
+    this.tick()
+  }
+
+  // ─── Animation engine ──────────────────────────────────────────
+
+  private getCurrentSightingId(): string | undefined {
+    return this.messages[this.msgIdx % this.messages.length]?.sightingId
+  }
+
+  private getCurrentLines(): string[] {
+    const msg = this.messages[this.msgIdx % this.messages.length]
     if (!msg) return [PREFIX + '...']
     return msg.lines.map(line => PREFIX + line)
   }
 
-  /** Update CSS class tracking how many lines are rendered. */
-  function updateLineClass(count: number): void {
-    toggleClass(ticker, 'ticker--lines-2', count >= 2)
+  private updateLineClass(count: number): void {
+    toggleClass(this.el, 'ticker--lines-2', count >= 2)
   }
 
-  function render(): void {
-    const lines = getCurrentLines()
-    contentEl.textContent = ''
+  private render(): void {
+    const lines = this.getCurrentLines()
+    this.contentEl.textContent = ''
 
     let renderedCount = 0
 
-    for (let i = 0; i <= lineIdx && i < lines.length; i++) {
+    for (let i = 0; i <= this.lineIdx && i < lines.length; i++) {
       const lineEl = h('div', { className: 'ticker__line' })
 
-      if (i < lineIdx) {
+      if (i < this.lineIdx) {
         lineEl.textContent = lines[i]
-      } else if (phase === 'holding') {
+      } else if (this.phase === 'holding') {
         lineEl.textContent = lines[i]
-        lineEl.appendChild(cursorEl)
+        lineEl.appendChild(this.cursorEl)
       } else {
-        lineEl.textContent = lines[i].slice(0, charIdx)
-        lineEl.appendChild(cursorEl)
+        lineEl.textContent = lines[i].slice(0, this.charIdx)
+        lineEl.appendChild(this.cursorEl)
       }
 
-      contentEl.appendChild(lineEl)
+      this.contentEl.appendChild(lineEl)
       renderedCount++
     }
 
-    updateLineClass(renderedCount)
+    this.updateLineClass(renderedCount)
   }
 
-  function tick(): void {
-    if (messages.length === 0) return
-    const lines = getCurrentLines()
+  private tick(): void {
+    if (this.messages.length === 0) return
+    const lines = this.getCurrentLines()
 
-    if (phase === 'typing') {
-      const currentLine = lines[lineIdx]
+    if (this.phase === 'typing') {
+      const currentLine = lines[this.lineIdx]
       if (!currentLine) {
-        advanceMessage()
+        this.advanceMessage()
         return
       }
 
-      if (charIdx <= currentLine.length) {
-        removeClass(cursorEl, 'ticker__cursor--blink')
-        render()
-        charIdx++
-        timer = setTimeout(tick, 25)
-      } else if (lineIdx < lines.length - 1) {
-        lineIdx++
-        charIdx = 0
-        timer = setTimeout(tick, 25)
+      if (this.charIdx <= currentLine.length) {
+        removeClass(this.cursorEl, 'ticker__cursor--blink')
+        this.render()
+        this.charIdx++
+        this.timer = setTimeout(() => this.tick(), 25)
+      } else if (this.lineIdx < lines.length - 1) {
+        this.lineIdx++
+        this.charIdx = 0
+        this.timer = setTimeout(() => this.tick(), 25)
       } else {
-        phase = 'holding'
-        addClass(cursorEl, 'ticker__cursor--blink')
-        render()
-        timer = setTimeout(tick, 3000)
+        this.phase = 'holding'
+        addClass(this.cursorEl, 'ticker__cursor--blink')
+        this.render()
+        this.timer = setTimeout(() => this.tick(), 3000)
       }
     } else {
-      advanceMessage()
+      this.advanceMessage()
     }
   }
 
-  function advanceMessage(): void {
-    removeClass(cursorEl, 'ticker__cursor--blink')
-    msgIdx = (msgIdx + 1) % messages.length
-    lineIdx = 0
-    charIdx = 0
-    phase = 'typing'
-    updateLineClass(0)
-    tick()
+  private advanceMessage(): void {
+    removeClass(this.cursorEl, 'ticker__cursor--blink')
+    this.msgIdx = (this.msgIdx + 1) % this.messages.length
+    this.lineIdx = 0
+    this.charIdx = 0
+    this.phase = 'typing'
+    this.updateLineClass(0)
+    this.tick()
   }
 
-  function handleClick(): void {
-    if (!dataLoaded) return
-    const id = getCurrentSightingId()
-    if (id && options?.onClick) {
-      options.onClick(id)
-    }
+  private handleClick(): void {
+    if (!this.dataLoaded) return
+    const id = this.getCurrentSightingId()
+    if (id && this.props.onClick) this.props.onClick(id)
   }
-
-  ticker.addEventListener('click', handleClick)
-  ticker.addEventListener('keydown', (e: Event) => {
-    const ke = e as KeyboardEvent
-    if (ke.key === 'Enter' || ke.key === ' ') {
-      ke.preventDefault()
-      handleClick()
-    }
-  })
-
-  function setMessages(newMessages: TickerMessage[]): void {
-    if (newMessages.length === 0) return
-    messages = newMessages
-    msgIdx = 0
-    lineIdx = 0
-    charIdx = 0
-    phase = 'typing'
-    dataLoaded = true
-    addClass(ticker, 'ticker--clickable')
-    updateLineClass(0)
-    if (timer) clearTimeout(timer)
-    tick()
-  }
-
-  tick()
-
-  return { el: ticker, setMessages }
 }

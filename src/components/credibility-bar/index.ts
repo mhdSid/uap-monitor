@@ -1,7 +1,7 @@
+import { Component } from '@/core'
 import type { CredibilityBarProps } from '@/types'
 import { h } from '@/utils/dom'
 
-/** Credibility score thresholds that determine visual treatment. */
 enum CredibilityLevel {
   HIGH = 'high',
   MEDIUM = 'medium',
@@ -20,18 +20,19 @@ function getLevel(value: number): CredibilityLevel {
   return CredibilityLevel.LOW
 }
 
-export function renderCredibilityBar(props: CredibilityBarProps): HTMLElement {
-  const { value } = props
-  const level = getLevel(value)
-  const color = LEVEL_COLORS[level]
+export class CredibilityBar extends Component<CredibilityBarProps> {
+  protected create(): HTMLElement {
+    const { value } = this.props
+    const color = LEVEL_COLORS[getLevel(value)]
 
-  return h('div', { className: 'credibility-bar' },
-    h('div', { className: 'credibility-bar__track' },
-      h('div', {
-        className: 'credibility-bar__fill',
-        style: { width: `${Math.min(value, 100)}%`, backgroundColor: color },
-      }),
-    ),
-    h('span', { className: 'credibility-bar__label' }, String(value)),
-  )
+    return h('div', { className: 'credibility-bar' },
+      h('div', { className: 'credibility-bar__track' },
+        h('div', {
+          className: 'credibility-bar__fill',
+          style: { width: `${Math.min(value, 100)}%`, backgroundColor: color },
+        }),
+      ),
+      h('span', { className: 'credibility-bar__label' }, String(value)),
+    )
+  }
 }

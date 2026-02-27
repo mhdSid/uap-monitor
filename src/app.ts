@@ -1,190 +1,251 @@
+/* ------------------------------------------------------------------ *
+ *  App — top-level orchestrator                                       *
+ *                                                                     *
+ *  Lifecycle:                                                         *
+ *    1. create()       → Build the DOM shell (header, ticker, loader) *
+ *    2. init()         → Load data, hydrate store, render grids       *
+ *                                                                     *
+ *  Internal flow:                                                     *
+ *    loadManifests → hydrateStore → buildControls → progressiveLoad   *
+ *    → buildBelowFold → finalize                                     *
+ * ------------------------------------------------------------------ */
+
+import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, filterSightings, useTicker, useAppStore, batch, minDelay } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, batch, minDelay, filterSightings } from '@/composables'
 import { AlertVariant } from '@/enums'
-import { renderHeader } from '@/components/header'
-import { renderTicker } from '@/components/ticker'
-import { renderLoader } from '@/components/loader'
-import { renderSection } from '@/components/layout'
-import { renderDataSources } from '@/components/data-sources'
-import { renderAlert } from '@/components/alert'
-import { renderFooter } from '@/components/footer'
-import { renderYearSelector } from '@/components/year-selector'
-import { renderFilterToolbar } from '@/components/filter-toolbar'
-import { renderSightingGrids, scrollToSighting } from '@/components/sighting-grid'
+import { Header } from '@/components/header'
+import { Ticker } from '@/components/ticker'
+import { Loader } from '@/components/loader'
+import { Section } from '@/components/layout'
+import { DataSources } from '@/components/data-sources'
+import { Alert } from '@/components/alert'
+import { Footer } from '@/components/footer'
+import { YearSelector } from '@/components/year-selector'
+import { FilterToolbar } from '@/components/filter-toolbar'
+import { SightingGrids } from '@/components/sighting-grid'
+import { WelcomeModal } from '@/components/welcome-modal'
 import { SECTION } from '@/data/strings'
 
-// ─── App entry ──────────────────────────────────────────────────────
+import type { Sighting } from '@/types'
 
-export async function createApp(root: HTMLElement): Promise<void> {
-  const store = useAppStore()
+export class App extends Component {
+  private store = useAppStore()
+  private dataSource = useDataSource()
+  private tickerMessages = useTicker()
 
-  // ─ App shell (visible immediately) ────────────────────────────
-  const main = h('main', { className: 'app-main', role: 'main' },
-    h('div', { className: 'app-loader' }, renderLoader()),
-  )
+  private main!: HTMLElement
+  private ticker!: Ticker
+  private grids!: SightingGrids
+  private renderVersion = 0
+  private yearRangeReady = false
 
-  const ticker = renderTicker({
-    onClick: (sightingId) => scrollToSighting(sightingId),
-  })
-  const { generateMessages } = useTicker()
+  // ─── Shell ─────────────────────────────────────────────────────
 
-  mount(root, h('div', { className: 'app' },
-    h('div', { className: 'scanlines' }),
-    renderHeader(),
-    ticker.el,
-    main,
-  ))
-
-  // ─ Load manifest → hydrate store ──────────────────────────────
-  const dataSource = useDataSource()
-  const { fetchYearRange, fetchProgressive, getSources, loadManifests } = dataSource
-
-  await loadManifests()
-
-  const years = dataSource.getAvailableYears()
-  const newest = years[0] ?? new Date().getFullYear()
-  const defaultFrom = newest - 1
-
-  batch(() => {
-    store.availableYears.set(years)
-    store.totalCount.set(dataSource.getTotalCount())
-    store.sources.set(getSources())
-    store.yearRange.set({ from: defaultFrom, to: newest })
-  })
-
-  // ─ UI helpers ─────────────────────────────────────────────────
-  const gridsContainer = h('div', { className: 'grids-container' })
-  let renderVersion = 0
-
-  function showLoader(): void {
-    clearChildren(gridsContainer)
-    gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
-  }
-
-  function lockHeight(container: HTMLElement): () => void {
-    const prev = container.offsetHeight
-    if (prev > 0) container.style.minHeight = `${prev}px`
-    return () => {
-      requestAnimationFrame(() => { container.style.minHeight = '' })
-    }
-  }
-
-  // ─ Filter reaction ────────────────────────────────────────────
-  // Async filter + re-render when store.filter changes.
-  // Uses renderVersion to cancel stale renders.
-
-  async function applyFilterAndRender(skipDelay = false): Promise<void> {
-    const version = ++renderVersion
-
-    const releaseLoader = lockHeight(gridsContainer)
-    showLoader()
-
-    const doFilter = () => filterSightings(
-      store.sightings.get(),
-      store.filter.get(),
+  protected create(): HTMLElement {
+    this.main = h('main', { className: 'app-main', role: 'main' },
+      h('div', { className: 'app-loader' }, new Loader({}).el),
     )
 
-    const filtered = skipDelay
-      ? await doFilter()
-      : await minDelay(doFilter)
+    this.ticker = new Ticker({
+      onClick: (id) => this.grids.scrollToSighting(id),
+    })
 
-    if (version !== renderVersion) {
-      releaseLoader()
+    this.grids = new SightingGrids({})
+
+    return h('div', { className: 'app' },
+      h('div', { className: 'scanlines' }),
+      new Header({}).el,
+      this.ticker.el,
+      this.main,
+    )
+  }
+
+  // ─── Initialization ────────────────────────────────────────────
+
+  async init(): Promise<void> {
+    const analytics = useAnalytics()
+    analytics.init()
+    analytics.pageView()
+
+    this.showWelcome()
+    await this.loadManifests()
+    this.hydrateStore()
+    this.buildControls()
+    this.bindReactions()
+    await this.progressiveLoad()
+    this.buildBelowFold()
+    this.finalize()
+  }
+
+  // ─── Phase: Load manifests ─────────────────────────────────────
+
+  private async loadManifests(): Promise<void> {
+    await this.dataSource.loadManifests()
+  }
+
+  // ─── Phase: Hydrate store ──────────────────────────────────────
+
+  private hydrateStore(): void {
+    const years = this.dataSource.getAvailableYears()
+    const newest = years[0] ?? new Date().getFullYear()
+    const defaultFrom = newest - 1
+
+    batch(() => {
+      this.store.availableYears.set(years)
+      this.store.totalCount.set(this.dataSource.getTotalCount())
+      this.store.sources.set(this.dataSource.getSources())
+      this.store.yearRange.set({ from: defaultFrom, to: newest })
+    })
+  }
+
+  // ─── Phase: Build controls ─────────────────────────────────────
+
+  private buildControls(): void {
+    const controlsForm = h('form', {
+      className: 'controls-form',
+      autocomplete: 'off',
+      onSubmit: (e: Event) => e.preventDefault(),
+    },
+      new YearSelector({}).el,
+      new FilterToolbar({}).el,
+    )
+
+    this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
+
+    clearChildren(this.main)
+    this.main.appendChild(controlsForm)
+    this.main.appendChild(this.grids.el)
+  }
+
+  // ─── Phase: Bind reactions ─────────────────────────────────────
+
+  private bindReactions(): void {
+    this.store.filter.subscribe(() => this.onFilterChange())
+
+    this.store.yearRange.subscribe(async () => {
+      if (!this.yearRangeReady) return
+      if (this.store.loading.get()) return
+      await this.onYearRangeChange()
+    })
+  }
+
+  // ─── Phase: Progressive load ───────────────────────────────────
+
+  private async progressiveLoad(): Promise<Sighting[]> {
+    const { from, to } = this.store.yearRange.get()
+
+    return this.dataSource.fetchProgressive(from, to, (partial) => {
+      this.store.sightings.set(partial)
+      this.store.shownCount.set(partial.length)
+      this.grids.render(partial)
+    })
+  }
+
+  // ─── Phase: Below-fold content ─────────────────────────────────
+
+  private buildBelowFold(): void {
+    const sourcesBody = h('div', {
+      style: { display: 'flex', flexDirection: 'column', gap: '10px' },
+    })
+
+    sourcesBody.appendChild(
+      new Alert({
+        variant: AlertVariant.INFO,
+        title: SECTION.INTEL_TITLE,
+        content: SECTION.INTEL_CONTENT,
+        dismissible: true,
+      }).el,
+    )
+
+    sourcesBody.appendChild(
+      new DataSources({ sources: this.store.sources.get() }).el,
+    )
+
+    this.main.appendChild(
+      new Section({
+        title: SECTION.DATA_SOURCES,
+        tooltip: SECTION.DATA_SOURCES_TOOLTIP,
+        content: sourcesBody,
+      }).el,
+    )
+
+    this.main.appendChild(new Footer({}).el)
+  }
+
+  // ─── Phase: Finalize ───────────────────────────────────────────
+
+  private finalize(): void {
+    const sightings = this.store.sightings.get()
+
+    batch(() => {
+      this.store.shownCount.set(sightings.length)
+      this.store.totalCount.set(this.dataSource.getTotalCount())
+    })
+
+    this.ticker.setMessages(
+      this.tickerMessages.generateMessages(sightings),
+    )
+
+    this.yearRangeReady = true
+  }
+
+  // ─── Phase: Show welcome ───────────────────────────────────────
+
+  private showWelcome(): void {
+    WelcomeModal.show()
+  }
+
+  // ─── Reactions ─────────────────────────────────────────────────
+
+  private async onFilterChange(): Promise<void> {
+    const version = ++this.renderVersion
+    const release = this.grids.lockHeight()
+
+    this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
+
+    const filtered = await minDelay(() =>
+      filterSightings(this.store.sightings.get(), this.store.filter.get()),
+    )
+
+    if (version !== this.renderVersion) {
+      release()
       return
     }
 
-    const releaseRender = lockHeight(gridsContainer)
-    await renderSightingGrids(gridsContainer, filtered, true)
+    const releaseRender = this.grids.lockHeight()
+    await this.grids.render(filtered, true)
     releaseRender()
-    releaseLoader()
+    release()
 
-    store.shownCount.set(filtered.length)
+    this.store.shownCount.set(filtered.length)
   }
 
-  store.filter.subscribe(() => {
-    applyFilterAndRender()
-  })
+  private async onYearRangeChange(): Promise<void> {
+    this.store.loading.set(true)
+    this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
 
-  // ─ Year range reaction ────────────────────────────────────────
-  // Fetch data for new range + re-render.
-  // Skips the first change (initial hydration — handled by progressive load below).
-
-  let yearRangeReady = false
-
-  store.yearRange.subscribe(async () => {
-    if (!yearRangeReady) return
-    if (store.loading.get()) return
-
-    store.loading.set(true)
-    showLoader()
-
-    const { from, to } = store.yearRange.get()
-    const sightings = await minDelay(() => fetchYearRange(from, to))
+    const { from, to } = this.store.yearRange.get()
+    const sightings = await minDelay(() => this.dataSource.fetchYearRange(from, to))
 
     batch(() => {
-      store.sightings.set(sightings)
-      store.shownCount.set(sightings.length)
-      store.loading.set(false)
+      this.store.sightings.set(sightings)
+      this.store.shownCount.set(sightings.length)
+      this.store.loading.set(false)
     })
 
-    await applyFilterAndRender(true)
-    ticker.setMessages(generateMessages(store.sightings.get()))
-  })
+    await this.grids.render(sightings, true)
 
-  // ─ Build skeleton ─────────────────────────────────────────────
-  const controlsForm = h('form', {
-    className: 'controls-form',
-    autocomplete: 'off',
-    onSubmit: (e: Event) => e.preventDefault(),
-  },
-    renderYearSelector(),
-    renderFilterToolbar(),
-  )
+    this.ticker.setMessages(
+      this.tickerMessages.generateMessages(sightings),
+    )
+  }
+}
 
-  gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
+// ─── Entry point ──────────────────────────────────────────────────
 
-  clearChildren(main)
-  main.appendChild(controlsForm)
-  main.appendChild(gridsContainer)
-
-  // ─ Progressive load ───────────────────────────────────────────
-  const finalSightings = await fetchProgressive(defaultFrom, newest, (partial) => {
-    store.sightings.set(partial)
-    store.shownCount.set(partial.length)
-    renderSightingGrids(gridsContainer, partial)
-  })
-
-  // ─ Below-fold content (deferred until grids are done) ─────────
-  const sourcesBody = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } })
-
-  sourcesBody.appendChild(
-    renderAlert({
-      variant: AlertVariant.INFO,
-      title: SECTION.INTEL_TITLE,
-      content: SECTION.INTEL_CONTENT,
-      dismissible: true,
-    }),
-  )
-
-  sourcesBody.appendChild(renderDataSources({ sources: store.sources.get() }))
-
-  main.appendChild(
-    renderSection({
-      title: SECTION.DATA_SOURCES,
-      tooltip: SECTION.DATA_SOURCES_TOOLTIP,
-    }, sourcesBody),
-  )
-  main.appendChild(renderFooter())
-
-  // ─ Finalize ───────────────────────────────────────────────────
-  batch(() => {
-    store.sightings.set(finalSightings)
-    store.shownCount.set(finalSightings.length)
-    store.totalCount.set(dataSource.getTotalCount())
-  })
-
-  ticker.setMessages(generateMessages(store.sightings.get()))
-
-  // Enable year-range subscription now that initial load is done
-  yearRangeReady = true
+export async function createApp(root: HTMLElement): Promise<void> {
+  const app = new App({})
+  mount(root, app.el)
+  await app.init()
 }

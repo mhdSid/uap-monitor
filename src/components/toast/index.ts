@@ -4,7 +4,6 @@ import { h, addClass, generateId, qsa } from '@/utils/dom'
 
 const TOAST_DURATION = 4000
 
-/** CSS class suffix per variant — maps to `.toast--error`, `.toast--success`, etc. */
 const VARIANT_CLASS: Record<ToastVariant, string> = {
   [ToastVariant.ERROR]: 'toast--error',
   [ToastVariant.SUCCESS]: 'toast--success',
@@ -28,7 +27,7 @@ function removeToast(id: string) {
   setTimeout(() => el.remove(), 300)
 }
 
-export function renderToast(message: ToastMessage): HTMLElement {
+function renderToast(message: ToastMessage): HTMLElement {
   const variantClass = VARIANT_CLASS[message.variant]
   return h('div', {
     className: `toast ${variantClass}`,

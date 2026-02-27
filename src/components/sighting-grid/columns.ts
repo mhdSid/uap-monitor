@@ -1,7 +1,7 @@
 import { h } from '@/utils/dom'
 import { formatDate } from '@/utils/format'
-import { renderStatusTag } from '@/components/tags'
-import { renderCredibilityBar } from '@/components/credibility-bar'
+import { StatusTag } from '@/components/tags'
+import { CredibilityBar } from '@/components/credibility-bar'
 import { DataSourceId } from '@/enums'
 import type { Sighting, DataGridColumn } from '@/types'
 
@@ -52,14 +52,14 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
       label: 'CRED',
       width: '100px',
       align: 'right',
-      render: (row) => renderCredibilityBar({ value: row.credibility }),
+      render: (row) => new CredibilityBar({ value: row.credibility }).el,
     },
     {
       key: 'status',
       label: 'STATUS',
       width: '80px',
       align: 'right',
-      render: (row) => renderStatusTag({ status: row.status }),
+      render: (row) => new StatusTag({ status: row.status }).el,
     },
     {
       key: 'occurredAt',

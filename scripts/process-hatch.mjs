@@ -28,53 +28,20 @@ import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execSync } from 'node:child_process'
 
+import {
+  Continent, Status, Shape,
+  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate,
+} from './shared-constants.mjs'
+
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
 const DEFAULT_INPUT = resolve(PROJECT_ROOT, 'hatch_udb.json')
 const DOWNLOAD_URL = 'https://raw.githubusercontent.com/richgel999/ufo_data/main/bin/hatch_udb.json'
 
-// ─── Named constants ────────────────────────────────────────────────
+// ─── Hatch-specific constants ───────────────────────────────────────
 
-const Continent = {
-  AMERICAS: 'AMERICAS',
-  EUROPE: 'EUROPE',
-  EURASIA: 'EURASIA',
-  ASIA_MIDDLE_EAST: 'ASIA_MIDDLE_EAST',
-  ASIA_PACIFIC: 'ASIA_PACIFIC',
-  OCEANIA: 'OCEANIA',
-  AFRICA: 'AFRICA',
-}
-
-const Status = { PENDING: 'PENDING' }
 const Source = { HATCH_UDB: 'HATCH_UDB' }
-
-const Shape = {
-  UNKNOWN: 'Unknown',
-  CHANGING: 'Changing',
-  CHEVRON: 'Chevron',
-  CIGAR: 'Cigar',
-  CIRCLE: 'Circle',
-  CONE: 'Cone',
-  CROSS: 'Cross',
-  CUBE: 'Cube',
-  CYLINDER: 'Cylinder',
-  DIAMOND: 'Diamond',
-  DISK: 'Disk',
-  EGG: 'Egg',
-  FIREBALL: 'Fireball',
-  FLASH: 'Flash',
-  FORMATION: 'Formation',
-  LIGHT: 'Light',
-  ORB: 'Orb',
-  OTHER: 'Other',
-  OVAL: 'Oval',
-  RECTANGLE: 'Rectangle',
-  SPHERE: 'Sphere',
-  STAR: 'Star',
-  TEARDROP: 'Teardrop',
-  TRIANGLE: 'Triangle',
-}
 
 // Year boundaries
 const MODERN_YEAR_START = 1900     // Per-year chunking from here
@@ -146,117 +113,7 @@ const ATTRIBUTE_TAG_MAP = {
   'MBR': 'Multiple observers',
 }
 
-// ─── Country → Continent (covers Hatch historical names) ────────────
-
-const COUNTRY_CONTINENT = {
-  'USA': Continent.AMERICAS, 'US': Continent.AMERICAS, 'United States': Continent.AMERICAS,
-  'Canada': Continent.AMERICAS, 'Mexico': Continent.AMERICAS, 'Brazil': Continent.AMERICAS,
-  'Argentina': Continent.AMERICAS, 'Colombia': Continent.AMERICAS, 'Chile': Continent.AMERICAS,
-  'Peru': Continent.AMERICAS, 'Venezuela': Continent.AMERICAS, 'Ecuador': Continent.AMERICAS,
-  'Bolivia': Continent.AMERICAS, 'Paraguay': Continent.AMERICAS, 'Uruguay': Continent.AMERICAS,
-  'Cuba': Continent.AMERICAS, 'Jamaica': Continent.AMERICAS, 'Puerto Rico': Continent.AMERICAS,
-  'Guatemala': Continent.AMERICAS, 'Honduras': Continent.AMERICAS, 'El Salvador': Continent.AMERICAS,
-  'Nicaragua': Continent.AMERICAS, 'Costa Rica': Continent.AMERICAS, 'Panama': Continent.AMERICAS,
-  'Trinidad and Tobago': Continent.AMERICAS, 'Bahamas': Continent.AMERICAS, 'Bermuda': Continent.AMERICAS,
-  'Dominican Republic': Continent.AMERICAS, 'Haiti': Continent.AMERICAS, 'Belize': Continent.AMERICAS,
-  'Guyana': Continent.AMERICAS, 'Suriname': Continent.AMERICAS, 'Barbados': Continent.AMERICAS,
-
-  'UK': Continent.EUROPE, 'United Kingdom': Continent.EUROPE, 'England': Continent.EUROPE,
-  'Scotland': Continent.EUROPE, 'Wales': Continent.EUROPE, 'Ireland': Continent.EUROPE,
-  'France': Continent.EUROPE, 'Germany': Continent.EUROPE, 'Spain': Continent.EUROPE,
-  'Italy': Continent.EUROPE, 'Netherlands': Continent.EUROPE, 'Belgium': Continent.EUROPE,
-  'Sweden': Continent.EUROPE, 'Norway': Continent.EUROPE, 'Denmark': Continent.EUROPE,
-  'Finland': Continent.EUROPE, 'Poland': Continent.EUROPE, 'Portugal': Continent.EUROPE,
-  'Greece': Continent.EUROPE, 'Turkey': Continent.EUROPE, 'Ukraine': Continent.EUROPE,
-  'Romania': Continent.EUROPE, 'Czech Republic': Continent.EUROPE, 'Austria': Continent.EUROPE,
-  'Switzerland': Continent.EUROPE, 'Hungary': Continent.EUROPE, 'Bulgaria': Continent.EUROPE,
-  'Croatia': Continent.EUROPE, 'Serbia': Continent.EUROPE, 'Slovakia': Continent.EUROPE,
-  'Slovenia': Continent.EUROPE, 'Iceland': Continent.EUROPE, 'Malta': Continent.EUROPE,
-  'Cyprus': Continent.EUROPE, 'Albania': Continent.EUROPE, 'Latvia': Continent.EUROPE,
-  'Lithuania': Continent.EUROPE, 'Estonia': Continent.EUROPE, 'Luxembourg': Continent.EUROPE,
-  'Moldova': Continent.EUROPE, 'Belarus': Continent.EUROPE, 'Georgia': Continent.EUROPE,
-  'Armenia': Continent.EUROPE, 'Azerbaijan': Continent.EUROPE,
-  'West Germany': Continent.EUROPE, 'East Germany': Continent.EUROPE,
-  'Yugoslavia': Continent.EUROPE, 'Czechoslovakia': Continent.EUROPE,
-  'Prussia': Continent.EUROPE, 'Sicily': Continent.EUROPE, 'Corsica': Continent.EUROPE,
-  'Sardinia': Continent.EUROPE, 'Crete': Continent.EUROPE, 'Bohemia': Continent.EUROPE,
-  'Montenegro': Continent.EUROPE, 'Kosovo': Continent.EUROPE,
-  'Bosnia and Herzegovina': Continent.EUROPE, 'North Macedonia': Continent.EUROPE,
-
-  'Russia': Continent.EURASIA, 'Russian Federation': Continent.EURASIA,
-  'Soviet Union': Continent.EURASIA, 'USSR': Continent.EURASIA,
-
-  'India': Continent.ASIA_MIDDLE_EAST, 'Pakistan': Continent.ASIA_MIDDLE_EAST,
-  'Iran': Continent.ASIA_MIDDLE_EAST, 'Iraq': Continent.ASIA_MIDDLE_EAST,
-  'Israel': Continent.ASIA_MIDDLE_EAST, 'Palestine': Continent.ASIA_MIDDLE_EAST,
-  'Lebanon': Continent.ASIA_MIDDLE_EAST, 'Jordan': Continent.ASIA_MIDDLE_EAST,
-  'Syria': Continent.ASIA_MIDDLE_EAST, 'Saudi Arabia': Continent.ASIA_MIDDLE_EAST,
-  'UAE': Continent.ASIA_MIDDLE_EAST, 'Kuwait': Continent.ASIA_MIDDLE_EAST,
-  'Qatar': Continent.ASIA_MIDDLE_EAST, 'Bahrain': Continent.ASIA_MIDDLE_EAST,
-  'Oman': Continent.ASIA_MIDDLE_EAST, 'Yemen': Continent.ASIA_MIDDLE_EAST,
-  'Afghanistan': Continent.ASIA_MIDDLE_EAST, 'Bangladesh': Continent.ASIA_MIDDLE_EAST,
-  'Sri Lanka': Continent.ASIA_MIDDLE_EAST, 'Nepal': Continent.ASIA_MIDDLE_EAST,
-  'Kazakhstan': Continent.ASIA_MIDDLE_EAST, 'Uzbekistan': Continent.ASIA_MIDDLE_EAST,
-  'Persia': Continent.ASIA_MIDDLE_EAST, 'Mesopotamia': Continent.ASIA_MIDDLE_EAST,
-  'Ottoman Empire': Continent.ASIA_MIDDLE_EAST, 'Trans-Jordan': Continent.ASIA_MIDDLE_EAST,
-  'Ceylon': Continent.ASIA_MIDDLE_EAST, 'Mongolia': Continent.ASIA_MIDDLE_EAST,
-
-  'Japan': Continent.ASIA_PACIFIC, 'China': Continent.ASIA_PACIFIC,
-  'South Korea': Continent.ASIA_PACIFIC, 'North Korea': Continent.ASIA_PACIFIC,
-  'Taiwan': Continent.ASIA_PACIFIC, 'Philippines': Continent.ASIA_PACIFIC,
-  'Thailand': Continent.ASIA_PACIFIC, 'Vietnam': Continent.ASIA_PACIFIC,
-  'Indonesia': Continent.ASIA_PACIFIC, 'Malaysia': Continent.ASIA_PACIFIC,
-  'Singapore': Continent.ASIA_PACIFIC, 'Myanmar': Continent.ASIA_PACIFIC,
-  'Cambodia': Continent.ASIA_PACIFIC, 'Laos': Continent.ASIA_PACIFIC,
-  'Hong Kong': Continent.ASIA_PACIFIC, 'Macau': Continent.ASIA_PACIFIC,
-  'Korea': Continent.ASIA_PACIFIC, 'Burma': Continent.ASIA_PACIFIC,
-  'Siam': Continent.ASIA_PACIFIC, 'Formosa': Continent.ASIA_PACIFIC,
-  'Indochina': Continent.ASIA_PACIFIC, 'Manchuria': Continent.ASIA_PACIFIC,
-
-  'Australia': Continent.OCEANIA, 'New Zealand': Continent.OCEANIA,
-  'Papua New Guinea': Continent.OCEANIA, 'Fiji': Continent.OCEANIA,
-  'Guam': Continent.OCEANIA, 'Hawaii': Continent.OCEANIA,
-
-  'South Africa': Continent.AFRICA, 'Nigeria': Continent.AFRICA, 'Egypt': Continent.AFRICA,
-  'Kenya': Continent.AFRICA, 'Ethiopia': Continent.AFRICA, 'Ghana': Continent.AFRICA,
-  'Algeria': Continent.AFRICA, 'Morocco': Continent.AFRICA, 'Tunisia': Continent.AFRICA,
-  'Libya': Continent.AFRICA, 'Sudan': Continent.AFRICA, 'Zimbabwe': Continent.AFRICA,
-  'Zambia': Continent.AFRICA, 'Angola': Continent.AFRICA, 'Madagascar': Continent.AFRICA,
-  'Cameroon': Continent.AFRICA, 'Congo': Continent.AFRICA, 'Botswana': Continent.AFRICA,
-  'Namibia': Continent.AFRICA, 'Mozambique': Continent.AFRICA, 'Tanzania': Continent.AFRICA,
-  'Uganda': Continent.AFRICA, 'Senegal': Continent.AFRICA, 'Mali': Continent.AFRICA,
-  'Rhodesia': Continent.AFRICA, 'Zaire': Continent.AFRICA, 'Tanganyika': Continent.AFRICA,
-  'Abyssinia': Continent.AFRICA, 'Belgian Congo': Continent.AFRICA,
-  'Reunion': Continent.AFRICA,
-
-  'Unknown': Continent.AMERICAS,
-  'At Sea': Continent.AMERICAS,
-  'Atlantic Ocean': Continent.AMERICAS,
-  'Pacific Ocean': Continent.OCEANIA,
-}
-
-// ─── Country → default coords (subset for Hatch fallback) ──────────
-
-const COUNTRY_COORDS = {
-  'USA': { lat: 38.895, lng: -77.036 }, 'Canada': { lat: 45.421, lng: -75.697 },
-  'Mexico': { lat: 19.433, lng: -99.133 }, 'Brazil': { lat: -15.798, lng: -47.892 },
-  'Argentina': { lat: -34.604, lng: -58.382 }, 'Colombia': { lat: 4.711, lng: -74.072 },
-  'Chile': { lat: -33.449, lng: -70.669 }, 'Peru': { lat: -12.046, lng: -77.043 },
-  'UK': { lat: 51.507, lng: -0.128 }, 'France': { lat: 48.857, lng: 2.352 },
-  'Germany': { lat: 52.520, lng: 13.405 }, 'Spain': { lat: 40.417, lng: -3.704 },
-  'Italy': { lat: 41.903, lng: 12.496 }, 'Netherlands': { lat: 52.368, lng: 4.904 },
-  'Belgium': { lat: 50.850, lng: 4.352 }, 'Sweden': { lat: 59.329, lng: 18.069 },
-  'Norway': { lat: 59.914, lng: 10.752 }, 'Denmark': { lat: 55.676, lng: 12.568 },
-  'Finland': { lat: 60.170, lng: 24.938 }, 'Poland': { lat: 52.230, lng: 21.012 },
-  'Portugal': { lat: 38.722, lng: -9.139 }, 'Greece': { lat: 37.984, lng: 23.728 },
-  'Turkey': { lat: 39.933, lng: 32.860 }, 'Russia': { lat: 55.756, lng: 37.617 },
-  'USSR': { lat: 55.756, lng: 37.617 }, 'Soviet Union': { lat: 55.756, lng: 37.617 },
-  'India': { lat: 28.614, lng: 77.209 }, 'Iran': { lat: 35.689, lng: 51.389 },
-  'Israel': { lat: 31.768, lng: 35.214 }, 'Palestine': { lat: 31.952, lng: 35.233 },
-  'Japan': { lat: 35.676, lng: 139.650 }, 'China': { lat: 39.904, lng: 116.407 },
-  'Australia': { lat: -35.281, lng: 149.130 }, 'New Zealand': { lat: -41.287, lng: 174.776 },
-  'South Africa': { lat: -25.748, lng: 28.229 }, 'Egypt': { lat: 30.044, lng: 31.236 },
-}
+// COUNTRY_CONTINENT and COUNTRY_COORDS imported from shared-constants.mjs
 
 // ─── Audit trackers ─────────────────────────────────────────────────
 
@@ -423,12 +280,7 @@ function yearToChunkKey(year) {
   return String(year)
 }
 
-function truncate(text, maxLen) {
-  if (!text) return ''
-  const cleaned = text.replace(/\n{3,}/g, '\n\n').trim()
-  if (cleaned.length <= maxLen) return cleaned
-  return cleaned.slice(0, maxLen).replace(/\s+\S*$/, '') + '…'
-}
+// truncate() imported from shared-constants.mjs
 
 // ─── Main ───────────────────────────────────────────────────────────
 

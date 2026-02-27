@@ -11,14 +11,17 @@ const SOURCE_REGISTRY: DataSource[] = [
     label: 'NUFORC',
     status: DataSourceStatus.SYNCING,
     url: 'https://nuforc.org',
+    dataUrl: 'https://nuforc.org/webreports/',
+    dataLabel: 'JSON',
     description: DATA_SOURCE_DESCRIPTIONS.NUFORC,
   },
   {
     id: DataSourceId.HATCH_UDB,
-    label: 'HATCH *U* DB',
+    label: 'HATCH UDB',
     status: DataSourceStatus.SYNCING,
     url: 'https://github.com/richgel999/ufo_data',
     dataUrl: 'https://raw.githubusercontent.com/richgel999/ufo_data/main/bin/hatch_udb.json',
+    dataLabel: 'JSON',
     description: DATA_SOURCE_DESCRIPTIONS.HATCH_UDB,
   },
   // ── Planned (ordered by integration priority) ──

@@ -1,83 +1,96 @@
+/* ------------------------------------------------------------------ *
+ *  SightingModal — detail view for a single UAP sighting              *
+ *                                                                     *
+ *  Opens via Modal.open() with structured header/content/footer.      *
+ * ------------------------------------------------------------------ */
+
 import type { Sighting } from '@/types'
 import { TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
-import { renderStatusTag, renderTag } from '@/components/tags'
-import { openModal } from '@/components/modal'
+import { StatusTag, Tag } from '@/components/tags'
+import { Modal } from '@/components/modal'
 import { MODAL } from '@/data/strings'
+import { useAnalytics } from '@/composables'
 
-export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): void {
-  openModal({
-    header: () =>
-      h('div', { className: 'modal-sighting__header' },
-        h('span', { className: 'modal-sighting__title' },
-          `${sighting.region}, ${sighting.country}`,
-        ),
-        renderStatusTag({ status: sighting.status }),
+export class SightingModal {
+  static open(sighting: Sighting, trigger?: HTMLElement): void {
+    const analytics = useAnalytics()
+    analytics.sightingViewed(sighting)
+
+    Modal.open({
+      header: () => SightingModal.buildHeader(sighting),
+      content: () => SightingModal.buildContent(sighting),
+      footer: () => SightingModal.buildFooter(sighting),
+      onClose: () => analytics.sightingDismissed(sighting),
+    }, trigger)
+  }
+
+  // ─── Slots ──────────────────────────────────────────────────────
+
+  private static buildHeader(s: Sighting): HTMLElement {
+    return h('div', { className: 'modal-sighting__header' },
+      h('span', { className: 'modal-sighting__title' }, `${s.region}, ${s.country}`),
+      new StatusTag({ status: s.status }).el,
+    )
+  }
+
+  private static buildContent(s: Sighting): HTMLElement {
+    const coordsStr = s.coordinates
+      ? `${s.coordinates.lat.toFixed(2)}°N, ${s.coordinates.lng.toFixed(2)}°E`
+      : s.location
+
+    const rows: [string, string][] = [
+      [MODAL.SHAPE, s.shape],
+      [MODAL.LOCATION, coordsStr],
+      [MODAL.DURATION, s.duration || MODAL.EMPTY_VALUE],
+      [MODAL.OBSERVERS, s.observers ? String(s.observers) : MODAL.EMPTY_VALUE],
+      [MODAL.CREDIBILITY, `${s.credibility}/100`],
+      ...(s.strangeness !== undefined
+        ? [[MODAL.STRANGENESS, `${s.strangeness}/100`] as [string, string]]
+        : []),
+      [MODAL.OCCURRED, s.occurredAt],
+      [MODAL.REPORTED, s.reportedAt],
+      [MODAL.SOURCE, s.source],
+      [MODAL.CONTINENT, s.continent],
+    ]
+
+    if (s.characteristics.length > 0) {
+      rows.push([MODAL.CHARACTERISTICS, s.characteristics.join(', ')])
+    }
+    if (s.tags && s.tags.length > 0) {
+      rows.push([MODAL.TAGS, s.tags.join(', ')])
+    }
+    if (s.ref) {
+      rows.push([MODAL.REFERENCE, s.ref])
+    }
+
+    const children: HTMLElement[] = rows.map(([label, value]) =>
+      h('div', { className: 'modal-sighting__row' },
+        h('span', { className: 'modal-sighting__label' }, label),
+        h('span', { className: 'modal-sighting__value' }, value),
       ),
+    )
 
-    content: () => {
-      const coordsStr = sighting.coordinates
-        ? `${sighting.coordinates.lat.toFixed(2)}°N, ${sighting.coordinates.lng.toFixed(2)}°E`
-        : sighting.location
+    if (s.summary) {
+      children.push(
+        h('div', { className: 'modal-sighting__summary-label' }, MODAL.SUMMARY),
+        h('p', { className: 'modal-sighting__summary' }, s.summary),
+      )
+    }
 
-      const rows: [string, string][] = [
-        [MODAL.SHAPE, sighting.shape],
-        [MODAL.LOCATION, coordsStr],
-        [MODAL.DURATION, sighting.duration || MODAL.EMPTY_VALUE],
-        [MODAL.OBSERVERS, sighting.observers ? String(sighting.observers) : MODAL.EMPTY_VALUE],
-        [MODAL.CREDIBILITY, `${sighting.credibility}/100`],
-        ...(sighting.strangeness !== undefined
-          ? [[MODAL.STRANGENESS, `${sighting.strangeness}/100`] as [string, string]]
-          : []),
-        [MODAL.OCCURRED, sighting.occurredAt],
-        [MODAL.REPORTED, sighting.reportedAt],
-        [MODAL.SOURCE, sighting.source],
-        [MODAL.CONTINENT, sighting.continent],
-      ]
+    if (s.description) {
+      children.push(
+        h('div', { className: 'modal-sighting__summary-label' }, MODAL.WITNESS_ACCOUNT),
+        h('p', { className: 'modal-sighting__description' }, s.description),
+      )
+    }
 
-      if (sighting.characteristics.length > 0) {
-        rows.push([MODAL.CHARACTERISTICS, sighting.characteristics.join(', ')])
-      }
+    return h('div', { className: 'modal-sighting__content' }, ...children)
+  }
 
-      if (sighting.tags && sighting.tags.length > 0) {
-        rows.push([MODAL.TAGS, sighting.tags.join(', ')])
-      }
-
-      if (sighting.ref) {
-        rows.push([MODAL.REFERENCE, sighting.ref])
-      }
-
-      const children: HTMLElement[] = [
-        ...rows.map(([label, value]) =>
-          h('div', { className: 'modal-sighting__row' },
-            h('span', { className: 'modal-sighting__label' }, label),
-            h('span', { className: 'modal-sighting__value' }, value),
-          ),
-        ),
-      ]
-
-      // Summary
-      if (sighting.summary) {
-        children.push(
-          h('div', { className: 'modal-sighting__summary-label' }, MODAL.SUMMARY),
-          h('p', { className: 'modal-sighting__summary' }, sighting.summary),
-        )
-      }
-
-      // Full description / witness account
-      if (sighting.description) {
-        children.push(
-          h('div', { className: 'modal-sighting__summary-label' }, MODAL.WITNESS_ACCOUNT),
-          h('p', { className: 'modal-sighting__description' }, sighting.description),
-        )
-      }
-
-      return h('div', { className: 'modal-sighting__content' }, ...children)
-    },
-
-    footer: () =>
-      h('div', { className: 'modal-sighting__footer' },
-        renderTag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${sighting.source}` }),
-      ),
-  }, trigger)
+  private static buildFooter(s: Sighting): HTMLElement {
+    return h('div', { className: 'modal-sighting__footer' },
+      new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${s.source}` }).el,
+    )
+  }
 }

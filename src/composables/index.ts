@@ -1,3 +1,4 @@
+export { useAnalytics } from './use-analytics'
 export { useAsyncAction } from './use-async-action'
 export { useDataSource } from './use-data-source'
 export { filterSightings } from './use-filter'

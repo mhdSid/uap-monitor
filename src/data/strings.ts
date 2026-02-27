@@ -132,7 +132,7 @@ export const TICKER = {
 
 export const DATA_SOURCE_DESCRIPTIONS = {
   NUFORC: 'National UFO Reporting Center — US-based sighting reports since 1974',
-  HATCH_UDB: 'Larry Hatch *U* Database — 18,000+ researcher-curated cases worldwide (70 AD–2002)',
+  HATCH_UDB: 'Larry Hatch UDB — 18,000+ researcher-curated cases worldwide (70 AD–2002)',
   NASA_CNEOS: 'NASA Center for Near Earth Object Studies — fireball and bolide data',
   OPENSKY: 'Open flight tracking network — cross-reference sightings with known aircraft',
   GDELT: 'Global Database of Events — UAP-related news from CJK and Russian media',
@@ -140,6 +140,18 @@ export const DATA_SOURCE_DESCRIPTIONS = {
   GEIPAN: 'French space agency UAP research unit — European sighting database',
   ENIGMA: 'International catalogue of UFO events and encounter classifications',
   CJK_SCRAPER: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news',
+} as const
+
+// ─── Welcome modal ──────────────────────────────────────────────────
+
+export const WELCOME = {
+  TITLE: 'UAP MONITOR',
+  SUBTITLE: 'Open-Source Intelligence Platform',
+  BODY: [
+    'Unidentified Aerial Phenomena are documented across dozens of databases, languages, and decades — scattered, inconsistent, and hard to search. This tool unifies them.',
+    'We aggregate, standardize, and surface UAP reports from verified open-source feeds so researchers, journalists, and curious minds can explore the data freely.',
+  ],
+  CTA: 'BEGIN MONITORING',
 } as const
 
 // ─── Errors ─────────────────────────────────────────────────────────
