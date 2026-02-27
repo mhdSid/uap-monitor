@@ -44,7 +44,9 @@ export class YearSelector extends Component {
       countEl.textContent = store.displayCount.get()
     })
 
-    const fireChange = (): void => {
+    // Separate handlers: whichever select the user changes,
+    // the OTHER adjusts to maintain from ≤ to
+    fromSelect.addEventListener('change', () => {
       const from = Number(fromSelect.value)
       let to = Number(toSelect.value)
       if (from > to) {
@@ -52,10 +54,17 @@ export class YearSelector extends Component {
         toSelect.value = String(to)
       }
       store.yearRange.set({ from, to })
-    }
+    })
 
-    fromSelect.addEventListener('change', fireChange)
-    toSelect.addEventListener('change', fireChange)
+    toSelect.addEventListener('change', () => {
+      let from = Number(fromSelect.value)
+      const to = Number(toSelect.value)
+      if (to < from) {
+        from = to
+        fromSelect.value = String(from)
+      }
+      store.yearRange.set({ from, to })
+    })
 
     return h('div', { className: 'year-selector' },
       fromSelect,

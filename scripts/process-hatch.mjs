@@ -36,7 +36,7 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
-const DEFAULT_INPUT = resolve(PROJECT_ROOT, 'hatch_udb.json')
+const DEFAULT_INPUT = resolve(PROJECT_ROOT, '__sources/hatch_udb.json')
 const DOWNLOAD_URL = 'https://raw.githubusercontent.com/richgel999/ufo_data/main/bin/hatch_udb.json'
 
 // ─── Hatch-specific constants ───────────────────────────────────────
@@ -457,7 +457,18 @@ function main() {
     writeFileSync(filepath, JSON.stringify(sightings))
 
     const sizeKB = Math.round(Buffer.byteLength(JSON.stringify(sightings)) / 1024)
-    manifest.years[key] = { count: sightings.length, file: filename, sizeKB }
+    const entry = { count: sightings.length, file: filename, sizeKB }
+
+    // For non-single-year chunks, include distinct years so the UI can list them
+    if (key === ANCIENT_CHUNK || key.endsWith('s')) {
+      const years = [...new Set(sightings.map((s) => {
+        const y = parseInt(s.occurredAt.split('-')[0], 10)
+        return isNaN(y) ? null : y
+      }).filter((y) => y !== null))].sort((a, b) => a - b)
+      entry.years = years
+    }
+
+    manifest.years[key] = entry
   }
 
   const manifestPath = resolve(OUTPUT_DIR, 'hatch-manifest.json')

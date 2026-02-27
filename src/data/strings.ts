@@ -121,6 +121,8 @@ export const TICKER = {
     'Aggregating reports from NUFORC database...',
     'Processing witness accounts and credibility scores...',
     'Cross-referencing flight data with sighting coordinates...',
+    'Loading 28,000+ researcher chronology records (Eberhart, Johnson, NICAP, Vallée)...',
+    'Integrating Blue Book unknowns and historical case files...',
   ],
   DEFAULT_MESSAGES_MULTI: [
     'Monitoring CJK and Russian language sources',
@@ -162,4 +164,6 @@ export const ERRORS = {
   NUFORC_LOAD: 'Failed to load NUFORC manifest',
   HATCH_MANIFEST: 'Malformed Hatch UDB manifest',
   HATCH_LOAD: 'Failed to load Hatch UDB manifest',
+  CHRONOLOGY_MANIFEST: 'Malformed chronology manifest',
+  CHRONOLOGY_LOAD: 'Failed to load chronology manifest',
 } as const

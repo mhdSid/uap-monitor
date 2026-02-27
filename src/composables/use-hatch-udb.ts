@@ -259,16 +259,15 @@ export function useHatchUdb() {
   function getAvailableYears(): number[] {
     if (!manifest) return []
     const years: number[] = []
-    for (const key of Object.keys(manifest.years)) {
-      if (key === 'ancient') continue
-      if (key.endsWith('s')) {
-        // Decade: expand to individual years for year selector compatibility
-        const decade = parseInt(key, 10)
-        if (!isNaN(decade)) {
-          for (let y = decade; y <= decade + 9; y++) years.push(y)
-        }
+    for (const [key, meta] of Object.entries(manifest.years)) {
+      // Ancient and decade chunks carry their own distinct years list
+      if (meta.years && meta.years.length > 0) {
+        years.push(...meta.years)
         continue
       }
+      // Per-year chunks: key IS the year
+      if (key === 'ancient') continue
+      if (key.endsWith('s')) continue
       const y = parseInt(key, 10)
       if (!isNaN(y)) years.push(y)
     }

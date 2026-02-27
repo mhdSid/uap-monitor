@@ -5,12 +5,34 @@
  * ------------------------------------------------------------------ */
 
 import type { Sighting } from '@/types'
-import { TagVariant } from '@/enums'
+import { DataSourceId, TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
 import { StatusTag, Tag } from '@/components/tags'
 import { Modal } from '@/components/modal'
 import { MODAL } from '@/data/strings'
 import { useAnalytics } from '@/composables'
+
+// ─── Sub-source display names (chronology) ──────────────────────────
+
+const SUB_SOURCE_LABELS: Record<string, string> = {
+  EBERHART: 'Eberhart',
+  JOHNSON: 'Johnson',
+  NICAP: 'NICAP',
+  VALLEE_MAGONIA: 'Vallée (Magonia)',
+  BB_UNKNOWNS: 'Blue Book Unknowns',
+  OVERMEIRE: 'Overmeire',
+  HALL: 'Hall (UFO Evidence)',
+  WONDERS_SKY: 'Wonders in the Sky',
+  PRE_ROSWELL: 'Pre-Roswell (Rife)',
+  DOLAN: 'Dolan',
+}
+
+function resolveSourceLabel(s: Sighting): string {
+  if (s.source === DataSourceId.CHRONOLOGY && s.subSource) {
+    return SUB_SOURCE_LABELS[s.subSource] || s.subSource
+  }
+  return s.source
+}
 
 export class SightingModal {
   static open(sighting: Sighting, trigger?: HTMLElement): void {
@@ -50,7 +72,7 @@ export class SightingModal {
         : []),
       [MODAL.OCCURRED, s.occurredAt],
       [MODAL.REPORTED, s.reportedAt],
-      [MODAL.SOURCE, s.source],
+      [MODAL.SOURCE, resolveSourceLabel(s)],
       [MODAL.CONTINENT, s.continent],
     ]
 
@@ -90,7 +112,7 @@ export class SightingModal {
 
   private static buildFooter(s: Sighting): HTMLElement {
     return h('div', { className: 'modal-sighting__footer' },
-      new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${s.source}` }).el,
+      new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el,
     )
   }
 }

@@ -1,5 +1,7 @@
 export { useAnalytics } from './use-analytics'
 export { useAsyncAction } from './use-async-action'
+export { useChronology } from './use-chronology'
+export type { ChronologySource } from './use-chronology'
 export { useDataSource } from './use-data-source'
 export { filterSightings } from './use-filter'
 export { useHatchUdb } from './use-hatch-udb'

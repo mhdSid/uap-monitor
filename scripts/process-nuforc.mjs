@@ -32,7 +32,7 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
-const DEFAULT_INPUT = resolve(PROJECT_ROOT, 'nuforc.json')
+const DEFAULT_INPUT = resolve(PROJECT_ROOT, '__sources/nuforc.json')
 
 // ─── NUFORC-specific constants ──────────────────────────────────────
 

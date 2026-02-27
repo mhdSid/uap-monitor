@@ -36,23 +36,6 @@ export class DataSources extends Component<DataSourcesProps> {
       ? 'data-sources__item data-sources__item--disabled'
       : 'data-sources__item'
 
-    const itemContent: HTMLElement[] = [dot, label]
-
-    // Raw data link badge
-    if (source.dataUrl && !isDisabled) {
-      itemContent.push(
-        h('a', {
-          className: 'data-sources__data-link',
-          href: source.dataUrl,
-          target: '_blank',
-          rel: 'noopener noreferrer',
-          title: 'View raw data',
-          'aria-label': `Raw data for ${source.label}`,
-          onClick: (e: Event) => e.stopPropagation(),
-        }, source.dataLabel || 'JSON'),
-      )
-    }
-
     if (source.url) {
       return h('a', {
         className: itemClass,
@@ -61,12 +44,12 @@ export class DataSources extends Component<DataSourcesProps> {
         rel: 'noopener noreferrer',
         title: source.description || source.label,
         'aria-label': `${source.label} — ${source.description || ''}`,
-      }, ...itemContent)
+      }, dot, label)
     }
 
     return h('div', {
       className: itemClass,
       title: source.description || source.label,
-    }, ...itemContent)
+    }, dot, label)
   }
 }

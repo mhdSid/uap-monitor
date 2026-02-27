@@ -30,6 +30,9 @@ export interface Sighting {
   /** Source database */
   source: DataSourceId
 
+  /** Sub-source identifier (chronology sources: EBERHART, JOHNSON, etc.) */
+  subSource?: string
+
   // ─── NUFORC-native fields ────────────────────────────────────────
 
   /** When the sighting occurred (ISO 8601) */
@@ -130,6 +133,10 @@ export interface DataSource {
   dataUrl?: string
   /** Label for the data badge (defaults to 'JSON') */
   dataLabel?: string
+  /** Sub-source identifier (for chronology sources) */
+  subSourceId?: string
+  /** Parent group label (e.g. 'Researcher Chronologies') — used for visual grouping */
+  group?: string
 }
 
 // ─── NUFORC data layer ──────────────────────────────────────────────
@@ -138,6 +145,8 @@ export interface YearChunkMeta {
   count: number
   file: string
   sizeKB: number
+  /** Distinct years with data (present for ancient and decade chunks only) */
+  years?: number[]
 }
 
 export interface SourceManifest {
@@ -145,6 +154,18 @@ export interface SourceManifest {
   totalRecords: number
   skippedRecords: number
   years: Record<string, YearChunkMeta>
+}
+
+export interface SubSourceMeta {
+  label: string
+  description: string
+  url: string
+  count: number
+  skipped: number
+}
+
+export interface ChronologyManifest extends SourceManifest {
+  subSources: Record<string, SubSourceMeta>
 }
 
 /** @deprecated Use SourceManifest — kept for backward compat */

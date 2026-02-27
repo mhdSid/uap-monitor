@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "data:nuforc": "node scripts/process-nuforc.mjs",
-    "data:hatch": "node scripts/process-hatch.mjs"
+    "data:hatch": "node scripts/process-hatch.mjs",
+    "data:chronology": "node scripts/process-chronology.mjs",
+    "data:pipeline:all": "yarn data:nuforc && yarn data:hatch && yarn data:chronology"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

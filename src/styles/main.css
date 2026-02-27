@@ -114,7 +114,7 @@ body {
 /* ===== MAIN ===== */
 .app-main {
   padding: 12px;
-  max-width: 1024px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -305,24 +305,6 @@ a.data-sources__item:hover {
 .data-sources__label {
   color: var(--color-muted);
   letter-spacing: 1px;
-}
-
-.data-sources__data-link {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  padding: 1px 4px;
-  border-radius: 2px;
-  background: rgba(0, 200, 255, 0.1);
-  color: var(--color-cyan);
-  border: 1px solid rgba(0, 200, 255, 0.2);
-  text-decoration: none;
-  margin-left: auto;
-  transition: background 0.15s;
-}
-
-.data-sources__data-link:hover {
-  background: rgba(0, 200, 255, 0.2);
 }
 
 /* ===== TICKER ===== */
@@ -924,6 +906,12 @@ a.data-sources__item:hover {
   background: rgba(0, 200, 255, 0.12);
   color: var(--color-cyan);
   border-color: rgba(0, 200, 255, 0.2);
+}
+
+.cell-report__source--chronology {
+  background: rgba(255, 180, 0, 0.12);
+  color: var(--color-amber);
+  border-color: rgba(255, 180, 0, 0.2);
 }
 
 .cell-report__tag-count {
