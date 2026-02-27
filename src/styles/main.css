@@ -306,6 +306,24 @@ a.data-sources__item:hover {
   letter-spacing: 1px;
 }
 
+.data-sources__data-link {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: rgba(0, 200, 255, 0.1);
+  color: var(--color-cyan);
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  text-decoration: none;
+  margin-left: auto;
+  transition: background 0.15s;
+}
+
+.data-sources__data-link:hover {
+  background: rgba(0, 200, 255, 0.2);
+}
+
 /* ===== TICKER ===== */
 .ticker {
   font-size: var(--fs-xs);
@@ -850,6 +868,45 @@ a.data-sources__item:hover {
 .cell-report__date {
   display: none;
   font-size: var(--fs-xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+.cell-report__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.cell-report__badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.cell-report__source {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  background: rgba(0, 255, 65, 0.12);
+  color: var(--color-green);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.cell-report__source--hatch-udb {
+  background: rgba(0, 200, 255, 0.12);
+  color: var(--color-cyan);
+  border-color: rgba(0, 200, 255, 0.2);
+}
+
+.cell-report__tag-count {
+  font-size: 9px;
   color: var(--color-dim);
   letter-spacing: 0.5px;
 }

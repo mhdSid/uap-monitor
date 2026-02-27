@@ -1,5 +1,5 @@
 import { ERRORS } from '@/data/strings'
-import type { NuforcManifest, Sighting, SightingFilter, YearChunkMeta } from '@/types'
+import type { SourceManifest, Sighting, SightingFilter, YearChunkMeta } from '@/types'
 import { Continent, DataSourceId, SightingShape, SightingStatus } from '@/enums'
 import { useToast } from '@/components/toast'
 
@@ -13,7 +13,7 @@ const DEFAULT_RANGE_YEARS = 2
 
 // ─── State (module-level singleton) ─────────────────────────────────
 
-let manifest: NuforcManifest | null = null
+let manifest: SourceManifest | null = null
 let manifestError: string | null = null
 const chunkCache = new Map<string, Sighting[]>()
 const pendingFetches = new Map<string, Promise<Sighting[]>>()
@@ -54,7 +54,7 @@ async function fetchJson<T>(url: string): Promise<T> {
 
 // ─── Validation ─────────────────────────────────────────────────────
 
-function isValidManifest(data: unknown): data is NuforcManifest {
+function isValidManifest(data: unknown): data is SourceManifest {
   if (typeof data !== 'object' || data === null) return false
   const obj = data as Record<string, unknown>
   return (
@@ -124,6 +124,10 @@ function parseSighting(raw: unknown): Sighting | null {
     continent,
     status,
     credibility: typeof r.credibility === 'number' ? Math.min(100, Math.max(0, r.credibility)) : 0,
+    // Extended fields (optional — present in Hatch, absent in NUFORC)
+    tags: Array.isArray(r.tags) ? r.tags : undefined,
+    strangeness: typeof r.strangeness === 'number' ? r.strangeness : undefined,
+    ref: typeof r.ref === 'string' ? r.ref : undefined,
   }
 }
 
@@ -178,7 +182,7 @@ export function useNuforc() {
   /**
    * Load the manifest. Cached after first successful fetch.
    */
-  async function loadManifest(): Promise<NuforcManifest | null> {
+  async function loadManifest(): Promise<SourceManifest | null> {
     if (manifest) return manifest
     if (manifestError) return null
 

@@ -27,6 +27,22 @@ export function renderDataSources(props: DataSourcesProps): HTMLElement {
       ? 'data-sources__item data-sources__item--disabled'
       : 'data-sources__item'
 
+    const itemContent: HTMLElement[] = [dot, label]
+
+    // Add raw data link badge for sources that expose their JSON
+    if (source.dataUrl && !isDisabled) {
+      const dataLink = h('a', {
+        className: 'data-sources__data-link',
+        href: source.dataUrl,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        title: 'View raw JSON data',
+        'aria-label': `Raw JSON data for ${source.label}`,
+        onClick: (e: Event) => e.stopPropagation(),
+      }, 'JSON')
+      itemContent.push(dataLink)
+    }
+
     if (source.url) {
       const link = h('a', {
         className: itemClass,
@@ -35,14 +51,14 @@ export function renderDataSources(props: DataSourcesProps): HTMLElement {
         rel: 'noopener noreferrer',
         title: source.description || source.label,
         'aria-label': `${source.label} — ${source.description || ''}`,
-      }, dot, label)
+      }, ...itemContent)
 
       wrapper.appendChild(link)
     } else {
       const item = h('div', {
         className: itemClass,
         title: source.description || source.label,
-      }, dot, label)
+      }, ...itemContent)
 
       wrapper.appendChild(item)
     }

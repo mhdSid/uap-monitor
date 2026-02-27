@@ -1,6 +1,7 @@
 export { useAsyncAction } from './use-async-action'
 export { useDataSource } from './use-data-source'
 export { filterSightings } from './use-filter'
+export { useHatchUdb } from './use-hatch-udb'
 export { useInfiniteScroll } from './use-infinite-scroll'
 export { useNuforc } from './use-nuforc'
 export { useTicker } from './use-ticker'

@@ -28,7 +28,9 @@ export async function filterSightings(
           s.region.toLowerCase().includes(searchLower) ||
           s.country.toLowerCase().includes(searchLower) ||
           s.location.toLowerCase().includes(searchLower) ||
-          s.shape.toLowerCase().includes(searchLower)
+          s.shape.toLowerCase().includes(searchLower) ||
+          s.source.toLowerCase().includes(searchLower) ||
+          (s.tags && s.tags.some(t => t.toLowerCase().includes(searchLower)))
         if (!match) continue
       }
       if (filter.shape && s.shape !== filter.shape) continue

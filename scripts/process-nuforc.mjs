@@ -358,6 +358,91 @@ const COUNTRY_CONTINENT = {
   'Reunion': Continent.AFRICA,
 }
 
+// ─── Country → default coordinates (capital / geographic centroid) ───
+// Used as fallback when individual sighting has no coordinates.
+// Comprehensive set matching src/data/countries.ts for consistency.
+
+const COUNTRY_COORDS = {
+  // Americas
+  'USA': { lat: 38.895, lng: -77.036 }, 'US': { lat: 38.895, lng: -77.036 },
+  'United States': { lat: 38.895, lng: -77.036 },
+  'Canada': { lat: 45.421, lng: -75.697 }, 'Mexico': { lat: 19.433, lng: -99.133 },
+  'Brazil': { lat: -15.798, lng: -47.892 }, 'Argentina': { lat: -34.604, lng: -58.382 },
+  'Colombia': { lat: 4.711, lng: -74.072 }, 'Chile': { lat: -33.449, lng: -70.669 },
+  'Peru': { lat: -12.046, lng: -77.043 }, 'Venezuela': { lat: 10.481, lng: -66.904 },
+  'Ecuador': { lat: -0.181, lng: -78.468 }, 'Bolivia': { lat: -16.490, lng: -68.119 },
+  'Paraguay': { lat: -25.264, lng: -57.576 }, 'Uruguay': { lat: -34.901, lng: -56.165 },
+  'Guyana': { lat: 6.801, lng: -58.155 }, 'Suriname': { lat: 5.852, lng: -55.204 },
+  'Guatemala': { lat: 14.635, lng: -90.507 }, 'Honduras': { lat: 14.072, lng: -87.192 },
+  'El Salvador': { lat: 13.693, lng: -89.218 }, 'Nicaragua': { lat: 12.115, lng: -86.236 },
+  'Costa Rica': { lat: 9.928, lng: -84.091 }, 'Panama': { lat: 8.982, lng: -79.520 },
+  'Cuba': { lat: 23.114, lng: -82.367 }, 'Jamaica': { lat: 18.110, lng: -77.298 },
+  'Haiti': { lat: 18.594, lng: -72.307 }, 'Dominican Republic': { lat: 18.486, lng: -69.931 },
+  'Trinidad and Tobago': { lat: 10.692, lng: -61.223 }, 'Bahamas': { lat: 25.034, lng: -77.396 },
+  'Barbados': { lat: 13.113, lng: -59.599 }, 'Belize': { lat: 17.190, lng: -88.498 },
+  'Puerto Rico': { lat: 18.466, lng: -66.106 }, 'Bermuda': { lat: 32.308, lng: -64.751 },
+  // Europe
+  'UK': { lat: 51.507, lng: -0.128 }, 'United Kingdom': { lat: 51.507, lng: -0.128 },
+  'England': { lat: 51.507, lng: -0.128 }, 'Scotland': { lat: 55.953, lng: -3.188 },
+  'Wales': { lat: 51.482, lng: -3.179 }, 'Northern Ireland': { lat: 54.597, lng: -5.930 },
+  'Ireland': { lat: 53.350, lng: -6.260 }, 'France': { lat: 48.857, lng: 2.352 },
+  'Germany': { lat: 52.520, lng: 13.405 }, 'Spain': { lat: 40.417, lng: -3.704 },
+  'Italy': { lat: 41.903, lng: 12.496 }, 'Netherlands': { lat: 52.368, lng: 4.904 },
+  'Belgium': { lat: 50.850, lng: 4.352 }, 'Sweden': { lat: 59.329, lng: 18.069 },
+  'Norway': { lat: 59.914, lng: 10.752 }, 'Denmark': { lat: 55.676, lng: 12.568 },
+  'Finland': { lat: 60.170, lng: 24.938 }, 'Poland': { lat: 52.230, lng: 21.012 },
+  'Portugal': { lat: 38.722, lng: -9.139 }, 'Greece': { lat: 37.984, lng: 23.728 },
+  'Turkey': { lat: 39.933, lng: 32.860 }, 'Ukraine': { lat: 50.450, lng: 30.523 },
+  'Romania': { lat: 44.427, lng: 26.103 }, 'Czech Republic': { lat: 50.076, lng: 14.438 },
+  'Czechia': { lat: 50.076, lng: 14.438 }, 'Austria': { lat: 48.208, lng: 16.374 },
+  'Switzerland': { lat: 46.948, lng: 7.447 }, 'Hungary': { lat: 47.498, lng: 19.040 },
+  'Bulgaria': { lat: 42.698, lng: 23.322 }, 'Croatia': { lat: 45.815, lng: 15.982 },
+  'Serbia': { lat: 44.787, lng: 20.449 }, 'Slovakia': { lat: 48.149, lng: 17.108 },
+  'Slovenia': { lat: 46.057, lng: 14.506 }, 'Lithuania': { lat: 54.687, lng: 25.280 },
+  'Latvia': { lat: 56.950, lng: 24.105 }, 'Estonia': { lat: 59.437, lng: 24.754 },
+  'Luxembourg': { lat: 49.612, lng: 6.132 }, 'Malta': { lat: 35.899, lng: 14.515 },
+  'Cyprus': { lat: 35.186, lng: 33.382 }, 'Iceland': { lat: 64.147, lng: -21.943 },
+  'Albania': { lat: 41.328, lng: 19.819 }, 'North Macedonia': { lat: 41.997, lng: 21.428 },
+  'Montenegro': { lat: 42.430, lng: 19.259 },
+  'Bosnia and Herzegovina': { lat: 43.856, lng: 18.413 },
+  'Moldova': { lat: 47.011, lng: 28.864 }, 'Belarus': { lat: 53.901, lng: 27.559 },
+  'Georgia': { lat: 41.715, lng: 44.827 }, 'Armenia': { lat: 40.179, lng: 44.499 },
+  'Azerbaijan': { lat: 40.409, lng: 49.867 },
+  // Eurasia
+  'Russia': { lat: 55.756, lng: 37.617 }, 'USSR': { lat: 55.756, lng: 37.617 },
+  'Soviet Union': { lat: 55.756, lng: 37.617 },
+  // Middle East & South/Central Asia
+  'India': { lat: 28.614, lng: 77.209 }, 'Pakistan': { lat: 33.684, lng: 73.048 },
+  'Bangladesh': { lat: 23.810, lng: 90.413 }, 'Sri Lanka': { lat: 6.927, lng: 79.861 },
+  'Nepal': { lat: 27.717, lng: 85.324 }, 'Afghanistan': { lat: 34.555, lng: 69.208 },
+  'Kazakhstan': { lat: 51.169, lng: 71.449 }, 'Uzbekistan': { lat: 41.300, lng: 69.240 },
+  'Iran': { lat: 35.689, lng: 51.389 }, 'Iraq': { lat: 33.315, lng: 44.366 },
+  'Israel': { lat: 31.768, lng: 35.214 }, 'Palestine': { lat: 31.952, lng: 35.233 },
+  'Lebanon': { lat: 33.894, lng: 35.502 }, 'Jordan': { lat: 31.945, lng: 35.928 },
+  'Syria': { lat: 33.514, lng: 36.277 }, 'Saudi Arabia': { lat: 24.714, lng: 46.675 },
+  'UAE': { lat: 24.454, lng: 54.377 }, 'United Arab Emirates': { lat: 24.454, lng: 54.377 },
+  'Qatar': { lat: 25.285, lng: 51.531 }, 'Kuwait': { lat: 29.376, lng: 47.977 },
+  'Oman': { lat: 23.588, lng: 58.383 }, 'Yemen': { lat: 15.369, lng: 44.191 },
+  // Asia Pacific
+  'Japan': { lat: 35.676, lng: 139.650 }, 'China': { lat: 39.904, lng: 116.407 },
+  'South Korea': { lat: 37.567, lng: 126.978 }, 'Taiwan': { lat: 25.033, lng: 121.565 },
+  'Hong Kong': { lat: 22.319, lng: 114.169 }, 'Philippines': { lat: 14.600, lng: 120.984 },
+  'Vietnam': { lat: 21.029, lng: 105.854 }, 'Thailand': { lat: 13.756, lng: 100.502 },
+  'Myanmar': { lat: 19.763, lng: 96.079 }, 'Cambodia': { lat: 11.556, lng: 104.928 },
+  'Laos': { lat: 17.976, lng: 102.633 }, 'Malaysia': { lat: 3.139, lng: 101.687 },
+  'Singapore': { lat: 1.352, lng: 103.820 }, 'Indonesia': { lat: -6.209, lng: 106.846 },
+  // Oceania
+  'Australia': { lat: -35.281, lng: 149.130 }, 'New Zealand': { lat: -41.287, lng: 174.776 },
+  'Fiji': { lat: -18.142, lng: 178.442 }, 'Guam': { lat: 13.444, lng: 144.794 },
+  'Hawaii': { lat: 21.307, lng: -157.858 },
+  // Africa
+  'South Africa': { lat: -25.748, lng: 28.229 }, 'Nigeria': { lat: 9.077, lng: 7.399 },
+  'Egypt': { lat: 30.044, lng: 31.236 }, 'Kenya': { lat: -1.292, lng: 36.822 },
+  'Morocco': { lat: 33.972, lng: -6.850 }, 'Algeria': { lat: 36.754, lng: 3.059 },
+  'Tunisia': { lat: 36.807, lng: 10.182 }, 'Ghana': { lat: 5.604, lng: -0.187 },
+  'Ethiopia': { lat: 9.019, lng: 38.753 }, 'Tanzania': { lat: -6.792, lng: 39.208 },
+}
+
 // US state abbreviations → full name
 const US_STATES = {
   'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
@@ -582,7 +667,7 @@ function main() {
       summary: truncate(record.Summary, SUMMARY_MAX_LENGTH),
       description: truncate(record.Text, DESCRIPTION_MAX_LENGTH),
       characteristics,
-      coordinates: null,
+      coordinates: COUNTRY_COORDS[loc.country] || null,
       region: loc.region,
       country: loc.country,
       continent: loc.continent,

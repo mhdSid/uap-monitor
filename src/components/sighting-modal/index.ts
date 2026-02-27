@@ -26,6 +26,9 @@ export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): vo
         [MODAL.DURATION, sighting.duration || MODAL.EMPTY_VALUE],
         [MODAL.OBSERVERS, sighting.observers ? String(sighting.observers) : MODAL.EMPTY_VALUE],
         [MODAL.CREDIBILITY, `${sighting.credibility}/100`],
+        ...(sighting.strangeness !== undefined
+          ? [[MODAL.STRANGENESS, `${sighting.strangeness}/100`] as [string, string]]
+          : []),
         [MODAL.OCCURRED, sighting.occurredAt],
         [MODAL.REPORTED, sighting.reportedAt],
         [MODAL.SOURCE, sighting.source],
@@ -34,6 +37,14 @@ export function openSightingModal(sighting: Sighting, trigger?: HTMLElement): vo
 
       if (sighting.characteristics.length > 0) {
         rows.push([MODAL.CHARACTERISTICS, sighting.characteristics.join(', ')])
+      }
+
+      if (sighting.tags && sighting.tags.length > 0) {
+        rows.push([MODAL.TAGS, sighting.tags.join(', ')])
+      }
+
+      if (sighting.ref) {
+        rows.push([MODAL.REFERENCE, sighting.ref])
       }
 
       const children: HTMLElement[] = [

@@ -98,11 +98,14 @@ export const MODAL = {
   DURATION: 'Duration',
   OBSERVERS: 'Observers',
   CREDIBILITY: 'Credibility',
+  STRANGENESS: 'Strangeness',
   OCCURRED: 'Occurred',
   REPORTED: 'Reported',
   SOURCE: 'Source',
   CONTINENT: 'Continent',
   CHARACTERISTICS: 'Characteristics',
+  TAGS: 'Tags',
+  REFERENCE: 'Reference',
   SUMMARY: 'SUMMARY',
   WITNESS_ACCOUNT: 'WITNESS ACCOUNT',
   EMPTY_VALUE: '—',
@@ -129,6 +132,7 @@ export const TICKER = {
 
 export const DATA_SOURCE_DESCRIPTIONS = {
   NUFORC: 'National UFO Reporting Center — US-based sighting reports since 1974',
+  HATCH_UDB: 'Larry Hatch *U* Database — 18,000+ researcher-curated cases worldwide (70 AD–2002)',
   NASA_CNEOS: 'NASA Center for Near Earth Object Studies — fireball and bolide data',
   OPENSKY: 'Open flight tracking network — cross-reference sightings with known aircraft',
   GDELT: 'Global Database of Events — UAP-related news from CJK and Russian media',
@@ -144,4 +148,6 @@ export const ERRORS = {
   UNEXPECTED: 'An unexpected error occurred',
   NUFORC_MANIFEST: 'Malformed NUFORC manifest',
   NUFORC_LOAD: 'Failed to load NUFORC manifest',
+  HATCH_MANIFEST: 'Malformed Hatch UDB manifest',
+  HATCH_LOAD: 'Failed to load Hatch UDB manifest',
 } as const

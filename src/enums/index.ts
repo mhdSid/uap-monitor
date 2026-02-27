@@ -61,6 +61,7 @@ export enum SightingCharacteristic {
 
 export enum DataSourceId {
   NUFORC = 'NUFORC',
+  HATCH_UDB = 'HATCH_UDB',
   ENIGMA = 'ENIGMA',
   NASA_CNEOS = 'NASA_CNEOS',
   OPENSKY = 'OPENSKY',

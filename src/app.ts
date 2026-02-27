@@ -36,17 +36,18 @@ export async function createApp(root: HTMLElement): Promise<void> {
   ))
 
   // ─ Load manifest → hydrate store ──────────────────────────────
-  const { fetchYearRange, fetchProgressive, getSources, nuforc } = useDataSource()
+  const dataSource = useDataSource()
+  const { fetchYearRange, fetchProgressive, getSources, loadManifests } = dataSource
 
-  await nuforc.loadManifest()
+  await loadManifests()
 
-  const years = nuforc.getAvailableYears()
+  const years = dataSource.getAvailableYears()
   const newest = years[0] ?? new Date().getFullYear()
   const defaultFrom = newest - 1
 
   batch(() => {
     store.availableYears.set(years)
-    store.totalCount.set(nuforc.getTotalCount())
+    store.totalCount.set(dataSource.getTotalCount())
     store.sources.set(getSources())
     store.yearRange.set({ from: defaultFrom, to: newest })
   })
@@ -179,7 +180,7 @@ export async function createApp(root: HTMLElement): Promise<void> {
   batch(() => {
     store.sightings.set(finalSightings)
     store.shownCount.set(finalSightings.length)
-    store.totalCount.set(nuforc.getTotalCount())
+    store.totalCount.set(dataSource.getTotalCount())
   })
 
   ticker.setMessages(generateMessages(store.sightings.get()))

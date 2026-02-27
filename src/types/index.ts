@@ -83,6 +83,17 @@ export interface Sighting {
 
   /** Credibility score 0-100 (computed from observers, characteristics, etc.) */
   credibility: number
+
+  // ─── Extended fields (source-dependent, optional) ──────────────
+
+  /** Searchable tags derived from source attributes (e.g. "Military observer", "Historical account") */
+  tags?: string[]
+
+  /** Strangeness rating 0-100 (Hatch UDB: original 1-10 scaled ×10) */
+  strangeness?: number
+
+  /** Bibliographic reference / source citation */
+  ref?: string
 }
 
 export interface RegionStats {
@@ -115,6 +126,8 @@ export interface DataSource {
   status: DataSourceStatus
   url?: string
   description?: string
+  /** Direct link to the raw JSON data file (shown as secondary link) */
+  dataUrl?: string
 }
 
 // ─── NUFORC data layer ──────────────────────────────────────────────
@@ -125,12 +138,15 @@ export interface YearChunkMeta {
   sizeKB: number
 }
 
-export interface NuforcManifest {
+export interface SourceManifest {
   generatedAt: string
   totalRecords: number
   skippedRecords: number
   years: Record<string, YearChunkMeta>
 }
+
+/** @deprecated Use SourceManifest — kept for backward compat */
+export type NuforcManifest = SourceManifest
 
 export interface SightingFilter {
   search?: string
