@@ -1,10 +1,10 @@
 import { h, clearChildren } from '@/utils/dom'
-import { yieldThread } from '@/utils/format'
 import { renderSection } from '@/components/layout'
 import { renderDataGrid } from '@/components/data-grid'
 import { openSightingModal } from '@/components/sighting-modal'
 import { groupByContinent } from '@/data/sightings'
 import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, FILTER } from '@/data/strings'
+import { useAppStore, yieldThread } from '@/composables'
 import { sightingColumns } from './columns'
 import type { Sighting, DataGridHandle } from '@/types'
 
@@ -27,16 +27,20 @@ let activeGrids: DataGridHandle<Sighting>[] = []
 
 /**
  * Render sighting data grouped by continent into section panels.
- * Always renders all 7 continents — empty ones show a status message.
  *
- * Uses a DocumentFragment to batch all sections into a single DOM write,
- * preventing layout shift. On re-renders, yields between groups for responsiveness.
+ * Reads `selectedContinent` from the store:
+ * - undefined (ALL REGIONS): renders all 7 continents including empty ones.
+ * - Specific continent: renders only that region's grid, hides empty grids.
+ *
+ * @param isRerender  Yield between groups on re-renders for responsiveness.
  */
 export async function renderSightingGrids(
   container: HTMLElement,
   sightings: Sighting[],
   isRerender = false,
 ): Promise<void> {
+  const store = useAppStore()
+  const selected = store.selectedContinent.get()
   const version = ++currentRenderVersion
 
   clearChildren(container)
@@ -54,11 +58,9 @@ export async function renderSightingGrids(
   const columns = getColumns()
   const groups = groupByContinent(sightings)
 
-  // Build all sections into a fragment for single DOM write (eliminates CLS)
   const frag = document.createDocumentFragment()
 
   for (const group of groups) {
-    // Abort if a newer render has started
     if (version !== currentRenderVersion) return
 
     if (group.count > 0) {
@@ -79,7 +81,8 @@ export async function renderSightingGrids(
           grid.el,
         ),
       )
-    } else {
+    } else if (!selected) {
+      // Show empty continent placeholders only when viewing ALL regions
       frag.appendChild(
         renderSection(
           {
@@ -96,19 +99,16 @@ export async function renderSightingGrids(
       )
     }
 
-    // Yield on re-renders to keep UI responsive during filter/year changes
     if (isRerender) {
       await yieldThread()
     }
   }
 
-  // Single DOM write: all sections appear at once
   container.appendChild(frag)
 }
 
 /**
  * Scroll to and highlight a sighting by its ID across all active continent grids.
- * Returns true if the sighting was found and scrolled to.
  */
 export function scrollToSighting(sightingId: string): boolean {
   for (const grid of activeGrids) {

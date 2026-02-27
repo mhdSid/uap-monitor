@@ -1,5 +1,5 @@
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, filterSightings, useTicker } from '@/composables'
+import { useDataSource, filterSightings, useTicker, useAppStore, batch, minDelay } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { renderHeader } from '@/components/header'
 import { renderTicker } from '@/components/ticker'
@@ -12,11 +12,13 @@ import { renderYearSelector } from '@/components/year-selector'
 import { renderFilterToolbar } from '@/components/filter-toolbar'
 import { renderSightingGrids, scrollToSighting } from '@/components/sighting-grid'
 import { SECTION } from '@/data/strings'
-import type { Sighting, SightingFilter } from '@/types'
 
 // ─── App entry ──────────────────────────────────────────────────────
 
 export async function createApp(root: HTMLElement): Promise<void> {
+  const store = useAppStore()
+
+  // ─ App shell (visible immediately) ────────────────────────────
   const main = h('main', { className: 'app-main', role: 'main' },
     h('div', { className: 'app-loader' }, renderLoader()),
   )
@@ -26,65 +28,64 @@ export async function createApp(root: HTMLElement): Promise<void> {
   })
   const { generateMessages } = useTicker()
 
-  const app = h('div', { className: 'app' },
+  mount(root, h('div', { className: 'app' },
     h('div', { className: 'scanlines' }),
     renderHeader(),
     ticker.el,
     main,
-  )
+  ))
 
-  mount(root, app)
-
-  // ─ Fetch manifest ─
+  // ─ Load manifest → hydrate store ──────────────────────────────
   const { fetchYearRange, fetchProgressive, getSources, nuforc } = useDataSource()
 
   await nuforc.loadManifest()
-  const availableYears = nuforc.getAvailableYears()
-  const newest = availableYears[0] ?? new Date().getFullYear()
+
+  const years = nuforc.getAvailableYears()
+  const newest = years[0] ?? new Date().getFullYear()
   const defaultFrom = newest - 1
 
-  // ─ State ─
-  let allSightings: Sighting[] = []
-  let activeFilter: SightingFilter = {}
-  let isLoading = false
-  let renderVersion = 0
+  batch(() => {
+    store.availableYears.set(years)
+    store.totalCount.set(nuforc.getTotalCount())
+    store.sources.set(getSources())
+    store.yearRange.set({ from: defaultFrom, to: newest })
+  })
 
-  // ─ Containers ─
+  // ─ UI helpers ─────────────────────────────────────────────────
   const gridsContainer = h('div', { className: 'grids-container' })
-
-  function updateCount(shown: number): void {
-    const el = main.querySelector('.year-selector__count')
-    if (el) {
-      el.textContent = `${shown.toLocaleString()} / ${nuforc.getTotalCount().toLocaleString()}`
-    }
-  }
+  let renderVersion = 0
 
   function showLoader(): void {
     clearChildren(gridsContainer)
     gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
   }
 
-  /**
-   * Lock container height during content changes to prevent layout shift.
-   * Returns a release function to call when the operation completes.
-   */
   function lockHeight(container: HTMLElement): () => void {
-    const prevHeight = container.offsetHeight
-    if (prevHeight > 0) {
-      container.style.minHeight = `${prevHeight}px`
-    }
+    const prev = container.offsetHeight
+    if (prev > 0) container.style.minHeight = `${prev}px`
     return () => {
       requestAnimationFrame(() => { container.style.minHeight = '' })
     }
   }
 
-  async function applyFilterAndRender(): Promise<void> {
+  // ─ Filter reaction ────────────────────────────────────────────
+  // Async filter + re-render when store.filter changes.
+  // Uses renderVersion to cancel stale renders.
+
+  async function applyFilterAndRender(skipDelay = false): Promise<void> {
     const version = ++renderVersion
 
     const releaseLoader = lockHeight(gridsContainer)
     showLoader()
 
-    const filtered = await filterSightings(allSightings, activeFilter)
+    const doFilter = () => filterSightings(
+      store.sightings.get(),
+      store.filter.get(),
+    )
+
+    const filtered = skipDelay
+      ? await doFilter()
+      : await minDelay(doFilter)
 
     if (version !== renderVersion) {
       releaseLoader()
@@ -95,64 +96,64 @@ export async function createApp(root: HTMLElement): Promise<void> {
     await renderSightingGrids(gridsContainer, filtered, true)
     releaseRender()
     releaseLoader()
-    updateCount(filtered.length)
+
+    store.shownCount.set(filtered.length)
   }
 
-  // ─ Year selector ─
-  const yearSelector = renderYearSelector({
-    availableYears,
-    defaultFrom,
-    defaultTo: newest,
-    onRangeChange: async (from, to) => {
-      if (isLoading) return
-      isLoading = true
-      showLoader()
-
-      allSightings = await fetchYearRange(from, to)
-      isLoading = false
-
-      await applyFilterAndRender()
-    },
+  store.filter.subscribe(() => {
+    applyFilterAndRender()
   })
 
-  // ─ Filter toolbar ─
-  const filterToolbar = renderFilterToolbar({
-    onFilterChange: (filter) => {
-      activeFilter = filter
-      applyFilterAndRender()
-    },
+  // ─ Year range reaction ────────────────────────────────────────
+  // Fetch data for new range + re-render.
+  // Skips the first change (initial hydration — handled by progressive load below).
+
+  let yearRangeReady = false
+
+  store.yearRange.subscribe(async () => {
+    if (!yearRangeReady) return
+    if (store.loading.get()) return
+
+    store.loading.set(true)
+    showLoader()
+
+    const { from, to } = store.yearRange.get()
+    const sightings = await minDelay(() => fetchYearRange(from, to))
+
+    batch(() => {
+      store.sightings.set(sightings)
+      store.shownCount.set(sightings.length)
+      store.loading.set(false)
+    })
+
+    await applyFilterAndRender(true)
+    ticker.setMessages(generateMessages(store.sightings.get()))
   })
 
-  // ─ Wrap controls in a form (prevents browser autofill warnings) ─
+  // ─ Build skeleton ─────────────────────────────────────────────
   const controlsForm = h('form', {
     className: 'controls-form',
     autocomplete: 'off',
     onSubmit: (e: Event) => e.preventDefault(),
   },
-    yearSelector,
-    filterToolbar,
+    renderYearSelector(),
+    renderFilterToolbar(),
   )
 
-  // ─ Assemble complete layout skeleton at once ─
-  // Loader goes into gridsContainer BEFORE appending to DOM
-  // so the container has height from the first paint
   gridsContainer.appendChild(h('div', { className: 'app-loader' }, renderLoader()))
 
   clearChildren(main)
   main.appendChild(controlsForm)
   main.appendChild(gridsContainer)
-  // NOTE: sourcesSection and footer are appended AFTER progressive loading
-  // completes, preventing CLS from grids pushing them down during load.
 
-  // ─ Progressive load — render each year's data as it arrives ─
+  // ─ Progressive load ───────────────────────────────────────────
   const finalSightings = await fetchProgressive(defaultFrom, newest, (partial) => {
-    allSightings = partial
+    store.sightings.set(partial)
+    store.shownCount.set(partial.length)
     renderSightingGrids(gridsContainer, partial)
-    updateCount(partial.length)
   })
 
-  // ─ Build and append below-fold content after grids are fully rendered ─
-  // Deferred to avoid blocking initial render with unnecessary DOM construction.
+  // ─ Below-fold content (deferred until grids are done) ─────────
   const sourcesBody = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } })
 
   sourcesBody.appendChild(
@@ -164,18 +165,25 @@ export async function createApp(root: HTMLElement): Promise<void> {
     }),
   )
 
-  sourcesBody.appendChild(renderDataSources({ sources: getSources() }))
+  sourcesBody.appendChild(renderDataSources({ sources: store.sources.get() }))
 
-  const sourcesSection = renderSection({
-    title: SECTION.DATA_SOURCES,
-    tooltip: SECTION.DATA_SOURCES_TOOLTIP,
-  }, sourcesBody)
-
-  main.appendChild(sourcesSection)
+  main.appendChild(
+    renderSection({
+      title: SECTION.DATA_SOURCES,
+      tooltip: SECTION.DATA_SOURCES_TOOLTIP,
+    }, sourcesBody),
+  )
   main.appendChild(renderFooter())
 
-  allSightings = finalSightings
+  // ─ Finalize ───────────────────────────────────────────────────
+  batch(() => {
+    store.sightings.set(finalSightings)
+    store.shownCount.set(finalSightings.length)
+    store.totalCount.set(nuforc.getTotalCount())
+  })
 
-  // ─ Feed real sighting data to ticker ─
-  ticker.setMessages(generateMessages(allSightings))
+  ticker.setMessages(generateMessages(store.sightings.get()))
+
+  // Enable year-range subscription now that initial load is done
+  yearRangeReady = true
 }

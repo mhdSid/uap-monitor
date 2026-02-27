@@ -1,23 +1,21 @@
 import { h } from '@/utils/dom'
 import { Continent, SightingShape } from '@/enums'
 import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
+import { useAppStore, useDebounce } from '@/composables'
 import type { SightingFilter } from '@/types'
 
-export interface FilterToolbarProps {
-  onFilterChange: (filter: SightingFilter) => void
-}
-
-export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
-  const { onFilterChange } = props
+export function renderFilterToolbar(): HTMLElement {
+  const store = useAppStore()
 
   const currentFilter: SightingFilter = {}
-  let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
   function emit(): void {
-    onFilterChange({ ...currentFilter })
+    store.filter.set({ ...currentFilter })
   }
 
-  // Search input
+  const emitDebounced = useDebounce(emit, 300)
+
+  // Search input — debounced to avoid thrashing on every keystroke
   const searchInput = h('input', {
     className: 'filter-toolbar__search',
     id: 'filter-search',
@@ -29,12 +27,11 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
     onInput: () => {
       const val = (searchInput as HTMLInputElement).value.trim()
       currentFilter.search = val || undefined
-      if (debounceTimer) clearTimeout(debounceTimer)
-      debounceTimer = setTimeout(emit, 300)
+      emitDebounced()
     },
   })
 
-  // Shape filter
+  // Shape filter — immediate (discrete selection, no typing)
   const shapeSelect = h('select', {
     className: 'filter-toolbar__select',
     id: 'filter-shape',
@@ -44,6 +41,7 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
     onChange: () => {
       const val = (shapeSelect as HTMLSelectElement).value
       currentFilter.shape = val ? (val as SightingShape) : undefined
+      emitDebounced.flush()
       emit()
     },
   })
@@ -53,7 +51,7 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
     shapeSelect.appendChild(h('option', { value: shape }, shape.toUpperCase()))
   }
 
-  // Continent filter
+  // Continent filter — immediate
   const continentSelect = h('select', {
     className: 'filter-toolbar__select',
     id: 'filter-region',
@@ -63,6 +61,7 @@ export function renderFilterToolbar(props: FilterToolbarProps): HTMLElement {
     onChange: () => {
       const val = (continentSelect as HTMLSelectElement).value
       currentFilter.continent = val ? (val as Continent) : undefined
+      emitDebounced.flush()
       emit()
     },
   })

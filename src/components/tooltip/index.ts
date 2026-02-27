@@ -9,6 +9,33 @@ export interface TooltipProps {
 const POPUP_WIDTH = 260
 const GAP = 6
 
+// ─── Shared singleton popup ────────────────────────────────────────
+// One popup element lives on document.body forever. All tooltip triggers
+// share it — clicking a trigger repositions and fills it. This prevents
+// the DOM leak where each re-render created new orphaned popup nodes.
+
+let sharedPopup: HTMLElement | null = null
+let activeWrapper: HTMLElement | null = null
+let activeCleanup: (() => void) | null = null
+
+function getSharedPopup(): HTMLElement {
+  if (!sharedPopup) {
+    sharedPopup = h('div', {
+      className: 'tooltip__popup',
+      role: 'tooltip',
+    })
+    document.body.appendChild(sharedPopup)
+  }
+  return sharedPopup
+}
+
+function closeSharedPopup(): void {
+  if (!activeCleanup) return
+  activeCleanup()
+  activeCleanup = null
+  activeWrapper = null
+}
+
 /**
  * Position the popup using fixed coordinates so it never overflows the viewport.
  * Strategy: try below-right, then flip vertical/horizontal as needed,
@@ -33,7 +60,6 @@ function positionPopup(popup: HTMLElement, trigger: HTMLElement): void {
   } else if (rect.top - GAP - popupH >= 0) {
     top = rect.top - GAP - popupH
   } else {
-    // Neither fits — clamp to bottom edge
     top = Math.max(4, vh - popupH - 4)
   }
 
@@ -44,7 +70,6 @@ function positionPopup(popup: HTMLElement, trigger: HTMLElement): void {
   } else if (rect.right - POPUP_WIDTH >= 4) {
     left = rect.right - POPUP_WIDTH
   } else {
-    // Neither fits — clamp to right edge with margin
     left = Math.max(4, vw - POPUP_WIDTH - 4)
   }
 
@@ -55,8 +80,7 @@ function positionPopup(popup: HTMLElement, trigger: HTMLElement): void {
 
 /**
  * Renders a "?" button that toggles a viewport-positioned tooltip popup on click.
- * Popup is appended to document.body to escape any containing blocks
- * (e.g. content-visibility: auto on ancestor sections).
+ * All tooltips share a single popup element on document.body.
  * Repositions on resize/scroll. Clicking anywhere else dismisses it.
  */
 export function renderTooltip(props: TooltipProps): HTMLElement {
@@ -68,47 +92,45 @@ export function renderTooltip(props: TooltipProps): HTMLElement {
     type: 'button',
   }, '?')
 
-  const popup = h('div', {
-    className: 'tooltip__popup',
-    role: 'tooltip',
-  }, props.content)
+  function open(): void {
+    // Close any currently open tooltip first
+    closeSharedPopup()
 
-  // Append popup to body so `position: fixed` works regardless of
-  // ancestor containing blocks (content-visibility, transforms, etc.)
-  document.body.appendChild(popup)
+    const popup = getSharedPopup()
+    popup.textContent = props.content
+    activeWrapper = wrapper
 
-  let isOpen = false
-
-  function reposition(): void {
-    positionPopup(popup, trigger)
-  }
-
-  function close(): void {
-    if (!isOpen) return
-    isOpen = false
-    removeClass(popup, 'tooltip__popup--visible')
-    document.removeEventListener('click', handleOutsideClick)
-    window.removeEventListener('resize', reposition)
-    window.removeEventListener('scroll', reposition, true)
-  }
-
-  function handleOutsideClick(e: Event): void {
-    if (!wrapper.contains(e.target as Node) && !popup.contains(e.target as Node)) {
-      close()
+    function reposition(): void {
+      positionPopup(popup, trigger)
     }
+
+    function handleOutsideClick(e: Event): void {
+      if (!wrapper.contains(e.target as Node) && !popup.contains(e.target as Node)) {
+        closeSharedPopup()
+      }
+    }
+
+    // Store cleanup so closeSharedPopup can tear down listeners
+    activeCleanup = () => {
+      removeClass(popup, 'tooltip__popup--visible')
+      document.removeEventListener('click', handleOutsideClick)
+      window.removeEventListener('resize', reposition)
+      window.removeEventListener('scroll', reposition, true)
+    }
+
+    reposition()
+    addClass(popup, 'tooltip__popup--visible')
+    document.addEventListener('click', handleOutsideClick)
+    window.addEventListener('resize', reposition)
+    window.addEventListener('scroll', reposition, true)
   }
 
   trigger.addEventListener('click', (e) => {
     e.stopPropagation()
-    if (isOpen) {
-      close()
+    if (activeWrapper === wrapper) {
+      closeSharedPopup()
     } else {
-      isOpen = true
-      reposition()
-      addClass(popup, 'tooltip__popup--visible')
-      document.addEventListener('click', handleOutsideClick)
-      window.addEventListener('resize', reposition)
-      window.addEventListener('scroll', reposition, true)
+      open()
     }
   })
 

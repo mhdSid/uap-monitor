@@ -441,7 +441,7 @@ a.data-sources__item:hover {
   background: #0e0e0e;
   border: 1px solid var(--color-border);
   width: 100%;
-  max-width: 480px;
+  max-width: 600px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;

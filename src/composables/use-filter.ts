@@ -1,5 +1,5 @@
 import type { Sighting, SightingFilter } from '@/types'
-import { yieldThread } from '@/utils/format'
+import { yieldThread } from './use-timing'
 
 /**
  * Non-blocking filter that processes sightings in chunks,

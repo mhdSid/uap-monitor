@@ -1,17 +1,14 @@
 import { h } from '@/utils/dom'
 import { FILTER, ARIA } from '@/data/strings'
+import { useAppStore, effect } from '@/composables'
 
-export interface YearSelectorProps {
-  availableYears: number[]
-  defaultFrom: number
-  defaultTo: number
-  onRangeChange: (from: number, to: number) => void
-}
+export function renderYearSelector(): HTMLElement {
+  const store = useAppStore()
 
-export function renderYearSelector(props: YearSelectorProps): HTMLElement {
-  const { availableYears, defaultFrom, defaultTo, onRangeChange } = props
+  const years = store.availableYears.get()
+  const { from: defaultFrom, to: defaultTo } = store.yearRange.get()
 
-  if (availableYears.length === 0) {
+  if (years.length === 0) {
     return h('div', { className: 'year-selector' },
       h('span', { className: 'year-selector__label' }, FILTER.NO_DATA),
     )
@@ -25,7 +22,7 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
       autocomplete: 'off',
       'aria-label': label,
     }) as HTMLSelectElement
-    for (const y of availableYears) {
+    for (const y of years) {
       const opt = h('option', { value: String(y) }, String(y))
       if (y === selected) (opt as HTMLOptionElement).selected = true
       sel.appendChild(opt)
@@ -33,10 +30,19 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
     return sel
   }
 
-  const fromSelect = makeSelect(Math.max(availableYears[availableYears.length - 1], defaultFrom), ARIA.YEAR_FROM, 'year-from')
-  const toSelect = makeSelect(Math.min(availableYears[0], defaultTo), ARIA.YEAR_TO, 'year-to')
+  const fromSelect = makeSelect(
+    Math.max(years[years.length - 1], defaultFrom), ARIA.YEAR_FROM, 'year-from',
+  )
+  const toSelect = makeSelect(
+    Math.min(years[0], defaultTo), ARIA.YEAR_TO, 'year-to',
+  )
 
   const countEl = h('span', { className: 'year-selector__count' }, '')
+
+  // Reactive: displayCount → DOM
+  effect(() => {
+    countEl.textContent = store.displayCount.get()
+  })
 
   function fireChange(): void {
     const from = Number(fromSelect.value)
@@ -45,7 +51,7 @@ export function renderYearSelector(props: YearSelectorProps): HTMLElement {
       to = from
       toSelect.value = String(to)
     }
-    onRangeChange(from, to)
+    store.yearRange.set({ from, to })
   }
 
   fromSelect.addEventListener('change', fireChange)
