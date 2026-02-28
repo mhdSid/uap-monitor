@@ -15,5 +15,5 @@ export const cx = {
   thRight: 'data-grid__th--right',
   thSortable: 'data-grid__th--sortable',
   thSorted: 'data-grid__th--sorted',
-  wrapper: 'data-grid__wrapper',
+  wrapper: 'data-grid__wrapper'
 } as const

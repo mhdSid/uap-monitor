@@ -28,7 +28,7 @@ interface SortState {
 const SORT_ICON_FACTORIES: Record<SortDirection, (() => SVGSVGElement) | null> = {
   none: null,
   asc: iconSortAsc,
-  desc: iconSortDesc,
+  desc: iconSortDesc
 }
 
 const PAGE_SIZE = 20
@@ -148,7 +148,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     if (items.length === 0) {
       const emptyCell = el('td', {
         className: cx.empty,
-        colSpan: String(this.props.columns.length),
+        colSpan: String(this.props.columns.length)
       })
       emptyCell.textContent = this.props.emptyText ?? FILTER.EMPTY_DEFAULT
       const emptyRow = el('tr')

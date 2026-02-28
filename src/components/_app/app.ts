@@ -49,11 +49,11 @@ export class App extends Component {
 
   protected create(): HTMLElement {
     this.main = h('main', { className: 'app-main', role: 'main' },
-      h('div', { className: 'app-loader' }, new Loader({}).el),
+      h('div', { className: 'app-loader' }, new Loader({}).el)
     )
 
     this.ticker = new Ticker({
-      onClick: (id) => this.grids.scrollToSighting(id),
+      onClick: (id) => this.grids.scrollToSighting(id)
     })
 
     this.grids = new SightingGrids({})
@@ -63,14 +63,14 @@ export class App extends Component {
     this.timeline = new Timeline({
       onRangeSelect: (from, to) => {
         this.store.yearRange.set({ from, to })
-      },
+      }
     })
 
     return h('div', { className: 'app' },
       h('div', { className: 'scanlines' }),
       new Header({}).el,
       this.ticker.el,
-      this.main,
+      this.main
     )
   }
 
@@ -118,10 +118,10 @@ export class App extends Component {
     const controlsForm = h('form', {
       className: 'controls-form',
       autocomplete: 'off',
-      onSubmit: (e: Event) => e.preventDefault(),
+      onSubmit: (e: Event) => e.preventDefault()
     },
       new YearSelector({}).el,
-      new FilterToolbar({}).el,
+      new FilterToolbar({}).el
     )
 
     this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
@@ -161,7 +161,7 @@ export class App extends Component {
 
   private buildBelowFold(): void {
     const sourcesBody = h('div', {
-      style: { display: 'flex', flexDirection: 'column', gap: '10px' },
+      style: { display: 'flex', flexDirection: 'column', gap: '10px' }
     })
 
     sourcesBody.appendChild(
@@ -169,20 +169,20 @@ export class App extends Component {
         variant: AlertVariant.INFO,
         title: SECTION.INTEL_TITLE,
         content: SECTION.INTEL_CONTENT,
-        dismissible: true,
-      }).el,
+        dismissible: true
+      }).el
     )
 
     sourcesBody.appendChild(
-      new DataSources({ sources: this.store.sources.get() }).el,
+      new DataSources({ sources: this.store.sources.get() }).el
     )
 
     this.main.appendChild(
       new Section({
         title: SECTION.DATA_SOURCES,
         tooltip: SECTION.DATA_SOURCES_TOOLTIP,
-        content: sourcesBody,
-      }).el,
+        content: sourcesBody
+      }).el
     )
 
     this.main.appendChild(new Footer({}).el)
@@ -201,7 +201,7 @@ export class App extends Component {
     })
 
     this.ticker.setMessages(
-      this.tickerMessages.generateMessages(sightings),
+      this.tickerMessages.generateMessages(sightings)
     )
 
     // Populate map and timeline
@@ -209,7 +209,7 @@ export class App extends Component {
     this.timeline.setManifestCounts(
       this.dataSource.getYearCounts(),
       years[years.length - 1] ?? 1900,
-      years[0] ?? new Date().getFullYear(),
+      years[0] ?? new Date().getFullYear()
     )
     this.timeline.setActiveRange(from, to)
 
@@ -231,7 +231,7 @@ export class App extends Component {
     this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
 
     const filtered = await minDelay(() =>
-      filterSightings(this.store.sightings.get(), this.store.filter.get()),
+      filterSightings(this.store.sightings.get(), this.store.filter.get())
     )
 
     if (version !== this.renderVersion) {
@@ -267,7 +267,7 @@ export class App extends Component {
     this.timeline.setActiveRange(from, to)
 
     this.ticker.setMessages(
-      this.tickerMessages.generateMessages(sightings),
+      this.tickerMessages.generateMessages(sightings)
     )
   }
 }

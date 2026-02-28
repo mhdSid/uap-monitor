@@ -14,5 +14,5 @@ export const cx = {
   cellType: 'cell-type',
   emptyState: 'empty-state',
   emptyStateCompact: 'empty-state--compact',
-  emptyStateText: 'empty-state__text',
+  emptyStateText: 'empty-state__text'
 } as const

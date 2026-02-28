@@ -37,7 +37,7 @@ export class FilterToolbar extends Component {
         const val = this.searchInput.value.trim()
         this.currentFilter.search = val || undefined
         this.emitDebounced()
-      },
+      }
     }) as HTMLInputElement
 
     this.shapeSelect = h('select', {
@@ -51,7 +51,7 @@ export class FilterToolbar extends Component {
         this.currentFilter.shape = val ? (val as SightingShape) : undefined
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
-      },
+      }
     }) as HTMLSelectElement
 
     this.shapeSelect.appendChild(h('option', { value: '' }, FILTER.ALL_SHAPES))
@@ -73,7 +73,7 @@ export class FilterToolbar extends Component {
         this.countrySelect.value = ''
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
-      },
+      }
     }) as HTMLSelectElement
 
     this.continentSelect.appendChild(h('option', { value: '' }, FILTER.ALL_REGIONS))
@@ -92,7 +92,7 @@ export class FilterToolbar extends Component {
         this.currentFilter.country = val || undefined
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
-      },
+      }
     }) as HTMLSelectElement
 
     this.countrySelect.appendChild(h('option', { value: '' }, FILTER.ALL_COUNTRIES))
@@ -105,8 +105,8 @@ export class FilterToolbar extends Component {
       h('div', { className: cx.selects },
         this.shapeSelect,
         this.continentSelect,
-        this.countrySelect,
-      ),
+        this.countrySelect
+      )
     )
   }
 
@@ -135,7 +135,7 @@ export class FilterToolbar extends Component {
 
     for (const [country, count] of sorted) {
       this.countrySelect.appendChild(
-        h('option', { value: country }, `${country} (${count})`),
+        h('option', { value: country }, `${country} (${count})`)
       )
     }
 

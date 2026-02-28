@@ -2,5 +2,5 @@
 export const cx = {
   root: 'timeline',
   canvas: 'timeline__canvas',
-  tooltip: 'timeline__tooltip',
+  tooltip: 'timeline__tooltip'
 } as const

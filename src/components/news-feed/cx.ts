@@ -4,5 +4,5 @@ export const cx = {
   meta: 'news-feed__meta',
   source: 'news-feed__source',
   text: 'news-feed__text',
-  time: 'news-feed__time',
+  time: 'news-feed__time'
 } as const

@@ -16,7 +16,7 @@
   border: 1px solid var(--color-border);
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: var(--fs-sm);
+  font-size: 16px;
   padding: 6px 8px;
   letter-spacing: 0.5px;
 }
@@ -33,9 +33,9 @@
 
 .filter-toolbar__selects {
   display: flex;
+  flex-direction: column;
   gap: 6px;
   flex: 1 1 100%;
-  flex-wrap: wrap;
 }
 
 .filter-toolbar__select {
@@ -55,7 +55,7 @@
   border-color: var(--color-green);
 }
 
-@media (max-width: 480px) {
-  .filter-toolbar__search { font-size: 16px !important; }
-  .filter-toolbar__selects { flex-direction: column; }
+@media (min-width: 481px) {
+  .filter-toolbar__search { font-size: var(--fs-sm); }
+  .filter-toolbar__selects { flex-direction: row; flex-wrap: wrap; }
 }

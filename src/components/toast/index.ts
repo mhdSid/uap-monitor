@@ -9,7 +9,7 @@ const TOAST_DURATION = 4000
 const VARIANT_CLASS: Record<ToastVariant, string> = {
   [ToastVariant.ERROR]: 'toast--error',
   [ToastVariant.SUCCESS]: 'toast--success',
-  [ToastVariant.INFO]: 'toast--info',
+  [ToastVariant.INFO]: 'toast--info'
 }
 
 let container: HTMLElement | null = null
@@ -34,7 +34,7 @@ function renderToast(message: ToastMessage): HTMLElement {
   return h('div', {
     className: `${cx.root} ${variantClass}`,
     dataset: { id: message.id },
-    role: 'alert',
+    role: 'alert'
   }, message.text)
 }
 
@@ -50,6 +50,6 @@ export function useToast() {
   return {
     info: (text: string) => show(text, ToastVariant.INFO),
     success: (text: string) => show(text, ToastVariant.SUCCESS),
-    error: (text: string) => show(text, ToastVariant.ERROR),
+    error: (text: string) => show(text, ToastVariant.ERROR)
   }
 }

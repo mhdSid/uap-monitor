@@ -9,7 +9,7 @@ export function useHatchUdb() {
     manifestFile: 'hatch-manifest.json',
     defaultSource: DataSourceId.HATCH_UDB,
     label: 'Hatch UDB',
-    simpleYears: false,
+    simpleYears: false
   })
 
   return {
@@ -18,6 +18,6 @@ export function useHatchUdb() {
     loadProgressive: loader.loadProgressive,
     getAvailableYears: loader.getAvailableYears,
     getTotalCount: loader.getTotalCount,
-    getYearCounts: loader.getYearCounts,
+    getYearCounts: loader.getYearCounts
   }
 }

@@ -94,7 +94,7 @@ export function signal<T>(initial: T): Signal<T> {
     set(v: T)          { if (!Object.is(v, val)) { val = v; emit(subs) } },
     update(fn)         { self.set(fn(val)) },
     subscribe(fn)      { const w = () => fn(val);  subs.add(w); return () => { subs.delete(w) } },
-    _sub(fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } },
+    _sub(fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } }
   }
   return self
 }
@@ -128,7 +128,7 @@ export function computed<T>(fn: () => T): ReadonlySignal<T> {
   const self: ReadonlySignal<T> = {
     get()              { track(self); return value },
     subscribe(fn)      { const w = () => fn(value); subs.add(w); return () => { subs.delete(w) } },
-    _sub(fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } },
+    _sub(fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } }
   }
   return self
 }

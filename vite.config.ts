@@ -6,8 +6,8 @@ export default defineConfig({
   base: process.env.VITE_BASE_URL ?? '/',
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
-    },
+      '@': resolve(__dirname, 'src')
+    }
   },
   build: {
     target: 'es2022',
@@ -15,14 +15,14 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true,
-        passes: 2,
-      },
+        passes: 2
+      }
     },
     rollupOptions: {
       output: {
-        manualChunks: undefined,
-      },
-    },
+        manualChunks: undefined
+      }
+    }
   },
   plugins: [
     VitePWA({
@@ -37,23 +37,23 @@ export default defineConfig({
             handler: 'CacheFirst',
             options: {
               cacheName: 'nuforc-data',
-              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 },
-            },
+              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 }
+            }
           },
           {
             urlPattern: /\/data\/nuforc-manifest\.json$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'nuforc-manifest',
-              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 },
-            },
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 }
+            }
           },
           {
             urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com/,
             handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'fonts', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } },
-          },
-        ],
+            options: { cacheName: 'fonts', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } }
+          }
+        ]
       },
       manifest: {
         name: 'UAP Monitor',
@@ -68,16 +68,16 @@ export default defineConfig({
           {
             src: 'icon-192.png',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/png'
           },
           {
             src: 'icon-512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
-      },
-    }),
-  ],
+            purpose: 'any maskable'
+          }
+        ]
+      }
+    })
+  ]
 })

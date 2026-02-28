@@ -26,7 +26,7 @@ const SUB_SOURCE_LABELS: Record<string, string> = {
   HALL: 'Hall (UFO Evidence)',
   WONDERS_SKY: 'Wonders in the Sky',
   PRE_ROSWELL: 'Pre-Roswell (Rife)',
-  DOLAN: 'Dolan',
+  DOLAN: 'Dolan'
 }
 
 function resolveSourceLabel(s: Sighting): string {
@@ -45,7 +45,7 @@ export class SightingModal {
       header: () => SightingModal.buildHeader(sighting),
       content: () => SightingModal.buildContent(sighting),
       footer: () => SightingModal.buildFooter(sighting),
-      onClose: () => analytics.sightingDismissed(sighting),
+      onClose: () => analytics.sightingDismissed(sighting)
     }, trigger)
   }
 
@@ -54,7 +54,7 @@ export class SightingModal {
   private static buildHeader(s: Sighting): HTMLElement {
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, [s.region, s.country].filter(Boolean).join(', ') || '—'),
-      new StatusTag({ status: s.status }).el,
+      new StatusTag({ status: s.status }).el
     )
   }
 
@@ -91,7 +91,7 @@ export class SightingModal {
         : []),
       [MODAL.OCCURRED, s.occurredAt],
       [MODAL.REPORTED, s.reportedAt],
-      [MODAL.CONTINENT, s.continent],
+      [MODAL.CONTINENT, s.continent]
     ]
 
     if (s.characteristics.length > 0) {
@@ -107,8 +107,8 @@ export class SightingModal {
     children.push(...rows.map(([label, value]) =>
       h('div', { className: cx.row },
         h('span', { className: cx.label }, label),
-        h('span', { className: cx.value }, value),
-      ),
+        h('span', { className: cx.value }, value)
+      )
     ))
 
     // Source row — clickable link if URL exists
@@ -119,15 +119,15 @@ export class SightingModal {
           className: `${cx.value} ${cx.sourceLink}`,
           href: sourceUrl,
           target: '_blank',
-          rel: 'noopener noreferrer',
+          rel: 'noopener noreferrer'
         }, sourceLabel)
       : h('span', { className: cx.value }, sourceLabel)
 
     children.push(
       h('div', { className: cx.row },
         h('span', { className: cx.label }, MODAL.SOURCE),
-        sourceValueEl,
-      ),
+        sourceValueEl
+      )
     )
 
     return h('div', { className: cx.content }, ...children)
@@ -135,7 +135,7 @@ export class SightingModal {
 
   private static buildFooter(s: Sighting): HTMLElement {
     return h('div', { className: cx.footer },
-      new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el,
+      new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el
     )
   }
 }

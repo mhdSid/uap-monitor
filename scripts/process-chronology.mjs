@@ -38,7 +38,7 @@ import {
   REGION_TO_COUNTRY,
   US_LOCATIONS,
   COUNTRY_COORDS,
-  truncate,
+  truncate
 } from './shared-constants.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -56,35 +56,35 @@ const SOURCES = [
     subSourceId: 'EBERHART',
     label: 'Eberhart',
     description: 'George Eberhart — UFOs and Intelligence: A Timeline (70 AD–present)',
-    url: 'http://www.cufos.org/pdfs/UFOsandIntelligence.pdf',
+    url: 'http://www.cufos.org/pdfs/UFOsandIntelligence.pdf'
   },
   {
     files: ['johnson.json'],
     subSourceId: 'JOHNSON',
     label: 'Johnson',
     description: 'Dr. Donald Johnson — UFOCAT-style date-based sighting database',
-    url: 'https://web.archive.org/web/http://www.ufoinfo.com/onthisday/calendar.html',
+    url: 'https://web.archive.org/web/http://www.ufoinfo.com/onthisday/calendar.html'
   },
   {
     files: ['nicap_db.json'],
     subSourceId: 'NICAP',
     label: 'NICAP',
     description: 'National Investigations Committee on Aerial Phenomena — sighting database',
-    url: 'http://www.nicap.org/NSID/NSID_DBListingbyDate.pdf',
+    url: 'http://www.nicap.org/NSID/NSID_DBListingbyDate.pdf'
   },
   {
     files: ['magonia.json'],
     subSourceId: 'VALLEE_MAGONIA',
     label: 'Vallée (Magonia)',
     description: 'Jacques Vallée — Passport to Magonia: close encounters 1868–1968',
-    url: 'https://archive.org/details/passporttomagoni0000vall',
+    url: 'https://archive.org/details/passporttomagoni0000vall'
   },
   {
     files: ['bb_unknowns.json'],
     subSourceId: 'BB_UNKNOWNS',
     label: 'Blue Book Unknowns',
     description: 'Project Blue Book — official USAF unexplained cases (Don Berliner list)',
-    url: 'https://github.com/richgel999/uap_resources/blob/main/bluebook_uncensored_unknowns_don_berliner.pdf',
+    url: 'https://github.com/richgel999/uap_resources/blob/main/bluebook_uncensored_unknowns_don_berliner.pdf'
   },
 
   // ── Tier 2: good supplementary sources ──
@@ -93,28 +93,28 @@ const SOURCES = [
     subSourceId: 'OVERMEIRE',
     label: 'Overmeire',
     description: 'Godelieve Van Overmeire — Belgian/French chronological catalogue',
-    url: 'https://web.archive.org/web/20060107070423/http://users.skynet.be/sky84985/chrono.html',
+    url: 'https://web.archive.org/web/20060107070423/http://users.skynet.be/sky84985/chrono.html'
   },
   {
     files: ['ufo_evidence_hall.json'],
     subSourceId: 'HALL',
     label: 'Hall (UFO Evidence)',
     description: 'Richard H. Hall — The UFO Evidence, Vols. I & II',
-    url: 'https://www.amazon.com/UFO-Evidence-Richard-Hall/dp/0760706271',
+    url: 'https://www.amazon.com/UFO-Evidence-Richard-Hall/dp/0760706271'
   },
   {
     files: ['ancient.json'],
     subSourceId: 'WONDERS_SKY',
     label: 'Wonders in the Sky',
     description: 'Vallée & Aubeck — aerial phenomena from antiquity to 1879',
-    url: 'https://archive.org/details/JacquesValleeChrisAubeckWondersInTheSkyUnexplainedAerialObjectsFromAntiquityToModernTimes',
+    url: 'https://archive.org/details/JacquesValleeChrisAubeckWondersInTheSkyUnexplainedAerialObjectsFromAntiquityToModernTimes'
   },
   {
     files: ['dolan.json'],
     subSourceId: 'DOLAN',
     label: 'Dolan',
     description: 'Richard Dolan — UFOs and the National Security State chronology',
-    url: 'https://archive.org/details/ufosnationalsecu00dola',
+    url: 'https://archive.org/details/ufosnationalsecu00dola'
   },
   {
     files: [
@@ -126,13 +126,13 @@ const SOURCES = [
       'pre_roswell_chap6.json',
       'pre_roswell_chap7.json',
       'pre_roswell_chap8.json',
-      'pre_roswell_chap9.json',
+      'pre_roswell_chap9.json'
     ],
     subSourceId: 'PRE_ROSWELL',
     label: 'Pre-Roswell (Rife)',
     description: 'Philip L. Rife — It Didn\'t Start with Roswell: pre-1947 cases',
-    url: 'https://archive.org/details/it-didnt-start-with-roswell-50-years-of-amazing-ufo-crashes-close-encounters-and',
-  },
+    url: 'https://archive.org/details/it-didnt-start-with-roswell-50-years-of-amazing-ufo-crashes-close-encounters-and'
+  }
 ]
 
 // ─── Year boundaries ────────────────────────────────────────────────
@@ -159,7 +159,7 @@ const US_STATES_ABBR = {
   'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
   'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah',
   'VT': 'Vermont', 'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia',
-  'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia',
+  'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia'
 }
 
 const US_STATE_NAMES = new Set(Object.values(US_STATES_ABBR))
@@ -186,7 +186,7 @@ function parseChronologyDate(raw, altBasicDate) {
     return {
       iso: `${String(year).padStart(4, '0')}-01-01T00:00:00`,
       year,
-      precision: 'year',
+      precision: 'year'
     }
   }
 
@@ -242,7 +242,7 @@ function parseChronologyLocation(raw) {
     region: '',
     country: 'Unknown',
     continent: Continent.AMERICAS,
-    coordinates: null,
+    coordinates: null
   }
 
   if (!raw) return fallback
@@ -312,7 +312,7 @@ function parseChronologyLocation(raw) {
   // Try multiple patterns from most to least specific
   const descPatterns = [
     /\b(?:in|of|near|off)\s+(?:the\s+)?([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)*)(?:\s*[.?]?)$/i,   // "in Japan", "near the British Isles", "of SPAIN"
-    /\b(?:coast|west|east|north|south|southwest|southeast|northwest|northeast)\s+of\s+([A-Z][A-Za-z\s]+?)(?:\s*\(.*\))?$/i,  // "coast of SPAIN"
+    /\b(?:coast|west|east|north|south|southwest|southeast|northwest|northeast)\s+of\s+([A-Z][A-Za-z\s]+?)(?:\s*\(.*\))?$/i  // "coast of SPAIN"
   ]
   for (const pat of descPatterns) {
     const m = location.match(pat)
@@ -539,7 +539,7 @@ const SUB_SOURCE_TIER = {
   DOLAN: 5,           // National security focus
   PRE_ROSWELL: 3,     // Historical compilation
   WONDERS_SKY: 3,     // Ancient/historical
-  OVERMEIRE: 3,       // Broad catalog
+  OVERMEIRE: 3       // Broad catalog
 }
 
 function computeChronologyCredibility(record, subSourceId, loc, ref, desc, parsed) {
@@ -721,7 +721,7 @@ function main() {
         status: Status.PENDING,
         credibility: computeChronologyCredibility(record, subSourceId, loc, ref, desc, parsed),
         ...(time && { time }),
-        ...(ref && { ref: truncate(ref, 500) }),
+        ...(ref && { ref: truncate(ref, 500) })
       }
 
       const chunkKey = yearToChunkKey(year)
@@ -738,7 +738,7 @@ function main() {
       description: config.description,
       url: config.url,
       count: processed,
-      skipped,
+      skipped
     }
 
     console.log(
@@ -757,7 +757,7 @@ function main() {
     totalRecords: totalProcessed,
     skippedRecords: totalSkipped,
     subSources: subSourceMeta,
-    years: {},
+    years: {}
   }
 
   const sortedKeys = [...byChunk.keys()].sort((a, b) => {

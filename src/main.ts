@@ -1,8 +1,9 @@
-import '@/styles'
+import { tokensCSS, baseCSS } from '@/styles'
 import { createApp } from '@/components/_app/app'
 import { qs } from '@/utils/dom'
 
-createApp(qs('#app'))
+document.head.insertAdjacentHTML('beforeend', `<style>${tokensCSS}</style>`)
+document.head.insertAdjacentHTML('beforeend', `<style>${baseCSS}</style>`)
 
 createApp(qs('#app'))
 

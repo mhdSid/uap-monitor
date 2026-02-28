@@ -24,7 +24,7 @@ const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM<
 const MARKER_COLORS: Record<string, string> = {
   NUFORC: colors.sourceNuforc,
   HATCH_UDB: colors.sourceHatch,
-  CHRONOLOGY: colors.sourceChronology,
+  CHRONOLOGY: colors.sourceChronology
 }
 
 const DEFAULT_CENTER: L.LatLngExpression = [30, 0]
@@ -63,12 +63,12 @@ export class SightingMap extends Component<SightingMapProps> {
       zoomControl: true,
       attributionControl: true,
       preferCanvas: true,
-      worldCopyJump: true,
+      worldCopyJump: true
     })
 
     L.tileLayer(DARK_TILES, {
       attribution: TILE_ATTR,
-      maxZoom: MAX_ZOOM,
+      maxZoom: MAX_ZOOM
     }).addTo(this.map)
 
     this.clusterGroup = L.markerClusterGroup({
@@ -92,9 +92,9 @@ export class SightingMap extends Component<SightingMapProps> {
         return L.divIcon({
           html: `<div class="${cx.mapCluster} ${sizeClass}">${count.toLocaleString()}</div>`,
           className: cx.mapClusterWrapper,
-          iconSize: L.point(radius, radius),
+          iconSize: L.point(radius, radius)
         })
-      },
+      }
     })
 
     this.map.addLayer(this.clusterGroup)
@@ -107,7 +107,7 @@ export class SightingMap extends Component<SightingMapProps> {
           north: b.getNorth(),
           south: b.getSouth(),
           east: b.getEast(),
-          west: b.getWest(),
+          west: b.getWest()
         })
       })
     }
@@ -139,13 +139,13 @@ export class SightingMap extends Component<SightingMapProps> {
         weight: 1,
         opacity: 0.9,
         interactive: true,
-        bubblingMouseEvents: false,
+        bubblingMouseEvents: false
       })
 
       marker.bindPopup(() => this.createPopup(s), {
         maxWidth: 280,
         closeButton: true,
-        autoPan: true,
+        autoPan: true
       })
 
       // Explicit click handler as fallback — ensures popup opens even if
@@ -181,7 +181,7 @@ export class SightingMap extends Component<SightingMapProps> {
       h('div', { className: cx.mapPopupDate }, year),
       h('div', { className: cx.mapPopupLocation }, s.location || s.region || '—'),
       h('div', { className: cx.mapPopupSummary }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
-      h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
+      h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`)
     )
   }
 }

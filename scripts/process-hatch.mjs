@@ -30,7 +30,7 @@ import { execSync } from 'node:child_process'
 
 import {
   Continent, Status, Shape,
-  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate,
+  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate
 } from './shared-constants.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -76,7 +76,7 @@ const ATTRIBUTE_SHAPE_MAP = {
   'FLS': Shape.FLASH,       // Flash
   'ORB': Shape.ORB,         // Orb
   'CHG': Shape.CHANGING,    // Changing shape
-  'TRD': Shape.TEARDROP,    // Teardrop
+  'TRD': Shape.TEARDROP    // Teardrop
 }
 
 // ─── Hatch attribute code → human-readable tag ──────────────────────
@@ -111,7 +111,7 @@ const ATTRIBUTE_TAG_MAP = {
   'ANI': 'Animal reaction',
   'INJ': 'Injury reported',
   'TRC': 'Physical traces',
-  'MBR': 'Multiple observers',
+  'MBR': 'Multiple observers'
 }
 
 // COUNTRY_CONTINENT and COUNTRY_COORDS imported from shared-constants.mjs
@@ -422,7 +422,7 @@ function main() {
       // Extended fields
       tags,
       ...(strangeness !== undefined && { strangeness }),
-      ...(ref && { ref: truncate(ref, 500) }),
+      ...(ref && { ref: truncate(ref, 500) })
     }
 
     const chunkKey = yearToChunkKey(year)
@@ -438,7 +438,7 @@ function main() {
     generatedAt: new Date().toISOString(),
     totalRecords: processed,
     skippedRecords: skipped,
-    years: {},
+    years: {}
   }
 
   const sortedKeys = [...byChunk.keys()].sort((a, b) => {

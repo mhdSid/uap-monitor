@@ -14,7 +14,7 @@ export class Section extends Component<SectionCreateProps> {
     const { title, live, tooltip, tag, count, content } = this.props
 
     const header = h('div', { className: cx.header },
-      h('span', { className: cx.title }, title),
+      h('span', { className: cx.title }, title)
     )
 
     if (live) header.appendChild(new LiveTag({}).el)
@@ -22,13 +22,13 @@ export class Section extends Component<SectionCreateProps> {
     if (tag) header.appendChild(tag)
     if (count !== undefined) {
       header.appendChild(
-        h('span', { className: cx.count }, String(count)),
+        h('span', { className: cx.count }, String(count))
       )
     }
 
     return h('div', { className: cx.root },
       header,
-      h('div', { className: cx.body }, content),
+      h('div', { className: cx.body }, content)
     )
   }
 }

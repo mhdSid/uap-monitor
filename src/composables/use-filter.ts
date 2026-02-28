@@ -7,7 +7,7 @@ import { yieldThread } from './use-timing'
  */
 export async function filterSightings(
   all: Sighting[],
-  filter: SightingFilter,
+  filter: SightingFilter
 ): Promise<Sighting[]> {
   const hasFilter = filter.search || filter.shape || filter.continent || filter.minCredibility || filter.country
 

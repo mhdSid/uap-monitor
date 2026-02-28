@@ -13,7 +13,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -100,14 +100,7 @@
   text-align: center;
 }
 
-@media (max-width: 480px) {
-  .cell-report__date { display: none; }
-
-  .cell-report__summary {
-    -webkit-line-clamp: 3;
-    font-size: var(--fs-sm);
-    line-height: 1.5;
-  }
-
-  .cell-report__meta { font-size: var(--fs-xs); }
+@media (min-width: 481px) {
+  .cell-report__date { display: block; }
+  .cell-report__summary { -webkit-line-clamp: 2; }
 }

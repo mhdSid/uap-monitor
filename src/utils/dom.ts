@@ -56,7 +56,7 @@ export function h(
 export function el<K extends keyof HTMLElementTagNameMap>(
   tag: K,
   attrs?: Record<string, string>,
-  children?: (HTMLElement | string | null)[],
+  children?: (HTMLElement | string | null)[]
 ): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag)
   if (attrs) {
@@ -149,7 +149,7 @@ export function removeClass(node: Element, ...names: string[]): void {
 export function toggleClass(
   node: Element,
   name: string,
-  force?: boolean,
+  force?: boolean
 ): boolean {
   return node.classList.toggle(name, force)
 }
@@ -163,7 +163,7 @@ export function hasClass(node: Element, name: string): boolean {
 /** Set / remove one or more attributes. null | undefined | false removes. */
 export function setAttrs(
   node: Element,
-  attrs: Record<string, string | number | boolean | null | undefined>,
+  attrs: Record<string, string | number | boolean | null | undefined>
 ): void {
   for (const key in attrs) {
     const v = attrs[key]
@@ -188,10 +188,10 @@ export function rawHtml(html: string): DocumentFragment {
 
 const SAFE_TAGS = new Set([
   'strong', 'em', 'b', 'i', 'br', 'p', 'ul', 'ol', 'li',
-  'span', 'div', 'a', 'code', 'pre', 'blockquote',
+  'span', 'div', 'a', 'code', 'pre', 'blockquote'
 ])
 const SAFE_ATTRS = new Set([
-  'style', 'class', 'href', 'target', 'rel',
+  'style', 'class', 'href', 'target', 'rel'
 ])
 
 /**
@@ -245,7 +245,7 @@ export function generateId(): string {
 /** querySelector that throws when nothing is found. */
 export function qs<T extends Element = HTMLElement>(
   selector: string,
-  parent: Element | Document = document,
+  parent: Element | Document = document
 ): T {
   const node = parent.querySelector<T>(selector)
   if (!node) throw new Error(`[dom] Element not found: ${selector}`)
@@ -255,7 +255,7 @@ export function qs<T extends Element = HTMLElement>(
 /** querySelectorAll returning a real Array. */
 export function qsa<T extends Element = HTMLElement>(
   selector: string,
-  parent: Element | Document = document,
+  parent: Element | Document = document
 ): T[] {
   return Array.from(parent.querySelectorAll<T>(selector))
 }
@@ -283,7 +283,7 @@ function applyProps(node: HTMLElement, props: DomProps): void {
     } else if (key.startsWith('on') && typeof value === 'function') {
       node.addEventListener(
         key.slice(2).toLowerCase(),
-        value as EventListener,
+        value as EventListener
       )
     } else if (value === true) {
       node.setAttribute(key, '')
@@ -295,7 +295,7 @@ function applyProps(node: HTMLElement, props: DomProps): void {
 
 function appendChildren(
   parent: Element | DocumentFragment,
-  children: DomChild[],
+  children: DomChild[]
 ): void {
   for (const child of children) {
     if (child == null || child === false) continue

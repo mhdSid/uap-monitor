@@ -8,7 +8,7 @@ export class Footer extends Component {
   protected create(): HTMLElement {
     return h('div', {
       className: cx.root,
-      role: 'contentinfo',
+      role: 'contentinfo'
     }, APP_FOOTER)
   }
 }

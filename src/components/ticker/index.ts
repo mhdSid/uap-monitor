@@ -19,7 +19,7 @@ export interface TickerProps {
 const DEFAULT_MESSAGES: TickerMessage[] = [
   { lines: ['Scanning open-source intelligence feeds for new UAP reports...'] },
   { lines: ['Aggregating reports from NUFORC database...'] },
-  { lines: ['Processing witness accounts and credibility scores...'] },
+  { lines: ['Processing witness accounts and credibility scores...'] }
 ]
 
 const PREFIX = TICKER.PREFIX
@@ -58,14 +58,14 @@ export class Ticker extends Component<TickerProps> {
 
     this.ghostEl = h('div', { className: cx.ghost },
       h('div', { className: cx.ghostLine }, GHOST_TEXT),
-      h('div', { className: cx.ghostLine }, GHOST_TEXT),
+      h('div', { className: cx.ghostLine }, GHOST_TEXT)
     )
 
     return h('div', {
       className: cx.root,
       role: 'button',
       tabIndex: 0,
-      'aria-label': ARIA.TICKER,
+      'aria-label': ARIA.TICKER
     }, this.contentEl, this.ghostEl)
   }
 

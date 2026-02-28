@@ -19,7 +19,7 @@ const VARIANT_COLORS: Record<AlertVariant, { border: string; text: string; icon:
   [AlertVariant.INFO]: { border: 'var(--color-cyan)', text: 'var(--color-cyan)', icon: 'ℹ' },
   [AlertVariant.WARNING]: { border: 'var(--color-amber)', text: 'var(--color-amber)', icon: '⚠' },
   [AlertVariant.ERROR]: { border: 'var(--color-red)', text: 'var(--color-red)', icon: '✕' },
-  [AlertVariant.NEUTRAL]: { border: 'var(--color-dim)', text: 'var(--color-muted)', icon: '—' },
+  [AlertVariant.NEUTRAL]: { border: 'var(--color-dim)', text: 'var(--color-muted)', icon: '—' }
 }
 
 export class Alert extends Component<AlertProps> {
@@ -29,12 +29,12 @@ export class Alert extends Component<AlertProps> {
     const alert = h('div', {
       className: `${cx.root} alert--${this.props.variant}`,
       role: 'alert',
-      style: { borderColor: colors.border },
+      style: { borderColor: colors.border }
     })
 
     const icon = h('span', {
       className: cx.icon,
-      style: { color: colors.text },
+      style: { color: colors.text }
     }, colors.icon)
 
     const body = h('div', { className: cx.body })
@@ -43,8 +43,8 @@ export class Alert extends Component<AlertProps> {
       body.appendChild(
         h('div', {
           className: cx.title,
-          style: { color: colors.text },
-        }, this.props.title),
+          style: { color: colors.text }
+        }, this.props.title)
       )
     }
 
@@ -67,8 +67,8 @@ export class Alert extends Component<AlertProps> {
           onClick: () => {
             alert.style.opacity = '0'
             setTimeout(() => alert.remove(), 200)
-          },
-        }, '×'),
+          }
+        }, '×')
       )
     }
 

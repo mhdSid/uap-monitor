@@ -13,7 +13,7 @@ export class YearSelector extends Component {
 
     if (years.length === 0) {
       return h('div', { className: cx.root },
-        h('span', { className: cx.label }, FILTER.NO_DATA),
+        h('span', { className: cx.label }, FILTER.NO_DATA)
       )
     }
 
@@ -23,7 +23,7 @@ export class YearSelector extends Component {
         id,
         name: id,
         autocomplete: 'off',
-        'aria-label': label,
+        'aria-label': label
       }) as HTMLSelectElement
       for (const y of years) {
         const opt = h('option', { value: String(y) }, String(y))
@@ -34,10 +34,10 @@ export class YearSelector extends Component {
     }
 
     const fromSelect = makeSelect(
-      Math.max(years[years.length - 1], defaultFrom), ARIA.YEAR_FROM, 'year-from',
+      Math.max(years[years.length - 1], defaultFrom), ARIA.YEAR_FROM, 'year-from'
     )
     const toSelect = makeSelect(
-      Math.min(years[0], defaultTo), ARIA.YEAR_TO, 'year-to',
+      Math.min(years[0], defaultTo), ARIA.YEAR_TO, 'year-to'
     )
 
     const countEl = h('span', { className: cx.count }, '')
@@ -72,7 +72,7 @@ export class YearSelector extends Component {
       fromSelect,
       h('span', { className: cx.separator }, '~'),
       toSelect,
-      countEl,
+      countEl
     )
   }
 }

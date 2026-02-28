@@ -9,7 +9,7 @@ import type { Sighting, DataGridColumn } from '@/types'
 const SOURCE_LABELS: Partial<Record<DataSourceId, string>> = {
   [DataSourceId.NUFORC]: 'NUFORC',
   [DataSourceId.HATCH_UDB]: 'HATCH',
-  [DataSourceId.CHRONOLOGY]: 'CHRON',
+  [DataSourceId.CHRONOLOGY]: 'CHRON'
 }
 
 const SUB_SOURCE_SHORT: Record<string, string> = {
@@ -22,13 +22,13 @@ const SUB_SOURCE_SHORT: Record<string, string> = {
   HALL: 'HALL',
   WONDERS_SKY: 'WNDR',
   PRE_ROSWELL: 'RIFE',
-  DOLAN: 'DOLN',
+  DOLAN: 'DOLN'
 }
 
 /** Source badge class by data source id */
 const SOURCE_CLASS: Record<string, string> = {
   [DataSourceId.CHRONOLOGY]: `${cx.source} ${cx.sourceChronology}`,
-  [DataSourceId.HATCH_UDB]: `${cx.source} ${cx.sourceHatchUdb}`,
+  [DataSourceId.HATCH_UDB]: `${cx.source} ${cx.sourceHatchUdb}`
 }
 
 function resolveGridSourceLabel(row: Sighting): string {
@@ -52,7 +52,7 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
 
         const metaParts = [
           [row.region, row.country].filter(Boolean).join(', '),
-          row.shape,
+          row.shape
         ]
 
         const meta = h('span', { className: cx.meta }, metaParts.join(' · '))
@@ -61,7 +61,7 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
           h('span', { className: sourceClass }, sourceLabel),
           ...(tagCount > 0
             ? [h('span', { className: cx.tagCount }, `${tagCount} tag${tagCount > 1 ? 's' : ''}`)]
-            : []),
+            : [])
         )
 
         return h('div', { className: cx.root },
@@ -69,24 +69,24 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
           meta,
           h('span', { className: cx.bottom },
             badges,
-            h('span', { className: cx.date }, formatDate(row.occurredAt)),
-          ),
+            h('span', { className: cx.date }, formatDate(row.occurredAt))
+          )
         )
-      },
+      }
     },
     {
       key: 'credibility',
       label: 'CRED',
       width: '100px',
       align: 'right',
-      render: (row) => new CredibilityBar({ value: row.credibility }).el,
+      render: (row) => new CredibilityBar({ value: row.credibility }).el
     },
     {
       key: 'status',
       label: 'STATUS',
       width: '80px',
       align: 'right',
-      render: (row) => new StatusTag({ status: row.status }).el,
+      render: (row) => new StatusTag({ status: row.status }).el
     },
     {
       key: 'occurredAt',
@@ -97,7 +97,7 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
         const full = formatDate(row.occurredAt)
         const compact = formatDateCompact(row.occurredAt)
         return h('span', { className: cx.cellTime, title: full }, compact)
-      },
-    },
+      }
+    }
   ]
 }

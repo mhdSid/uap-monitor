@@ -9,7 +9,7 @@ const STATUS_DOT_COLORS: Record<DataSourceStatus, string> = {
   [DataSourceStatus.ONLINE]: 'var(--color-green)',
   [DataSourceStatus.SYNCING]: 'var(--color-amber)',
   [DataSourceStatus.OFFLINE]: 'var(--color-muted)',
-  [DataSourceStatus.DISABLED]: 'var(--color-muted)',
+  [DataSourceStatus.DISABLED]: 'var(--color-muted)'
 }
 
 export class DataSources extends Component<DataSourcesProps> {
@@ -29,7 +29,7 @@ export class DataSources extends Component<DataSourcesProps> {
 
     const dot = h('span', {
       className: cx.dot,
-      style: { backgroundColor: dotColor },
+      style: { backgroundColor: dotColor }
     })
 
     const label = h('span', { className: cx.label }, source.label)
@@ -45,13 +45,13 @@ export class DataSources extends Component<DataSourcesProps> {
         target: '_blank',
         rel: 'noopener noreferrer',
         title: source.description || source.label,
-        'aria-label': `${source.label} — ${source.description || ''}`,
+        'aria-label': `${source.label} — ${source.description || ''}`
       }, dot, label)
     }
 
     return h('div', {
       className: itemClass,
-      title: source.description || source.label,
+      title: source.description || source.label
     }, dot, label)
   }
 }

@@ -11,7 +11,7 @@ export class NewsFeed extends Component<NewsFeedProps> {
 
     for (const item of this.props.items) {
       const meta = h('div', { className: cx.meta },
-        h('span', { className: cx.source }, item.source),
+        h('span', { className: cx.source }, item.source)
       )
       if (item.tag) {
         meta.appendChild(new Tag({ variant: item.tag }).el)
@@ -21,8 +21,8 @@ export class NewsFeed extends Component<NewsFeedProps> {
       wrapper.appendChild(
         h('div', { className: cx.item },
           meta,
-          h('div', { className: cx.text }, item.text),
-        ),
+          h('div', { className: cx.text }, item.text)
+        )
       )
     }
 

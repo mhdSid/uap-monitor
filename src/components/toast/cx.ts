@@ -5,5 +5,5 @@ export const cx = {
   exit: 'toast--exit',
   info: 'toast--info',
   success: 'toast--success',
-  container: 'toast-container',
+  container: 'toast-container'
 } as const

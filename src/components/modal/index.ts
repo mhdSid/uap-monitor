@@ -37,7 +37,7 @@ export class Modal {
     const closeBtn = h('button', {
       className: cx.close,
       'aria-label': ARIA.CLOSE_MODAL,
-      onClick: () => Modal.close(),
+      onClick: () => Modal.close()
     }, iconClose(14))
 
     const headerBar = h('div', { className: cx.header })
@@ -47,7 +47,7 @@ export class Modal {
     const dialog = h('div', {
       className: cx.root,
       role: 'dialog',
-      'aria-modal': 'true',
+      'aria-modal': 'true'
     }, headerBar)
 
     const titleEl = headerBar.querySelector('.modal-sighting__title, .modal__title, .welcome__title')

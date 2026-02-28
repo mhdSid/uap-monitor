@@ -30,7 +30,7 @@ export function useChronology(): ChronologySource {
     validateManifest: (data) => {
       const obj = data as Record<string, unknown>
       return typeof obj.subSources === 'object' && obj.subSources !== null
-    },
+    }
   })
 
   _instance = {
@@ -39,7 +39,7 @@ export function useChronology(): ChronologySource {
     loadProgressive: loader.loadProgressive,
     getAvailableYears: loader.getAvailableYears,
     getTotalCount: loader.getTotalCount,
-    getYearCounts: loader.getYearCounts,
+    getYearCounts: loader.getYearCounts
   }
 
   return _instance

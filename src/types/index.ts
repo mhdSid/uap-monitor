@@ -5,7 +5,7 @@ import type {
   SightingShape,
   SightingStatus,
   TagVariant,
-  ToastVariant,
+  ToastVariant
 } from '@/enums'
 
 // ─── Core domain ─────────────────────────────────────────────────────

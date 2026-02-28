@@ -13,7 +13,7 @@ enum CredibilityLevel {
 const LEVEL_COLORS: Record<CredibilityLevel, string> = {
   [CredibilityLevel.HIGH]: 'var(--color-green)',
   [CredibilityLevel.MEDIUM]: 'var(--color-amber)',
-  [CredibilityLevel.LOW]: 'var(--color-muted)',
+  [CredibilityLevel.LOW]: 'var(--color-muted)'
 }
 
 function getLevel(value: number): CredibilityLevel {
@@ -31,10 +31,10 @@ export class CredibilityBar extends Component<CredibilityBarProps> {
       h('div', { className: cx.track },
         h('div', {
           className: cx.fill,
-          style: { width: `${Math.min(value, 100)}%`, backgroundColor: color },
-        }),
+          style: { width: `${Math.min(value, 100)}%`, backgroundColor: color }
+        })
       ),
-      h('span', { className: cx.label }, String(value)),
+      h('span', { className: cx.label }, String(value))
     )
   }
 }

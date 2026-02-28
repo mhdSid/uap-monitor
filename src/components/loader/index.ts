@@ -20,10 +20,10 @@ export class Loader extends Component {
     return h('div', {
       className: cx.root,
       role: 'status',
-      'aria-label': ARIA.LOADING,
+      'aria-label': ARIA.LOADING
     },
       sweep,
-      h('div', { className: cx.text }, 'Loading...'),
+      h('div', { className: cx.text }, 'Loading...')
     )
   }
 }

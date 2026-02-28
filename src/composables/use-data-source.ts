@@ -16,7 +16,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Eberhart',
     status: DataSourceStatus.SYNCING,
     url: 'http://www.cufos.org/pdfs/UFOsandIntelligence.pdf',
-    description: 'George Eberhart — UFOs and Intelligence: A Timeline (70 AD–present)',
+    description: 'George Eberhart — UFOs and Intelligence: A Timeline (70 AD–present)'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -24,7 +24,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Johnson',
     status: DataSourceStatus.SYNCING,
     url: 'https://web.archive.org/web/http://www.ufoinfo.com/onthisday/calendar.html',
-    description: 'Dr. Donald Johnson — UFOCAT-style date-based sighting database',
+    description: 'Dr. Donald Johnson — UFOCAT-style date-based sighting database'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -32,7 +32,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'NICAP',
     status: DataSourceStatus.SYNCING,
     url: 'http://www.nicap.org/NSID/NSID_DBListingbyDate.pdf',
-    description: 'National Investigations Committee on Aerial Phenomena — sighting database',
+    description: 'National Investigations Committee on Aerial Phenomena — sighting database'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -40,7 +40,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Vallée (Magonia)',
     status: DataSourceStatus.SYNCING,
     url: 'https://archive.org/details/passporttomagoni0000vall',
-    description: 'Jacques Vallée — Passport to Magonia: close encounters 1868–1968',
+    description: 'Jacques Vallée — Passport to Magonia: close encounters 1868–1968'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -48,7 +48,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Blue Book Unknowns',
     status: DataSourceStatus.SYNCING,
     url: 'https://github.com/richgel999/uap_resources/blob/main/bluebook_uncensored_unknowns_don_berliner.pdf',
-    description: 'Project Blue Book — official USAF unexplained cases (Don Berliner list)',
+    description: 'Project Blue Book — official USAF unexplained cases (Don Berliner list)'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -56,7 +56,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Overmeire',
     status: DataSourceStatus.SYNCING,
     url: 'https://web.archive.org/web/20060107070423/http://users.skynet.be/sky84985/chrono.html',
-    description: 'Godelieve Van Overmeire — Belgian/French chronological catalogue',
+    description: 'Godelieve Van Overmeire — Belgian/French chronological catalogue'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -64,7 +64,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Hall (UFO Evidence)',
     status: DataSourceStatus.SYNCING,
     url: 'https://www.amazon.com/UFO-Evidence-Richard-Hall/dp/0760706271',
-    description: 'Richard H. Hall — The UFO Evidence, Vols. I & II',
+    description: 'Richard H. Hall — The UFO Evidence, Vols. I & II'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -72,7 +72,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Wonders in the Sky',
     status: DataSourceStatus.SYNCING,
     url: 'https://archive.org/details/JacquesValleeChrisAubeckWondersInTheSkyUnexplainedAerialObjectsFromAntiquityToModernTimes',
-    description: 'Vallée & Aubeck — aerial phenomena from antiquity to 1879',
+    description: 'Vallée & Aubeck — aerial phenomena from antiquity to 1879'
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -80,7 +80,7 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Pre-Roswell (Rife)',
     status: DataSourceStatus.SYNCING,
     url: 'https://archive.org/details/it-didnt-start-with-roswell-50-years-of-amazing-ufo-crashes-close-encounters-and',
-    description: "Philip L. Rife — It Didn't Start with Roswell: pre-1947 cases",
+    description: "Philip L. Rife — It Didn't Start with Roswell: pre-1947 cases"
   },
   {
     id: DataSourceId.CHRONOLOGY,
@@ -88,8 +88,8 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     label: 'Dolan',
     status: DataSourceStatus.SYNCING,
     url: 'https://archive.org/details/ufosnationalsecu00dola',
-    description: 'Richard Dolan — UFOs and the National Security State chronology',
-  },
+    description: 'Richard Dolan — UFOs and the National Security State chronology'
+  }
 ]
 
 // ─── Primary source registry ────────────────────────────────────────
@@ -101,14 +101,14 @@ const SOURCE_REGISTRY: DataSource[] = [
     label: 'NUFORC',
     status: DataSourceStatus.SYNCING,
     url: 'https://nuforc.org',
-    description: DATA_SOURCE_DESCRIPTIONS.NUFORC,
+    description: DATA_SOURCE_DESCRIPTIONS.NUFORC
   },
   {
     id: DataSourceId.HATCH_UDB,
     label: 'HATCH UDB',
     status: DataSourceStatus.SYNCING,
     url: 'https://github.com/richgel999/ufo_data',
-    description: DATA_SOURCE_DESCRIPTIONS.HATCH_UDB,
+    description: DATA_SOURCE_DESCRIPTIONS.HATCH_UDB
   },
 
   // ── Chronology sub-sources (all share DataSourceId.CHRONOLOGY) ──
@@ -120,49 +120,49 @@ const SOURCE_REGISTRY: DataSource[] = [
     label: 'NASA CNEOS',
     status: DataSourceStatus.DISABLED,
     url: 'https://cneos.jpl.nasa.gov/fireballs/',
-    description: DATA_SOURCE_DESCRIPTIONS.NASA_CNEOS,
+    description: DATA_SOURCE_DESCRIPTIONS.NASA_CNEOS
   },
   {
     id: DataSourceId.OPENSKY,
     label: 'OPENSKY',
     status: DataSourceStatus.DISABLED,
     url: 'https://opensky-network.org',
-    description: DATA_SOURCE_DESCRIPTIONS.OPENSKY,
+    description: DATA_SOURCE_DESCRIPTIONS.OPENSKY
   },
   {
     id: DataSourceId.GDELT,
     label: 'GDELT',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.gdeltproject.org',
-    description: DATA_SOURCE_DESCRIPTIONS.GDELT,
+    description: DATA_SOURCE_DESCRIPTIONS.GDELT
   },
   {
     id: DataSourceId.AARO,
     label: 'AARO',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.aaro.mil',
-    description: DATA_SOURCE_DESCRIPTIONS.AARO,
+    description: DATA_SOURCE_DESCRIPTIONS.AARO
   },
   {
     id: DataSourceId.GEIPAN,
     label: 'GEIPAN',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.cnes.fr/en/geipan',
-    description: DATA_SOURCE_DESCRIPTIONS.GEIPAN,
+    description: DATA_SOURCE_DESCRIPTIONS.GEIPAN
   },
   {
     id: DataSourceId.ENIGMA,
     label: 'ENIGMA',
     status: DataSourceStatus.DISABLED,
     url: 'https://www.intcat.co.uk',
-    description: DATA_SOURCE_DESCRIPTIONS.ENIGMA,
+    description: DATA_SOURCE_DESCRIPTIONS.ENIGMA
   },
   {
     id: DataSourceId.CJK_SCRAPER,
     label: 'CJK SCRAPER',
     status: DataSourceStatus.DISABLED,
-    description: DATA_SOURCE_DESCRIPTIONS.CJK_SCRAPER,
-  },
+    description: DATA_SOURCE_DESCRIPTIONS.CJK_SCRAPER
+  }
 ]
 
 function updateSourceStatus(id: DataSourceId, hasData: boolean): void {
@@ -195,7 +195,7 @@ export function useDataSource() {
       chronology.loadManifest().then((m) => {
         // Update all chronology sub-source statuses based on manifest load
         updateSourceStatus(DataSourceId.CHRONOLOGY, m !== null && m.totalRecords > 0)
-      }),
+      })
     ])
   }
 
@@ -215,7 +215,7 @@ export function useDataSource() {
     const [nuforcData, hatchData, chronData] = await Promise.all([
       nuforc.loadYearRange(from, to),
       hatch.loadYearRange(from, to),
-      chronology.loadYearRange(from, to),
+      chronology.loadYearRange(from, to)
     ])
 
     updateSourceStatus(DataSourceId.NUFORC, nuforcData.length > 0)
@@ -231,7 +231,7 @@ export function useDataSource() {
   async function fetchProgressive(
     from: number,
     to: number,
-    onChunk: (sightings: Sighting[]) => void,
+    onChunk: (sightings: Sighting[]) => void
   ): Promise<Sighting[]> {
     // Start Hatch + Chronology loading in background (non-progressive)
     const hatchPromise = hatch.loadYearRange(from, to)
@@ -332,7 +332,7 @@ export function useDataSource() {
     getSources,
     nuforc,
     hatch,
-    chronology,
+    chronology
   }
 }
 

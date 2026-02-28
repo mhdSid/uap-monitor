@@ -1,4 +1,4 @@
 /** Class name constants for footer. */
 export const cx = {
-  root: 'app-footer',
+  root: 'app-footer'
 } as const

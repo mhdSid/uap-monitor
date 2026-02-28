@@ -23,7 +23,7 @@ export interface InfiniteScrollActions<T> {
 
 export function useInfiniteScroll<T>(
   pageSize: number = DEFAULT_PAGE_SIZE,
-  onUpdate?: (state: InfiniteScrollState<T>) => void,
+  onUpdate?: (state: InfiniteScrollState<T>) => void
 ): InfiniteScrollActions<T> {
   let allItems: T[] = []
   let visibleCount = 0
@@ -34,7 +34,7 @@ export function useInfiniteScroll<T>(
       allItems,
       visibleItems: allItems.slice(0, visibleCount),
       visibleCount,
-      hasMore: visibleCount < allItems.length,
+      hasMore: visibleCount < allItems.length
     }
   }
 
@@ -65,7 +65,7 @@ export function useInfiniteScroll<T>(
           loadMore()
         }
       },
-      { root: scrollRoot, rootMargin: '200px' },
+      { root: scrollRoot, rootMargin: '200px' }
     )
     observer.observe(sentinel)
   }

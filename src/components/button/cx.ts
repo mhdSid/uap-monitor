@@ -15,5 +15,5 @@ export const cx = {
   xs: 'btn--xs',
   icon: 'btn__icon',
   iconTrailing: 'btn__icon--trailing',
-  label: 'btn__label',
+  label: 'btn__label'
 } as const

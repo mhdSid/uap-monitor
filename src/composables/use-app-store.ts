@@ -69,7 +69,7 @@ export function useAppStore(): AppStore {
   const shownCount = signal(0)
 
   const selectedContinent = computed<Continent | undefined>(
-    () => filter.get().continent,
+    () => filter.get().continent
   )
 
   const hasActiveFilter = computed(() => {
@@ -78,7 +78,7 @@ export function useAppStore(): AppStore {
   })
 
   const displayCount = computed(
-    () => `${shownCount.get().toLocaleString()} / ${totalCount.get().toLocaleString()}`,
+    () => `${shownCount.get().toLocaleString()} / ${totalCount.get().toLocaleString()}`
   )
 
   instance = {
@@ -92,7 +92,7 @@ export function useAppStore(): AppStore {
     shownCount,
     selectedContinent,
     hasActiveFilter,
-    displayCount,
+    displayCount
   }
 
   return instance

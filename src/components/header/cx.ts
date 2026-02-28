@@ -6,5 +6,5 @@ export const cx = {
   left: 'app-header__left',
   right: 'app-header__right',
   title: 'app-header__title',
-  version: 'app-header__version',
+  version: 'app-header__version'
 } as const

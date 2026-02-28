@@ -42,8 +42,8 @@ export class SightingGrids extends Component {
     if (sightings.length === 0) {
       this.el.appendChild(
         h('div', { className: cx.emptyState },
-          h('span', { className: cx.emptyStateText }, FILTER.NO_RESULTS),
-        ),
+          h('span', { className: cx.emptyStateText }, FILTER.NO_RESULTS)
+        )
       )
       return
     }
@@ -58,7 +58,7 @@ export class SightingGrids extends Component {
         const grid = new DataGrid<Sighting>({
           columns: this.columns,
           data: group.items,
-          onRowClick: (s, trigger) => SightingModal.open(s, trigger),
+          onRowClick: (s, trigger) => SightingModal.open(s, trigger)
         })
         this.activeGrids.push(grid)
 
@@ -67,8 +67,8 @@ export class SightingGrids extends Component {
             title: group.label,
             count: group.count,
             tooltip: CONTINENT_TOOLTIPS[group.continent],
-            content: grid.el,
-          }).el,
+            content: grid.el
+          }).el
         )
       } else if (!selected) {
         frag.appendChild(
@@ -78,10 +78,10 @@ export class SightingGrids extends Component {
             tooltip: CONTINENT_TOOLTIPS[group.continent],
             content: h('div', { className: `${cx.emptyState} ${cx.emptyStateCompact}` },
               h('span', { className: cx.emptyStateText },
-                CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT,
-              ),
-            ),
-          }).el,
+                CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT
+              )
+            )
+          }).el
         )
       }
 

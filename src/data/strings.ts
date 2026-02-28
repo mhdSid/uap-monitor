@@ -23,7 +23,7 @@ export const ARIA = {
   DISMISS_ALERT: 'Dismiss alert',
   TICKER: 'Click to scroll to this sighting in the grid',
   TICKER_IDLE: 'UAP Monitor live feed',
-  TOOLTIP: 'More info',
+  TOOLTIP: 'More info'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -35,7 +35,7 @@ export const CONTINENT_LABELS: Record<Continent, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'ASIA — MIDDLE EAST',
   [Continent.ASIA_PACIFIC]: 'ASIA — PACIFIC',
   [Continent.OCEANIA]: 'OCEANIA',
-  [Continent.AFRICA]: 'AFRICA',
+  [Continent.AFRICA]: 'AFRICA'
 }
 
 export const CONTINENT_DISPLAY_NAMES: Record<string, string> = {
@@ -45,7 +45,7 @@ export const CONTINENT_DISPLAY_NAMES: Record<string, string> = {
   ASIA_MIDDLE_EAST: 'Middle East',
   ASIA_PACIFIC: 'Asia-Pacific',
   OCEANIA: 'Oceania',
-  AFRICA: 'Africa',
+  AFRICA: 'Africa'
 }
 
 // ─── Continent tooltips ─────────────────────────────────────────────
@@ -57,7 +57,7 @@ export const CONTINENT_TOOLTIPS: Record<string, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'Sightings from the Middle East, Central Asia, and South Asia — including Iran, Saudi Arabia, India, Pakistan, and Afghanistan.',
   [Continent.ASIA_PACIFIC]: 'Sightings from East and Southeast Asia including Japan, China, Korea, and ASEAN nations. CJK scraper integration planned.',
   [Continent.OCEANIA]: 'Sightings from Australia, New Zealand, and Pacific Island nations.',
-  [Continent.AFRICA]: 'Sightings from African nations. Historically underreported in English-language databases.',
+  [Continent.AFRICA]: 'Sightings from African nations. Historically underreported in English-language databases.'
 }
 
 export const CONTINENT_EMPTY: Record<string, string> = {
@@ -67,7 +67,7 @@ export const CONTINENT_EMPTY: Record<string, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'No sightings in the Middle East for current filters.',
   [Continent.ASIA_PACIFIC]: 'No sightings in Asia-Pacific for current filters. CJK scraper integration planned.',
   [Continent.OCEANIA]: 'No sightings in Oceania for current filters.',
-  [Continent.AFRICA]: 'No sightings in Africa for current filters. Coverage is limited in English-language databases.',
+  [Continent.AFRICA]: 'No sightings in Africa for current filters. Coverage is limited in English-language databases.'
 }
 
 // ─── Filter & search ────────────────────────────────────────────────
@@ -79,7 +79,7 @@ export const FILTER = {
   ALL_COUNTRIES: 'ALL COUNTRIES',
   NO_DATA: 'NO DATA',
   NO_RESULTS: 'NO MATCHING SIGHTINGS',
-  EMPTY_DEFAULT: 'No data',
+  EMPTY_DEFAULT: 'No data'
 } as const
 
 // ─── Section titles ─────────────────────────────────────────────────
@@ -88,7 +88,7 @@ export const SECTION = {
   DATA_SOURCES: 'DATA SOURCES',
   DATA_SOURCES_TOOLTIP: 'Open-source intelligence feeds aggregated by UAP Monitor. Green = live, amber = syncing, grey = planned. Click any source to visit its website.',
   INTEL_TITLE: 'INTELLIGENCE SOURCES',
-  INTEL_CONTENT: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.',
+  INTEL_CONTENT: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.'
 } as const
 
 // ─── Sighting modal labels ──────────────────────────────────────────
@@ -109,7 +109,7 @@ export const MODAL = {
   REFERENCE: 'Reference',
   SUMMARY: 'SUMMARY',
   WITNESS_ACCOUNT: 'WITNESS ACCOUNT',
-  EMPTY_VALUE: '—',
+  EMPTY_VALUE: '—'
 } as const
 
 // ─── Ticker ─────────────────────────────────────────────────────────
@@ -123,12 +123,12 @@ export const TICKER = {
     'Processing witness accounts and credibility scores...',
     'Cross-referencing flight data with sighting coordinates...',
     'Loading 28,000+ researcher chronology records (Eberhart, Johnson, NICAP, Vallée)...',
-    'Integrating Blue Book unknowns and historical case files...',
+    'Integrating Blue Book unknowns and historical case files...'
   ],
   DEFAULT_MESSAGES_MULTI: [
     'Monitoring CJK and Russian language sources',
-    'for new activity...',
-  ],
+    'for new activity...'
+  ]
 } as const
 
 // ─── Data sources ───────────────────────────────────────────────────
@@ -142,7 +142,7 @@ export const DATA_SOURCE_DESCRIPTIONS = {
   AARO: 'All-domain Anomaly Resolution Office — US DoD official UAP investigations',
   GEIPAN: 'French space agency UAP research unit — European sighting database',
   ENIGMA: 'International catalogue of UFO events and encounter classifications',
-  CJK_SCRAPER: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news',
+  CJK_SCRAPER: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news'
 } as const
 
 // ─── Welcome modal ──────────────────────────────────────────────────
@@ -152,7 +152,7 @@ export const WELCOME = {
   SUBTITLE: 'Open-Source Intelligence Platform',
   BODY: [
     'Unidentified Aerial Phenomena are documented across dozens of databases, languages, and decades — scattered, inconsistent, and hard to search. This tool unifies them.',
-    'We aggregate, standardize, and surface UAP reports from verified open-source feeds so researchers, journalists, and curious minds can explore the data freely.',
+    'We aggregate, standardize, and surface UAP reports from verified open-source feeds so researchers, journalists, and curious minds can explore the data freely.'
   ],
   CTA: 'BEGIN MONITORING',
   SOURCES_TITLE: 'ACTIVE SOURCES',
@@ -164,7 +164,7 @@ export const WELCOME = {
   STAT_SOURCES_LABEL: 'Sources',
   STAT_OPEN: '100%',
   STAT_OPEN_LABEL: 'Open data',
-  CLOSING: 'All data is open. All code is open. The truth should be too.',
+  CLOSING: 'All data is open. All code is open. The truth should be too.'
 } as const
 
 // ─── Errors ─────────────────────────────────────────────────────────
@@ -176,5 +176,5 @@ export const ERRORS = {
   HATCH_MANIFEST: 'Malformed Hatch UDB manifest',
   HATCH_LOAD: 'Failed to load Hatch UDB manifest',
   CHRONOLOGY_MANIFEST: 'Malformed chronology manifest',
-  CHRONOLOGY_LOAD: 'Failed to load chronology manifest',
+  CHRONOLOGY_LOAD: 'Failed to load chronology manifest'
 } as const

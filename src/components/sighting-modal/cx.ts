@@ -14,5 +14,5 @@ export const cx = {
   summaryLabel: 'modal-sighting__summary-label',
   title: 'modal-sighting__title',
   value: 'modal-sighting__value',
-  sourceLink: 'modal-sighting__source-link',
+  sourceLink: 'modal-sighting__source-link'
 } as const

@@ -8,5 +8,5 @@ export const cx = {
   cursorBlink: 'ticker__cursor--blink',
   ghost: 'ticker__ghost',
   ghostLine: 'ticker__ghost-line',
-  line: 'ticker__line',
+  line: 'ticker__line'
 } as const

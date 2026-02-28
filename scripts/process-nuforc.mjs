@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url'
 
 import {
   Continent, Status, Shape, VALID_SHAPES,
-  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate,
+  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate
 } from './shared-constants.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -38,7 +38,7 @@ const DEFAULT_INPUT = resolve(SOURCES_DIR, 'nuforc.json')
 // ─── NUFORC-specific constants ──────────────────────────────────────
 
 const Source = {
-  NUFORC: 'NUFORC',
+  NUFORC: 'NUFORC'
 }
 
 const VALID_YEAR_MIN = 1950
@@ -68,7 +68,7 @@ const SHAPE_ALIASES = {
   'Dome': Shape.CIRCLE,
   'Flare': Shape.FIREBALL,
   'N/A': Shape.UNKNOWN,
-  '': Shape.UNKNOWN,
+  '': Shape.UNKNOWN
 }
 
 // ─── Country → default coordinates ──────────────────────────────────
@@ -88,7 +88,7 @@ const US_STATES = {
   'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
   'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah',
   'VT': 'Vermont', 'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia',
-  'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia',
+  'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia'
 }
 
 // Canadian province abbreviations
@@ -97,7 +97,7 @@ const CA_PROVINCES = {
   'NB': 'New Brunswick', 'NL': 'Newfoundland', 'NS': 'Nova Scotia',
   'NT': 'Northwest Territories', 'NU': 'Nunavut', 'ON': 'Ontario',
   'PE': 'Prince Edward Island', 'QC': 'Quebec', 'SK': 'Saskatchewan',
-  'YT': 'Yukon',
+  'YT': 'Yukon'
 }
 
 // ─── Audit trackers ─────────────────────────────────────────────────
@@ -118,7 +118,7 @@ function parseNuforcDate(raw) {
 function parseLocation(raw) {
   const fallback = {
     city: '', state: '', country: Shape.UNKNOWN,
-    region: '', continent: Continent.AMERICAS,
+    region: '', continent: Continent.AMERICAS
   }
 
   if (!raw) return fallback
@@ -298,7 +298,7 @@ function main() {
       country: loc.country,
       continent: loc.continent,
       status: Status.PENDING,
-      credibility,
+      credibility
     }
 
     if (!byYear.has(year)) byYear.set(year, [])
@@ -313,7 +313,7 @@ function main() {
     generatedAt: new Date().toISOString(),
     totalRecords: processed,
     skippedRecords: skipped,
-    years: {},
+    years: {}
   }
 
   const sortedYears = [...byYear.keys()].sort()

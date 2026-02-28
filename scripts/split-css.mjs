@@ -36,13 +36,13 @@ const SECTION_MAP = {
   'BUTTON': { dir: 'button', file: 'styles.css' },
   'WELCOME MODAL': { dir: 'welcome-modal', file: 'styles.css' },
   'SIGHTING MAP': { dir: 'sighting-map', file: 'styles.css' },
-  'TIMELINE': { dir: 'timeline', file: 'styles.css' },
+  'TIMELINE': { dir: 'timeline', file: 'styles.css' }
 }
 
 // ── Global sections (stay in global.css) ──
 const GLOBAL_SECTIONS = new Set([
   'VARIABLES', 'RESET', 'SCANLINES', 'MAIN', 'GRIDS CONTAINER',
-  'CONTROLS FORM', 'FOCUS RING (a11y)', 'BODY SCROLL LOCK (when modal open)',
+  'CONTROLS FORM', 'FOCUS RING (a11y)', 'BODY SCROLL LOCK (when modal open)'
 ])
 
 // ── Parse CSS into sections ──
@@ -75,7 +75,7 @@ const globalParts = []
 
 for (const section of sections) {
   const content = lines.slice(section.startLine, section.endLine + 1).join('\n').trim()
-  
+
   if (GLOBAL_SECTIONS.has(section.name)) {
     globalParts.push(content)
     continue

@@ -312,7 +312,7 @@ export const COUNTRY_CONTINENT: Record<string, Continent> = {
   'Pacific Ocean': Continent.OCEANIA,
   'Indian Ocean': Continent.AFRICA,
   'Arctic': Continent.EURASIA,
-  'Antarctica': Continent.OCEANIA,
+  'Antarctica': Continent.OCEANIA
 }
 
 // ─── Country → Default Coordinates (capital / centroid) ─────────────
@@ -533,7 +533,7 @@ export const COUNTRY_COORDS: Record<string, { lat: number; lng: number }> = {
   'Atlantic Ocean': { lat: 25, lng: -40 },
   'Pacific Ocean': { lat: 0, lng: -160 },
   'Indian Ocean': { lat: -10, lng: 70 },
-  'Antarctica': { lat: -82, lng: 0 },
+  'Antarctica': { lat: -82, lng: 0 }
 }
 
 // ─── Lookup helpers ─────────────────────────────────────────────────

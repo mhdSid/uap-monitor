@@ -5,5 +5,5 @@ export const cx = {
   close: 'alert__close',
   content: 'alert__content',
   icon: 'alert__icon',
-  title: 'alert__title',
+  title: 'alert__title'
 } as const

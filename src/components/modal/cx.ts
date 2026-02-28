@@ -6,5 +6,5 @@ export const cx = {
   close: 'modal__close',
   content: 'modal__content',
   footer: 'modal__footer',
-  header: 'modal__header',
+  header: 'modal__header'
 } as const

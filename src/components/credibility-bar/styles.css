@@ -7,7 +7,7 @@
 }
 
 .credibility-bar__track {
-  width: 48px;
+  width: 28px;
   height: 4px;
   background: var(--color-border);
   border-radius: 1px;
@@ -24,7 +24,8 @@
   min-width: 20px;
   text-align: right;
 }
+}
 
-@media (max-width: 480px) {
-  .credibility-bar__track { width: 28px; }
+@media (min-width: 481px) {
+  .credibility-bar__track { width: 48px; }
 }

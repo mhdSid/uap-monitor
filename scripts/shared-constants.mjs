@@ -19,11 +19,11 @@ export const Continent = {
   ASIA_MIDDLE_EAST: 'ASIA_MIDDLE_EAST',
   ASIA_PACIFIC: 'ASIA_PACIFIC',
   OCEANIA: 'OCEANIA',
-  AFRICA: 'AFRICA',
+  AFRICA: 'AFRICA'
 }
 
 export const Status = {
-  PENDING: 'PENDING',
+  PENDING: 'PENDING'
 }
 
 export const Shape = {
@@ -50,7 +50,7 @@ export const Shape = {
   SPHERE: 'Sphere',
   STAR: 'Star',
   TEARDROP: 'Teardrop',
-  TRIANGLE: 'Triangle',
+  TRIANGLE: 'Triangle'
 }
 
 export const VALID_SHAPES = new Set(Object.values(Shape))
@@ -376,7 +376,7 @@ export const COUNTRY_CONTINENT = {
   'SOUTHERN EUROPE': Continent.EUROPE,
   'South America': Continent.AMERICAS,
   'North America': Continent.AMERICAS,
-  'Central America': Continent.AMERICAS,
+  'Central America': Continent.AMERICAS
 }
 
 // ─── Country name aliases → canonical name in COUNTRY_CONTINENT ─────
@@ -553,7 +553,7 @@ export const COUNTRY_ALIASES = {
   'Straits of Magellan': 'Chile',
   'Villefranche-du-Rouergue': 'France',
   "St. James's Park": 'UK',
-  'Standlake Broad': 'UK',
+  'Standlake Broad': 'UK'
 }
 
 // ─── Region/province/territory → country ────────────────────────────
@@ -640,7 +640,7 @@ export const REGION_TO_COUNTRY = {
   'S.C': 'USA',
   'S.D': 'USA',
   'W.V': 'USA',
-  'R.I': 'USA',
+  'R.I': 'USA'
 }
 
 // ─── Known US locations (cities, AFBs, institutions, landmarks) ─────
@@ -658,7 +658,7 @@ export const US_LOCATIONS = new Set([
   'Harvard University', 'University of Colorado', 'University of New Mexico',
   'Brookhaven National Laboratory', 'MIT',
   'Nevada Test Site', 'Area 51 in Nevada',
-  'Wright-Patterson AFB in Ohio',
+  'Wright-Patterson AFB in Ohio'
 ])
 
 // ─── Country → default coordinates (capital / geographic centroid) ───
@@ -743,7 +743,7 @@ export const COUNTRY_COORDS = {
   'Egypt': { lat: 30.044, lng: 31.236 }, 'Kenya': { lat: -1.292, lng: 36.822 },
   'Morocco': { lat: 33.972, lng: -6.850 }, 'Algeria': { lat: 36.754, lng: 3.059 },
   'Tunisia': { lat: 36.807, lng: 10.182 }, 'Ghana': { lat: 5.604, lng: -0.187 },
-  'Ethiopia': { lat: 9.019, lng: 38.753 }, 'Tanzania': { lat: -6.792, lng: 39.208 },
+  'Ethiopia': { lat: 9.019, lng: 38.753 }, 'Tanzania': { lat: -6.792, lng: 39.208 }
 }
 
 // ─── Utility functions ──────────────────────────────────────────────

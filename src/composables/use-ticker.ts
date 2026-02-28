@@ -26,7 +26,7 @@ const DEFAULT_MESSAGES: TickerMessage[] = [
   { lines: ['Aggregating reports from NUFORC database...'] },
   { lines: ['Processing witness accounts and credibility scores...'] },
   { lines: ['Cross-referencing flight data with sighting coordinates...'] },
-  { lines: ['Monitoring CJK and Russian language sources', 'for new activity...'] },
+  { lines: ['Monitoring CJK and Russian language sources', 'for new activity...'] }
 ]
 
 // ─── Message generators ─────────────────────────────────────────────
@@ -124,7 +124,7 @@ const GENERATORS: MessageGenerator[] = [
   topContinent,
   highCredibility,
   randomCharacteristic,
-  datasetStats,
+  datasetStats
 ]
 
 // ─── Composable ─────────────────────────────────────────────────────

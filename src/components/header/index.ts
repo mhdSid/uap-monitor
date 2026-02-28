@@ -18,12 +18,12 @@ export class Header extends Component {
     const left = h('div', { className: cx.left },
       radar,
       h('span', { className: cx.title }, APP_NAME),
-      h('span', { className: cx.version }, APP_VERSION),
+      h('span', { className: cx.version }, APP_VERSION)
     )
 
     const clock = h('time', {
       className: cx.clock,
-      'aria-label': ARIA.CLOCK,
+      'aria-label': ARIA.CLOCK
     })
 
     const updateClock = (): void => {
@@ -45,12 +45,12 @@ export class Header extends Component {
       href: REPO_URL,
       target: '_blank',
       rel: 'noopener noreferrer',
-      'aria-label': ARIA.GITHUB,
+      'aria-label': ARIA.GITHUB
     }, githubIcon)
 
     const right = h('div', { className: cx.right },
       clock,
-      githubLink,
+      githubLink
     )
 
     return h('header', { className: cx.root, role: 'banner' }, left, right)

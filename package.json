@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "lint": "eslint . --ext .ts,.js,.mjs",
     "preview": "vite preview",
     "data:nuforc": "node scripts/process-nuforc.mjs",
     "data:hatch": "node scripts/process-hatch.mjs",

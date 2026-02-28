@@ -34,7 +34,7 @@ const ACTIVE_SOURCES: WelcomeSource[] = [
   { name: 'Blue Book Unknowns',  records: '700+',  period: '1947–1969', tier: 'high' },
   { name: 'Hall (UFO Evidence)', records: '600+',  period: '1947–2003', tier: 'high' },
   { name: 'Wonders in the Sky',  records: '500+',  period: '70 AD–1879', tier: 'base' },
-  { name: 'Dolan',               records: '300+',  period: '1941–2003', tier: 'mid' },
+  { name: 'Dolan',               records: '300+',  period: '1941–2003', tier: 'mid' }
 ]
 
 export class WelcomeModal {
@@ -55,7 +55,7 @@ export class WelcomeModal {
       onClose: () => {
         WelcomeModal.dismissed = true
         useAnalytics().welcomeModalClosed()
-      },
+      }
     })
 
     return true
@@ -66,7 +66,7 @@ export class WelcomeModal {
   private static buildHeader(): HTMLElement {
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, WELCOME.TITLE),
-      h('span', { className: cx.subtitle }, WELCOME.SUBTITLE),
+      h('span', { className: cx.subtitle }, WELCOME.SUBTITLE)
     )
   }
 
@@ -82,8 +82,8 @@ export class WelcomeModal {
         WelcomeModal.stat(WELCOME.STAT_TIMESPAN, WELCOME.STAT_TIMESPAN_LABEL),
         WelcomeModal.stat(WELCOME.STAT_RECORDS, WELCOME.STAT_RECORDS_LABEL),
         WelcomeModal.stat(WELCOME.STAT_SOURCES, WELCOME.STAT_SOURCES_LABEL),
-        WelcomeModal.stat(WELCOME.STAT_OPEN, WELCOME.STAT_OPEN_LABEL),
-      ),
+        WelcomeModal.stat(WELCOME.STAT_OPEN, WELCOME.STAT_OPEN_LABEL)
+      )
     )
 
     // ── Active sources list ──
@@ -93,21 +93,21 @@ export class WelcomeModal {
     const TIER_CX: Record<string, string> = {
       high: cx.sourceTierHigh,
       mid: cx.sourceTierMid,
-      base: cx.sourceTierBase,
+      base: cx.sourceTierBase
     }
     for (const src of ACTIVE_SOURCES) {
       sourceList.appendChild(
         h('div', { className: cx.source },
           h('span', { className: `${cx.sourceTier} ${TIER_CX[src.tier]}` }),
           h('span', { className: cx.sourceName }, src.name),
-          h('span', { className: cx.sourceMeta }, `${src.records} · ${src.period}`),
-        ),
+          h('span', { className: cx.sourceMeta }, `${src.records} · ${src.period}`)
+        )
       )
     }
     body.appendChild(sourceList)
 
     body.appendChild(
-      h('p', { className: `${cx.text} ${cx.textClosing}` }, WELCOME.CLOSING),
+      h('p', { className: `${cx.text} ${cx.textClosing}` }, WELCOME.CLOSING)
     )
 
     return body
@@ -120,7 +120,7 @@ export class WelcomeModal {
       color: 'primary',
       size: 'md',
       block: true,
-      onClick: () => WelcomeModal.dismiss(),
+      onClick: () => WelcomeModal.dismiss()
     })
 
     return h('div', { className: cx.footer }, btn.el)
@@ -131,7 +131,7 @@ export class WelcomeModal {
   private static stat(value: string, label: string): HTMLElement {
     return h('div', { className: cx.stat },
       h('span', { className: cx.statValue }, value),
-      h('span', { className: cx.statLabel }, label),
+      h('span', { className: cx.statLabel }, label)
     )
   }
 

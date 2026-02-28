@@ -35,7 +35,7 @@ export interface DebouncedFn<T extends (...args: unknown[]) => void> {
  */
 export function useDebounce<T extends (...args: unknown[]) => void>(
   fn: T,
-  ms: number,
+  ms: number
 ): DebouncedFn<T> {
   let timer: ReturnType<typeof setTimeout> | null = null
   let latestArgs: Parameters<T> | null = null
@@ -95,7 +95,7 @@ export interface ThrottledFn<T extends (...args: unknown[]) => void> {
  */
 export function useThrottle<T extends (...args: unknown[]) => void>(
   fn: T,
-  ms: number,
+  ms: number
 ): ThrottledFn<T> {
   let timer: ReturnType<typeof setTimeout> | null = null
   let lastRun = 0
@@ -164,7 +164,7 @@ export function yieldThread(): Promise<void> {
 export async function minDelay<T>(fn: () => Promise<T>, ms = 800): Promise<T> {
   const [result] = await Promise.all([
     fn(),
-    new Promise<void>((r) => setTimeout(r, ms)),
+    new Promise<void>((r) => setTimeout(r, ms))
   ])
   return result
 }

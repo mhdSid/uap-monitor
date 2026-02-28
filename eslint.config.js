@@ -7,11 +7,11 @@ export default tseslint.config(
   {
     rules: {
       semi: ['error', 'never'],
-      'comma-dangle': ['error', 'always-multiline'],
+      'comma-dangle': ['error', 'never'],
       'no-trailing-spaces': 'error',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/explicit-function-return-type': 'off',
-    },
+      '@typescript-eslint/explicit-function-return-type': 'off'
+    }
   },
   {
     files: ['scripts/**/*.mjs'],
@@ -21,8 +21,8 @@ export default tseslint.config(
         console: 'readonly',
         Buffer: 'readonly',
         __dirname: 'readonly',
-        __filename: 'readonly',
-      },
-    },
-  },
+        __filename: 'readonly'
+      }
+    }
+  }
 )

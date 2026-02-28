@@ -32,6 +32,9 @@ export const palette = {
 
   white20: 'rgba(255, 255, 255, 0.2)',
   white15: 'rgba(255, 255, 255, 0.15)',
+  white08: 'rgba(255, 255, 255, 0.08)',
+
+  green500_20: 'rgba(0, 255, 65, 0.2)'
 } as const
 
 // ─── Semantic tokens (JS-side) ──────────────────────────────────────
@@ -48,5 +51,5 @@ export const colors = {
 
   sourceNuforc: palette.green400,
   sourceHatch: palette.cyan400,
-  sourceChronology: palette.amber400,
+  sourceChronology: palette.amber400
 } as const

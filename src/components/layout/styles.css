@@ -32,9 +32,10 @@
 }
 
 .section__body {
-  padding: 12px;
+  padding: 8px;
+}
 }
 
-@media (max-width: 480px) {
-  .section__body { padding: 8px; }
+@media (min-width: 481px) {
+  .section__body { padding: 12px; }
 }

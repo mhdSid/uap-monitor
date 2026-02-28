@@ -25,7 +25,7 @@ const INTERACTION_EVENTS = [
   'click',
   'touchstart',
   'keydown',
-  'mousemove',
+  'mousemove'
 ] as const
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -61,7 +61,7 @@ function toShallow(s: Sighting): SightingShallow {
     country: s.country,
     continent: s.continent,
     credibility: s.credibility,
-    occurredAt: s.occurredAt,
+    occurredAt: s.occurredAt
   }
 }
 
@@ -161,7 +161,7 @@ class Analytics {
   sightingViewed(sighting: Sighting): void {
     this.push({
       event: 'sighting_viewed',
-      sighting: toShallow(sighting),
+      sighting: toShallow(sighting)
     })
   }
 
@@ -169,7 +169,7 @@ class Analytics {
   sightingDismissed(sighting: Sighting): void {
     this.push({
       event: 'sighting_dismissed',
-      sighting: toShallow(sighting),
+      sighting: toShallow(sighting)
     })
   }
 }

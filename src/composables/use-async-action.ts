@@ -6,12 +6,12 @@ export function useAsyncAction<T>() {
   const state: AsyncState<T> = {
     data: null,
     loading: false,
-    error: null,
+    error: null
   }
 
   async function execute(
     callback: () => Promise<T>,
-    onSuccess?: (data: T) => void,
+    onSuccess?: (data: T) => void
   ): Promise<void> {
     state.loading = true
     state.error = null

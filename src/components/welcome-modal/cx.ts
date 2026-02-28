@@ -20,5 +20,5 @@ export const cx = {
   subtitle: 'welcome__subtitle',
   text: 'welcome__text',
   textClosing: 'welcome__text--closing',
-  title: 'welcome__title',
+  title: 'welcome__title'
 } as const

@@ -42,14 +42,14 @@ export class Button extends Component<ButtonProps> {
       disabled = false,
       icon,
       trailingIcon,
-      onClick,
+      onClick
     } = this.props
 
     const classes = [
       'btn',
       `btn--${variant}`,
       `btn--${color}`,
-      `btn--${size}`,
+      `btn--${size}`
     ]
     if (block) classes.push('btn--block')
 
@@ -73,7 +73,7 @@ export class Button extends Component<ButtonProps> {
       className: classes.join(' '),
       type: 'button',
       disabled: disabled || undefined,
-      onClick: onClick ?? undefined,
+      onClick: onClick ?? undefined
     }, ...children)
 
     return btn

@@ -18,7 +18,7 @@ export function useNuforc() {
     defaultSource: DataSourceId.NUFORC,
     label: 'NUFORC',
     simpleYears: true,
-    onError: (msg) => toast.error(msg),
+    onError: (msg) => toast.error(msg)
   })
 
   /**
@@ -44,6 +44,6 @@ export function useNuforc() {
     loadDefault,
     getAvailableYears: loader.getAvailableYears,
     getTotalCount: loader.getTotalCount,
-    getYearCounts: loader.getYearCounts,
+    getYearCounts: loader.getYearCounts
   }
 }

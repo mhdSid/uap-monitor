@@ -120,7 +120,7 @@ export function parseSighting(raw: unknown, defaultSource: DataSourceId): Sighti
     credibility: typeof r.credibility === 'number' ? Math.min(100, Math.max(0, r.credibility)) : 0,
     tags: Array.isArray(r.tags) ? r.tags : undefined,
     strangeness: typeof r.strangeness === 'number' ? r.strangeness : undefined,
-    ref: typeof r.ref === 'string' ? r.ref : undefined,
+    ref: typeof r.ref === 'string' ? r.ref : undefined
   }
 }
 
@@ -165,7 +165,7 @@ export function getChunkKeysForRange(
   yearKeys: string[],
   fromYear: number,
   toYear: number,
-  simpleYears = false,
+  simpleYears = false
 ): string[] {
   const keys: string[] = []
 
@@ -243,7 +243,7 @@ export interface SourceLoader<M extends ManifestLike = ManifestLike> {
  * Each source composable calls this once and extends with source-specific helpers.
  */
 export function createSourceLoader<M extends ManifestLike = ManifestLike>(
-  config: SourceLoaderConfig,
+  config: SourceLoaderConfig
 ): SourceLoader<M> {
   let manifest: M | null = null
   let manifestError: string | null = null
@@ -314,7 +314,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
       Object.keys(manifest.years),
       fromYear,
       toYear,
-      config.simpleYears,
+      config.simpleYears
     )
   }
 
@@ -330,7 +330,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
   async function loadProgressive(
     fromYear: number,
     toYear: number,
-    onChunk: (sightings: Sighting[]) => void,
+    onChunk: (sightings: Sighting[]) => void
   ): Promise<Sighting[]> {
     const m = await loadManifest()
     if (!m) return []
@@ -380,7 +380,16 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     if (!manifest) return counts
     for (const [key, meta] of Object.entries(manifest.years)) {
       const y = parseInt(key, 10)
-      if (!isNaN(y)) counts.set(y, meta.count)
+      if (!isNaN(y) && !key.endsWith('s')) {
+        // Simple year key: "1947" → count goes directly
+        counts.set(y, (counts.get(y) || 0) + meta.count)
+      } else if (meta.years && meta.years.length > 0) {
+        // Ancient or decade chunk with listed years — distribute evenly
+        const perYear = Math.max(1, Math.round(meta.count / meta.years.length))
+        for (const yr of meta.years) {
+          counts.set(yr, (counts.get(yr) || 0) + perYear)
+        }
+      }
     }
     return counts
   }
@@ -406,6 +415,6 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     getTotalCount,
     getYearCounts,
     getLoadedCount,
-    getManifest,
+    getManifest
   }
 }

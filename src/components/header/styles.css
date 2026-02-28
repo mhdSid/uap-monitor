@@ -28,6 +28,7 @@
 }
 
 .app-header__clock {
+  display: none;
   font-size: var(--fs-sm);
   color: var(--color-muted);
   letter-spacing: 1px;
@@ -51,6 +52,6 @@
   color: var(--color-text-strong);
 }
 
-@media (max-width: 480px) {
-  .app-header__clock { display: none; }
+@media (min-width: 481px) {
+  .app-header__clock { display: flex; }
 }

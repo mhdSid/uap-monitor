@@ -10,7 +10,7 @@ const CONTINENT_ORDER: Continent[] = [
   Continent.ASIA_MIDDLE_EAST,
   Continent.ASIA_PACIFIC,
   Continent.OCEANIA,
-  Continent.AFRICA,
+  Continent.AFRICA
 ]
 
 /**
@@ -33,7 +33,7 @@ export function groupByContinent<T extends { continent: Continent }>(items: T[])
       continent,
       label: CONTINENT_LABELS[continent],
       items: groupItems,
-      count: groupItems.length,
+      count: groupItems.length
     }
   })
 }

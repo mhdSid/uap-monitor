@@ -21,7 +21,7 @@ function getSharedPopup(): HTMLElement {
   if (!sharedPopup) {
     sharedPopup = h('div', {
       className: cx.tooltipPopup,
-      role: 'tooltip',
+      role: 'tooltip'
     })
     document.body.appendChild(sharedPopup)
   }
@@ -78,7 +78,7 @@ export class Tooltip extends Component<TooltipProps> {
     this.trigger = h('button', {
       className: cx.tooltipTrigger,
       'aria-label': this.props.ariaLabel || ARIA.TOOLTIP,
-      type: 'button',
+      type: 'button'
     }, '?')
 
     wrapper.appendChild(this.trigger)
