@@ -1,5 +1,5 @@
 import '@/styles'
-import { createApp } from '@/app'
+import { createApp } from '@/components/_app/app'
 import { qs } from '@/utils/dom'
 
 createApp(qs('#app'))
