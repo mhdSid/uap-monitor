@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h, addClass, removeClass } from '@/utils/dom'
 import { ARIA } from '@/data/strings'
@@ -18,7 +20,7 @@ let activeCleanup: (() => void) | null = null
 function getSharedPopup(): HTMLElement {
   if (!sharedPopup) {
     sharedPopup = h('div', {
-      className: 'tooltip__popup',
+      className: cx.tooltipPopup,
       role: 'tooltip',
     })
     document.body.appendChild(sharedPopup)
@@ -71,10 +73,10 @@ export class Tooltip extends Component<TooltipProps> {
   private trigger!: HTMLElement
 
   protected create(): HTMLElement {
-    const wrapper = h('div', { className: 'tooltip-wrapper' })
+    const wrapper = h('div', { className: cx.tooltipWrapper })
 
     this.trigger = h('button', {
-      className: 'tooltip__trigger',
+      className: cx.tooltipTrigger,
       'aria-label': this.props.ariaLabel || ARIA.TOOLTIP,
       type: 'button',
     }, '?')
@@ -110,14 +112,14 @@ export class Tooltip extends Component<TooltipProps> {
     }
 
     activeCleanup = () => {
-      removeClass(popup, 'tooltip__popup--visible')
+      removeClass(popup, cx.tooltipPopupVisible)
       document.removeEventListener('click', handleOutsideClick)
       window.removeEventListener('resize', reposition)
       window.removeEventListener('scroll', reposition, true)
     }
 
     reposition()
-    addClass(popup, 'tooltip__popup--visible')
+    addClass(popup, cx.tooltipPopupVisible)
     document.addEventListener('click', handleOutsideClick)
     window.addEventListener('resize', reposition)
     window.addEventListener('scroll', reposition, true)

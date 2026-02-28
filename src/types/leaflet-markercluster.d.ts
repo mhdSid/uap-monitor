@@ -8,6 +8,8 @@ declare namespace L {
     spiderfyOnMaxZoom?: boolean
     showCoverageOnHover?: boolean
     zoomToBoundsOnClick?: boolean
+    disableClusteringAtZoom?: number
+    spiderfyDistanceMultiplier?: number
     chunkedLoading?: boolean
     chunkInterval?: number
     chunkDelay?: number

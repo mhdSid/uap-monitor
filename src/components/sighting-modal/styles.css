@@ -1,0 +1,116 @@
+/* ===== MODAL SIGHTING DETAIL ===== */
+.modal-sighting__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.modal-sighting__title {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 1px;
+}
+
+.modal-sighting__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.modal-sighting__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--c-neutral-900);
+}
+
+.modal-sighting__label {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.modal-sighting__value {
+  font-size: var(--fs-sm);
+  color: var(--color-text-strong);
+  text-align: right;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.modal-sighting__summary-label {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.modal-sighting__summary {
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* When summary has description below it */
+.modal-sighting__summary--with-desc {
+  margin-bottom: 8px;
+}
+
+/* When summary is the only text block */
+.modal-sighting__summary--solo {
+  margin-bottom: 16px;
+}
+
+.modal-sighting__description {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* When description follows summary */
+.modal-sighting__description--with-summary {
+  margin-bottom: 16px;
+}
+
+/* When description is the only text block */
+.modal-sighting__description--solo {
+  margin-bottom: 16px;
+}
+
+.modal-sighting__footer {
+  display: flex;
+}
+
+.modal-sighting__source-link {
+  color: var(--color-green);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.modal-sighting__source-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .modal-sighting__row {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .modal-sighting__value { text-align: left; }
+}

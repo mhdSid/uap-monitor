@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  Button — styled, accessible button component                       *
  *                                                                     *
@@ -55,15 +57,15 @@ export class Button extends Component<ButtonProps> {
 
     if (icon) {
       const svg = icon()
-      addClass(svg, 'btn__icon')
+      addClass(svg, cx.icon)
       children.push(svg)
     }
 
-    children.push(h('span', { className: 'btn__label' }, label))
+    children.push(h('span', { className: cx.label }, label))
 
     if (trailingIcon) {
       const svg = trailingIcon()
-      addClass(svg, 'btn__icon', 'btn__icon--trailing')
+      addClass(svg, cx.icon, cx.iconTrailing)
       children.push(svg)
     }
 

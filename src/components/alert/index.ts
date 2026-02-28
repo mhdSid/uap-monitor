@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { AlertVariant } from '@/enums'
 import { ARIA } from '@/data/strings'
@@ -25,28 +27,28 @@ export class Alert extends Component<AlertProps> {
     const colors = VARIANT_COLORS[this.props.variant]
 
     const alert = h('div', {
-      className: `alert alert--${this.props.variant}`,
+      className: `${cx.root} alert--${this.props.variant}`,
       role: 'alert',
       style: { borderColor: colors.border },
     })
 
     const icon = h('span', {
-      className: 'alert__icon',
+      className: cx.icon,
       style: { color: colors.text },
     }, colors.icon)
 
-    const body = h('div', { className: 'alert__body' })
+    const body = h('div', { className: cx.body })
 
     if (this.props.title) {
       body.appendChild(
         h('div', {
-          className: 'alert__title',
+          className: cx.title,
           style: { color: colors.text },
         }, this.props.title),
       )
     }
 
-    const content = h('div', { className: 'alert__content' })
+    const content = h('div', { className: cx.content })
     if (typeof this.props.content === 'string') {
       content.textContent = this.props.content
     } else {
@@ -60,7 +62,7 @@ export class Alert extends Component<AlertProps> {
     if (this.props.dismissible) {
       alert.appendChild(
         h('button', {
-          className: 'alert__close',
+          className: cx.close,
           'aria-label': ARIA.DISMISS_ALERT,
           onClick: () => {
             alert.style.opacity = '0'

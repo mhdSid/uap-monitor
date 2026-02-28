@@ -76,6 +76,7 @@ export const FILTER = {
   SEARCH_PLACEHOLDER: 'SEARCH REPORTS...',
   ALL_SHAPES: 'ALL SHAPES',
   ALL_REGIONS: 'ALL REGIONS',
+  ALL_COUNTRIES: 'ALL COUNTRIES',
   NO_DATA: 'NO DATA',
   NO_RESULTS: 'NO MATCHING SIGHTINGS',
   EMPTY_DEFAULT: 'No data',
@@ -154,6 +155,16 @@ export const WELCOME = {
     'We aggregate, standardize, and surface UAP reports from verified open-source feeds so researchers, journalists, and curious minds can explore the data freely.',
   ],
   CTA: 'BEGIN MONITORING',
+  SOURCES_TITLE: 'ACTIVE SOURCES',
+  STAT_TIMESPAN: '70 AD–present',
+  STAT_TIMESPAN_LABEL: 'Time span',
+  STAT_RECORDS: '193,000+',
+  STAT_RECORDS_LABEL: 'Records',
+  STAT_SOURCES: '12 active',
+  STAT_SOURCES_LABEL: 'Sources',
+  STAT_OPEN: '100%',
+  STAT_OPEN_LABEL: 'Open data',
+  CLOSING: 'All data is open. All code is open. The truth should be too.',
 } as const
 
 // ─── Errors ─────────────────────────────────────────────────────────

@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import type { NewsFeedProps } from '@/types'
 import { h } from '@/utils/dom'
@@ -8,18 +10,18 @@ export class NewsFeed extends Component<NewsFeedProps> {
     const wrapper = h('div', { className: 'news-feed' })
 
     for (const item of this.props.items) {
-      const meta = h('div', { className: 'news-feed__meta' },
-        h('span', { className: 'news-feed__source' }, item.source),
+      const meta = h('div', { className: cx.meta },
+        h('span', { className: cx.source }, item.source),
       )
       if (item.tag) {
         meta.appendChild(new Tag({ variant: item.tag }).el)
       }
-      meta.appendChild(h('span', { className: 'news-feed__time' }, item.time))
+      meta.appendChild(h('span', { className: cx.time }, item.time))
 
       wrapper.appendChild(
-        h('div', { className: 'news-feed__item' },
+        h('div', { className: cx.item },
           meta,
-          h('div', { className: 'news-feed__text' }, item.text),
+          h('div', { className: cx.text }, item.text),
         ),
       )
     }

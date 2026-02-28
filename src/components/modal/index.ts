@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  Modal — singleton dialog with focus trap & WAI-ARIA compliance     *
  *                                                                     *
@@ -33,17 +35,17 @@ export class Modal {
     Modal.trigger = trigger ?? (document.activeElement as HTMLElement | null)
 
     const closeBtn = h('button', {
-      className: 'modal__close',
+      className: cx.close,
       'aria-label': ARIA.CLOSE_MODAL,
       onClick: () => Modal.close(),
     }, iconClose(14))
 
-    const headerBar = h('div', { className: 'modal__header' })
+    const headerBar = h('div', { className: cx.header })
     if (slots.header) headerBar.appendChild(slots.header())
     headerBar.appendChild(closeBtn)
 
     const dialog = h('div', {
-      className: 'modal',
+      className: cx.root,
       role: 'dialog',
       'aria-modal': 'true',
     }, headerBar)
@@ -56,13 +58,13 @@ export class Modal {
     }
 
     if (slots.content) {
-      dialog.appendChild(h('div', { className: 'modal__content' }, slots.content()))
+      dialog.appendChild(h('div', { className: cx.content }, slots.content()))
     }
     if (slots.footer) {
-      dialog.appendChild(h('div', { className: 'modal__footer' }, slots.footer()))
+      dialog.appendChild(h('div', { className: cx.footer }, slots.footer()))
     }
 
-    const overlay = h('div', { className: 'modal-overlay' }, dialog)
+    const overlay = h('div', { className: cx.overlay }, dialog)
     overlay.addEventListener('click', (e: Event) => {
       if (e.target === overlay) Modal.close()
     })

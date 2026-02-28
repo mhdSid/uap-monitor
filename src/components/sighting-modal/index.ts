@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  SightingModal — detail view for a single UAP sighting              *
  *                                                                     *
@@ -10,7 +12,7 @@ import { h } from '@/utils/dom'
 import { StatusTag, Tag } from '@/components/tags'
 import { Modal } from '@/components/modal'
 import { MODAL } from '@/data/strings'
-import { useAnalytics } from '@/composables'
+import { useAnalytics, getSourceUrl } from '@/composables'
 
 // ─── Sub-source display names (chronology) ──────────────────────────
 
@@ -50,8 +52,8 @@ export class SightingModal {
   // ─── Slots ──────────────────────────────────────────────────────
 
   private static buildHeader(s: Sighting): HTMLElement {
-    return h('div', { className: 'modal-sighting__header' },
-      h('span', { className: 'modal-sighting__title' }, `${s.region}, ${s.country}`),
+    return h('div', { className: cx.header },
+      h('span', { className: cx.title }, [s.region, s.country].filter(Boolean).join(', ') || '—'),
       new StatusTag({ status: s.status }).el,
     )
   }
@@ -68,15 +70,13 @@ export class SightingModal {
     const hasDescription = !!s.description
 
     if (hasSummary) {
-      children.push(
-        h('p', { className: `modal-sighting__summary${hasDescription ? ' modal-sighting__summary--with-desc' : ' modal-sighting__summary--solo'}` }, s.summary),
-      )
+      const cls = hasDescription ? `${cx.summary} ${cx.summaryWithDesc}` : `${cx.summary} ${cx.summarySolo}`
+      children.push(h('p', { className: cls }, s.summary))
     }
 
     if (hasDescription) {
-      children.push(
-        h('p', { className: `modal-sighting__description${hasSummary ? ' modal-sighting__description--with-summary' : ' modal-sighting__description--solo'}` }, s.description),
-      )
+      const cls = hasSummary ? `${cx.description} ${cx.descriptionWithSummary}` : `${cx.description} ${cx.descriptionSolo}`
+      children.push(h('p', { className: cls }, s.description))
     }
 
     // Metadata rows
@@ -91,7 +91,6 @@ export class SightingModal {
         : []),
       [MODAL.OCCURRED, s.occurredAt],
       [MODAL.REPORTED, s.reportedAt],
-      [MODAL.SOURCE, resolveSourceLabel(s)],
       [MODAL.CONTINENT, s.continent],
     ]
 
@@ -106,17 +105,36 @@ export class SightingModal {
     }
 
     children.push(...rows.map(([label, value]) =>
-      h('div', { className: 'modal-sighting__row' },
-        h('span', { className: 'modal-sighting__label' }, label),
-        h('span', { className: 'modal-sighting__value' }, value),
+      h('div', { className: cx.row },
+        h('span', { className: cx.label }, label),
+        h('span', { className: cx.value }, value),
       ),
     ))
 
-    return h('div', { className: 'modal-sighting__content' }, ...children)
+    // Source row — clickable link if URL exists
+    const sourceLabel = resolveSourceLabel(s)
+    const sourceUrl = getSourceUrl(s.source, s.subSource)
+    const sourceValueEl = sourceUrl
+      ? h('a', {
+          className: `${cx.value} ${cx.sourceLink}`,
+          href: sourceUrl,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        }, sourceLabel)
+      : h('span', { className: cx.value }, sourceLabel)
+
+    children.push(
+      h('div', { className: cx.row },
+        h('span', { className: cx.label }, MODAL.SOURCE),
+        sourceValueEl,
+      ),
+    )
+
+    return h('div', { className: cx.content }, ...children)
   }
 
   private static buildFooter(s: Sighting): HTMLElement {
-    return h('div', { className: 'modal-sighting__footer' },
+    return h('div', { className: cx.footer },
       new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el,
     )
   }

@@ -151,13 +151,13 @@ function parseLocation(raw) {
   // Build region string
   let region = city
   if (state && US_STATES[state]) {
-    region = `${city}, ${state}`
+    region = city ? `${city}, ${state}` : state
     country = 'USA'
   } else if (state && CA_PROVINCES[state]) {
-    region = `${city}, ${state}`
+    region = city ? `${city}, ${state}` : state
     country = 'Canada'
   } else if (state) {
-    region = `${city}, ${state}`
+    region = city ? `${city}, ${state}` : state
   }
 
   // Resolve continent — log unmapped countries instead of silently defaulting

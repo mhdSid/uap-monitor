@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import type { DataSourcesProps, DataSource } from '@/types'
 import { DataSourceStatus } from '@/enums'
@@ -12,7 +14,7 @@ const STATUS_DOT_COLORS: Record<DataSourceStatus, string> = {
 
 export class DataSources extends Component<DataSourcesProps> {
   protected create(): HTMLElement {
-    const wrapper = h('div', { className: 'data-sources' })
+    const wrapper = h('div', { className: cx.root })
 
     for (const source of this.props.sources) {
       wrapper.appendChild(this.renderItem(source))
@@ -26,15 +28,15 @@ export class DataSources extends Component<DataSourcesProps> {
     const isDisabled = source.status === DataSourceStatus.DISABLED
 
     const dot = h('span', {
-      className: 'data-sources__dot',
+      className: cx.dot,
       style: { backgroundColor: dotColor },
     })
 
-    const label = h('span', { className: 'data-sources__label' }, source.label)
+    const label = h('span', { className: cx.label }, source.label)
 
     const itemClass = isDisabled
-      ? 'data-sources__item data-sources__item--disabled'
-      : 'data-sources__item'
+      ? `${cx.item} ${cx.itemDisabled}`
+      : cx.item
 
     if (source.url) {
       return h('a', {

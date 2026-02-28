@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import type { CredibilityBarProps } from '@/types'
 import { h } from '@/utils/dom'
@@ -25,14 +27,14 @@ export class CredibilityBar extends Component<CredibilityBarProps> {
     const { value } = this.props
     const color = LEVEL_COLORS[getLevel(value)]
 
-    return h('div', { className: 'credibility-bar' },
-      h('div', { className: 'credibility-bar__track' },
+    return h('div', { className: cx.root },
+      h('div', { className: cx.track },
         h('div', {
-          className: 'credibility-bar__fill',
+          className: cx.fill,
           style: { width: `${Math.min(value, 100)}%`, backgroundColor: color },
         }),
       ),
-      h('span', { className: 'credibility-bar__label' }, String(value)),
+      h('span', { className: cx.label }, String(value)),
     )
   }
 }

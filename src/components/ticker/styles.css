@@ -1,0 +1,84 @@
+/* ===== TICKER ===== */
+.ticker {
+  font-size: var(--fs-xs);
+  color: var(--color-green);
+  padding: 6px 12px;
+  background: var(--c-neutral-975);
+  border-bottom: 1px solid var(--color-border);
+  height: calc(var(--fs-xs) * 1.5 * 2 + 12px); /* 2 lines + padding */
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+/* Only show interactive affordances when ticker links to a sighting */
+.ticker--clickable {
+  cursor: pointer;
+}
+
+.ticker--clickable:hover {
+  background: var(--c-neutral-950);
+}
+
+.ticker--clickable:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--color-green);
+}
+
+.ticker--clickable:active {
+  background: var(--c-neutral-955);
+}
+
+.ticker__content {
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+
+.ticker__line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: calc(var(--fs-xs) * 1.5);
+}
+
+/* Ghost lines: subtle // placeholders showing the 2-line capacity */
+.ticker__ghost {
+  position: absolute;
+  inset: 6px 12px;
+  line-height: 1.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ticker__ghost-line {
+  color: var(--color-border);
+  opacity: 0.4;
+  height: calc(var(--fs-xs) * 1.5);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* Fade ghost lines as real content covers them */
+.ticker__content:not(:empty) ~ .ticker__ghost .ticker__ghost-line:first-child {
+  opacity: 0;
+}
+
+.ticker--lines-2 .ticker__ghost .ticker__ghost-line:last-child {
+  opacity: 0;
+}
+
+.ticker__cursor {
+  font-weight: bold;
+}
+
+.ticker__cursor--blink {
+  animation: cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

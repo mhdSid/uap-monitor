@@ -1,0 +1,37 @@
+/* ===== DATA SOURCES ===== */
+.data-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.data-sources__item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid var(--color-border);
+  font-size: var(--fs-xs);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s;
+}
+
+a.data-sources__item:hover {
+  border-color: var(--color-dim);
+}
+
+.data-sources__item--disabled {
+  opacity: 0.35;
+}
+
+.data-sources__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.data-sources__label {
+  color: var(--color-muted);
+  letter-spacing: 1px;
+}

@@ -1,5 +1,8 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
+import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -34,12 +37,12 @@ export class Timeline extends Component<TimelineProps> {
 
   protected create(): HTMLElement {
     this.canvas = document.createElement('canvas')
-    this.canvas.className = 'timeline__canvas'
+    this.canvas.className = cx.canvas
 
-    this.tooltip = h('div', { className: 'timeline__tooltip' })
+    this.tooltip = h('div', { className: cx.tooltip })
     this.tooltip.style.display = 'none'
 
-    const wrapper = h('div', { className: 'timeline' },
+    const wrapper = h('div', { className: cx.root },
       this.canvas,
       this.tooltip,
     )
@@ -159,7 +162,7 @@ export class Timeline extends Component<TimelineProps> {
     }
     if (maxCount === 0) {
       // Draw empty state hint
-      ctx.fillStyle = 'rgba(255,255,255,0.15)'
+      ctx.fillStyle = palette.white15
       ctx.font = '11px monospace'
       ctx.textAlign = 'center'
       ctx.fillText('No data for this range', w / 2, cH / 2)
@@ -179,21 +182,21 @@ export class Timeline extends Component<TimelineProps> {
       const isHovered = year === this.hoverYear
 
       if (isActive) {
-        ctx.fillStyle = isHovered ? 'rgba(0, 255, 136, 0.3)' : 'rgba(0, 255, 136, 0.08)'
+        ctx.fillStyle = isHovered ? palette.green400_30 : palette.green400_08
         ctx.fillRect(x, 0, barW + BAR_GAP, barArea)
       }
 
       // Bar
       if (barH > 0) {
         ctx.fillStyle = isActive
-          ? (isHovered ? '#00ff88' : 'rgba(0, 255, 136, 0.7)')
-          : (isHovered ? 'rgba(255, 180, 0, 0.9)' : 'rgba(255, 180, 0, 0.4)')
+          ? (isHovered ? palette.green400 : palette.green400_70)
+          : (isHovered ? palette.amber500_90 : palette.amber500_40)
         ctx.fillRect(x, barArea - barH, barW, barH)
       }
 
       // Year labels (sparse)
       if (yearSpan <= 30 || i % Math.ceil(yearSpan / 20) === 0) {
-        ctx.fillStyle = isActive ? 'rgba(0, 255, 136, 0.5)' : 'rgba(255,255,255,0.2)'
+        ctx.fillStyle = isActive ? palette.green500_50 : palette.white20
         ctx.font = '9px monospace'
         ctx.textAlign = 'center'
         ctx.fillText(String(year).slice(-2), x + barW / 2, cH - 3)

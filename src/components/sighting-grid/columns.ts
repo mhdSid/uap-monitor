@@ -3,6 +3,7 @@ import { formatDate, formatDateCompact } from '@/utils/format'
 import { StatusTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'
 import { DataSourceId } from '@/enums'
+import { cx } from './cx'
 import type { Sighting, DataGridColumn } from '@/types'
 
 const SOURCE_LABELS: Partial<Record<DataSourceId, string>> = {
@@ -24,6 +25,12 @@ const SUB_SOURCE_SHORT: Record<string, string> = {
   DOLAN: 'DOLN',
 }
 
+/** Source badge class by data source id */
+const SOURCE_CLASS: Record<string, string> = {
+  [DataSourceId.CHRONOLOGY]: `${cx.source} ${cx.sourceChronology}`,
+  [DataSourceId.HATCH_UDB]: `${cx.source} ${cx.sourceHatchUdb}`,
+}
+
 function resolveGridSourceLabel(row: Sighting): string {
   if (row.source === DataSourceId.CHRONOLOGY && row.subSource) {
     return SUB_SOURCE_SHORT[row.subSource] || 'CHRON'
@@ -40,33 +47,29 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
       sortable: false,
       render: (row) => {
         const sourceLabel = resolveGridSourceLabel(row)
-        const sourceClass = row.source === DataSourceId.CHRONOLOGY
-          ? 'cell-report__source cell-report__source--chronology'
-          : `cell-report__source cell-report__source--${row.source.toLowerCase().replace('_', '-')}`
+        const sourceClass = SOURCE_CLASS[row.source] || `${cx.source} ${cx.source}--${row.source.toLowerCase().replace('_', '-')}`
         const tagCount = row.tags?.length ?? 0
 
         const metaParts = [
-          `${row.region}${row.country ? ', ' + row.country : ''}`,
+          [row.region, row.country].filter(Boolean).join(', '),
           row.shape,
         ]
 
-        const meta = h('span', { className: 'cell-report__meta' }, metaParts.join(' · '))
+        const meta = h('span', { className: cx.meta }, metaParts.join(' · '))
 
-        const badges = h('span', { className: 'cell-report__badges' },
-          h('span', {
-            className: sourceClass,
-          }, sourceLabel),
+        const badges = h('span', { className: cx.badges },
+          h('span', { className: sourceClass }, sourceLabel),
           ...(tagCount > 0
-            ? [h('span', { className: 'cell-report__tag-count' }, `${tagCount} tag${tagCount > 1 ? 's' : ''}`)]
+            ? [h('span', { className: cx.tagCount }, `${tagCount} tag${tagCount > 1 ? 's' : ''}`)]
             : []),
         )
 
-        return h('div', { className: 'cell-report' },
-          h('span', { className: 'cell-report__summary' }, row.summary || '—'),
+        return h('div', { className: cx.root },
+          h('span', { className: cx.summary }, row.summary || '—'),
           meta,
-          h('span', { className: 'cell-report__bottom' },
+          h('span', { className: cx.bottom },
             badges,
-            h('span', { className: 'cell-report__date' }, formatDate(row.occurredAt)),
+            h('span', { className: cx.date }, formatDate(row.occurredAt)),
           ),
         )
       },
@@ -93,7 +96,7 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
       render: (row) => {
         const full = formatDate(row.occurredAt)
         const compact = formatDateCompact(row.occurredAt)
-        return h('span', { className: 'cell-time', title: full }, compact)
+        return h('span', { className: cx.cellTime, title: full }, compact)
       },
     },
   ]

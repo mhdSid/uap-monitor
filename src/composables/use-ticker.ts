@@ -60,7 +60,7 @@ function countByShape(sightings: Sighting[]): Map<string, number> {
 const recentSighting: MessageGenerator = (sightings) => {
   const s = pick(sightings)
   const summary = s.summary.length > 60 ? s.summary.slice(0, 57) + '...' : s.summary
-  return { lines: [`${s.region}, ${s.country}:`, `"${summary}"`], sightingId: s.id }
+  return { lines: [`${[s.region, s.country].filter(Boolean).join(', ')}:`, `"${summary}"`], sightingId: s.id }
 }
 
 /** Report top shape in dataset. */
@@ -105,7 +105,7 @@ const randomCharacteristic: MessageGenerator = (sightings) => {
   if (withChars.length === 0) return null
   const s = pick(withChars)
   const char = pick(s.characteristics)
-  return { lines: [`${s.region}, ${s.country}:`, `Witness reported "${char}" during ${s.shape.toLowerCase()} sighting`], sightingId: s.id }
+  return { lines: [`${[s.region, s.country].filter(Boolean).join(', ')}:`, `Witness reported "${char}" during ${s.shape.toLowerCase()} sighting`], sightingId: s.id }
 }
 
 /** Total dataset stats. */

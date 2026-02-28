@@ -10,6 +10,7 @@
  *    → buildBelowFold → finalize                                     *
  * ------------------------------------------------------------------ */
 
+import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, batch, minDelay, filterSightings } from '@/composables'

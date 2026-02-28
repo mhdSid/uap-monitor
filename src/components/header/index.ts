@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h, setAttrs } from '@/utils/dom'
 import { iconRadar, iconGithub } from '@/components/icons'
@@ -13,14 +15,14 @@ export class Header extends Component {
     const radar = iconRadar(16)
     radar.style.color = 'var(--color-green)'
 
-    const left = h('div', { className: 'app-header__left' },
+    const left = h('div', { className: cx.left },
       radar,
-      h('span', { className: 'app-header__title' }, APP_NAME),
-      h('span', { className: 'app-header__version' }, APP_VERSION),
+      h('span', { className: cx.title }, APP_NAME),
+      h('span', { className: cx.version }, APP_VERSION),
     )
 
     const clock = h('time', {
-      className: 'app-header__clock',
+      className: cx.clock,
       'aria-label': ARIA.CLOCK,
     })
 
@@ -39,19 +41,19 @@ export class Header extends Component {
     githubIcon.style.color = 'var(--color-muted)'
 
     const githubLink = h('a', {
-      className: 'app-header__github',
+      className: cx.github,
       href: REPO_URL,
       target: '_blank',
       rel: 'noopener noreferrer',
       'aria-label': ARIA.GITHUB,
     }, githubIcon)
 
-    const right = h('div', { className: 'app-header__right' },
+    const right = h('div', { className: cx.right },
       clock,
       githubLink,
     )
 
-    return h('header', { className: 'app-header', role: 'banner' }, left, right)
+    return h('header', { className: cx.root, role: 'banner' }, left, right)
   }
 
   destroy(): void {

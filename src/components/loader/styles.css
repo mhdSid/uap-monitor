@@ -1,0 +1,27 @@
+/* ===== RADAR LOADER ===== */
+.radar-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.radar-loader__sweep svg {
+  display: block;
+}
+
+.radar-loader__hand {
+  transform-origin: 40px 40px;
+  animation: radar-spin 2s linear infinite;
+}
+
+.radar-loader__text {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+  letter-spacing: 2px;
+}
+
+@keyframes radar-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

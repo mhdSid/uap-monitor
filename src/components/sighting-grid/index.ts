@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  SightingGrids — continent-grouped grids with infinite scroll       *
  *                                                                     *
@@ -39,8 +41,8 @@ export class SightingGrids extends Component {
 
     if (sightings.length === 0) {
       this.el.appendChild(
-        h('div', { className: 'empty-state' },
-          h('span', { className: 'empty-state__text' }, FILTER.NO_RESULTS),
+        h('div', { className: cx.emptyState },
+          h('span', { className: cx.emptyStateText }, FILTER.NO_RESULTS),
         ),
       )
       return
@@ -74,8 +76,8 @@ export class SightingGrids extends Component {
             title: group.label,
             count: group.count,
             tooltip: CONTINENT_TOOLTIPS[group.continent],
-            content: h('div', { className: 'empty-state empty-state--compact' },
-              h('span', { className: 'empty-state__text' },
+            content: h('div', { className: `${cx.emptyState} ${cx.emptyStateCompact}` },
+              h('span', { className: cx.emptyStateText },
                 CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT,
               ),
             ),

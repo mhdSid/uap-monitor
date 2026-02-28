@@ -1,0 +1,30 @@
+/* ===== NEWS FEED ===== */
+.news-feed__item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--c-neutral-900);
+}
+
+.news-feed__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.news-feed__source {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+}
+
+.news-feed__time {
+  margin-left: auto;
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+}
+
+.news-feed__text {
+  color: var(--color-text);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}

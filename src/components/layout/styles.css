@@ -1,0 +1,40 @@
+/* ===== SECTION ===== */
+.section {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  margin-bottom: 12px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+.section__header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.section__title {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-text-strong);
+}
+
+.section__count {
+  margin-left: auto;
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  padding: 1px 6px;
+}
+
+.section__body {
+  padding: 12px;
+}
+
+@media (max-width: 480px) {
+  .section__body { padding: 8px; }
+}

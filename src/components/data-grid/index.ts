@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  DataGrid<T> — sortable, infinitely-scrolling table component       *
  *                                                                     *
@@ -56,25 +58,25 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
     const { columns } = this.props
 
-    const wrapper = h('div', { className: 'data-grid__wrapper' })
-    const table = el('table', { className: 'data-grid' })
+    const wrapper = h('div', { className: cx.wrapper })
+    const table = el('table', { className: cx.root })
 
     // Header
     const thead = el('thead')
     const headerRow = el('tr')
 
     this.headerCells = columns.map((col) => {
-      const th = el('th', { className: 'data-grid__th' })
+      const th = el('th', { className: cx.th })
 
-      if (col.align === 'right') addClass(th, 'data-grid__th--right')
-      else if (col.align === 'center') addClass(th, 'data-grid__th--center')
+      if (col.align === 'right') addClass(th, cx.thRight)
+      else if (col.align === 'center') addClass(th, cx.thCenter)
 
       if (col.width) th.style.width = col.width
       th.style.padding = `${CELL_PAD_COMPACT} ${CELL_PAD}`
       th.textContent = col.label
 
       if (col.sortable !== false && col.label) {
-        addClass(th, 'data-grid__th--sortable')
+        addClass(th, cx.thSortable)
         this.setSortIcon(th, col.label, 'hint')
         th.addEventListener('click', () => this.handleSort(col.key as string, th))
       }
@@ -87,7 +89,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
     // Body & sentinel
     this.tbody = el('tbody')
-    this.sentinel = h('div', { className: 'data-grid__sentinel' })
+    this.sentinel = h('div', { className: cx.sentinel })
 
     // Infinite scroll
     this.scroll = useInfiniteScroll<T>(PAGE_SIZE, (state) => {
@@ -145,7 +147,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
     if (items.length === 0) {
       const emptyCell = el('td', {
-        className: 'data-grid__empty',
+        className: cx.empty,
         colSpan: String(this.props.columns.length),
       })
       emptyCell.textContent = this.props.emptyText ?? FILTER.EMPTY_DEFAULT
@@ -168,13 +170,13 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
   private renderRow(row: T): HTMLTableRowElement {
     const { columns, onRowClick } = this.props
-    const tr = el('tr', { className: 'data-grid__row' })
+    const tr = el('tr', { className: cx.row })
 
     for (const col of columns) {
-      const td = el('td', { className: 'data-grid__td' })
+      const td = el('td', { className: cx.td })
 
-      if (col.align === 'right') addClass(td, 'data-grid__td--right')
-      else if (col.align === 'center') addClass(td, 'data-grid__td--center')
+      if (col.align === 'right') addClass(td, cx.tdRight)
+      else if (col.align === 'center') addClass(td, cx.tdCenter)
 
       if (col.width) td.style.width = col.width
       td.style.padding = `${CELL_PAD_COMPACT} ${CELL_PAD}`
@@ -192,7 +194,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     }
 
     if (onRowClick) {
-      addClass(tr, 'data-grid__row--clickable')
+      addClass(tr, cx.rowClickable)
       setAttrs(tr, { tabindex: '0', role: 'button' })
 
       const id = (row as Record<string, unknown>).id
@@ -226,7 +228,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     for (let i = 0; i < this.headerCells.length; i++) {
       const label = columns[i].label
       const isSortable = columns[i].sortable !== false && label
-      removeClass(this.headerCells[i], 'data-grid__th--sorted')
+      removeClass(this.headerCells[i], cx.thSorted)
 
       if (isSortable) this.setSortIcon(this.headerCells[i], label, 'hint')
       else this.headerCells[i].textContent = label
@@ -235,7 +237,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     if (newDir !== 'none') {
       const idx = this.headerCells.indexOf(clickedTh)
       this.setSortIcon(clickedTh, columns[idx].label, newDir)
-      addClass(clickedTh, 'data-grid__th--sorted')
+      addClass(clickedTh, cx.thSorted)
     }
 
     if (newDir === 'none') {
@@ -254,13 +256,13 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     th.textContent = label
     if (direction === 'hint') {
       const icon = iconSortDefault()
-      addClass(icon, 'data-grid__sort-icon', 'data-grid__sort-icon--hint')
+      addClass(icon, cx.sortIcon, cx.sortIconHint)
       th.appendChild(icon)
     } else {
       const factory = SORT_ICON_FACTORIES[direction]
       if (factory) {
         const icon = factory()
-        addClass(icon, 'data-grid__sort-icon')
+        addClass(icon, cx.sortIcon)
         th.appendChild(icon)
       }
     }

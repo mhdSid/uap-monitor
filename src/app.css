@@ -1,0 +1,35 @@
+/* ─── App shell ──────────────────────────────────────────────────── */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.app-main {
+  padding: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.app-loader {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.grids-container {
+  contain: layout style;
+}
+
+.controls-form {
+  display: contents;
+}

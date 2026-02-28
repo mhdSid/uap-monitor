@@ -1,0 +1,150 @@
+/* ===== DATA GRID ===== */
+.data-grid__wrapper {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.data-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  table-layout: fixed;
+}
+
+.data-grid__th {
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background: var(--c-neutral-960);
+  z-index: 1;
+  border-bottom: 1px solid var(--color-border);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.data-grid__th--right { text-align: right; }
+.data-grid__th--center { text-align: center; }
+
+.data-grid__th--sortable {
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.data-grid__th--sortable:hover {
+  color: var(--color-green);
+}
+
+.data-grid__th--sorted {
+  color: var(--color-green);
+}
+
+.data-grid__sort-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.data-grid__sort-icon--hint {
+  color: var(--color-dim);
+  opacity: 0.6;
+}
+
+.data-grid__th--sortable:hover .data-grid__sort-icon--hint {
+  opacity: 1;
+}
+
+.data-grid__row {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-grid__row--clickable {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.data-grid__row--clickable {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.data-grid__row--clickable:hover {
+  background: var(--c-green-500-03);
+}
+
+/* Unified focus style for both SP (touch → focus) and PC (keyboard/click → focus-visible) */
+.data-grid__row--clickable:focus-visible,
+.data-grid__row--clickable:focus,
+.data-grid__row--clickable:active,
+.data-grid__row:focus {
+  outline: none;
+  background: var(--c-green-500-08);
+}
+
+/* Left accent bar via border on first cell — reliable across SP & PC
+   (inset box-shadow on <tr> clips on mobile due to table box model quirks) */
+.data-grid__td:first-child {
+  border-left: 3px solid transparent;
+}
+
+.data-grid__row--clickable:focus-visible > .data-grid__td:first-child,
+.data-grid__row--clickable:focus > .data-grid__td:first-child,
+.data-grid__row--clickable:active > .data-grid__td:first-child,
+.data-grid__row:focus > .data-grid__td:first-child {
+  border-left-color: var(--color-green);
+}
+
+.data-grid__td {
+  vertical-align: middle;
+}
+
+.data-grid__td--right { text-align: right; }
+.data-grid__td--center { text-align: center; }
+
+.data-grid__empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.data-grid__sentinel {
+  height: 1px;
+}
+
+@media (max-width: 480px) {
+  .data-grid { font-size: var(--fs-xs); }
+
+  .data-grid__th:nth-child(3),
+  .data-grid__td:nth-child(3) {
+    display: none;
+  }
+
+  .data-grid__th:nth-child(1),
+  .data-grid__td:nth-child(1) {
+    width: auto !important;
+  }
+
+  .data-grid__th:nth-child(2),
+  .data-grid__td:nth-child(2) {
+    width: 56px !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .data-grid__th:nth-child(4),
+  .data-grid__td:nth-child(4) {
+    width: 62px !important;
+    padding-left: 2px !important;
+    padding-right: 4px !important;
+    font-size: 9px;
+  }
+}

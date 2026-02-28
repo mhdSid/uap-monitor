@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
 import { FILTER, ARIA } from '@/data/strings'
@@ -10,14 +12,14 @@ export class YearSelector extends Component {
     const { from: defaultFrom, to: defaultTo } = store.yearRange.get()
 
     if (years.length === 0) {
-      return h('div', { className: 'year-selector' },
-        h('span', { className: 'year-selector__label' }, FILTER.NO_DATA),
+      return h('div', { className: cx.root },
+        h('span', { className: cx.label }, FILTER.NO_DATA),
       )
     }
 
     const makeSelect = (selected: number, label: string, id: string): HTMLSelectElement => {
       const sel = h('select', {
-        className: 'year-selector__select',
+        className: cx.select,
         id,
         name: id,
         autocomplete: 'off',
@@ -38,7 +40,7 @@ export class YearSelector extends Component {
       Math.min(years[0], defaultTo), ARIA.YEAR_TO, 'year-to',
     )
 
-    const countEl = h('span', { className: 'year-selector__count' }, '')
+    const countEl = h('span', { className: cx.count }, '')
 
     effect(() => {
       countEl.textContent = store.displayCount.get()
@@ -66,9 +68,9 @@ export class YearSelector extends Component {
       store.yearRange.set({ from, to })
     })
 
-    return h('div', { className: 'year-selector' },
+    return h('div', { className: cx.root },
       fromSelect,
-      h('span', { className: 'year-selector__separator' }, '~'),
+      h('span', { className: cx.separator }, '~'),
       toSelect,
       countEl,
     )

@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import type { ToastMessage } from '@/types'
 import { ToastVariant } from '@/enums'
 import { h, addClass, generateId, qsa } from '@/utils/dom'
@@ -14,7 +16,7 @@ let container: HTMLElement | null = null
 
 function ensureContainer(): HTMLElement {
   if (container && document.body.contains(container)) return container
-  container = h('div', { className: 'toast-container', 'aria-live': 'polite' })
+  container = h('div', { className: cx.container, 'aria-live': 'polite' })
   document.body.appendChild(container)
   return container
 }
@@ -30,7 +32,7 @@ function removeToast(id: string) {
 function renderToast(message: ToastMessage): HTMLElement {
   const variantClass = VARIANT_CLASS[message.variant]
   return h('div', {
-    className: `toast ${variantClass}`,
+    className: `${cx.root} ${variantClass}`,
     dataset: { id: message.id },
     role: 'alert',
   }, message.text)

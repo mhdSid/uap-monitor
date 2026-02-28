@@ -1,0 +1,113 @@
+/* ===== CELL: REPORT (summary primary, region secondary) ===== */
+.cell-report {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cell-report__summary {
+  color: var(--color-text);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.cell-report__meta {
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cell-report__date {
+  display: none;
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+.cell-report__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.cell-report__badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.cell-report__source {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  background: var(--c-green-500-12);
+  color: var(--color-green);
+  border: 1px solid var(--c-green-500-20);
+}
+
+.cell-report__source--hatch-udb {
+  background: var(--c-cyan-400-12);
+  color: var(--color-cyan);
+  border-color: var(--c-cyan-400-20);
+}
+
+.cell-report__source--chronology {
+  background: var(--c-amber-400-12);
+  color: var(--color-amber);
+  border-color: var(--c-amber-400-20);
+}
+
+.cell-report__tag-count {
+  font-size: 9px;
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+/* ===== CELL HELPERS ===== */
+.cell-type { color: var(--color-cyan); }
+.cell-time { font-size: var(--fs-xs); color: var(--color-dim); white-space: nowrap; }
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.empty-state--compact {
+  padding: 24px 16px;
+}
+
+.empty-state__text {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .cell-report__date { display: none; }
+
+  .cell-report__summary {
+    -webkit-line-clamp: 3;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+
+  .cell-report__meta { font-size: var(--fs-xs); }
+}

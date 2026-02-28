@@ -1,0 +1,45 @@
+/* ===== YEAR SELECTOR ===== */
+.year-selector {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.year-selector__label {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 2px;
+}
+
+.year-selector__select {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  padding: 3px 6px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.year-selector__select:focus-visible {
+  border-color: var(--color-green);
+}
+
+.year-selector__separator {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+
+.year-selector__count {
+  margin-left: auto;
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  letter-spacing: 1px;
+}

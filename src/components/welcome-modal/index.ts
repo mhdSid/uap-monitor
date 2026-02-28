@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  WelcomeModal — introductory overlay shown on first launch          *
  *                                                                     *
@@ -62,48 +64,50 @@ export class WelcomeModal {
   // ─── Slots ──────────────────────────────────────────────────────
 
   private static buildHeader(): HTMLElement {
-    return h('div', { className: 'welcome__header' },
-      h('span', { className: 'welcome__title' }, WELCOME.TITLE),
-      h('span', { className: 'welcome__subtitle' }, WELCOME.SUBTITLE),
+    return h('div', { className: cx.header },
+      h('span', { className: cx.title }, WELCOME.TITLE),
+      h('span', { className: cx.subtitle }, WELCOME.SUBTITLE),
     )
   }
 
   private static buildContent(): HTMLElement {
-    const body = h('div', { className: 'welcome__body' })
+    const body = h('div', { className: cx.body })
 
     for (const paragraph of WELCOME.BODY) {
-      body.appendChild(h('p', { className: 'welcome__text' }, paragraph))
+      body.appendChild(h('p', { className: cx.text }, paragraph))
     }
 
     body.appendChild(
-      h('div', { className: 'welcome__stats' },
-        WelcomeModal.stat('70 AD–present', 'Time span'),
-        WelcomeModal.stat('193,000+', 'Records'),
-        WelcomeModal.stat('12 active', 'Sources'),
-        WelcomeModal.stat('100%', 'Open data'),
+      h('div', { className: cx.stats },
+        WelcomeModal.stat(WELCOME.STAT_TIMESPAN, WELCOME.STAT_TIMESPAN_LABEL),
+        WelcomeModal.stat(WELCOME.STAT_RECORDS, WELCOME.STAT_RECORDS_LABEL),
+        WelcomeModal.stat(WELCOME.STAT_SOURCES, WELCOME.STAT_SOURCES_LABEL),
+        WelcomeModal.stat(WELCOME.STAT_OPEN, WELCOME.STAT_OPEN_LABEL),
       ),
     )
 
     // ── Active sources list ──
-    body.appendChild(h('div', { className: 'welcome__sources-title' }, 'ACTIVE SOURCES'))
+    body.appendChild(h('div', { className: cx.sourcesTitle }, WELCOME.SOURCES_TITLE))
 
-    const sourceList = h('div', { className: 'welcome__sources' })
+    const sourceList = h('div', { className: cx.sources })
+    const TIER_CX: Record<string, string> = {
+      high: cx.sourceTierHigh,
+      mid: cx.sourceTierMid,
+      base: cx.sourceTierBase,
+    }
     for (const src of ACTIVE_SOURCES) {
-      const tierClass = `welcome__source-tier welcome__source-tier--${src.tier}`
       sourceList.appendChild(
-        h('div', { className: 'welcome__source' },
-          h('span', { className: tierClass }),
-          h('span', { className: 'welcome__source-name' }, src.name),
-          h('span', { className: 'welcome__source-meta' }, `${src.records} · ${src.period}`),
+        h('div', { className: cx.source },
+          h('span', { className: `${cx.sourceTier} ${TIER_CX[src.tier]}` }),
+          h('span', { className: cx.sourceName }, src.name),
+          h('span', { className: cx.sourceMeta }, `${src.records} · ${src.period}`),
         ),
       )
     }
     body.appendChild(sourceList)
 
     body.appendChild(
-      h('p', { className: 'welcome__text welcome__text--closing' },
-        'All data is open. All code is open. The truth should be too.',
-      ),
+      h('p', { className: `${cx.text} ${cx.textClosing}` }, WELCOME.CLOSING),
     )
 
     return body
@@ -119,15 +123,15 @@ export class WelcomeModal {
       onClick: () => WelcomeModal.dismiss(),
     })
 
-    return h('div', { className: 'welcome__footer' }, btn.el)
+    return h('div', { className: cx.footer }, btn.el)
   }
 
   // ─── Helpers ────────────────────────────────────────────────────
 
   private static stat(value: string, label: string): HTMLElement {
-    return h('div', { className: 'welcome__stat' },
-      h('span', { className: 'welcome__stat-value' }, value),
-      h('span', { className: 'welcome__stat-label' }, label),
+    return h('div', { className: cx.stat },
+      h('span', { className: cx.statValue }, value),
+      h('span', { className: cx.statLabel }, label),
     )
   }
 

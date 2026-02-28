@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
 import { Continent, SightingShape } from '@/enums'
@@ -24,7 +26,7 @@ export class FilterToolbar extends Component {
     this.emitDebounced = useDebounce(emit, 300)
 
     this.searchInput = h('input', {
-      className: 'filter-toolbar__search',
+      className: cx.search,
       id: 'filter-search',
       name: 'filter-search',
       type: 'text',
@@ -39,7 +41,7 @@ export class FilterToolbar extends Component {
     }) as HTMLInputElement
 
     this.shapeSelect = h('select', {
-      className: 'filter-toolbar__select',
+      className: cx.select,
       id: 'filter-shape',
       name: 'filter-shape',
       autocomplete: 'off',
@@ -58,7 +60,7 @@ export class FilterToolbar extends Component {
     }
 
     this.continentSelect = h('select', {
-      className: 'filter-toolbar__select',
+      className: cx.select,
       id: 'filter-region',
       name: 'filter-region',
       autocomplete: 'off',
@@ -80,7 +82,7 @@ export class FilterToolbar extends Component {
     }
 
     this.countrySelect = h('select', {
-      className: 'filter-toolbar__select',
+      className: cx.select,
       id: 'filter-country',
       name: 'filter-country',
       autocomplete: 'off',
@@ -93,14 +95,14 @@ export class FilterToolbar extends Component {
       },
     }) as HTMLSelectElement
 
-    this.countrySelect.appendChild(h('option', { value: '' }, 'ALL COUNTRIES'))
+    this.countrySelect.appendChild(h('option', { value: '' }, FILTER.ALL_COUNTRIES))
 
     // Populate countries from loaded sightings reactively
     store.sightings.subscribe(() => this.updateCountryOptions())
 
-    return h('div', { className: 'filter-toolbar', role: 'search', 'aria-label': ARIA.FILTER_BAR },
+    return h('div', { className: cx.root, role: 'search', 'aria-label': ARIA.FILTER_BAR },
       this.searchInput,
-      h('div', { className: 'filter-toolbar__selects' },
+      h('div', { className: cx.selects },
         this.shapeSelect,
         this.continentSelect,
         this.countrySelect,

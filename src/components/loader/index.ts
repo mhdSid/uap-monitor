@@ -1,10 +1,12 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h, rawHtml } from '@/utils/dom'
 import { ARIA } from '@/data/strings'
 
 export class Loader extends Component {
   protected create(): HTMLElement {
-    const sweep = h('div', { className: 'radar-loader__sweep' })
+    const sweep = h('div', { className: cx.sweep })
     sweep.appendChild(rawHtml(`
       <svg viewBox="0 0 80 80" width="80" height="80" aria-hidden="true">
         <circle cx="40" cy="40" r="36" fill="none" stroke="var(--color-border)" stroke-width="1"/>
@@ -16,12 +18,12 @@ export class Loader extends Component {
     `))
 
     return h('div', {
-      className: 'radar-loader',
+      className: cx.root,
       role: 'status',
       'aria-label': ARIA.LOADING,
     },
       sweep,
-      h('div', { className: 'radar-loader__text' }, 'Loading...'),
+      h('div', { className: cx.text }, 'Loading...'),
     )
   }
 }

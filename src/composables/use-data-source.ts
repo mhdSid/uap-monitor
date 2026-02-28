@@ -335,3 +335,17 @@ export function useDataSource() {
     chronology,
   }
 }
+
+/**
+ * Look up the URL for a data source (or sub-source).
+ * Usable outside the composable lifecycle.
+ */
+export function getSourceUrl(sourceId: string, subSourceId?: string): string | undefined {
+  for (const s of SOURCE_REGISTRY) {
+    if (s.id === sourceId) {
+      if (subSourceId && s.subSourceId === subSourceId) return s.url
+      if (!subSourceId && !s.subSourceId) return s.url
+    }
+  }
+  return undefined
+}

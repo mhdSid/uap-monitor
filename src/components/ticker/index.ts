@@ -1,3 +1,5 @@
+import './styles.css'
+import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  Ticker — typing-animation status bar with click-to-scroll          *
  *                                                                     *
@@ -51,16 +53,16 @@ export class Ticker extends Component<TickerProps> {
     this.timer = null
     this.dataLoaded = false
 
-    this.contentEl = h('div', { className: 'ticker__content' })
-    this.cursorEl = h('span', { className: 'ticker__cursor' }, '█')
+    this.contentEl = h('div', { className: cx.content })
+    this.cursorEl = h('span', { className: cx.cursor }, '█')
 
-    this.ghostEl = h('div', { className: 'ticker__ghost' },
-      h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
-      h('div', { className: 'ticker__ghost-line' }, GHOST_TEXT),
+    this.ghostEl = h('div', { className: cx.ghost },
+      h('div', { className: cx.ghostLine }, GHOST_TEXT),
+      h('div', { className: cx.ghostLine }, GHOST_TEXT),
     )
 
     return h('div', {
-      className: 'ticker',
+      className: cx.root,
       role: 'button',
       tabIndex: 0,
       'aria-label': ARIA.TICKER,
@@ -127,7 +129,7 @@ export class Ticker extends Component<TickerProps> {
     let renderedCount = 0
 
     for (let i = 0; i <= this.lineIdx && i < lines.length; i++) {
-      const lineEl = h('div', { className: 'ticker__line' })
+      const lineEl = h('div', { className: cx.line })
 
       if (i < this.lineIdx) {
         lineEl.textContent = lines[i]
@@ -158,7 +160,7 @@ export class Ticker extends Component<TickerProps> {
       }
 
       if (this.charIdx <= currentLine.length) {
-        removeClass(this.cursorEl, 'ticker__cursor--blink')
+        removeClass(this.cursorEl, cx.cursorBlink)
         this.render()
         this.charIdx++
         this.timer = setTimeout(() => this.tick(), 25)
@@ -168,7 +170,7 @@ export class Ticker extends Component<TickerProps> {
         this.timer = setTimeout(() => this.tick(), 25)
       } else {
         this.phase = 'holding'
-        addClass(this.cursorEl, 'ticker__cursor--blink')
+        addClass(this.cursorEl, cx.cursorBlink)
         this.render()
         this.timer = setTimeout(() => this.tick(), 3000)
       }
@@ -178,7 +180,7 @@ export class Ticker extends Component<TickerProps> {
   }
 
   private advanceMessage(): void {
-    removeClass(this.cursorEl, 'ticker__cursor--blink')
+    removeClass(this.cursorEl, cx.cursorBlink)
     this.msgIdx = (this.msgIdx + 1) % this.messages.length
     this.lineIdx = 0
     this.charIdx = 0

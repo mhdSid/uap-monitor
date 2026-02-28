@@ -1,5 +1,8 @@
+import './styles.css'
+import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
+import { colors } from '@/styles/palette'
 import type { Sighting, Coordinates } from '@/types'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -19,9 +22,9 @@ const DARK_TILES = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.pn
 const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
 
 const MARKER_COLORS: Record<string, string> = {
-  NUFORC: '#00ff88',
-  HATCH_UDB: '#00d4ff',
-  CHRONOLOGY: '#ffb400',
+  NUFORC: colors.sourceNuforc,
+  HATCH_UDB: colors.sourceHatch,
+  CHRONOLOGY: colors.sourceChronology,
 }
 
 const DEFAULT_CENTER: L.LatLngExpression = [30, 0]
@@ -39,8 +42,8 @@ export class SightingMap extends Component<SightingMapProps> {
   private isVisible = false
 
   protected create(): HTMLElement {
-    this.wrapper = h('div', { className: 'sighting-map' })
-    const mapEl = h('div', { className: 'sighting-map__canvas' })
+    this.wrapper = h('div', { className: cx.sightingMap })
+    const mapEl = h('div', { className: cx.sightingMapCanvas })
     this.wrapper.appendChild(mapEl)
 
     // Defer map init until mounted (needs real DOM dimensions)
@@ -73,20 +76,22 @@ export class SightingMap extends Component<SightingMapProps> {
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
       zoomToBoundsOnClick: true,
+      disableClusteringAtZoom: 12,
+      spiderfyDistanceMultiplier: 1.5,
       chunkedLoading: true,
       chunkInterval: 100,
       chunkDelay: 10,
       iconCreateFunction: (cluster) => {
         const count = cluster.getChildCount()
-        let size: string, radius: number
-        if (count < 20) { size = 'sm'; radius = 28 }
-        else if (count < 100) { size = 'md'; radius = 36 }
-        else if (count < 500) { size = 'lg'; radius = 44 }
-        else { size = 'xl'; radius = 52 }
+        let sizeClass: string, radius: number
+        if (count < 20) { sizeClass = cx.mapClusterSm; radius = 28 }
+        else if (count < 100) { sizeClass = cx.mapClusterMd; radius = 36 }
+        else if (count < 500) { sizeClass = cx.mapClusterLg; radius = 44 }
+        else { sizeClass = cx.mapClusterXl; radius = 52 }
 
         return L.divIcon({
-          html: `<div class="map-cluster map-cluster--${size}">${count.toLocaleString()}</div>`,
-          className: 'map-cluster-wrapper',
+          html: `<div class="${cx.mapCluster} ${sizeClass}">${count.toLocaleString()}</div>`,
+          className: cx.mapClusterWrapper,
           iconSize: L.point(radius, radius),
         })
       },
@@ -125,17 +130,30 @@ export class SightingMap extends Component<SightingMapProps> {
     const markers: L.CircleMarker[] = []
     for (const s of sightings) {
       if (!s.coordinates) continue
-      const color = MARKER_COLORS[s.source] || '#ffb400'
+      const color = MARKER_COLORS[s.source] || colors.sourceChronology
       const marker = L.circleMarker([s.coordinates.lat, s.coordinates.lng], {
-        radius: 4,
+        radius: 6,
         color,
         fillColor: color,
-        fillOpacity: 0.6,
+        fillOpacity: 0.7,
         weight: 1,
-        opacity: 0.8,
+        opacity: 0.9,
+        interactive: true,
+        bubblingMouseEvents: false,
       })
 
-      marker.bindPopup(() => this.createPopup(s), { maxWidth: 280 })
+      marker.bindPopup(() => this.createPopup(s), {
+        maxWidth: 280,
+        closeButton: true,
+        autoPan: true,
+      })
+
+      // Explicit click handler as fallback — ensures popup opens even if
+      // Leaflet's default bindPopup click is intercepted by markercluster
+      marker.on('click', () => {
+        if (!marker.isPopupOpen()) marker.openPopup()
+      })
+
       markers.push(marker)
     }
 
@@ -159,11 +177,11 @@ export class SightingMap extends Component<SightingMapProps> {
   private createPopup(s: Sighting): HTMLElement {
     const year = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
     const src = s.subSource || s.source
-    return h('div', { className: 'map-popup' },
-      h('div', { className: 'map-popup__date' }, year),
-      h('div', { className: 'map-popup__location' }, s.location || s.region || '—'),
-      h('div', { className: 'map-popup__summary' }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
-      h('div', { className: 'map-popup__meta' }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
+    return h('div', { className: cx.mapPopup },
+      h('div', { className: cx.mapPopupDate }, year),
+      h('div', { className: cx.mapPopupLocation }, s.location || s.region || '—'),
+      h('div', { className: cx.mapPopupSummary }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
+      h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
     )
   }
 }

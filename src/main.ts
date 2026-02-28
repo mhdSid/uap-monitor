@@ -1,9 +1,8 @@
-import css from '@/styles/main.css?inline'
+import '@/styles'
 import { createApp } from '@/app'
 import { qs } from '@/utils/dom'
 
-// Inject CSS synchronously before app mounts — eliminates render-blocking <link>
-document.head.insertAdjacentHTML('beforeend', `<style>${css}</style>`)
+createApp(qs('#app'))
 
 createApp(qs('#app'))
 
