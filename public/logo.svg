@@ -1,54 +1,91 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="globe-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a0a0a"/>
-      <stop offset="100%" stop-color="#111"/>
-    </linearGradient>
-    <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#00ff41" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.4"/>
-    </linearGradient>
-    <radialGradient id="pulse" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00ff41" stop-opacity="0.9"/>
-      <stop offset="60%" stop-color="#00ff41" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#00ff41" stop-opacity="0"/>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#080808"/>
     </radialGradient>
+    <radialGradient id="core-glow" cx="50%" cy="48%" r="35%">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="anomaly" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#00ff88" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#00ff88" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="arc1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#00ff88" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#22d3ee" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="arc2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#22d3ee" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#a78bfa" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="arc3" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00ff88" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <filter id="glow-strong">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+    </filter>
   </defs>
 
-  <!-- Background circle -->
-  <circle cx="256" cy="256" r="248" fill="url(#globe-grad)" stroke="#1e1e1e" stroke-width="2"/>
+  <!-- Background -->
+  <circle cx="256" cy="256" r="252" fill="url(#bg)" stroke="#1a1a1a" stroke-width="1.5"/>
 
-  <!-- Globe grid lines — latitude -->
-  <ellipse cx="256" cy="256" rx="200" ry="200" fill="none" stroke="#1e1e1e" stroke-width="1.5"/>
-  <ellipse cx="256" cy="256" rx="200" ry="60" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-  <ellipse cx="256" cy="256" rx="200" ry="130" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-  <line x1="256" y1="56" x2="256" y2="456" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- Subtle grid (globe impression, very faint) -->
+  <ellipse cx="256" cy="256" rx="180" ry="180" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+  <ellipse cx="256" cy="256" rx="120" ry="180" fill="none" stroke="#181818" stroke-width="0.5"/>
+  <ellipse cx="256" cy="256" rx="50" ry="180" fill="none" stroke="#181818" stroke-width="0.4"/>
+  <ellipse cx="256" cy="256" rx="180" ry="60" fill="none" stroke="#181818" stroke-width="0.5"/>
+  <ellipse cx="256" cy="256" rx="180" ry="120" fill="none" stroke="#181818" stroke-width="0.4"/>
 
-  <!-- Globe grid lines — longitude -->
-  <ellipse cx="256" cy="256" rx="60" ry="200" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-  <ellipse cx="256" cy="256" rx="130" ry="200" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-  <line x1="56" y1="256" x2="456" y2="256" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- Core glow field -->
+  <circle cx="256" cy="245" r="160" fill="url(#core-glow)"/>
 
-  <!-- Anomaly detection rings -->
-  <circle cx="256" cy="220" r="80" fill="none" stroke="url(#ring-grad)" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.7"/>
-  <circle cx="256" cy="220" r="50" fill="none" stroke="url(#ring-grad)" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
-  <circle cx="256" cy="220" r="24" fill="none" stroke="#00ff41" stroke-width="1.5" opacity="0.8"/>
+  <!-- Orbital detection arcs — the signature element -->
+  <!-- Primary arc (top-left to bottom-right sweep) -->
+  <ellipse cx="256" cy="245" rx="140" ry="85" fill="none" stroke="url(#arc1)" stroke-width="2" transform="rotate(-25 256 245)"/>
+  <!-- Secondary arc (crossing) -->
+  <ellipse cx="256" cy="245" rx="110" ry="70" fill="none" stroke="url(#arc2)" stroke-width="1.5" transform="rotate(30 256 245)"/>
+  <!-- Tertiary arc (wide, faint) -->
+  <ellipse cx="256" cy="255" rx="170" ry="55" fill="none" stroke="url(#arc3)" stroke-width="1" transform="rotate(-5 256 255)"/>
 
-  <!-- Central anomaly point -->
-  <circle cx="256" cy="220" r="8" fill="url(#pulse)"/>
-  <circle cx="256" cy="220" r="3.5" fill="#00ff41"/>
+  <!-- Detection rings around anomaly -->
+  <circle cx="256" cy="238" r="42" fill="none" stroke="#00ff88" stroke-width="1" stroke-dasharray="6 4" opacity="0.35"/>
+  <circle cx="256" cy="238" r="26" fill="none" stroke="#00ff88" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.45"/>
 
-  <!-- Secondary signal points on globe -->
-  <circle cx="170" cy="300" r="3" fill="#22d3ee" opacity="0.6"/>
-  <circle cx="340" cy="180" r="2.5" fill="#a78bfa" opacity="0.5"/>
-  <circle cx="310" cy="330" r="2" fill="#f59e0b" opacity="0.4"/>
-  <circle cx="190" cy="170" r="2" fill="#22d3ee" opacity="0.3"/>
+  <!-- Anomaly — the central subject -->
+  <circle cx="256" cy="238" r="14" fill="url(#anomaly)" filter="url(#glow-strong)" opacity="0.6"/>
+  <circle cx="256" cy="238" r="8" fill="url(#anomaly)" filter="url(#glow)"/>
+  <circle cx="256" cy="238" r="3.5" fill="#fff"/>
 
-  <!-- Signal traces -->
-  <line x1="256" y1="220" x2="170" y2="300" stroke="#22d3ee" stroke-width="0.5" opacity="0.2"/>
-  <line x1="256" y1="220" x2="340" y2="180" stroke="#a78bfa" stroke-width="0.5" opacity="0.2"/>
-  <line x1="256" y1="220" x2="310" y2="330" stroke="#f59e0b" stroke-width="0.5" opacity="0.15"/>
+  <!-- Signal points (other detections on the globe) -->
+  <circle cx="155" cy="310" r="3" fill="#22d3ee" opacity="0.5"/>
+  <circle cx="155" cy="310" r="8" fill="none" stroke="#22d3ee" stroke-width="0.5" opacity="0.25"/>
+  <circle cx="348" cy="190" r="2.5" fill="#a78bfa" opacity="0.45"/>
+  <circle cx="348" cy="190" r="7" fill="none" stroke="#a78bfa" stroke-width="0.5" opacity="0.2"/>
+  <circle cx="320" cy="330" r="2" fill="#f59e0b" opacity="0.35"/>
+  <circle cx="195" cy="175" r="2" fill="#22d3ee" opacity="0.3"/>
+  <circle cx="290" cy="280" r="1.5" fill="#00ff88" opacity="0.25"/>
 
-  <!-- UAP MON text arc at bottom -->
-  <text x="256" y="440" text-anchor="middle" font-family="'Menlo','Monaco','Courier New',monospace" font-size="36" font-weight="700" letter-spacing="12" fill="#555">UAP</text>
+  <!-- Faint signal traces from anomaly to secondary points -->
+  <line x1="256" y1="238" x2="155" y2="310" stroke="#22d3ee" stroke-width="0.4" opacity="0.12"/>
+  <line x1="256" y1="238" x2="348" y2="190" stroke="#a78bfa" stroke-width="0.4" opacity="0.1"/>
+  <line x1="256" y1="238" x2="320" y2="330" stroke="#f59e0b" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- Crosshair (subtle, technical) -->
+  <line x1="256" y1="218" x2="256" y2="225" stroke="#00ff88" stroke-width="0.6" opacity="0.5"/>
+  <line x1="256" y1="251" x2="256" y2="258" stroke="#00ff88" stroke-width="0.6" opacity="0.5"/>
+  <line x1="236" y1="238" x2="243" y2="238" stroke="#00ff88" stroke-width="0.6" opacity="0.5"/>
+  <line x1="269" y1="238" x2="276" y2="238" stroke="#00ff88" stroke-width="0.6" opacity="0.5"/>
 </svg>

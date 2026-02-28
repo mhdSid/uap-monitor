@@ -32,7 +32,8 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
-const DEFAULT_INPUT = resolve(PROJECT_ROOT, '__sources/nuforc.json')
+const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
+const DEFAULT_INPUT = resolve(SOURCES_DIR, 'nuforc.json')
 
 // ─── NUFORC-specific constants ──────────────────────────────────────
 
@@ -237,7 +238,7 @@ function main() {
   if (!existsSync(inputPath)) {
     console.error(`\n  ✗ File not found: ${inputPath}`)
     console.error(`\n  Download it first:`)
-    console.error(`  curl -L -o nuforc.json https://huggingface.co/datasets/kcimc/NUFORC/resolve/main/nuforc.json\n`)
+    console.error(`  curl -L -o __sources/nuforc.json https://huggingface.co/datasets/kcimc/NUFORC/resolve/main/nuforc.json\n`)
     process.exit(1)
   }
 

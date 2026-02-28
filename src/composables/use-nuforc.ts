@@ -305,6 +305,15 @@ export function useNuforc() {
     return manifest?.totalRecords ?? 0
   }
 
+  function getYearCounts(): Map<number, number> {
+    const counts = new Map<number, number>()
+    if (!manifest) return counts
+    for (const [year, meta] of Object.entries(manifest.years)) {
+      counts.set(Number(year), meta.count)
+    }
+    return counts
+  }
+
   /**
    * Count of currently loaded sightings.
    */
@@ -357,6 +366,7 @@ export function useNuforc() {
     getAvailableYears,
     isYearLoaded,
     getTotalCount,
+    getYearCounts,
     getLoadedCount,
   }
 }

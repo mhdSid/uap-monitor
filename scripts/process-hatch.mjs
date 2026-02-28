@@ -36,7 +36,8 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
-const DEFAULT_INPUT = resolve(PROJECT_ROOT, '__sources/hatch_udb.json')
+const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
+const DEFAULT_INPUT = resolve(SOURCES_DIR, 'hatch_udb.json')
 const DOWNLOAD_URL = 'https://raw.githubusercontent.com/richgel999/ufo_data/main/bin/hatch_udb.json'
 
 // ─── Hatch-specific constants ───────────────────────────────────────
@@ -290,12 +291,13 @@ function main() {
   // Auto-download if requested or file doesn't exist
   if (inputPath === '--download' || !existsSync(inputPath)) {
     if (inputPath === '--download') inputPath = DEFAULT_INPUT
-    console.log(`\n  Downloading Hatch UDB from GitHub...`)
+    mkdirSync(SOURCES_DIR, { recursive: true })
+    console.log(`\n  Downloading Hatch UDB to __sources/...`)
     try {
       execSync(`curl -L -o "${inputPath}" "${DOWNLOAD_URL}"`, { stdio: 'inherit' })
     } catch {
       console.error(`\n  ✗ Download failed. Try manually:`)
-      console.error(`  curl -L -o hatch_udb.json ${DOWNLOAD_URL}\n`)
+      console.error(`  curl -L -o __sources/hatch_udb.json ${DOWNLOAD_URL}\n`)
       process.exit(1)
     }
   }
@@ -303,7 +305,7 @@ function main() {
   if (!existsSync(inputPath)) {
     console.error(`\n  ✗ File not found: ${inputPath}`)
     console.error(`\n  Download it:`)
-    console.error(`  curl -L -o hatch_udb.json ${DOWNLOAD_URL}\n`)
+    console.error(`  curl -L -o __sources/hatch_udb.json ${DOWNLOAD_URL}\n`)
     process.exit(1)
   }
 

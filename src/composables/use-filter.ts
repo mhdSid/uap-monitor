@@ -9,7 +9,7 @@ export async function filterSightings(
   all: Sighting[],
   filter: SightingFilter,
 ): Promise<Sighting[]> {
-  const hasFilter = filter.search || filter.shape || filter.continent || filter.minCredibility
+  const hasFilter = filter.search || filter.shape || filter.continent || filter.minCredibility || filter.country
 
   if (!hasFilter) return all
 
@@ -35,6 +35,7 @@ export async function filterSightings(
       }
       if (filter.shape && s.shape !== filter.shape) continue
       if (filter.continent && s.continent !== filter.continent) continue
+      if (filter.country && s.country !== filter.country) continue
       if (filter.minCredibility && s.credibility < filter.minCredibility) continue
       result.push(s)
     }

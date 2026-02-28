@@ -61,6 +61,25 @@ export class SightingModal {
       ? `${s.coordinates.lat.toFixed(2)}°N, ${s.coordinates.lng.toFixed(2)}°E`
       : s.location
 
+    const children: HTMLElement[] = []
+
+    // Summary + description at the top
+    const hasSummary = !!s.summary
+    const hasDescription = !!s.description
+
+    if (hasSummary) {
+      children.push(
+        h('p', { className: `modal-sighting__summary${hasDescription ? ' modal-sighting__summary--with-desc' : ' modal-sighting__summary--solo'}` }, s.summary),
+      )
+    }
+
+    if (hasDescription) {
+      children.push(
+        h('p', { className: `modal-sighting__description${hasSummary ? ' modal-sighting__description--with-summary' : ' modal-sighting__description--solo'}` }, s.description),
+      )
+    }
+
+    // Metadata rows
     const rows: [string, string][] = [
       [MODAL.SHAPE, s.shape],
       [MODAL.LOCATION, coordsStr],
@@ -86,26 +105,12 @@ export class SightingModal {
       rows.push([MODAL.REFERENCE, s.ref])
     }
 
-    const children: HTMLElement[] = rows.map(([label, value]) =>
+    children.push(...rows.map(([label, value]) =>
       h('div', { className: 'modal-sighting__row' },
         h('span', { className: 'modal-sighting__label' }, label),
         h('span', { className: 'modal-sighting__value' }, value),
       ),
-    )
-
-    if (s.summary) {
-      children.push(
-        h('div', { className: 'modal-sighting__summary-label' }, MODAL.SUMMARY),
-        h('p', { className: 'modal-sighting__summary' }, s.summary),
-      )
-    }
-
-    if (s.description) {
-      children.push(
-        h('div', { className: 'modal-sighting__summary-label' }, MODAL.WITNESS_ACCOUNT),
-        h('p', { className: 'modal-sighting__description' }, s.description),
-      )
-    }
+    ))
 
     return h('div', { className: 'modal-sighting__content' }, ...children)
   }

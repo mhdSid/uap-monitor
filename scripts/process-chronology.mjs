@@ -43,8 +43,8 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
-const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
 const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
+const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
 const RAW_BASE_URL = 'https://raw.githubusercontent.com/richgel999/ufo_data/main/bin'
 
 // ─── Source configurations ──────────────────────────────────────────
@@ -527,6 +527,56 @@ function normalizeRef(raw) {
   return String(raw)
 }
 
+// ─── Credibility scoring ────────────────────────────────────────────
+
+const SUB_SOURCE_TIER = {
+  BB_UNKNOWNS: 15,    // Official USAF investigation
+  NICAP: 10,          // Scientific investigation org
+  EBERHART: 10,       // Comprehensive scholarly timeline
+  HALL: 10,           // Rigorous evidence compilation
+  VALLEE_MAGONIA: 8,  // Renowned researcher
+  JOHNSON: 5,         // Date-based catalog
+  DOLAN: 5,           // National security focus
+  PRE_ROSWELL: 3,     // Historical compilation
+  WONDERS_SKY: 3,     // Ancient/historical
+  OVERMEIRE: 3,       // Broad catalog
+}
+
+function computeChronologyCredibility(record, subSourceId, loc, ref, desc, parsed) {
+  let score = 20 // baseline
+
+  // Sub-source tier (0-15)
+  score += SUB_SOURCE_TIER[subSourceId] || 3
+
+  // Description length (0-20)
+  const descLen = (desc || '').length
+  if (descLen > 500) score += 20
+  else if (descLen > 200) score += 15
+  else if (descLen > 80) score += 10
+  else if (descLen > 30) score += 5
+
+  // Location specificity (0-15)
+  if (loc.coordinates) score += 10
+  if (loc.country !== 'Unknown') score += 5
+
+  // Date precision (0-10)
+  const dateStr = record.date || record.alt_basic_date || ''
+  const slashCount = (dateStr.match(/\//g) || []).length
+  if (slashCount >= 2) score += 10        // full M/D/Y
+  else if (slashCount === 1) score += 5   // M/Y only
+
+  // References (0-10)
+  const refStr = ref || ''
+  const refCount = (refStr.match(/\[/g) || []).length
+  if (refCount >= 3) score += 10
+  else if (refCount >= 1) score += 5
+
+  // Time specified (0-5)
+  if (record.time) score += 5
+
+  return Math.min(100, Math.max(0, score))
+}
+
 // ─── Year → chunk key ───────────────────────────────────────────────
 
 function yearToChunkKey(year) {
@@ -573,7 +623,8 @@ function downloadSources() {
     for (const f of src.files) allFiles.add(f)
   }
 
-  console.log(`\n  Downloading ${allFiles.size} source files...\n`)
+  mkdirSync(SOURCES_DIR, { recursive: true })
+  console.log(`\n  Downloading ${allFiles.size} source files to __sources/...\n`)
 
   for (const filename of allFiles) {
     const dest = resolve(SOURCES_DIR, filename)
@@ -668,7 +719,7 @@ function main() {
         country: loc.country,
         continent: loc.continent,
         status: Status.PENDING,
-        credibility: 50,
+        credibility: computeChronologyCredibility(record, subSourceId, loc, ref, desc, parsed),
         ...(time && { time }),
         ...(ref && { ref: truncate(ref, 500) }),
       }

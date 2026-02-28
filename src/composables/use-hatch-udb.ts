@@ -278,6 +278,16 @@ export function useHatchUdb() {
     return manifest?.totalRecords ?? 0
   }
 
+  function getYearCounts(): Map<number, number> {
+    const counts = new Map<number, number>()
+    if (!manifest) return counts
+    for (const [key, meta] of Object.entries(manifest.years)) {
+      const y = parseInt(key, 10)
+      if (!isNaN(y)) counts.set(y, meta.count)
+    }
+    return counts
+  }
+
   function getLoadedCount(): number {
     let count = 0
     for (const chunk of chunkCache.values()) {
@@ -293,6 +303,7 @@ export function useHatchUdb() {
     loadProgressive,
     getAvailableYears,
     getTotalCount,
+    getYearCounts,
     getLoadedCount,
   }
 }

@@ -15,6 +15,7 @@ export interface ChronologySource {
   ): Promise<Sighting[]>
   getAvailableYears(): number[]
   getTotalCount(): number
+  getYearCounts(): Map<number, number>
   getLoadedCount(): number
   getSubSources(): Record<string, SubSourceMeta>
   getSubSourceCount(subSourceId: string): number
@@ -276,6 +277,16 @@ export function useChronology(): ChronologySource {
     return manifest?.totalRecords ?? 0
   }
 
+  function getYearCounts(): Map<number, number> {
+    const counts = new Map<number, number>()
+    if (!manifest) return counts
+    for (const [key, meta] of Object.entries(manifest.years)) {
+      const y = parseInt(key, 10)
+      if (!isNaN(y)) counts.set(y, meta.count)
+    }
+    return counts
+  }
+
   function getLoadedCount(): number {
     let count = 0
     for (const chunk of chunkCache.values()) {
@@ -299,6 +310,7 @@ export function useChronology(): ChronologySource {
     loadProgressive,
     getAvailableYears,
     getTotalCount,
+    getYearCounts,
     getLoadedCount,
     getSubSources,
     getSubSourceCount,

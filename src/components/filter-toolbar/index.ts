@@ -10,6 +10,7 @@ export class FilterToolbar extends Component {
   private searchInput!: HTMLInputElement
   private shapeSelect!: HTMLSelectElement
   private continentSelect!: HTMLSelectElement
+  private countrySelect!: HTMLSelectElement
   private emitDebounced!: ReturnType<typeof useDebounce>
 
   protected create(): HTMLElement {
@@ -65,6 +66,9 @@ export class FilterToolbar extends Component {
       onChange: () => {
         const val = this.continentSelect.value
         this.currentFilter.continent = val ? (val as Continent) : undefined
+        // Clear country when continent changes
+        this.currentFilter.country = undefined
+        this.countrySelect.value = ''
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
       },
@@ -75,12 +79,65 @@ export class FilterToolbar extends Component {
       this.continentSelect.appendChild(h('option', { value }, label))
     }
 
+    this.countrySelect = h('select', {
+      className: 'filter-toolbar__select',
+      id: 'filter-country',
+      name: 'filter-country',
+      autocomplete: 'off',
+      'aria-label': 'Filter by country',
+      onChange: () => {
+        const val = this.countrySelect.value
+        this.currentFilter.country = val || undefined
+        this.emitDebounced.flush()
+        store.filter.set({ ...this.currentFilter })
+      },
+    }) as HTMLSelectElement
+
+    this.countrySelect.appendChild(h('option', { value: '' }, 'ALL COUNTRIES'))
+
+    // Populate countries from loaded sightings reactively
+    store.sightings.subscribe(() => this.updateCountryOptions())
+
     return h('div', { className: 'filter-toolbar', role: 'search', 'aria-label': ARIA.FILTER_BAR },
       this.searchInput,
       h('div', { className: 'filter-toolbar__selects' },
         this.shapeSelect,
         this.continentSelect,
+        this.countrySelect,
       ),
     )
+  }
+
+  private updateCountryOptions(): void {
+    const store = useAppStore()
+    const sightings = store.sightings.get()
+    const counts = new Map<string, number>()
+
+    for (const s of sightings) {
+      if (s.country && s.country !== 'Unknown') {
+        counts.set(s.country, (counts.get(s.country) || 0) + 1)
+      }
+    }
+
+    // Sort by count descending, take top 50
+    const sorted = [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 50)
+
+    const currentVal = this.countrySelect.value
+
+    // Clear and rebuild
+    while (this.countrySelect.options.length > 1) {
+      this.countrySelect.remove(1)
+    }
+
+    for (const [country, count] of sorted) {
+      this.countrySelect.appendChild(
+        h('option', { value: country }, `${country} (${count})`),
+      )
+    }
+
+    // Restore selection if still valid
+    if (currentVal) this.countrySelect.value = currentVal
   }
 }

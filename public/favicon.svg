@@ -1,19 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Dark circle -->
-  <circle cx="16" cy="16" r="15" fill="#0a0a0a" stroke="#1e1e1e" stroke-width="1"/>
-
-  <!-- Minimal globe grid -->
-  <circle cx="16" cy="16" r="12" fill="none" stroke="#1e1e1e" stroke-width="0.8"/>
-  <ellipse cx="16" cy="16" rx="12" ry="4" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
-  <ellipse cx="16" cy="16" rx="4" ry="12" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
-
+  <defs>
+    <radialGradient id="fg" cx="50%" cy="46%" r="40%">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="a" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="40%" stop-color="#00ff88"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <circle cx="16" cy="16" r="15.5" fill="#0a0a0a" stroke="#222" stroke-width="0.5"/>
+  <!-- Faint grid -->
+  <circle cx="16" cy="16" r="11" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+  <ellipse cx="16" cy="16" rx="11" ry="4" fill="none" stroke="#181818" stroke-width="0.4"/>
+  <ellipse cx="16" cy="16" rx="4" ry="11" fill="none" stroke="#181818" stroke-width="0.4"/>
+  <!-- Core glow -->
+  <circle cx="16" cy="15" r="10" fill="url(#fg)"/>
+  <!-- Orbital arcs -->
+  <ellipse cx="16" cy="15" rx="9" ry="5.5" fill="none" stroke="#00ff88" stroke-width="0.7" opacity="0.5" transform="rotate(-25 16 15)"/>
+  <ellipse cx="16" cy="15" rx="7" ry="4.5" fill="none" stroke="#22d3ee" stroke-width="0.6" opacity="0.35" transform="rotate(30 16 15)"/>
   <!-- Detection ring -->
-  <circle cx="16" cy="14" r="5" fill="none" stroke="#00ff41" stroke-width="0.8" opacity="0.6"/>
-
-  <!-- Anomaly point -->
-  <circle cx="16" cy="14" r="2" fill="#00ff41"/>
-
+  <circle cx="16" cy="14.5" r="3.5" fill="none" stroke="#00ff88" stroke-width="0.5" stroke-dasharray="2 1.5" opacity="0.4"/>
+  <!-- Anomaly core -->
+  <circle cx="16" cy="14.5" r="2.5" fill="url(#a)" opacity="0.7"/>
+  <circle cx="16" cy="14.5" r="1.2" fill="#fff"/>
   <!-- Secondary signals -->
-  <circle cx="11" cy="19" r="1" fill="#22d3ee" opacity="0.5"/>
-  <circle cx="22" cy="12" r="0.8" fill="#a78bfa" opacity="0.4"/>
+  <circle cx="10.5" cy="20" r="0.8" fill="#22d3ee" opacity="0.45"/>
+  <circle cx="22" cy="11.5" r="0.7" fill="#a78bfa" opacity="0.35"/>
 </svg>

@@ -24,6 +24,8 @@ import { Footer } from '@/components/footer'
 import { YearSelector } from '@/components/year-selector'
 import { FilterToolbar } from '@/components/filter-toolbar'
 import { SightingGrids } from '@/components/sighting-grid'
+import { SightingMap } from '@/components/sighting-map'
+import { Timeline } from '@/components/timeline'
 import { WelcomeModal } from '@/components/welcome-modal'
 import { SECTION } from '@/data/strings'
 
@@ -37,6 +39,8 @@ export class App extends Component {
   private main!: HTMLElement
   private ticker!: Ticker
   private grids!: SightingGrids
+  private sightingMap!: SightingMap
+  private timeline!: Timeline
   private renderVersion = 0
   private yearRangeReady = false
 
@@ -52,6 +56,14 @@ export class App extends Component {
     })
 
     this.grids = new SightingGrids({})
+
+    this.sightingMap = new SightingMap({})
+
+    this.timeline = new Timeline({
+      onRangeSelect: (from, to) => {
+        this.store.yearRange.set({ from, to })
+      },
+    })
 
     return h('div', { className: 'app' },
       h('div', { className: 'scanlines' }),
@@ -89,7 +101,7 @@ export class App extends Component {
   private hydrateStore(): void {
     const years = this.dataSource.getAvailableYears()
     const newest = years[0] ?? new Date().getFullYear()
-    const defaultFrom = newest - 1
+    const defaultFrom = newest - 5
 
     batch(() => {
       this.store.availableYears.set(years)
@@ -115,6 +127,8 @@ export class App extends Component {
 
     clearChildren(this.main)
     this.main.appendChild(controlsForm)
+    this.main.appendChild(this.timeline.el)
+    this.main.appendChild(this.sightingMap.el)
     this.main.appendChild(this.grids.el)
   }
 
@@ -177,6 +191,8 @@ export class App extends Component {
 
   private finalize(): void {
     const sightings = this.store.sightings.get()
+    const years = this.store.availableYears.get()
+    const { from, to } = this.store.yearRange.get()
 
     batch(() => {
       this.store.shownCount.set(sightings.length)
@@ -186,6 +202,15 @@ export class App extends Component {
     this.ticker.setMessages(
       this.tickerMessages.generateMessages(sightings),
     )
+
+    // Populate map and timeline
+    this.sightingMap.setSightings(sightings)
+    this.timeline.setManifestCounts(
+      this.dataSource.getYearCounts(),
+      years[years.length - 1] ?? 1900,
+      years[0] ?? new Date().getFullYear(),
+    )
+    this.timeline.setActiveRange(from, to)
 
     this.yearRangeReady = true
   }
@@ -218,6 +243,7 @@ export class App extends Component {
     releaseRender()
     release()
 
+    this.sightingMap.setSightings(filtered)
     this.store.shownCount.set(filtered.length)
   }
 
@@ -235,6 +261,9 @@ export class App extends Component {
     })
 
     await this.grids.render(sightings, true)
+
+    this.sightingMap.setSightings(sightings)
+    this.timeline.setActiveRange(from, to)
 
     this.ticker.setMessages(
       this.tickerMessages.generateMessages(sightings),

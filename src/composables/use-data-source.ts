@@ -304,6 +304,19 @@ export function useDataSource() {
     return nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount()
   }
 
+  /**
+   * Merged year counts from all source manifests (for timeline density).
+   */
+  function getYearCounts(): Map<number, number> {
+    const merged = new Map<number, number>()
+    for (const source of [nuforc.getYearCounts(), hatch.getYearCounts(), chronology.getYearCounts()]) {
+      for (const [year, count] of source) {
+        merged.set(year, (merged.get(year) || 0) + count)
+      }
+    }
+    return merged
+  }
+
   function getSources(): DataSource[] {
     return SOURCE_REGISTRY
   }
@@ -315,6 +328,7 @@ export function useDataSource() {
     fetchProgressive,
     getAvailableYears,
     getTotalCount,
+    getYearCounts,
     getSources,
     nuforc,
     hatch,

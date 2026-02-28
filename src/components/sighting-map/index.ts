@@ -1,0 +1,169 @@
+import { Component } from '@/core'
+import { h } from '@/utils/dom'
+import type { Sighting, Coordinates } from '@/types'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import 'leaflet.markercluster'
+import 'leaflet.markercluster/dist/MarkerCluster.css'
+
+// ─── Types ──────────────────────────────────────────────────────────
+
+export interface SightingMapProps {
+  onCountrySelect?: (country: string | undefined) => void
+  onBoundsChange?: (bounds: { north: number; south: number; east: number; west: number }) => void
+}
+
+// ─── Constants ──────────────────────────────────────────────────────
+
+const DARK_TILES = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
+
+const MARKER_COLORS: Record<string, string> = {
+  NUFORC: '#00ff88',
+  HATCH_UDB: '#00d4ff',
+  CHRONOLOGY: '#ffb400',
+}
+
+const DEFAULT_CENTER: L.LatLngExpression = [30, 0]
+const DEFAULT_ZOOM = 2
+const MIN_ZOOM = 2
+const MAX_ZOOM = 14
+
+// ─── Component ──────────────────────────────────────────────────────
+
+export class SightingMap extends Component<SightingMapProps> {
+  private map!: L.Map
+  private clusterGroup!: L.MarkerClusterGroup
+  private wrapper!: HTMLElement
+  private resizeObserver!: ResizeObserver
+  private isVisible = false
+
+  protected create(): HTMLElement {
+    this.wrapper = h('div', { className: 'sighting-map' })
+    const mapEl = h('div', { className: 'sighting-map__canvas' })
+    this.wrapper.appendChild(mapEl)
+
+    // Defer map init until mounted (needs real DOM dimensions)
+    requestAnimationFrame(() => {
+      this.initMap(mapEl)
+    })
+
+    return this.wrapper
+  }
+
+  private initMap(container: HTMLElement): void {
+    this.map = L.map(container, {
+      center: DEFAULT_CENTER,
+      zoom: DEFAULT_ZOOM,
+      minZoom: MIN_ZOOM,
+      maxZoom: MAX_ZOOM,
+      zoomControl: true,
+      attributionControl: true,
+      preferCanvas: true,
+      worldCopyJump: true,
+    })
+
+    L.tileLayer(DARK_TILES, {
+      attribution: TILE_ATTR,
+      maxZoom: MAX_ZOOM,
+    }).addTo(this.map)
+
+    this.clusterGroup = L.markerClusterGroup({
+      maxClusterRadius: 50,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      zoomToBoundsOnClick: true,
+      chunkedLoading: true,
+      chunkInterval: 100,
+      chunkDelay: 10,
+      iconCreateFunction: (cluster) => {
+        const count = cluster.getChildCount()
+        let size: string, radius: number
+        if (count < 20) { size = 'sm'; radius = 28 }
+        else if (count < 100) { size = 'md'; radius = 36 }
+        else if (count < 500) { size = 'lg'; radius = 44 }
+        else { size = 'xl'; radius = 52 }
+
+        return L.divIcon({
+          html: `<div class="map-cluster map-cluster--${size}">${count.toLocaleString()}</div>`,
+          className: 'map-cluster-wrapper',
+          iconSize: L.point(radius, radius),
+        })
+      },
+    })
+
+    this.map.addLayer(this.clusterGroup)
+
+    // Emit bounds change on move/zoom
+    if (this.props.onBoundsChange) {
+      this.map.on('moveend', () => {
+        const b = this.map.getBounds()
+        this.props.onBoundsChange!({
+          north: b.getNorth(),
+          south: b.getSouth(),
+          east: b.getEast(),
+          west: b.getWest(),
+        })
+      })
+    }
+
+    // Handle resize
+    this.resizeObserver = new ResizeObserver(() => {
+      if (this.isVisible) this.map.invalidateSize()
+    })
+    this.resizeObserver.observe(this.wrapper)
+    this.isVisible = true
+  }
+
+  // ─── Public API ─────────────────────────────────────────────────
+
+  setSightings(sightings: Sighting[]): void {
+    if (!this.clusterGroup) return
+
+    this.clusterGroup.clearLayers()
+
+    const markers: L.CircleMarker[] = []
+    for (const s of sightings) {
+      if (!s.coordinates) continue
+      const color = MARKER_COLORS[s.source] || '#ffb400'
+      const marker = L.circleMarker([s.coordinates.lat, s.coordinates.lng], {
+        radius: 4,
+        color,
+        fillColor: color,
+        fillOpacity: 0.6,
+        weight: 1,
+        opacity: 0.8,
+      })
+
+      marker.bindPopup(() => this.createPopup(s), { maxWidth: 280 })
+      markers.push(marker)
+    }
+
+    this.clusterGroup.addLayers(markers)
+  }
+
+  fitToData(): void {
+    if (!this.map || !this.clusterGroup) return
+    const bounds = this.clusterGroup.getBounds()
+    if (bounds.isValid()) {
+      this.map.fitBounds(bounds, { padding: [30, 30], maxZoom: 10 })
+    }
+  }
+
+  invalidateSize(): void {
+    if (this.map) this.map.invalidateSize()
+  }
+
+  // ─── Popup ────────────────────────────────────────────────────
+
+  private createPopup(s: Sighting): HTMLElement {
+    const year = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
+    const src = s.subSource || s.source
+    return h('div', { className: 'map-popup' },
+      h('div', { className: 'map-popup__date' }, year),
+      h('div', { className: 'map-popup__location' }, s.location || s.region || '—'),
+      h('div', { className: 'map-popup__summary' }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
+      h('div', { className: 'map-popup__meta' }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
+    )
+  }
+}
