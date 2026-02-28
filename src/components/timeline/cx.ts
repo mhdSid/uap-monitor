@@ -1,6 +1,7 @@
-/** Class name constants for timeline. Auto-generated — edit styles.css, re-run gen. */
+/** Class name constants for timeline. */
 export const cx = {
   root: 'timeline',
+  scroller: 'timeline__scroller',
   canvas: 'timeline__canvas',
   tooltip: 'timeline__tooltip'
 } as const
