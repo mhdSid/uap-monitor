@@ -1,5 +1,5 @@
 import { h } from '@/utils/dom'
-import { formatDate } from '@/utils/format'
+import { formatDate, formatDateCompact } from '@/utils/format'
 import { StatusTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'
 import { DataSourceId } from '@/enums'
@@ -90,7 +90,11 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
       label: 'DATE',
       width: '90px',
       align: 'right',
-      render: (row) => h('span', { className: 'cell-time' }, formatDate(row.occurredAt)),
+      render: (row) => {
+        const full = formatDate(row.occurredAt)
+        const compact = formatDateCompact(row.occurredAt)
+        return h('span', { className: 'cell-time', title: full }, compact)
+      },
     },
   ]
 }

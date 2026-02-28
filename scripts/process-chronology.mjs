@@ -34,6 +34,9 @@ import {
   Status,
   Shape,
   COUNTRY_CONTINENT,
+  COUNTRY_ALIASES,
+  REGION_TO_COUNTRY,
+  US_LOCATIONS,
   COUNTRY_COORDS,
   truncate,
 } from './shared-constants.mjs'
@@ -247,8 +250,116 @@ function parseChronologyLocation(raw) {
   const locStr = Array.isArray(raw) ? raw[0] : raw
   if (typeof locStr !== 'string' || !locStr.trim()) return fallback
 
-  const location = locStr.trim()
-  const parts = location.split(',').map((s) => s.trim()).filter(Boolean)
+  const location = locStr.trim().replace(/[\u2018\u2019]/g, "'")
+
+  // Helper: resolve a value to a known country (checks COUNTRY_CONTINENT,
+  // COUNTRY_ALIASES, REGION_TO_COUNTRY, US state names, abbreviations)
+  const resolveCountry = (val) => {
+    if (!val) return null
+    // Direct match in COUNTRY_CONTINENT
+    if (COUNTRY_CONTINENT[val]) return val
+    // Alias match
+    if (COUNTRY_ALIASES[val]) return COUNTRY_ALIASES[val]
+    // Title-case attempt
+    const tc = val.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
+    if (COUNTRY_CONTINENT[tc]) return tc
+    if (COUNTRY_ALIASES[tc]) return COUNTRY_ALIASES[tc]
+    // Region → country (Canadian provinces, Australian states, etc.)
+    if (REGION_TO_COUNTRY[val]) return REGION_TO_COUNTRY[val]
+    if (REGION_TO_COUNTRY[tc]) return REGION_TO_COUNTRY[tc]
+    // Strip directional prefixes: "Northern China" → "China", "N. China" → "China"
+    const stripped = val
+      .replace(/^(?:northern|southern|eastern|western|central|north|south|east|west|northeast|northwest|southeast|southwest|N\.\s*|S\.\s*|E\.\s*|W\.\s*|NE\.\s*|NW\.\s*|SE\.\s*|SW\.\s*)\s*/i, '')
+      .trim()
+    if (stripped && stripped !== val) {
+      const sr = resolveCountry(stripped)
+      if (sr) return sr
+    }
+    return null
+  }
+
+  const resolveUSState = (val) => {
+    if (!val) return false
+    if (US_STATES_ABBR[val]) return true
+    if (US_STATE_NAMES.has(val)) return true
+    return false
+  }
+
+  // ── Pre-processing: try to resolve the whole string as an alias first ──
+  const wholeResolved = resolveCountry(location)
+  if (wholeResolved) {
+    const continent = COUNTRY_CONTINENT[wholeResolved] || COUNTRY_CONTINENT['Unknown']
+    const coordinates = COUNTRY_COORDS[wholeResolved] || null
+    return { location, region: '', country: wholeResolved, continent, coordinates }
+  }
+
+  // ── Colon-separated (Overmeire: "GREAT BRITAIN: Sandwich (Kent)") ──
+  if (location.includes(':')) {
+    const colonParts = location.split(':').map((s) => s.trim().replace(/\.$/, '').trim()).filter(Boolean)
+    if (colonParts.length >= 2) {
+      const first = colonParts[0]
+      const rest = colonParts.slice(1).join(', ')
+      const resolved = resolveCountry(first)
+      if (resolved) {
+        const continent = COUNTRY_CONTINENT[resolved] || COUNTRY_CONTINENT['Unknown']
+        const coordinates = COUNTRY_COORDS[resolved] || null
+        return { location, region: rest, country: resolved, continent, coordinates }
+      }
+    }
+  }
+
+  // ── Descriptive patterns: extract country from "...in/of/near/off COUNTRY..." ──
+  // Try multiple patterns from most to least specific
+  const descPatterns = [
+    /\b(?:in|of|near|off)\s+(?:the\s+)?([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)*)(?:\s*[.?]?)$/i,   // "in Japan", "near the British Isles", "of SPAIN"
+    /\b(?:coast|west|east|north|south|southwest|southeast|northwest|northeast)\s+of\s+([A-Z][A-Za-z\s]+?)(?:\s*\(.*\))?$/i,  // "coast of SPAIN"
+  ]
+  for (const pat of descPatterns) {
+    const m = location.match(pat)
+    if (m) {
+      const candidate = m[1].trim().replace(/\.$/, '')
+      const resolved = resolveCountry(candidate)
+      if (resolved) {
+        const continent = COUNTRY_CONTINENT[resolved] || COUNTRY_CONTINENT['Unknown']
+        const coordinates = COUNTRY_COORDS[resolved] || null
+        return { location, region: location, country: resolved, continent, coordinates }
+      }
+    }
+  }
+
+  // ── Parenthesized country: "...text (SPAIN)" or "GERMANY (unspecified)" ──
+  const parenMatch = location.match(/\(([^)]+)\)\s*$/)
+  if (parenMatch) {
+    const candidate = parenMatch[1].trim().replace(/\.$/, '')
+    const resolved = resolveCountry(candidate)
+    if (resolved) {
+      const continent = COUNTRY_CONTINENT[resolved] || COUNTRY_CONTINENT['Unknown']
+      const coordinates = COUNTRY_COORDS[resolved] || null
+      return { location, region: location, country: resolved, continent, coordinates }
+    }
+    // Parenthesized US state: "Cleveland (Ohio)", "Huntsville (Alabama)"
+    if (resolveUSState(candidate)) {
+      const continent = COUNTRY_CONTINENT['USA']
+      const coordinates = COUNTRY_COORDS['USA'] || null
+      return { location, region: location, country: 'USA', continent, coordinates }
+    }
+    // If paren content isn't a country, try the prefix before the paren
+    const prefix = location.replace(/\s*\([^)]*\)\s*$/, '').trim()
+    const prefixResolved = resolveCountry(prefix)
+    if (prefixResolved) {
+      const continent = COUNTRY_CONTINENT[prefixResolved] || COUNTRY_CONTINENT['Unknown']
+      const coordinates = COUNTRY_COORDS[prefixResolved] || null
+      return { location, region: location, country: prefixResolved, continent, coordinates }
+    }
+  }
+
+  // Strip trailing periods from each part (Overmeire: "Texas.", "California.")
+  // Also strip generic suffixes like "At Sea", "in flight" that hide the real location
+  const STRIP_SUFFIXES = new Set(['at sea', 'in flight', 'in air', 'in air space'])
+  const parts = location.split(',')
+    .map((s) => s.trim().replace(/\.$/, '').trim())
+    .filter((s) => s && !STRIP_SUFFIXES.has(s.toLowerCase()))
+  if (parts.length === 0) return fallback
 
   let city = ''
   let state = ''
@@ -256,54 +367,137 @@ function parseChronologyLocation(raw) {
 
   if (parts.length === 1) {
     const val = parts[0]
-    if (COUNTRY_CONTINENT[val]) {
-      country = val
-    } else if (US_STATE_NAMES.has(val)) {
+    const resolved = resolveCountry(val)
+    if (resolved) {
+      country = resolved
+    } else if (resolveUSState(val)) {
       state = US_STATE_FROM_NAME[val] || val
       country = 'USA'
-    } else if (US_STATES_ABBR[val]) {
-      state = val
+    } else if (US_LOCATIONS.has(val)) {
+      city = val
       country = 'USA'
     } else {
-      const titleCase = val.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
-      if (COUNTRY_CONTINENT[titleCase]) {
-        country = titleCase
-      } else {
-        city = val
+      // Try first word(s) as country: "ENGLAND Lakenheath" → England
+      const words = val.split(/\s+/)
+      let found = false
+      for (let i = Math.min(3, words.length - 1); i >= 1; i--) {
+        const prefix = words.slice(0, i).join(' ')
+        const prefixResolved = resolveCountry(prefix)
+        if (prefixResolved) {
+          country = prefixResolved
+          city = words.slice(i).join(' ')
+          found = true
+          break
+        }
       }
+      if (!found) city = val
     }
   } else if (parts.length === 2) {
     const [first, second] = parts
 
     if (US_STATES_ABBR[second]) {
+      // "City, CA"
       city = first
       state = second
       country = 'USA'
     } else if (US_STATE_NAMES.has(second)) {
+      // "City, California"
       city = first
       state = US_STATE_FROM_NAME[second] || second
       country = 'USA'
-    } else if (COUNTRY_CONTINENT[second]) {
-      city = first
-      country = second
     } else {
-      const firstTitle = first.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
-      if (COUNTRY_CONTINENT[first] || COUNTRY_CONTINENT[firstTitle]) {
-        country = COUNTRY_CONTINENT[first] ? first : firstTitle
+      // Try first part as country FIRST when it's clearly a country name
+      // (Overmeire format: "FRANCE, at sea" / "JAPAN, City")
+      const firstResolved = resolveCountry(first)
+      const secondResolved = resolveCountry(second)
+
+      if (firstResolved && secondResolved) {
+        // Both resolve — prefer the real country over generic (At Sea, Unknown, etc.)
+        const genericCountries = new Set(['At Sea', 'Unknown', 'Atlantic Ocean', 'Pacific Ocean'])
+        if (genericCountries.has(secondResolved) && !genericCountries.has(firstResolved)) {
+          country = firstResolved
+          city = second
+        } else {
+          city = first
+          country = secondResolved
+        }
+      } else if (firstResolved) {
+        country = firstResolved
         city = second
+      } else if (secondResolved) {
+        city = first
+        country = secondResolved
+      } else if (REGION_TO_COUNTRY[second]) {
+        city = first
+        country = REGION_TO_COUNTRY[second]
+        state = second
+      } else if (US_LOCATIONS.has(second) || US_LOCATIONS.has(first)) {
+        city = first
+        country = 'USA'
       } else {
         city = first
-        const secondTitle = second.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
-        country = COUNTRY_CONTINENT[secondTitle] ? secondTitle : second
+        country = second
       }
     }
   } else if (parts.length >= 3) {
-    city = parts[0]
-    state = parts[1]
-    country = parts[parts.length - 1]
+    const first = parts[0]
+    const last = parts[parts.length - 1]
+    const secondLast = parts[parts.length - 2]
+
+    // Try FIRST part as country (Overmeire: "FRANCE, City, SubRegion")
+    const firstResolved = resolveCountry(first)
+    // Try LAST part as country (standard: "City, State, Country")
+    const lastResolved = resolveCountry(last)
+
+    if (firstResolved && lastResolved) {
+      // Both resolve — prefer last (standard format) unless last is generic
+      const genericCountries = new Set(['At Sea', 'Unknown', 'Atlantic Ocean', 'Pacific Ocean'])
+      if (genericCountries.has(lastResolved) && !genericCountries.has(firstResolved)) {
+        country = firstResolved
+        city = parts.slice(1).join(', ')
+      } else {
+        country = lastResolved
+        city = parts[0]
+        state = parts.slice(1, -1).join(', ')
+      }
+    } else if (lastResolved) {
+      country = lastResolved
+      city = parts[0]
+      state = parts.slice(1, -1).join(', ')
+    } else if (firstResolved) {
+      // Overmeire: "FRANCE, City, SubRegion"
+      country = firstResolved
+      city = parts.slice(1).join(', ')
+    } else if (US_STATES_ABBR[last]) {
+      country = 'USA'
+      state = parts.slice(1, -1).join(', ')
+      city = first
+    } else if (US_STATE_NAMES.has(last)) {
+      country = 'USA'
+      state = US_STATE_FROM_NAME[last] || last
+      city = first
+    } else if (REGION_TO_COUNTRY[last]) {
+      country = REGION_TO_COUNTRY[last]
+      state = last
+      city = first
+    } else if (US_LOCATIONS.has(last)) {
+      country = 'USA'
+      state = parts.slice(1, -1).join(', ')
+      city = first
+    } else if (resolveCountry(secondLast)) {
+      country = resolveCountry(secondLast)
+      state = parts.slice(1, -2).join(', ')
+      city = first
+    } else {
+      city = first
+      state = parts.slice(1, -1).join(', ')
+      country = last
+    }
   }
 
   if (country === 'United States' || country === 'US') country = 'USA'
+  // Resolve final country through aliases one more time
+  if (COUNTRY_ALIASES[country]) country = COUNTRY_ALIASES[country]
 
   let region = city
   if (state) region = region ? `${city}, ${state}` : state

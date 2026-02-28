@@ -1253,32 +1253,42 @@ body.modal-open {
   .app-header__clock { display: none; }
   .section__body { padding: 8px; }
 
-  /* Grid: hide STATUS and DATE columns on mobile */
+  /* Grid: hide only STATUS column on mobile */
   .data-grid__th:nth-child(3),
-  .data-grid__td:nth-child(3),
-  .data-grid__th:nth-child(4),
-  .data-grid__td:nth-child(4) {
+  .data-grid__td:nth-child(3) {
     display: none;
   }
 
-  /* Report cell takes remaining space, cred column shrinks to fit */
+  /* Report cell takes remaining space */
   .data-grid__th:nth-child(1),
   .data-grid__td:nth-child(1) {
     width: auto !important;
   }
 
+  /* Compact CRED column */
   .data-grid__th:nth-child(2),
   .data-grid__td:nth-child(2) {
-    width: 72px !important;
+    width: 56px !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  /* Compact DATE column — visible for sorting */
+  .data-grid__th:nth-child(4),
+  .data-grid__td:nth-child(4) {
+    width: 62px !important;
+    padding-left: 2px !important;
+    padding-right: 4px !important;
+    font-size: 9px;
   }
 
   .credibility-bar__track {
-    width: 32px;
+    width: 28px;
   }
 
-  /* Show inline date in report cell instead */
+  /* Hide inline date in report cell (now shown in its own column) */
   .cell-report__date {
-    display: block;
+    display: none;
   }
 
   .cell-report__summary {
