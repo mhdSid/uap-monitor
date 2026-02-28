@@ -13,7 +13,6 @@ export interface TimelineProps {
 
 // ─── Constants ──────────────────────────────────────────────────────
 
-/** Bar geometry — 10px wide + 2px gap = 12px per year, comfortably tappable */
 const BAR_W = 10
 const BAR_GAP = 2
 const BAR_STEP = BAR_W + BAR_GAP
@@ -21,6 +20,7 @@ const BAR_MIN_H = 3
 const BAR_RADIUS = 2
 const LABEL_H = 16
 const PAD_X = 8
+const THUMB_MIN_W = 48 // minimum thumb width — comfortably tappable
 
 // ─── Component ──────────────────────────────────────────────────────
 
@@ -28,8 +28,12 @@ export class Timeline extends Component<TimelineProps> {
   private scroller!: HTMLElement
   private canvas!: HTMLCanvasElement
   private tooltip!: HTMLElement
-  private yearCounts: Map<number, number> = new Map()
 
+  // Custom scrollbar
+  private scrollTrack!: HTMLElement
+  private scrollThumb!: HTMLElement
+
+  private yearCounts: Map<number, number> = new Map()
   private dataFrom = 1900
   private dataTo = 2024
   private activeFrom = 0
@@ -38,6 +42,11 @@ export class Timeline extends Component<TimelineProps> {
   private mounted = false
   private canvasW = 0
   private canvasH = 0
+
+  // Thumb drag state
+  private isDragging = false
+  private dragStartX = 0
+  private dragStartScroll = 0
 
   protected create(): HTMLElement {
     this.canvas = document.createElement('canvas')
@@ -48,8 +57,12 @@ export class Timeline extends Component<TimelineProps> {
 
     this.scroller = h('div', { className: cx.scroller }, this.canvas)
 
+    this.scrollThumb = h('div', { className: cx.scrollThumb })
+    this.scrollTrack = h('div', { className: cx.scrollTrack }, this.scrollThumb)
+
     const wrapper = h('div', { className: cx.root },
       this.scroller,
+      this.scrollTrack,
       this.tooltip
     )
 
@@ -119,16 +132,19 @@ export class Timeline extends Component<TimelineProps> {
     const yearSpan = this.dataTo - this.dataFrom + 1
     const totalW = PAD_X * 2 + yearSpan * BAR_STEP
     const containerH = Math.max(120, Math.floor(this.el.getBoundingClientRect().height))
+    const trackH = this.scrollTrack.getBoundingClientRect().height || 14
+    const canvasH = containerH - trackH
 
     this.canvasW = totalW
-    this.canvasH = containerH
+    this.canvasH = canvasH
 
     const dpr = window.devicePixelRatio || 1
     this.canvas.width = totalW * dpr
-    this.canvas.height = containerH * dpr
+    this.canvas.height = canvasH * dpr
     this.canvas.style.width = totalW + 'px'
-    this.canvas.style.height = containerH + 'px'
+    this.canvas.style.height = canvasH + 'px'
 
+    this.syncThumb()
     this.draw()
 
     if (this.activeFrom > 0) {
@@ -141,6 +157,39 @@ export class Timeline extends Component<TimelineProps> {
     const x = PAD_X + (midYear - this.dataFrom) * BAR_STEP
     const viewW = this.scroller.clientWidth
     this.scroller.scrollLeft = Math.max(0, x - viewW / 2)
+  }
+
+  // ─── Custom scrollbar ────────────────────────────────────────
+
+  private syncThumb(): void {
+    const scrollW = this.scroller.scrollWidth
+    const clientW = this.scroller.clientWidth
+    if (scrollW <= clientW) {
+      this.scrollTrack.style.display = 'none'
+      return
+    }
+    this.scrollTrack.style.display = ''
+
+    const trackW = this.scrollTrack.clientWidth
+    const ratio = clientW / scrollW
+    const thumbW = Math.max(THUMB_MIN_W, Math.round(ratio * trackW))
+    const maxScroll = scrollW - clientW
+    const scrollFrac = maxScroll > 0 ? this.scroller.scrollLeft / maxScroll : 0
+    const thumbX = Math.round(scrollFrac * (trackW - thumbW))
+
+    this.scrollThumb.style.width = thumbW + 'px'
+    this.scrollThumb.style.transform = `translateX(${thumbX}px)`
+  }
+
+  private scrollFromThumbX(trackClientX: number): void {
+    const trackRect = this.scrollTrack.getBoundingClientRect()
+    const trackW = trackRect.width
+    const thumbW = this.scrollThumb.offsetWidth
+    const x = trackClientX - trackRect.left - thumbW / 2
+    const maxThumbX = trackW - thumbW
+    const frac = Math.max(0, Math.min(1, x / maxThumbX))
+    const maxScroll = this.scroller.scrollWidth - this.scroller.clientWidth
+    this.scroller.scrollLeft = Math.round(frac * maxScroll)
   }
 
   // ─── Drawing ──────────────────────────────────────────────────
@@ -215,7 +264,6 @@ export class Timeline extends Component<TimelineProps> {
         ctx.closePath()
         ctx.fill()
       } else if (isActive) {
-        // Tiny dot for zero-count active years
         ctx.fillStyle = palette.green400_30
         ctx.fillRect(x + 3, barArea - 2, BAR_W - 6, 2)
       }
@@ -251,6 +299,11 @@ export class Timeline extends Component<TimelineProps> {
   }
 
   private bindEvents(): void {
+    // ── Scroller → sync thumb ────────────────────────────────────
+    this.scroller.addEventListener('scroll', () => {
+      if (!this.isDragging) this.syncThumb()
+    }, { passive: true })
+
     // ── Hover (desktop) ──────────────────────────────────────────
     this.canvas.addEventListener('mousemove', (e) => {
       const year = this.yearFromX(e.clientX)
@@ -267,7 +320,7 @@ export class Timeline extends Component<TimelineProps> {
       this.draw()
     })
 
-    // ── Click (desktop) ──────────────────────────────────────────
+    // ── Click bar (desktop) ──────────────────────────────────────
     this.canvas.addEventListener('click', (e) => {
       const year = this.yearFromX(e.clientX)
       if (year != null && this.props.onRangeSelect) {
@@ -275,7 +328,7 @@ export class Timeline extends Component<TimelineProps> {
       }
     })
 
-    // ── Tap (mobile) — distinguish scroll from tap ──────────────
+    // ── Tap bar (mobile) — distinguish scroll from tap ───────────
     let touchMoved = false
 
     this.scroller.addEventListener('touchstart', (e) => {
@@ -296,6 +349,72 @@ export class Timeline extends Component<TimelineProps> {
         this.props.onRangeSelect(year, year)
       }
     }, { passive: true })
+
+    // ── Thumb drag (mouse) ───────────────────────────────────────
+    this.scrollThumb.addEventListener('mousedown', (e) => {
+      e.preventDefault()
+      this.isDragging = true
+      this.dragStartX = e.clientX
+      this.dragStartScroll = this.scroller.scrollLeft
+      this.scrollThumb.classList.add(cx.scrollThumbActive)
+    })
+
+    window.addEventListener('mousemove', (e) => {
+      if (!this.isDragging) return
+      const dx = e.clientX - this.dragStartX
+      const trackW = this.scrollTrack.clientWidth
+      const thumbW = this.scrollThumb.offsetWidth
+      const maxThumbTravel = trackW - thumbW
+      if (maxThumbTravel <= 0) return
+      const maxScroll = this.scroller.scrollWidth - this.scroller.clientWidth
+      const scrollDelta = (dx / maxThumbTravel) * maxScroll
+      this.scroller.scrollLeft = Math.max(0, Math.min(maxScroll, this.dragStartScroll + scrollDelta))
+      this.syncThumb()
+    })
+
+    window.addEventListener('mouseup', () => {
+      if (!this.isDragging) return
+      this.isDragging = false
+      this.scrollThumb.classList.remove(cx.scrollThumbActive)
+    })
+
+    // ── Thumb drag (touch) ───────────────────────────────────────
+    this.scrollThumb.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return
+      e.preventDefault()
+      this.isDragging = true
+      this.dragStartX = e.touches[0].clientX
+      this.dragStartScroll = this.scroller.scrollLeft
+      this.scrollThumb.classList.add(cx.scrollThumbActive)
+    })
+
+    window.addEventListener('touchmove', (e) => {
+      if (!this.isDragging) return
+      const touch = e.touches[0]
+      if (!touch) return
+      const dx = touch.clientX - this.dragStartX
+      const trackW = this.scrollTrack.clientWidth
+      const thumbW = this.scrollThumb.offsetWidth
+      const maxThumbTravel = trackW - thumbW
+      if (maxThumbTravel <= 0) return
+      const maxScroll = this.scroller.scrollWidth - this.scroller.clientWidth
+      const scrollDelta = (dx / maxThumbTravel) * maxScroll
+      this.scroller.scrollLeft = Math.max(0, Math.min(maxScroll, this.dragStartScroll + scrollDelta))
+      this.syncThumb()
+    }, { passive: true })
+
+    window.addEventListener('touchend', () => {
+      if (!this.isDragging) return
+      this.isDragging = false
+      this.scrollThumb.classList.remove(cx.scrollThumbActive)
+    })
+
+    // ── Track click (jump to position) ───────────────────────────
+    this.scrollTrack.addEventListener('click', (e) => {
+      if (e.target === this.scrollThumb) return
+      this.scrollFromThumbX(e.clientX)
+      this.syncThumb()
+    })
   }
 
   private showTooltip(clientX: number, year: number | null): void {
