@@ -1,4 +1,3 @@
-/** Class name constants for ticker. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'ticker',
   clickable: 'ticker--clickable',

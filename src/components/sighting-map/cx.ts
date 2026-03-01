@@ -1,4 +1,3 @@
-/** Class name constants for sighting-map. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   mapCluster: 'map-cluster',
   mapClusterLg: 'map-cluster--lg',

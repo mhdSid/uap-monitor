@@ -1,4 +1,3 @@
-/** Class name constants for data-grid. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'data-grid',
   empty: 'data-grid__empty',

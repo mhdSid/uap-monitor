@@ -1,4 +1,3 @@
-/** Class name constants for alert. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'alert',
   body: 'alert__body',

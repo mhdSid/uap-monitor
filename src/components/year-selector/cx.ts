@@ -1,4 +1,3 @@
-/** Class name constants for year-selector. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'year-selector',
   count: 'year-selector__count',

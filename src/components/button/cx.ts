@@ -1,4 +1,3 @@
-/** Class name constants for button. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'btn',
   block: 'btn--block',

@@ -1,4 +1,3 @@
-/** Class name constants for modal. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'modal',
   overlay: 'modal-overlay',

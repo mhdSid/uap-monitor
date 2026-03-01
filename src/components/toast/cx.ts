@@ -1,4 +1,3 @@
-/** Class name constants for toast. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'toast',
   error: 'toast--error',

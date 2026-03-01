@@ -1,0 +1,35 @@
+{
+  "id": "_sighting_id",
+  "url": "_source_url",
+  "dates": {
+    "occurred": "occurred",
+    "reported": "reported",
+    "posted": "posted"
+  },
+  "location": {
+    "full": "location",
+    "city": "_city",
+    "state": "_state",
+    "country": "_country",
+    "details": "location_details"
+  },
+  "observation": {
+    "duration": "duration",
+    "num_observers": "$int:num_observers",
+    "viewed_from": "viewed_from",
+    "direction": "direction_from_viewer",
+    "elevation_angle": "angle_of_elevation",
+    "closest_distance": "closest_distance"
+  },
+  "craft": {
+    "shape": "shape",
+    "color": "color",
+    "estimated_size": "estimated_size",
+    "estimated_speed": "estimated_speed",
+    "characteristics": "$split:characteristics"
+  },
+  "report": {
+    "summary": "summary",
+    "description": "description"
+  }
+}

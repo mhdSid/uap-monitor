@@ -1,3 +1,3 @@
 import './styles.css'
-import { cx } from './cx'
+export { cx } from './cx'
 export { Section } from './section'

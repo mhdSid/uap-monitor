@@ -1,4 +1,3 @@
-/** Class name constants for tags. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'tag',
   count: 'tag--count',

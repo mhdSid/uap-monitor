@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-02-28T07:06:22.495Z",
-  "totalRecords": 147373,
-  "skippedRecords": 517,
+  "generatedAt": "2026-03-01T13:38:53.542Z",
+  "totalRecords": 152950,
+  "skippedRecords": 1571,
   "years": {
     "1950": {
       "count": 41,
@@ -372,6 +372,21 @@
       "count": 4178,
       "file": "nuforc-2023.json",
       "sizeKB": 4388
+    },
+    "2024": {
+      "count": 1190,
+      "file": "nuforc-2024.json",
+      "sizeKB": 1449
+    },
+    "2025": {
+      "count": 3809,
+      "file": "nuforc-2025.json",
+      "sizeKB": 4648
+    },
+    "2026": {
+      "count": 578,
+      "file": "nuforc-2026.json",
+      "sizeKB": 695
     }
   }
 }

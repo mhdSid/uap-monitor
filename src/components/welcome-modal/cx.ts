@@ -1,4 +1,3 @@
-/** Class name constants for welcome-modal. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   body: 'welcome__body',
   divider: 'welcome__divider',

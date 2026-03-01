@@ -1,0 +1,10 @@
+{
+  "id": "$int:_sighting_id",
+  "date": "$date(Local):occurred",
+  "city": "_city",
+  "state": "_state",
+  "country": "_country | Unknown",
+  "shape": "shape | Unspecified",
+  "summary": "summary || description",
+  "url": "_source_url"
+}

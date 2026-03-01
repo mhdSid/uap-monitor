@@ -26,3 +26,5 @@ dist-ssr
 *.sw?
 
 __sources
+nuforc_raw_cache.json
+nuforc_scraped.json

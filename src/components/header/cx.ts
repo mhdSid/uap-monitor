@@ -1,4 +1,3 @@
-/** Class name constants for header. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'app-header',
   clock: 'app-header__clock',

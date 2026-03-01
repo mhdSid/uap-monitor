@@ -1,0 +1,13 @@
+{
+  "Sighting": "$int:_sighting_id",
+  "Occurred": "$date(Local):occurred",
+  "Location": "location",
+  "Shape": "shape",
+  "Duration": "duration",
+  "No of observers": "$int:num_observers",
+  "Reported": "$date(Pacific):reported",
+  "Posted": "$date:posted",
+  "Characteristics": "$split:characteristics",
+  "Summary": "summary",
+  "Text": "description"
+}

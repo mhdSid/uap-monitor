@@ -1,4 +1,3 @@
-/** Class name constants for timeline. */
 export const cx = {
   root: 'timeline',
   scroller: 'timeline__scroller',

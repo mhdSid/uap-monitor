@@ -1,4 +1,3 @@
-/** Class name constants for loader. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'radar-loader',
   hand: 'radar-loader__hand',

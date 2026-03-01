@@ -1,4 +1,3 @@
-/** Class name constants for sighting-grid. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'cell-report',
   badges: 'cell-report__badges',
