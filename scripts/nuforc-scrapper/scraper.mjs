@@ -126,8 +126,8 @@ async function buildFetchOptions() {
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; rv:128.0) Gecko/20100101 Firefox/128.0",
       Accept: "text/html,application/xhtml+xml",
-      Referer: "https://nuforc.org/subndx/?id=all",
-    },
+      Referer: "https://nuforc.org/subndx/?id=all"
+    }
   }
   if (opts.tor) {
     fetchOpts.agent = await getTorAgent()
@@ -422,7 +422,7 @@ function parseDetailPage(html, sightingId) {
     summary,
     description,
     media_urls: mediaUrls.length > 0 ? mediaUrls : null,
-    posted: postedMatch ? postedMatch[1] : null,
+    posted: postedMatch ? postedMatch[1] : null
   }
 
   if (record.location) {
@@ -706,9 +706,9 @@ function buildCacheData(records, yearRange, collected, notFound, outOfRange) {
       scraped_at: new Date().toISOString(),
       total_records: records.length,
       year_filter: yearRange,
-      scrape_stats: { collected, not_found: notFound, out_of_range: outOfRange },
+      scrape_stats: { collected, not_found: notFound, out_of_range: outOfRange }
     },
-    records,
+    records
   }
 }
 
