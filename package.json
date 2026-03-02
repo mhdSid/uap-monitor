@@ -20,7 +20,8 @@
     "scrape:nuforc:test-transforms": "node scripts/nuforc-scrapper/test-transforms.mjs",
     "scrape:nuforc:cache:huggingface": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/huggingface.json --output nuforc_scraped.json --merge __sources/nuforc.json",
     "scrape:nuforc:cache:full": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/full.json",
-    "scrape:nuforc:cache:minimal": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/minimal.json"
+    "scrape:nuforc:cache:minimal": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/minimal.json",
+    "sanitize:nuforc": "node scripts/nuforc-scrapper/sanitize.mjs __sources/nuforc.json --fields text,Text,summary,description"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

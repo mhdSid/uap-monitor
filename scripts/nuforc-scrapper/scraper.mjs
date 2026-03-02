@@ -46,7 +46,7 @@ const DETAIL_URL = (id) => `${BASE_URL}/sighting/?id=${id}`
 const RAW_CACHE_FILE = "nuforc_raw_cache.json"
 const DEFAULT_OUTPUT = "nuforc_output.json"
 const DEFAULT_DELAY_MS = 500
-const CONSECUTIVE_MISS_LIMIT = 200
+const CONSECUTIVE_MISS_LIMIT = 100
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
 
@@ -126,8 +126,8 @@ async function buildFetchOptions() {
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; rv:128.0) Gecko/20100101 Firefox/128.0",
       Accept: "text/html,application/xhtml+xml",
-      Referer: "https://nuforc.org/subndx/?id=all"
-    }
+      Referer: "https://nuforc.org/subndx/?id=all",
+    },
   }
   if (opts.tor) {
     fetchOpts.agent = await getTorAgent()
@@ -171,6 +171,134 @@ async function fetchWithRetry(url, retries = 3) {
 
 // ─── Detail Page Parser ─────────────────────────────────────────────────────
 
+/**
+ * Clean residual JS/CSS/HTML artifacts from extracted text.
+ * Handles bare CSS/JS without wrapping <style>/<script> tags.
+ *
+ * Strategy: line-by-line filtering first (catches full lines of CSS/JS),
+ * then inline cleanup (catches fragments within mixed lines).
+ */
+function sanitizeText(text) {
+  if (!text) return null
+
+  // ── Phase 1: Line-level filtering ────────────────────────────────────
+  // Remove entire lines that are clearly CSS, JS, or artifacts
+
+  const lines = text.split("\n")
+  const cleaned = []
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const trimmed = line.trim()
+
+    if (!trimmed) {
+      cleaned.push("")
+      continue
+    }
+
+    // CSS: selector { ... } on one line (handles nested braces too)
+    if (/^[.#]?[\w-]+[^{]*\{.*\}\s*$/.test(trimmed) && !/^[A-Z]/.test(trimmed)) continue
+    // CSS: @-rules on one line: @media (...) { ... }  @keyframes { ... }
+    if (/^@[\w-]+[\s(].*\{.*\}\s*$/.test(trimmed)) continue
+    // CSS: @-rule opening: @media (max-width: 768px) {
+    if (/^@[\w-]+\s*(?:\([^)]*\))?\s*\{?\s*$/.test(trimmed)) continue
+    // CSS: opening selector {
+    if (/^[.#][\w->+~\s,.:#\[\]='"*]+\{\s*$/.test(trimmed)) continue
+    // CSS: closing }
+    if (/^\}?\s*\}\s*;?\s*$/.test(trimmed)) continue
+    // CSS: property: value;
+    if (/^(?:margin|padding|width|height|display|position|overflow|float|clear|color|font(?:-\w+)?|background(?:-\w+)?|border(?:-\w+)?|text-(?:align|decoration|transform|indent|overflow|shadow)|line-height|z-index|opacity|visibility|cursor|content|top|right|bottom|left|max-width|min-width|max-height|min-height|box-sizing|flex(?:-\w+)?|grid(?:-\w+)?|transform|transition|animation|vertical-align|white-space|word-break|list-style|outline|appearance|resize|object-fit|pointer-events|src|fill|stroke)\s*:[^]*;?\s*$/i.test(trimmed)) continue
+    // CSS: !important or lone units
+    if (/^\d+(?:\.\d+)?(?:px|em|rem|%|vh|vw|pt)\s*;?\s*$/.test(trimmed)) continue
+    // CSS: standalone selector (e.g. .vjs-big-play-button)
+    if (/^[.#][\w-]+(?:\s*[,>+~]\s*[.#]?[\w-]+)*\s*$/.test(trimmed)) continue
+
+    // JS: var/let/const/function declarations
+    if (/^\s*(?:var|let|const|function)\s+/.test(trimmed)) continue
+    // JS: window./document./console. calls
+    if (/^\s*(?:window|document|console|navigator|self)\./.test(trimmed)) continue
+    // JS: method calls like player.ready(, $.fn., etc
+    if (/^\s*\w+\.\w+\s*\(/.test(trimmed)) continue
+    // JS: closing }); or })
+    if (/^[}\]);,]+\s*$/.test(trimmed)) continue
+    // JS: arrow functions
+    if (/^\s*(?:\w+|\([^)]*\))\s*=>\s*/.test(trimmed)) continue
+    // JS: if/else/for/while/return/new/typeof
+    if (/^\s*(?:if|else|for|while|return|new|typeof|try|catch|throw|switch|case|break|continue)\s*[\s({]/.test(trimmed)) continue
+    // JS: assignment to DOM: something.style.x = ...
+    if (/\.\s*style\s*\./.test(trimmed)) continue
+    // JS: property assignments: vid.src = '...', el.width = 640
+    if (/^\s*\w+\.\w+\s*=\s*.+;?\s*$/.test(trimmed) && !/[.]\s*$/.test(trimmed)) continue
+    // JS: common event/DOM methods
+    if (/(?:addEventListener|removeEventListener|querySelector|getElementById|getElementsBy|createElement|appendChild|innerHTML|className|classList|setAttribute)\s*[.(]/.test(trimmed)) continue
+    // JS: object literal properties — key: "string", key: number, key: true/false
+    if (/^\s*[\w$]+\s*:\s*(?:["'][^"']*["']|\d+(?:\.\d+)?|true|false|null|undefined|\[.*\]|\{.*\})\s*,?\s*$/.test(trimmed)) continue
+
+    // Media: videojs, flowplayer, jwplayer, MusePlayer, etc
+    if (/\b(?:videojs|flowplayer|jwplayer|plyr|hls\.js|dash\.js|wistia|brightcove|MusePlayer|EmbedPlayer|MediaElement|Kaltura|SproutVideo)\b/i.test(trimmed)) continue
+    // Media: player operations
+    if (/\bplayer\b.*(?:setup|init|ready|play|pause|src|load|dispose|on|off)\s*\(/i.test(trimmed)) continue
+
+    // URLs to assets
+    if (/^https?:\/\/\S+\.(?:js|css|mp4|webm|m3u8|woff|ttf|svg)\b/.test(trimmed)) continue
+    // Data URIs
+    if (/^data:/.test(trimmed)) continue
+
+    // HTML attributes orphaned: class="..." id="..."
+    if (/^(?:class|id|style|data-[\w-]+|aria-[\w-]+)\s*=\s*["']/.test(trimmed)) continue
+
+    cleaned.push(line)
+  }
+
+  // ── Phase 2: Inline cleanup ──────────────────────────────────────────
+  // Remove fragments embedded within otherwise good lines
+
+  let result = cleaned.join("\n")
+
+  result = result
+    // Inline CSS properties: display: block; within a sentence
+    .replace(/\b(?:display|margin|padding|width|height|position|overflow|opacity|visibility|z-index|float|clear)\s*:\s*[^;.!?\n]+;/gi, "")
+    // !important
+    .replace(/!important/gi, "")
+    // url() references
+    .replace(/url\s*\([^)]*\)/gi, "")
+    // Inline JS: window.xxx, document.xxx
+    .replace(/(?:window|document|console)\.\w[\w.]*/g, "")
+    // HTML entities
+    .replace(/&(?:amp|lt|gt|quot|nbsp|#\d+);/g, " ")
+    // HTML comments
+    .replace(/<!--[\s\S]*?-->/g, "")
+    // Stray braces
+    .replace(/[{}]/g, "")
+    // Stray semicolons at start/end of line
+    .replace(/^\s*;+\s*$/gm, "")
+
+    // ── Whitespace normalization ──────────────────────────────────────
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/^\s+$/gm, "")
+    .trim()
+
+  if (result.length < 3) return null
+  return result
+}
+
+/**
+ * Sanitize all text fields in a raw record.
+ * Called in --cache mode to clean previously scraped dirty data.
+ */
+const TEXT_FIELDS_TO_SANITIZE = ["summary", "description", "location_details"]
+
+function sanitizeRecord(record) {
+  const cleaned = { ...record }
+  for (const field of TEXT_FIELDS_TO_SANITIZE) {
+    if (cleaned[field] && typeof cleaned[field] === "string") {
+      cleaned[field] = sanitizeText(cleaned[field])
+    }
+  }
+  return cleaned
+}
+
 function parseDetailPage(html, sightingId) {
   const $ = cheerio.load(html)
 
@@ -186,19 +314,58 @@ function parseDetailPage(html, sightingId) {
     return match ? match[1].trim() : null
   }
 
+  // Extract media URLs before we strip them (some sightings have videos/images)
+  const mediaUrls = []
+  const mediaPattern = /<(?:video|source|iframe|a)\b[^>]*(?:src|href)=["']([^"']+\.(?:mp4|webm|m3u8|mov|jpg|jpeg|png|gif)(?:[^"']*)?)["'][^>]*>/gi
+  let mediaMatch
+  while ((mediaMatch = mediaPattern.exec(primaryHtml)) !== null) {
+    mediaUrls.push(mediaMatch[1])
+  }
+
   let summary = null
   let description = null
 
   const textHtml = primaryHtml
+    // 1. Remove entire block elements + their content (script, style, video, iframe, etc.)
+    .replace(/<(script|style|iframe|video|object|embed|noscript|svg|source|track)\b[^>]*>[\s\S]*?<\/\1>/gi, "")
+    // Also catch self-closing/void versions: <iframe ... />, <source ... />
+    .replace(/<(iframe|video|object|embed|source|track|link)\b[^>]*\/?>/gi, "")
+    // 2. Convert <br> to newlines
     .replace(/<br\s*\/?>/gi, "\n")
+    // 3. Strip remaining HTML tags
     .replace(/<[^>]+>/g, " ")
+    // 4. Decode HTML entities
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#\d+;/g, "")
 
-  const lines = textHtml.split("\n").map((l) => l.trim()).filter(Boolean)
+  const lines = textHtml
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean)
+    // 5. Filter out lines that look like JS/CSS/HTML artifacts
+    .filter((line) => {
+      // CSS-like: selectors, properties, braces
+      if (/^\s*[.#]?[\w-]+\s*\{/.test(line)) return false
+      if (/^\s*[\w-]+\s*:\s*[^;]+;\s*$/.test(line) && !line.includes(":") === false && /\{|\}|;/.test(line) && !/^\w+:/.test(line)) return false
+      if (/^\s*\}\s*$/.test(line)) return false
+      // JS-like: var/let/const/function declarations, common JS patterns
+      if (/^\s*(var|let|const|function|if|else|for|while|return|window\.|document\.|new |typeof )\b/.test(line)) return false
+      // URL-like standalone lines (src references)
+      if (/^https?:\/\/\S+\.(js|css|mp4|webm|m3u8)/.test(line)) return false
+      // Common media player / embed artifacts
+      if (/^(videojs|flowplayer|jwplayer|wistia|vimeo|youtube)/i.test(line)) return false
+      if (/player\.(setup|play|on|ready|src)\s*\(/i.test(line)) return false
+      // Data URIs, base64
+      if (/^data:/.test(line)) return false
+      // Very short lines that are just punctuation/code fragments
+      if (/^[{}();,[\]]+$/.test(line)) return false
+      return true
+    })
 
   const metaLabels = [
     "Characteristics", "Estimated Speed", "Closest Distance",
@@ -224,9 +391,9 @@ function parseDetailPage(html, sightingId) {
       contentLines.push(lines[i])
     }
     if (contentLines.length > 0) {
-      summary = contentLines[0]
+      summary = sanitizeText(contentLines[0])
       description = contentLines.length > 1
-        ? contentLines.slice(1).join("\n")
+        ? sanitizeText(contentLines.slice(1).join("\n"))
         : null
     }
   }
@@ -254,7 +421,8 @@ function parseDetailPage(html, sightingId) {
     characteristics: extract("Characteristics"),
     summary,
     description,
-    posted: postedMatch ? postedMatch[1] : null
+    media_urls: mediaUrls.length > 0 ? mediaUrls : null,
+    posted: postedMatch ? postedMatch[1] : null,
   }
 
   if (record.location) {
@@ -538,9 +706,9 @@ function buildCacheData(records, yearRange, collected, notFound, outOfRange) {
       scraped_at: new Date().toISOString(),
       total_records: records.length,
       year_filter: yearRange,
-      scrape_stats: { collected, not_found: notFound, out_of_range: outOfRange }
+      scrape_stats: { collected, not_found: notFound, out_of_range: outOfRange },
     },
-    records
+    records,
   }
 }
 
@@ -821,6 +989,10 @@ async function runCacheMode() {
     records = records.filter((r) => matchesYearFilter(r, yearRange))
     log(`After year filter: ${records.length} records`)
   }
+
+  // Sanitize text fields (cleans dirty data from previously scraped records)
+  log(`Sanitizing text fields...`)
+  records = records.map(sanitizeRecord)
 
   // Transform
   let outputRecords
