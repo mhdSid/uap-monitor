@@ -20,16 +20,17 @@ const BAR_MIN_H = 3
 const BAR_RADIUS = 2
 const LABEL_H = 16
 const PAD_X = 8
-const THUMB_MIN_W = 48 // minimum thumb width — comfortably tappable
+const THUMB_MIN_W = 48
 
 // ─── Component ──────────────────────────────────────────────────────
 
 export class Timeline extends Component<TimelineProps> {
   private scroller!: HTMLElement
   private canvas!: HTMLCanvasElement
+  private hoverBar!: HTMLElement
   private tooltip!: HTMLElement
+  private loaderEl!: HTMLElement
 
-  // Custom scrollbar
   private scrollTrack!: HTMLElement
   private scrollThumb!: HTMLElement
 
@@ -43,19 +44,35 @@ export class Timeline extends Component<TimelineProps> {
   private canvasW = 0
   private canvasH = 0
 
-  // Thumb drag state
+  // Thumb drag
   private isDragging = false
   private dragStartX = 0
   private dragStartScroll = 0
+
+  // Perf: cached values — zero DOM queries on hover
+  private maxCount = 0
+  private barHeights!: Float32Array    // pre-computed bar pixel heights
+  private scrollerLeft = 0             // cached scroller.getBoundingClientRect().left
+  private rootLeft = 0                 // cached root rect left
+  private rootWidth = 0                // cached root rect width
+  private barArea = 0                  // cached bar drawing area height
 
   protected create(): HTMLElement {
     this.canvas = document.createElement('canvas')
     this.canvas.className = cx.canvas
 
+    this.hoverBar = h('div', { className: cx.hoverBar })
+
     this.tooltip = h('div', { className: cx.tooltip })
     this.tooltip.style.display = 'none'
 
-    this.scroller = h('div', { className: cx.scroller }, this.canvas)
+    this.loaderEl = h('div', { className: cx.loader })
+    this.loaderEl.style.display = 'none'
+
+    this.scroller = h('div', { className: cx.scroller },
+      this.canvas,
+      this.hoverBar
+    )
 
     this.scrollThumb = h('div', { className: cx.scrollThumb })
     this.scrollTrack = h('div', { className: cx.scrollTrack }, this.scrollThumb)
@@ -63,7 +80,8 @@ export class Timeline extends Component<TimelineProps> {
     const wrapper = h('div', { className: cx.root },
       this.scroller,
       this.scrollTrack,
-      this.tooltip
+      this.tooltip,
+      this.loaderEl
     )
 
     this.bindEvents()
@@ -82,6 +100,59 @@ export class Timeline extends Component<TimelineProps> {
     ro.observe(this.el)
   }
 
+  destroy(): void {
+    super.destroy()
+  }
+
+  // ─── Perf: pre-compute everything data-dependent ──────────────
+
+  private computeMaxCount(): void {
+    let max = 0
+    for (let y = this.dataFrom; y <= this.dataTo; y++) {
+      const c = this.yearCounts.get(y) || 0
+      if (c > max) max = c
+    }
+    this.maxCount = max
+  }
+
+  /** Pre-compute pixel heights for every year bar. Called on data/resize. */
+  private computeBarHeights(): void {
+    const yearSpan = this.dataTo - this.dataFrom + 1
+    this.barHeights = new Float32Array(yearSpan)
+
+    if (this.maxCount === 0) return
+
+    const barMaxH = this.barArea - 8
+    for (let i = 0; i < yearSpan; i++) {
+      const count = this.yearCounts.get(this.dataFrom + i) || 0
+      this.barHeights[i] = count > 0
+        ? BAR_MIN_H + (count / this.maxCount) * (barMaxH - BAR_MIN_H)
+        : 0
+    }
+  }
+
+  /** Cache layout rects. Called on resize only. */
+  private cacheLayout(): void {
+    const scrollerRect = this.scroller.getBoundingClientRect()
+    this.scrollerLeft = scrollerRect.left
+
+    const rootRect = this.el.getBoundingClientRect()
+    this.rootLeft = rootRect.left
+    this.rootWidth = rootRect.width
+  }
+
+  // ─── Loading overlay ──────────────────────────────────────────
+
+  showLoader(el?: HTMLElement): void {
+    this.loaderEl.textContent = ''
+    if (el) this.loaderEl.appendChild(el)
+    this.loaderEl.style.display = ''
+  }
+
+  hideLoader(): void {
+    this.loaderEl.style.display = 'none'
+  }
+
   // ─── Public API ─────────────────────────────────────────────────
 
   setSightings(sightings: Sighting[]): void {
@@ -90,12 +161,14 @@ export class Timeline extends Component<TimelineProps> {
       const y = parseInt(s.occurredAt?.slice(0, 4), 10)
       if (!isNaN(y)) this.yearCounts.set(y, (this.yearCounts.get(y) || 0) + 1)
     }
+    this.computeMaxCount()
     this.resize()
   }
 
   setYearRange(from: number, to: number): void {
     this.dataFrom = from
     this.dataTo = to
+    this.computeMaxCount()
     this.resize()
   }
 
@@ -114,6 +187,7 @@ export class Timeline extends Component<TimelineProps> {
     }
     this.dataFrom = availableFrom
     this.dataTo = availableTo
+    this.computeMaxCount()
     this.resize()
   }
 
@@ -121,6 +195,7 @@ export class Timeline extends Component<TimelineProps> {
     this.yearCounts = new Map(counts)
     this.dataFrom = availableFrom
     this.dataTo = availableTo
+    this.computeMaxCount()
     this.resize()
   }
 
@@ -137,6 +212,7 @@ export class Timeline extends Component<TimelineProps> {
 
     this.canvasW = totalW
     this.canvasH = canvasH
+    this.barArea = canvasH - LABEL_H
 
     const dpr = window.devicePixelRatio || 1
     this.canvas.width = totalW * dpr
@@ -144,6 +220,11 @@ export class Timeline extends Component<TimelineProps> {
     this.canvas.style.width = totalW + 'px'
     this.canvas.style.height = canvasH + 'px'
 
+    // Set hover bar height to match bar area (exclude labels)
+    this.hoverBar.style.bottom = LABEL_H + 'px'
+
+    this.computeBarHeights()
+    this.cacheLayout()
     this.syncThumb()
     this.draw()
 
@@ -192,7 +273,7 @@ export class Timeline extends Component<TimelineProps> {
     this.scroller.scrollLeft = Math.round(frac * maxScroll)
   }
 
-  // ─── Drawing ──────────────────────────────────────────────────
+  // ─── Drawing (canvas — only on data/range change) ─────────────
 
   private draw(): void {
     const ctx = this.canvas.getContext('2d')
@@ -210,16 +291,7 @@ export class Timeline extends Component<TimelineProps> {
     const yearSpan = this.dataTo - this.dataFrom + 1
     if (yearSpan <= 0) return
 
-    const barArea = cH - LABEL_H
-
-    // Max count for scaling
-    let maxCount = 0
-    for (let y = this.dataFrom; y <= this.dataTo; y++) {
-      const c = this.yearCounts.get(y) || 0
-      if (c > maxCount) maxCount = c
-    }
-
-    if (maxCount === 0) {
+    if (this.maxCount === 0) {
       ctx.fillStyle = palette.white15
       ctx.font = '11px monospace'
       ctx.textAlign = 'center'
@@ -227,32 +299,23 @@ export class Timeline extends Component<TimelineProps> {
       return
     }
 
-    const barMaxH = barArea - 8
+    const barArea = this.barArea
     const labelEvery = this.labelInterval(yearSpan)
 
     for (let i = 0; i < yearSpan; i++) {
       const year = this.dataFrom + i
-      const count = this.yearCounts.get(year) || 0
       const x = PAD_X + i * BAR_STEP
+      const barH = this.barHeights[i]
 
       const isActive = year >= this.activeFrom && year <= this.activeTo
-      const isHovered = year === this.hoverYear
-      const barH = count > 0
-        ? BAR_MIN_H + (count / maxCount) * (barMaxH - BAR_MIN_H)
-        : 0
 
-      // Active range band
       if (isActive) {
-        ctx.fillStyle = isHovered ? palette.green400_30 : palette.green400_08
+        ctx.fillStyle = palette.green400_08
         ctx.fillRect(x - 1, 0, BAR_STEP, barArea)
       }
 
-      // Bar (rounded top)
       if (barH > 0) {
-        ctx.fillStyle = isHovered
-          ? (isActive ? palette.green400 : palette.amber500_90)
-          : (isActive ? palette.green400_70 : palette.amber500_40)
-
+        ctx.fillStyle = isActive ? palette.green400_70 : palette.amber500_40
         const by = barArea - barH
         const r = Math.min(BAR_RADIUS, BAR_W / 2, barH / 2)
         ctx.beginPath()
@@ -268,7 +331,6 @@ export class Timeline extends Component<TimelineProps> {
         ctx.fillRect(x + 3, barArea - 2, BAR_W - 6, 2)
       }
 
-      // Year labels
       const showLabel = (year % labelEvery === 0) || i === 0 || i === yearSpan - 1
       if (showLabel) {
         ctx.fillStyle = isActive ? palette.green500_50 : palette.white20
@@ -287,48 +349,94 @@ export class Timeline extends Component<TimelineProps> {
     return 100
   }
 
-  // ─── Events ───────────────────────────────────────────────────
+  // ─── Hover (pure DOM — zero canvas work) ──────────────────────
 
-  private yearFromX(clientX: number): number | null {
-    const rect = this.canvas.getBoundingClientRect()
-    const x = clientX - rect.left
+  /**
+   * Converts clientX → year index using only cached numbers.
+   * Zero DOM queries. Pure arithmetic.
+   */
+  private yearFromClientX(clientX: number): number | null {
+    const x = clientX - this.scrollerLeft + this.scroller.scrollLeft
     const idx = Math.floor((x - PAD_X) / BAR_STEP)
     const yearSpan = this.dataTo - this.dataFrom + 1
     if (idx < 0 || idx >= yearSpan) return null
     return this.dataFrom + idx
   }
 
+  /**
+   * Moves the CSS hover-bar div + sets its ::after height.
+   * GPU-composited transform — no layout, no paint, no canvas.
+   */
+  private applyHover(year: number | null, clientX: number): void {
+    if (year == null || this.maxCount === 0) {
+      this.hoverBar.style.display = 'none'
+      this.tooltip.style.display = 'none'
+      return
+    }
+
+    const i = year - this.dataFrom
+    const x = PAD_X + i * BAR_STEP
+    const barH = this.barHeights[i] || 0
+    // const isActive = year >= this.activeFrom && year <= this.activeTo
+
+    // Position the highlight column
+    this.hoverBar.style.display = 'block'
+    this.hoverBar.style.transform = `translateX(${x - 1}px)`
+
+    // Set bar overlay height + color via CSS custom properties
+    this.hoverBar.style.setProperty('--bar-h', barH > 0 ? barH + 'px' : '0px')
+    this.hoverBar.style.setProperty('--bar-color', palette.green400_70)
+
+    // Tooltip
+    const count = this.yearCounts.get(year) || 0
+    this.tooltip.textContent = `${year}: ${count.toLocaleString()} sightings`
+    this.tooltip.style.display = 'block'
+
+    const tx = clientX - this.rootLeft
+    const tooltipW = 140
+    this.tooltip.style.left = `${Math.max(4, Math.min(tx - tooltipW / 2, this.rootWidth - tooltipW - 4))}px`
+  }
+
+  // ─── Events ───────────────────────────────────────────────────
+
   private bindEvents(): void {
-    // ── Scroller → sync thumb ────────────────────────────────────
     this.scroller.addEventListener('scroll', () => {
       if (!this.isDragging) this.syncThumb()
     }, { passive: true })
 
-    // ── Hover (desktop) ──────────────────────────────────────────
-    this.canvas.addEventListener('mousemove', (e) => {
-      const year = this.yearFromX(e.clientX)
-      if (year !== this.hoverYear) {
-        this.hoverYear = year
-        this.draw()
-        this.showTooltip(e.clientX, year)
-      }
+    // ── Hover — RAF-coalesced, always reads latest position ──────
+    let lastX = 0
+    let raf: number | null = null
+
+    this.scroller.addEventListener('mousemove', (e) => {
+      lastX = e.clientX
+      if (raf !== null) return
+      raf = requestAnimationFrame(() => {
+        raf = null
+        const year = this.yearFromClientX(lastX)
+        if (year !== this.hoverYear) {
+          this.hoverYear = year
+          this.applyHover(year, lastX)
+        }
+      })
     })
 
-    this.canvas.addEventListener('mouseleave', () => {
+    this.scroller.addEventListener('mouseleave', () => {
+      if (raf !== null) { cancelAnimationFrame(raf); raf = null }
       this.hoverYear = null
+      this.hoverBar.style.display = 'none'
       this.tooltip.style.display = 'none'
-      this.draw()
     })
 
-    // ── Click bar (desktop) ──────────────────────────────────────
-    this.canvas.addEventListener('click', (e) => {
-      const year = this.yearFromX(e.clientX)
+    // ── Click ────────────────────────────────────────────────────
+    this.scroller.addEventListener('click', (e) => {
+      const year = this.yearFromClientX(e.clientX)
       if (year != null && this.props.onRangeSelect) {
         this.props.onRangeSelect(year, year)
       }
     })
 
-    // ── Tap bar (mobile) — distinguish scroll from tap ───────────
+    // ── Tap (mobile) ─────────────────────────────────────────────
     let touchMoved = false
 
     this.scroller.addEventListener('touchstart', (e) => {
@@ -344,7 +452,7 @@ export class Timeline extends Component<TimelineProps> {
       if (touchMoved) return
       const touch = e.changedTouches[0]
       if (!touch) return
-      const year = this.yearFromX(touch.clientX)
+      const year = this.yearFromClientX(touch.clientX)
       if (year != null && this.props.onRangeSelect) {
         this.props.onRangeSelect(year, year)
       }
@@ -409,26 +517,11 @@ export class Timeline extends Component<TimelineProps> {
       this.scrollThumb.classList.remove(cx.scrollThumbActive)
     })
 
-    // ── Track click (jump to position) ───────────────────────────
+    // ── Track click ──────────────────────────────────────────────
     this.scrollTrack.addEventListener('click', (e) => {
       if (e.target === this.scrollThumb) return
       this.scrollFromThumbX(e.clientX)
       this.syncThumb()
     })
-  }
-
-  private showTooltip(clientX: number, year: number | null): void {
-    if (year == null) {
-      this.tooltip.style.display = 'none'
-      return
-    }
-    const count = this.yearCounts.get(year) || 0
-    this.tooltip.textContent = `${year}: ${count.toLocaleString()} sightings`
-    this.tooltip.style.display = 'block'
-
-    const rootRect = this.el.getBoundingClientRect()
-    const x = clientX - rootRect.left
-    const tooltipW = 140
-    this.tooltip.style.left = `${Math.max(4, Math.min(x - tooltipW / 2, rootRect.width - tooltipW - 4))}px`
   }
 }

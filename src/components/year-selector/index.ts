@@ -68,6 +68,13 @@ export class YearSelector extends Component {
       store.yearRange.set({ from, to })
     })
 
+    // Sync selects when yearRange changes externally (e.g. timeline bar click)
+    effect(() => {
+      const { from, to } = store.yearRange.get()
+      fromSelect.value = String(from)
+      toSelect.value = String(to)
+    })
+
     return h('div', { className: cx.root },
       fromSelect,
       h('span', { className: cx.separator }, '~'),

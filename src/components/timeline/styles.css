@@ -1,4 +1,3 @@
-/* ===== TIMELINE ===== */
 .timeline {
   position: relative;
   width: 100%;
@@ -16,8 +15,8 @@
   flex: 1;
   overflow-x: scroll;
   overflow-y: hidden;
-  /* Hide native scrollbar — replaced by custom track */
   scrollbar-width: none;
+  position: relative;
 }
 
 .timeline__scroller::-webkit-scrollbar {
@@ -26,6 +25,30 @@
 
 .timeline__canvas {
   display: block;
+}
+
+/* ── Hover highlight (pure CSS — zero canvas work) ─────────────────── */
+.timeline__hover-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px; /* BAR_STEP */
+  bottom: 0;
+  pointer-events: none;
+  will-change: transform;
+  background: var(--c-green-400-16);
+  display: none;
+}
+
+.timeline__hover-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1px;
+  width: 10px; /* BAR_W */
+  height: var(--bar-h, 0px);
+  background: var(--bar-color, var(--c-green-400-70));
+  border-radius: 2px 2px 0 0;
 }
 
 /* ── Custom scrollbar ──────────────────────────────────────────────── */
@@ -73,6 +96,17 @@
   pointer-events: none;
   white-space: nowrap;
   z-index: 10;
+}
+
+/* ── Loader overlay ─────────────────────────────────────────────── */
+.timeline__loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-panel-70);
+  z-index: 15;
 }
 
 @media (min-width: 481px) {

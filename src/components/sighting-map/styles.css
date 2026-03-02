@@ -1,9 +1,6 @@
-/* ===== SIGHTING MAP ===== */
 .sighting-map {
   width: 100%;
-  height: auto;
   aspect-ratio: 1;
-  max-height: 500px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
   overflow: hidden;
@@ -14,6 +11,17 @@
 .sighting-map__canvas {
   width: 100%;
   height: 100%;
+}
+
+/* ── Loader overlay ──────────────────────────────────────────────── */
+.sighting-map__loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-panel-70);
+  z-index: 500;
 }
 
 /* Leaflet dark theme overrides */
@@ -120,4 +128,5 @@
 }
 .leaflet-popup-close-button {
   color: var(--color-dim) !important;
+}
 }

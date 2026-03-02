@@ -124,7 +124,7 @@ export class App extends Component {
       new FilterToolbar({}).el
     )
 
-    this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
+    this.showAllLoaders()
 
     clearChildren(this.main)
     this.main.appendChild(controlsForm)
@@ -212,6 +212,7 @@ export class App extends Component {
       years[0] ?? new Date().getFullYear()
     )
     this.timeline.setActiveRange(from, to)
+    this.hideAllLoaders()
 
     this.yearRangeReady = true
   }
@@ -224,11 +225,23 @@ export class App extends Component {
 
   // ─── Reactions ─────────────────────────────────────────────────
 
+  private showAllLoaders(): void {
+    const loader = () => h('div', { className: 'app-loader' }, new Loader({}).el)
+    this.grids.showLoader(loader())
+    this.timeline.showLoader(loader())
+    this.sightingMap.showLoader(loader())
+  }
+
+  private hideAllLoaders(): void {
+    this.timeline.hideLoader()
+    this.sightingMap.hideLoader()
+  }
+
   private async onFilterChange(): Promise<void> {
     const version = ++this.renderVersion
     const release = this.grids.lockHeight()
 
-    this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
+    this.showAllLoaders()
 
     const filtered = await minDelay(() =>
       filterSightings(this.store.sightings.get(), this.store.filter.get())
@@ -245,12 +258,13 @@ export class App extends Component {
     release()
 
     this.sightingMap.setSightings(filtered)
+    this.hideAllLoaders()
     this.store.shownCount.set(filtered.length)
   }
 
   private async onYearRangeChange(): Promise<void> {
     this.store.loading.set(true)
-    this.grids.showLoader(h('div', { className: 'app-loader' }, new Loader({}).el))
+    this.showAllLoaders()
 
     const { from, to } = this.store.yearRange.get()
     const sightings = await minDelay(() => this.dataSource.fetchYearRange(from, to))
@@ -265,6 +279,7 @@ export class App extends Component {
 
     this.sightingMap.setSightings(sightings)
     this.timeline.setActiveRange(from, to)
+    this.hideAllLoaders()
 
     this.ticker.setMessages(
       this.tickerMessages.generateMessages(sightings)

@@ -10,7 +10,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import type { DataGridProps, DataGridColumn } from '@/types'
+import type { DataGridProps } from '@/types'
 import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment } from '@/utils/dom'
 import { useInfiniteScroll } from '@/composables/use-infinite-scroll'
 import { iconSortDefault, iconSortAsc, iconSortDesc } from '@/components/icons'

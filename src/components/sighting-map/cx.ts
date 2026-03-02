@@ -11,5 +11,6 @@ export const cx = {
   mapPopupMeta: 'map-popup__meta',
   mapPopupSummary: 'map-popup__summary',
   sightingMap: 'sighting-map',
-  sightingMapCanvas: 'sighting-map__canvas'
+  sightingMapCanvas: 'sighting-map__canvas',
+  sightingMapLoader: 'sighting-map__loader'
 } as const
