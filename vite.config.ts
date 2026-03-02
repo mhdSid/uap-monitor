@@ -33,19 +33,51 @@ export default defineConfig({
         navigateFallbackAllowlist: [/^\/$/],
         runtimeCaching: [
           {
-            urlPattern: /\/data\/nuforc-.*\.json$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'nuforc-data',
-              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 }
-            }
-          },
-          {
             urlPattern: /\/data\/nuforc-manifest\.json$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'nuforc-manifest',
               expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 }
+            }
+          },
+          {
+            urlPattern: /\/data\/chronology-manifest\.json$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'chronology-manifest',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 }
+            }
+          },
+          {
+            urlPattern: /\/data\/hatch-manifest\.json$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'hatch-manifest',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 }
+            }
+          },
+          {
+            urlPattern: /\/data\/nuforc-.*\.json$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'nuforc-data',
+              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 7 }
+            }
+          },
+          {
+            urlPattern: /\/data\/chronology-.*\.json$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'chronology-data',
+              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 30 }
+            }
+          },
+          {
+            urlPattern: /\/data\/hatch-.*\.json$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'hatch-data',
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 }
             }
           },
           {
