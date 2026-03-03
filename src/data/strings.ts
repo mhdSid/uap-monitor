@@ -135,7 +135,7 @@ export const GDELT_MODAL = {
 // ─── GDELT grid ─────────────────────────────────────────────────────
 
 export const GDELT_GRID = {
-  EMPTY: 'No GDELT articles available. Run scripts/gdelt/fetch.mjs to populate.',
+  EMPTY: 'No GDELT articles available.',
   EMPTY_FILTERED: 'No articles match current filters.'
 } as const
 
