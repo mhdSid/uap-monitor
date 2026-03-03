@@ -1,0 +1,81 @@
+/* ===== GDELT ARTICLE MODAL ===== */
+.gdelt-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.gdelt-modal__title {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+.gdelt-modal__domain {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+}
+
+.gdelt-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.gdelt-modal__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--c-neutral-900);
+}
+
+.gdelt-modal__label {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.gdelt-modal__value {
+  font-size: var(--fs-sm);
+  color: var(--color-text-strong);
+  text-align: left;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.gdelt-modal__link {
+  color: var(--color-green);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gdelt-modal__link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.gdelt-modal__footer {
+  display: flex;
+}
+
+.gdelt-modal__source-tag {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 481px) {
+  .gdelt-modal__row {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .gdelt-modal__value { text-align: right; }
+}

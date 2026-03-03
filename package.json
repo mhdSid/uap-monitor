@@ -14,18 +14,21 @@
     "data:pipeline:all": "yarn data:nuforc && yarn data:hatch && yarn data:chronology",
     "scrape:nuforc:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2026",
     "scrape:nuforc:2025": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2025",
-    "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 195787 --concurrency 3 --delay 300 --years 2024",
+    "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 184389 --concurrency 3 --delay 300 --years 2024",
     "scrape:nuforc:test": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose",
     "scrape:nuforc:test:tor": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose --tor",
     "scrape:nuforc:test-transforms": "node scripts/nuforc-scrapper/test-transforms.mjs",
     "scrape:nuforc:cache:huggingface": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/huggingface.json --output nuforc_scraped.json --merge __sources/nuforc.json",
     "scrape:nuforc:cache:full": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/full.json",
     "scrape:nuforc:cache:minimal": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/minimal.json",
-    "sanitize:nuforc": "node scripts/nuforc-scrapper/sanitize.mjs __sources/nuforc.json --fields text,Text,summary,description"
+    "sanitize:nuforc": "node scripts/nuforc-scrapper/sanitize.mjs __sources/nuforc.json --fields text,Text,summary,description",
+    "fetch:gdelt": "node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --days 7 --max 75",
+    "fetch:gnews": "node scripts/gnews/fetch.mjs --out public/data/gnews-articles.json --days 365 --limit 500"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/leaflet": "^1.9.21",
+    "@types/three": "^0.160.0",
     "cheerio": "^1.0.0",
     "commander": "^13.1.0",
     "eslint": "^10.0.2",
@@ -38,6 +41,7 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
-    "leaflet.markercluster": "^1.5.3"
+    "leaflet.markercluster": "^1.5.3",
+    "three": "^0.160.0"
   }
 }

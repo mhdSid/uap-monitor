@@ -25,7 +25,8 @@ const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM<
 const MARKER_COLORS: Record<string, string> = {
   NUFORC: colors.sourceNuforc,
   HATCH_UDB: colors.sourceHatch,
-  CHRONOLOGY: colors.sourceChronology
+  CHRONOLOGY: colors.sourceChronology,
+  EXPERIENCER: colors.sourceExperiencer
 }
 
 const DEFAULT_CENTER: L.LatLngExpression = [30, 0]

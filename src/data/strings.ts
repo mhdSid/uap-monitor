@@ -88,7 +88,13 @@ export const SECTION = {
   DATA_SOURCES: 'DATA SOURCES',
   DATA_SOURCES_TOOLTIP: 'Open-source intelligence feeds aggregated by UAP Monitor. Green = live, amber = syncing, grey = planned. Click any source to visit its website.',
   INTEL_TITLE: 'INTELLIGENCE SOURCES',
-  INTEL_CONTENT: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.'
+  INTEL_CONTENT: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.',
+  EXPERIENCER: 'EXPERIENCER REPORTS',
+  EXPERIENCER_TOOLTIP: 'Firsthand structural encounter testimony from anonymous experiencers. Source identity protected. Material reviewed for internal consistency and cross-referenced against known observation patterns.',
+  GDELT_NEWS: 'GLOBAL NEWS FEED',
+  GDELT_NEWS_TOOLTIP: 'UAP/UFO-related articles from the GDELT Project — a global open-source news monitoring platform covering 100+ languages. Filtered for aerial phenomena, AARO, and related topics. Updated daily via scripts/gdelt/fetch.mjs.',
+  GNEWS: 'NEWS FEED',
+  GNEWS_TOOLTIP: 'UAP/UFO-related articles from GNews — aggregating 60,000+ worldwide news sources. Filtered for aerial phenomena, AARO, and related topics. Updated daily via scripts/gnews/fetch.mjs.'
 } as const
 
 // ─── Sighting modal labels ──────────────────────────────────────────
@@ -110,6 +116,63 @@ export const MODAL = {
   SUMMARY: 'SUMMARY',
   WITNESS_ACCOUNT: 'WITNESS ACCOUNT',
   EMPTY_VALUE: '—'
+} as const
+
+// ─── GDELT modal labels ────────────────────────────────────────────
+
+export const GDELT_MODAL = {
+  SOURCE: 'Source',
+  PUBLISHED: 'Published',
+  LANGUAGE: 'Language',
+  COUNTRY: 'Country',
+  TONE: 'Tone',
+  URL: 'URL',
+  FOOTER_PREFIX: 'GDELT',
+  FOOTER_SEPARATOR: ' · ',
+  EMPTY_VALUE: '—'
+} as const
+
+// ─── GDELT grid ─────────────────────────────────────────────────────
+
+export const GDELT_GRID = {
+  EMPTY: 'No GDELT articles available. Run scripts/gdelt/fetch.mjs to populate.',
+  EMPTY_FILTERED: 'No articles match current filters.'
+} as const
+
+// ─── GNews modal labels ─────────────────────────────────────────────
+
+export const GNEWS_MODAL = {
+  SOURCE: 'Source',
+  PUBLISHED: 'Published',
+  DESCRIPTION: 'Description',
+  URL: 'URL',
+  FOOTER_PREFIX: 'GNews',
+  FOOTER_SEPARATOR: ' · ',
+  EMPTY_VALUE: '—'
+} as const
+
+// ─── GNews grid ─────────────────────────────────────────────────────
+
+export const GNEWS_GRID = {
+  EMPTY: 'No GNews articles available.',
+  EMPTY_FILTERED: 'No articles match current filters.'
+} as const
+
+// ─── Vessel viewer ──────────────────────────────────────────────────
+
+export const VESSEL = {
+  TITLE: 'FRACTAL VESSEL',
+  AUTO_ROTATE: '↻ AUTO',
+  MODE_SPHERE: 'SPHERE',
+  MODE_DISC: 'DISC',
+  MODE_FRACTAL: 'FRACTAL',
+  MODE_SPINE: 'SPINE',
+  MODE_TRANSIT: 'TRANSIT',
+  INFO_SPHERE: '~800 blades · 400–900m diameter · overlapping shell',
+  INFO_DISC: 'Flattened configuration · ~200–400m · low profile',
+  INFO_FRACTAL: 'Fully extended · blades at max reach · starburst',
+  INFO_SPINE: 'Acceleration survival · ~2km axial extension',
+  INFO_TRANSIT: 'Singularity ring · spacetime deformation · FTL'
 } as const
 
 // ─── Ticker ─────────────────────────────────────────────────────────
@@ -139,10 +202,12 @@ export const DATA_SOURCE_DESCRIPTIONS = {
   NASA_CNEOS: 'NASA Center for Near Earth Object Studies — fireball and bolide data',
   OPENSKY: 'Open flight tracking network — cross-reference sightings with known aircraft',
   GDELT: 'Global Database of Events — UAP-related news from CJK and Russian media',
+  GNEWS: 'GNews — UAP/UFO news aggregation from 60,000+ worldwide sources via API',
   AARO: 'All-domain Anomaly Resolution Office — US DoD official UAP investigations',
   GEIPAN: 'French space agency UAP research unit — European sighting database',
   ENIGMA: 'International catalogue of UFO events and encounter classifications',
-  CJK_SCRAPER: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news'
+  CJK_SCRAPER: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news',
+  EXPERIENCER: 'Firsthand structural encounter testimony from vetted experiencer sources'
 } as const
 
 // ─── Welcome modal ──────────────────────────────────────────────────

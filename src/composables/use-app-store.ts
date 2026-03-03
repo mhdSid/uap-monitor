@@ -17,7 +17,7 @@
  * └─────────────────────────────────────────────────────────┘
  */
 
-import type { Sighting, SightingFilter, DataSource } from '@/types'
+import type { Sighting, SightingFilter, DataSource, GdeltArticle, GnewsArticle } from '@/types'
 import type { Continent } from '@/enums'
 import { signal, computed } from './use-store'
 import type { Signal, ReadonlySignal } from './use-store'
@@ -42,6 +42,10 @@ export interface AppStore {
   sources: Signal<DataSource[]>
   /** Count of sightings currently displayed (after filtering). */
   shownCount: Signal<number>
+  /** GDELT news articles (loaded separately). */
+  gdeltArticles: Signal<GdeltArticle[]>
+  /** GNews articles (loaded separately). */
+  gnewsArticles: Signal<GnewsArticle[]>
 
   // ── Derived (readonly) ────────────────────────────────────────
   /** Currently selected continent from filter, or undefined for all. */
@@ -67,6 +71,8 @@ export function useAppStore(): AppStore {
   const totalCount = signal(0)
   const sources = signal<DataSource[]>([])
   const shownCount = signal(0)
+  const gdeltArticles = signal<GdeltArticle[]>([])
+  const gnewsArticles = signal<GnewsArticle[]>([])
 
   const selectedContinent = computed<Continent | undefined>(
     () => filter.get().continent
@@ -90,6 +96,8 @@ export function useAppStore(): AppStore {
     totalCount,
     sources,
     shownCount,
+    gdeltArticles,
+    gnewsArticles,
     selectedContinent,
     hasActiveFilter,
     displayCount

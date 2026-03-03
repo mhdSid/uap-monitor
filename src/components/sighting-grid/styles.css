@@ -1,4 +1,3 @@
-/* ===== CELL: REPORT (summary primary, region secondary) ===== */
 .cell-report {
   display: flex;
   flex-direction: column;
@@ -72,6 +71,12 @@
   border-color: var(--c-amber-400-20);
 }
 
+.cell-report__source--experiencer {
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
 .cell-report__tag-count {
   font-size: 9px;
   color: var(--color-dim);
@@ -130,7 +135,7 @@
 
 .grids-container .data-grid__th:nth-child(2),
 .grids-container .data-grid__td:nth-child(2) {
-  width: 60px !important;
+  width: 44px !important;
   padding-left: 2px !important;
   padding-right: 2px !important;
 }
@@ -146,7 +151,7 @@
   .grids-container .data-grid__th:nth-child(4),
   .grids-container .data-grid__td:nth-child(4) {
     display: table-cell;
-    width: 90px !important;
+    width: 75px !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
     font-size: inherit;
@@ -154,7 +159,7 @@
 
   .grids-container .data-grid__th:nth-child(2),
   .grids-container .data-grid__td:nth-child(2) {
-    width: 100px !important;
+    width: 110px !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
   }

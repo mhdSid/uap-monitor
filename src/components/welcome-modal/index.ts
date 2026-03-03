@@ -34,7 +34,9 @@ const ACTIVE_SOURCES: WelcomeSource[] = [
   { name: 'Blue Book Unknowns',  records: '700+',  period: '1947–1969', tier: 'high' },
   { name: 'Hall (UFO Evidence)', records: '600+',  period: '1947–2003', tier: 'high' },
   { name: 'Wonders in the Sky',  records: '500+',  period: '70 AD–1879', tier: 'base' },
-  { name: 'Dolan',               records: '300+',  period: '1941–2003', tier: 'mid' }
+  { name: 'Dolan',               records: '300+',  period: '1941–2003', tier: 'mid' },
+  { name: 'GDELT News',          records: 'Live',  period: 'Daily',     tier: 'mid' },
+  { name: 'GNews',               records: 'Live',  period: 'Daily',     tier: 'mid' }
 ]
 
 export class WelcomeModal {

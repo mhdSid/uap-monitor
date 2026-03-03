@@ -51,5 +51,6 @@ export const colors = {
 
   sourceNuforc: palette.green400,
   sourceHatch: palette.cyan400,
-  sourceChronology: palette.amber400
+  sourceChronology: palette.amber400,
+  sourceExperiencer: palette.purple500
 } as const

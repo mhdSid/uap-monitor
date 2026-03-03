@@ -70,6 +70,8 @@ export enum DataSourceId {
   GEIPAN = 'GEIPAN',
   CJK_SCRAPER = 'CJK_SCRAPER',
   AARO = 'AARO',
+  GNEWS = 'GNEWS',
+  EXPERIENCER = 'EXPERIENCER',
 }
 
 export enum DataSourceStatus {

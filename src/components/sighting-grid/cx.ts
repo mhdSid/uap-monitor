@@ -1,3 +1,4 @@
+/** Class name constants for sighting-grid. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
   root: 'cell-report',
   badgeDate: 'cell-report__badge-date',
@@ -8,6 +9,7 @@ export const cx = {
   source: 'cell-report__source',
   sourceChronology: 'cell-report__source--chronology',
   sourceHatchUdb: 'cell-report__source--hatch-udb',
+  sourceExperiencer: 'cell-report__source--experiencer',
   summary: 'cell-report__summary',
   tagCount: 'cell-report__tag-count',
   cellTime: 'cell-time',

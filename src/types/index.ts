@@ -123,6 +123,48 @@ export interface Fireball {
   location: string
 }
 
+// ─── GDELT news layer ───────────────────────────────────────────────
+
+export interface GdeltArticle {
+  id: string
+  title: string
+  url: string
+  domain: string
+  publishedAt: string
+  language: string
+  sourceName?: string
+  country?: string
+  imageUrl?: string | null
+  tone: number
+}
+
+export interface GdeltCollection {
+  generatedAt: string
+  query: string
+  totalResults: number
+  articles: GdeltArticle[]
+}
+
+// ─── GNews layer ────────────────────────────────────────────────────
+
+export interface GnewsArticle {
+  id: string
+  title: string
+  description: string
+  url: string
+  imageUrl?: string | null
+  publishedAt: string
+  sourceName: string
+  sourceUrl?: string | null
+}
+
+export interface GnewsCollection {
+  generatedAt: string
+  query: string
+  totalResults: number
+  articles: GnewsArticle[]
+}
+
 export interface DataSource {
   id: DataSourceId
   label: string

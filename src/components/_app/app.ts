@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, batch, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useGdelt, useGnews, batch, minDelay, filterSightings } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -28,6 +28,8 @@ import { SightingGrids } from '@/components/sighting-grid'
 import { SightingMap } from '@/components/sighting-map'
 import { Timeline } from '@/components/timeline'
 import { WelcomeModal } from '@/components/welcome-modal'
+import { GdeltGrid } from '@/components/gdelt-grid'
+import { GnewsGrid } from '@/components/gnews-grid'
 import { SECTION } from '@/data/strings'
 
 import type { Sighting } from '@/types'
@@ -35,11 +37,15 @@ import type { Sighting } from '@/types'
 export class App extends Component {
   private store = useAppStore()
   private dataSource = useDataSource()
+  private gdelt = useGdelt()
+  private gnews = useGnews()
   private tickerMessages = useTicker()
 
   private main!: HTMLElement
   private ticker!: Ticker
   private grids!: SightingGrids
+  private gdeltGrid!: GdeltGrid
+  private gnewsGrid!: GnewsGrid
   private sightingMap!: SightingMap
   private timeline!: Timeline
   private renderVersion = 0
@@ -57,6 +63,8 @@ export class App extends Component {
     })
 
     this.grids = new SightingGrids({})
+    this.gdeltGrid = new GdeltGrid({})
+    this.gnewsGrid = new GnewsGrid({})
 
     this.sightingMap = new SightingMap({
       onSightingSelect: (id) => this.grids.scrollToSighting(id)
@@ -89,6 +97,8 @@ export class App extends Component {
     this.buildControls()
     this.bindReactions()
     await this.progressiveLoad()
+    this.loadGdeltArticles()
+    this.loadGnewsArticles()
     this.buildBelowFold()
     this.finalize()
   }
@@ -132,6 +142,29 @@ export class App extends Component {
     this.main.appendChild(controlsForm)
     this.main.appendChild(this.timeline.el)
     this.main.appendChild(this.sightingMap.el)
+
+    // ── GNews news section ──────────────────────────────────────
+    const gnewsCount = this.store.gnewsArticles.get().length
+    this.main.appendChild(
+      new Section({
+        title: SECTION.GNEWS,
+        tooltip: SECTION.GNEWS_TOOLTIP,
+        count: gnewsCount || undefined,
+        content: this.gnewsGrid.el
+      }).el
+    )
+
+    // ── GDELT news section ──────────────────────────────────────
+    const gdeltCount = this.store.gdeltArticles.get().length
+    this.main.appendChild(
+      new Section({
+        title: SECTION.GDELT_NEWS,
+        tooltip: SECTION.GDELT_NEWS_TOOLTIP,
+        count: gdeltCount || undefined,
+        content: this.gdeltGrid.el
+      }).el
+    )
+
     this.main.appendChild(this.grids.el)
   }
 
@@ -159,9 +192,26 @@ export class App extends Component {
     })
   }
 
+  // ─── Phase: Load GDELT ──────────────────────────────────────────
+
+  private async loadGdeltArticles(): Promise<void> {
+    const articles = await this.gdelt.load()
+    this.store.gdeltArticles.set(articles)
+    this.gdeltGrid.render(articles)
+  }
+
+  // ─── Phase: Load GNews ─────────────────────────────────────────
+
+  private async loadGnewsArticles(): Promise<void> {
+    const articles = await this.gnews.load()
+    this.store.gnewsArticles.set(articles)
+    this.gnewsGrid.render(articles)
+  }
+
   // ─── Phase: Below-fold content ─────────────────────────────────
 
   private buildBelowFold(): void {
+    // ── Data sources section ────────────────────────────────────
     const sourcesBody = h('div', {
       style: { display: 'flex', flexDirection: 'column', gap: '10px' }
     })
@@ -260,6 +310,21 @@ export class App extends Component {
     release()
 
     this.sightingMap.setSightings(filtered)
+
+    // Re-filter GDELT articles by search term
+    const gdeltFiltered = this.gdelt.filterArticles(
+      this.store.gdeltArticles.get(),
+      this.store.filter.get()
+    )
+    this.gdeltGrid.render(gdeltFiltered)
+
+    // Re-filter GNews articles by search term
+    const gnewsFiltered = this.gnews.filterArticles(
+      this.store.gnewsArticles.get(),
+      this.store.filter.get()
+    )
+    this.gnewsGrid.render(gnewsFiltered)
+
     this.hideAllLoaders()
     this.store.shownCount.set(filtered.length)
   }

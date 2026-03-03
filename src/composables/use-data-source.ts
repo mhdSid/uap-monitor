@@ -132,9 +132,20 @@ const SOURCE_REGISTRY: DataSource[] = [
   {
     id: DataSourceId.GDELT,
     label: 'GDELT',
-    status: DataSourceStatus.DISABLED,
+    status: DataSourceStatus.SYNCING,
     url: 'https://www.gdeltproject.org',
-    description: DATA_SOURCE_DESCRIPTIONS.GDELT
+    description: DATA_SOURCE_DESCRIPTIONS.GDELT,
+    dataUrl: '/data/gdelt-articles.json',
+    dataLabel: 'JSON'
+  },
+  {
+    id: DataSourceId.GNEWS,
+    label: 'GNews',
+    status: DataSourceStatus.SYNCING,
+    url: 'https://gnews.io',
+    description: DATA_SOURCE_DESCRIPTIONS.GNEWS,
+    dataUrl: '/data/gnews-articles.json',
+    dataLabel: 'JSON'
   },
   {
     id: DataSourceId.AARO,

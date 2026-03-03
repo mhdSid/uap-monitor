@@ -9,7 +9,8 @@ import type { Sighting, DataGridColumn } from '@/types'
 const SOURCE_LABELS: Partial<Record<DataSourceId, string>> = {
   [DataSourceId.NUFORC]: 'NUFORC',
   [DataSourceId.HATCH_UDB]: 'HATCH',
-  [DataSourceId.CHRONOLOGY]: 'CHRON'
+  [DataSourceId.CHRONOLOGY]: 'CHRON',
+  [DataSourceId.EXPERIENCER]: 'HUMAN'
 }
 
 const SUB_SOURCE_SHORT: Record<string, string> = {
@@ -28,7 +29,8 @@ const SUB_SOURCE_SHORT: Record<string, string> = {
 /** Source badge class by data source id */
 const SOURCE_CLASS: Record<string, string> = {
   [DataSourceId.CHRONOLOGY]: `${cx.source} ${cx.sourceChronology}`,
-  [DataSourceId.HATCH_UDB]: `${cx.source} ${cx.sourceHatchUdb}`
+  [DataSourceId.HATCH_UDB]: `${cx.source} ${cx.sourceHatchUdb}`,
+  [DataSourceId.EXPERIENCER]: `${cx.source} ${cx.sourceExperiencer}`
 }
 
 function resolveGridSourceLabel(row: Sighting): string {
@@ -57,10 +59,9 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
 
         const meta = h('span', { className: cx.meta }, metaParts.join(' · '))
 
-        const occuredAt = row.occurredAt?.slice(0, 10) || ''
         const badges = h('span', { className: cx.badges },
           h('span', { className: sourceClass }, sourceLabel),
-          h('span', { className: cx.badgeDate }, occuredAt ? `• ${occuredAt}` : ''),
+          h('span', { className: cx.badgeDate }, row.occurredAt?.slice(0, 10) || ''),
           ...(tagCount > 0
             ? [h('span', { className: cx.tagCount }, `${tagCount} tag${tagCount > 1 ? 's' : ''}`)]
             : [])

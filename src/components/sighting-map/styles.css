@@ -143,3 +143,9 @@
 .leaflet-popup-close-button {
   color: var(--color-dim) !important;
 }
+
+@media (min-width: 481px) {
+  .sighting-map {
+    max-height: 500px;
+  }
+}
