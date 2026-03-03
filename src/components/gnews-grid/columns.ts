@@ -23,13 +23,13 @@ export function gnewsColumns(): DataGridColumn<GnewsArticle>[] {
         )
       }
     },
-    {
-      key: 'sourceName',
-      label: 'SOURCE',
-      width: '120px',
-      align: 'left',
-      render: (row) => h('span', { className: cx.source }, row.sourceName || '\u2014')
-    },
+    // {
+    //   key: 'sourceName',
+    //   label: 'SOURCE',
+    //   width: '120px',
+    //   align: 'left',
+    //   render: (row) => h('span', { className: cx.source }, row.sourceName || '\u2014')
+    // },
     {
       key: 'publishedAt',
       label: 'DATE',

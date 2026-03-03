@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useGdelt, useGnews, batch, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, batch, minDelay, filterSightings } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -37,8 +37,6 @@ import type { Sighting } from '@/types'
 export class App extends Component {
   private store = useAppStore()
   private dataSource = useDataSource()
-  private gdelt = useGdelt()
-  private gnews = useGnews()
   private tickerMessages = useTicker()
 
   private main!: HTMLElement
@@ -92,13 +90,20 @@ export class App extends Component {
     analytics.pageView()
 
     this.showWelcome()
-    await this.loadManifests()
+
+    // ── All three are independent network fetches — parallelize ──
+    await Promise.all([
+      this.loadManifests(),
+      this.gdeltGrid.load(),
+      this.gnewsGrid.load()
+    ])
+
+    // ── Sequential: each step depends on the one before ──
     this.hydrateStore()
     this.buildControls()
     this.bindReactions()
+
     await this.progressiveLoad()
-    this.loadGdeltArticles()
-    this.loadGnewsArticles()
     this.buildBelowFold()
     this.finalize()
   }
@@ -190,22 +195,6 @@ export class App extends Component {
       this.store.shownCount.set(partial.length)
       this.grids.render(partial)
     })
-  }
-
-  // ─── Phase: Load GDELT ──────────────────────────────────────────
-
-  private async loadGdeltArticles(): Promise<void> {
-    const articles = await this.gdelt.load()
-    this.store.gdeltArticles.set(articles)
-    this.gdeltGrid.render(articles)
-  }
-
-  // ─── Phase: Load GNews ─────────────────────────────────────────
-
-  private async loadGnewsArticles(): Promise<void> {
-    const articles = await this.gnews.load()
-    this.store.gnewsArticles.set(articles)
-    this.gnewsGrid.render(articles)
   }
 
   // ─── Phase: Below-fold content ─────────────────────────────────
@@ -311,19 +300,10 @@ export class App extends Component {
 
     this.sightingMap.setSightings(filtered)
 
-    // Re-filter GDELT articles by search term
-    const gdeltFiltered = this.gdelt.filterArticles(
-      this.store.gdeltArticles.get(),
-      this.store.filter.get()
-    )
-    this.gdeltGrid.render(gdeltFiltered)
-
-    // Re-filter GNews articles by search term
-    const gnewsFiltered = this.gnews.filterArticles(
-      this.store.gnewsArticles.get(),
-      this.store.filter.get()
-    )
-    this.gnewsGrid.render(gnewsFiltered)
+    // Grids read from store internally
+    const filter = this.store.filter.get()
+    this.gdeltGrid.applyFilter(filter)
+    this.gnewsGrid.applyFilter(filter)
 
     this.hideAllLoaders()
     this.store.shownCount.set(filtered.length)

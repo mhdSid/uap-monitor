@@ -54,7 +54,7 @@
   white-space: nowrap;
 }
 
-.gdelt-row__tone {
+/* .gdelt-row__tone {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--color-muted);
@@ -70,7 +70,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--color-amber);
-}
+} */
 
 .gdelt-row__lang {
   font-family: var(--font-mono);

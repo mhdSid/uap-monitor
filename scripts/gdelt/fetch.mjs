@@ -51,14 +51,11 @@ function urlToId(url) {
 }
 
 function parseGdeltDate(str) {
-  if (!str || str.length < 8) return null
-  const y = str.slice(0, 4)
-  const m = str.slice(4, 6)
-  const d = str.slice(6, 8)
-  const hh = str.slice(8, 10) || '00'
-  const mm = str.slice(10, 12) || '00'
-  const ss = str.slice(12, 14) || '00'
-  return y + '-' + m + '-' + d + 'T' + hh + ':' + mm + ':' + ss + 'Z'
+  const match = str.match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})?(\d{2})?(\d{2})?$/)
+  if (!match) return null
+
+  const [, y, m, d, hh = '00', mm = '00', ss = '00'] = match
+  return `${y}-${m}-${d}T${hh}:${mm}:${ss}Z`
 }
 
 /**
@@ -118,8 +115,8 @@ function transformArticle(raw) {
     language: raw.language || 'en',
     sourceName: raw.sourcecountry ? raw.domain + ' (' + raw.sourcecountry + ')' : raw.domain,
     country: raw.sourcecountry || '',
-    imageUrl: raw.socialimage || null,
-    tone: typeof raw.tone === 'number' ? Math.round(raw.tone * 10) / 10 : 0
+    imageUrl: raw.socialimage || null
+    // tone: typeof raw.tone === 'number' ? Math.round(raw.tone * 10) / 10 : 0
   }
 }
 

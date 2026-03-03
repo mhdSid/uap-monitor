@@ -418,3 +418,73 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     getManifest
   }
 }
+
+// ─── Article loader factory ─────────────────────────────────────────
+
+export interface ArticleCollection<A> {
+  articles?: A[]
+  [key: string]: unknown
+}
+
+export interface ArticleLoaderConfig<A, C extends ArticleCollection<A>> {
+  /** JSON filename relative to data dir, e.g. 'gdelt-articles.json' */
+  file: string
+  /** Label for logs */
+  label: string
+  /** Fields to match against when filtering by search query */
+  searchFields: (keyof A & string)[]
+  /** Optional error handler */
+  onError?: (message: string) => void
+}
+
+export interface ArticleLoader<A, C extends ArticleCollection<A>> {
+  load(): Promise<A[]>
+  filterArticles(articles: A[], search: string): A[]
+  getCollection(): C | null
+  getCount(): number
+}
+
+export function createArticleLoader<A extends Record<string, unknown>, C extends ArticleCollection<A>>(
+  config: ArticleLoaderConfig<A, C>
+): ArticleLoader<A, C> {
+  let cachedArticles: A[] | null = null
+  let cachedCollection: C | null = null
+
+  const reportError = config.onError ?? ((msg) => console.warn(`[${config.label}] ${msg}`))
+
+  async function load(): Promise<A[]> {
+    if (cachedArticles) return cachedArticles
+
+    try {
+      const data = await fetchJson<C>(dataUrl(config.file))
+      cachedCollection = data
+      cachedArticles = data.articles ?? []
+      return cachedArticles
+    } catch {
+      // No data yet — not an error, just not populated
+      cachedArticles = []
+      return []
+    }
+  }
+
+  function filterArticles(articles: A[], search: string): A[] {
+    if (!search) return articles
+    const q = search.toLowerCase()
+    return articles.filter(a =>
+      config.searchFields.some(field => {
+        const val = a[field]
+        return typeof val === 'string' && val.toLowerCase().includes(q)
+      })
+    )
+  }
+
+  function getCollection(): C | null {
+    return cachedCollection
+  }
+
+  function getCount(): number {
+    return cachedArticles?.length ?? 0
+  }
+
+  return { load, filterArticles, getCollection, getCount }
+}

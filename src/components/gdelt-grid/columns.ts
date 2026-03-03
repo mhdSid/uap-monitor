@@ -24,19 +24,19 @@ export function gdeltColumns(): DataGridColumn<GdeltArticle>[] {
         )
       }
     },
-    {
-      key: 'tone',
-      label: 'TONE',
-      width: '70px',
-      align: 'right',
-      render: (row) => {
-        const cls = row.tone > 0 ? cx.tonePositive
-          : row.tone < -3 ? cx.toneNegative
-          : cx.tone
-        const prefix = row.tone > 0 ? '+' : ''
-        return h('span', { className: cls }, `${prefix}${row.tone}`)
-      }
-    },
+    // {
+    //   key: 'tone',
+    //   label: 'TONE',
+    //   width: '70px',
+    //   align: 'right',
+    //   render: (row) => {
+    //     const cls = row.tone > 0 ? cx.tonePositive
+    //       : row.tone < -3 ? cx.toneNegative
+    //       : cx.tone
+    //     const prefix = row.tone > 0 ? '+' : ''
+    //     return h('span', { className: cls }, `${prefix}${row.tone}`)
+    //   }
+    // },
     {
       key: 'language',
       label: 'LANG',
