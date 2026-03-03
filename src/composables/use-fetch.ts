@@ -423,17 +423,12 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
 
 export interface ArticleCollection<A> {
   articles?: A[]
-  [key: string]: unknown
 }
 
-export interface ArticleLoaderConfig<A, C extends ArticleCollection<A>> {
-  /** JSON filename relative to data dir, e.g. 'gdelt-articles.json' */
+export interface ArticleLoaderConfig<A> {
   file: string
-  /** Label for logs */
   label: string
-  /** Fields to match against when filtering by search query */
   searchFields: (keyof A & string)[]
-  /** Optional error handler */
   onError?: (message: string) => void
 }
 
@@ -444,9 +439,10 @@ export interface ArticleLoader<A, C extends ArticleCollection<A>> {
   getCount(): number
 }
 
-export function createArticleLoader<A extends Record<string, unknown>, C extends ArticleCollection<A>>(
-  config: ArticleLoaderConfig<A, C>
-): ArticleLoader<A, C> {
+export function createArticleLoader<
+  A extends object,
+  C extends ArticleCollection<A>
+>(config: ArticleLoaderConfig<A>): ArticleLoader<A, C>{
   let cachedArticles: A[] | null = null
   let cachedCollection: C | null = null
 
