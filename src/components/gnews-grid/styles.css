@@ -76,10 +76,12 @@
 }
 
 /* ── Column widths scoped to gnews grid ─────────────────────── */
-.gnews-grid-container .data-grid__row td:nth-child(1) { width: 60%; }
-.gnews-grid-container .data-grid__row td:nth-child(2) { width: 120px; }
-.gnews-grid-container .data-grid__row td:nth-child(3) { width: 90px; }
+.gnews-grid-container .data-grid__td:nth-child(1), .gnews-grid-container .data-grid__th:nth-child(1) {
+  width: auto !important;
+  display: table-cell;
+}
 
-@media (max-width: 640px) {
-  .gnews-grid-container .data-grid__row td:nth-child(2) { display: none; }
+.gnews-grid-container .data-grid__td:nth-child(2), .gnews-grid-container .data-grid__th:nth-child(2) {
+  width: 75px !important;
+  display: table-cell;
 }

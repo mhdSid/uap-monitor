@@ -37,13 +37,13 @@ export function gdeltColumns(): DataGridColumn<GdeltArticle>[] {
     //     return h('span', { className: cls }, `${prefix}${row.tone}`)
     //   }
     // },
-    {
-      key: 'language',
-      label: 'LANG',
-      width: '50px',
-      align: 'center',
-      render: (row) => h('span', { className: cx.lang }, (row.language || 'en').toUpperCase())
-    },
+    // {
+    //   key: 'language',
+    //   label: 'LANG',
+    //   width: '50px',
+    //   align: 'center',
+    //   render: (row) => h('span', { className: cx.lang }, (row.language || 'en').toUpperCase())
+    // },
     {
       key: 'publishedAt',
       label: 'DATE',

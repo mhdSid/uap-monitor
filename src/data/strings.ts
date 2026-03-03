@@ -91,10 +91,10 @@ export const SECTION = {
   INTEL_CONTENT: 'UAP Monitor aggregates data from multiple open-source intelligence feeds. Green indicators are live. Disabled sources are planned integrations — hover any source for details.',
   EXPERIENCER: 'EXPERIENCER REPORTS',
   EXPERIENCER_TOOLTIP: 'Firsthand structural encounter testimony from anonymous experiencers. Source identity protected. Material reviewed for internal consistency and cross-referenced against known observation patterns.',
-  GDELT_NEWS: 'GLOBAL NEWS FEED',
-  GDELT_NEWS_TOOLTIP: 'UAP/UFO-related articles from the GDELT Project — a global open-source news monitoring platform covering 100+ languages. Filtered for aerial phenomena, AARO, and related topics. Updated daily via scripts/gdelt/fetch.mjs.',
-  GNEWS: 'NEWS FEED',
-  GNEWS_TOOLTIP: 'UAP/UFO-related articles from GNews — aggregating 60,000+ worldwide news sources. Filtered for aerial phenomena, AARO, and related topics. Updated daily via scripts/gnews/fetch.mjs.'
+  GDELT_NEWS: 'GDELT FEED',
+  GDELT_NEWS_TOOLTIP: 'Global UAP/UFO media coverage via the GDELT Project. Monitors broadcast, print, and web sources across 100+ languages with sentiment analysis.',
+  GNEWS: 'GNEWS FEED',
+  GNEWS_TOOLTIP: 'Latest UAP/UFO news aggregated from 60,000+ worldwide sources via GNews. English-language articles sorted by recency.'
 } as const
 
 // ─── Sighting modal labels ──────────────────────────────────────────

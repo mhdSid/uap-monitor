@@ -90,12 +90,12 @@
 }
 
 /* ── Column widths scoped to gdelt grid ─────────────────────── */
-.gdelt-grid-container .data-grid__row td:nth-child(1) { width: 55%; }
-.gdelt-grid-container .data-grid__row td:nth-child(2) { width: 70px; }
-.gdelt-grid-container .data-grid__row td:nth-child(3) { width: 50px; }
-.gdelt-grid-container .data-grid__row td:nth-child(4) { width: 90px; }
+.gdelt-grid-container .data-grid__td:nth-child(1), .gdelt-grid-container .data-grid__th:nth-child(1) {
+  width: auto !important;
+  display: table-cell;
+}
 
-@media (max-width: 640px) {
-  .gdelt-grid-container .data-grid__row td:nth-child(2),
-  .gdelt-grid-container .data-grid__row td:nth-child(3) { display: none; }
+.gdelt-grid-container .data-grid__td:nth-child(2), .gdelt-grid-container .data-grid__td:nth-child(2) {
+  width: 75px !important;
+  display: table-cell;
 }
