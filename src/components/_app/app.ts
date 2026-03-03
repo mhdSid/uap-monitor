@@ -119,7 +119,7 @@ export class App extends Component {
   private hydrateStore(): void {
     const years = this.dataSource.getAvailableYears()
     const newest = years[0] ?? new Date().getFullYear()
-    const defaultFrom = newest - 5
+    const defaultFrom = newest - 1
 
     batch(() => {
       this.store.availableYears.set(years)
