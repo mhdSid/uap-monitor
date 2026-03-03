@@ -13,17 +13,6 @@
   height: 100%;
 }
 
-/* ── Loader overlay ──────────────────────────────────────────────── */
-.sighting-map__loader {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--c-panel-70);
-  z-index: 500;
-}
-
 /* Leaflet dark theme overrides */
 .leaflet-container {
   background: var(--c-neutral-950);
@@ -128,5 +117,4 @@
 }
 .leaflet-popup-close-button {
   color: var(--color-dim) !important;
-}
 }

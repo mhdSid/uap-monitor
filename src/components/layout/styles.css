@@ -33,7 +33,6 @@
 .section__body {
   padding: 8px;
 }
-}
 
 @media (min-width: 481px) {
   .section__body { padding: 12px; }

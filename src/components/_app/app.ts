@@ -229,12 +229,10 @@ export class App extends Component {
     const loader = () => h('div', { className: 'app-loader' }, new Loader({}).el)
     this.grids.showLoader(loader())
     this.timeline.showLoader(loader())
-    this.sightingMap.showLoader(loader())
   }
 
   private hideAllLoaders(): void {
     this.timeline.hideLoader()
-    this.sightingMap.hideLoader()
   }
 
   private async onFilterChange(): Promise<void> {

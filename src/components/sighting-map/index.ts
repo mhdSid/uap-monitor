@@ -38,17 +38,13 @@ export class SightingMap extends Component<SightingMapProps> {
   private map!: L.Map
   private clusterGroup!: L.MarkerClusterGroup
   private wrapper!: HTMLElement
-  private loaderEl!: HTMLElement
   private resizeObserver!: ResizeObserver
   private isVisible = false
 
   protected create(): HTMLElement {
     this.wrapper = h('div', { className: cx.sightingMap })
     const mapEl = h('div', { className: cx.sightingMapCanvas })
-    this.loaderEl = h('div', { className: cx.sightingMapLoader })
-    this.loaderEl.style.display = 'none'
     this.wrapper.appendChild(mapEl)
-    this.wrapper.appendChild(this.loaderEl)
 
     // Defer map init until mounted (needs real DOM dimensions)
     requestAnimationFrame(() => {
@@ -122,18 +118,6 @@ export class SightingMap extends Component<SightingMapProps> {
     })
     this.resizeObserver.observe(this.wrapper)
     this.isVisible = true
-  }
-
-  // ─── Loading overlay ─────────────────────────────────────────────
-
-  showLoader(el?: HTMLElement): void {
-    this.loaderEl.textContent = ''
-    if (el) this.loaderEl.appendChild(el)
-    this.loaderEl.style.display = ''
-  }
-
-  hideLoader(): void {
-    this.loaderEl.style.display = 'none'
   }
 
   // ─── Public API ─────────────────────────────────────────────────
