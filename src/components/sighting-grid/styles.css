@@ -1,3 +1,4 @@
+/* ===== CELL: REPORT (summary primary, region secondary) ===== */
 .cell-report {
   display: flex;
   flex-direction: column;
@@ -77,6 +78,12 @@
   letter-spacing: 0.5px;
 }
 
+.cell-report__badge-date {
+  font-size: 9px;
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
 /* ===== CELL HELPERS ===== */
 .cell-type { color: var(--color-cyan); }
 .cell-time { font-size: var(--fs-xs); color: var(--color-dim); white-space: nowrap; }
@@ -101,5 +108,54 @@
 
 @media (min-width: 481px) {
   .cell-report__date { display: block; }
+  .cell-report__badge-date { display: none; }
   .cell-report__summary { -webkit-line-clamp: 2; }
+}
+
+/* ── Sighting grid column layout ───────────────────────────────────── */
+/* Columns: 1=REPORT  2=CRED  3=STATUS  4=DATE                        */
+
+/* Mobile: hide STATUS + DATE, REPORT fills space, CRED compact */
+.grids-container .data-grid__th:nth-child(3),
+.grids-container .data-grid__td:nth-child(3),
+.grids-container .data-grid__th:nth-child(4),
+.grids-container .data-grid__td:nth-child(4) {
+  display: none;
+}
+
+.grids-container .data-grid__th:nth-child(1),
+.grids-container .data-grid__td:nth-child(1) {
+  width: auto !important;
+}
+
+.grids-container .data-grid__th:nth-child(2),
+.grids-container .data-grid__td:nth-child(2) {
+  width: 60px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+/* Desktop: show all columns with fixed widths */
+@media (min-width: 481px) {
+  .grids-container .data-grid__th:nth-child(3),
+  .grids-container .data-grid__td:nth-child(3) {
+    display: table-cell;
+    width: 95px !important;
+  }
+
+  .grids-container .data-grid__th:nth-child(4),
+  .grids-container .data-grid__td:nth-child(4) {
+    display: table-cell;
+    width: 90px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    font-size: inherit;
+  }
+
+  .grids-container .data-grid__th:nth-child(2),
+  .grids-container .data-grid__td:nth-child(2) {
+    width: 100px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
 }

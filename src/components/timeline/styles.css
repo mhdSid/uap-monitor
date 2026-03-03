@@ -34,10 +34,10 @@
   left: 0;
   width: 12px; /* BAR_STEP */
   bottom: 0;
-  pointer-events: none;
   will-change: transform;
   background: var(--c-green-400-16);
   display: none;
+  cursor: pointer;
 }
 
 .timeline__hover-bar::after {

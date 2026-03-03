@@ -58,12 +58,12 @@ program
   .option("--schema <file>", "JSON schema file for output transformation")
   .option("--output <file>", "Output file path", DEFAULT_OUTPUT)
   .option("--raw-file <file>", "Raw cache file path", RAW_CACHE_FILE)
-  .option("--start-id <n>", "Sighting ID to start walking backwards from", parseInt)
+  .option("--start-id <n>", "Sighting ID to start walking backwards from", v => parseInt(v, 10))
   .option("--years <range>", "Year or year range (e.g. 2025, 2020-2026)")
-  .option("--limit <n>", "Max number of records to collect", parseInt)
-  .option("--concurrency <n>", "Number of parallel requests (be polite)", parseInt, 3)
-  .option("--delay <ms>", "Delay between requests in ms", parseInt, DEFAULT_DELAY_MS)
-  .option("--miss-limit <n>", "Stop after N consecutive misses", parseInt, CONSECUTIVE_MISS_LIMIT)
+  .option("--limit <n>", "Max number of records to collect", v => parseInt(v, 10))
+  .option("--concurrency <n>", "Number of parallel requests (be polite)", v => parseInt(v, 10), 3)
+  .option("--delay <ms>", "Delay between requests in ms", v => parseInt(v, 10), DEFAULT_DELAY_MS)
+  .option("--miss-limit <n>", "Stop after N consecutive misses", v => parseInt(v, 10), CONSECUTIVE_MISS_LIMIT)
   .option("--resume", "Resume scraping — skip IDs already in raw cache")
   .option("--merge <file>", "Merge transformed output into this existing JSON file (creates backup)")
   .option("--merge-key <field>", "Field to deduplicate on when merging (dot notation for nested, e.g. 'id' or 'sighting_id')", "id")
@@ -126,8 +126,8 @@ async function buildFetchOptions() {
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; rv:128.0) Gecko/20100101 Firefox/128.0",
       Accept: "text/html,application/xhtml+xml",
-      Referer: "https://nuforc.org/subndx/?id=all"
-    }
+      Referer: "https://nuforc.org/subndx/?id=all",
+    },
   }
   if (opts.tor) {
     fetchOpts.agent = await getTorAgent()
@@ -422,7 +422,7 @@ function parseDetailPage(html, sightingId) {
     summary,
     description,
     media_urls: mediaUrls.length > 0 ? mediaUrls : null,
-    posted: postedMatch ? postedMatch[1] : null
+    posted: postedMatch ? postedMatch[1] : null,
   }
 
   if (record.location) {
@@ -706,9 +706,9 @@ function buildCacheData(records, yearRange, collected, notFound, outOfRange) {
       scraped_at: new Date().toISOString(),
       total_records: records.length,
       year_filter: yearRange,
-      scrape_stats: { collected, not_found: notFound, out_of_range: outOfRange }
+      scrape_stats: { collected, not_found: notFound, out_of_range: outOfRange },
     },
-    records
+    records,
   }
 }
 
@@ -921,9 +921,13 @@ async function runScrapeMode() {
 
     // Early stop: if every valid record in this batch is OLDER than our
     // target year range, we've walked past it — no point continuing.
-    if (yearRange && batchPastRange > 0 && batchPastRange === batchResults.filter(r => r.status === "ok").length) {
+    // Only activates AFTER we've collected at least 1 record (so we don't
+    // stop before reaching the target range when resuming with older years).
+    if (yearRange && collected > 0 && batchPastRange > 0 && batchPastRange === batchResults.filter(r => r.status === "ok").length) {
       consecutivePastRange += batchPastRange
-    } else {
+    } else if (batchResults.length > 0) {
+      // Only reset when we actually processed a batch (don't let skipped
+      // batches from --resume leave the counter stale)
       consecutivePastRange = 0
     }
     if (consecutivePastRange >= missLimit) {

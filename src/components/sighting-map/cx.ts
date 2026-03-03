@@ -9,6 +9,7 @@ export const cx = {
   mapPopupDate: 'map-popup__date',
   mapPopupLocation: 'map-popup__location',
   mapPopupMeta: 'map-popup__meta',
+  mapPopupAction: 'map-popup__action',
   mapPopupSummary: 'map-popup__summary',
   sightingMap: 'sighting-map',
   sightingMapCanvas: 'sighting-map__canvas',

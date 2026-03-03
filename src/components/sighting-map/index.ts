@@ -14,6 +14,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.css'
 export interface SightingMapProps {
   onCountrySelect?: (country: string | undefined) => void
   onBoundsChange?: (bounds: { north: number; south: number; east: number; west: number }) => void
+  onSightingSelect?: (sightingId: string) => void
 }
 
 // ─── Constants ──────────────────────────────────────────────────────
@@ -38,17 +39,23 @@ export class SightingMap extends Component<SightingMapProps> {
   private map!: L.Map
   private clusterGroup!: L.MarkerClusterGroup
   private wrapper!: HTMLElement
+  private loaderEl!: HTMLElement
   private resizeObserver!: ResizeObserver
   private isVisible = false
 
   protected create(): HTMLElement {
     this.wrapper = h('div', { className: cx.sightingMap })
     const mapEl = h('div', { className: cx.sightingMapCanvas })
+    this.loaderEl = h('div', { className: cx.sightingMapLoader })
+    this.loaderEl.style.display = 'none'
     this.wrapper.appendChild(mapEl)
+    this.wrapper.appendChild(this.loaderEl)
 
-    // Defer map init until mounted (needs real DOM dimensions)
+    // Defer map init — double RAF ensures layout is fully resolved
     requestAnimationFrame(() => {
-      this.initMap(mapEl)
+      requestAnimationFrame(() => {
+        this.initMap(mapEl)
+      })
     })
 
     return this.wrapper
@@ -120,6 +127,21 @@ export class SightingMap extends Component<SightingMapProps> {
     this.isVisible = true
   }
 
+  // ─── Loading overlay ─────────────────────────────────────────────
+
+  showLoader(el?: HTMLElement): void {
+    this.loaderEl.textContent = ''
+    if (el) this.loaderEl.appendChild(el)
+    this.loaderEl.style.display = ''
+  }
+
+  hideLoader(): void {
+    this.loaderEl.style.display = 'none'
+    if (this.map) {
+      setTimeout(() => this.map.invalidateSize({ animate: false }), 50)
+    }
+  }
+
   // ─── Public API ─────────────────────────────────────────────────
 
   setSightings(sightings: Sighting[]): void {
@@ -177,11 +199,21 @@ export class SightingMap extends Component<SightingMapProps> {
   private createPopup(s: Sighting): HTMLElement {
     const year = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
     const src = s.subSource || s.source
-    return h('div', { className: cx.mapPopup },
+    const popup = h('div', { className: cx.mapPopup },
       h('div', { className: cx.mapPopupDate }, year),
       h('div', { className: cx.mapPopupLocation }, s.location || s.region || '—'),
       h('div', { className: cx.mapPopupSummary }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
-      h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`)
+      h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
+      h('div', { className: cx.mapPopupAction }, '↳ View in list')
     )
+
+    popup.addEventListener('click', () => {
+      if (this.props.onSightingSelect) {
+        this.map.closePopup()
+        this.props.onSightingSelect(s.id)
+      }
+    })
+
+    return popup
   }
 }

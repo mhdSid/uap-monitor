@@ -1,3 +1,4 @@
+/* ===== DATA GRID ===== */
 .data-grid__wrapper {
   max-height: 420px;
   overflow-y: auto;
@@ -117,55 +118,4 @@
 
 .data-grid__sentinel {
   height: 1px;
-}
-
-/* ── Mobile base: compact columns ──────────────────────────────────── */
-
-.data-grid__th:nth-child(3),
-.data-grid__td:nth-child(3) {
-  display: none;
-}
-
-.data-grid__th:nth-child(1),
-.data-grid__td:nth-child(1) {
-  width: auto !important;
-}
-
-.data-grid__th:nth-child(2),
-.data-grid__td:nth-child(2) {
-  width: 56px !important;
-  padding-left: 2px !important;
-  padding-right: 2px !important;
-}
-
-.data-grid__th:nth-child(4),
-.data-grid__td:nth-child(4) {
-  width: 62px !important;
-  padding-left: 2px !important;
-  padding-right: 4px !important;
-  font-size: 9px;
-}
-
-@media (min-width: 481px) {
-  .data-grid { font-size: var(--fs-sm); }
-
-  .data-grid__th:nth-child(3),
-  .data-grid__td:nth-child(3) {
-    display: table-cell;
-  }
-
-  .data-grid__th:nth-child(2),
-  .data-grid__td:nth-child(2) {
-    width: auto !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
-
-  .data-grid__th:nth-child(4),
-  .data-grid__td:nth-child(4) {
-    width: auto !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-    font-size: inherit;
-  }
 }

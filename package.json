@@ -14,7 +14,7 @@
     "data:pipeline:all": "yarn data:nuforc && yarn data:hatch && yarn data:chronology",
     "scrape:nuforc:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2026",
     "scrape:nuforc:2025": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2025",
-    "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2024",
+    "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 195787 --concurrency 3 --delay 300 --years 2024",
     "scrape:nuforc:test": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose",
     "scrape:nuforc:test:tor": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose --tor",
     "scrape:nuforc:test-transforms": "node scripts/nuforc-scrapper/test-transforms.mjs",

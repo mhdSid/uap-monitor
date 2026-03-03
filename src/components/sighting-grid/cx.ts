@@ -1,5 +1,6 @@
 export const cx = {
   root: 'cell-report',
+  badgeDate: 'cell-report__badge-date',
   badges: 'cell-report__badges',
   bottom: 'cell-report__bottom',
   date: 'cell-report__date',

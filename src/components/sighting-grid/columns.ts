@@ -57,8 +57,10 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
 
         const meta = h('span', { className: cx.meta }, metaParts.join(' · '))
 
+        const occuredAt = row.occurredAt?.slice(0, 10) || ''
         const badges = h('span', { className: cx.badges },
           h('span', { className: sourceClass }, sourceLabel),
+          h('span', { className: cx.badgeDate }, occuredAt ? `• ${occuredAt}` : ''),
           ...(tagCount > 0
             ? [h('span', { className: cx.tagCount }, `${tagCount} tag${tagCount > 1 ? 's' : ''}`)]
             : [])
