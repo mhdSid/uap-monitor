@@ -42,11 +42,60 @@ export async function fetchJson<T>(url: string): Promise<T> {
 
   const text = await response.text()
 
+  let data: unknown
   try {
-    return JSON.parse(text) as T
+    data = JSON.parse(text)
   } catch {
     throw new Error(`Invalid JSON from ${url}`)
   }
+
+  // ── Chunked file reassembly ───────────────────────────────────
+  if (isChunkedIndex(data)) {
+    return reassembleChunked<T>(data, url)
+  }
+
+  return data as T
+}
+
+// ─── Chunked index detection & reassembly ───────────────────────────
+
+interface ChunkedIndex {
+  __chunked: true
+  files: string[]
+  totalItems: number
+  field?: string
+  envelope?: Record<string, unknown>
+}
+
+function isChunkedIndex(data: unknown): data is ChunkedIndex {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    (data as Record<string, unknown>).__chunked === true &&
+    Array.isArray((data as Record<string, unknown>).files)
+  )
+}
+
+async function reassembleChunked<T>(index: ChunkedIndex, originalUrl: string): Promise<T> {
+  const baseUrl = originalUrl.substring(0, originalUrl.lastIndexOf('/') + 1)
+
+  const chunkPromises = index.files.map(async (file) => {
+    const res = await fetch(`${baseUrl}${file}`)
+    if (!res.ok) throw new Error(`Failed to fetch chunk ${file}: ${res.status}`)
+    return res.json() as Promise<unknown[]>
+  })
+
+  const chunks = await Promise.all(chunkPromises)
+  const merged = chunks.flat()
+
+  // Shape 1: top-level array — return merged array directly
+  if (!index.field) {
+    return merged as T
+  }
+
+  // Shape 2: object with array field — reconstruct envelope
+  const result = { ...index.envelope, [index.field]: merged }
+  return result as T
 }
 
 // ─── Validation sets ────────────────────────────────────────────────
