@@ -1,7 +1,7 @@
 import { h } from '@/utils/dom'
 import { formatDate, formatDateCompact } from '@/utils/format'
 import { cx } from './cx'
-import { GDELT_TONE_BANDS, GDELT_TONE_TOOLTIP } from '@/data/strings'
+import { GDELT_TONE_BANDS } from '@/data/strings'
 import type { GdeltArticle, DataGridColumn } from '@/types'
 
 // ─── Tone band mapping ──────────────────────────────────────────────
