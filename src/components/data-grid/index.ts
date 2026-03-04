@@ -10,6 +10,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
+import { Tooltip } from '@/components/tooltip'
 import type { DataGridProps } from '@/types'
 import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment } from '@/utils/dom'
 import { useInfiniteScroll } from '@/composables/use-infinite-scroll'
@@ -73,11 +74,18 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
       if (col.width) th.style.width = col.width
       th.style.padding = `${CELL_PAD_COMPACT} ${CELL_PAD}`
-      th.textContent = col.label
+
+      if (col.tooltip) {
+        th.textContent = col.label
+        const tip = new Tooltip({ content: col.tooltip, html: true, ariaLabel: col.label + ' info' })
+        th.appendChild(tip.el)
+      } else {
+        th.textContent = col.label
+      }
 
       if (col.sortable !== false && col.label) {
         addClass(th, cx.thSortable)
-        this.setSortIcon(th, col.label, 'hint')
+        this.setSortIcon(th, col, 'hint')
         th.addEventListener('click', () => this.handleSort(col.key as string, th))
       }
 
@@ -226,17 +234,20 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     const { columns } = this.props
 
     for (let i = 0; i < this.headerCells.length; i++) {
-      const label = columns[i].label
-      const isSortable = columns[i].sortable !== false && label
+      const col = columns[i]
+      const isSortable = col.sortable !== false && col.label
       removeClass(this.headerCells[i], cx.thSorted)
 
-      if (isSortable) this.setSortIcon(this.headerCells[i], label, 'hint')
-      else this.headerCells[i].textContent = label
+      if (isSortable) this.setSortIcon(this.headerCells[i], col, 'hint')
+      else {
+        clearChildren(this.headerCells[i])
+        this.headerCells[i].textContent = col.label
+      }
     }
 
     if (newDir !== 'none') {
       const idx = this.headerCells.indexOf(clickedTh)
-      this.setSortIcon(clickedTh, columns[idx].label, newDir)
+      this.setSortIcon(clickedTh, columns[idx], newDir)
       addClass(clickedTh, cx.thSorted)
     }
 
@@ -252,8 +263,15 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     this.scroll.setItems(this.currentData)
   }
 
-  private setSortIcon(th: HTMLTableCellElement, label: string, direction: SortDirection | 'hint'): void {
-    th.textContent = label
+  private setSortIcon(th: HTMLTableCellElement, col: { label: string; tooltip?: string }, direction: SortDirection | 'hint'): void {
+    clearChildren(th)
+    th.textContent = col.label
+
+    if (col.tooltip) {
+      const tip = new Tooltip({ content: col.tooltip, html: true, ariaLabel: col.label + ' info' })
+      th.appendChild(tip.el)
+    }
+
     if (direction === 'hint') {
       const icon = iconSortDefault()
       addClass(icon, cx.sortIcon, cx.sortIconHint)

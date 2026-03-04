@@ -119,3 +119,13 @@
 .data-grid__sentinel {
   height: 1px;
 }
+
+.data-grid__th .tooltip-wrapper {
+  margin-left: 4px;
+}
+
+.data-grid__th .tooltip-wrapper .tooltip__trigger {
+  width: 14px;
+  height: 14px;
+  font-weight: 100;
+}

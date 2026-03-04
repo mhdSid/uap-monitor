@@ -1,4 +1,5 @@
 import { Continent } from '@/enums'
+import { WelcomeSource } from '@/types'
 
 // ─── App metadata ───────────────────────────────────────────────────
 
@@ -98,6 +99,22 @@ export const SECTION = {
   GNEWS: 'GNEWS FEED',
   GNEWS_TOOLTIP: 'Latest UAP/UFO news aggregated from 60,000+ worldwide sources via GNews. English-language articles sorted by recency.'
 } as const
+
+export const GDELT_TONE_BANDS = {
+  VERY_POSITIVE: { min: 5, label: 'VERY POSITIVE', color: 'positive' },
+  POSITIVE:      { min: 0, max: 5, label: 'POSITIVE', color: 'positive-dim' },
+  NEUTRAL:       { min: -1, max: 1, label: 'NEUTRAL', color: 'neutral' },
+  NEGATIVE:      { min: -5, max: 0, label: 'NEGATIVE', color: 'negative-dim' },
+  VERY_NEGATIVE: { max: -5, label: 'VERY NEGATIVE', color: 'negative' }
+} as const
+
+export const GDELT_TONE_TOOLTIP = [
+  `■ ${GDELT_TONE_BANDS.VERY_POSITIVE.label} — Favorable, enthusiastic coverage`,
+  `■ ${GDELT_TONE_BANDS.POSITIVE.label} — Mildly positive framing`,
+  `■ ${GDELT_TONE_BANDS.NEUTRAL.label} — Factual, no strong sentiment`,
+  `■ ${GDELT_TONE_BANDS.NEGATIVE.label} — Critical, skeptical tone`,
+  `■ ${GDELT_TONE_BANDS.VERY_NEGATIVE.label} — Hostile, alarming framing`
+].join('\n')
 
 // ─── Sighting modal labels ──────────────────────────────────────────
 
@@ -229,14 +246,32 @@ export const WELCOME = {
   SOURCES_TITLE: 'ACTIVE SOURCES',
   STAT_TIMESPAN: '70 AD–present',
   STAT_TIMESPAN_LABEL: 'Time span',
-  STAT_RECORDS: '193,000+',
+  STAT_RECORDS: '230,000+',
   STAT_RECORDS_LABEL: 'Records',
-  STAT_SOURCES: '12 active',
+  STAT_SOURCES: '14 active',
   STAT_SOURCES_LABEL: 'Sources',
   STAT_COVERAGE: 'Global',
   STAT_COVERAGE_LABEL: 'Coverage',
   CLOSING: 'Transparency drives understanding. All data is open. The truth should be too.'
 } as const
+
+
+export const ACTIVE_SOURCES: WelcomeSource[] = [
+  { name: 'NUFORC',              records: '195K',  period: '1974–2026', tier: 'high' },
+  { name: 'Hatch *U* Database',  records: '18K',   period: '1942–2003', tier: 'high' },
+  { name: 'Eberhart Timeline',   records: '5.9K',  period: '70 AD–2024', tier: 'high' },
+  { name: 'NICAP',               records: '5.2K',  period: '1942–1975', tier: 'high' },
+  { name: 'Pre-Roswell (Rife)',  records: '5K',    period: '1880–1947', tier: 'base' },
+  { name: 'Johnson UFOCAT',      records: '4.1K',  period: '1900–2004', tier: 'mid' },
+  { name: 'Overmeire Catalogue', records: '4K',    period: '500 BC–2005', tier: 'base' },
+  { name: 'Vallée (Magonia)',    records: '923',   period: '1868–1968', tier: 'high' },
+  { name: 'Blue Book Unknowns',  records: '700+',  period: '1947–1969', tier: 'high' },
+  { name: 'Hall (UFO Evidence)', records: '600+',  period: '1947–2003', tier: 'high' },
+  { name: 'Wonders in the Sky',  records: '500+',  period: '70 AD–1879', tier: 'base' },
+  { name: 'Dolan',               records: '300+',  period: '1941–2003', tier: 'mid' },
+  { name: 'GDELT News',          records: 'Live',  period: 'Daily',     tier: 'mid' },
+  { name: 'GNews',               records: 'Live',  period: 'Daily',     tier: 'mid' }
+]
 
 // ─── Errors ─────────────────────────────────────────────────────────
 

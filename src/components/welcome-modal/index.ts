@@ -10,34 +10,8 @@ import { cx } from './cx'
 import { Modal } from '@/components/modal'
 import { Button } from '@/components/button'
 import { h } from '@/utils/dom'
-import { WELCOME } from '@/data/strings'
+import { ACTIVE_SOURCES, WELCOME } from '@/data/strings'
 import { useAnalytics } from '@/composables'
-
-// ─── Source definitions for welcome display ─────────────────────────
-
-interface WelcomeSource {
-  name: string
-  records: string
-  period: string
-  tier: 'high' | 'mid' | 'base'
-}
-
-const ACTIVE_SOURCES: WelcomeSource[] = [
-  { name: 'NUFORC',              records: '147K',  period: '1974–2024', tier: 'high' },
-  { name: 'Hatch *U* Database',  records: '18K',   period: '1942–2003', tier: 'high' },
-  { name: 'Eberhart Timeline',   records: '5.9K',  period: '70 AD–2024', tier: 'high' },
-  { name: 'NICAP',               records: '5.2K',  period: '1942–1975', tier: 'high' },
-  { name: 'Pre-Roswell (Rife)',  records: '5K',    period: '1880–1947', tier: 'base' },
-  { name: 'Johnson UFOCAT',      records: '4.1K',  period: '1900–2004', tier: 'mid' },
-  { name: 'Overmeire Catalogue', records: '4K',    period: '500 BC–2005', tier: 'base' },
-  { name: 'Vallée (Magonia)',    records: '923',   period: '1868–1968', tier: 'high' },
-  { name: 'Blue Book Unknowns',  records: '700+',  period: '1947–1969', tier: 'high' },
-  { name: 'Hall (UFO Evidence)', records: '600+',  period: '1947–2003', tier: 'high' },
-  { name: 'Wonders in the Sky',  records: '500+',  period: '70 AD–1879', tier: 'base' },
-  { name: 'Dolan',               records: '300+',  period: '1941–2003', tier: 'mid' },
-  { name: 'GDELT News',          records: 'Live',  period: 'Daily',     tier: 'mid' },
-  { name: 'GNews',               records: 'Live',  period: 'Daily',     tier: 'mid' }
-]
 
 export class WelcomeModal {
   /** Track dismiss within this page load only (no sessionStorage). */

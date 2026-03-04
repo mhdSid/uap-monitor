@@ -51,6 +51,7 @@ function sanitizeText(text) {
     // CSS: @-rule opening
     if (/^@[\w-]+\s*(?:\([^)]*\))?\s*\{?\s*$/.test(trimmed)) continue
     // CSS: opening selector {
+    // eslint-disable-next-line no-useless-escape
     if (/^[.#][\w->+~\s,.:#\[\]='"*]+\{\s*$/.test(trimmed)) continue
     // CSS: closing }
     if (/^\}?\s*\}\s*;?\s*$/.test(trimmed)) continue

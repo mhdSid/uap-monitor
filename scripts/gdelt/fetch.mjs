@@ -3,16 +3,20 @@
 /**
  * GDELT UAP/UFO News Fetcher — powered by gdelt-ts-client
  *
+ * Time-windowed, tone-banded fetching for maximum coverage.
+ * Splits the date range into 30-day windows and queries 5 tone bands
+ * per window, yielding up to 3,750 unique articles across 90 days.
+ *
  * Usage:
  *   node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json
- *   node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --days 30
- *   node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --query "(UFO OR UAP)"
+ *   node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --days 90 --max 3750
  *
  * Options:
- *   --out     Output file path (required)
- *   --days    Lookback window in days (default: 7, max: 90)
- *   --query   Custom query override
- *   --max     Max articles to keep after dedup (default: 250)
+ *   --out       Output file path (required)
+ *   --days      Lookback window in days (default: 90, max: 90)
+ *   --query     Custom query override (must include outer parens for OR)
+ *   --max       Max articles to keep after dedup (default: 3750)
+ *   --window    Window size in days for chunked requests (default: 30)
  */
 
 import { writeFileSync, mkdirSync } from 'node:fs'
@@ -20,42 +24,77 @@ import { dirname } from 'node:path'
 import { GdeltClient } from 'gdelt-ts-client'
 import { DEFAULT_NEWS_QUERY, urlToId } from '../shared-constants.mjs'
 
+// ─── Tone bands ─────────────────────────────────────────────────────
+
+const TONE_BANDS = [
+  { filter: 'tone>5',             tone:  7,   label: 'very positive' },
+  { filter: 'tone>0 tone<5',     tone:  2.5, label: 'positive' },
+  { filter: 'toneabs<1',         tone:  0,   label: 'neutral' },
+  { filter: 'tone<0 tone>-5',    tone: -2.5, label: 'negative' },
+  { filter: 'tone<-5',           tone: -7,   label: 'very negative' }
+]
+
 // ─── CLI args ───────────────────────────────────────────────────────
 
 function parseArgs() {
   const args = process.argv.slice(2)
-  const opts = { out: '', days: 7, query: '', max: 250 }
+  const opts = { out: '', days: 90, query: '', max: 3750, window: 30 }
   for (let i = 0; i < args.length; i++) {
     switch (args[i]) {
-      case '--out': opts.out = args[++i] || ''; break
-      case '--days': opts.days = Math.min(parseInt(args[++i], 10) || 7, 90); break
-      case '--query': opts.query = args[++i] || ''; break
-      case '--max': opts.max = parseInt(args[++i], 10) || 250; break
+      case '--out':    opts.out    = args[++i] || ''; break
+      case '--days':   opts.days   = Math.min(parseInt(args[++i], 10) || 90, 90); break
+      case '--query':  opts.query  = args[++i] || ''; break
+      case '--max':    opts.max    = parseInt(args[++i], 10) || 3750; break
+      case '--window': opts.window = Math.min(parseInt(args[++i], 10) || 30, 90); break
     }
   }
   if (!opts.out) {
-    console.error('Usage: node scripts/gdelt/fetch.mjs --out <path> [--days N] [--query "..."] [--max N]')
+    console.error('Usage: node scripts/gdelt/fetch.mjs --out <path> [--days N] [--max N] [--window N]')
     process.exit(1)
   }
   return opts
 }
 
+// ─── Date helpers ───────────────────────────────────────────────────
+
+function toGdeltDatetime(date) {
+  const pad = (n) => String(n).padStart(2, '0')
+  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}` +
+         `${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}`
+}
+
+function buildWindows(totalDays, windowSize) {
+  const now = new Date()
+  const windows = []
+  let remaining = totalDays
+
+  while (remaining > 0) {
+    const chunkDays = Math.min(remaining, windowSize)
+    const end = new Date(now.getTime() - (totalDays - remaining) * 86400000)
+    const start = new Date(end.getTime() - chunkDays * 86400000)
+    windows.push({
+      startdatetime: toGdeltDatetime(start),
+      enddatetime: toGdeltDatetime(end),
+      label: `${Math.round((totalDays - remaining))}d–${Math.round((totalDays - remaining) + chunkDays)}d ago`
+    })
+    remaining -= chunkDays
+  }
+
+  return windows
+}
+
 // ─── Transform ──────────────────────────────────────────────────────
 
 function parseGdeltDate(str) {
+  if (!str) return null
   const match = str.match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})?(\d{2})?(\d{2})?$/)
   if (!match) return null
-
   const [, y, m, d, hh = '00', mm = '00', ss = '00'] = match
   return `${y}-${m}-${d}T${hh}:${mm}:${ss}Z`
 }
 
-function transformArticle(raw) {
+function transformArticle(raw, bandTone) {
   const url = raw.url || ''
-  const tone = typeof raw.tone === 'number'
-    ? Math.round(raw.tone * 10) / 10
-    : 0
-
   return {
     id: urlToId(url),
     title: (raw.title || '').trim(),
@@ -68,7 +107,7 @@ function transformArticle(raw) {
       : raw.domain,
     country: raw.sourcecountry || '',
     imageUrl: raw.socialimage || null,
-    tone
+    tone: bandTone
   }
 }
 
@@ -76,13 +115,16 @@ function transformArticle(raw) {
 
 async function main() {
   const opts = parseArgs()
-  const query = opts.query || `(${DEFAULT_NEWS_QUERY})`
-  const maxrecords = Math.min(opts.max, 250)
-  const timespan = opts.days + 'd'
+  const baseQuery = opts.query || `(${DEFAULT_NEWS_QUERY})`
+  const windows = buildWindows(opts.days, opts.window)
 
-  console.log('Query:      ' + query)
-  console.log('Timespan:   ' + timespan)
-  console.log('Max:        ' + maxrecords)
+  console.log('Base query:  ' + baseQuery)
+  console.log('Total days:  ' + opts.days)
+  console.log('Window size: ' + opts.window + 'd')
+  console.log('Windows:     ' + windows.length)
+  console.log('Tone bands:  ' + TONE_BANDS.length)
+  console.log('Requests:    ' + (windows.length * TONE_BANDS.length))
+  console.log('Max output:  ' + opts.max)
   console.log()
 
   const client = new GdeltClient({
@@ -92,39 +134,67 @@ async function main() {
     retryDelay: 5000
   })
 
-  const response = await client.getArticles({
-    query,
-    timespan,
-    maxrecords,
-    sort: 'datedesc'
-  })
-
-  const rawArticles = response.articles || []
-  console.log('Raw results: ' + rawArticles.length)
-
-  // Transform + dedup by URL
   const seen = new Set()
-  const articles = rawArticles
-    .map(transformArticle)
-    .filter(a => {
-      if (seen.has(a.url)) return false
-      seen.add(a.url)
-      return true
-    })
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  const allArticles = []
 
-  console.log('After dedup: ' + articles.length)
+  for (const win of windows) {
+    console.log(`── Window: ${win.label} ──`)
+
+    for (const band of TONE_BANDS) {
+      const query = `${baseQuery} ${band.filter}`
+      const label = `  [${band.label}]`
+
+      // eslint-disable-next-line
+      let rawArticles = []
+      try {
+        const response = await client.getArticles({
+          query,
+          startdatetime: win.startdatetime,
+          enddatetime: win.enddatetime,
+          maxrecords: 250,
+          sort: 'datedesc'
+        })
+        rawArticles = response.articles || []
+      } catch (err) {
+        console.log(`${label} Error: ${err.message} — skipping`)
+        continue
+      }
+
+      let added = 0
+      for (const raw of rawArticles) {
+        const article = transformArticle(raw, band.tone)
+        if (!seen.has(article.url)) {
+          seen.add(article.url)
+          allArticles.push(article)
+          added++
+        }
+      }
+
+      console.log(`${label} ${rawArticles.length} fetched, ${added} new`)
+
+      // Courtesy delay between requests
+      await new Promise(r => setTimeout(r, 1200))
+    }
+  }
+
+  console.log('\nTotal after dedup: ' + allArticles.length)
+
+  const trimmed = allArticles
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, opts.max)
 
   const output = {
     generatedAt: new Date().toISOString(),
-    query,
-    totalResults: rawArticles.length,
-    articles
+    query: baseQuery,
+    days: opts.days,
+    windows: windows.length,
+    totalResults: allArticles.length,
+    articles: trimmed
   }
 
   mkdirSync(dirname(opts.out), { recursive: true })
   writeFileSync(opts.out, JSON.stringify(output, null, 2), 'utf-8')
-  console.log('\nWrote ' + articles.length + ' articles -> ' + opts.out)
+  console.log('Wrote ' + trimmed.length + ' articles -> ' + opts.out)
 }
 
 main().catch(err => { console.error('\nGDELT fetch failed: ' + err.message); process.exit(1) })

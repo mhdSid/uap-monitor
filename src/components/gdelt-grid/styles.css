@@ -54,22 +54,50 @@
   white-space: nowrap;
 }
 
-.gdelt-row__tone {
+/* ── Tone band tags ──────────────────────────────────────────── */
+
+.gdelt-row__tone-tag {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--color-muted);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
 }
 
-.gdelt-row__tone--positive {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+.gdelt-row__tone-tag--very-positive {
   color: var(--color-green);
+  background: var(--c-green-400-08);
+  border: 1px solid var(--c-green-400-16);
 }
 
-.gdelt-row__tone--negative {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+.gdelt-row__tone-tag--positive {
+  color: var(--color-green);
+  opacity: 0.7;
+  background: var(--c-green-400-08);
+  border: 1px solid var(--c-green-400-16);
+}
+
+.gdelt-row__tone-tag--neutral {
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+}
+
+.gdelt-row__tone-tag--negative {
   color: var(--color-amber);
+  opacity: 0.7;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.12);
+}
+
+.gdelt-row__tone-tag--very-negative {
+  color: var(--color-amber);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.16);
 }
 
 .gdelt-row__lang {
@@ -96,7 +124,7 @@
 }
 
 .gdelt-grid-container .data-grid__td:nth-child(2), .gdelt-grid-container .data-grid__th:nth-child(2) {
-  width: 70px !important;
+  width: 110px !important;
   display: table-cell;
 }
 

@@ -19,6 +19,7 @@ export default tseslint.config(
       globals: {
         process: 'readonly',
         console: 'readonly',
+        setTimeout: 'readonly',
         Buffer: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly'

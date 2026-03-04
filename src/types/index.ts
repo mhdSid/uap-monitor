@@ -251,6 +251,7 @@ export interface DataGridColumn<T> {
   align?: 'left' | 'right' | 'center'
   width?: string
   sortable?: boolean
+  tooltip?: string
   render?: (row: T) => HTMLElement | string
 }
 
@@ -305,4 +306,11 @@ export interface ContinentGroup<T> {
   label: string
   items: T[]
   count: number
+}
+
+export interface WelcomeSource {
+  name: string
+  records: string
+  period: string
+  tier: 'high' | 'mid' | 'base'
 }

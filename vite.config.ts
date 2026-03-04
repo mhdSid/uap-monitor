@@ -81,6 +81,22 @@ export default defineConfig({
             }
           },
           {
+            urlPattern: /\/data\/gdelt-articles\.json$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'gdelt-articles',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 6 }
+            }
+          },
+          {
+            urlPattern: /\/data\/gnews-articles\.json$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'gnews-articles',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 6 }
+            }
+          },
+          {
             urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com/,
             handler: 'StaleWhileRevalidate',
             options: { cacheName: 'fonts', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } }
@@ -90,7 +106,7 @@ export default defineConfig({
       manifest: {
         name: 'UAP Monitor',
         short_name: 'UAP MON',
-        description: 'Real-time UAP/UFO sighting monitor — CJK + Russia intelligence layer',
+        description: 'Global UAP intelligence platform aggregating verified sighting reports and real-time news feeds',
         theme_color: '#0a0a0a',
         background_color: '#0a0a0a',
         display: 'standalone',

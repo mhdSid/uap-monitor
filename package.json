@@ -12,7 +12,7 @@
     "data:hatch": "node scripts/process-hatch.mjs",
     "data:chronology": "node scripts/process-chronology.mjs",
     "data:pipeline:all": "yarn data:nuforc && yarn data:hatch && yarn data:chronology",
-    "scrape:nuforc:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2026",
+    "scrape:nuforc:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196208 --concurrency 1 --years 2026",
     "scrape:nuforc:2025": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2025",
     "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 184389 --concurrency 3 --delay 300 --years 2024",
     "scrape:nuforc:test": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose",
@@ -22,7 +22,7 @@
     "scrape:nuforc:cache:full": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/full.json",
     "scrape:nuforc:cache:minimal": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/minimal.json",
     "sanitize:nuforc": "node scripts/nuforc-scrapper/sanitize.mjs __sources/nuforc.json --fields text,Text,summary,description",
-    "fetch:gdelt": "node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --days 90 --max 250",
+    "fetch:gdelt": "node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --days 90 --max 1250",
     "fetch:gnews": "node scripts/gnews/fetch.mjs --out public/data/gnews-articles.json --days 730 --limit 500"
   },
   "devDependencies": {
