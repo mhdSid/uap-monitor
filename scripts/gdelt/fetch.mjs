@@ -76,7 +76,7 @@ function transformArticle(raw) {
 
 async function main() {
   const opts = parseArgs()
-  const query = opts.query || DEFAULT_NEWS_QUERY
+  const query = opts.query || `(${DEFAULT_NEWS_QUERY})`
   const maxrecords = Math.min(opts.max, 250)
   const timespan = opts.days + 'd'
 
