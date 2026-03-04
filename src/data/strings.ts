@@ -108,14 +108,6 @@ export const GDELT_TONE_BANDS = {
   VERY_NEGATIVE: { max: -5, label: 'VERY NEGATIVE', color: 'negative' }
 } as const
 
-export const GDELT_TONE_TOOLTIP = [
-  `■ ${GDELT_TONE_BANDS.VERY_POSITIVE.label} — Favorable, enthusiastic coverage`,
-  `■ ${GDELT_TONE_BANDS.POSITIVE.label} — Mildly positive framing`,
-  `■ ${GDELT_TONE_BANDS.NEUTRAL.label} — Factual, no strong sentiment`,
-  `■ ${GDELT_TONE_BANDS.NEGATIVE.label} — Critical, skeptical tone`,
-  `■ ${GDELT_TONE_BANDS.VERY_NEGATIVE.label} — Hostile, alarming framing`
-].join('\n')
-
 // ─── Sighting modal labels ──────────────────────────────────────────
 
 export const MODAL = {

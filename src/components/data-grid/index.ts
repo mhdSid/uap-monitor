@@ -77,7 +77,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
       if (col.tooltip) {
         th.textContent = col.label
-        const tip = new Tooltip({ content: col.tooltip, html: true, ariaLabel: col.label + ' info' })
+        const tip = new Tooltip({ content: col.tooltip, ariaLabel: col.label + ' info' })
         th.appendChild(tip.el)
       } else {
         th.textContent = col.label
@@ -268,7 +268,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     th.textContent = col.label
 
     if (col.tooltip) {
-      const tip = new Tooltip({ content: col.tooltip, html: true, ariaLabel: col.label + ' info' })
+      const tip = new Tooltip({ content: col.tooltip, ariaLabel: col.label + ' info' })
       th.appendChild(tip.el)
     }
 

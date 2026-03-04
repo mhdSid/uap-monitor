@@ -47,7 +47,7 @@ export function gdeltColumns(): DataGridColumn<GdeltArticle>[] {
       label: 'TONE',
       width: '110px',
       align: 'right',
-      tooltip: GDELT_TONE_TOOLTIP,
+      // tooltip: GDELT_TONE_TOOLTIP,
       render: (row) => {
         const band = getToneBand(row.tone)
         return h('span', { className: `${cx.toneTag} ${band.cx}` }, band.label)
