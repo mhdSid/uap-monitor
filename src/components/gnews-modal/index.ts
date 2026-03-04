@@ -4,7 +4,7 @@ import type { GnewsArticle } from '@/types'
 import { h } from '@/utils/dom'
 import { Modal } from '@/components/modal'
 import { formatDate } from '@/utils/format'
-import { GNEWS_MODAL } from '@/data/strings'
+import { GNEWS_MODAL, ARIA } from '@/data/strings'
 
 export class GnewsModal {
   static open(article: GnewsArticle, trigger?: HTMLElement): void {
@@ -25,11 +25,34 @@ export class GnewsModal {
   private static buildContent(a: GnewsArticle): HTMLElement {
     const children: HTMLElement[] = []
 
-    // Description at the top if available
+    // Article image (if available)
+    if (a.imageUrl) {
+      const img = h('img', {
+        className: cx.imageEl,
+        src: a.imageUrl,
+        alt: GNEWS_MODAL.IMAGE_ALT,
+        loading: 'lazy'
+      }) as HTMLImageElement
+
+      // Hide broken images gracefully
+      img.onerror = () => { img.parentElement?.remove() }
+
+      children.push(
+        h('div', { className: cx.image, role: 'img', 'aria-label': ARIA.ARTICLE_IMAGE }, img)
+      )
+    }
+
+    // Description as summary text
     if (a.description) {
       children.push(h('p', { className: cx.desc }, a.description))
     }
 
+    // Full content body (longer text from GNews API)
+    if (a.content && a.content !== a.description) {
+      children.push(h('p', { className: cx.body }, a.content))
+    }
+
+    // Metadata rows
     const rows: [string, string][] = [
       [GNEWS_MODAL.SOURCE, a.sourceName || GNEWS_MODAL.EMPTY_VALUE],
       [GNEWS_MODAL.PUBLISHED, formatDate(a.publishedAt)]
@@ -42,27 +65,23 @@ export class GnewsModal {
       )
     ))
 
-    // Article link
-    children.push(
-      h('div', { className: cx.row },
-        h('span', { className: cx.label }, GNEWS_MODAL.URL),
-        h('a', {
-          className: `${cx.value} ${cx.link}`,
-          href: a.url,
-          target: '_blank',
-          rel: 'noopener noreferrer'
-        }, a.url.length > 60 ? a.url.slice(0, 60) + '\u2026' : a.url)
-      )
-    )
-
     return h('div', { className: cx.content }, ...children)
   }
 
   private static buildFooter(a: GnewsArticle): HTMLElement {
+    const sourceTarget = a.sourceUrl || a.url
+
     return h('div', { className: cx.footer },
       h('span', { className: cx.sourceTag },
         GNEWS_MODAL.FOOTER_PREFIX + GNEWS_MODAL.FOOTER_SEPARATOR + a.sourceName
-      )
+      ),
+      h('a', {
+        className: cx.footerLink,
+        href: sourceTarget,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        'aria-label': ARIA.VISIT_SOURCE
+      }, GNEWS_MODAL.VIEW_SOURCE)
     )
   }
 }

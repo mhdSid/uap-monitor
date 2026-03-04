@@ -10,6 +10,8 @@
  *   - Country/coord maps are the UNION of both scripts' needs (modern + historical)
  */
 
+import { createHash } from 'node:crypto'
+
 // ─── Enums ──────────────────────────────────────────────────────────
 
 export const Continent = {
@@ -753,4 +755,14 @@ export function truncate(text, maxLen) {
   const cleaned = text.replace(/\n{3,}/g, '\n\n').trim()
   if (cleaned.length <= maxLen) return cleaned
   return cleaned.slice(0, maxLen).replace(/\s+\S*$/, '') + '…'
+}
+
+// ─── News fetch shared constants ────────────────────────────────────
+
+/** Default search query shared across GDELT and GNews fetch scripts. */
+export const DEFAULT_NEWS_QUERY = 'UAP OR UFO OR "unidentified aerial" OR "flying saucer" OR AARO OR "alien craft"'
+
+/** Deterministic short ID from a URL string. */
+export function urlToId(url) {
+  return createHash('sha256').update(url).digest('hex').slice(0, 12)
 }

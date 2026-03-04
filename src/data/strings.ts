@@ -4,14 +4,14 @@ import { Continent } from '@/enums'
 
 export const APP_NAME = 'UAP MONITOR'
 export const APP_VERSION = 'v0.1.0'
-export const APP_FOOTER = 'UAP MONITOR v0.1.0 — Open-source UAP sighting aggregator'
-export const APP_REPO_FALLBACK = 'https://github.com/mhdSid/uap-monitor'
+export const APP_FOOTER_NAME = 'UAP MONITOR'
+export const APP_FOOTER_TAGLINE = 'Global UAP Intelligence Platform'
+export const APP_URL = 'https://uapmonitor.org'
 
 // ─── Aria labels ────────────────────────────────────────────────────
 
 export const ARIA = {
   CLOCK: 'Current UTC time',
-  GITHUB: 'View source on GitHub',
   SEARCH: 'Search sighting reports',
   FILTER_SHAPE: 'Filter by shape',
   FILTER_REGION: 'Filter by region',
@@ -23,7 +23,9 @@ export const ARIA = {
   DISMISS_ALERT: 'Dismiss alert',
   TICKER: 'Click to scroll to this sighting in the grid',
   TICKER_IDLE: 'UAP Monitor live feed',
-  TOOLTIP: 'More info'
+  TOOLTIP: 'More info',
+  ARTICLE_IMAGE: 'Article thumbnail image',
+  VISIT_SOURCE: 'Visit source website'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -129,7 +131,9 @@ export const GDELT_MODAL = {
   URL: 'URL',
   FOOTER_PREFIX: 'GDELT',
   FOOTER_SEPARATOR: ' · ',
-  EMPTY_VALUE: '—'
+  EMPTY_VALUE: '—',
+  IMAGE_ALT: 'Article thumbnail',
+  VIEW_SOURCE: 'View source article'
 } as const
 
 // ─── GDELT grid ─────────────────────────────────────────────────────
@@ -148,7 +152,9 @@ export const GNEWS_MODAL = {
   URL: 'URL',
   FOOTER_PREFIX: 'GNews',
   FOOTER_SEPARATOR: ' · ',
-  EMPTY_VALUE: '—'
+  EMPTY_VALUE: '—',
+  IMAGE_ALT: 'Article thumbnail',
+  VIEW_SOURCE: 'View source article'
 } as const
 
 // ─── GNews grid ─────────────────────────────────────────────────────
@@ -214,10 +220,10 @@ export const DATA_SOURCE_DESCRIPTIONS = {
 
 export const WELCOME = {
   TITLE: 'UAP MONITOR',
-  SUBTITLE: 'Open-Source Intelligence Platform',
+  SUBTITLE: 'Global UAP Intelligence Platform',
   BODY: [
-    'Unidentified Aerial Phenomena are documented across dozens of databases, languages, and decades — scattered, inconsistent, and hard to search. This tool unifies them.',
-    'We aggregate, standardize, and surface UAP reports from verified open-source feeds so researchers, journalists, and curious minds can explore the data freely.'
+    'Unidentified Aerial Phenomena are documented across dozens of databases, languages, and decades — scattered, inconsistent, and hard to search. This platform unifies them.',
+    'We aggregate, standardize, and surface UAP reports from verified intelligence feeds so researchers, journalists, and curious minds can explore the data freely.'
   ],
   CTA: 'BEGIN MONITORING',
   SOURCES_TITLE: 'ACTIVE SOURCES',
@@ -227,9 +233,9 @@ export const WELCOME = {
   STAT_RECORDS_LABEL: 'Records',
   STAT_SOURCES: '12 active',
   STAT_SOURCES_LABEL: 'Sources',
-  STAT_OPEN: '100%',
-  STAT_OPEN_LABEL: 'Open data',
-  CLOSING: 'All data is open. All code is open. The truth should be too.'
+  STAT_COVERAGE: 'Global',
+  STAT_COVERAGE_LABEL: 'Coverage',
+  CLOSING: 'Transparency drives understanding. All data is open. The truth should be too.'
 } as const
 
 // ─── Errors ─────────────────────────────────────────────────────────

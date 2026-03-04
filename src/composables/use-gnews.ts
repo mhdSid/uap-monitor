@@ -4,7 +4,7 @@ import { createArticleLoader } from './use-fetch'
 const loader = createArticleLoader<GnewsArticle, GnewsCollection>({
   file: 'gnews-articles.json',
   label: 'GNews',
-  searchFields: ['title', 'description', 'sourceName']
+  searchFields: ['title', 'description', 'content', 'sourceName']
 })
 
 export function useGnews() {

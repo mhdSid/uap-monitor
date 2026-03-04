@@ -4,7 +4,7 @@ import type { GdeltArticle } from '@/types'
 import { h } from '@/utils/dom'
 import { Modal } from '@/components/modal'
 import { formatDate } from '@/utils/format'
-import { GDELT_MODAL } from '@/data/strings'
+import { GDELT_MODAL, ARIA } from '@/data/strings'
 
 export class GdeltModal {
   static open(article: GdeltArticle, trigger?: HTMLElement): void {
@@ -23,6 +23,26 @@ export class GdeltModal {
   }
 
   private static buildContent(a: GdeltArticle): HTMLElement {
+    const children: HTMLElement[] = []
+
+    // Article image (if available)
+    if (a.imageUrl) {
+      const img = h('img', {
+        className: cx.imageEl,
+        src: a.imageUrl,
+        alt: GDELT_MODAL.IMAGE_ALT,
+        loading: 'lazy'
+      }) as HTMLImageElement
+
+      // Hide broken images gracefully
+      img.onerror = () => { img.parentElement?.remove() }
+
+      children.push(
+        h('div', { className: cx.image, role: 'img', 'aria-label': ARIA.ARTICLE_IMAGE }, img)
+      )
+    }
+
+    // Metadata rows
     const rows: [string, string | HTMLElement][] = [
       [GDELT_MODAL.SOURCE, a.sourceName || a.domain],
       [GDELT_MODAL.PUBLISHED, formatDate(a.publishedAt)],
@@ -31,14 +51,14 @@ export class GdeltModal {
       [GDELT_MODAL.TONE, `${a.tone > 0 ? '+' : ''}${a.tone}`]
     ]
 
-    const children: HTMLElement[] = rows.map(([label, value]) =>
+    children.push(...rows.map(([label, value]) =>
       h('div', { className: cx.row },
         h('span', { className: cx.label }, label),
         typeof value === 'string'
           ? h('span', { className: cx.value }, value)
           : value
       )
-    )
+    ))
 
     // Article link
     children.push(
@@ -49,7 +69,7 @@ export class GdeltModal {
           href: a.url,
           target: '_blank',
           rel: 'noopener noreferrer'
-        }, a.url.length > 60 ? a.url.slice(0, 60) + '…' : a.url)
+        }, a.url.length > 60 ? a.url.slice(0, 60) + '\u2026' : a.url)
       )
     )
 
@@ -60,7 +80,14 @@ export class GdeltModal {
     return h('div', { className: cx.footer },
       h('span', { className: cx.sourceTag },
         `${GDELT_MODAL.FOOTER_PREFIX}${GDELT_MODAL.FOOTER_SEPARATOR}${a.domain}`
-      )
+      ),
+      h('a', {
+        className: cx.footerLink,
+        href: a.url,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        'aria-label': ARIA.VISIT_SOURCE
+      }, GDELT_MODAL.VIEW_SOURCE)
     )
   }
 }

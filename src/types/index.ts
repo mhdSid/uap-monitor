@@ -151,6 +151,7 @@ export interface GnewsArticle {
   id: string
   title: string
   description: string
+  content: string
   url: string
   imageUrl?: string | null
   publishedAt: string

@@ -2,10 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h, setAttrs } from '@/utils/dom'
-import { iconRadar, iconGithub } from '@/components/icons'
-import { APP_NAME, APP_VERSION, APP_REPO_FALLBACK, ARIA } from '@/data/strings'
-
-const REPO_URL = import.meta.env.VITE_REPO_URL ?? APP_REPO_FALLBACK
+import { iconRadar } from '@/components/icons'
+import { APP_NAME, APP_VERSION, ARIA } from '@/data/strings'
 
 export class Header extends Component {
   private clockTimer!: number
@@ -37,20 +35,8 @@ export class Header extends Component {
     updateClock()
     this.clockTimer = window.setInterval(updateClock, 1000)
 
-    const githubIcon = iconGithub(14)
-    githubIcon.style.color = 'var(--color-muted)'
-
-    const githubLink = h('a', {
-      className: cx.github,
-      href: REPO_URL,
-      target: '_blank',
-      rel: 'noopener noreferrer',
-      'aria-label': ARIA.GITHUB
-    }, githubIcon)
-
     const right = h('div', { className: cx.right },
-      clock,
-      githubLink
+      clock
     )
 
     return h('header', { className: cx.root, role: 'banner' }, left, right)

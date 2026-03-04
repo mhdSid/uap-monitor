@@ -39,18 +39,6 @@
   gap: 12px;
 }
 
-.app-header__github {
-  display: flex;
-  align-items: center;
-  padding: 4px;
-  color: var(--color-muted);
-  transition: color 0.15s;
-}
-
-.app-header__github:hover {
-  color: var(--color-text-strong);
-}
-
 @media (min-width: 481px) {
   .app-header__clock { display: flex; }
 }

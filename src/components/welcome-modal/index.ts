@@ -84,7 +84,7 @@ export class WelcomeModal {
         WelcomeModal.stat(WELCOME.STAT_TIMESPAN, WELCOME.STAT_TIMESPAN_LABEL),
         WelcomeModal.stat(WELCOME.STAT_RECORDS, WELCOME.STAT_RECORDS_LABEL),
         WelcomeModal.stat(WELCOME.STAT_SOURCES, WELCOME.STAT_SOURCES_LABEL),
-        WelcomeModal.stat(WELCOME.STAT_OPEN, WELCOME.STAT_OPEN_LABEL)
+        WelcomeModal.stat(WELCOME.STAT_COVERAGE, WELCOME.STAT_COVERAGE_LABEL)
       )
     )
 
