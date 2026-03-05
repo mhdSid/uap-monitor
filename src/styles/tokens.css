@@ -137,7 +137,7 @@
   --space-xl: 24px;
 
   /* ── Breakpoints (can't use vars in @media — documented here) ───── */
-  /* --bp-sm: 481px;  → @media (min-width: 481px)                    */
+  /* --bp-sm: 768px;  → @media (min-width: 768px)                    */
 
   /* ── Z-index layers ───────────────────────────────────────────────── */
   --z-base: 1;

@@ -54,7 +54,7 @@
   border-color: var(--color-green);
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .filter-toolbar__search { font-size: var(--fs-sm); }
   .filter-toolbar__selects { flex-direction: row; flex-wrap: wrap; }
 }

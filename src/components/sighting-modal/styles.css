@@ -105,7 +105,7 @@
   text-decoration: underline;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .modal-sighting__row {
     flex-direction: row;
     justify-content: space-between;

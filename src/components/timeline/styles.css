@@ -109,7 +109,7 @@
   z-index: 15;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .timeline { height: 300px; }
 
   .timeline__scroll-track {

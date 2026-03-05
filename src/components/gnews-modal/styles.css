@@ -114,7 +114,7 @@
   letter-spacing: 0.5px;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .gnews-modal__row {
     flex-direction: row;
     justify-content: space-between;

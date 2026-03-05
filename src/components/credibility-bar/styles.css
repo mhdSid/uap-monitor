@@ -24,6 +24,6 @@
   text-align: right;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .credibility-bar__track { width: 48px; }
 }

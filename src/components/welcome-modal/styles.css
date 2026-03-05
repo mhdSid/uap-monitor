@@ -148,7 +148,7 @@
 
 .welcome__footer .btn { width: 100%; }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .welcome__stats { grid-template-columns: repeat(4, 1fr); }
   .welcome__sources { grid-template-columns: 1fr 1fr; }
   .welcome__footer .btn { width: auto; }

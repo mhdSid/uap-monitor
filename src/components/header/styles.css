@@ -39,6 +39,6 @@
   gap: 12px;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .app-header__clock { display: flex; }
 }

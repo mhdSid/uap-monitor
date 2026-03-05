@@ -34,6 +34,6 @@
   padding: 8px;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .section__body { padding: 12px; }
 }

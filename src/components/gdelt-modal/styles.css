@@ -106,7 +106,7 @@
   letter-spacing: 0.5px;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .gdelt-modal__row {
     flex-direction: row;
     justify-content: space-between;

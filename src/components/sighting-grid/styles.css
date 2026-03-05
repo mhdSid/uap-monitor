@@ -80,12 +80,6 @@
   text-align: center;
 }
 
-@media (min-width: 481px) {
-  .cell-report__date { display: block; }
-  .cell-report__badge-date { display: none; }
-  .cell-report__summary { -webkit-line-clamp: 2; }
-}
-
 /* ── Sighting grid column layout ───────────────────────────────────── */
 /* Columns: 1=REPORT  2=CRED  3=STATUS  4=DATE                        */
 
@@ -110,7 +104,11 @@
 }
 
 /* Desktop: show all columns with fixed widths */
-@media (min-width: 481px) {
+@media (min-width: 768px) {
+  .cell-report__date { display: block; }
+  .cell-report__badge-date { display: none; }
+  .cell-report__summary { -webkit-line-clamp: 2; }
+
   .grids-container .data-grid__th:nth-child(3),
   .grids-container .data-grid__td:nth-child(3) {
     display: table-cell;

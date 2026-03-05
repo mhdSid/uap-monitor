@@ -144,7 +144,7 @@
   color: var(--color-dim) !important;
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .sighting-map {
     max-height: 500px;
   }

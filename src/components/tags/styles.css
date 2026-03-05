@@ -65,7 +65,7 @@
   50% { opacity: 0.2; }
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .tag--responsive {
     font-size: var(--fs-xs);
     padding: 1px 6px;
