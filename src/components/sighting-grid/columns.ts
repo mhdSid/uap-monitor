@@ -1,6 +1,6 @@
 import { h } from '@/utils/dom'
 import { formatDate, formatDateCompact } from '@/utils/format'
-import { StatusTag } from '@/components/tags'
+import { StatusTag, createSourceTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'
 import { DataSourceId } from '@/enums'
 import { cx } from './cx'
@@ -26,13 +26,6 @@ const SUB_SOURCE_SHORT: Record<string, string> = {
   DOLAN: 'DOLN'
 }
 
-/** Source badge class by data source id */
-const SOURCE_CLASS: Record<string, string> = {
-  [DataSourceId.CHRONOLOGY]: `${cx.source} ${cx.sourceChronology}`,
-  [DataSourceId.HATCH_UDB]: `${cx.source} ${cx.sourceHatchUdb}`,
-  [DataSourceId.EXPERIENCER]: `${cx.source} ${cx.sourceExperiencer}`
-}
-
 function resolveGridSourceLabel(row: Sighting): string {
   if (row.source === DataSourceId.CHRONOLOGY && row.subSource) {
     return SUB_SOURCE_SHORT[row.subSource] || 'CHRON'
@@ -49,7 +42,6 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
       sortable: false,
       render: (row) => {
         const sourceLabel = resolveGridSourceLabel(row)
-        const sourceClass = SOURCE_CLASS[row.source] || `${cx.source} ${cx.source}--${row.source.toLowerCase().replace('_', '-')}`
         const tagCount = row.tags?.length ?? 0
 
         const metaParts = [
@@ -60,7 +52,7 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
         const meta = h('span', { className: cx.meta }, metaParts.join(' · '))
 
         const badges = h('span', { className: cx.badges },
-          h('span', { className: sourceClass }, sourceLabel),
+          createSourceTag(row.source, sourceLabel),
           h('span', { className: cx.badgeDate }, row.occurredAt?.slice(0, 10) || ''),
           ...(tagCount > 0
             ? [h('span', { className: cx.tagCount }, `${tagCount} tag${tagCount > 1 ? 's' : ''}`)]

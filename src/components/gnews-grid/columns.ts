@@ -1,6 +1,7 @@
 import { h } from '@/utils/dom'
 import { formatDate, formatDateCompact } from '@/utils/format'
 import { cx } from './cx'
+import { createNewsSourceTag } from '@/components/tags'
 import type { GnewsArticle, DataGridColumn } from '@/types'
 
 export function gnewsColumns(): DataGridColumn<GnewsArticle>[] {
@@ -17,19 +18,12 @@ export function gnewsColumns(): DataGridColumn<GnewsArticle>[] {
             ? h('span', { className: cx.desc }, row.description)
             : h('span', {}),
           h('span', { className: cx.bottom },
-            h('span', { className: cx.source }, row.sourceName || row.url),
+            createNewsSourceTag(row.sourceName || row.url),
             h('span', { className: cx.date }, formatDate(row.publishedAt))
           )
         )
       }
     },
-    // {
-    //   key: 'sourceName',
-    //   label: 'SOURCE',
-    //   width: '120px',
-    //   align: 'left',
-    //   render: (row) => h('span', { className: cx.source }, row.sourceName || '\u2014')
-    // },
     {
       key: 'publishedAt',
       label: 'DATE',

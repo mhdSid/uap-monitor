@@ -87,6 +87,20 @@ export enum TagVariant {
   LIVE = 'LIVE',
   NEW = 'NEW',
   DISABLED = 'DISABLED',
+  TONE_VERY_POSITIVE = 'VERY POSITIVE',
+  TONE_POSITIVE = 'POSITIVE',
+  TONE_NEUTRAL = 'NEUTRAL',
+  TONE_NEGATIVE = 'NEGATIVE',
+  TONE_VERY_NEGATIVE = 'VERY NEGATIVE',
+  SOURCE_NUFORC = 'NUFORC',
+  SOURCE_HATCH = 'HATCH',
+  SOURCE_CHRONOLOGY = 'CHRON',
+  SOURCE_EXPERIENCER = 'HUMAN',
+  SOURCE_NEWS = 'NEWS',
+  STATUS_VERIFIED = 'VERIFIED',
+  STATUS_PENDING = 'PENDING',
+  STATUS_ANALYZING = 'ANALYZING',
+  STATUS_DEBUNKED = 'DEBUNKED',
 }
 
 export enum AlertVariant {
@@ -103,4 +117,12 @@ export enum ToastVariant {
   ERROR = 'error',
   SUCCESS = 'success',
   INFO = 'info',
+}
+
+export enum TagSize {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+  RESPONSIVE = 'responsive'
 }

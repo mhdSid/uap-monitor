@@ -4,6 +4,7 @@ import type {
   DataSourceStatus,
   SightingShape,
   SightingStatus,
+  TagSize,
   TagVariant,
   ToastVariant
 } from '@/enums'
@@ -279,6 +280,13 @@ export interface SectionProps {
 export interface TagProps {
   variant: TagVariant
   label?: string
+  size?: TagSize
+}
+
+export interface TagStyle {
+  color: string
+  bg: string
+  border?: string
 }
 
 export interface StatusTagProps {

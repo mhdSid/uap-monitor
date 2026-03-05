@@ -43,21 +43,6 @@
   margin-top: 1px;
 }
 
-.gnews-row__source {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--color-green);
-  letter-spacing: 0.3px;
-  background: var(--c-green-400-08);
-  border: 1px solid var(--c-green-400-16);
-  border-radius: 2px;
-  padding: 1px 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 160px;
-}
-
 .gnews-row__date {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);

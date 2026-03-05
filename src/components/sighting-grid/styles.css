@@ -46,37 +46,6 @@
   flex-shrink: 0;
 }
 
-.cell-report__source {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  padding: 1px 4px;
-  border-radius: 2px;
-  text-transform: uppercase;
-  line-height: 1.4;
-  background: var(--c-green-500-12);
-  color: var(--color-green);
-  border: 1px solid var(--c-green-500-20);
-}
-
-.cell-report__source--hatch-udb {
-  background: var(--c-cyan-400-12);
-  color: var(--color-cyan);
-  border-color: var(--c-cyan-400-20);
-}
-
-.cell-report__source--chronology {
-  background: var(--c-amber-400-12);
-  color: var(--color-amber);
-  border-color: var(--c-amber-400-20);
-}
-
-.cell-report__source--experiencer {
-  background: rgba(167, 139, 250, 0.12);
-  color: #a78bfa;
-  border-color: rgba(167, 139, 250, 0.2);
-}
-
 .cell-report__tag-count {
   font-size: 9px;
   color: var(--color-dim);

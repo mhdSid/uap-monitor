@@ -3,6 +3,7 @@ import { cx } from './cx'
 import type { GnewsArticle } from '@/types'
 import { h } from '@/utils/dom'
 import { Modal } from '@/components/modal'
+import { AsyncImage } from '@/components/async-image'
 import { formatDate } from '@/utils/format'
 import { GNEWS_MODAL, ARIA } from '@/data/strings'
 
@@ -27,18 +28,12 @@ export class GnewsModal {
 
     // Article image (if available)
     if (a.imageUrl) {
-      const img = h('img', {
-        className: cx.imageEl,
+      const image = new AsyncImage({
         src: a.imageUrl,
-        alt: GNEWS_MODAL.IMAGE_ALT,
-        loading: 'lazy'
-      }) as HTMLImageElement
-
-      // Hide broken images gracefully
-      img.onerror = () => { img.parentElement?.remove() }
-
+        alt: a.title || GNEWS_MODAL.IMAGE_ALT
+      })
       children.push(
-        h('div', { className: cx.image, role: 'img', 'aria-label': ARIA.ARTICLE_IMAGE }, img)
+        h('div', { className: cx.image }, image.el)
       )
     }
 

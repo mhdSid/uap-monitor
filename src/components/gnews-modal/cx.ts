@@ -4,7 +4,6 @@ export const cx = {
   sourceName: 'gnews-modal__source-name',
   content: 'gnews-modal__content',
   image: 'gnews-modal__image',
-  imageEl: 'gnews-modal__image-el',
   desc: 'gnews-modal__desc',
   body: 'gnews-modal__body',
   row: 'gnews-modal__row',

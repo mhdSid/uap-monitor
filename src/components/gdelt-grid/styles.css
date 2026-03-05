@@ -32,72 +32,11 @@
   margin-top: 1px;
 }
 
-.gdelt-row__domain {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--color-green);
-  letter-spacing: 0.3px;
-  background: var(--c-green-400-08);
-  border: 1px solid var(--c-green-400-16);
-  border-radius: 2px;
-  padding: 1px 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 160px;
-}
-
 .gdelt-row__date {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--color-muted);
   white-space: nowrap;
-}
-
-/* ── Tone band tags ──────────────────────────────────────────── */
-
-.gdelt-row__tone-tag {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  padding: 2px 6px;
-  border-radius: 2px;
-  white-space: nowrap;
-  display: inline-block;
-  text-align: center;
-}
-
-.gdelt-row__tone-tag--very-positive {
-  color: var(--color-green);
-  background: var(--c-green-400-08);
-  border: 1px solid var(--c-green-400-16);
-}
-
-.gdelt-row__tone-tag--positive {
-  color: var(--color-green);
-  opacity: 0.7;
-  background: var(--c-green-400-08);
-  border: 1px solid var(--c-green-400-16);
-}
-
-.gdelt-row__tone-tag--neutral {
-  color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--color-border);
-}
-
-.gdelt-row__tone-tag--negative {
-  color: var(--color-amber);
-  opacity: 0.7;
-  background: rgba(245, 158, 11, 0.06);
-  border: 1px solid rgba(245, 158, 11, 0.12);
-}
-
-.gdelt-row__tone-tag--very-negative {
-  color: var(--color-amber);
-  background: rgba(245, 158, 11, 0.08);
-  border: 1px solid rgba(245, 158, 11, 0.16);
 }
 
 .gdelt-row__lang {

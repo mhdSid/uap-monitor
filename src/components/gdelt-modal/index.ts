@@ -3,6 +3,8 @@ import { cx } from './cx'
 import type { GdeltArticle } from '@/types'
 import { h } from '@/utils/dom'
 import { Modal } from '@/components/modal'
+import { AsyncImage } from '@/components/async-image'
+import { createToneTag } from '@/components/tags'
 import { formatDate } from '@/utils/format'
 import { GDELT_MODAL, ARIA } from '@/data/strings'
 
@@ -27,18 +29,12 @@ export class GdeltModal {
 
     // Article image (if available)
     if (a.imageUrl) {
-      const img = h('img', {
-        className: cx.imageEl,
+      const image = new AsyncImage({
         src: a.imageUrl,
-        alt: GDELT_MODAL.IMAGE_ALT,
-        loading: 'lazy'
-      }) as HTMLImageElement
-
-      // Hide broken images gracefully
-      img.onerror = () => { img.parentElement?.remove() }
-
+        alt: a.title || GDELT_MODAL.IMAGE_ALT
+      })
       children.push(
-        h('div', { className: cx.image, role: 'img', 'aria-label': ARIA.ARTICLE_IMAGE }, img)
+        h('div', { className: cx.image }, image.el)
       )
     }
 
@@ -48,7 +44,7 @@ export class GdeltModal {
       [GDELT_MODAL.PUBLISHED, formatDate(a.publishedAt)],
       [GDELT_MODAL.LANGUAGE, (a.language || 'en').toUpperCase()],
       [GDELT_MODAL.COUNTRY, a.country || GDELT_MODAL.EMPTY_VALUE],
-      [GDELT_MODAL.TONE, `${a.tone > 0 ? '+' : ''}${a.tone}`]
+      [GDELT_MODAL.TONE, createToneTag(a.tone)]
     ]
 
     children.push(...rows.map(([label, value]) =>

@@ -33,6 +33,27 @@
   animation: blink 1.2s ease-in-out infinite;
 }
 
+.tag--sm {
+  font-size: 8px;
+  padding: 1px 4px;
+}
+
+.tag--md {
+  font-size: var(--fs-xs);
+  padding: 1px 6px;
+}
+
+.tag--lg {
+  font-size: var(--fs-sm);
+  padding: 2px 8px;
+}
+
+.tag--xs {
+  font-size: 7px;
+  padding: 0px 3px;
+  letter-spacing: 0.3px;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.2; }

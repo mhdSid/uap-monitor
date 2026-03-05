@@ -4,7 +4,6 @@ export const cx = {
   domain: 'gdelt-modal__domain',
   content: 'gdelt-modal__content',
   image: 'gdelt-modal__image',
-  imageEl: 'gdelt-modal__image-el',
   desc: 'gdelt-modal__desc',
   row: 'gdelt-modal__row',
   label: 'gdelt-modal__label',

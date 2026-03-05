@@ -276,3 +276,7 @@ export const ERRORS = {
   CHRONOLOGY_MANIFEST: 'Malformed chronology manifest',
   CHRONOLOGY_LOAD: 'Failed to load chronology manifest'
 } as const
+
+export const TAGS = {
+  LIVE: 'LIVE'
+} as const

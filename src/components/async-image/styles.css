@@ -1,0 +1,52 @@
+/* ===== ASYNC IMAGE ===== */
+
+.async-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--c-neutral-900);
+}
+
+/* ── Loader placeholder ─────────────────────────────────────── */
+
+.async-image__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.async-image__placeholder .radar-loader {
+  transform: scale(0.55);
+}
+
+.async-image__placeholder .radar-loader__text {
+  display: none;
+}
+
+/* ── Image element ──────────────────────────────────────────── */
+
+.async-image__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.async-image__img--loaded {
+  opacity: 1;
+}
+
+/* ── Error — hide entire component ──────────────────────────── */
+
+.async-image--error {
+  display: none;
+}
