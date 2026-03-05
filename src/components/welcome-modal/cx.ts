@@ -11,6 +11,7 @@ export const cx = {
   sourceTierHigh: 'welcome__source-tier--high',
   sourceTierMid: 'welcome__source-tier--mid',
   sources: 'welcome__sources',
+  sourcesLoader: 'welcome__sources-loader',
   sourcesTitle: 'welcome__sources-title',
   stat: 'welcome__stat',
   statLabel: 'welcome__stat-label',

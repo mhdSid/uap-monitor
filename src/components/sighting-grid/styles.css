@@ -1,7 +1,7 @@
 .cell-report {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-1);
   min-width: 0;
 }
 
@@ -36,24 +36,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
+  gap: var(--space-3);
 }
 
 .cell-report__badges {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-xs);
   flex-shrink: 0;
 }
 
 .cell-report__tag-count {
-  font-size: 9px;
+  font-size: var(--fs-3xs);
   color: var(--color-dim);
   letter-spacing: 0.5px;
 }
 
 .cell-report__badge-date {
-  font-size: 9px;
+  font-size: var(--fs-3xs);
   color: var(--color-dim);
   letter-spacing: 0.5px;
 }
@@ -66,11 +66,11 @@
 .empty-state {
   display: flex;
   justify-content: center;
-  padding: 48px 16px;
+  padding: var(--space-3xl) var(--space-lg);
 }
 
 .empty-state--compact {
-  padding: 24px 16px;
+  padding: var(--space-xl) var(--space-lg);
 }
 
 .empty-state__text {
@@ -99,8 +99,8 @@
 .grids-container .data-grid__th:nth-child(2),
 .grids-container .data-grid__td:nth-child(2) {
   width: 55px !important;
-  padding-left: 2px !important;
-  padding-right: 2px !important;
+  padding-left: var(--space-1) !important;
+  padding-right: var(--space-1) !important;
 }
 
 /* Desktop: show all columns with fixed widths */
@@ -119,15 +119,15 @@
   .grids-container .data-grid__td:nth-child(4) {
     display: table-cell;
     width: 75px !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding-left: var(--space-sm) !important;
+    padding-right: var(--space-sm) !important;
     font-size: inherit;
   }
 
   .grids-container .data-grid__th:nth-child(2),
   .grids-container .data-grid__td:nth-child(2) {
     width: 110px !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding-left: var(--space-sm) !important;
+    padding-right: var(--space-sm) !important;
   }
 }

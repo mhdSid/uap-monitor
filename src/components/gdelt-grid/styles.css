@@ -1,9 +1,8 @@
-/* ===== GDELT GRID ROW ===== */
 .gdelt-row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 2px 0;
+  gap: var(--space-1);
+  padding: var(--space-1) 0;
 }
 
 .gdelt-row__title {
@@ -28,8 +27,8 @@
 .gdelt-row__bottom {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 1px;
+  gap: var(--space-sm);
+  margin-top: var(--space-px);
 }
 
 .gdelt-row__date {
@@ -41,13 +40,13 @@
 
 .gdelt-row__lang {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--fs-3xs);
   color: var(--color-muted);
   letter-spacing: 0.5px;
 }
 
 .gdelt-grid__empty {
-  padding: 24px 16px;
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
 }
 

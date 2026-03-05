@@ -1,8 +1,7 @@
-/* ===== GNEWS ARTICLE MODAL ===== */
 .gnews-modal__header {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-xs);
   flex: 1;
 }
 
@@ -28,29 +27,29 @@
 
 .gnews-modal__image {
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-md);
 }
 
 .gnews-modal__desc {
   font-size: var(--fs-sm);
   color: var(--color-text);
   line-height: 1.6;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-sm);
 }
 
 .gnews-modal__body {
   font-size: var(--fs-sm);
   color: var(--color-text);
   line-height: 1.7;
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-md);
   white-space: pre-line;
 }
 
 .gnews-modal__row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 6px 0;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
   border-bottom: 1px solid var(--c-neutral-900);
 }
 
@@ -95,7 +94,7 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-xs);
 }
 
 .gnews-modal__footer-link:hover {
@@ -118,7 +117,7 @@
   .gnews-modal__row {
     flex-direction: row;
     justify-content: space-between;
-    gap: 12px;
+    gap: var(--space-md);
   }
   .gnews-modal__value { text-align: right; }
 }

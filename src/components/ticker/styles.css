@@ -1,10 +1,10 @@
 .ticker {
   font-size: var(--fs-xs);
   color: var(--color-green);
-  padding: 6px 12px;
+  padding: var(--space-3) var(--space-md);
   background: var(--c-neutral-975);
   border-bottom: 1px solid var(--color-border);
-  height: calc(var(--fs-xs) * 1.5 * 2 + 12px); /* 2 lines + padding */
+  height: calc(var(--fs-xs) * 1.5 * 2 + var(--space-3) * 2); /* 2 lines + padding */
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
@@ -45,7 +45,7 @@
 /* Ghost lines: subtle // placeholders showing the 2-line capacity */
 .ticker__ghost {
   position: absolute;
-  inset: 6px 12px;
+  inset: var(--space-3) var(--space-md);
   line-height: 1.5;
   z-index: 0;
   pointer-events: none;

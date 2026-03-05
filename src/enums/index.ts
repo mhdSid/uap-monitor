@@ -5,14 +5,14 @@ export enum Continent {
   ASIA_MIDDLE_EAST = 'ASIA_MIDDLE_EAST',
   ASIA_PACIFIC = 'ASIA_PACIFIC',
   OCEANIA = 'OCEANIA',
-  AFRICA = 'AFRICA',
+  AFRICA = 'AFRICA'
 }
 
 export enum SightingStatus {
   VERIFIED = 'VERIFIED',
   PENDING = 'PENDING',
   ANALYZING = 'ANALYZING',
-  DEBUNKED = 'DEBUNKED',
+  DEBUNKED = 'DEBUNKED'
 }
 
 export enum SightingShape {
@@ -40,7 +40,7 @@ export enum SightingShape {
   STAR = 'Star',
   TEARDROP = 'Teardrop',
   TRIANGLE = 'Triangle',
-  UNKNOWN = 'Unknown',
+  UNKNOWN = 'Unknown'
 }
 
 export enum SightingCharacteristic {
@@ -56,7 +56,7 @@ export enum SightingCharacteristic {
   POSSIBLE_ABDUCTION = 'Possible abduction',
   MISSING_TIME = 'Missing Time',
   MARKS_ON_BODY = 'Marks found on body afterwards',
-  LANDED = 'Landed',
+  LANDED = 'Landed'
 }
 
 export enum DataSourceId {
@@ -71,14 +71,14 @@ export enum DataSourceId {
   CJK_SCRAPER = 'CJK_SCRAPER',
   AARO = 'AARO',
   GNEWS = 'GNEWS',
-  EXPERIENCER = 'EXPERIENCER',
+  EXPERIENCER = 'EXPERIENCER'
 }
 
 export enum DataSourceStatus {
   ONLINE = 'ONLINE',
   SYNCING = 'SYNCING',
   OFFLINE = 'OFFLINE',
-  DISABLED = 'DISABLED',
+  DISABLED = 'DISABLED'
 }
 
 export enum TagVariant {
@@ -100,7 +100,7 @@ export enum TagVariant {
   STATUS_VERIFIED = 'VERIFIED',
   STATUS_PENDING = 'PENDING',
   STATUS_ANALYZING = 'ANALYZING',
-  STATUS_DEBUNKED = 'DEBUNKED',
+  STATUS_DEBUNKED = 'DEBUNKED'
 }
 
 export enum AlertVariant {
@@ -110,13 +110,13 @@ export enum AlertVariant {
   INFO = 'info',
   WARNING = 'warning',
   ERROR = 'error',
-  NEUTRAL = 'neutral',
+  NEUTRAL = 'neutral'
 }
 
 export enum ToastVariant {
   ERROR = 'error',
   SUCCESS = 'success',
-  INFO = 'info',
+  INFO = 'info'
 }
 
 export enum TagSize {

@@ -1,13 +1,13 @@
 .credibility-bar {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-3);
   justify-content: flex-end;
 }
 
 .credibility-bar__track {
-  width: 28px;
-  height: 4px;
+  width: var(--space-14);
+  height: var(--space-xs);
   background: var(--color-border);
   border-radius: 1px;
   overflow: hidden;
@@ -20,10 +20,10 @@
 
 .credibility-bar__label {
   font-size: var(--fs-xs);
-  min-width: 20px;
+  min-width: var(--space-10);
   text-align: right;
 }
 
 @media (min-width: 768px) {
-  .credibility-bar__track { width: 48px; }
+  .credibility-bar__track { width: var(--space-24); }
 }

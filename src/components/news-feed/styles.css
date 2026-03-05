@@ -1,13 +1,13 @@
 .news-feed__item {
-  padding: 8px 0;
+  padding: var(--space-sm) 0;
   border-bottom: 1px solid var(--c-neutral-900);
 }
 
 .news-feed__meta {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 3px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
 }
 
 .news-feed__source {

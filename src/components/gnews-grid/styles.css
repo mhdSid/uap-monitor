@@ -1,9 +1,8 @@
-/* ===== GNEWS GRID ROW ===== */
 .gnews-row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 2px 0;
+  gap: var(--space-1);
+  padding: var(--space-1) 0;
 }
 
 .gnews-row__title {
@@ -39,8 +38,8 @@
 .gnews-row__bottom {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 1px;
+  gap: var(--space-sm);
+  margin-top: var(--space-px);
 }
 
 .gnews-row__date {
@@ -51,7 +50,7 @@
 }
 
 .gnews-grid__empty {
-  padding: 24px 16px;
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
 }
 

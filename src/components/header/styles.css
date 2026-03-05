@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
+  padding: var(--space-5) var(--space-lg);
   border-bottom: 1px solid var(--color-border);
   background: var(--c-neutral-975);
 }
@@ -10,7 +10,7 @@
 .app-header__left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-5);
 }
 
 .app-header__title {
@@ -36,7 +36,7 @@
 .app-header__right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-md);
 }
 
 @media (min-width: 768px) {

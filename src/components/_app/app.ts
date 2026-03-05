@@ -31,6 +31,8 @@ import { WelcomeModal } from '@/components/welcome-modal'
 import { GdeltGrid } from '@/components/gdelt-grid'
 import { GnewsGrid } from '@/components/gnews-grid'
 import { SECTION } from '@/data/strings'
+import { useDeriveWelcomeSources } from '@/composables/use-welcome-sources'
+import { useGdelt, useGnews } from '@/composables'
 
 import type { Sighting } from '@/types'
 
@@ -97,6 +99,9 @@ export class App extends Component {
       this.gdeltGrid.load(),
       this.gnewsGrid.load()
     ])
+
+    // ── Hydrate welcome modal sources from live manifest + feed data ──
+    this.hydrateWelcomeSources()
 
     // ── Sequential: each step depends on the one before ──
     this.hydrateStore()
@@ -262,6 +267,28 @@ export class App extends Component {
 
   private showWelcome(): void {
     WelcomeModal.show()
+  }
+
+  /**
+   * Derive and push live source metadata into the welcome modal's
+   * ACTIVE SOURCES slot. Called immediately after all manifests and
+   * article feeds have loaded — replaces the Loader placeholder.
+   */
+  private hydrateWelcomeSources(): void {
+    const chronologyManifest = this.dataSource.chronology.loadManifest()
+    // loadManifest() is async but the manifest is already cached by this
+    // point (loadManifests() ran first), so we re-use the cached promise
+    // and handle resolution non-blockingly.
+    void Promise.resolve(chronologyManifest).then((manifest) => {
+      const sources = useDeriveWelcomeSources({
+        nuforc: this.dataSource.nuforc,
+        hatch: this.dataSource.hatch,
+        chronologyManifest: manifest,
+        gdeltCollection: useGdelt().getCollection(),
+        gnewsCollection: useGnews().getCollection()
+      })
+      WelcomeModal.setSources(sources)
+    })
   }
 
   // ─── Reactions ─────────────────────────────────────────────────

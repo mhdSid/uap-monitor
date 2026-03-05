@@ -1,10 +1,8 @@
-/* ===== ASYNC IMAGE ===== */
-
 .async-image {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--c-neutral-900);
 }

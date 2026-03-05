@@ -7,7 +7,7 @@ import { h } from '@/utils/dom'
 enum CredibilityLevel {
   HIGH = 'high',
   MEDIUM = 'medium',
-  LOW = 'low',
+  LOW = 'low'
 }
 
 const LEVEL_COLORS: Record<CredibilityLevel, string> = {

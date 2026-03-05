@@ -1,7 +1,7 @@
 .modal-sighting__header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
   flex: 1;
 }
 
@@ -21,8 +21,8 @@
 .modal-sighting__row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 6px 0;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
   border-bottom: 1px solid var(--c-neutral-900);
 }
 
@@ -46,8 +46,8 @@
   font-size: var(--fs-xs);
   color: var(--color-muted);
   letter-spacing: 1px;
-  margin-top: 12px;
-  margin-bottom: 4px;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
 }
 
 .modal-sighting__summary {
@@ -61,12 +61,12 @@
 
 /* When summary has description below it */
 .modal-sighting__summary--with-desc {
-  margin-bottom: 8px;
+  margin-bottom: var(--space-sm);
 }
 
 /* When summary is the only text block */
 .modal-sighting__summary--solo {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-lg);
 }
 
 .modal-sighting__description {
@@ -81,12 +81,12 @@
 
 /* When description follows summary */
 .modal-sighting__description--with-summary {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-lg);
 }
 
 /* When description is the only text block */
 .modal-sighting__description--solo {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-lg);
 }
 
 .modal-sighting__footer {
@@ -109,7 +109,7 @@
   .modal-sighting__row {
     flex-direction: row;
     justify-content: space-between;
-    gap: 12px;
+    gap: var(--space-md);
   }
 
   .modal-sighting__value { text-align: right; }

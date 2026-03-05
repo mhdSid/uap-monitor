@@ -49,7 +49,7 @@
 .data-grid__sort-icon {
   display: inline-block;
   vertical-align: middle;
-  margin-left: 4px;
+  margin-left: var(--space-xs);
   color: currentColor;
   flex-shrink: 0;
 }
@@ -90,8 +90,7 @@
   background: var(--c-green-500-08);
 }
 
-/* Left accent bar via border on first cell — reliable across SP & PC
-   (inset box-shadow on <tr> clips on mobile due to table box model quirks) */
+/* Left accent bar via border on first cell */
 .data-grid__td:first-child {
   border-left: 3px solid transparent;
 }
@@ -111,21 +110,21 @@
 .data-grid__td--center { text-align: center; }
 
 .data-grid__empty {
-  padding: 24px;
+  padding: var(--space-xl);
   text-align: center;
   color: var(--color-muted);
 }
 
 .data-grid__sentinel {
-  height: 1px;
+  height: var(--space-px);
 }
 
 .data-grid__th .tooltip-wrapper {
-  margin-left: 4px;
+  margin-left: var(--space-xs);
 }
 
 .data-grid__th .tooltip-wrapper .tooltip__trigger {
-  width: 14px;
-  height: 14px;
+  width: var(--space-7);
+  height: var(--space-7);
   font-weight: 100;
 }

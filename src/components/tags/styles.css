@@ -1,11 +1,13 @@
+/* ===== TAGS ─── size variants use semantic font + spacing vars ===== */
+
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-xs);
   font-size: var(--fs-xs);
   font-family: var(--font-mono);
   letter-spacing: 1px;
-  padding: 1px 6px;
+  padding: var(--space-px) var(--space-3);
   border: 1px solid currentColor;
   border-radius: var(--radius-sm);
   white-space: nowrap;
@@ -34,30 +36,37 @@
   animation: blink 1.2s ease-in-out infinite;
 }
 
-.tag--sm {
-  font-size: 8px;
-  padding: 1px 4px;
-}
+/* ── Size variants ──────────────────────────────────────────── */
 
-.tag--md {
-  font-size: var(--fs-xs);
-  padding: 1px 6px;
-}
-
-.tag--lg {
-  font-size: var(--fs-sm);
-  padding: 2px 8px;
-}
-
+/* xs: ultra-compact badge (map overlays, badge-dates) */
 .tag--xs {
-  font-size: 7px;
-  padding: 0px 3px;
+  font-size: var(--fs-3xs);   /* 8px */
+  padding: 0 var(--space-1);  /* 0 2px */
   letter-spacing: 0.3px;
 }
 
+/* sm: compact in-grid chips */
+.tag--sm {
+  font-size: var(--fs-3xs);     /* 8px */
+  padding: var(--space-px) var(--space-xs); /* 1px 4px */
+}
+
+/* md: default tag size (matches .tag base — explicit alias) */
+.tag--md {
+  font-size: var(--fs-xs);        /* 12px */
+  padding: var(--space-px) var(--space-3); /* 1px 6px */
+}
+
+/* lg: slightly larger for modal / welcome contexts */
+.tag--lg {
+  font-size: var(--fs-sm);      /* 13px */
+  padding: var(--space-1) var(--space-sm); /* 2px 8px */
+}
+
+/* responsive: sm on mobile, md on desktop */
 .tag--responsive {
-  font-size: 8px;
-  padding: 1px 4px;
+  font-size: var(--fs-3xs);     /* 8px mobile */
+  padding: var(--space-px) var(--space-xs);
 }
 
 @keyframes blink {
@@ -67,7 +76,7 @@
 
 @media (min-width: 768px) {
   .tag--responsive {
-    font-size: var(--fs-xs);
-    padding: 1px 6px;
+    font-size: var(--fs-xs);          /* 12px desktop */
+    padding: var(--space-px) var(--space-3);
   }
 }
