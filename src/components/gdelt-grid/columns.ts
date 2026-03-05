@@ -19,8 +19,7 @@ export function gdeltColumns(): DataGridColumn<GdeltArticle>[] {
           h('span', { className: cx.title }, row.title || '—'),
           h('span', { className: cx.meta }, metaParts.join(' · ')),
           h('span', { className: cx.bottom },
-            createNewsSourceTag(row.domain),
-            h('span', { className: cx.date }, formatDate(row.publishedAt))
+            createNewsSourceTag(row.domain)
           )
         )
       }

@@ -9,6 +9,7 @@
   border: 1px solid currentColor;
   border-radius: var(--radius-sm);
   white-space: nowrap;
+  width: fit-content;
 }
 
 .tag--live {

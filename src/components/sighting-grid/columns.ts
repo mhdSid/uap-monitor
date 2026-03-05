@@ -63,8 +63,7 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
           h('span', { className: cx.summary }, row.summary || '—'),
           meta,
           h('span', { className: cx.bottom },
-            badges,
-            h('span', { className: cx.date }, formatDate(row.occurredAt))
+            badges
           )
         )
       }

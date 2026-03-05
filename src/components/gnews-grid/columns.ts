@@ -18,8 +18,7 @@ export function gnewsColumns(): DataGridColumn<GnewsArticle>[] {
             ? h('span', { className: cx.desc }, row.description)
             : h('span', {}),
           h('span', { className: cx.bottom },
-            createNewsSourceTag(row.sourceName || row.url),
-            h('span', { className: cx.date }, formatDate(row.publishedAt))
+            createNewsSourceTag(row.sourceName || row.url)
           )
         )
       }
