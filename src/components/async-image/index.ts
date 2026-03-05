@@ -32,7 +32,7 @@ export class AsyncImage extends Component<AsyncImageProps> {
     }
 
     // Loader placeholder — centered in the reserved space
-    const loader = new Loader()
+    const loader = new Loader({})
     const placeholder = h('div', { className: cx.placeholder })
     placeholder.appendChild(loader.el)
 
