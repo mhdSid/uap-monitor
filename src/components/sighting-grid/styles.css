@@ -104,7 +104,7 @@
 
 .grids-container .data-grid__th:nth-child(2),
 .grids-container .data-grid__td:nth-child(2) {
-  width: 44px !important;
+  width: 55px !important;
   padding-left: 2px !important;
   padding-right: 2px !important;
 }
