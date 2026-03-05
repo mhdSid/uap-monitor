@@ -54,7 +54,19 @@
   letter-spacing: 0.3px;
 }
 
+.tag--responsive {
+  font-size: 8px;
+  padding: 1px 4px;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.2; }
+}
+
+@media (min-width: 481px) {
+  .tag--responsive {
+    font-size: var(--fs-xs);
+    padding: 1px 6px;
+  }
 }

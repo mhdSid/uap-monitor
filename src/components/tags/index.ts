@@ -72,7 +72,7 @@ export class LiveTag extends Component {
 export class StatusTag extends Component<StatusTagProps> {
   protected create(): HTMLElement {
     const variant = STATUS_VARIANT[this.props.status] ?? TagVariant.STATUS_PENDING
-    return new Tag({ variant, label: this.props.status, size: TagSize.SM }).el
+    return new Tag({ variant, label: this.props.status, size: TagSize.RESPONSIVE }).el
   }
 }
 
@@ -88,7 +88,7 @@ export function resolveToneVariant(tone: number): TagVariant {
 
 export function createToneTag(tone: number): HTMLElement {
   const variant = resolveToneVariant(tone)
-  return new Tag({ variant, size: TagSize.SM }).el
+  return new Tag({ variant, size: TagSize.RESPONSIVE }).el
 }
 
 // ─── Source tag helper ──────────────────────────────────────────────
@@ -106,9 +106,9 @@ export function resolveSourceVariant(sourceId: string): TagVariant {
 
 export function createSourceTag(sourceId: string, label: string): HTMLElement {
   const variant = resolveSourceVariant(sourceId)
-  return new Tag({ variant, label, size: TagSize.SM }).el
+  return new Tag({ variant, label, size: TagSize.RESPONSIVE }).el
 }
 
 export function createNewsSourceTag(label: string): HTMLElement {
-  return new Tag({ variant: TagVariant.SOURCE_NEWS, label, size: TagSize.SM }).el
+  return new Tag({ variant: TagVariant.SOURCE_NEWS, label, size: TagSize.RESPONSIVE }).el
 }

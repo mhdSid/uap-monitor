@@ -1,6 +1,7 @@
 export const cx = {
   root: 'tag',
   xs: 'tag--xs',
+  responsive: 'tag--responsive',
   sm: 'tag--sm',
   md: 'tag--md',
   lg: 'tag--lg',
