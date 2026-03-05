@@ -147,12 +147,11 @@
   margin-left: auto;
 }
 
-.welcome__sources-loader {
+.welcome__body-loader {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: var(--space-lg) 0;
-  width: 100%;
+  padding: var(--space-xl) var(--space-md);
 }
 
 .welcome__footer .btn { width: 100%; }

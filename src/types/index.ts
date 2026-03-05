@@ -322,3 +322,20 @@ export interface WelcomeSource {
   period: string
   tier: 'high' | 'mid' | 'base'
 }
+
+export interface ManifestSource {
+  getTotalCount(): number
+  getAvailableYears(): number[]
+}
+
+export interface WelcomeStats {
+  timespan: string
+  records: string
+  sources: string
+  coverage: string
+}
+
+export interface WelcomeData {
+  stats: WelcomeStats
+  sources: WelcomeSource[]
+}

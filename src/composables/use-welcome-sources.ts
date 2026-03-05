@@ -1,9 +1,6 @@
 import type { ChronologyManifest, GdeltCollection, GnewsCollection, WelcomeSource } from '@/types'
 
 // ─── Chronology sub-source display metadata ──────────────────────────
-// Defines the render order + static display props (period, tier, name)
-// for each key in ChronologyManifest.subSources. Record counts come
-// from the live manifest response.
 
 const CHRONOLOGY_ORDER: string[] = [
   'EBERHART',
@@ -33,11 +30,23 @@ const CHRONOLOGY_META: Record<string, { name: string; period: string; tier: Welc
 
 // ─── Helpers ─────────────────────────────────────────────────────────
 
-function formatCount(n: number): string {
+function formatSourceCount(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
   if (n >= 10_000)    return `${Math.round(n / 1_000)}K`
   if (n >= 1_000)     return `${(n / 1_000).toFixed(1)}K`
   return `${n}`
+}
+
+function formatRecordCount(n: number): string {
+  // Floor to nearest 1,000 and append + to signal "at least this many"
+  const floored = Math.floor(n / 1_000) * 1_000
+  return `${floored.toLocaleString()}+`
+}
+
+function formatYear(year: number): string {
+  if (year < 0)   return `${Math.abs(year)} BC`
+  if (year < 100) return `${year} AD`
+  return `${year}`
 }
 
 function yearRangeStr(years: number[]): string {
@@ -47,51 +56,80 @@ function yearRangeStr(years: number[]): string {
   return min === max ? `${min}` : `${min}–${max}`
 }
 
-// ─── Manifest-source interface ────────────────────────────────────────
-// A minimal interface matching useNuforc / useHatchUdb return shapes
-// so we don't couple this utility to concrete composables.
-
-export interface ManifestSource {
-  getTotalCount(): number
-  getAvailableYears(): number[]
-}
-
 // ─── Main export ──────────────────────────────────────────────────────
 
 /**
- * Derive a live WelcomeSource[] from loaded manifests + article collections.
- * Falls back to readable placeholder strings if a source didn't load.
+ * Derive live stats + source list from loaded manifests and article collections.
+ * Called once all network requests have settled inside WelcomeModal.
  */
-export function useDeriveWelcomeSources(params: {
+export function useDeriveWelcomeData(params: {
   nuforc: ManifestSource
   hatch: ManifestSource
+  chronology: ManifestSource
   chronologyManifest: ChronologyManifest | null
   gdeltCollection: GdeltCollection | null
   gnewsCollection: GnewsCollection | null
-}): WelcomeSource[] {
-  const { nuforc, hatch, chronologyManifest, gdeltCollection, gnewsCollection } = params
-  const sources: WelcomeSource[] = []
+}): WelcomeData {
+  const { nuforc, hatch, chronology, chronologyManifest, gdeltCollection, gnewsCollection } = params
 
-  // ── NUFORC ──────────────────────────────────────────────────────
+  // ── Stats ────────────────────────────────────────────────────────
+
+  // Time span: oldest available year across all sighting sources
+  const allYears = [
+    ...nuforc.getAvailableYears(),
+    ...hatch.getAvailableYears(),
+    ...chronology.getAvailableYears()
+  ]
+  const oldestYear = allYears.length > 0 ? Math.min(...allYears) : 1974
+  const timespan = `${formatYear(oldestYear)}–present`
+
+  // Records: total sighting records across all three sources
+  const totalRecords = nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount()
+  const records = totalRecords > 0 ? formatRecordCount(totalRecords) : '230,000+'
+
+  // Sources: count every discrete source that loaded
+  const subSourceCount = chronologyManifest
+    ? Object.keys(chronologyManifest.subSources).length
+    : 0
+  const activeCount =
+    (nuforc.getTotalCount() > 0 ? 1 : 0) +
+    (hatch.getTotalCount() > 0 ? 1 : 0) +
+    subSourceCount +
+    (gdeltCollection != null ? 1 : 0) +
+    (gnewsCollection != null ? 1 : 0)
+  const sources = activeCount > 0 ? `${activeCount} active` : '14 active'
+
+  const stats: WelcomeStats = {
+    timespan,
+    records,
+    sources,
+    coverage: 'Global'
+  }
+
+  // ── Source list ──────────────────────────────────────────────────
+
+  const sourceList: WelcomeSource[] = []
+
+  // NUFORC
   const nuforcCount = nuforc.getTotalCount()
   const nuforcYears = nuforc.getAvailableYears()
-  sources.push({
+  sourceList.push({
     name: 'NUFORC',
-    records: nuforcCount > 0 ? formatCount(nuforcCount) : '~195K',
+    records: nuforcCount > 0 ? formatSourceCount(nuforcCount) : '~195K',
     period: nuforcYears.length > 0 ? yearRangeStr(nuforcYears) : '1974–present',
     tier: 'high'
   })
 
-  // ── Hatch *U* Database ──────────────────────────────────────────
+  // Hatch *U* Database
   const hatchCount = hatch.getTotalCount()
-  sources.push({
+  sourceList.push({
     name: 'Hatch *U* Database',
-    records: hatchCount > 0 ? formatCount(hatchCount) : '~18K',
+    records: hatchCount > 0 ? formatSourceCount(hatchCount) : '~18K',
     period: '1942–2003',
     tier: 'high'
   })
 
-  // ── Chronology sub-sources (from manifest, ordered) ─────────────
+  // Chronology sub-sources (ordered)
   if (chronologyManifest?.subSources) {
     const subSources = chronologyManifest.subSources
 
@@ -99,47 +137,47 @@ export function useDeriveWelcomeSources(params: {
       const meta = CHRONOLOGY_META[key]
       if (!meta) continue
       const sub = subSources[key]
-      sources.push({
+      sourceList.push({
         name: meta.name,
-        records: sub ? formatCount(sub.count) : '—',
+        records: sub ? formatSourceCount(sub.count) : '—',
         period: meta.period,
         tier: meta.tier
       })
     }
 
-    // Surface any sub-sources the manifest has that aren't in our list
+    // Any sub-sources in the manifest not in our ordered list
     for (const [key, sub] of Object.entries(subSources)) {
       if (CHRONOLOGY_ORDER.includes(key)) continue
-      sources.push({
+      sourceList.push({
         name: sub.label,
-        records: formatCount(sub.count),
+        records: formatSourceCount(sub.count),
         period: '—',
         tier: 'base'
       })
     }
   }
 
-  // ── GDELT ───────────────────────────────────────────────────────
+  // GDELT
   const gdeltCount = gdeltCollection?.totalResults
-  sources.push({
+  sourceList.push({
     name: 'GDELT News',
-    records: gdeltCount != null ? `${formatCount(gdeltCount)} articles` : 'Live',
+    records: gdeltCount != null ? `${formatSourceCount(gdeltCount)} articles` : 'Live',
     period: gdeltCollection?.generatedAt
       ? new Date(gdeltCollection.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       : 'Daily',
     tier: 'mid'
   })
 
-  // ── GNews ───────────────────────────────────────────────────────
+  // GNews
   const gnewsCount = gnewsCollection?.totalResults
-  sources.push({
+  sourceList.push({
     name: 'GNews',
-    records: gnewsCount != null ? `${formatCount(gnewsCount)} articles` : 'Live',
+    records: gnewsCount != null ? `${formatSourceCount(gnewsCount)} articles` : 'Live',
     period: gnewsCollection?.generatedAt
       ? new Date(gnewsCollection.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       : 'Daily',
     tier: 'mid'
   })
 
-  return sources
+  return { stats, sources: sourceList }
 }
