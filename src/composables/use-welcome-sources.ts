@@ -1,4 +1,4 @@
-import type { ChronologyManifest, GdeltCollection, GnewsCollection, WelcomeSource } from '@/types'
+import type { ChronologyManifest, GdeltCollection, GnewsCollection, ManifestSource, WelcomeData, WelcomeSource, WelcomeStats } from '@/types'
 
 // ─── Chronology sub-source display metadata ──────────────────────────
 
