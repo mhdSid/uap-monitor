@@ -24,6 +24,19 @@
   z-index: 500;
 }
 
+/* ── Layer toggle controls ───────────────────────────────────────── */
+.sighting-map__controls {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 450;
+  padding: var(--space-3) var(--space-4);
+  background: var(--c-panel-95);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  pointer-events: auto;
+}
+
 /* Leaflet dark theme overrides */
 .leaflet-container {
   background: var(--c-neutral-950);

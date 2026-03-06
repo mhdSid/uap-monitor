@@ -16,7 +16,7 @@ import { Button } from '@/components/button'
 import { Loader } from '@/components/loader'
 import { h, clearChildren } from '@/utils/dom'
 import { WELCOME } from '@/data/strings'
-import { useAnalytics, useNuforc, useHatchUdb, useChronology, useGdelt, useGnews } from '@/composables'
+import { useAnalytics, useNuforc, useHatchUdb, useChronology, useGdelt, useGnews, useFireball } from '@/composables'
 import { useDeriveWelcomeData } from '@/composables/use-welcome-sources'
 import type { WelcomeSource, WelcomeStats } from '@/types'
 
@@ -96,6 +96,7 @@ export class WelcomeModal {
     const chronology = useChronology()
     const gdelt = useGdelt()
     const gnews = useGnews()
+    const fireball = useFireball()
 
     // All requests are independent — parallelise. Composables cache results
     // so concurrent calls from app.ts share the same in-flight fetches.
@@ -104,7 +105,8 @@ export class WelcomeModal {
       hatch.loadManifest(),
       chronology.loadManifest(),
       gdelt.load(),
-      gnews.load()
+      gnews.load(),
+      fireball.load()
     ])
 
     // Guard: user may have dismissed the modal while loading
@@ -116,7 +118,8 @@ export class WelcomeModal {
       chronology,
       chronologyManifest:  await chronology.loadManifest(), // cached, free
       gdeltCollection:     gdelt.getCollection(),
-      gnewsCollection:     gnews.getCollection()
+      gnewsCollection:     gnews.getCollection(),
+      fireballCollection:  fireball.getCollection()
     })
 
     clearChildren(WelcomeModal.contentEl)

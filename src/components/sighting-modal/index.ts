@@ -6,13 +6,14 @@ import { cx } from './cx'
  *  Opens via Modal.open() with structured header/content/footer.      *
  * ------------------------------------------------------------------ */
 
-import type { Sighting } from '@/types'
+import type { Sighting, Fireball, GdeltArticle, GnewsArticle } from '@/types'
 import { DataSourceId, TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
 import { StatusTag, Tag } from '@/components/tags'
 import { Modal } from '@/components/modal'
-import { MODAL } from '@/data/strings'
-import { useAnalytics, getSourceUrl } from '@/composables'
+import { MODAL, RELATED } from '@/data/strings'
+import { useAnalytics, getSourceUrl, useFireball, useAppStore } from '@/composables'
+import { haversineKm } from '@/composables/use-fireball'
 
 // ─── Sub-source display names (chronology) ──────────────────────────
 
@@ -130,6 +131,22 @@ export class SightingModal {
       )
     )
 
+    // ── Related fireballs ──────────────────────────────────────────
+    const fireball = useFireball()
+    const nearbyFireballs = fireball.findNearSighting(s)
+    children.push(SightingModal.buildRelatedFireballs(s, nearbyFireballs))
+
+    // ── Related news ───────────────────────────────────────────────
+    const store = useAppStore()
+    const related = fireball.findRelatedNews(
+      s,
+      store.gdeltArticles.get(),
+      store.gnewsArticles.get()
+    )
+    if (related.gdelt.length > 0 || related.gnews.length > 0) {
+      children.push(SightingModal.buildRelatedNews(related.gdelt, related.gnews))
+    }
+
     return h('div', { className: cx.content }, ...children)
   }
 
@@ -137,5 +154,80 @@ export class SightingModal {
     return h('div', { className: cx.footer },
       new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el
     )
+  }
+
+  // ─── Related content ────────────────────────────────────────────
+
+  private static buildRelatedFireballs(s: Sighting, fireballs: Fireball[]): HTMLElement {
+    const section = h('div', { className: cx.relatedSection })
+    section.appendChild(h('div', { className: cx.relatedTitle }, RELATED.FIREBALLS_TITLE))
+
+    if (fireballs.length === 0) {
+      section.appendChild(h('div', { className: cx.relatedEmpty }, RELATED.FIREBALLS_EMPTY))
+      return section
+    }
+
+    for (const fb of fireballs) {
+      const date = fb.date?.slice(0, 10) ?? MODAL.EMPTY_VALUE
+      const parts: string[] = []
+      if (fb.energy != null) parts.push(`${RELATED.FIREBALL_ENERGY}: ${fb.energy}${RELATED.FIREBALL_ENERGY_UNIT}`)
+      if (fb.impactEnergy != null) parts.push(`${RELATED.FIREBALL_IMPACT}: ${fb.impactEnergy}${RELATED.FIREBALL_IMPACT_UNIT}`)
+      if (fb.altitude != null) parts.push(`${RELATED.FIREBALL_ALTITUDE}: ${fb.altitude}${RELATED.FIREBALL_ALTITUDE_UNIT}`)
+      if (fb.velocity != null) parts.push(`${RELATED.FIREBALL_VELOCITY}: ${fb.velocity}${RELATED.FIREBALL_VELOCITY_UNIT}`)
+
+      let distStr = ''
+      if (s.coordinates && fb.lat != null && fb.lng != null) {
+        const km = haversineKm(s.coordinates.lat, s.coordinates.lng, fb.lat, fb.lng)
+        distStr = `${Math.round(km)}${RELATED.FIREBALL_DISTANCE_UNIT}`
+      }
+
+      section.appendChild(
+        h('div', { className: cx.relatedItem },
+          h('span', { className: cx.relatedItemDate }, date),
+          h('span', { className: cx.relatedItemMeta }, parts.join(' · ')),
+          distStr
+            ? h('span', { className: cx.relatedItemDistance }, distStr)
+            : h('span', {})
+        )
+      )
+    }
+
+    return section
+  }
+
+  private static buildRelatedNews(
+    gdelt: GdeltArticle[],
+    gnews: GnewsArticle[]
+  ): HTMLElement {
+    const section = h('div', { className: cx.relatedSection })
+    section.appendChild(h('div', { className: cx.relatedTitle }, RELATED.NEWS_TITLE))
+
+    const allNews = [
+      ...gdelt.map(a => ({ title: a.title, url: a.url, date: a.publishedAt, source: a.domain })),
+      ...gnews.map(a => ({ title: a.title, url: a.url, date: a.publishedAt, source: a.sourceName }))
+    ].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5)
+
+    if (allNews.length === 0) {
+      section.appendChild(h('div', { className: cx.relatedEmpty }, RELATED.NEWS_EMPTY))
+      return section
+    }
+
+    for (const item of allNews) {
+      section.appendChild(
+        h('div', { className: cx.relatedItem },
+          h('a', {
+            className: cx.relatedItemLink,
+            href: item.url,
+            target: '_blank',
+            rel: 'noopener noreferrer'
+          }, item.title.length > 80 ? item.title.slice(0, 77) + '\u2026' : item.title),
+          h('span', { className: cx.relatedItemMeta },
+            `${item.source} · ${item.date.slice(0, 10)}`
+          )
+        )
+      )
+    }
+
+    return section
   }
 }

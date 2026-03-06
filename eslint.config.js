@@ -21,6 +21,7 @@ export default tsEslint.config(
     languageOptions: {
       globals: {
         process: 'readonly',
+        fetch: 'readonly',
         console: 'readonly',
         setTimeout: 'readonly',
         Buffer: 'readonly',

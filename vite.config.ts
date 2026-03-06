@@ -97,9 +97,28 @@ export default defineConfig({
             }
           },
           {
-            urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com/,
-            handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'fonts', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } }
+            urlPattern: /\/data\/nasa-fireballs\.json$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'nasa-fireballs',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 * 7 }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/[a-d]\.basemaps\.cartocdn\.com\//,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'carto-tiles',
+              expiration: { maxEntries: 500, maxAgeSeconds: 60 * 60 * 24 * 30 }
+            }
+          },
+          {
+            urlPattern: /\/favicon.*\.(svg|png|ico)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'favicon',
+              expiration: { maxEntries: 5, maxAgeSeconds: 60 * 60 * 24 * 365 }
+            }
           }
         ]
       },

@@ -118,9 +118,11 @@ const SOURCE_REGISTRY: DataSource[] = [
   {
     id: DataSourceId.NASA_CNEOS,
     label: 'NASA CNEOS',
-    status: DataSourceStatus.DISABLED,
+    status: DataSourceStatus.SYNCING,
     url: 'https://cneos.jpl.nasa.gov/fireballs/',
-    description: DATA_SOURCE_DESCRIPTIONS.NASA_CNEOS
+    description: DATA_SOURCE_DESCRIPTIONS.NASA_CNEOS,
+    dataUrl: '/data/nasa-fireballs.json',
+    dataLabel: 'JSON'
   },
   {
     id: DataSourceId.OPENSKY,

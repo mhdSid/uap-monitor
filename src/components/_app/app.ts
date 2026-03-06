@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, batch, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, batch, minDelay, filterSightings } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -38,6 +38,7 @@ export class App extends Component {
   private store = useAppStore()
   private dataSource = useDataSource()
   private tickerMessages = useTicker()
+  private fireball = useFireball()
 
   private main!: HTMLElement
   private ticker!: Ticker
@@ -91,11 +92,12 @@ export class App extends Component {
 
     this.showWelcome()
 
-    // ── All three are independent network fetches — parallelize ──
+    // ── All are independent network fetches — parallelize ──
     await Promise.all([
       this.loadManifests(),
       this.gdeltGrid.load(),
-      this.gnewsGrid.load()
+      this.gnewsGrid.load(),
+      this.fireball.load()
     ])
 
     // ── Sequential: each step depends on the one before ──
@@ -247,6 +249,11 @@ export class App extends Component {
 
     // Populate map and timeline
     this.sightingMap.setSightings(sightings)
+
+    const fireballs = this.fireball.getAll()
+    this.store.fireballs.set(fireballs)
+    this.sightingMap.setFireballs(fireballs.filter(f => f.lat != null))
+
     this.timeline.setManifestCounts(
       this.dataSource.getYearCounts(),
       years[years.length - 1] ?? 1900,

@@ -85,6 +85,13 @@ export const FILTER = {
   EMPTY_DEFAULT: 'No data'
 } as const
 
+// ─── Map layer controls ─────────────────────────────────────────────
+
+export const MAP_LAYERS = {
+  SIGHTINGS: 'Sightings',
+  FIREBALLS: 'Fireballs'
+} as const
+
 // ─── Section titles ─────────────────────────────────────────────────
 
 export const SECTION = {
@@ -127,6 +134,25 @@ export const MODAL = {
   SUMMARY: 'SUMMARY',
   WITNESS_ACCOUNT: 'WITNESS ACCOUNT',
   EMPTY_VALUE: '—'
+} as const
+
+// ─── Related content (sighting modal) ───────────────────────────────
+
+export const RELATED = {
+  FIREBALLS_TITLE: 'RELATED FIREBALLS',
+  FIREBALLS_EMPTY: 'No NASA fireball events within 200 km / 72 hrs',
+  NEWS_TITLE: 'RELATED NEWS',
+  NEWS_EMPTY: 'No related news articles within ±7 days',
+  FIREBALL_ENERGY: 'Energy',
+  FIREBALL_IMPACT: 'Impact',
+  FIREBALL_ALTITUDE: 'Alt',
+  FIREBALL_VELOCITY: 'Vel',
+  FIREBALL_DISTANCE: 'Distance',
+  FIREBALL_ENERGY_UNIT: ' J×10¹⁰',
+  FIREBALL_IMPACT_UNIT: ' kt',
+  FIREBALL_ALTITUDE_UNIT: ' km',
+  FIREBALL_VELOCITY_UNIT: ' km/s',
+  FIREBALL_DISTANCE_UNIT: ' km'
 } as const
 
 // ─── GDELT modal labels ────────────────────────────────────────────
@@ -240,7 +266,7 @@ export const WELCOME = {
   STAT_TIMESPAN_LABEL: 'Time span',
   STAT_RECORDS: '230,000+',
   STAT_RECORDS_LABEL: 'Records',
-  STAT_SOURCES: '14 active',
+  STAT_SOURCES: '15 active',
   STAT_SOURCES_LABEL: 'Sources',
   STAT_COVERAGE: 'Global',
   STAT_COVERAGE_LABEL: 'Coverage',

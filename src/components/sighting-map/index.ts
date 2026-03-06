@@ -3,7 +3,9 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
 import { colors } from '@/styles/palette'
-import type { Sighting } from '@/types'
+import { CheckboxGroup } from '@/components/checkbox'
+import { MAP_LAYERS } from '@/data/strings'
+import type { Sighting, Fireball } from '@/types'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.markercluster'
@@ -26,7 +28,8 @@ const MARKER_COLORS: Record<string, string> = {
   NUFORC: colors.sourceNuforc,
   HATCH_UDB: colors.sourceHatch,
   CHRONOLOGY: colors.sourceChronology,
-  EXPERIENCER: colors.sourceExperiencer
+  EXPERIENCER: colors.sourceExperiencer,
+  NASA_CNEOS: colors.sourceFireball
 }
 
 const DEFAULT_CENTER: L.LatLngExpression = [30, 0]
@@ -39,6 +42,7 @@ const MAX_ZOOM = 14
 export class SightingMap extends Component<SightingMapProps> {
   private map!: L.Map
   private clusterGroup!: L.MarkerClusterGroup
+  private fireballLayer!: L.LayerGroup
   private wrapper!: HTMLElement
   private loaderEl!: HTMLElement
   private resizeObserver!: ResizeObserver
@@ -49,7 +53,28 @@ export class SightingMap extends Component<SightingMapProps> {
     const mapEl = h('div', { className: cx.sightingMapCanvas })
     this.loaderEl = h('div', { className: cx.sightingMapLoader })
     this.loaderEl.style.display = 'none'
+
+    const controls = new CheckboxGroup({
+      items: [
+        {
+          label: MAP_LAYERS.SIGHTINGS,
+          color: colors.sourceNuforc,
+          checked: true,
+          onChange: (on) => this.toggleSightings(on)
+        },
+        {
+          label: MAP_LAYERS.FIREBALLS,
+          color: colors.sourceFireball,
+          checked: true,
+          onChange: (on) => this.toggleFireballs(on)
+        }
+      ]
+    })
+
+    const controlsEl = h('div', { className: cx.mapControls }, controls.el)
+
     this.wrapper.appendChild(mapEl)
+    this.wrapper.appendChild(controlsEl)
     this.wrapper.appendChild(this.loaderEl)
 
     // Defer map init — double RAF ensures layout is fully resolved
@@ -106,6 +131,9 @@ export class SightingMap extends Component<SightingMapProps> {
     })
 
     this.map.addLayer(this.clusterGroup)
+
+    this.fireballLayer = L.layerGroup()
+    this.map.addLayer(this.fireballLayer)
 
     // Emit bounds change on move/zoom
     if (this.props.onBoundsChange) {
@@ -183,6 +211,46 @@ export class SightingMap extends Component<SightingMapProps> {
     this.clusterGroup.addLayers(markers)
   }
 
+  setFireballs(fireballs: Fireball[]): void {
+    if (!this.fireballLayer) return
+
+    this.fireballLayer.clearLayers()
+    const color = colors.sourceFireball
+
+    for (const fb of fireballs) {
+      if (fb.lat == null || fb.lng == null) continue
+
+      const marker = L.circleMarker([fb.lat, fb.lng], {
+        radius: 8,
+        color,
+        fillColor: color,
+        fillOpacity: 0.8,
+        weight: 2,
+        opacity: 1,
+        interactive: true
+      })
+
+      const date = fb.date?.slice(0, 10) ?? '—'
+      const parts = [
+        fb.energy != null ? `Energy: ${fb.energy} J×10¹⁰` : '',
+        fb.impactEnergy != null ? `Impact: ${fb.impactEnergy} kt` : '',
+        fb.altitude != null ? `Alt: ${fb.altitude} km` : '',
+        fb.velocity != null ? `Vel: ${fb.velocity} km/s` : ''
+      ].filter(Boolean)
+
+      marker.bindPopup(() =>
+        h('div', { className: cx.mapPopup },
+          h('div', { className: cx.mapPopupDate }, date),
+          h('div', { className: cx.mapPopupLocation }, `${fb.lat!.toFixed(2)}°, ${fb.lng!.toFixed(2)}°`),
+          h('div', { className: cx.mapPopupMeta }, parts.join(' · ')),
+          h('div', { className: cx.mapPopupMeta }, 'NASA CNEOS Fireball')
+        ), { maxWidth: 280, closeButton: true }
+      )
+
+      this.fireballLayer.addLayer(marker)
+    }
+  }
+
   fitToData(): void {
     if (!this.map || !this.clusterGroup) return
     const bounds = this.clusterGroup.getBounds()
@@ -193,6 +261,20 @@ export class SightingMap extends Component<SightingMapProps> {
 
   invalidateSize(): void {
     if (this.map) this.map.invalidateSize()
+  }
+
+  // ─── Layer toggles ─────────────────────────────────────────────
+
+  private toggleSightings(visible: boolean): void {
+    if (!this.map || !this.clusterGroup) return
+    if (visible) this.map.addLayer(this.clusterGroup)
+    else this.map.removeLayer(this.clusterGroup)
+  }
+
+  private toggleFireballs(visible: boolean): void {
+    if (!this.map || !this.fireballLayer) return
+    if (visible) this.map.addLayer(this.fireballLayer)
+    else this.map.removeLayer(this.fireballLayer)
   }
 
   // ─── Popup ────────────────────────────────────────────────────

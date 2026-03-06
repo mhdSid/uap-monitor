@@ -118,10 +118,23 @@ export interface NewsItem {
 }
 
 export interface Fireball {
+  id: string
   date: string
-  coordinates: Coordinates
-  energy: string
-  location: string
+  lat: number | null
+  lng: number | null
+  altitude: number | null
+  velocity: number | null
+  energy: number | null
+  impactEnergy: number | null
+  source: string
+}
+
+export interface FireballCollection {
+  generatedAt: string
+  source: string
+  totalResults: number
+  withCoordinates: number
+  fireballs: Fireball[]
 }
 
 // ─── GDELT news layer ───────────────────────────────────────────────

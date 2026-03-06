@@ -1,4 +1,4 @@
-import type { ChronologyManifest, GdeltCollection, GnewsCollection, ManifestSource, WelcomeData, WelcomeSource, WelcomeStats } from '@/types'
+import type { ChronologyManifest, FireballCollection, GdeltCollection, GnewsCollection, ManifestSource, WelcomeData, WelcomeSource, WelcomeStats } from '@/types'
 
 // ─── Chronology sub-source display metadata ──────────────────────────
 
@@ -69,8 +69,9 @@ export function useDeriveWelcomeData(params: {
   chronologyManifest: ChronologyManifest | null
   gdeltCollection: GdeltCollection | null
   gnewsCollection: GnewsCollection | null
+  fireballCollection: FireballCollection | null
 }): WelcomeData {
-  const { nuforc, hatch, chronology, chronologyManifest, gdeltCollection, gnewsCollection } = params
+  const { nuforc, hatch, chronology, chronologyManifest, gdeltCollection, gnewsCollection, fireballCollection } = params
 
   // ── Stats ────────────────────────────────────────────────────────
 
@@ -96,7 +97,8 @@ export function useDeriveWelcomeData(params: {
     (hatch.getTotalCount() > 0 ? 1 : 0) +
     subSourceCount +
     (gdeltCollection != null ? 1 : 0) +
-    (gnewsCollection != null ? 1 : 0)
+    (gnewsCollection != null ? 1 : 0) +
+    (fireballCollection != null ? 1 : 0)
   const sources = activeCount > 0 ? `${activeCount} active` : '14 active'
 
   const stats: WelcomeStats = {
@@ -177,6 +179,15 @@ export function useDeriveWelcomeData(params: {
       ? new Date(gnewsCollection.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       : 'Daily',
     tier: 'mid'
+  })
+
+  // NASA CNEOS Fireballs
+  const fireballCount = fireballCollection?.totalResults
+  sourceList.push({
+    name: 'NASA CNEOS Fireballs',
+    records: fireballCount != null ? `${formatSourceCount(fireballCount)} events` : '900+',
+    period: '1988–present',
+    tier: 'high'
   })
 
   return { stats, sources: sourceList }

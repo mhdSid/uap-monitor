@@ -13,5 +13,13 @@ export const cx = {
   summaryLabel: 'modal-sighting__summary-label',
   title: 'modal-sighting__title',
   value: 'modal-sighting__value',
-  sourceLink: 'modal-sighting__source-link'
+  sourceLink: 'modal-sighting__source-link',
+  relatedSection: 'modal-sighting__related',
+  relatedTitle: 'modal-sighting__related-title',
+  relatedEmpty: 'modal-sighting__related-empty',
+  relatedItem: 'modal-sighting__related-item',
+  relatedItemDate: 'modal-sighting__related-item-date',
+  relatedItemMeta: 'modal-sighting__related-item-meta',
+  relatedItemDistance: 'modal-sighting__related-item-distance',
+  relatedItemLink: 'modal-sighting__related-item-link'
 } as const

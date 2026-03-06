@@ -5,6 +5,7 @@ export const cx = {
   mapClusterSm: 'map-cluster--sm',
   mapClusterXl: 'map-cluster--xl',
   mapClusterWrapper: 'map-cluster-wrapper',
+  mapControls: 'sighting-map__controls',
   mapPopup: 'map-popup',
   mapPopupDate: 'map-popup__date',
   mapPopupLocation: 'map-popup__location',
