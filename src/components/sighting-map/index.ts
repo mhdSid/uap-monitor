@@ -4,12 +4,15 @@ import { Component } from '@/core'
 import { h } from '@/utils/dom'
 import { colors } from '@/styles/palette'
 import { CheckboxGroup } from '@/components/checkbox'
-import { MAP_LAYERS } from '@/data/strings'
+import { Alert } from '@/components/alert'
+import { AlertVariant } from '@/enums'
 import type { Sighting, Fireball } from '@/types'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.markercluster'
 import 'leaflet.markercluster/dist/MarkerCluster.css'
+import { MAP_INFO } from '@/data/strings'
+import { MAP_LAYERS } from '@/data/strings'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -77,6 +80,18 @@ export class SightingMap extends Component<SightingMapProps> {
     this.wrapper.appendChild(controlsEl)
     this.wrapper.appendChild(this.loaderEl)
 
+    const alert = new Alert({
+      variant: AlertVariant.INFO,
+      title: MAP_INFO.TITLE,
+      content: MAP_INFO.CONTENT,
+      dismissible: false
+    })
+
+    const outer = h('div', { className: cx.sightingMapOuter },
+      alert.el,
+      this.wrapper
+    )
+
     // Defer map init — double RAF ensures layout is fully resolved
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -84,7 +99,7 @@ export class SightingMap extends Component<SightingMapProps> {
       })
     })
 
-    return this.wrapper
+    return outer
   }
 
   private initMap(container: HTMLElement): void {

@@ -92,6 +92,11 @@ export const MAP_LAYERS = {
   FIREBALLS: 'Fireballs'
 } as const
 
+export const MAP_INFO = {
+  TITLE: 'GEOSPATIAL INTELLIGENCE',
+  CONTENT: 'Interactive density map of UAP sighting reports and NASA fireball events. Marker colors indicate data source — green for civilian reports, orange for government sensor data. Cluster numbers reveal concentration hotspots. Cross-referencing coordinates with temporal data exposes patterns invisible in tabular views: recurring locations, proximity to military installations, and correlation with atmospheric bolide events.'
+} as const
+
 // ─── Section titles ─────────────────────────────────────────────────
 
 export const SECTION = {

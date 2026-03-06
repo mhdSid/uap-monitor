@@ -1,10 +1,15 @@
+.sighting-map-outer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
 .sighting-map {
   width: 100%;
   aspect-ratio: 1;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  margin-bottom: var(--space-5);
   position: relative;
 }
 

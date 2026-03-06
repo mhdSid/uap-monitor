@@ -13,6 +13,7 @@ export const cx = {
   mapPopupAction: 'map-popup__action',
   mapPopupSummary: 'map-popup__summary',
   sightingMap: 'sighting-map',
+  sightingMapOuter: 'sighting-map-outer',
   sightingMapCanvas: 'sighting-map__canvas',
   sightingMapLoader: 'sighting-map__loader'
 } as const

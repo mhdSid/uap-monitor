@@ -13,6 +13,9 @@
 }
 
 .app-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
   padding: var(--space-md);
   max-width: 800px;
   margin: 0 auto;
@@ -29,5 +32,7 @@
 }
 
 .controls-form {
-  display: contents;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
