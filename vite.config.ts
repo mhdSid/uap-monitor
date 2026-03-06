@@ -123,27 +123,44 @@ export default defineConfig({
         ]
       },
       manifest: {
-        name: 'UAP Monitor',
+        name: 'UAP Monitor — Global UAP/UFO Sighting Intelligence',
         short_name: 'UAP MON',
-        description: 'Global UAP intelligence platform aggregating verified sighting reports and real-time news feeds',
+        description: 'Global UAP intelligence platform aggregating 230,000+ verified sighting reports from 15 sources spanning 70 AD to present. Credibility scoring, shape analysis, NASA fireball correlation, and real-time news feeds.',
         theme_color: '#0a0a0a',
         background_color: '#0a0a0a',
         display: 'standalone',
+        orientation: 'portrait-primary',
         start_url: './',
         scope: './',
+        lang: 'en',
+        dir: 'ltr',
+        categories: ['education', 'news', 'reference'],
         icons: [
           {
             src: 'icon-192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'icon-512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
+          },
+          {
+            src: 'favicon-16.png',
+            sizes: '16x16',
+            type: 'image/png'
+          },
+          {
+            src: 'favicon-32.png',
+            sizes: '32x32',
+            type: 'image/png'
           }
-        ]
+        ],
+        related_applications: [],
+        prefer_related_applications: false
       }
     })
   ]
