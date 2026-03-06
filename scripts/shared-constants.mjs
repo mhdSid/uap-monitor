@@ -11,6 +11,7 @@
  */
 
 import { createHash } from 'node:crypto'
+import { readFileSync, existsSync } from 'node:fs'
 
 // ─── Enums ──────────────────────────────────────────────────────────
 
@@ -765,4 +766,69 @@ export const DEFAULT_NEWS_QUERY = 'UAP OR UFO OR "unidentified aerial" OR "flyin
 /** Deterministic short ID from a URL string. */
 export function urlToId(url) {
   return createHash('sha256').update(url).digest('hex').slice(0, 12)
+}
+
+/**
+ * Load existing articles from a JSON file, merge with new articles,
+ * deduplicate by URL, sort newest first, and trim to max.
+ *
+ * @param {string} filePath  - Path to existing JSON file
+ * @param {object[]} newArticles - Freshly fetched articles
+ * @param {string} arrayField - Name of the articles array in the JSON ('articles', 'fireballs', etc.)
+ * @param {string} urlField - Field name to deduplicate on (default: 'url')
+ * @param {string} dateField - Field name to sort by (default: 'publishedAt')
+ * @param {number} max - Max articles to keep after merge
+ * @returns {{ merged: object[], existing: number, added: number }}
+ */
+export function mergeArticles(filePath, newArticles, {
+  arrayField = 'articles',
+  urlField = 'url',
+  dateField = 'publishedAt',
+  max = Infinity
+} = {}) {
+  let existing = []
+
+  if (existsSync(filePath)) {
+    try {
+      const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
+      existing = raw[arrayField] || []
+      console.log(`Existing file: ${existing.length} ${arrayField}`)
+    } catch {
+      console.log('Existing file unreadable, starting fresh')
+    }
+  } else {
+    console.log('No existing file, starting fresh')
+  }
+
+  const seen = new Set()
+  const merged = []
+
+  // New articles take priority (fresher data)
+  for (const a of newArticles) {
+    const key = a[urlField] || a.id
+    if (!seen.has(key)) {
+      seen.add(key)
+      merged.push(a)
+    }
+  }
+
+  // Then append existing that aren't dupes
+  let kept = 0
+  for (const a of existing) {
+    const key = a[urlField] || a.id
+    if (!seen.has(key)) {
+      seen.add(key)
+      merged.push(a)
+      kept++
+    }
+  }
+
+  const sorted = merged
+    .sort((a, b) => (b[dateField] || '').localeCompare(a[dateField] || ''))
+    .slice(0, max)
+
+  const added = merged.length - existing.length
+  console.log(`Merge: ${existing.length} existing + ${newArticles.length} fetched -> ${merged.length} deduped -> ${sorted.length} after trim (${Math.max(0, added)} net new)`)
+
+  return { merged: sorted, existing: existing.length, added: Math.max(0, added) }
 }

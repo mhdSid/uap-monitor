@@ -16,6 +16,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname } from 'node:path'
 import { createHash } from 'node:crypto'
+import { mergeArticles } from '../shared-constants.mjs'
 
 // ─── CLI args ───────────────────────────────────────────────────────
 
@@ -114,17 +115,26 @@ async function main() {
   const withCoords = fireballs.filter(f => f.lat != null && f.lng != null)
   console.log(`Transformed: ${fireballs.length} total, ${withCoords.length} with coordinates`)
 
+  // Merge with existing file
+  const { merged } = mergeArticles(opts.out, fireballs, {
+    arrayField: 'fireballs',
+    urlField: 'id',
+    dateField: 'date'
+  })
+
+  const mergedWithCoords = merged.filter(f => f.lat != null && f.lng != null)
+
   const output = {
     generatedAt: new Date().toISOString(),
     source: 'NASA/JPL CNEOS Fireball Data API',
-    totalResults: fireballs.length,
-    withCoordinates: withCoords.length,
-    fireballs: fireballs.sort((a, b) => b.date.localeCompare(a.date))
+    totalResults: merged.length,
+    withCoordinates: mergedWithCoords.length,
+    fireballs: merged
   }
 
   mkdirSync(dirname(opts.out), { recursive: true })
   writeFileSync(opts.out, JSON.stringify(output, null, 2), 'utf-8')
-  console.log(`Wrote ${fireballs.length} fireballs -> ${opts.out}`)
+  console.log(`Wrote ${merged.length} fireballs -> ${opts.out}`)
 }
 
 main().catch(err => { console.error('Fireball fetch failed:', err.message); process.exit(1) })

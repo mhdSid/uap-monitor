@@ -22,7 +22,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname } from 'node:path'
 import GNews from '@gnews-io/gnews-io-js'
-import { DEFAULT_NEWS_QUERY, urlToId } from '../shared-constants.mjs'
+import { DEFAULT_NEWS_QUERY, urlToId, mergeArticles } from '../shared-constants.mjs'
 
 const PER_PAGE = 10  // GNews free tier hard limit
 
@@ -183,16 +183,24 @@ async function main() {
     .slice(0, opts.limit)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
 
+  // Merge with existing file
+  const { merged } = mergeArticles(opts.out, trimmed, {
+    arrayField: 'articles',
+    urlField: 'url',
+    dateField: 'publishedAt',
+    max: opts.limit
+  })
+
   const output = {
     generatedAt: new Date().toISOString(),
     query,
-    totalResults: totalAvailable,
-    articles: trimmed
+    totalResults: merged.length,
+    articles: merged
   }
 
   mkdirSync(dirname(opts.out), { recursive: true })
   writeFileSync(opts.out, JSON.stringify(output, null, 2), 'utf-8')
-  console.log('Wrote ' + trimmed.length + ' articles -> ' + opts.out)
+  console.log('Wrote ' + merged.length + ' articles -> ' + opts.out)
 }
 
 main().catch(err => { console.error('\nGNews fetch failed: ' + err.message); process.exit(1) })

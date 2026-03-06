@@ -22,7 +22,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname } from 'node:path'
 import { GdeltClient } from 'gdelt-ts-client'
-import { DEFAULT_NEWS_QUERY, urlToId } from '../shared-constants.mjs'
+import { DEFAULT_NEWS_QUERY, urlToId, mergeArticles } from '../shared-constants.mjs'
 
 // ─── Tone bands ─────────────────────────────────────────────────────
 
@@ -183,18 +183,26 @@ async function main() {
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, opts.max)
 
+  // Merge with existing file
+  const { merged } = mergeArticles(opts.out, trimmed, {
+    arrayField: 'articles',
+    urlField: 'url',
+    dateField: 'publishedAt',
+    max: opts.max
+  })
+
   const output = {
     generatedAt: new Date().toISOString(),
     query: baseQuery,
     days: opts.days,
     windows: windows.length,
-    totalResults: allArticles.length,
-    articles: trimmed
+    totalResults: merged.length,
+    articles: merged
   }
 
   mkdirSync(dirname(opts.out), { recursive: true })
   writeFileSync(opts.out, JSON.stringify(output, null, 2), 'utf-8')
-  console.log('Wrote ' + trimmed.length + ' articles -> ' + opts.out)
+  console.log('Wrote ' + merged.length + ' articles -> ' + opts.out)
 }
 
 main().catch(err => { console.error('\nGDELT fetch failed: ' + err.message); process.exit(1) })
