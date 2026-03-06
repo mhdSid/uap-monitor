@@ -83,6 +83,14 @@
 /* ── Sighting grid column layout ───────────────────────────────────── */
 /* Columns: 1=REPORT  2=CRED  3=STATUS  4=DATE                        */
 
+.grids-container {
+  contain: layout style;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  contain: layout style;
+}
+
 /* Mobile: hide STATUS + DATE, REPORT fills space, CRED compact */
 .grids-container .data-grid__th:nth-child(3),
 .grids-container .data-grid__td:nth-child(3),
