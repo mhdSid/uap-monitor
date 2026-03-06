@@ -27,10 +27,6 @@
   padding: var(--space-20) 0;
 }
 
-.grids-container {
-  contain: layout style;
-}
-
 .controls-form {
   display: flex;
   flex-direction: column;
