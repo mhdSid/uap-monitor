@@ -143,9 +143,8 @@ export class SightingModal {
       store.gdeltArticles.get(),
       store.gnewsArticles.get()
     )
-    if (related.gdelt.length > 0 || related.gnews.length > 0) {
-      children.push(SightingModal.buildRelatedNews(related.gdelt, related.gnews))
-    }
+
+    children.push(SightingModal.buildRelatedNews(related.gdelt, related.gnews))
 
     return h('div', { className: cx.content }, ...children)
   }
