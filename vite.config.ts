@@ -29,8 +29,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: null,
       workbox: {
-        navigateFallback: 'offline.html',
-        navigateFallbackAllowlist: [/^\/$/],
+        skipWaiting: true,
+        clientsClaim: true,
+        navigateFallback: 'index.html',
+        navigateFallbackAllowlist: [/^\/(?!api)/],
         runtimeCaching: [
           {
             urlPattern: /\/data\/nuforc-manifest\.json$/,
