@@ -13,10 +13,15 @@
  *   node scripts/nasa-fireball/fetch.mjs --out public/data/nasa-fireballs.json
  */
 
-import { writeFileSync, mkdirSync } from 'node:fs'
-import { dirname } from 'node:path'
+import { writeFileSync, mkdirSync, copyFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { mergeArticles } from '../shared-constants.mjs'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const PROJECT_ROOT = resolve(__dirname, '..', '..')
+const SOURCE_FILE = resolve(PROJECT_ROOT, '__sources', 'nasa-fireballs.json')
 
 // ─── CLI args ───────────────────────────────────────────────────────
 
@@ -115,8 +120,11 @@ async function main() {
   const withCoords = fireballs.filter(f => f.lat != null && f.lng != null)
   console.log(`Transformed: ${fireballs.length} total, ${withCoords.length} with coordinates`)
 
-  // Merge with existing file
-  const { merged } = mergeArticles(opts.out, fireballs, {
+  // Merge with existing source file
+  
+  mkdirSync(dirname(SOURCE_FILE), { recursive: true })
+
+  const { merged } = mergeArticles(SOURCE_FILE, fireballs, {
     arrayField: 'fireballs',
     urlField: 'id',
     dateField: 'date'
@@ -132,9 +140,16 @@ async function main() {
     fireballs: merged
   }
 
+  const json = JSON.stringify(output, null, 2)
+
+  // Write source of truth
+  writeFileSync(SOURCE_FILE, json, 'utf-8')
+  console.log(`Wrote ${merged.length} fireballs -> ${SOURCE_FILE}`)
+
+  // Copy to public/data
   mkdirSync(dirname(opts.out), { recursive: true })
-  writeFileSync(opts.out, JSON.stringify(output, null, 2), 'utf-8')
-  console.log(`Wrote ${merged.length} fireballs -> ${opts.out}`)
+  copyFileSync(SOURCE_FILE, opts.out)
+  console.log(`Copied -> ${opts.out}`)
 }
 
 main().catch(err => { console.error('Fireball fetch failed:', err.message); process.exit(1) })

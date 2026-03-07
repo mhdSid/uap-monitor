@@ -19,10 +19,15 @@
  *   GNEWS_API_KEY   Required. Get one at https://gnews.io
  */
 
-import { writeFileSync, mkdirSync } from 'node:fs'
-import { dirname } from 'node:path'
+import { writeFileSync, mkdirSync, copyFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import GNews from '@gnews-io/gnews-io-js'
 import { DEFAULT_NEWS_QUERY, urlToId, mergeArticles } from '../shared-constants.mjs'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const PROJECT_ROOT = resolve(__dirname, '..', '..')
+const SOURCE_FILE = resolve(PROJECT_ROOT, '__sources', 'gnews-articles.json')
 
 const PER_PAGE = 10  // GNews free tier hard limit
 
@@ -183,8 +188,10 @@ async function main() {
     .slice(0, opts.limit)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
 
-  // Merge with existing file
-  const { merged } = mergeArticles(opts.out, trimmed, {
+  // Merge with existing source of truth
+  mkdirSync(dirname(SOURCE_FILE), { recursive: true })
+
+  const { merged } = mergeArticles(SOURCE_FILE, trimmed, {
     arrayField: 'articles',
     urlField: 'url',
     dateField: 'publishedAt',
@@ -198,9 +205,16 @@ async function main() {
     articles: merged
   }
 
+  const json = JSON.stringify(output, null, 2)
+
+  // Write source of truth
+  writeFileSync(SOURCE_FILE, json, 'utf-8')
+  console.log('Wrote ' + merged.length + ' articles -> ' + SOURCE_FILE)
+
+  // Copy to public/data
   mkdirSync(dirname(opts.out), { recursive: true })
-  writeFileSync(opts.out, JSON.stringify(output, null, 2), 'utf-8')
-  console.log('Wrote ' + merged.length + ' articles -> ' + opts.out)
+  copyFileSync(SOURCE_FILE, opts.out)
+  console.log('Copied -> ' + opts.out)
 }
 
 main().catch(err => { console.error('\nGNews fetch failed: ' + err.message); process.exit(1) })
