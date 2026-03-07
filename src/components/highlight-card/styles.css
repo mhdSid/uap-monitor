@@ -1,0 +1,37 @@
+.highlight-card {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+
+.highlight-card__year {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-green);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.highlight-card__location {
+  font-size: var(--fs-2xs);
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+}
+
+.highlight-card__headline {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .highlight-card {
+    flex: 0 0 180px;
+    padding: var(--space-4);
+  }
+
+  .highlight-card__year {
+    font-size: var(--fs-title);
+  }
+}

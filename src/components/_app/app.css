@@ -12,6 +12,10 @@
   z-index: var(--z-scanlines);
 }
 
+[data-theme="light"] .scanlines {
+  display: none;
+}
+
 .app-main {
   display: flex;
   flex-direction: column;

@@ -25,6 +25,7 @@ export interface SightingMapProps {
 // ─── Constants ──────────────────────────────────────────────────────
 
 const DARK_TILES = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+const LIGHT_TILES = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
 const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
 
 const MARKER_COLORS: Record<string, string> = {
@@ -44,6 +45,7 @@ const MAX_ZOOM = 14
 
 export class SightingMap extends Component<SightingMapProps> {
   private map!: L.Map
+  private tileLayer!: L.TileLayer
   private clusterGroup!: L.MarkerClusterGroup
   private fireballLayer!: L.LayerGroup
   private wrapper!: HTMLElement
@@ -114,7 +116,7 @@ export class SightingMap extends Component<SightingMapProps> {
       worldCopyJump: true
     })
 
-    L.tileLayer(DARK_TILES, {
+    this.tileLayer = L.tileLayer(DARK_TILES, {
       attribution: TILE_ATTR,
       maxZoom: MAX_ZOOM
     }).addTo(this.map)
@@ -272,6 +274,12 @@ export class SightingMap extends Component<SightingMapProps> {
     if (bounds.isValid()) {
       this.map.fitBounds(bounds, { padding: [30, 30], maxZoom: 10 })
     }
+  }
+
+  setTheme(theme: 'dark' | 'light'): void {
+    if (!this.map || !this.tileLayer) return
+    const url = theme === 'light' ? LIGHT_TILES : DARK_TILES
+    this.tileLayer.setUrl(url)
   }
 
   invalidateSize(): void {

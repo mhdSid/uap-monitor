@@ -84,3 +84,37 @@ export function iconSortDesc(size = 10): SVGSVGElement {
     <path d="M2.5 3.5L5 7L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   `, size)
 }
+
+export function iconSun(size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    <line x1="8" y1="1.5" x2="8" y2="3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="8" y1="13" x2="8" y2="14.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="1.5" y1="8" x2="3" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="13" y1="8" x2="14.5" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="3.4" y1="3.4" x2="4.5" y2="4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="11.5" y1="11.5" x2="12.6" y2="12.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="3.4" y1="12.6" x2="4.5" y2="11.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="11.5" y1="4.5" x2="12.6" y2="3.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  `
+  return svg
+}
+
+export function iconMoon(size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <path d="M13.5 8.5a5.5 5.5 0 0 1-7.5-5 5.5 5.5 0 0 0 5 8 5.5 5.5 0 0 0 2.5-3z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  `
+  return svg
+}

@@ -187,3 +187,101 @@
   --z-toast:   1100;
   --z-scanlines: 9999;
 }
+
+/* ─── Light theme ──────────────────────────────────────────────────
+ *  Overrides raw palette + semantic tokens.
+ *  All component CSS references vars, so no component changes needed.
+ *  WCAG AA: text ≥ 4.5:1, UI elements ≥ 3:1 against backgrounds.
+ * ─────────────────────────────────────────────────────────────────── */
+
+[data-theme="light"] {
+  /* ── Neutral palette overrides ───────────────────────────────────── */
+  --c-neutral-975: #f5f5f5;
+  --c-neutral-960: #f0f0f0;
+  --c-neutral-955: #ededed;
+  --c-neutral-950: #fafafa;
+  --c-neutral-900: #e5e5e5;
+  --c-neutral-850: rgba(245, 245, 245, 0.85);
+  --c-neutral-800: #d4d4d4;
+  --c-neutral-700: #a3a3a3;
+  --c-neutral-600: #737373;
+  --c-neutral-500: #525252;
+  --c-neutral-400: #404040;
+  --c-neutral-300: #262626;
+  --c-neutral-250: #1a1a1a;
+  --c-neutral-200: #171717;
+  --c-neutral-400-08: rgba(64, 64, 64, 0.08);
+  --c-neutral-400-15: rgba(64, 64, 64, 0.15);
+  --c-white-20: rgba(0, 0, 0, 0.08);
+  --c-white-15: rgba(0, 0, 0, 0.06);
+  --c-white-08: rgba(0, 0, 0, 0.04);
+  --c-overlay: rgba(0, 0, 0, 0.4);
+  --c-overlay-70: rgba(0, 0, 0, 0.35);
+  --c-panel: rgba(255, 255, 255, 0.92);
+  --c-panel-70: rgba(255, 255, 255, 0.7);
+  --c-panel-95: rgba(255, 255, 255, 0.95);
+  --c-shadow: rgba(0, 0, 0, 0.12);
+
+  /* ── Green (darker for light bg — WCAG AA 4.5:1 on white) ──────── */
+  --c-green-500: #008f24;
+  --c-green-400: #00a832;
+  --c-green-300: #16a34a;
+  --c-green-500-70: rgba(0, 143, 36, 0.7);
+  --c-green-500-50: rgba(0, 143, 36, 0.5);
+  --c-green-500-40: rgba(0, 143, 36, 0.4);
+  --c-green-500-30: rgba(0, 143, 36, 0.3);
+  --c-green-500-25: rgba(0, 143, 36, 0.25);
+  --c-green-500-20: rgba(0, 143, 36, 0.2);
+  --c-green-500-12: rgba(0, 143, 36, 0.12);
+  --c-green-500-10: rgba(0, 143, 36, 0.1);
+  --c-green-500-08: rgba(0, 143, 36, 0.08);
+  --c-green-500-06: rgba(0, 143, 36, 0.06);
+  --c-green-500-03: rgba(0, 143, 36, 0.03);
+  --c-green-400-70: rgba(0, 168, 50, 0.7);
+  --c-green-400-60: rgba(0, 168, 50, 0.6);
+  --c-green-400-50: rgba(0, 168, 50, 0.5);
+  --c-green-400-40: rgba(0, 168, 50, 0.4);
+  --c-green-400-30: rgba(0, 168, 50, 0.3);
+  --c-green-400-22: rgba(0, 168, 50, 0.22);
+  --c-green-400-16: rgba(0, 168, 50, 0.16);
+  --c-green-400-12: rgba(0, 168, 50, 0.12);
+  --c-green-400-08: rgba(0, 168, 50, 0.08);
+
+  /* ── Amber (darker for readability) ────────────────────────────── */
+  --c-amber-500: #b45309;
+  --c-amber-400: #c2610c;
+  --c-amber-500-90: rgba(194, 97, 12, 0.9);
+  --c-amber-500-40: rgba(194, 97, 12, 0.4);
+  --c-amber-400-30: rgba(194, 97, 12, 0.3);
+  --c-amber-400-20: rgba(194, 97, 12, 0.2);
+  --c-amber-400-12: rgba(194, 97, 12, 0.12);
+
+  /* ── Red / Cyan / Purple ───────────────────────────────────────── */
+  --c-red-500: #dc2626;
+  --c-cyan-500: #0891b2;
+  --c-cyan-400: #0284a8;
+  --c-cyan-500-30: rgba(8, 145, 178, 0.3);
+  --c-cyan-400-50: rgba(2, 132, 168, 0.5);
+  --c-cyan-400-30: rgba(2, 132, 168, 0.3);
+  --c-cyan-400-20: rgba(2, 132, 168, 0.2);
+  --c-cyan-400-12: rgba(2, 132, 168, 0.12);
+  --c-purple-500: #7c3aed;
+
+  /* ── Semantic (auto-derived from overridden palette) ────────────── */
+  --color-bg: var(--c-neutral-950);
+  --color-surface: var(--c-neutral-850);
+  --color-border: var(--c-neutral-800);
+  --color-border-strong: var(--c-neutral-700);
+  --color-text: var(--c-neutral-300);
+  --color-text-strong: var(--c-neutral-200);
+  --color-muted: var(--c-neutral-500);
+  --color-dim: var(--c-neutral-600);
+  --color-green: var(--c-green-500);
+  --color-amber: var(--c-amber-500);
+  --color-red: var(--c-red-500);
+  --color-cyan: var(--c-cyan-500);
+  --color-purple: var(--c-purple-500);
+  --color-source-nuforc: var(--c-green-400);
+  --color-source-hatch: var(--c-cyan-400);
+  --color-source-chronology: var(--c-amber-400);
+}

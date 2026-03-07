@@ -1,11 +1,10 @@
 .filter-toolbar {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   gap: var(--space-sm);
-  flex-wrap: wrap;
 }
 
 .filter-toolbar__search {
@@ -14,7 +13,7 @@
   border: 1px solid var(--color-border);
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: var(--fs-title); /* 16px — intentional: prevents iOS auto-zoom */
+  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
   padding: var(--space-3) var(--space-sm);
   letter-spacing: 0.5px;
 }
@@ -51,6 +50,12 @@
 
 .filter-toolbar__select:focus-visible {
   border-color: var(--color-green);
+}
+
+.filter-toolbar__sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
 @media (min-width: 768px) {

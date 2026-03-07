@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, batch, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, batch, effect, minDelay, filterSightings } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -30,6 +30,7 @@ import { Timeline } from '@/components/timeline'
 import { WelcomeModal } from '@/components/welcome-modal'
 import { GdeltGrid } from '@/components/gdelt-grid'
 import { GnewsGrid } from '@/components/gnews-grid'
+import { Highlights } from '@/components/highlights'
 import { SECTION } from '@/data/strings'
 
 import type { Sighting } from '@/types'
@@ -150,6 +151,7 @@ export class App extends Component {
     clearChildren(this.main)
     this.main.appendChild(controlsForm)
     this.main.appendChild(this.timeline.el)
+    this.main.appendChild(new Highlights({}).el)
     this.main.appendChild(this.sightingMap.el)
 
     // ── GNews news section ──────────────────────────────────────
@@ -186,6 +188,12 @@ export class App extends Component {
       if (!this.yearRangeReady) return
       if (this.store.loading.get()) return
       await this.onYearRangeChange()
+    })
+
+    // Swap map tiles on theme change
+    const { theme } = useTheme()
+    effect(() => {
+      this.sightingMap.setTheme(theme.get())
     })
   }
 

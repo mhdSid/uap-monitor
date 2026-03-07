@@ -1,0 +1,18 @@
+.carousel {
+  width: 100%;
+}
+
+.carousel__track {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: var(--space-4);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: var(--space-2);
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}

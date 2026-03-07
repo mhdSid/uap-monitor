@@ -2,8 +2,10 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h, setAttrs } from '@/utils/dom'
-import { iconRadar } from '@/components/icons'
+import { iconRadar, iconSun, iconMoon } from '@/components/icons'
+import { Switch } from '@/components/switch'
 import { APP_NAME, APP_VERSION, ARIA } from '@/data/strings'
+import { useTheme } from '@/composables'
 
 export class Header extends Component {
   private clockTimer!: number
@@ -35,8 +37,19 @@ export class Header extends Component {
     updateClock()
     this.clockTimer = window.setInterval(updateClock, 1000)
 
+    const { theme, toggle } = useTheme()
+
+    const themeSwitch = new Switch({
+      checked: theme.get() === 'light',
+      iconOn: () => iconSun(10),
+      iconOff: () => iconMoon(10),
+      ariaLabel: ARIA.THEME_TOGGLE,
+      onChange: () => toggle()
+    })
+
     const right = h('div', { className: cx.right },
-      clock
+      clock,
+      themeSwitch.el
     )
 
     return h('header', { className: cx.root, role: 'banner' }, left, right)

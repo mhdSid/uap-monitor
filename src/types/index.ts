@@ -234,6 +234,8 @@ export interface SightingFilter {
   continent?: Continent
   minCredibility?: number
   country?: string
+  /** Active source IDs — undefined means all sources shown */
+  sources?: Set<string>
 }
 
 // ─── UI state ────────────────────────────────────────────────────────

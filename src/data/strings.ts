@@ -26,7 +26,8 @@ export const ARIA = {
   TICKER_IDLE: 'UAP Monitor live feed',
   TOOLTIP: 'More info',
   ARTICLE_IMAGE: 'Article thumbnail image',
-  VISIT_SOURCE: 'Visit source website'
+  VISIT_SOURCE: 'Visit source website',
+  THEME_TOGGLE: 'Toggle light and dark mode'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -82,7 +83,8 @@ export const FILTER = {
   ALL_COUNTRIES: 'ALL COUNTRIES',
   NO_DATA: 'NO DATA',
   NO_RESULTS: 'NO MATCHING SIGHTINGS',
-  EMPTY_DEFAULT: 'No data'
+  EMPTY_DEFAULT: 'No data',
+  SOURCES_LABEL: 'SOURCES'
 } as const
 
 // ─── Map layer controls ─────────────────────────────────────────────
@@ -306,6 +308,69 @@ export const ERRORS = {
   HATCH_LOAD: 'Failed to load Hatch UDB manifest',
   CHRONOLOGY_MANIFEST: 'Malformed chronology manifest',
   CHRONOLOGY_LOAD: 'Failed to load chronology manifest'
+} as const
+
+// ─── Historical highlights ──────────────────────────────────────────
+
+export const HIGHLIGHTS = {
+  TITLE: 'HISTORICAL CASES',
+  NO_MATCH: 'Sighting not found in current dataset.',
+  ITEMS: [
+    {
+      year: '1663',
+      location: 'Lake Robozero, Russia',
+      headline: 'Monastery monks recorded a 40-meter flaming sphere hovering over a lake for two hours. Water illuminated to the bottom.',
+      searchKey: 'Robozero'
+    },
+    {
+      year: '1908',
+      location: 'Tunguska, Siberia',
+      headline: '80 million trees flattened across 2,150 km\u00B2. No impact crater ever found. Cause remains debated.',
+      searchKey: 'Tunguska'
+    },
+    {
+      year: '1947',
+      location: 'Roswell, New Mexico',
+      headline: 'Debris recovered from a ranch. Military initially announced a "flying disc" then retracted to weather balloon. Became the defining UFO case.',
+      searchKey: 'Roswell'
+    },
+    {
+      year: '1952',
+      location: 'Washington, D.C.',
+      headline: 'UFOs tracked on radar over the U.S. Capitol on two consecutive weekends. Fighter jets scrambled.',
+      searchKey: 'Washington'
+    },
+    {
+      year: '1977',
+      location: 'Petrozavodsk, Russia',
+      headline: 'Jellyfish-shaped object emitted light rays over the city. Circular holes melted through apartment windows.',
+      searchKey: 'Petrozavodsk'
+    },
+    {
+      year: '1988',
+      location: 'Dalnegorsk, Hill 611',
+      headline: 'Sphere crashed into a hilltop. Scientists recovered 17-micron metallic mesh interwoven with gold wire.',
+      searchKey: 'Dalnegorsk'
+    },
+    {
+      year: '1989',
+      location: 'Voronezh, Russia',
+      headline: 'TASS reported 9-foot, three-eyed beings in a city park. Police confirmed. Ground radiation 2x above baseline.',
+      searchKey: 'Voronezh'
+    },
+    {
+      year: '2004',
+      location: 'USS Nimitz, Pacific',
+      headline: 'Navy pilots tracked a Tic Tac-shaped object performing impossible maneuvers. FLIR footage later declassified.',
+      searchKey: 'Nimitz'
+    },
+    {
+      year: '2023',
+      location: 'Leningrad Oblast, Russia',
+      headline: 'Object near nuclear plant. Military confirmed: no engines, not a drone. Fighter jets scrambled. Airspace closed.',
+      searchKey: 'Sosnovy Bor'
+    }
+  ]
 } as const
 
 export const TAGS = {

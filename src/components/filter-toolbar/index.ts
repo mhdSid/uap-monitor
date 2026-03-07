@@ -2,10 +2,20 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
-import { Continent, SightingShape } from '@/enums'
+import { Continent, SightingShape, DataSourceId } from '@/enums'
 import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
 import { useAppStore, useDebounce } from '@/composables'
+import { Checkbox } from '@/components/checkbox'
+import { colors } from '@/styles/palette'
 import type { SightingFilter } from '@/types'
+
+// ─── Source chip config (uses enum + palette — no anonymous strings) ─
+
+const SOURCE_CHIPS: { id: DataSourceId; label: string; color: string }[] = [
+  { id: DataSourceId.NUFORC,     label: DataSourceId.NUFORC,     color: colors.sourceNuforc },
+  { id: DataSourceId.HATCH_UDB,  label: DataSourceId.HATCH_UDB,  color: colors.sourceHatch },
+  { id: DataSourceId.CHRONOLOGY, label: DataSourceId.CHRONOLOGY,  color: colors.sourceChronology }
+]
 
 export class FilterToolbar extends Component {
   private currentFilter!: SightingFilter
@@ -68,7 +78,6 @@ export class FilterToolbar extends Component {
       onChange: () => {
         const val = this.continentSelect.value
         this.currentFilter.continent = val ? (val as Continent) : undefined
-        // Clear country when continent changes
         this.currentFilter.country = undefined
         this.countrySelect.value = ''
         this.emitDebounced.flush()
@@ -96,9 +105,24 @@ export class FilterToolbar extends Component {
     }) as HTMLSelectElement
 
     this.countrySelect.appendChild(h('option', { value: '' }, FILTER.ALL_COUNTRIES))
-
-    // Populate countries from loaded sightings reactively
     store.sightings.subscribe(() => this.updateCountryOptions())
+
+    // ── Source chips ─────────────────────────────────────────────
+    const sourceChips = SOURCE_CHIPS.map(src => {
+      return new Checkbox({
+        label: src.label,
+        color: src.color,
+        checked: true,
+        onChange: (checked) => {
+          const active = this.currentFilter.sources
+            ?? new Set(SOURCE_CHIPS.map(s => s.id as string))
+          if (checked) active.add(src.id)
+          else active.delete(src.id)
+          this.currentFilter.sources = active.size === SOURCE_CHIPS.length ? undefined : new Set(active)
+          store.filter.set({ ...this.currentFilter })
+        }
+      })
+    })
 
     return h('div', { className: cx.root, role: 'search', 'aria-label': ARIA.FILTER_BAR },
       this.searchInput,
@@ -106,6 +130,9 @@ export class FilterToolbar extends Component {
         this.shapeSelect,
         this.continentSelect,
         this.countrySelect
+      ),
+      h('div', { className: cx.sources },
+        ...sourceChips.map(cb => cb.el)
       )
     )
   }
@@ -121,14 +148,12 @@ export class FilterToolbar extends Component {
       }
     }
 
-    // Sort by count descending, take top 50
     const sorted = [...counts.entries()]
       .sort((a, b) => b[1] - a[1])
       .slice(0, 50)
 
     const currentVal = this.countrySelect.value
 
-    // Clear and rebuild
     while (this.countrySelect.options.length > 1) {
       this.countrySelect.remove(1)
     }
@@ -139,7 +164,6 @@ export class FilterToolbar extends Component {
       )
     }
 
-    // Restore selection if still valid
     if (currentVal) this.countrySelect.value = currentVal
   }
 }

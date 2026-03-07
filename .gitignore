@@ -24,6 +24,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.claude
+.github/
 
 __sources
 nuforc_raw_cache.json
@@ -31,5 +33,4 @@ nuforc_scraped.json
 us_gov_iran_case.pdf
 ufo_crash_soviet_union.pdf
 russian_sightings.md
-.claude
-.github/
+UFOs_The_Definitive_Casebook_LQ2.pdf
