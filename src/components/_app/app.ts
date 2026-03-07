@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, batch, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, batch, minDelay, filterSightings } from '@/composables'
 import { AlertVariant } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -39,6 +39,7 @@ export class App extends Component {
   private dataSource = useDataSource()
   private tickerMessages = useTicker()
   private fireball = useFireball()
+  private russianHistorical = useRussianHistorical()
 
   private main!: HTMLElement
   private ticker!: Ticker
@@ -97,7 +98,8 @@ export class App extends Component {
       this.loadManifests(),
       this.gdeltGrid.load(),
       this.gnewsGrid.load(),
-      this.fireball.load()
+      this.fireball.load(),
+      this.russianHistorical.load()
     ])
 
     // ── Sequential: each step depends on the one before ──
@@ -234,6 +236,17 @@ export class App extends Component {
   // ─── Phase: Finalize ───────────────────────────────────────────
 
   private finalize(): void {
+    // Merge Russian Historical sightings into main dataset
+    const russianSightings = this.russianHistorical.getAll()
+    if (russianSightings.length > 0) {
+      const current = this.store.sightings.get()
+      const ids = new Set(current.map(s => s.id))
+      const newOnes = russianSightings.filter(s => !ids.has(s.id))
+      if (newOnes.length > 0) {
+        this.store.sightings.set([...current, ...newOnes])
+      }
+    }
+
     const sightings = this.store.sightings.get()
     const years = this.store.availableYears.get()
     const { from, to } = this.store.yearRange.get()

@@ -89,6 +89,15 @@ const CHRONOLOGY_SUB_SOURCES: DataSource[] = [
     status: DataSourceStatus.SYNCING,
     url: 'https://archive.org/details/ufosnationalsecu00dola',
     description: 'Richard Dolan — UFOs and the National Security State chronology'
+  },
+  {
+    id: DataSourceId.CHRONOLOGY,
+    subSourceId: 'RUSSIAN_HISTORICAL',
+    label: 'Russian',
+    status: DataSourceStatus.SYNCING,
+    url: 'https://www.cia.gov/readingroom/docs/DOC_0005517761.pdf',
+    description: 'Russian Historical — Curated from FBIS/CIA declassified reports, Soviet media archives, and verified researcher compilations (1663–present)',
+    dataUrl: '/data/russian-historical.json'
   }
 ]
 

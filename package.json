@@ -25,6 +25,7 @@
     "fetch:gdelt": "node scripts/gdelt/fetch.mjs --out public/data/gdelt-articles.json --days 90 --max 1250",
     "fetch:gnews": "node scripts/gnews/fetch.mjs --out public/data/gnews-articles.json --days 730 --limit 500",
     "fetch:fireball": "node scripts/nasa-fireball/fetch.mjs --out public/data/nasa-fireballs.json",
+    "process:russian": "node scripts/process-russian-historical.mjs",
     "chunk": "node scripts/chunk-public-data.mjs --dir public/data --limit 24"
   },
   "devDependencies": {
