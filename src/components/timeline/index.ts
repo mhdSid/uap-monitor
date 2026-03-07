@@ -2,8 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
-import type { Sighting } from '@/types'
 import { palette } from '@/styles/palette'
+import type { Sighting } from '@/types'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -224,12 +224,8 @@ export class Timeline extends Component<TimelineProps> {
 
     const dpr = window.devicePixelRatio || 1
 
-    // Guard against exceeding mobile canvas memory limits (~16MP on iOS)
-    const pixelW = Math.min(totalW * dpr, 8192)
-    const pixelH = Math.min(canvasH * dpr, 4096)
-
-    this.canvas.width = pixelW
-    this.canvas.height = pixelH
+    this.canvas.width = totalW * dpr
+    this.canvas.height = canvasH * dpr
     this.canvas.style.width = totalW + 'px'
     this.canvas.style.height = canvasH + 'px'
 
@@ -307,11 +303,8 @@ export class Timeline extends Component<TimelineProps> {
 
     if (w <= 0 || cH <= 0) return
 
-    // Use actual canvas pixel dimensions for scale (may be capped on mobile)
-    const scaleX = this.canvas.width / w
-    const scaleY = this.canvas.height / cH
-
-    ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0)
+    const dpr = window.devicePixelRatio || 1
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     ctx.clearRect(0, 0, w, cH)
 
     const yearSpan = this.dataTo - this.dataFrom + 1
