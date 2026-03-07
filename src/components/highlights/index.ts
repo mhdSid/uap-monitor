@@ -27,14 +27,14 @@ export class Highlights extends Component {
             return
           }
 
-          // Not in current range — expand year range to include this card's year
+          // Not in current range — set a 10-year window around the target
           const targetYear = parseInt(item.year, 10)
           const { from, to } = store.yearRange.get()
 
           if (targetYear >= from && targetYear <= to) return // Already in range, just no match
           if (store.loading.get()) return // Already loading
 
-          store.yearRange.set({ from: targetYear, to })
+          store.yearRange.set({ from: targetYear, to: targetYear + 10 })
 
           // Wait for loading to finish, then search again
           const unsub = store.loading.subscribe((loading) => {

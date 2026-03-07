@@ -5,6 +5,8 @@ import { h } from '@/utils/dom'
 import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 
+const MAX_YEAR_SPAN = 10
+
 export class YearSelector extends Component {
   protected create(): HTMLElement {
     const store = useAppStore()
@@ -15,6 +17,25 @@ export class YearSelector extends Component {
       return h('div', { className: cx.root },
         h('span', { className: cx.label }, FILTER.NO_DATA)
       )
+    }
+
+    const oldest = years[years.length - 1]
+    const newest = years[0]
+
+    // Find nearest available year at or after target
+    const nearestAfter = (target: number): number => {
+      for (let i = years.length - 1; i >= 0; i--) {
+        if (years[i] >= target) return years[i]
+      }
+      return newest
+    }
+
+    // Find nearest available year at or before target
+    const nearestBefore = (target: number): number => {
+      for (let i = 0; i < years.length; i++) {
+        if (years[i] <= target) return years[i]
+      }
+      return oldest
     }
 
     const makeSelect = (selected: number, label: string, id: string): HTMLSelectElement => {
@@ -34,10 +55,10 @@ export class YearSelector extends Component {
     }
 
     const fromSelect = makeSelect(
-      Math.max(years[years.length - 1], defaultFrom), ARIA.YEAR_FROM, 'year-from'
+      Math.max(oldest, defaultFrom), ARIA.YEAR_FROM, 'year-from'
     )
     const toSelect = makeSelect(
-      Math.min(years[0], defaultTo), ARIA.YEAR_TO, 'year-to'
+      Math.min(newest, defaultTo), ARIA.YEAR_TO, 'year-to'
     )
 
     const countEl = h('span', { className: cx.count }, '')
@@ -46,29 +67,31 @@ export class YearSelector extends Component {
       countEl.textContent = store.displayCount.get()
     })
 
-    // Separate handlers: whichever select the user changes,
-    // the OTHER adjusts to maintain from ≤ to
+    // User changes FROM → clamp TO to from + MAX_YEAR_SPAN
     fromSelect.addEventListener('change', () => {
       const from = Number(fromSelect.value)
       let to = Number(toSelect.value)
-      if (from > to) {
-        to = from
-        toSelect.value = String(to)
-      }
+
+      if (from > to) to = from
+      if (to - from > MAX_YEAR_SPAN) to = nearestAfter(from + MAX_YEAR_SPAN)
+
+      toSelect.value = String(to)
       store.yearRange.set({ from, to })
     })
 
+    // User changes TO → clamp FROM to to - MAX_YEAR_SPAN
     toSelect.addEventListener('change', () => {
       let from = Number(fromSelect.value)
       const to = Number(toSelect.value)
-      if (to < from) {
-        from = to
-        fromSelect.value = String(from)
-      }
+
+      if (to < from) from = to
+      if (to - from > MAX_YEAR_SPAN) from = nearestBefore(to - MAX_YEAR_SPAN)
+
+      fromSelect.value = String(from)
       store.yearRange.set({ from, to })
     })
 
-    // Sync selects when yearRange changes externally (e.g. timeline bar click)
+    // Sync selects when yearRange changes externally
     effect(() => {
       const { from, to } = store.yearRange.get()
       fromSelect.value = String(from)
