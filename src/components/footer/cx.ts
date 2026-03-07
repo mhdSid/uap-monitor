@@ -4,5 +4,8 @@ export const cx = {
   name: 'app-footer__name',
   separator: 'app-footer__separator',
   tagline: 'app-footer__tagline',
-  domain: 'app-footer__domain'
+  links: 'app-footer__links',
+  domain: 'app-footer__domain',
+  link: 'app-footer__link',
+  linkSep: 'app-footer__link-sep'
 } as const

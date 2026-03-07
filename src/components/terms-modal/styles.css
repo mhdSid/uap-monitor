@@ -1,0 +1,32 @@
+.terms-modal__title {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 1px;
+}
+
+.terms-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.terms-modal__updated {
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  font-family: var(--font-mono);
+}
+
+.terms-modal__heading {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 0.5px;
+  margin-top: var(--space-2);
+}
+
+.terms-modal__paragraph {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  line-height: 1.6;
+}

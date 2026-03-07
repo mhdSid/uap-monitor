@@ -311,3 +311,17 @@ export const ERRORS = {
 export const TAGS = {
   LIVE: 'LIVE'
 } as const
+
+export const SUB_SOURCE_LABELS: Record<string, string> = {
+  EBERHART: 'Eberhart',
+  JOHNSON: 'Johnson',
+  NICAP: 'NICAP',
+  VALLEE_MAGONIA: 'Vallée (Magonia)',
+  BB_UNKNOWNS: 'Blue Book Unknowns',
+  OVERMEIRE: 'Overmeire',
+  HALL: 'Hall (UFO Evidence)',
+  WONDERS_SKY: 'Wonders in the Sky',
+  PRE_ROSWELL: 'Pre-Roswell (Rife)',
+  DOLAN: 'Dolan',
+  RUSSIAN_HISTORICAL: 'Russian Historical'
+} as const

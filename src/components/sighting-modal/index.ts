@@ -11,24 +11,9 @@ import { DataSourceId, TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
 import { StatusTag, Tag } from '@/components/tags'
 import { Modal } from '@/components/modal'
-import { MODAL, RELATED } from '@/data/strings'
+import { MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
 import { useAnalytics, getSourceUrl, useFireball, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
-
-// ─── Sub-source display names (chronology) ──────────────────────────
-
-const SUB_SOURCE_LABELS: Record<string, string> = {
-  EBERHART: 'Eberhart',
-  JOHNSON: 'Johnson',
-  NICAP: 'NICAP',
-  VALLEE_MAGONIA: 'Vallée (Magonia)',
-  BB_UNKNOWNS: 'Blue Book Unknowns',
-  OVERMEIRE: 'Overmeire',
-  HALL: 'Hall (UFO Evidence)',
-  WONDERS_SKY: 'Wonders in the Sky',
-  PRE_ROSWELL: 'Pre-Roswell (Rife)',
-  DOLAN: 'Dolan'
-}
 
 function resolveSourceLabel(s: Sighting): string {
   if (s.source === DataSourceId.CHRONOLOGY && s.subSource) {
