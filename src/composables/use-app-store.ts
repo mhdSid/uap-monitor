@@ -83,7 +83,7 @@ export function useAppStore(): AppStore {
 
   const hasActiveFilter = computed(() => {
     const f = filter.get()
-    return !!(f.search || f.shape || f.continent || f.minCredibility)
+    return !!(f.search || f.shape || f.continent || f.minCredibility || f.country || f.sources)
   })
 
   const displayCount = computed(

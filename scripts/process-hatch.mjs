@@ -30,8 +30,9 @@ import { execSync } from 'node:child_process'
 
 import {
   Continent, Status, Shape,
-  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate
+  COUNTRY_CONTINENT, truncate
 } from './shared-constants.mjs'
+import { resolveWithStats, printStats } from './geocoder.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
@@ -114,7 +115,7 @@ const ATTRIBUTE_TAG_MAP = {
   'MBR': 'Multiple observers'
 }
 
-// COUNTRY_CONTINENT and COUNTRY_COORDS imported from shared-constants.mjs
+// COUNTRY_CONTINENT imported from shared-constants.mjs
 
 // ─── Audit trackers ─────────────────────────────────────────────────
 
@@ -362,8 +363,8 @@ function main() {
     }
     countryCounts.set(country, (countryCounts.get(country) || 0) + 1)
 
-    // Coordinates: parse from LatLong, fallback to country default
-    const coords = parseLatLong(record.key_vals?.LatLong) || COUNTRY_COORDS[country] || null
+    // Coordinates: parse from LatLong, fallback to geocoder
+    const coords = parseLatLong(record.key_vals?.LatLong) || resolveWithStats(locale, stateProv, country)
 
     // Shape from attributes
     const shape = extractShape(record.attributes)
@@ -514,6 +515,8 @@ function main() {
   const totalMB = Object.values(manifest.years).reduce((a, y) => a + y.sizeKB, 0) / 1024
   console.log(`\n  Total output: ${totalMB.toFixed(1)} MB`)
   console.log(`  Manifest: ${manifestPath}\n`)
+
+  printStats('Hatch Geocoder')
 }
 
 main()

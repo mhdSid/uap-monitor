@@ -2,8 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
-import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
+import { palette } from '@/styles/palette'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -60,6 +60,10 @@ export class Timeline extends Component<TimelineProps> {
   protected create(): HTMLElement {
     this.canvas = document.createElement('canvas')
     this.canvas.className = cx.canvas
+    // Prevent broken canvas icon on mobile before first resize
+    this.canvas.width = 1
+    this.canvas.height = 1
+    this.canvas.style.visibility = 'hidden'
 
     this.hoverBar = h('div', { className: cx.hoverBar })
 
@@ -91,7 +95,7 @@ export class Timeline extends Component<TimelineProps> {
   protected didMount(): void {
     const ro = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        if (entry.contentRect.width > 0) {
+        if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
           this.mounted = true
           this.resize()
         }
@@ -205,18 +209,27 @@ export class Timeline extends Component<TimelineProps> {
     if (!this.mounted) return
 
     const yearSpan = this.dataTo - this.dataFrom + 1
+    if (yearSpan <= 0) return
+
     const totalW = PAD_X * 2 + yearSpan * BAR_STEP
     const containerH = Math.max(120, Math.floor(this.el.getBoundingClientRect().height))
     const trackH = this.scrollTrack.getBoundingClientRect().height || 14
     const canvasH = containerH - trackH
+
+    if (totalW <= 0 || canvasH <= 0) return
 
     this.canvasW = totalW
     this.canvasH = canvasH
     this.barArea = canvasH - LABEL_H
 
     const dpr = window.devicePixelRatio || 1
-    this.canvas.width = totalW * dpr
-    this.canvas.height = canvasH * dpr
+
+    // Guard against exceeding mobile canvas memory limits (~16MP on iOS)
+    const pixelW = Math.min(totalW * dpr, 8192)
+    const pixelH = Math.min(canvasH * dpr, 4096)
+
+    this.canvas.width = pixelW
+    this.canvas.height = pixelH
     this.canvas.style.width = totalW + 'px'
     this.canvas.style.height = canvasH + 'px'
 
@@ -227,6 +240,11 @@ export class Timeline extends Component<TimelineProps> {
     this.cacheLayout()
     this.syncThumb()
     this.draw()
+
+    // Show canvas after first successful draw (hidden until layout resolved)
+    if (this.canvas.style.visibility === 'hidden') {
+      this.canvas.style.visibility = 'visible'
+    }
 
     if (this.activeFrom > 0) {
       this.scrollToRange(this.activeFrom, this.activeTo)
@@ -275,17 +293,25 @@ export class Timeline extends Component<TimelineProps> {
 
   // ─── Drawing (canvas — only on data/range change) ─────────────
 
+  /** Force canvas redraw — call on theme change */
+  redraw(): void {
+    this.draw()
+  }
+
   private draw(): void {
     const ctx = this.canvas.getContext('2d')
     if (!ctx) return
 
-    const dpr = window.devicePixelRatio || 1
     const w = this.canvasW
     const cH = this.canvasH
 
     if (w <= 0 || cH <= 0) return
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    // Use actual canvas pixel dimensions for scale (may be capped on mobile)
+    const scaleX = this.canvas.width / w
+    const scaleY = this.canvas.height / cH
+
+    ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0)
     ctx.clearRect(0, 0, w, cH)
 
     const yearSpan = this.dataTo - this.dataFrom + 1

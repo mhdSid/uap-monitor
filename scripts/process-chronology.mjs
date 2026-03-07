@@ -37,9 +37,9 @@ import {
   COUNTRY_ALIASES,
   REGION_TO_COUNTRY,
   US_LOCATIONS,
-  COUNTRY_COORDS,
   truncate
 } from './shared-constants.mjs'
+import { resolveWithStats, normalizeLocationString, printStats } from './geocoder.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
@@ -289,7 +289,7 @@ function parseChronologyLocation(raw) {
   const wholeResolved = resolveCountry(location)
   if (wholeResolved) {
     const continent = COUNTRY_CONTINENT[wholeResolved] || COUNTRY_CONTINENT['Unknown']
-    const coordinates = COUNTRY_COORDS[wholeResolved] || null
+    const coordinates = null
     return { location, region: '', country: wholeResolved, continent, coordinates }
   }
 
@@ -302,7 +302,7 @@ function parseChronologyLocation(raw) {
       const resolved = resolveCountry(first)
       if (resolved) {
         const continent = COUNTRY_CONTINENT[resolved] || COUNTRY_CONTINENT['Unknown']
-        const coordinates = COUNTRY_COORDS[resolved] || null
+        const coordinates = null
         return { location, region: rest, country: resolved, continent, coordinates }
       }
     }
@@ -321,7 +321,7 @@ function parseChronologyLocation(raw) {
       const resolved = resolveCountry(candidate)
       if (resolved) {
         const continent = COUNTRY_CONTINENT[resolved] || COUNTRY_CONTINENT['Unknown']
-        const coordinates = COUNTRY_COORDS[resolved] || null
+        const coordinates = null
         return { location, region: location, country: resolved, continent, coordinates }
       }
     }
@@ -334,13 +334,14 @@ function parseChronologyLocation(raw) {
     const resolved = resolveCountry(candidate)
     if (resolved) {
       const continent = COUNTRY_CONTINENT[resolved] || COUNTRY_CONTINENT['Unknown']
-      const coordinates = COUNTRY_COORDS[resolved] || null
+      const coordinates = null
       return { location, region: location, country: resolved, continent, coordinates }
     }
     // Parenthesized US state: "Cleveland (Ohio)", "Huntsville (Alabama)"
     if (resolveUSState(candidate)) {
       const continent = COUNTRY_CONTINENT['USA']
-      const coordinates = COUNTRY_COORDS['USA'] || null
+      const stateAbbr = US_STATES_ABBR[candidate] ? candidate : US_STATE_FROM_NAME[candidate]
+      const coordinates = null
       return { location, region: location, country: 'USA', continent, coordinates }
     }
     // If paren content isn't a country, try the prefix before the paren
@@ -348,7 +349,7 @@ function parseChronologyLocation(raw) {
     const prefixResolved = resolveCountry(prefix)
     if (prefixResolved) {
       const continent = COUNTRY_CONTINENT[prefixResolved] || COUNTRY_CONTINENT['Unknown']
-      const coordinates = COUNTRY_COORDS[prefixResolved] || null
+      const coordinates = null
       return { location, region: location, country: prefixResolved, continent, coordinates }
     }
   }
@@ -514,7 +515,7 @@ function parseChronologyLocation(raw) {
     continent = Continent.AMERICAS
   }
 
-  const coordinates = COUNTRY_COORDS[country] || null
+  const coordinates = null
 
   return { location, region, country, continent, coordinates }
 }
@@ -695,6 +696,11 @@ function main() {
 
       const { iso, year } = parsed
       const loc = parseChronologyLocation(record.location)
+
+      // Use geocoder for city-level coordinates (parseChronologyLocation handles country/continent)
+      const geoNorm = normalizeLocationString(String(record.location || ''))
+      const geoCoords = resolveWithStats(geoNorm.city || loc.region, geoNorm.state, loc.country)
+
       const ref = normalizeRef(record.ref)
       const desc = record.desc || ''
       const description = ref ? `${desc}\n\nRef: ${ref}` : desc
@@ -714,7 +720,7 @@ function main() {
         summary: truncate(desc, SUMMARY_MAX_LENGTH),
         description: truncate(description, DESCRIPTION_MAX_LENGTH),
         characteristics: [],
-        coordinates: loc.coordinates,
+        coordinates: geoCoords,
         region: loc.region,
         country: loc.country,
         continent: loc.continent,
@@ -812,6 +818,8 @@ function main() {
   let totalKB = Object.values(manifest.years).reduce((s, /** @type {any} */ y) => s + y.sizeKB, 0)
   console.log(`\n  Total output: ${(totalKB / 1024).toFixed(1)} MB`)
   console.log(`  Manifest: chronology-manifest.json\n`)
+
+  printStats('Chronology Geocoder')
 }
 
 main()

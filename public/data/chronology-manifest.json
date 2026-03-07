@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-06T13:59:18.785Z",
+  "generatedAt": "2026-03-07T12:29:27.597Z",
   "totalRecords": 28228,
   "skippedRecords": 684,
   "subSources": {
@@ -148,7 +148,7 @@
     "1914": {
       "count": 38,
       "file": "chronology-1914.json",
-      "sizeKB": 60
+      "sizeKB": 61
     },
     "1915": {
       "count": 15,
@@ -218,7 +218,7 @@
     "1928": {
       "count": 16,
       "file": "chronology-1928.json",
-      "sizeKB": 27
+      "sizeKB": 28
     },
     "1929": {
       "count": 14,
@@ -248,7 +248,7 @@
     "1934": {
       "count": 29,
       "file": "chronology-1934.json",
-      "sizeKB": 42
+      "sizeKB": 43
     },
     "1935": {
       "count": 27,
@@ -293,87 +293,87 @@
     "1943": {
       "count": 82,
       "file": "chronology-1943.json",
-      "sizeKB": 113
+      "sizeKB": 114
     },
     "1944": {
       "count": 173,
       "file": "chronology-1944.json",
-      "sizeKB": 225
+      "sizeKB": 226
     },
     "1945": {
       "count": 201,
       "file": "chronology-1945.json",
-      "sizeKB": 264
+      "sizeKB": 265
     },
     "1946": {
       "count": 244,
       "file": "chronology-1946.json",
-      "sizeKB": 361
+      "sizeKB": 362
     },
     "1947": {
       "count": 735,
       "file": "chronology-1947.json",
-      "sizeKB": 1085
+      "sizeKB": 1088
     },
     "1948": {
       "count": 339,
       "file": "chronology-1948.json",
-      "sizeKB": 460
+      "sizeKB": 461
     },
     "1949": {
       "count": 393,
       "file": "chronology-1949.json",
-      "sizeKB": 522
+      "sizeKB": 523
     },
     "1950": {
       "count": 552,
       "file": "chronology-1950.json",
-      "sizeKB": 749
+      "sizeKB": 751
     },
     "1951": {
       "count": 346,
       "file": "chronology-1951.json",
-      "sizeKB": 464
+      "sizeKB": 465
     },
     "1952": {
       "count": 1670,
       "file": "chronology-1952.json",
-      "sizeKB": 2126
+      "sizeKB": 2132
     },
     "1953": {
       "count": 608,
       "file": "chronology-1953.json",
-      "sizeKB": 809
+      "sizeKB": 811
     },
     "1954": {
       "count": 1504,
       "file": "chronology-1954.json",
-      "sizeKB": 2103
+      "sizeKB": 2107
     },
     "1955": {
       "count": 383,
       "file": "chronology-1955.json",
-      "sizeKB": 508
+      "sizeKB": 509
     },
     "1956": {
       "count": 341,
       "file": "chronology-1956.json",
-      "sizeKB": 456
+      "sizeKB": 457
     },
     "1957": {
       "count": 727,
       "file": "chronology-1957.json",
-      "sizeKB": 991
+      "sizeKB": 993
     },
     "1958": {
       "count": 383,
       "file": "chronology-1958.json",
-      "sizeKB": 509
+      "sizeKB": 511
     },
     "1959": {
       "count": 413,
       "file": "chronology-1959.json",
-      "sizeKB": 552
+      "sizeKB": 553
     },
     "1960": {
       "count": 282,
@@ -383,42 +383,42 @@
     "1961": {
       "count": 264,
       "file": "chronology-1961.json",
-      "sizeKB": 349
+      "sizeKB": 350
     },
     "1962": {
       "count": 313,
       "file": "chronology-1962.json",
-      "sizeKB": 437
+      "sizeKB": 438
     },
     "1963": {
       "count": 280,
       "file": "chronology-1963.json",
-      "sizeKB": 376
+      "sizeKB": 377
     },
     "1964": {
       "count": 353,
       "file": "chronology-1964.json",
-      "sizeKB": 484
+      "sizeKB": 485
     },
     "1965": {
       "count": 703,
       "file": "chronology-1965.json",
-      "sizeKB": 964
+      "sizeKB": 966
     },
     "1966": {
       "count": 949,
       "file": "chronology-1966.json",
-      "sizeKB": 1278
+      "sizeKB": 1281
     },
     "1967": {
       "count": 1696,
       "file": "chronology-1967.json",
-      "sizeKB": 2306
+      "sizeKB": 2311
     },
     "1968": {
       "count": 583,
       "file": "chronology-1968.json",
-      "sizeKB": 884
+      "sizeKB": 885
     },
     "1969": {
       "count": 348,
@@ -438,72 +438,72 @@
     "1972": {
       "count": 317,
       "file": "chronology-1972.json",
-      "sizeKB": 465
+      "sizeKB": 466
     },
     "1973": {
       "count": 692,
       "file": "chronology-1973.json",
-      "sizeKB": 942
+      "sizeKB": 944
     },
     "1974": {
       "count": 465,
       "file": "chronology-1974.json",
-      "sizeKB": 728
+      "sizeKB": 729
     },
     "1975": {
       "count": 571,
       "file": "chronology-1975.json",
-      "sizeKB": 826
+      "sizeKB": 827
     },
     "1976": {
       "count": 476,
       "file": "chronology-1976.json",
-      "sizeKB": 714
+      "sizeKB": 715
     },
     "1977": {
       "count": 682,
       "file": "chronology-1977.json",
-      "sizeKB": 980
+      "sizeKB": 982
     },
     "1978": {
       "count": 795,
       "file": "chronology-1978.json",
-      "sizeKB": 1150
+      "sizeKB": 1152
     },
     "1979": {
       "count": 459,
       "file": "chronology-1979.json",
-      "sizeKB": 664
+      "sizeKB": 665
     },
     "1980": {
       "count": 373,
       "file": "chronology-1980.json",
-      "sizeKB": 565
+      "sizeKB": 566
     },
     "1981": {
       "count": 325,
       "file": "chronology-1981.json",
-      "sizeKB": 477
+      "sizeKB": 478
     },
     "1982": {
       "count": 266,
       "file": "chronology-1982.json",
-      "sizeKB": 371
+      "sizeKB": 372
     },
     "1983": {
       "count": 208,
       "file": "chronology-1983.json",
-      "sizeKB": 288
+      "sizeKB": 289
     },
     "1984": {
       "count": 271,
       "file": "chronology-1984.json",
-      "sizeKB": 387
+      "sizeKB": 388
     },
     "1985": {
       "count": 90,
       "file": "chronology-1985.json",
-      "sizeKB": 134
+      "sizeKB": 135
     },
     "1986": {
       "count": 150,
@@ -518,37 +518,37 @@
     "1988": {
       "count": 169,
       "file": "chronology-1988.json",
-      "sizeKB": 250
+      "sizeKB": 251
     },
     "1989": {
       "count": 320,
       "file": "chronology-1989.json",
-      "sizeKB": 484
+      "sizeKB": 485
     },
     "1990": {
       "count": 273,
       "file": "chronology-1990.json",
-      "sizeKB": 410
+      "sizeKB": 411
     },
     "1991": {
       "count": 168,
       "file": "chronology-1991.json",
-      "sizeKB": 259
+      "sizeKB": 260
     },
     "1992": {
       "count": 202,
       "file": "chronology-1992.json",
-      "sizeKB": 287
+      "sizeKB": 288
     },
     "1993": {
       "count": 231,
       "file": "chronology-1993.json",
-      "sizeKB": 324
+      "sizeKB": 325
     },
     "1994": {
       "count": 209,
       "file": "chronology-1994.json",
-      "sizeKB": 286
+      "sizeKB": 287
     },
     "1995": {
       "count": 243,
@@ -578,7 +578,7 @@
     "2000": {
       "count": 199,
       "file": "chronology-2000.json",
-      "sizeKB": 294
+      "sizeKB": 295
     },
     "2001": {
       "count": 148,
@@ -603,7 +603,7 @@
     "2005": {
       "count": 106,
       "file": "chronology-2005.json",
-      "sizeKB": 141
+      "sizeKB": 142
     },
     "2006": {
       "count": 67,
@@ -643,7 +643,7 @@
     "2013": {
       "count": 38,
       "file": "chronology-2013.json",
-      "sizeKB": 63
+      "sizeKB": 64
     },
     "2014": {
       "count": 19,
@@ -658,7 +658,7 @@
     "2016": {
       "count": 10,
       "file": "chronology-2016.json",
-      "sizeKB": 16
+      "sizeKB": 17
     },
     "2017": {
       "count": 22,
@@ -693,7 +693,7 @@
     "ancient": {
       "count": 644,
       "file": "chronology-ancient.json",
-      "sizeKB": 1035,
+      "sizeKB": 1038,
       "years": [
         34,
         61,
@@ -1125,7 +1125,7 @@
     "1840s": {
       "count": 45,
       "file": "chronology-1840s.json",
-      "sizeKB": 68,
+      "sizeKB": 69,
       "years": [
         1842,
         1843,
@@ -1140,7 +1140,7 @@
     "1850s": {
       "count": 30,
       "file": "chronology-1850s.json",
-      "sizeKB": 47,
+      "sizeKB": 48,
       "years": [
         1850,
         1851,
@@ -1156,7 +1156,7 @@
     "1860s": {
       "count": 53,
       "file": "chronology-1860s.json",
-      "sizeKB": 82,
+      "sizeKB": 83,
       "years": [
         1860,
         1861,
@@ -1173,7 +1173,7 @@
     "1870s": {
       "count": 72,
       "file": "chronology-1870s.json",
-      "sizeKB": 119,
+      "sizeKB": 120,
       "years": [
         1870,
         1871,
@@ -1207,7 +1207,7 @@
     "1890s": {
       "count": 442,
       "file": "chronology-1890s.json",
-      "sizeKB": 667,
+      "sizeKB": 669,
       "years": [
         1890,
         1891,

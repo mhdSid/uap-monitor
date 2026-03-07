@@ -190,10 +190,12 @@ export class App extends Component {
       await this.onYearRangeChange()
     })
 
-    // Swap map tiles on theme change
+    // Swap map tiles + redraw canvas on theme change
     const { theme } = useTheme()
     effect(() => {
-      this.sightingMap.setTheme(theme.get())
+      const t = theme.get()
+      this.sightingMap.setTheme(t)
+      this.timeline.redraw()
     })
   }
 
@@ -326,7 +328,7 @@ export class App extends Component {
     releaseRender()
     release()
 
-    this.sightingMap.setSightings(filtered)
+    this.sightingMap.setSightings(filtered, this.store.hasActiveFilter.get())
 
     // Grids read from store internally
     const filter = this.store.filter.get()

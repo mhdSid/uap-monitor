@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-06T13:59:17.918Z",
+  "generatedAt": "2026-03-07T12:29:26.225Z",
   "totalRecords": 18116,
   "skippedRecords": 0,
   "years": {
@@ -351,7 +351,7 @@
     "1972": {
       "count": 337,
       "file": "hatch-1972.json",
-      "sizeKB": 406
+      "sizeKB": 405
     },
     "1973": {
       "count": 723,
@@ -366,12 +366,12 @@
     "1975": {
       "count": 504,
       "file": "hatch-1975.json",
-      "sizeKB": 610
+      "sizeKB": 609
     },
     "1976": {
       "count": 412,
       "file": "hatch-1976.json",
-      "sizeKB": 492
+      "sizeKB": 491
     },
     "1977": {
       "count": 466,

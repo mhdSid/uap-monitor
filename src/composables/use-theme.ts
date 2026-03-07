@@ -38,7 +38,6 @@ function resolveInitial(): Theme {
     if (stored === 'dark' || stored === 'light') return stored
   } catch { /* private mode */ }
 
-  if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light'
   return 'dark'
 }
 

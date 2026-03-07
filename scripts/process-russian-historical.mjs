@@ -3,23 +3,17 @@
 /**
  * Russian Historical UFO Sightings — Processing Script
  *
- * Reads curated sightings from __source/russia.json and outputs
+ * Reads curated sightings from __sources/russia.json and outputs
  * a normalized manifest to public/data/russian-historical.json.
  *
- * Sources:
- * - FBIS/CIA Declassified: DOC_0005517761.pdf (Nov 1989)
- * - RusArtNet historical archive
- * - ThinkAboutItDocs sighting database
- * - Jerusalem Post, Moscow Times
- *
- * Usage:
- *   node scripts/process-russian-historical.mjs
+ * Uses geocoder for any records missing coordinates.
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
+import { resolveWithStats, printStats } from './geocoder.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
@@ -36,22 +30,26 @@ function generateId(date, location) {
     .slice(0, 12)
 }
 
-// ─── Main ───────────────────────────────────────────────────────────
-
 function process() {
   const raw = JSON.parse(readFileSync(INPUT, 'utf-8'))
-  console.log(`Read ${raw.length} sightings from __source/russia.json`)
+  console.log(`Read ${raw.length} sightings from __sources/russia.json`)
 
-  const processed = raw.map(s => ({
-    id: generateId(s.occurredAt, s.location),
-    source: SOURCE,
-    subSource: SUB_SOURCE,
-    ...s,
-    reportedAt: s.occurredAt,
-    postedAt: new Date().toISOString(),
-    continent: 'EURASIA',
-    status: 'PENDING'
-  }))
+  const processed = raw.map(s => {
+    // Use existing coordinates if provided, else geocode
+    const coordinates = s.coordinates || resolveWithStats(s.location, s.region, s.country)
+
+    return {
+      id: generateId(s.occurredAt, s.location),
+      source: SOURCE,
+      subSource: SUB_SOURCE,
+      ...s,
+      coordinates,
+      reportedAt: s.occurredAt,
+      postedAt: new Date().toISOString(),
+      continent: 'EURASIA',
+      status: 'PENDING'
+    }
+  })
 
   const output = processed.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))
 
@@ -93,6 +91,8 @@ function process() {
   for (const [c, n] of Object.entries(centuries).sort()) {
     console.log(`  ${c}s: ${n}`)
   }
+
+  printStats('Russian Historical Geocoder')
 }
 
 process()

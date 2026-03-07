@@ -26,8 +26,9 @@ import { fileURLToPath } from 'node:url'
 
 import {
   Continent, Status, Shape, VALID_SHAPES,
-  COUNTRY_CONTINENT, COUNTRY_COORDS, truncate
+  COUNTRY_CONTINENT, truncate
 } from './shared-constants.mjs'
+import { resolveWithStats, printStats, resetStats } from './geocoder.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
@@ -72,7 +73,7 @@ const SHAPE_ALIASES = {
 }
 
 // ─── Country → default coordinates ──────────────────────────────────
-// COUNTRY_CONTINENT and COUNTRY_COORDS imported from shared-constants.mjs
+// COUNTRY_CONTINENT imported from shared-constants.mjs
 
 // US state abbreviations → full name
 const US_STATES = {
@@ -147,6 +148,22 @@ function parseLocation(raw) {
 
   // Normalize country aliases
   if (country === 'United States' || country === 'US') country = 'USA'
+
+  // State abbreviations sometimes leak into country field (e.g. "City, DC" or "City, , CA")
+  if (!state && US_STATES[country]) {
+    state = country
+    country = 'USA'
+  } else if (state && US_STATES[country]) {
+    // "City, State, DC" — country is actually another state code, use it
+    state = country
+    country = 'USA'
+  }
+
+  // Canadian province in country field
+  if (!state && CA_PROVINCES[country]) {
+    state = country
+    country = 'Canada'
+  }
 
   // Build region string
   let region = city
@@ -293,7 +310,7 @@ function main() {
       summary: truncate(record.Summary, SUMMARY_MAX_LENGTH),
       description: truncate(record.Text, DESCRIPTION_MAX_LENGTH),
       characteristics,
-      coordinates: COUNTRY_COORDS[loc.country] || null,
+      coordinates: resolveWithStats(loc.city, loc.state, loc.country),
       region: loc.region,
       country: loc.country,
       continent: loc.continent,
@@ -383,6 +400,8 @@ function main() {
   const totalMB = Object.values(manifest.years).reduce((a, y) => a + y.sizeKB, 0) / 1024
   console.log(`\n  Total output: ${totalMB.toFixed(1)} MB (from ${(Buffer.byteLength(raw) / 1024 / 1024).toFixed(0)} MB input)`)
   console.log(`  Manifest: ${manifestPath}\n`)
+
+  printStats('NUFORC Geocoder')
 }
 
 main()

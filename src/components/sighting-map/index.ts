@@ -190,7 +190,7 @@ export class SightingMap extends Component<SightingMapProps> {
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  setSightings(sightings: Sighting[]): void {
+  setSightings(sightings: Sighting[], fitBounds = false): void {
     if (!this.clusterGroup) return
 
     this.clusterGroup.clearLayers()
@@ -226,6 +226,11 @@ export class SightingMap extends Component<SightingMapProps> {
     }
 
     this.clusterGroup.addLayers(markers)
+
+    if (fitBounds && markers.length > 0) {
+      const bounds = L.latLngBounds(markers.map(m => m.getLatLng()))
+      this.map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 })
+    }
   }
 
   setFireballs(fireballs: Fireball[]): void {
