@@ -4,7 +4,7 @@ import { Component } from '@/core'
 import { h, setAttrs } from '@/utils/dom'
 import { iconRadar, iconSun, iconMoon } from '@/components/icons'
 import { Switch } from '@/components/switch'
-import { APP_NAME, APP_VERSION, ARIA } from '@/data/strings'
+import { APP_NAME, ARIA } from '@/data/strings'
 import { useTheme } from '@/composables'
 
 export class Header extends Component {
@@ -17,8 +17,7 @@ export class Header extends Component {
 
     const left = h('div', { className: cx.left },
       radar,
-      h('span', { className: cx.title }, APP_NAME),
-      h('span', { className: cx.version }, APP_VERSION)
+      h('span', { className: cx.title }, APP_NAME)
     )
 
     const clock = h('time', {

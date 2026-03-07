@@ -4,7 +4,6 @@ import { WelcomeSource } from '@/types'
 // ─── App metadata ───────────────────────────────────────────────────
 
 export const APP_NAME = 'UAP MONITOR'
-export const APP_VERSION = 'v0.1.0'
 export const APP_FOOTER_NAME = 'UAP MONITOR'
 export const APP_FOOTER_TAGLINE = 'Global UAP Intelligence Platform'
 export const APP_URL = 'https://uapmonitor.org'
