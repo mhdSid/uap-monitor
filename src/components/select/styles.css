@@ -1,0 +1,35 @@
+.select {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  min-width: 0;
+  transition: border-color var(--transition-fast);
+}
+
+.select:focus-visible {
+  outline: none;
+  border-color: var(--color-green);
+}
+
+/* Color: primary (green text — used for year selectors) */
+.select--primary {
+  color: var(--color-green);
+  letter-spacing: 1px;
+}
+
+/* Size: sm (compact — year selectors) */
+.select--sm {
+  font-size: var(--fs-sm);
+  padding: var(--space-1) var(--space-3);
+}
+
+/* Size: md (standard — filter selects) */
+.select--md {
+  font-size: var(--fs-xs);
+  padding: var(--space-3);
+  flex: 1;
+}

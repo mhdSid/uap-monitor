@@ -1,6 +1,7 @@
 export const cx = {
   root: 'btn',
   block: 'btn--block',
+  filled: 'btn--filled',
   ghost: 'btn--ghost',
   lg: 'btn--lg',
   md: 'btn--md',

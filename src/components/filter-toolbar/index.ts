@@ -5,9 +5,12 @@ import { h } from '@/utils/dom'
 import { Continent, SightingShape, DataSourceId } from '@/enums'
 import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
 import { useAppStore, useDebounce } from '@/composables'
+import { TextInput } from '@/components/text-input'
+import { Select } from '@/components/select'
 import { Checkbox } from '@/components/checkbox'
 import { colors } from '@/styles/palette'
 import type { SightingFilter } from '@/types'
+import type { SelectOption } from '@/components/select'
 
 // ─── Source chip config (uses enum + palette — no anonymous strings) ─
 
@@ -17,12 +20,30 @@ const SOURCE_CHIPS: { id: DataSourceId; label: string; color: string }[] = [
   { id: DataSourceId.CHRONOLOGY, label: DataSourceId.CHRONOLOGY,  color: colors.sourceChronology }
 ]
 
+// ─── Option builders ────────────────────────────────────────────────
+
+function shapeOptions(): SelectOption[] {
+  return [
+    { value: '', label: FILTER.ALL_SHAPES },
+    ...Object.values(SightingShape).map(s => ({ value: s, label: s.toUpperCase() }))
+  ]
+}
+
+function continentOptions(): SelectOption[] {
+  return [
+    { value: '', label: FILTER.ALL_REGIONS },
+    ...Object.entries(CONTINENT_LABELS).map(([value, label]) => ({ value, label }))
+  ]
+}
+
+// ─── Component ──────────────────────────────────────────────────────
+
 export class FilterToolbar extends Component {
   private currentFilter!: SightingFilter
-  private searchInput!: HTMLInputElement
-  private shapeSelect!: HTMLSelectElement
-  private continentSelect!: HTMLSelectElement
-  private countrySelect!: HTMLSelectElement
+  private searchInput!: TextInput
+  private shapeSelect!: Select
+  private continentSelect!: Select
+  private countrySelect!: Select
   private emitDebounced!: ReturnType<typeof useDebounce>
 
   protected create(): HTMLElement {
@@ -35,76 +56,60 @@ export class FilterToolbar extends Component {
 
     this.emitDebounced = useDebounce(emit, 300)
 
-    this.searchInput = h('input', {
-      className: cx.search,
+    // ── Search ──────────────────────────────────────────────────
+    this.searchInput = new TextInput({
       id: 'filter-search',
       name: 'filter-search',
-      type: 'text',
-      autocomplete: 'off',
       placeholder: FILTER.SEARCH_PLACEHOLDER,
-      'aria-label': ARIA.SEARCH,
-      onInput: () => {
-        const val = this.searchInput.value.trim()
+      ariaLabel: ARIA.SEARCH,
+      size: 'md',
+      onInput: (val) => {
         this.currentFilter.search = val || undefined
         this.emitDebounced()
       }
-    }) as HTMLInputElement
+    })
 
-    this.shapeSelect = h('select', {
-      className: cx.select,
+    // ── Shape ────────────────────────────────────────────────────
+    this.shapeSelect = new Select({
       id: 'filter-shape',
       name: 'filter-shape',
-      autocomplete: 'off',
-      'aria-label': ARIA.FILTER_SHAPE,
-      onChange: () => {
-        const val = this.shapeSelect.value
+      ariaLabel: ARIA.FILTER_SHAPE,
+      options: shapeOptions(),
+      onChange: (val) => {
         this.currentFilter.shape = val ? (val as SightingShape) : undefined
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
       }
-    }) as HTMLSelectElement
+    })
 
-    this.shapeSelect.appendChild(h('option', { value: '' }, FILTER.ALL_SHAPES))
-    for (const shape of Object.values(SightingShape)) {
-      this.shapeSelect.appendChild(h('option', { value: shape }, shape.toUpperCase()))
-    }
-
-    this.continentSelect = h('select', {
-      className: cx.select,
+    // ── Continent ────────────────────────────────────────────────
+    this.continentSelect = new Select({
       id: 'filter-region',
       name: 'filter-region',
-      autocomplete: 'off',
-      'aria-label': ARIA.FILTER_REGION,
-      onChange: () => {
-        const val = this.continentSelect.value
+      ariaLabel: ARIA.FILTER_REGION,
+      options: continentOptions(),
+      onChange: (val) => {
         this.currentFilter.continent = val ? (val as Continent) : undefined
         this.currentFilter.country = undefined
         this.countrySelect.value = ''
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
       }
-    }) as HTMLSelectElement
+    })
 
-    this.continentSelect.appendChild(h('option', { value: '' }, FILTER.ALL_REGIONS))
-    for (const [value, label] of Object.entries(CONTINENT_LABELS)) {
-      this.continentSelect.appendChild(h('option', { value }, label))
-    }
-
-    this.countrySelect = h('select', {
-      className: cx.select,
+    // ── Country ──────────────────────────────────────────────────
+    this.countrySelect = new Select({
       id: 'filter-country',
       name: 'filter-country',
-      autocomplete: 'off',
-      'aria-label': 'Filter by country',
-      onChange: () => {
-        const val = this.countrySelect.value
+      ariaLabel: ARIA.FILTER_COUNTRY,
+      options: [{ value: '', label: FILTER.ALL_COUNTRIES }],
+      onChange: (val) => {
         this.currentFilter.country = val || undefined
         this.emitDebounced.flush()
         store.filter.set({ ...this.currentFilter })
       }
-    }) as HTMLSelectElement
+    })
 
-    this.countrySelect.appendChild(h('option', { value: '' }, FILTER.ALL_COUNTRIES))
     store.sightings.subscribe(() => this.updateCountryOptions())
 
     // ── Source chips ─────────────────────────────────────────────
@@ -125,11 +130,11 @@ export class FilterToolbar extends Component {
     })
 
     return h('div', { className: cx.root, role: 'search', 'aria-label': ARIA.FILTER_BAR },
-      this.searchInput,
+      this.searchInput.el,
       h('div', { className: cx.selects },
-        this.shapeSelect,
-        this.continentSelect,
-        this.countrySelect
+        this.shapeSelect.el,
+        this.continentSelect.el,
+        this.countrySelect.el
       ),
       h('div', { className: cx.sources },
         ...sourceChips.map(cb => cb.el)
@@ -152,18 +157,14 @@ export class FilterToolbar extends Component {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 50)
 
-    const currentVal = this.countrySelect.value
+    const options: SelectOption[] = [
+      { value: '', label: FILTER.ALL_COUNTRIES },
+      ...sorted.map(([country, count]) => ({
+        value: country,
+        label: `${country} (${count})`
+      }))
+    ]
 
-    while (this.countrySelect.options.length > 1) {
-      this.countrySelect.remove(1)
-    }
-
-    for (const [country, count] of sorted) {
-      this.countrySelect.appendChild(
-        h('option', { value: country }, `${country} (${count})`)
-      )
-    }
-
-    if (currentVal) this.countrySelect.value = currentVal
+    this.countrySelect.setOptions(options)
   }
 }

@@ -15,6 +15,7 @@ export const ARIA = {
   SEARCH: 'Search sighting reports',
   FILTER_SHAPE: 'Filter by shape',
   FILTER_REGION: 'Filter by region',
+  FILTER_COUNTRY: 'Filter by country',
   FILTER_BAR: 'Filter sighting reports',
   YEAR_FROM: 'From year',
   YEAR_TO: 'To year',

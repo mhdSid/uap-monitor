@@ -13,7 +13,7 @@ import { h, addClass } from '@/utils/dom'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
-export type ButtonVariant = 'solid' | 'outline' | 'soft' | 'ghost'
+export type ButtonVariant = 'solid' | 'filled' | 'outline' | 'soft' | 'ghost'
 export type ButtonColor = 'primary' | 'secondary' | 'neutral' | 'error'
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg'
 

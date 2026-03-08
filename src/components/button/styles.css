@@ -7,10 +7,11 @@
   font-weight: 700;
   letter-spacing: 1.5px;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), color var(--transition-base), opacity var(--transition-fast);
   text-transform: uppercase;
   white-space: nowrap;
   outline: none;
+  border-radius: var(--radius-md);
 }
 
 .btn:disabled {
@@ -95,4 +96,35 @@
 }
 .btn--soft.btn--primary:hover:not(:disabled) {
   background: var(--c-green-500-12);
+}
+
+/* Filled — high-emphasis CTA with opaque background */
+.btn--filled.btn--primary {
+  background: var(--color-green);
+  border: 1px solid var(--color-green);
+  color: var(--color-bg);
+}
+.btn--filled.btn--primary:hover:not(:disabled),
+.btn--filled.btn--primary:focus-visible {
+  opacity: 0.85;
+}
+
+.btn--filled.btn--secondary {
+  background: var(--color-cyan);
+  border: 1px solid var(--color-cyan);
+  color: var(--color-bg);
+}
+.btn--filled.btn--secondary:hover:not(:disabled),
+.btn--filled.btn--secondary:focus-visible {
+  opacity: 0.85;
+}
+
+.btn--filled.btn--error {
+  background: var(--color-red);
+  border: 1px solid var(--color-red);
+  color: var(--color-bg);
+}
+.btn--filled.btn--error:hover:not(:disabled),
+.btn--filled.btn--error:focus-visible {
+  opacity: 0.85;
 }

@@ -47,29 +47,6 @@
   text-transform: uppercase;
 }
 
-.hero__cta {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--color-bg);
-  border-radius: var(--radius-md);
-  background: var(--color-green);
-  border: none;
-  padding: var(--space-4) var(--space-lg);
-  cursor: pointer;
-  transition: opacity var(--transition-fast);
-}
-
-.hero__cta:hover {
-  opacity: 0.85;
-}
-
-.hero__cta:focus-visible {
-  outline: 2px solid var(--color-green);
-  outline-offset: 2px;
-}
-
 @media (max-width: 480px) {
   .hero__stats {
     gap: var(--space-md);

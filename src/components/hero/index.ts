@@ -2,6 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
+import { Button } from '@/components/button'
 import { HERO } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 
@@ -17,13 +18,11 @@ export class Hero extends Component<HeroProps> {
     const sourcesValue = h('span', { className: cx.statValue }, '15')
     const yearsValue = h('span', { className: cx.statValue }, '—')
 
-    // Live-update sighting count
     effect(() => {
       const total = store.totalCount.get()
       sightingsValue.textContent = total > 0 ? total.toLocaleString() : '—'
     })
 
-    // Live-update year span
     effect(() => {
       const years = store.availableYears.get()
       if (years.length > 0) {
@@ -33,11 +32,13 @@ export class Hero extends Component<HeroProps> {
       }
     })
 
-    const cta = h('button', {
-      className: cx.cta,
-      type: 'button',
+    const cta = new Button({
+      label: HERO.CTA,
+      variant: 'filled',
+      color: 'primary',
+      size: 'sm',
       onClick: () => this.props.onExplore?.()
-    }, HERO.CTA)
+    })
 
     return h('section', { className: cx.root },
       h('p', { className: cx.tagline }, HERO.TAGLINE),
@@ -55,7 +56,7 @@ export class Hero extends Component<HeroProps> {
           h('span', { className: cx.statLabel }, HERO.STAT_YEARS)
         )
       ),
-      cta
+      cta.el
     )
   }
 }
