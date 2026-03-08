@@ -284,4 +284,14 @@
   --color-source-nuforc: var(--c-green-400);
   --color-source-hatch: var(--c-cyan-400);
   --color-source-chronology: var(--c-amber-400);
+
+  /* ── Transitions ─────────────────────────────────────────────── */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* ── Shadows ────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 4px var(--c-overlay);
+  --shadow-md: 0 4px 16px var(--c-overlay);
+  --shadow-lg: 0 8px 32px var(--c-overlay);
 }

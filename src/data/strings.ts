@@ -26,7 +26,8 @@ export const ARIA = {
   TOOLTIP: 'More info',
   ARTICLE_IMAGE: 'Article thumbnail image',
   VISIT_SOURCE: 'Visit source website',
-  THEME_TOGGLE: 'Toggle light and dark mode'
+  THEME_TOGGLE: 'Toggle light and dark mode',
+  FILTER_TOGGLE: 'Toggle search filters'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -279,6 +280,14 @@ export const WELCOME = {
   CLOSING: 'Transparency drives understanding. All data is open. The truth should be too.'
 } as const
 
+export const HERO = {
+  TAGLINE: 'Global UAP/UFO Sighting Intelligence',
+  CTA: 'EXPLORE MAP',
+  STAT_SIGHTINGS: 'Sightings',
+  STAT_SOURCES: 'Sources',
+  STAT_YEARS: 'Years of Data'
+} as const
+
 
 export const ACTIVE_SOURCES: WelcomeSource[] = [
   { name: 'NUFORC',              records: '195K',  period: '1974–2026', tier: 'high' },
@@ -314,6 +323,7 @@ export const ERRORS = {
 export const HIGHLIGHTS = {
   TITLE: 'HISTORICAL CASES',
   NO_MATCH: 'Sighting not found in current dataset.',
+  EXPANDING: 'Loading historical data...',
   ITEMS: [
     {
       year: '1663',

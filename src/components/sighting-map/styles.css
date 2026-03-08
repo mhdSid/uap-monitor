@@ -4,6 +4,49 @@
   gap: var(--space-4);
 }
 
+.sighting-map__details {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+}
+
+.sighting-map__summary {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sighting-map__summary::-webkit-details-marker {
+  display: none;
+}
+
+.sighting-map__summary::before {
+  content: '▸';
+  font-size: var(--fs-xs);
+  color: var(--color-green);
+  transition: transform var(--transition-fast);
+}
+
+.sighting-map__details[open] > .sighting-map__summary::before {
+  transform: rotate(90deg);
+}
+
+.sighting-map__details-content {
+  padding: 0 var(--space-5) var(--space-5);
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
 .sighting-map {
   width: 100%;
   aspect-ratio: 1;

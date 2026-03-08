@@ -9,7 +9,8 @@ export const CONTACT = {
 
 export const FOOTER_LINKS = {
   TERMS: 'Terms',
-  CONTACT: 'Contact'
+  CONTACT: 'Contact',
+  ABOUT: 'About'
 } as const
 
 // ─── Terms of Service ───────────────────────────────────────────────

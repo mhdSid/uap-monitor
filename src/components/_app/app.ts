@@ -27,10 +27,10 @@ import { FilterToolbar } from '@/components/filter-toolbar'
 import { SightingGrids } from '@/components/sighting-grid'
 import { SightingMap } from '@/components/sighting-map'
 import { Timeline } from '@/components/timeline'
-import { WelcomeModal } from '@/components/welcome-modal'
 import { GdeltGrid } from '@/components/gdelt-grid'
 import { GnewsGrid } from '@/components/gnews-grid'
 import { Highlights } from '@/components/highlights'
+import { Hero } from '@/components/hero'
 import { SECTION } from '@/data/strings'
 
 import type { Sighting } from '@/types'
@@ -92,8 +92,6 @@ export class App extends Component {
     analytics.init()
     analytics.pageView()
 
-    this.showWelcome()
-
     // ── All are independent network fetches — parallelize ──
     await Promise.all([
       this.loadManifests(),
@@ -149,6 +147,13 @@ export class App extends Component {
     this.showAllLoaders()
 
     clearChildren(this.main)
+
+    // ── Hero (above fold — first thing users see) ────────────────
+    const hero = new Hero({
+      onExplore: () => this.sightingMap.el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+    this.main.appendChild(hero.el)
+
     this.main.appendChild(controlsForm)
     this.main.appendChild(this.timeline.el)
     this.main.appendChild(new Highlights({}).el)
@@ -286,12 +291,6 @@ export class App extends Component {
     this.hideAllLoaders()
 
     this.yearRangeReady = true
-  }
-
-  // ─── Phase: Show welcome ───────────────────────────────────────
-
-  private showWelcome(): void {
-    WelcomeModal.show()
   }
 
   // ─── Reactions ─────────────────────────────────────────────────

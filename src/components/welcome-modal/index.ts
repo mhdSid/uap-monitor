@@ -39,8 +39,6 @@ export class WelcomeModal {
   // ─── Public API ────────────────────────────────────────────────
 
   static show(): boolean {
-    if (WelcomeModal.dismissed) return false
-
     Modal.open({
       header:  () => WelcomeModal.buildHeader(),
       content: () => WelcomeModal.buildContent(),

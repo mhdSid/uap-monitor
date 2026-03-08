@@ -5,10 +5,16 @@ import { h } from '@/utils/dom'
 import { APP_FOOTER_NAME, APP_FOOTER_TAGLINE, APP_URL } from '@/data/strings'
 import { FOOTER_LINKS, CONTACT } from '@/data/legal'
 import { TermsModal } from '@/components/terms-modal'
+import { WelcomeModal } from '@/components/welcome-modal'
 
 export class Footer extends Component {
   protected create(): HTMLElement {
     const year = new Date().getFullYear()
+
+    const aboutLink = h('button', {
+      className: cx.link,
+      onClick: () => WelcomeModal.show()
+    }, FOOTER_LINKS.ABOUT)
 
     const termsLink = h('button', {
       className: cx.link,
@@ -32,6 +38,8 @@ export class Footer extends Component {
           href: APP_URL,
           rel: 'noopener'
         }, 'uapmonitor.org'),
+        h('span', { className: cx.linkSep }, '\u00B7'),
+        aboutLink,
         h('span', { className: cx.linkSep }, '\u00B7'),
         termsLink,
         h('span', { className: cx.linkSep }, '\u00B7'),

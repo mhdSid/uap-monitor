@@ -4,8 +4,6 @@ import { Component } from '@/core'
 import { h } from '@/utils/dom'
 import { colors } from '@/styles/palette'
 import { CheckboxGroup } from '@/components/checkbox'
-import { Alert } from '@/components/alert'
-import { AlertVariant } from '@/enums'
 import type { Sighting, Fireball } from '@/types'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -82,16 +80,15 @@ export class SightingMap extends Component<SightingMapProps> {
     this.wrapper.appendChild(controlsEl)
     this.wrapper.appendChild(this.loaderEl)
 
-    const alert = new Alert({
-      variant: AlertVariant.INFO,
-      title: MAP_INFO.TITLE,
-      content: MAP_INFO.CONTENT,
-      dismissible: false
-    })
+    const details = h('details', { className: cx.mapDetails })
+    const summary = h('summary', { className: cx.mapSummary }, MAP_INFO.TITLE)
+    const content = h('p', { className: cx.mapDetailsContent }, MAP_INFO.CONTENT)
+    details.appendChild(summary)
+    details.appendChild(content)
 
     const outer = h('div', { className: cx.sightingMapOuter },
-      alert.el,
-      this.wrapper
+      this.wrapper,
+      details
     )
 
     // Defer map init — double RAF ensures layout is fully resolved
