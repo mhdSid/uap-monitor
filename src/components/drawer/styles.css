@@ -1,5 +1,3 @@
-/* ─── Drawer — bottom slide-up panel ────────────────────────────── */
-
 .drawer {
   position: fixed;
   inset: 0;
@@ -55,7 +53,7 @@
 .drawer__handle {
   display: flex;
   justify-content: center;
-  padding: var(--space-md) 0 var(--space-sm);
+  padding: var(--space-lg) 0 var(--space-sm);
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -73,23 +71,47 @@
 .drawer__body {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-sm) var(--space-lg) var(--space-xl);
+  padding: var(--space-md) var(--space-xl) var(--space-2xl);
 }
 
-/* ── Child overrides inside drawer (mobile) ──────────────────────── */
+/* ── Child overrides inside drawer ───────────────────────────────── */
 
 .drawer__body .controls-form {
-  gap: var(--space-lg);
+  gap: var(--space-sm);
 }
 
 .drawer__body .year-selector {
   border: none;
-  padding: 0;
+  padding: var(--space-sm) 0;
   background: transparent;
+  gap: var(--space-md);
+}
+
+.drawer__body .year-selector .select {
+  padding: var(--space-4) var(--space-sm);
+  font-size: var(--fs-sm);
 }
 
 .drawer__body .filter-toolbar {
   border: none;
   padding: 0;
   background: transparent;
+  gap: var(--space-md);
+}
+
+.drawer__body .filter-toolbar .text-input {
+  padding: var(--space-5) var(--space-md);
+}
+
+.drawer__body .filter-toolbar .select {
+  padding: var(--space-4) var(--space-sm);
+}
+
+.drawer__body .filter-toolbar__selects {
+  gap: var(--space-sm);
+}
+
+.drawer__body .filter-toolbar__sources {
+  gap: var(--space-sm);
+  padding-top: var(--space-3);
 }
