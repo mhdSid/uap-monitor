@@ -23,7 +23,7 @@ import { writeFileSync, mkdirSync, copyFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { GdeltClient } from 'gdelt-ts-client'
-import { DEFAULT_NEWS_QUERY, urlToId, mergeArticles } from '../shared-constants.mjs'
+import { GDELT_NEWS_QUERY, urlToId, mergeArticles, isNoiseArticle } from '../shared-constants.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..', '..')
@@ -120,7 +120,7 @@ function transformArticle(raw, bandTone) {
 
 async function main() {
   const opts = parseArgs()
-  const baseQuery = opts.query || `(${DEFAULT_NEWS_QUERY})`
+  const baseQuery = opts.query || `(${GDELT_NEWS_QUERY})`
   const windows = buildWindows(opts.days, opts.window)
 
   console.log('Base query:  ' + baseQuery)
@@ -166,16 +166,17 @@ async function main() {
       }
 
       let added = 0
+      let noise = 0
       for (const raw of rawArticles) {
         const article = transformArticle(raw, band.tone)
-        if (!seen.has(article.url)) {
-          seen.add(article.url)
-          allArticles.push(article)
-          added++
-        }
+        if (seen.has(article.url)) continue
+        if (isNoiseArticle(article)) { noise++; continue }
+        seen.add(article.url)
+        allArticles.push(article)
+        added++
       }
 
-      console.log(`${label} ${rawArticles.length} fetched, ${added} new`)
+      console.log(`${label} ${rawArticles.length} fetched, ${added} new${noise > 0 ? `, ${noise} noise filtered` : ''}`)
 
       // Courtesy delay between requests
       await new Promise(r => setTimeout(r, 1200))

@@ -715,7 +715,141 @@ export function truncate(text, maxLen) {
 // ─── News fetch shared constants ────────────────────────────────────
 
 /** Default search query shared across GDELT and GNews fetch scripts. */
-export const DEFAULT_NEWS_QUERY = 'UAP OR UFO OR "unidentified aerial" OR "flying saucer" OR AARO OR "alien craft"'
+/**
+ * News query strategy:
+ *
+ * GDELT — supports complex boolean queries with exclusions.
+ *   Single comprehensive query wrapped in parens, combined with
+ *   tone filters per-band. Exclusions via -"term" syntax.
+ *
+ * GNews — shorter queries, no NOT support. Rotate through focused
+ *   queries across pagination pages. Post-fetch filtering removes noise.
+ *
+ * BOTH — post-fetch `isNoiseArticle()` catches entertainment, movies,
+ *   games, music, sports, and tabloid content that slips through queries.
+ */
+
+// ─── GDELT query ───────────────────────────────────────────────────
+// GDELT API limits query to ~250 chars. Keep only highest-signal terms.
+// Noise filtering handled by post-fetch `isNoiseArticle()`.
+
+export const GDELT_NEWS_QUERY = [
+  '"UAP sighting"',
+  '"UFO sighting"',
+  '"UFO report"',
+  '"unidentified aerial phenomena"',
+  '"unidentified flying object"',
+  '"flying saucer"',
+  '"non-human intelligence"',
+  '"UFO disclosure"',
+  'AARO',
+  'NUFORC'
+].join(' OR ')
+
+// ─── GNews rotation queries ────────────────────────────────────────
+
+export const GNEWS_QUERIES = [
+  'UAP sighting OR "unidentified aerial phenomenon"',
+  'UFO sighting OR "unidentified flying object"',
+  '"UFO report" OR "UAP report" OR NUFORC',
+  '"flying saucer" OR "alien craft" OR "close encounter"',
+  'AARO OR "UAP disclosure" OR "UFO hearing"',
+  '"non-human intelligence" OR "UFO disclosure" OR MUFON',
+  '"Pentagon UFO" OR "congressional UAP" OR "UAP task force"',
+  '"aerial anomaly" OR "unidentified anomalous phenomena"'
+]
+
+// Legacy alias
+export const DEFAULT_NEWS_QUERY = GDELT_NEWS_QUERY
+
+// ─── Post-fetch noise filter ───────────────────────────────────────
+
+/**
+ * Domains known to produce entertainment/tabloid content that
+ * matches UAP keywords but isn't serious reporting.
+ */
+const BLOCKED_DOMAINS = new Set([
+  'imdb.com',
+  'rottentomatoes.com',
+  'metacritic.com',
+  'ign.com',
+  'gamespot.com',
+  'kotaku.com',
+  'polygon.com',
+  'screenrant.com',
+  'cbr.com',
+  'collider.com',
+  'comicbook.com',
+  'denofgeek.com',
+  'gamesradar.com',
+  'pcgamer.com',
+  'destructoid.com',
+  'thegamer.com',
+  'whatculture.com',
+  'looper.com',
+  'movieweb.com',
+  'cinemablend.com',
+  'flickeringmyth.com',
+  'themarysue.com',
+  'syfy.com'
+])
+
+/**
+ * Title/description patterns that indicate entertainment noise.
+ * Matched case-insensitive against title + description.
+ */
+const NOISE_PATTERNS = [
+  // Movies, TV, streaming
+  /\b(movie|film|trailer|box office|sequel|prequel|remake|reboot)\b/i,
+  /\b(netflix|hulu|disney\+|amazon prime|hbo|streaming|binge)\b/i,
+  /\b(TV series|TV show|episode|season \d|showrunner)\b/i,
+  /\b(actor|actress|director|cast|starring|cameo)\b/i,
+  // Gaming
+  /\b(video game|playstation|xbox|nintendo|steam|epic games|fortnite)\b/i,
+  /\b(gameplay|DLC|expansion pack|early access|game pass)\b/i,
+  // Music
+  /\b(album|single|track|concert|tour|music video|spotify|billboard)\b/i,
+  // Books/comics
+  /\b(book review|novel|comic book|manga|graphic novel)\b/i,
+  // Sports
+  /\b(NFL|NBA|MLB|NHL|FIFA|Premier League|Champions League|World Cup)\b/i,
+  // Tabloid/astrology
+  /\b(horoscope|zodiac|astrology|psychic reading|tarot)\b/i,
+  // Recipes/lifestyle (sometimes "flying saucer" = cocktail name)
+  /\b(recipe|cocktail|drink mix|bartender)\b/i,
+  // Toys/merchandise
+  /\b(action figure|LEGO|toy|collectible|funko)\b/i
+]
+
+/**
+ * Check if an article is entertainment/noise rather than serious UAP reporting.
+ * @param {{ title?: string; description?: string; url?: string; domain?: string }} article
+ * @returns {boolean} true if the article should be excluded
+ */
+export function isNoiseArticle(article) {
+  const domain = (article.domain || extractDomain(article.url || '')).toLowerCase()
+
+  // Block known entertainment domains
+  if (BLOCKED_DOMAINS.has(domain)) return true
+
+  // Check title + description against noise patterns
+  const text = [article.title || '', article.description || ''].join(' ')
+  if (!text) return false
+
+  for (const pattern of NOISE_PATTERNS) {
+    if (pattern.test(text)) return true
+  }
+
+  return false
+}
+
+function extractDomain(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return ''
+  }
+}
 
 /** Deterministic short ID from a URL string. */
 export function urlToId(url) {

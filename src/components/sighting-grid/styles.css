@@ -112,12 +112,10 @@
   padding-right: var(--space-1) !important;
 }
 
-/* Inline credibility: visible on SP, hidden on desktop */
+/* Inline credibility bar: visible on SP, hidden on desktop */
 .cell-report__inline-cred {
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  color: var(--color-dim);
-  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  width: 55px;
 }
 
 /* Desktop: show all columns with fixed widths */

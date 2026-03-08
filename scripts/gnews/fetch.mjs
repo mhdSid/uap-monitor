@@ -23,7 +23,7 @@ import { writeFileSync, mkdirSync, copyFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import GNews from '@gnews-io/gnews-io-js'
-import { DEFAULT_NEWS_QUERY, urlToId, mergeArticles } from '../shared-constants.mjs'
+import { GNEWS_QUERIES, urlToId, mergeArticles, isNoiseArticle } from '../shared-constants.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..', '..')
@@ -87,102 +87,109 @@ async function main() {
   }
 
   const opts = parseArgs()
-  const query = opts.query || DEFAULT_NEWS_QUERY
+  const queries = opts.query ? [opts.query] : GNEWS_QUERIES
   const fromDate = daysAgoISO(opts.days)
-  const toDate = new Date().toISOString()
 
-  console.log('Query:      ' + query)
-  console.log('Window:     ' + fromDate + ' -> ' + toDate)
-  console.log('Lang:       ' + opts.lang)
-  console.log('Limit:      ' + opts.limit + ' articles')
-  console.log('Max pages:  ' + opts.pages)
+  console.log('Queries:     ' + queries.length + ' rotation queries')
+  console.log('Window:      ' + fromDate + ' -> now')
+  console.log('Lang:        ' + opts.lang)
+  console.log('Limit:       ' + opts.limit + ' articles')
+  console.log('Max pages:   ' + opts.pages + ' (across all queries)')
   console.log()
 
   const client = new GNews(apiKey)
   const allArticles = []
   const seen = new Set()
-  let currentTo = toDate
-  let totalAvailable = 0
-  let emptyStreak = 0
+  let totalPages = 0
 
-  for (let page = 1; page <= opts.pages; page++) {
-    console.log('[Page ' + page + '] to=' + currentTo + ' ...')
+  for (const query of queries) {
+    if (totalPages >= opts.pages) break
+    if (allArticles.length >= opts.limit) break
 
-    let data
-    try {
-      data = await client.search(query, {
-        lang: opts.lang,
-        max: PER_PAGE,
-        from: fromDate,
-        to: currentTo,
-        sortby: 'publishedAt'
-      })
-    } catch (err) {
-      console.error('  Stopping: ' + err.message)
-      break
-    }
+    console.log(`── Query: ${query} ──`)
+    let currentTo = new Date().toISOString()
+    let emptyStreak = 0
 
-    if (page === 1) {
-      totalAvailable = data.totalArticles || 0
-      console.log('  Total available: ' + totalAvailable)
-    }
+    // Paginate within this query
+    const maxPagesPerQuery = Math.ceil(opts.pages / queries.length)
 
-    const batch = data.articles || []
-    if (batch.length === 0) {
-      console.log('  No more articles.')
-      break
-    }
+    for (let page = 1; page <= maxPagesPerQuery; page++) {
+      if (totalPages >= opts.pages) break
+      if (allArticles.length >= opts.limit) break
 
-    // Deduplicate within and across pages
-    let newCount = 0
-    for (const raw of batch) {
-      const a = transformArticle(raw)
-      if (!seen.has(a.url)) {
+      totalPages++
+      console.log('  [Page ' + page + '] to=' + currentTo.slice(0, 19) + ' ...')
+
+      let data
+      try {
+        data = await client.search(query, {
+          lang: opts.lang,
+          max: PER_PAGE,
+          from: fromDate,
+          to: currentTo,
+          sortby: 'publishedAt'
+        })
+      } catch (err) {
+        console.error('  Stopping query: ' + err.message)
+        break
+      }
+
+      if (page === 1) {
+        console.log('  Total available: ' + (data.totalArticles || 0))
+      }
+
+      const batch = data.articles || []
+      if (batch.length === 0) {
+        console.log('  No more articles.')
+        break
+      }
+
+      let newCount = 0
+      let noise = 0
+      for (const raw of batch) {
+        const a = transformArticle(raw)
+        if (seen.has(a.url)) continue
+        if (isNoiseArticle(a)) { noise++; continue }
         seen.add(a.url)
         allArticles.push(a)
         newCount++
       }
-    }
 
-    console.log('  Got ' + batch.length + ', ' + newCount + ' new (total: ' + allArticles.length + ')')
+      console.log('  Got ' + batch.length + ', ' + newCount + ' new' + (noise ? ', ' + noise + ' noise' : '') + ' (total: ' + allArticles.length + ')')
 
-    if (allArticles.length >= opts.limit) {
-      console.log('  Reached article limit (' + opts.limit + ').')
-      break
-    }
-
-    // Find oldest article in batch to shift the window
-    let oldestDate = null
-    for (const raw of batch) {
-      const pd = raw.publishedAt
-      if (pd && (!oldestDate || pd < oldestDate)) {
-        oldestDate = pd
+      // Find oldest article to shift window
+      let oldestDate = null
+      for (const raw of batch) {
+        const pd = raw.publishedAt
+        if (pd && (!oldestDate || pd < oldestDate)) {
+          oldestDate = pd
+        }
       }
-    }
 
-    if (!oldestDate || oldestDate >= currentTo) {
-      const d = new Date(currentTo)
-      d.setSeconds(d.getSeconds() - 1)
-      currentTo = d.toISOString()
-    } else {
-      currentTo = oldestDate
-    }
-
-    if (newCount === 0) {
-      emptyStreak++
-      if (emptyStreak >= 3) {
-        console.log('  3 consecutive pages with no new articles. Stopping.')
-        break
+      if (!oldestDate || oldestDate >= currentTo) {
+        const d = new Date(currentTo)
+        d.setSeconds(d.getSeconds() - 1)
+        currentTo = d.toISOString()
+      } else {
+        currentTo = oldestDate
       }
-    } else {
-      emptyStreak = 0
-    }
 
-    // Rate limit courtesy — 1s between requests
-    await new Promise(r => setTimeout(r, 1000))
+      if (newCount === 0) {
+        emptyStreak++
+        if (emptyStreak >= 2) {
+          console.log('  No new results. Moving to next query.')
+          break
+        }
+      } else {
+        emptyStreak = 0
+      }
+
+      // Rate limit courtesy
+      await new Promise(r => setTimeout(r, 1000))
+    }
   }
 
-  console.log('\nTotal collected: ' + allArticles.length)
+  console.log('\nTotal collected: ' + allArticles.length + ' (' + totalPages + ' API calls)')
 
   const trimmed = allArticles
     .slice(0, opts.limit)
@@ -200,7 +207,7 @@ async function main() {
 
   const output = {
     generatedAt: new Date().toISOString(),
-    query,
+    queries: queries.length,
     totalResults: merged.length,
     articles: merged
   }
