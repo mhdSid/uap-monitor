@@ -110,7 +110,9 @@ export class SightingMap extends Component<SightingMapProps> {
       zoomControl: true,
       attributionControl: true,
       preferCanvas: true,
-      worldCopyJump: true
+      worldCopyJump: true,
+      tap: true,
+      tapTolerance: 15
     })
 
     this.tileLayer = L.tileLayer(DARK_TILES, {
@@ -119,22 +121,22 @@ export class SightingMap extends Component<SightingMapProps> {
     }).addTo(this.map)
 
     this.clusterGroup = L.markerClusterGroup({
-      maxClusterRadius: 50,
+      maxClusterRadius: 45,
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
       zoomToBoundsOnClick: true,
-      disableClusteringAtZoom: 12,
-      spiderfyDistanceMultiplier: 1.5,
+      disableClusteringAtZoom: 10,
+      spiderfyDistanceMultiplier: 2,
       chunkedLoading: true,
       chunkInterval: 100,
       chunkDelay: 10,
       iconCreateFunction: (cluster) => {
         const count = cluster.getChildCount()
         let sizeClass: string, radius: number
-        if (count < 20) { sizeClass = cx.mapClusterSm; radius = 28 }
-        else if (count < 100) { sizeClass = cx.mapClusterMd; radius = 36 }
-        else if (count < 500) { sizeClass = cx.mapClusterLg; radius = 44 }
-        else { sizeClass = cx.mapClusterXl; radius = 52 }
+        if (count < 20) { sizeClass = cx.mapClusterSm; radius = 36 }
+        else if (count < 100) { sizeClass = cx.mapClusterMd; radius = 44 }
+        else if (count < 500) { sizeClass = cx.mapClusterLg; radius = 52 }
+        else { sizeClass = cx.mapClusterXl; radius = 60 }
 
         return L.divIcon({
           html: `<div class="${cx.mapCluster} ${sizeClass}">${count.toLocaleString()}</div>`,
@@ -192,12 +194,15 @@ export class SightingMap extends Component<SightingMapProps> {
 
     this.clusterGroup.clearLayers()
 
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const markerRadius = isTouchDevice ? 10 : 6
+
     const markers: L.CircleMarker[] = []
     for (const s of sightings) {
       if (!s.coordinates) continue
       const color = MARKER_COLORS[s.source] || colors.sourceChronology
       const marker = L.circleMarker([s.coordinates.lat, s.coordinates.lng], {
-        radius: 6,
+        radius: markerRadius,
         color,
         fillColor: color,
         fillOpacity: 0.7,
@@ -209,15 +214,26 @@ export class SightingMap extends Component<SightingMapProps> {
 
       marker.bindPopup(() => this.createPopup(s), {
         maxWidth: 280,
+        minWidth: isTouchDevice ? 220 : 200,
         closeButton: true,
-        autoPan: true
+        autoPan: true,
+        autoPanPadding: L.point(40, 40)
       })
 
-      // Explicit click handler as fallback — ensures popup opens even if
-      // Leaflet's default bindPopup click is intercepted by markercluster
-      marker.on('click', () => {
-        if (!marker.isPopupOpen()) marker.openPopup()
-      })
+      // On touch: prevent cluster zoom-through — stop propagation and force popup
+      if (isTouchDevice) {
+        marker.on('click', (e: L.LeafletMouseEvent) => {
+          e.originalEvent?.stopPropagation()
+          e.originalEvent?.preventDefault()
+          if (!marker.isPopupOpen()) {
+            marker.openPopup()
+          }
+        })
+      } else {
+        marker.on('click', () => {
+          if (!marker.isPopupOpen()) marker.openPopup()
+        })
+      }
 
       markers.push(marker)
     }
@@ -235,18 +251,21 @@ export class SightingMap extends Component<SightingMapProps> {
 
     this.fireballLayer.clearLayers()
     const color = colors.sourceFireball
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const fireballRadius = isTouchDevice ? 12 : 8
 
     for (const fb of fireballs) {
       if (fb.lat == null || fb.lng == null) continue
 
       const marker = L.circleMarker([fb.lat, fb.lng], {
-        radius: 8,
+        radius: fireballRadius,
         color,
         fillColor: color,
         fillOpacity: 0.8,
         weight: 2,
         opacity: 1,
-        interactive: true
+        interactive: true,
+        bubblingMouseEvents: false
       })
 
       const date = fb.date?.slice(0, 10) ?? '—'

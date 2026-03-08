@@ -8,7 +8,6 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   font-family: var(--font-mono);
-  border-radius: var(--radius-md);
 }
 
 .sighting-map__summary {
@@ -90,6 +89,18 @@
 .leaflet-container {
   background: var(--c-neutral-950);
   font-family: var(--font-mono);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Enlarge zoom controls on touch */
+@media (pointer: coarse) {
+  .leaflet-control-zoom a {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 20px !important;
+  }
 }
 
 .leaflet-control-zoom a {
@@ -128,31 +139,31 @@
 .map-cluster--sm {
   font-size: var(--fs-3xs);
   background: var(--c-green-400-08);
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
 }
 
 .map-cluster--md {
   font-size: 10px;
   background: var(--c-green-400-12);
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
 }
 
 .map-cluster--lg {
   font-size: var(--fs-xxs);
   background: var(--c-green-400-16);
   border-color: var(--c-green-400-50);
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
 }
 
 .map-cluster--xl {
   font-size: var(--fs-xs);
   background: var(--c-green-400-22);
   border-color: var(--c-green-400-60);
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
 }
 
 /* Map popup */
@@ -217,6 +228,31 @@
 
 .leaflet-popup-close-button {
   color: var(--color-dim) !important;
+  font-size: 20px !important;
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Touch: larger close button + popup action tap target */
+@media (pointer: coarse) {
+  .leaflet-popup-close-button {
+    font-size: 24px !important;
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+  }
+
+  .map-popup__action {
+    padding: var(--space-3) 0;
+    font-size: var(--fs-xs);
+  }
+
+  .leaflet-popup-content {
+    margin: var(--space-sm) !important;
+  }
 }
 
 @media (min-width: 768px) {
