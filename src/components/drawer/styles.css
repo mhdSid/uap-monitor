@@ -1,0 +1,95 @@
+/* ─── Drawer — bottom slide-up panel ────────────────────────────── */
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.drawer--open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* ── Overlay ─────────────────────────────────────────────────────── */
+
+.drawer__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--c-overlay);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.drawer--open .drawer__overlay {
+  opacity: 1;
+}
+
+/* ── Panel ───────────────────────────────────────────────────────── */
+
+.drawer__panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 85vh;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transform: translateY(100%);
+  transition: transform var(--transition-slow);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.drawer--open .drawer__panel {
+  transform: translateY(0);
+}
+
+/* ── Handle ──────────────────────────────────────────────────────── */
+
+.drawer__handle {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-md) 0 var(--space-sm);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.drawer__handle-bar {
+  width: var(--space-24);
+  height: 4px;
+  background: var(--color-dim);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Body ────────────────────────────────────────────────────────── */
+
+.drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm) var(--space-lg) var(--space-xl);
+}
+
+/* ── Child overrides inside drawer (mobile) ──────────────────────── */
+
+.drawer__body .controls-form {
+  gap: var(--space-lg);
+}
+
+.drawer__body .year-selector {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.drawer__body .filter-toolbar {
+  border: none;
+  padding: 0;
+  background: transparent;
+}

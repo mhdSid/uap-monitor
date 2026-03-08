@@ -8,6 +8,7 @@ export const cx = {
   neutral: 'btn--neutral',
   outline: 'btn--outline',
   primary: 'btn--primary',
+  round: 'btn--round',
   secondary: 'btn--secondary',
   sm: 'btn--sm',
   soft: 'btn--soft',

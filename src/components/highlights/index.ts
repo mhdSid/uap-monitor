@@ -6,6 +6,7 @@ import { Carousel } from '@/components/carousel'
 import { HighlightCard } from '@/components/highlight-card'
 import { SightingModal } from '@/components/sighting-modal'
 import { HIGHLIGHTS } from '@/data/strings'
+import { MAX_YEAR_SPAN } from '@/data/config'
 import { useAppStore } from '@/composables'
 import type { Sighting } from '@/types'
 
@@ -34,7 +35,7 @@ export class Highlights extends Component {
           if (targetYear >= from && targetYear <= to) return // Already in range, just no match
           if (store.loading.get()) return // Already loading
 
-          store.yearRange.set({ from: targetYear, to: targetYear + 10 })
+          store.yearRange.set({ from: targetYear, to: targetYear + MAX_YEAR_SPAN })
 
           // Wait for loading to finish, then search again
           const unsub = store.loading.subscribe((loading) => {

@@ -3,9 +3,10 @@ import { cx } from './cx'
 /* ------------------------------------------------------------------ *
  *  Button — styled, accessible button component                       *
  *                                                                     *
- *  Variants: solid, outline, soft, ghost                              *
+ *  Variants: solid, filled, outline, soft, ghost                      *
  *  Colors:   primary (green), secondary (cyan), neutral, error        *
  *  Sizes:    xs, sm, md, lg                                           *
+ *  Shape:    round (icon-only circular button)                        *
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
@@ -23,7 +24,9 @@ export interface ButtonProps {
   color?: ButtonColor
   size?: ButtonSize
   block?: boolean
+  round?: boolean
   disabled?: boolean
+  ariaLabel?: string
   icon?: () => SVGSVGElement
   trailingIcon?: () => SVGSVGElement
   onClick?: () => void
@@ -39,19 +42,22 @@ export class Button extends Component<ButtonProps> {
       color = 'primary',
       size = 'md',
       block = false,
+      round = false,
       disabled = false,
+      ariaLabel,
       icon,
       trailingIcon,
       onClick
     } = this.props
 
-    const classes = [
-      'btn',
+    const classes: string[] = [
+      cx.root,
       `btn--${variant}`,
       `btn--${color}`,
       `btn--${size}`
     ]
-    if (block) classes.push('btn--block')
+    if (block) classes.push(cx.block)
+    if (round) classes.push(cx.round)
 
     const children: (HTMLElement | SVGSVGElement | string)[] = []
 
@@ -61,9 +67,12 @@ export class Button extends Component<ButtonProps> {
       children.push(svg)
     }
 
-    children.push(h('span', { className: cx.label }, label))
+    // Round buttons are icon-only — hide label visually
+    if (!round) {
+      children.push(h('span', { className: cx.label }, label))
+    }
 
-    if (trailingIcon) {
+    if (trailingIcon && !round) {
       const svg = trailingIcon()
       addClass(svg, cx.icon, cx.iconTrailing)
       children.push(svg)
@@ -73,6 +82,7 @@ export class Button extends Component<ButtonProps> {
       className: classes.join(' '),
       type: 'button',
       disabled: disabled || undefined,
+      'aria-label': round ? (ariaLabel || label) : ariaLabel,
       onClick: onClick ?? undefined
     }, ...children)
 

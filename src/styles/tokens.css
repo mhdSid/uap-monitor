@@ -183,7 +183,9 @@
   --z-base:    1;
   --z-sticky:  10;
   --z-tooltip: 100;
+  --z-fab:     500;
   --z-modal:   1000;
+  --z-drawer:  1050;
   --z-toast:   1100;
   --z-scanlines: 9999;
 }

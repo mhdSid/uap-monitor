@@ -36,3 +36,43 @@
   flex-direction: column;
   gap: var(--space-4);
 }
+
+/* ── FAB — floating action button (mobile only) ──────────────────── */
+
+.fab {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  z-index: var(--z-fab);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Desktop: drawer is a static passthrough, FAB hidden ─────────── */
+
+@media (min-width: 768px) {
+  .fab { display: none; }
+
+  .drawer {
+    position: static;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .drawer__overlay { display: none; }
+
+  .drawer__panel {
+    position: static;
+    transform: none;
+    max-height: none;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+
+  .drawer__handle { display: none; }
+
+  .drawer__body {
+    padding: 0;
+    overflow: visible;
+  }
+}

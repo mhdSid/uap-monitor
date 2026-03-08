@@ -29,6 +29,16 @@
 .btn--lg { padding: var(--space-7)  var(--space-2xl); font-size: var(--fs-body);}
 .btn--block { width: 100%; }
 
+/* Round — icon-only circular button */
+.btn--round {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+.btn--round.btn--xs  { padding: var(--space-2); }
+.btn--round.btn--sm  { padding: var(--space-3); }
+.btn--round.btn--md  { padding: var(--space-4); }
+.btn--round.btn--lg  { padding: var(--space-5); }
+
 /* Solid — primary (green) */
 .btn--solid.btn--primary {
   background: var(--c-green-500-12);

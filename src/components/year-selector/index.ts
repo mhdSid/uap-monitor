@@ -5,9 +5,8 @@ import { h } from '@/utils/dom'
 import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 import { Select } from '@/components/select'
+import { MAX_YEAR_SPAN } from '@/data/config'
 import type { SelectOption } from '@/components/select'
-
-export const MAX_YEAR_SPAN = 10
 
 export class YearSelector extends Component {
   protected create(): HTMLElement {

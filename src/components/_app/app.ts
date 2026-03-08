@@ -30,7 +30,11 @@ import { Timeline } from '@/components/timeline'
 import { NewsFeed } from '@/components/news-feed'
 import { Highlights } from '@/components/highlights'
 import { Hero } from '@/components/hero'
-import { SECTION } from '@/data/strings'
+import { Drawer } from '@/components/drawer'
+import { Button } from '@/components/button'
+import { iconSearch } from '@/components/icons'
+import { SECTION, ARIA } from '@/data/strings'
+import { DEFAULT_YEAR_OFFSET } from '@/data/config'
 
 import type { Sighting } from '@/types'
 
@@ -47,6 +51,8 @@ export class App extends Component {
   private newsFeed!: NewsFeed
   private sightingMap!: SightingMap
   private timeline!: Timeline
+  private filterDrawer!: Drawer
+  private fab!: Button
   private renderVersion = 0
   private yearRangeReady = false
 
@@ -118,7 +124,7 @@ export class App extends Component {
   private hydrateStore(): void {
     const years = this.dataSource.getAvailableYears()
     const newest = years[0] ?? new Date().getFullYear()
-    const defaultFrom = newest - 1
+    const defaultFrom = newest - DEFAULT_YEAR_OFFSET
 
     batch(() => {
       this.store.availableYears.set(years)
@@ -140,6 +146,24 @@ export class App extends Component {
       new FilterToolbar({}).el
     )
 
+    // ── Filter drawer (mobile) — wraps controlsForm ─────────────
+    this.filterDrawer = new Drawer({
+      content: controlsForm,
+      onClose: () => this.fab.el.focus()
+    })
+
+    // ── FAB (mobile) — opens the drawer ─────────────────────────
+    this.fab = new Button({
+      label: ARIA.FILTER_TOGGLE,
+      variant: 'filled',
+      color: 'primary',
+      size: 'lg',
+      round: true,
+      icon: () => iconSearch(18),
+      onClick: () => this.filterDrawer.toggle()
+    })
+    this.fab.el.classList.add('fab')
+
     this.showAllLoaders()
 
     clearChildren(this.main)
@@ -150,7 +174,7 @@ export class App extends Component {
     })
     this.main.appendChild(hero.el)
 
-    this.main.appendChild(controlsForm)
+    this.main.appendChild(this.filterDrawer.el)
     this.main.appendChild(this.timeline.el)
     this.main.appendChild(new Highlights({}).el)
     this.main.appendChild(this.sightingMap.el)
@@ -167,6 +191,9 @@ export class App extends Component {
     )
 
     this.main.appendChild(this.grids.el)
+
+    // FAB appended to app root (fixed position, floats above everything)
+    this.el.appendChild(this.fab.el)
   }
 
   // ─── Phase: Bind reactions ─────────────────────────────────────

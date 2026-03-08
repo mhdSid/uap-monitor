@@ -2,9 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h, setAttrs } from '@/utils/dom'
-import { iconRadar, iconSun, iconMoon, iconSearch, iconClose } from '@/components/icons'
+import { iconRadar, iconSun, iconMoon } from '@/components/icons'
 import { Switch } from '@/components/switch'
-import { HeaderAction } from '@/components/header-action'
 import { APP_NAME, ARIA } from '@/data/strings'
 import { useTheme } from '@/composables'
 
@@ -47,17 +46,8 @@ export class Header extends Component {
       onChange: () => toggle()
     })
 
-    const filterToggle = new HeaderAction({
-      iconDefault: () => iconSearch(16),
-      iconActive: () => iconClose(16),
-      ariaLabel: ARIA.FILTER_TOGGLE,
-      dataAttr: 'data-filters-open'
-    })
-    filterToggle.el.classList.add(cx.filterToggle)
-
     const right = h('div', { className: cx.right },
       clock,
-      filterToggle.el,
       themeSwitch.el
     )
 
