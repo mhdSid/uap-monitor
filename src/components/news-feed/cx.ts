@@ -1,7 +1,10 @@
 export const cx = {
-  item: 'news-feed__item',
-  meta: 'news-feed__meta',
-  source: 'news-feed__source',
-  text: 'news-feed__text',
-  time: 'news-feed__time'
+  root: 'intel-row',
+  title: 'intel-row__title',
+  meta: 'intel-row__meta',
+  bottom: 'intel-row__bottom',
+  date: 'intel-row__date',
+  desc: 'intel-row__desc',
+  emptyState: 'intel-feed__empty',
+  emptyText: 'intel-feed__empty-text'
 } as const

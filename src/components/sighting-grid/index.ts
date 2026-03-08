@@ -12,7 +12,7 @@ import { h, clearChildren } from '@/utils/dom'
 import { Section } from '@/components/layout'
 import { DataGrid } from '@/components/data-grid'
 import { SightingModal } from '@/components/sighting-modal'
-import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, FILTER } from '@/data/strings'
+import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, FILTER, SECTION } from '@/data/strings'
 import { useAppStore, yieldThread } from '@/composables'
 import { sightingColumns } from './columns'
 import type { Sighting, DataGridColumn } from '@/types'
@@ -50,6 +50,8 @@ export class SightingGrids extends Component {
 
     const groups = groupByContinent(sightings)
     const frag = document.createDocumentFragment()
+
+    frag.appendChild(h('h2', { className: cx.heading }, SECTION.SIGHTING_REPORTS))
 
     for (const group of groups) {
       if (version !== this.renderVersion) return

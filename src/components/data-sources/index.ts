@@ -4,13 +4,7 @@ import { Component } from '@/core'
 import type { DataSourcesProps, DataSource } from '@/types'
 import { DataSourceStatus } from '@/enums'
 import { h } from '@/utils/dom'
-
-const STATUS_DOT_COLORS: Record<DataSourceStatus, string> = {
-  [DataSourceStatus.ONLINE]: 'var(--color-green)',
-  [DataSourceStatus.SYNCING]: 'var(--color-amber)',
-  [DataSourceStatus.OFFLINE]: 'var(--color-muted)',
-  [DataSourceStatus.DISABLED]: 'var(--color-muted)'
-}
+import { createDataSourceTag } from '@/components/tags'
 
 export class DataSources extends Component<DataSourcesProps> {
   protected create(): HTMLElement {
@@ -24,34 +18,27 @@ export class DataSources extends Component<DataSourcesProps> {
   }
 
   private renderItem(source: DataSource): HTMLElement {
-    const dotColor = STATUS_DOT_COLORS[source.status]
     const isDisabled = source.status === DataSourceStatus.DISABLED
-
-    const dot = h('span', {
-      className: cx.dot,
-      style: { backgroundColor: dotColor }
-    })
-
-    const label = h('span', { className: cx.label }, source.label)
-
-    const itemClass = isDisabled
-      ? `${cx.item} ${cx.itemDisabled}`
-      : cx.item
+    const tag = createDataSourceTag(source.label, source.status, isDisabled)
 
     if (source.url) {
-      return h('a', {
-        className: itemClass,
+      const link = h('a', {
+        className: cx.item,
         href: source.url,
         target: '_blank',
         rel: 'noopener noreferrer',
         title: source.description || source.label,
         'aria-label': `${source.label} — ${source.description || ''}`
-      }, dot, label)
+      })
+      link.appendChild(tag)
+      return link
     }
 
-    return h('div', {
-      className: itemClass,
+    const item = h('div', {
+      className: cx.item,
       title: source.description || source.label
-    }, dot, label)
+    })
+    item.appendChild(tag)
+    return item
   }
 }

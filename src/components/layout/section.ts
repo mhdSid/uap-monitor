@@ -1,7 +1,7 @@
 import { Component } from '@/core'
 import type { SectionProps } from '@/types'
 import { h } from '@/utils/dom'
-import { LiveTag } from '@/components/tags'
+import { LiveTag, createCountTag } from '@/components/tags'
 import { Tooltip } from '@/components/tooltip'
 import { cx } from './cx'
 
@@ -21,9 +21,9 @@ export class Section extends Component<SectionCreateProps> {
     if (tooltip) header.appendChild(new Tooltip({ content: tooltip, ariaLabel: `About ${title}` }).el)
     if (tag) header.appendChild(tag)
     if (count !== undefined) {
-      header.appendChild(
-        h('span', { className: cx.count }, String(count))
-      )
+      const countTag = createCountTag(count)
+      countTag.style.marginLeft = 'auto'
+      header.appendChild(countTag)
     }
 
     return h('div', { className: cx.root },

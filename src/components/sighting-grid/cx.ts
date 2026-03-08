@@ -10,6 +10,7 @@ export const cx = {
   tagCount: 'cell-report__tag-count',
   cellTime: 'cell-time',
   cellType: 'cell-type',
+  heading: 'grids-heading',
   emptyState: 'empty-state',
   emptyStateCompact: 'empty-state--compact',
   emptyStateText: 'empty-state__text'

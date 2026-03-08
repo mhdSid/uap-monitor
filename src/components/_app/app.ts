@@ -27,8 +27,7 @@ import { FilterToolbar } from '@/components/filter-toolbar'
 import { SightingGrids } from '@/components/sighting-grid'
 import { SightingMap } from '@/components/sighting-map'
 import { Timeline } from '@/components/timeline'
-import { GdeltGrid } from '@/components/gdelt-grid'
-import { GnewsGrid } from '@/components/gnews-grid'
+import { NewsFeed } from '@/components/news-feed'
 import { Highlights } from '@/components/highlights'
 import { Hero } from '@/components/hero'
 import { SECTION } from '@/data/strings'
@@ -45,8 +44,7 @@ export class App extends Component {
   private main!: HTMLElement
   private ticker!: Ticker
   private grids!: SightingGrids
-  private gdeltGrid!: GdeltGrid
-  private gnewsGrid!: GnewsGrid
+  private newsFeed!: NewsFeed
   private sightingMap!: SightingMap
   private timeline!: Timeline
   private renderVersion = 0
@@ -64,8 +62,7 @@ export class App extends Component {
     })
 
     this.grids = new SightingGrids({})
-    this.gdeltGrid = new GdeltGrid({})
-    this.gnewsGrid = new GnewsGrid({})
+    this.newsFeed = new NewsFeed({})
 
     this.sightingMap = new SightingMap({
       onSightingSelect: (id) => this.grids.scrollToSighting(id)
@@ -95,8 +92,7 @@ export class App extends Component {
     // ── All are independent network fetches — parallelize ──
     await Promise.all([
       this.loadManifests(),
-      this.gdeltGrid.load(),
-      this.gnewsGrid.load(),
+      this.newsFeed.load(),
       this.fireball.load(),
       this.russianHistorical.load()
     ])
@@ -159,25 +155,14 @@ export class App extends Component {
     this.main.appendChild(new Highlights({}).el)
     this.main.appendChild(this.sightingMap.el)
 
-    // ── GNews news section ──────────────────────────────────────
-    const gnewsCount = this.store.gnewsArticles.get().length
+    // ── Intelligence feed (merged GDELT + GNews) ─────────────────
+    const feedCount = this.newsFeed.getCount()
     this.main.appendChild(
       new Section({
-        title: SECTION.GNEWS,
-        tooltip: SECTION.GNEWS_TOOLTIP,
-        count: gnewsCount || undefined,
-        content: this.gnewsGrid.el
-      }).el
-    )
-
-    // ── GDELT news section ──────────────────────────────────────
-    const gdeltCount = this.store.gdeltArticles.get().length
-    this.main.appendChild(
-      new Section({
-        title: SECTION.GDELT_NEWS,
-        tooltip: SECTION.GDELT_NEWS_TOOLTIP,
-        count: gdeltCount || undefined,
-        content: this.gdeltGrid.el
+        title: SECTION.INTEL_FEED,
+        tooltip: SECTION.INTEL_FEED_TOOLTIP,
+        count: feedCount || undefined,
+        content: this.newsFeed.el
       }).el
     )
 
@@ -329,10 +314,8 @@ export class App extends Component {
 
     this.sightingMap.setSightings(filtered, this.store.hasActiveFilter.get())
 
-    // Grids read from store internally
     const filter = this.store.filter.get()
-    this.gdeltGrid.applyFilter(filter)
-    this.gnewsGrid.applyFilter(filter)
+    this.newsFeed.applyFilter(filter)
 
     this.hideAllLoaders()
     this.store.shownCount.set(filtered.length)

@@ -8,6 +8,7 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   font-family: var(--font-mono);
+  border-radius: var(--radius-md);
 }
 
 .sighting-map__summary {

@@ -19,11 +19,6 @@
   border-color: var(--color-green);
 }
 
-.tag--count {
-  color: var(--color-amber);
-  border-color: var(--color-amber);
-}
-
 .tag__dot {
   display: inline-block;
   width: 5px;

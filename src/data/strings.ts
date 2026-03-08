@@ -112,7 +112,10 @@ export const SECTION = {
   GDELT_NEWS: 'GDELT FEED',
   GDELT_NEWS_TOOLTIP: 'Global UAP/UFO media coverage via the GDELT Project. Monitors broadcast, print, and web sources across 100+ languages with sentiment analysis.',
   GNEWS: 'GNEWS FEED',
-  GNEWS_TOOLTIP: 'Latest UAP/UFO news aggregated from 60,000+ worldwide sources via GNews. English-language articles sorted by recency.'
+  GNEWS_TOOLTIP: 'Latest UAP/UFO news aggregated from 60,000+ worldwide sources via GNews. English-language articles sorted by recency.',
+  INTEL_FEED: 'INTELLIGENCE FEED',
+  INTEL_FEED_TOOLTIP: 'Unified UAP/UFO news from two sources: GDELT Project (broadcast, print, and web across 100+ languages with sentiment analysis) and GNews (60,000+ worldwide sources, English-language). Merged and sorted by date.',
+  SIGHTING_REPORTS: 'SIGHTING REPORTS'
 } as const
 
 export const GDELT_TONE_BANDS = {
@@ -205,6 +208,13 @@ export const GNEWS_MODAL = {
 export const GNEWS_GRID = {
   EMPTY: 'No GNews articles available.',
   EMPTY_FILTERED: 'No articles match current filters.'
+} as const
+
+export const INTEL_FEED = {
+  EMPTY: 'No articles available.',
+  EMPTY_FILTERED: 'No articles match current filters.',
+  SOURCE_GDELT: 'GDELT',
+  SOURCE_GNEWS: 'GNews'
 } as const
 
 // ─── Vessel viewer ──────────────────────────────────────────────────

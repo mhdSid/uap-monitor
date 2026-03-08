@@ -108,15 +108,6 @@ export interface RegionStats {
   trend: string
 }
 
-export interface NewsItem {
-  id: string
-  source: string
-  text: string
-  time: string
-  tag: TagVariant | null
-  continent: Continent
-}
-
 export interface Fireball {
   id: string
   date: string
@@ -178,6 +169,26 @@ export interface GnewsCollection {
   query: string
   totalResults: number
   articles: GnewsArticle[]
+}
+
+// ─── Unified intelligence feed ──────────────────────────────────────
+
+export type IntelSource = 'gdelt' | 'gnews'
+
+export interface IntelArticle {
+  id: string
+  title: string
+  url: string
+  publishedAt: string
+  sourceName: string
+  intelSource: IntelSource
+  /** GDELT-specific */
+  tone?: number
+  country?: string
+  domain?: string
+  /** GNews-specific */
+  description?: string
+  imageUrl?: string | null
 }
 
 export interface DataSource {
@@ -314,10 +325,6 @@ export interface CredibilityBarProps {
 
 export interface DataSourcesProps {
   sources: DataSource[]
-}
-
-export interface NewsFeedProps {
-  items: NewsItem[]
 }
 
 export interface TickerProps {

@@ -30,6 +30,9 @@ const TAG_STYLES: Record<TagVariant, TagStyle> = {
   [TagVariant.SOURCE_CHRONOLOGY]: { color: 'var(--color-amber)', bg: 'var(--c-amber-400-12)', border: 'var(--c-amber-400-20)' },
   [TagVariant.SOURCE_EXPERIENCER]: { color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.12)', border: 'rgba(167, 139, 250, 0.2)' },
   [TagVariant.SOURCE_NEWS]: { color: 'var(--color-green)', bg: 'var(--c-green-400-08)', border: 'var(--c-green-400-16)' },
+  [TagVariant.SOURCE_GDELT]: { color: 'var(--color-amber)', bg: 'transparent', border: 'var(--color-amber)' },
+  [TagVariant.SOURCE_GNEWS]: { color: 'var(--color-cyan)', bg: 'transparent', border: 'var(--color-cyan)' },
+  [TagVariant.COUNT]: { color: 'var(--color-muted)', bg: 'transparent', border: 'var(--color-border)' },
   [TagVariant.STATUS_VERIFIED]: { color: 'var(--color-green)', bg: 'transparent' },
   [TagVariant.STATUS_PENDING]: { color: 'var(--color-amber)', bg: 'transparent' },
   [TagVariant.STATUS_ANALYZING]: { color: 'var(--color-cyan)', bg: 'transparent' },
@@ -111,4 +114,57 @@ export function createSourceTag(sourceId: string, label: string): HTMLElement {
 
 export function createNewsSourceTag(label: string): HTMLElement {
   return new Tag({ variant: TagVariant.SOURCE_NEWS, label, size: TagSize.RESPONSIVE }).el
+}
+
+// ─── Intel source tag helper (GDELT / GNews badges) ────────────────
+
+const INTEL_SOURCE_VARIANT: Record<string, TagVariant> = {
+  gdelt: TagVariant.SOURCE_GDELT,
+  gnews: TagVariant.SOURCE_GNEWS
+}
+
+export function createIntelSourceTag(source: string, label: string): HTMLElement {
+  const variant = INTEL_SOURCE_VARIANT[source] ?? TagVariant.SOURCE_NEWS
+  return new Tag({ variant, label, size: TagSize.RESPONSIVE }).el
+}
+
+// ─── Count tag helper (section counts) ──────────────────────────────
+
+export function createCountTag(count: number | string): HTMLElement {
+  return new Tag({
+    variant: TagVariant.COUNT,
+    label: String(count),
+    size: TagSize.MD
+  }).el
+}
+
+// ─── Data source tag helper (status dot + label) ────────────────────
+
+const STATUS_DOT_COLORS: Record<string, string> = {
+  ONLINE: 'var(--color-green)',
+  SYNCING: 'var(--color-amber)',
+  OFFLINE: 'var(--color-muted)',
+  DISABLED: 'var(--color-muted)'
+}
+
+export function createDataSourceTag(
+  label: string,
+  status: string,
+  disabled = false
+): HTMLElement {
+  const tag = new Tag({
+    variant: TagVariant.COUNT,
+    label,
+    size: TagSize.MD
+  })
+
+  const dot = h('span', {
+    className: cx.dot,
+    style: { backgroundColor: STATUS_DOT_COLORS[status] ?? 'var(--color-muted)' }
+  })
+  tag.el.prepend(dot)
+
+  if (disabled) tag.el.style.opacity = '0.35'
+
+  return tag.el
 }
