@@ -826,15 +826,34 @@ const NOISE_PATTERNS = [
  * @param {{ title?: string; description?: string; url?: string; domain?: string }} article
  * @returns {boolean} true if the article should be excluded
  */
+// Titles that indicate index/tag pages, not actual articles
+const JUNK_TITLES = new Set([
+  'latest articles', 'latest news', 'breaking news', 'home',
+  'news', 'articles', 'top stories', 'homepage', 'index',
+  'search results', 'tag', 'tags', 'archive', 'archives',
+  'untitled', 'no title'
+])
+
 export function isNoiseArticle(article) {
   const domain = (article.domain || extractDomain(article.url || '')).toLowerCase()
 
   // Block known entertainment domains
   if (BLOCKED_DOMAINS.has(domain)) return true
 
+  const title = (article.title || '').trim()
+
+  // No title or too short = junk
+  if (title.length < 5) return true
+
+  // Generic index page titles
+  if (JUNK_TITLES.has(title.toLowerCase())) return true
+
+  // URL looks like an index/tag page (not a real article slug)
+  const url = article.url || ''
+  if (/\/tag\/\*\/|\/index\?more=|\/category\/\*/.test(url)) return true
+
   // Check title + description against noise patterns
-  const text = [article.title || '', article.description || ''].join(' ')
-  if (!text) return false
+  const text = [title, article.description || ''].join(' ')
 
   for (const pattern of NOISE_PATTERNS) {
     if (pattern.test(text)) return true
@@ -849,6 +868,44 @@ function extractDomain(url) {
   } catch {
     return ''
   }
+}
+
+/**
+ * Deep-deduplicate articles by id, URL, normalized title, and normalized description.
+ * Keeps the first occurrence (assumes input is already sorted by date desc).
+ */
+export function deduplicateArticles(articles) {
+  const seenIds = new Set()
+  const seenUrls = new Set()
+  const seenTitles = new Set()
+  const seenDescs = new Set()
+  const result = []
+
+  for (const a of articles) {
+    // Skip if same id
+    if (a.id && seenIds.has(a.id)) continue
+
+    // Skip if same URL
+    const url = (a.url || '').toLowerCase().replace(/\/+$/, '')
+    if (url && seenUrls.has(url)) continue
+
+    // Normalize title: lowercase, strip punctuation, collapse whitespace
+    const normTitle = (a.title || '').toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim()
+    if (normTitle.length > 10 && seenTitles.has(normTitle)) continue
+
+    // Normalize description (if present and long enough to be meaningful)
+    const normDesc = (a.description || '').toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim()
+    if (normDesc.length > 30 && seenDescs.has(normDesc)) continue
+
+    if (a.id) seenIds.add(a.id)
+    if (url) seenUrls.add(url)
+    if (normTitle.length > 10) seenTitles.add(normTitle)
+    if (normDesc.length > 30) seenDescs.add(normDesc)
+
+    result.push(a)
+  }
+
+  return result
 }
 
 /** Deterministic short ID from a URL string. */
