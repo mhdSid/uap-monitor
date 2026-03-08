@@ -33,7 +33,7 @@ const SORT_ICON_FACTORIES: Record<SortDirection, (() => SVGSVGElement) | null> =
 }
 
 const PAGE_SIZE = 20
-const CELL_PAD = '0'
+const CELL_PAD = '8px'
 const CELL_PAD_COMPACT = '10px'
 
 // ─── DataGrid class ─────────────────────────────────────────────────
