@@ -62,10 +62,12 @@ export class Highlights extends Component {
   private static findSighting(sightings: Sighting[], year: string, searchKey: string): Sighting | null {
     const key = searchKey.toLowerCase()
 
+    // Pass 1: year + location
     for (const s of sightings) {
       if (s.occurredAt.startsWith(year) && s.location.toLowerCase().includes(key)) return s
     }
 
+    // Pass 2: year + summary/description
     for (const s of sightings) {
       if (s.occurredAt.startsWith(year) && (
         s.summary.toLowerCase().includes(key) ||
@@ -73,17 +75,15 @@ export class Highlights extends Component {
       )) return s
     }
 
+    // Pass 3: year + region/country
     for (const s of sightings) {
-      if (s.location.toLowerCase().includes(key)) return s
+      if (s.occurredAt.startsWith(year) && (
+        s.region.toLowerCase().includes(key) ||
+        s.country.toLowerCase().includes(key)
+      )) return s
     }
 
-    for (const s of sightings) {
-      if (
-        s.summary.toLowerCase().includes(key) ||
-        s.description.toLowerCase().includes(key)
-      ) return s
-    }
-
+    // No match — return null rather than a random sighting
     return null
   }
 }

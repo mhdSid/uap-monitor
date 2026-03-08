@@ -5,7 +5,7 @@ import { h } from '@/utils/dom'
 import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 
-const MAX_YEAR_SPAN = 10
+export const MAX_YEAR_SPAN = 10
 
 export class YearSelector extends Component {
   protected create(): HTMLElement {
