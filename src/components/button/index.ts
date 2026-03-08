@@ -16,7 +16,7 @@ import { h, addClass } from '@/utils/dom'
 
 export type ButtonVariant = 'solid' | 'filled' | 'outline' | 'soft' | 'ghost'
 export type ButtonColor = 'primary' | 'secondary' | 'neutral' | 'error'
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg'
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
 export interface ButtonProps {
   label: string

@@ -157,9 +157,9 @@ export class App extends Component {
       label: ARIA.FILTER_TOGGLE,
       variant: 'filled',
       color: 'primary',
-      size: 'lg',
+      size: 'xl',
       round: true,
-      icon: () => iconSearch(18),
+      icon: () => iconSearch(22),
       onClick: () => this.filterDrawer.toggle()
     })
     this.fab.el.classList.add('fab')

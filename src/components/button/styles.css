@@ -27,6 +27,9 @@
 .btn--sm { padding: var(--space-3)  var(--space-lg);  font-size: var(--fs-xs);  }
 .btn--md { padding: var(--space-5)  var(--space-xl);  font-size: var(--fs-sm);  }
 .btn--lg { padding: var(--space-7)  var(--space-2xl); font-size: var(--fs-body);}
+.btn--xl  { padding: var(--space-8)  var(--space-2xl); font-size: var(--fs-body);}
+.btn--2xl { padding: var(--space-10) var(--space-2xl); font-size: var(--fs-lg); }
+.btn--3xl { padding: var(--space-12) var(--space-2xl); font-size: var(--fs-xl); }
 .btn--block { width: 100%; }
 
 /* Round — icon-only circular button */
@@ -38,6 +41,9 @@
 .btn--round.btn--sm  { padding: var(--space-3); }
 .btn--round.btn--md  { padding: var(--space-4); }
 .btn--round.btn--lg  { padding: var(--space-5); }
+.btn--round.btn--xl  { padding: var(--space-7); }
+.btn--round.btn--2xl { padding: var(--space-8); }
+.btn--round.btn--3xl { padding: var(--space-10); }
 
 /* Solid — primary (green) */
 .btn--solid.btn--primary {
