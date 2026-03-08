@@ -1,8 +1,7 @@
 .intel-row {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-1) 0;
+  gap: var(--space-2);
 }
 
 .intel-row__title {
