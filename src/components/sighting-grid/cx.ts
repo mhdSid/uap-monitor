@@ -8,6 +8,7 @@ export const cx = {
   meta: 'cell-report__meta',
   summary: 'cell-report__summary',
   tagCount: 'cell-report__tag-count',
+  inlineCred: 'cell-report__inline-cred',
   cellTime: 'cell-time',
   cellType: 'cell-type',
   heading: 'grids-heading',

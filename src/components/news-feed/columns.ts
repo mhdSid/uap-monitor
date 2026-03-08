@@ -34,6 +34,14 @@ export function intelFeedColumns(): DataGridColumn<IntelArticle>[] {
           createIntelSourceTag(row.intelSource, BADGE_LABEL[row.intelSource] || row.intelSource),
           createNewsSourceTag(row.domain || row.sourceName)
         )
+
+        // Inline tone for mobile (column hidden on SP)
+        if (row.tone != null) {
+          const inlineTone = createToneTag(row.tone)
+          inlineTone.classList.add(cx.inlineTone)
+          bottom.appendChild(inlineTone)
+        }
+
         root.appendChild(bottom)
 
         return root

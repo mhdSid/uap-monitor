@@ -60,6 +60,8 @@
 }
 
 /* ── Column widths ──────────────────────────────────────────── */
+
+/* SP: hide TONE column, show inline tone in bottom row */
 .intel-feed-container .data-grid__td:nth-child(1),
 .intel-feed-container .data-grid__th:nth-child(1) {
   width: auto !important;
@@ -68,12 +70,24 @@
 
 .intel-feed-container .data-grid__td:nth-child(2),
 .intel-feed-container .data-grid__th:nth-child(2) {
-  width: 110px !important;
-  display: table-cell;
+  display: none;
 }
 
 .intel-feed-container .data-grid__td:nth-child(3),
 .intel-feed-container .data-grid__th:nth-child(3) {
   width: 75px !important;
   display: table-cell;
+}
+
+/* Desktop: show TONE column, hide inline tone */
+@media (min-width: 768px) {
+  .intel-feed-container .data-grid__td:nth-child(2),
+  .intel-feed-container .data-grid__th:nth-child(2) {
+    display: table-cell;
+    width: 110px !important;
+  }
+
+  .intel-row__inline-tone {
+    display: none;
+  }
 }

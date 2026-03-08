@@ -59,11 +59,15 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
             : [])
         )
 
+        // Inline credibility for mobile (CRED column hidden on SP)
+        const inlineCred = h('span', { className: cx.inlineCred }, `Cred: ${row.credibility}`)
+
         return h('div', { className: cx.root },
           h('span', { className: cx.summary }, row.summary || '—'),
           meta,
           h('span', { className: cx.bottom },
-            badges
+            badges,
+            inlineCred
           )
         )
       }
