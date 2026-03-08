@@ -31,7 +31,7 @@ export class Select extends Component<SelectProps> {
       size = 'md', color = 'default', onChange
     } = this.props
 
-    const classes = [cx.root, cx[size]]
+    const classes: string[] = [cx.root, size === 'sm' ? cx.sm : cx.md]
     if (color === 'primary') classes.push(cx.primary)
 
     this.select = h('select', {
