@@ -110,9 +110,7 @@ export class SightingMap extends Component<SightingMapProps> {
       zoomControl: true,
       attributionControl: true,
       preferCanvas: true,
-      worldCopyJump: true,
-      tap: true,
-      tapTolerance: 15
+      worldCopyJump: true
     })
 
     this.tileLayer = L.tileLayer(DARK_TILES, {
