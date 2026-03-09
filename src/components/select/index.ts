@@ -2,8 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
+import { ComponentSize } from '@/enums'
 
-export type SelectSize = 'sm' | 'md' | 'lg'
 export type SelectColor = 'default' | 'primary'
 
 export interface SelectOption {
@@ -17,7 +17,7 @@ export interface SelectProps {
   ariaLabel: string
   options: SelectOption[]
   selected?: string
-  size?: SelectSize
+  size?: ComponentSize
   color?: SelectColor
   onChange?: (value: string) => void
 }
@@ -28,10 +28,14 @@ export class Select extends Component<SelectProps> {
   protected create(): HTMLElement {
     const {
       id, name, ariaLabel, options, selected,
-      size = 'md', color = 'default', onChange
+      size = ComponentSize.MD, color = 'default', onChange
     } = this.props
 
-    const SIZE_CX: Record<SelectSize, string> = { sm: cx.sm, md: cx.md, lg: cx.lg }
+    const SIZE_CX: Record<ComponentSize, string> = {
+      [ComponentSize.SM]: cx.sm,
+      [ComponentSize.MD]: cx.md,
+      [ComponentSize.LG]: cx.lg
+    }
     const classes: string[] = [cx.root, SIZE_CX[size]]
     if (color === 'primary') classes.push(cx.primary)
 

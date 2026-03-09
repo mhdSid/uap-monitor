@@ -124,7 +124,7 @@
 
   /* Hide inline cred — column is visible */
   .cell-report__inline-cred {
-    display: none;
+    display: none !important;
   }
 
   .grids-container .data-grid__th:nth-child(2),

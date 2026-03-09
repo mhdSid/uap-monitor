@@ -1,5 +1,5 @@
 import { h } from '@/utils/dom'
-import { formatDate, formatDateCompact } from '@/utils/format'
+import { formatDate, formatDateCompact, formatLocation } from '@/utils/format'
 import { StatusTag, createSourceTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'
 import { DataSourceId } from '@/enums'
@@ -45,9 +45,9 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
         const tagCount = row.tags?.length ?? 0
 
         const metaParts = [
-          [row.region, row.country].filter(Boolean).join(', '),
+          formatLocation(row.region, row.country),
           row.shape
-        ]
+        ].filter(v => v && v !== '—')
 
         const meta = h('span', { className: cx.meta }, metaParts.join(' · '))
 

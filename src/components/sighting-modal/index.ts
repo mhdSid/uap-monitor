@@ -9,6 +9,7 @@ import { cx } from './cx'
 import type { Sighting, Fireball, GdeltArticle, GnewsArticle } from '@/types'
 import { DataSourceId, TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
+import { formatLocation } from '@/utils/format'
 import { StatusTag, Tag } from '@/components/tags'
 import { Modal } from '@/components/modal'
 import { MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
@@ -39,7 +40,7 @@ export class SightingModal {
 
   private static buildHeader(s: Sighting): HTMLElement {
     return h('div', { className: cx.header },
-      h('span', { className: cx.title }, [s.region, s.country].filter(Boolean).join(', ') || '—'),
+      h('span', { className: cx.title }, formatLocation(s.region, s.country)),
       new StatusTag({ status: s.status }).el
     )
   }

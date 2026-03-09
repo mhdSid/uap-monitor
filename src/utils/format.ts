@@ -36,7 +36,27 @@ export function formatDate(iso: string): string {
 }
 
 /**
- * Compact date for tight spaces (grid cells, ticker).
+ * Sanitize a location string for display.
+ *
+ * Handles:
+ *   - Empty/null → "—"
+ *   - Consecutive commas/separators → collapsed ("Ballintober, , Ireland" → "Ballintober, Ireland")
+ *   - Leading/trailing separators → trimmed (", , Ireland" → "Ireland")
+ *   - Multiple spaces → single space
+ */
+export function formatLocation(...parts: (string | undefined | null)[]): string {
+  const joined = parts.filter(Boolean).join(', ')
+  const cleaned = joined
+    .replace(/,\s*,/g, ',')         // collapse ", ,"
+    .replace(/·\s*·/g, '·')         // collapse "· ·"
+    .replace(/\s{2,}/g, ' ')        // collapse multiple spaces
+    .replace(/^[,·\s]+/, '')        // strip leading separators
+    .replace(/[,·\s]+$/, '')        // strip trailing separators
+    .trim()
+  return cleaned || '—'
+}
+
+/**
  * "Mar 15" for current year, "Mar '24" for other modern years,
  * "70 AD" for ancient.
  */

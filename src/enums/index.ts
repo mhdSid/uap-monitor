@@ -129,3 +129,21 @@ export enum TagSize {
   LG = 'lg',
   RESPONSIVE = 'responsive'
 }
+
+/** Shared size scale for form components (TextInput, Select). */
+export enum ComponentSize {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg'
+}
+
+/** Extended size scale for Button (adds xs, xl, 2xl, 3xl). */
+export enum ButtonSize {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
+  XXL = '2xl',
+  XXXL = '3xl'
+}

@@ -14,7 +14,7 @@ import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, batch, effect, minDelay, filterSightings } from '@/composables'
-import { AlertVariant } from '@/enums'
+import { AlertVariant, ComponentSize, ButtonSize } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
 import { Loader } from '@/components/loader'
@@ -137,14 +137,14 @@ export class App extends Component {
   // ─── Phase: Build controls ─────────────────────────────────────
 
   private buildControls(): void {
-    const filterToolbar = new FilterToolbar({ inputSize: 'md', selectSize: 'md' })
+    const filterToolbar = new FilterToolbar({ inputSize: ComponentSize.MD, selectSize: ComponentSize.MD })
 
     const controlsForm = h('form', {
       className: 'controls-form',
       autocomplete: 'off',
       onSubmit: (e: Event) => e.preventDefault()
     },
-      new YearSelector({ selectSize: 'md' }).el,
+      new YearSelector({ selectSize: ComponentSize.MD }).el,
       filterToolbar.el
     )
 
@@ -170,7 +170,7 @@ export class App extends Component {
       label: ARIA.FILTER_TOGGLE,
       variant: 'filled',
       color: 'primary',
-      size: 'xl',
+      size: ButtonSize.XL,
       round: true,
       icon: () => iconSearch(22),
       onClick: () => this.filterDrawer.toggle()

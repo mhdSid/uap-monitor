@@ -13,6 +13,7 @@ import { cx } from './cx'
 
 import { Modal } from '@/components/modal'
 import { Button } from '@/components/button'
+import { ButtonSize } from '@/enums'
 import { Loader } from '@/components/loader'
 import { h, clearChildren } from '@/utils/dom'
 import { WELCOME } from '@/data/strings'
@@ -78,7 +79,7 @@ export class WelcomeModal {
       label: WELCOME.CTA,
       variant: 'solid',
       color: 'primary',
-      size: 'md',
+      size: ButtonSize.MD,
       block: true,
       onClick: () => Modal.close()
     })

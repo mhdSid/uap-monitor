@@ -4,15 +4,14 @@ import { Component } from '@/core'
 import { h } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
-
-export type TextInputSize = 'sm' | 'md' | 'lg'
+import { ComponentSize } from '@/enums'
 
 export interface TextInputProps {
   id?: string
   name?: string
   placeholder?: string
   ariaLabel: string
-  size?: TextInputSize
+  size?: ComponentSize
   clearable?: boolean
   onInput?: (value: string) => void
   onClear?: () => void
@@ -23,10 +22,16 @@ export class TextInput extends Component<TextInputProps> {
   private clearBtn!: HTMLButtonElement | null
 
   protected create(): HTMLElement {
-    const { id, name, placeholder, ariaLabel, size = 'md', clearable = false, onInput, onClear } = this.props
+    const { id, name, placeholder, ariaLabel, size = ComponentSize.MD, clearable = false, onInput, onClear } = this.props
+
+    const SIZE_CX: Record<ComponentSize, string> = {
+      [ComponentSize.SM]: cx.sm,
+      [ComponentSize.MD]: cx.md,
+      [ComponentSize.LG]: cx.lg
+    }
 
     this.input = h('input', {
-      className: `${cx.input} ${cx[size]}`,
+      className: `${cx.input} ${SIZE_CX[size]}`,
       type: 'text',
       autocomplete: 'off',
       ...(id && { id }),

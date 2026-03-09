@@ -11,12 +11,12 @@ import { cx } from './cx'
 
 import { Component } from '@/core'
 import { h, addClass } from '@/utils/dom'
+import { ButtonSize } from '@/enums'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
 export type ButtonVariant = 'solid' | 'filled' | 'outline' | 'soft' | 'ghost'
 export type ButtonColor = 'primary' | 'secondary' | 'neutral' | 'error'
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
 export interface ButtonProps {
   label: string
@@ -40,7 +40,7 @@ export class Button extends Component<ButtonProps> {
       label,
       variant = 'solid',
       color = 'primary',
-      size = 'md',
+      size = ButtonSize.MD,
       block = false,
       round = false,
       disabled = false,

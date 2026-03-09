@@ -2,6 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
+import { formatLocation } from '@/utils/format'
 import { colors } from '@/styles/palette'
 import { CheckboxGroup } from '@/components/checkbox'
 import type { Sighting, Fireball } from '@/types'
@@ -337,7 +338,7 @@ export class SightingMap extends Component<SightingMapProps> {
 
     const popup = h('div', { className: cx.mapPopup },
       h('div', { className: cx.mapPopupDate }, year),
-      h('div', { className: cx.mapPopupLocation }, s.location || s.region || '—'),
+      h('div', { className: cx.mapPopupLocation }, formatLocation(s.location, s.region)),
       h('div', { className: cx.mapPopupSummary }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
       h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
       action

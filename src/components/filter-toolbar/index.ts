@@ -6,11 +6,11 @@ import { Continent, SightingShape, DataSourceId } from '@/enums'
 import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
 import { useAppStore, useDebounce } from '@/composables'
 import { TextInput } from '@/components/text-input'
-import type { TextInputSize } from '@/components/text-input'
 import { Select } from '@/components/select'
-import type { SelectOption, SelectSize } from '@/components/select'
+import type { SelectOption } from '@/components/select'
 import { Checkbox } from '@/components/checkbox'
 import { colors } from '@/styles/palette'
+import { ComponentSize } from '@/enums'
 import type { SightingFilter } from '@/types'
 
 // ─── Source chip config (uses enum + palette — no anonymous strings) ─
@@ -40,8 +40,8 @@ function continentOptions(): SelectOption[] {
 // ─── Component ──────────────────────────────────────────────────────
 
 export interface FilterToolbarProps {
-  inputSize?: TextInputSize
-  selectSize?: SelectSize
+  inputSize?: ComponentSize
+  selectSize?: ComponentSize
 }
 
 export class FilterToolbar extends Component<FilterToolbarProps> {
@@ -55,8 +55,8 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
   protected create(): HTMLElement {
     this.currentFilter = {}
     const store = useAppStore()
-    const inputSize = this.props.inputSize ?? 'md'
-    const selectSize = this.props.selectSize ?? 'md'
+    const inputSize = this.props.inputSize ?? ComponentSize.MD
+    const selectSize = this.props.selectSize ?? ComponentSize.MD
 
     const emit = (): void => {
       store.filter.set({ ...this.currentFilter })
