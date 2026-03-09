@@ -37,27 +37,9 @@
   gap: var(--space-md);
 }
 
-.controls-form .year-selector {
-  border: none;
-  padding: var(--space-sm) 0;
-  background: transparent;
-  gap: var(--space-md);
-}
-
-.controls-form .filter-toolbar {
-  border: none;
-  padding: 0;
-  background: transparent;
-  gap: var(--space-md);
-}
-
-.controls-form .filter-toolbar__selects {
-  gap: var(--space-sm);
-}
-
-.controls-form .filter-toolbar__sources {
-  gap: var(--space-sm);
-  padding-top: var(--space-3);
+/* Desktop controls: hidden on SP */
+.controls-form--desktop {
+  display: none;
 }
 
 /* ── FAB — floating action button (mobile only) ──────────────────── */
@@ -77,8 +59,16 @@
   }
 }
 
-/* ── Desktop: FAB hidden, controls always inline ─────────────────── */
+/* ── Desktop: inline controls visible, FAB + drawer hidden ───────── */
 
 @media (min-width: 768px) {
+  .controls-form--desktop {
+    display: flex;
+  }
+
   .fab { display: none !important; }
+
+  .drawer {
+    display: none;
+  }
 }

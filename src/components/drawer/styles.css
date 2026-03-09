@@ -73,3 +73,21 @@
   overflow-y: auto;
   padding: var(--space-md) var(--space-xl) var(--space-2xl);
 }
+
+/* ── Structural overrides for controls inside drawer ─────────────── */
+
+.drawer__body .controls-form {
+  gap: var(--space-lg);
+}
+
+.drawer__body .year-selector {
+  border: none;
+  padding: var(--space-sm) 0;
+  background: transparent;
+}
+
+.drawer__body .filter-toolbar {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
