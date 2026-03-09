@@ -152,8 +152,15 @@ export class App extends Component {
     this.filterDrawer = new Drawer({
       content: controlsForm,
       onOpen: () => {
-        // Delay focus until slide animation settles (avoids iOS keyboard fighting transition)
-        setTimeout(() => filterToolbar.focusSearch(), 300)
+        // Focus search after slide transition completes
+        const panel = this.filterDrawer.el.querySelector('.drawer__panel')
+        if (panel) {
+          panel.addEventListener('transitionend', () => {
+            filterToolbar.focusSearch()
+          }, { once: true })
+        } else {
+          filterToolbar.focusSearch()
+        }
       },
       onClose: () => this.fab.el.focus()
     })

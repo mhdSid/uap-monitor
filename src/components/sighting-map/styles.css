@@ -203,11 +203,16 @@
 
 .map-popup__action {
   color: var(--color-green);
+  font-family: var(--font-mono);
   font-size: var(--fs-3xs);
   letter-spacing: 0.5px;
   margin-top: var(--space-xs);
   cursor: pointer;
   opacity: 0.7;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
 }
 
 .map-popup__action:hover {

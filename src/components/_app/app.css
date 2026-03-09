@@ -47,6 +47,13 @@
   box-shadow: var(--shadow-lg);
 }
 
+/* Space at bottom so FAB doesn't overlap footer content */
+@media (max-width: 767px) {
+  .app-main {
+    padding-bottom: calc(var(--space-3xl) + var(--space-xl));
+  }
+}
+
 /* ── Desktop: drawer is a static passthrough, FAB hidden ─────────── */
 
 @media (min-width: 768px) {

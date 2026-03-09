@@ -128,9 +128,15 @@ export class Drawer extends Component<DrawerProps> {
     this.el.classList.add(cx.rootOpen)
     this.panel.style.transform = ''
     this.overlay.style.opacity = ''
-    this.panel.focus()
     document.body.style.overflow = 'hidden'
-    this.props.onOpen?.()
+
+    // If onOpen is provided, let it handle focus (e.g. auto-focus search input).
+    // Otherwise focus the panel for keyboard accessibility.
+    if (this.props.onOpen) {
+      this.props.onOpen()
+    } else {
+      this.panel.focus()
+    }
   }
 
   close(): void {

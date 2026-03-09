@@ -329,18 +329,27 @@ export class SightingMap extends Component<SightingMapProps> {
   private createPopup(s: Sighting): HTMLElement {
     const year = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
     const src = s.subSource || s.source
+
+    const action = h('button', {
+      className: cx.mapPopupAction,
+      type: 'button'
+    }, '↳ View in list')
+
     const popup = h('div', { className: cx.mapPopup },
       h('div', { className: cx.mapPopupDate }, year),
       h('div', { className: cx.mapPopupLocation }, s.location || s.region || '—'),
       h('div', { className: cx.mapPopupSummary }, (s.summary || '').slice(0, 150) + (s.summary?.length > 150 ? '…' : '')),
       h('div', { className: cx.mapPopupMeta }, `${src} · ${s.shape} · Cred: ${s.credibility}`),
-      h('div', { className: cx.mapPopupAction }, '↳ View in list')
+      action
     )
 
-    popup.addEventListener('click', () => {
+    action.addEventListener('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
       if (this.props.onSightingSelect) {
-        this.map.closePopup()
         this.props.onSightingSelect(s.id)
+        // Close popup after scroll is initiated, not before
+        requestAnimationFrame(() => this.map.closePopup())
       }
     })
 

@@ -89,7 +89,8 @@
 
 .drawer__body .year-selector .select {
   padding: var(--space-4) var(--space-sm);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-title); /* 16px — prevents iOS zoom */
+  min-height: 44px;
 }
 
 .drawer__body .filter-toolbar {
@@ -104,7 +105,9 @@
 }
 
 .drawer__body .filter-toolbar .select {
-  padding: var(--space-4) var(--space-sm);
+  padding: var(--space-5) var(--space-md);
+  font-size: var(--fs-title); /* 16px — matches text-input, prevents iOS zoom */
+  min-height: 44px;
 }
 
 .drawer__body .filter-toolbar__selects {
