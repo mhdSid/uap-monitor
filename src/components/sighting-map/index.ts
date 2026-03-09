@@ -242,6 +242,11 @@ export class SightingMap extends Component<SightingMapProps> {
       const bounds = L.latLngBounds(markers.map(m => m.getLatLng()))
       this.map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 })
     }
+
+    // Force cluster recalculation — ensures visual update after chunkedLoading
+    requestAnimationFrame(() => {
+      if (this.map) this.map.fire('zoomend')
+    })
   }
 
   setFireballs(fireballs: Fireball[]): void {

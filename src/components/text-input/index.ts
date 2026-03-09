@@ -24,6 +24,7 @@ export class TextInput extends Component<TextInputProps> {
       className: `${cx.root} ${cx[size]}`,
       type: 'text',
       autocomplete: 'off',
+      autofocus: 1,
       ...(id && { id }),
       ...(name && { name }),
       ...(placeholder && { placeholder }),

@@ -65,7 +65,13 @@ export class FilterToolbar extends Component {
       size: 'md',
       onInput: (val) => {
         this.currentFilter.search = val || undefined
-        this.emitDebounced()
+        if (!val) {
+          // Clear: flush immediately so map/grids update instantly
+          this.emitDebounced.flush()
+          store.filter.set({ ...this.currentFilter })
+        } else {
+          this.emitDebounced()
+        }
       }
     })
 
