@@ -40,12 +40,26 @@ export function formatDate(iso: string): string {
  *
  * Handles:
  *   - Empty/null → "—"
- *   - Consecutive commas/separators → collapsed ("Ballintober, , Ireland" → "Ballintober, Ireland")
- *   - Leading/trailing separators → trimmed (", , Ireland" → "Ireland")
+ *   - Duplicate parts (location already contains region) → deduplicated
+ *   - Consecutive commas/separators → collapsed
+ *   - Leading/trailing separators → trimmed
  *   - Multiple spaces → single space
  */
 export function formatLocation(...parts: (string | undefined | null)[]): string {
-  const joined = parts.filter(Boolean).join(', ')
+  // Step 1: Remove empty parts and trim
+  const trimmed = parts.map(p => (p || '').trim()).filter(Boolean)
+
+  // Step 2: Remove exact duplicates (keep first)
+  const unique = [...new Set(trimmed)]
+
+  // Step 3: Remove parts that are substrings of a longer part
+  const filtered = unique.filter((part, i) =>
+    !unique.some((other, j) =>
+      i !== j && other.length > part.length && other.toLowerCase().includes(part.toLowerCase())
+    )
+  )
+
+  const joined = filtered.join(', ')
   const cleaned = joined
     .replace(/,\s*,/g, ',')         // collapse ", ,"
     .replace(/·\s*·/g, '·')         // collapse "· ·"

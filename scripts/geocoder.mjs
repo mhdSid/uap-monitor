@@ -124,7 +124,7 @@ const US_STATE_TO_ABBR = {
 const US_ABBR_SET = new Set(Object.values(US_STATE_TO_ABBR))
 const CA_PROVINCES = new Set(['AB','BC','MB','NB','NL','NS','NT','NU','ON','PE','QC','SK','YT'])
 
-// City name aliases
+// City name aliases (modern names, ancient names, transliterations)
 const CITY_ALIASES = {
   'new york': 'new york city',
   'washington': 'washington, d.c.',
@@ -132,7 +132,31 @@ const CITY_ALIASES = {
   'st. paul': 'saint paul',
   'st. petersburg': 'saint petersburg',
   'ft. worth': 'fort worth',
-  'ft. lauderdale': 'fort lauderdale'
+  'ft. lauderdale': 'fort lauderdale',
+  // Ancient / alternate names
+  'byblos': 'jbeil',           // Byblos → Jbeil (modern Arabic), Lebanon
+  'tyre': 'sour',              // Tyre → Sour, Lebanon
+  'sidon': 'saida',            // Sidon → Saida, Lebanon
+  'baalbek': 'baalbeck',       // variant spelling
+  'tripolis': 'tripoli',       // ancient Greek → modern
+  'smyrna': 'izmir',           // Turkey
+  'constantinople': 'istanbul', // Turkey
+  'peking': 'beijing',         // China
+  'bombay': 'mumbai',          // India
+  'madras': 'chennai',         // India
+  'calcutta': 'kolkata',       // India
+  'rangoon': 'yangon',         // Myanmar
+  'saigon': 'ho chi minh city', // Vietnam
+  'batavia': 'jakarta',        // Indonesia
+  'leopoldville': 'kinshasa',  // DRC
+  'salisbury': 'harare',       // Zimbabwe (only as alias, won't affect UK Salisbury since it checks country)
+  'leningrad': 'saint petersburg', // Russia
+  'stalingrad': 'volgograd',   // Russia
+  'petrograd': 'saint petersburg', // Russia
+  'danzig': 'gdansk',          // Poland
+  'breslau': 'wroclaw',        // Poland
+  'konigsberg': 'kaliningrad', // Russia
+  'formosa': 'taipei'          // Taiwan
 }
 
 // ─── Indices (built once) ───────────────────────────────────────────
