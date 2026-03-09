@@ -6,11 +6,12 @@ import { Continent, SightingShape, DataSourceId } from '@/enums'
 import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
 import { useAppStore, useDebounce } from '@/composables'
 import { TextInput } from '@/components/text-input'
+import type { TextInputSize } from '@/components/text-input'
 import { Select } from '@/components/select'
+import type { SelectOption, SelectSize } from '@/components/select'
 import { Checkbox } from '@/components/checkbox'
 import { colors } from '@/styles/palette'
 import type { SightingFilter } from '@/types'
-import type { SelectOption } from '@/components/select'
 
 // ─── Source chip config (uses enum + palette — no anonymous strings) ─
 
@@ -38,7 +39,12 @@ function continentOptions(): SelectOption[] {
 
 // ─── Component ──────────────────────────────────────────────────────
 
-export class FilterToolbar extends Component {
+export interface FilterToolbarProps {
+  inputSize?: TextInputSize
+  selectSize?: SelectSize
+}
+
+export class FilterToolbar extends Component<FilterToolbarProps> {
   private currentFilter!: SightingFilter
   private searchInput!: TextInput
   private shapeSelect!: Select
@@ -49,6 +55,8 @@ export class FilterToolbar extends Component {
   protected create(): HTMLElement {
     this.currentFilter = {}
     const store = useAppStore()
+    const inputSize = this.props.inputSize ?? 'md'
+    const selectSize = this.props.selectSize ?? 'md'
 
     const emit = (): void => {
       store.filter.set({ ...this.currentFilter })
@@ -62,7 +70,7 @@ export class FilterToolbar extends Component {
       name: 'filter-search',
       placeholder: FILTER.SEARCH_PLACEHOLDER,
       ariaLabel: ARIA.SEARCH,
-      size: 'md',
+      size: inputSize,
       clearable: true,
       onInput: (val) => {
         this.currentFilter.search = val || undefined
@@ -86,6 +94,7 @@ export class FilterToolbar extends Component {
       name: 'filter-shape',
       ariaLabel: ARIA.FILTER_SHAPE,
       options: shapeOptions(),
+      size: selectSize,
       onChange: (val) => {
         this.currentFilter.shape = val ? (val as SightingShape) : undefined
         this.emitDebounced.flush()
@@ -99,6 +108,7 @@ export class FilterToolbar extends Component {
       name: 'filter-region',
       ariaLabel: ARIA.FILTER_REGION,
       options: continentOptions(),
+      size: selectSize,
       onChange: (val) => {
         this.currentFilter.continent = val ? (val as Continent) : undefined
         this.currentFilter.country = undefined
@@ -114,6 +124,7 @@ export class FilterToolbar extends Component {
       name: 'filter-country',
       ariaLabel: ARIA.FILTER_COUNTRY,
       options: [{ value: '', label: FILTER.ALL_COUNTRIES }],
+      size: selectSize,
       onChange: (val) => {
         this.currentFilter.country = val || undefined
         this.emitDebounced.flush()

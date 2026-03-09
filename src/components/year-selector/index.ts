@@ -6,13 +6,18 @@ import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 import { Select } from '@/components/select'
 import { MAX_YEAR_SPAN } from '@/data/config'
-import type { SelectOption } from '@/components/select'
+import type { SelectOption, SelectSize } from '@/components/select'
 
-export class YearSelector extends Component {
+export interface YearSelectorProps {
+  selectSize?: SelectSize
+}
+
+export class YearSelector extends Component<YearSelectorProps> {
   protected create(): HTMLElement {
     const store = useAppStore()
     const years = store.availableYears.get()
     const { from: defaultFrom, to: defaultTo } = store.yearRange.get()
+    const selectSize = this.props.selectSize ?? 'sm'
 
     if (years.length === 0) {
       return h('div', { className: cx.root },
@@ -50,7 +55,7 @@ export class YearSelector extends Component {
       ariaLabel: ARIA.YEAR_FROM,
       options: yearOptions,
       selected: String(Math.max(oldest, defaultFrom)),
-      size: 'sm',
+      size: selectSize,
       color: 'primary',
       onChange: () => {
         const from = Number(fromSelect.value)
@@ -70,7 +75,7 @@ export class YearSelector extends Component {
       ariaLabel: ARIA.YEAR_TO,
       options: yearOptions,
       selected: String(Math.min(newest, defaultTo)),
-      size: 'sm',
+      size: selectSize,
       color: 'primary',
       onChange: () => {
         let from = Number(fromSelect.value)

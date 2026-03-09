@@ -137,14 +137,14 @@ export class App extends Component {
   // ─── Phase: Build controls ─────────────────────────────────────
 
   private buildControls(): void {
-    const filterToolbar = new FilterToolbar({})
+    const filterToolbar = new FilterToolbar({ inputSize: 'md', selectSize: 'md' })
 
     const controlsForm = h('form', {
       className: 'controls-form',
       autocomplete: 'off',
       onSubmit: (e: Event) => e.preventDefault()
     },
-      new YearSelector({}).el,
+      new YearSelector({ selectSize: 'md' }).el,
       filterToolbar.el
     )
 

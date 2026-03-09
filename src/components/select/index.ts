@@ -3,7 +3,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
 
-export type SelectSize = 'sm' | 'md'
+export type SelectSize = 'sm' | 'md' | 'lg'
 export type SelectColor = 'default' | 'primary'
 
 export interface SelectOption {
@@ -31,7 +31,8 @@ export class Select extends Component<SelectProps> {
       size = 'md', color = 'default', onChange
     } = this.props
 
-    const classes: string[] = [cx.root, size === 'sm' ? cx.sm : cx.md]
+    const SIZE_CX: Record<SelectSize, string> = { sm: cx.sm, md: cx.md, lg: cx.lg }
+    const classes: string[] = [cx.root, SIZE_CX[size]]
     if (color === 'primary') classes.push(cx.primary)
 
     this.select = h('select', {

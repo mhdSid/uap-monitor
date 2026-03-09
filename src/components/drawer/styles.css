@@ -74,10 +74,12 @@
   padding: var(--space-md) var(--space-xl) var(--space-2xl);
 }
 
-/* ── Child overrides inside drawer ───────────────────────────────── */
+/* ── Child layout overrides inside drawer ─────────────────────────── */
+/* Sizing (font, padding, min-height) is handled via component props  */
+/* (inputSize/selectSize='lg'). Only structural context rules here.   */
 
 .drawer__body .controls-form {
-  gap: var(--space-sm);
+  gap: var(--space-lg);
 }
 
 .drawer__body .year-selector {
@@ -87,23 +89,11 @@
   gap: var(--space-md);
 }
 
-.drawer__body .year-selector .select {
-  padding: var(--space-4) var(--space-sm);
-}
-
 .drawer__body .filter-toolbar {
   border: none;
   padding: 0;
   background: transparent;
   gap: var(--space-md);
-}
-
-.drawer__body .filter-toolbar .text-input {
-  padding: var(--space-5) var(--space-md);
-}
-
-.drawer__body .filter-toolbar .select {
-  padding: var(--space-5) var(--space-md);
 }
 
 .drawer__body .filter-toolbar__selects {

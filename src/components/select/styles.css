@@ -33,3 +33,11 @@
   padding: var(--space-3);
   flex: 1;
 }
+
+/* Size: lg (touch-friendly — drawer / mobile) */
+.select--lg {
+  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
+  padding: var(--space-5) var(--space-md);
+  min-height: 44px;
+  flex: 1;
+}

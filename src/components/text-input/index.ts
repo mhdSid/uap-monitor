@@ -5,7 +5,7 @@ import { h } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 
-export type TextInputSize = 'sm' | 'md'
+export type TextInputSize = 'sm' | 'md' | 'lg'
 
 export interface TextInputProps {
   id?: string
