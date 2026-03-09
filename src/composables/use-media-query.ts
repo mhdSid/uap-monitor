@@ -1,6 +1,15 @@
-const SP_BREAKPOINT = '(max-width: 480px)'
+/**
+ * useMediaQuery — reactive media query listener
+ *
+ * Returns isSp/isPc getters and onChange subscriber.
+ * Breakpoint matches CSS `@media (min-width: 768px)`.
+ */
 
-export function useMediaQuery() {
+const SP_BREAKPOINT = '(max-width: 767px)'
+
+let instance: ReturnType<typeof createMediaQuery> | null = null
+
+function createMediaQuery() {
   const mql = window.matchMedia(SP_BREAKPOINT)
   const listeners = new Set<(isSp: boolean) => void>()
 
@@ -17,4 +26,10 @@ export function useMediaQuery() {
   }
 
   return { isSp, isPc, onChange }
+}
+
+/** Singleton — safe to call from any component. */
+export function useMediaQuery() {
+  if (!instance) instance = createMediaQuery()
+  return instance
 }

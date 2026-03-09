@@ -323,20 +323,52 @@ function main() {
     processed++
   }
 
+  // ─ Deduplicate ─
+  let dupes = 0
+  const deduped = new Map()
+
+  for (const [year, sightings] of byYear) {
+    const seenIds = new Set()
+    const seenDescs = new Set()
+    const unique = []
+
+    for (const s of sightings) {
+      // Skip exact ID duplicates
+      if (seenIds.has(s.id)) { dupes++; continue }
+      seenIds.add(s.id)
+
+      // Skip duplicate descriptions (normalize: lowercase, strip whitespace/punctuation)
+      if (s.description) {
+        const normDesc = s.description.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim()
+        if (normDesc.length > 30) {
+          if (seenDescs.has(normDesc)) { dupes++; continue }
+          seenDescs.add(normDesc)
+        }
+      }
+
+      unique.push(s)
+    }
+
+    deduped.set(year, unique)
+  }
+
+  console.log(`  Deduplicated: ${dupes} duplicates removed`)
+
   // ─ Write chunks ─
   mkdirSync(OUTPUT_DIR, { recursive: true })
 
   const manifest = {
     generatedAt: new Date().toISOString(),
-    totalRecords: processed,
+    totalRecords: processed - dupes,
     skippedRecords: skipped,
+    duplicatesRemoved: dupes,
     years: {}
   }
 
-  const sortedYears = [...byYear.keys()].sort()
+  const sortedYears = [...deduped.keys()].sort()
 
   for (const year of sortedYears) {
-    const sightings = byYear.get(year)
+    const sightings = deduped.get(year)
     sightings.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))
 
     const filename = `nuforc-${year}.json`
@@ -351,8 +383,8 @@ function main() {
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 
   // ─ Summary ─
-  console.log(`\n  ✓ Processed ${processed.toLocaleString()} sightings (${skipped} skipped)`)
-  console.log(`  ✓ ${sortedYears.length} year chunks written to public/data/`)
+  console.log(`\n  ✓ Processed ${processed.toLocaleString()} sightings (${skipped} skipped, ${dupes} duplicates removed)`)
+  console.log(`  ✓ ${(processed - dupes).toLocaleString()} unique sightings in ${sortedYears.length} year chunks`)
   console.log(`\n  Year range: ${sortedYears[0]} — ${sortedYears[sortedYears.length - 1]}`)
 
   // Top shapes

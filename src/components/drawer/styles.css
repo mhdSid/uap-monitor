@@ -73,34 +73,3 @@
   overflow-y: auto;
   padding: var(--space-md) var(--space-xl) var(--space-2xl);
 }
-
-/* ── Child layout overrides inside drawer ─────────────────────────── */
-/* Sizing (font, padding, min-height) is handled via component props  */
-/* (inputSize/selectSize='lg'). Only structural context rules here.   */
-
-.drawer__body .controls-form {
-  gap: var(--space-lg);
-}
-
-.drawer__body .year-selector {
-  border: none;
-  padding: var(--space-sm) 0;
-  background: transparent;
-  gap: var(--space-md);
-}
-
-.drawer__body .filter-toolbar {
-  border: none;
-  padding: 0;
-  background: transparent;
-  gap: var(--space-md);
-}
-
-.drawer__body .filter-toolbar__selects {
-  gap: var(--space-sm);
-}
-
-.drawer__body .filter-toolbar__sources {
-  gap: var(--space-sm);
-  padding-top: var(--space-3);
-}

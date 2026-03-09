@@ -12,6 +12,8 @@ export const cx = {
   cellTime: 'cell-time',
   cellType: 'cell-type',
   heading: 'grids-heading',
+  searchBar: 'grids-search',
+  sectionWrapper: 'grids-section',
   emptyState: 'empty-state',
   emptyStateCompact: 'empty-state--compact',
   emptyStateText: 'empty-state__text'

@@ -88,7 +88,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  contain: layout style;
 }
 
 /* SP: hide CRED + STATUS, show DATE. Inline cred visible in bottom row. */
@@ -159,4 +158,15 @@
   color: var(--color-text-strong);
   padding: var(--space-sm) 0 0;
   margin: 0;
+}
+
+/* ── Inline search bar ─────────────────────────────────────────────── */
+
+.grids-search {
+  padding: var(--space-sm) 0;
+}
+
+.grids-section {
+  display: flex;
+  flex-direction: column;
 }

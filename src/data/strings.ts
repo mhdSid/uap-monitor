@@ -29,7 +29,9 @@ export const ARIA = {
   VISIT_SOURCE: 'Visit source website',
   THEME_TOGGLE: 'Toggle light and dark mode',
   FILTER_TOGGLE: 'Toggle search filters',
-  CLEAR_SEARCH: 'Clear search'
+  CLEAR_SEARCH: 'Clear search',
+  SEARCH_SIGHTINGS: 'Search sighting reports',
+  SEARCH_INTEL: 'Search intelligence articles'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -215,7 +217,8 @@ export const INTEL_FEED = {
   EMPTY: 'No articles available.',
   EMPTY_FILTERED: 'No articles match current filters.',
   SOURCE_GDELT: 'GDELT',
-  SOURCE_GNEWS: 'GNews'
+  SOURCE_GNEWS: 'GNews',
+  SEARCH_PLACEHOLDER: 'SEARCH ARTICLES...'
 } as const
 
 // ─── Vessel viewer ──────────────────────────────────────────────────

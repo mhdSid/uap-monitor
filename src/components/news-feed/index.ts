@@ -5,11 +5,14 @@ import { Component } from '@/core'
 import { h, clearChildren } from '@/utils/dom'
 import { DataGrid } from '@/components/data-grid'
 import { Loader } from '@/components/loader'
+import { TextInput } from '@/components/text-input'
 import { GdeltModal } from '@/components/gdelt-modal'
 import { GnewsModal } from '@/components/gnews-modal'
-import { INTEL_FEED } from '@/data/strings'
+import { INTEL_FEED, ARIA } from '@/data/strings'
+import { ComponentSize } from '@/enums'
 import { intelFeedColumns } from './columns'
-import { useGdelt, useGnews, useAppStore } from '@/composables'
+import { useGdelt, useGnews, useAppStore, useDebounce } from '@/composables'
+import { tokenMatch } from '@/utils/search'
 import type { IntelArticle, GdeltArticle, GnewsArticle, DataGridColumn, SightingFilter } from '@/types'
 
 // ─── Helpers ────────────────────────────────────────────────────────
@@ -64,17 +67,6 @@ function mergeAndDedupe(gdelt: GdeltArticle[], gnews: GnewsArticle[]): IntelArti
   return merged
 }
 
-function filterArticles(articles: IntelArticle[], search: string): IntelArticle[] {
-  if (!search) return articles
-  const lower = search.toLowerCase()
-  return articles.filter(a =>
-    a.title.toLowerCase().includes(lower) ||
-    (a.sourceName && a.sourceName.toLowerCase().includes(lower)) ||
-    (a.description && a.description.toLowerCase().includes(lower)) ||
-    (a.country && a.country.toLowerCase().includes(lower))
-  )
-}
-
 // ─── Lookup maps for modal routing ──────────────────────────────────
 
 let gdeltLookup = new Map<string, GdeltArticle>()
@@ -94,12 +86,68 @@ export class NewsFeed extends Component {
   private gnews = useGnews()
   private store = useAppStore()
   private allArticles: IntelArticle[] = []
+  private baseArticles: IntelArticle[] = []
+  private searchQuery = ''
+  private searchInput!: TextInput
+  private contentEl!: HTMLElement
 
   protected create(): HTMLElement {
     this.columns = intelFeedColumns()
     this.grid = null
-    return h('div', { className: 'intel-feed-container' })
+
+    this.searchInput = new TextInput({
+      id: 'intel-search',
+      name: 'intel-search',
+      placeholder: INTEL_FEED.SEARCH_PLACEHOLDER,
+      ariaLabel: ARIA.SEARCH_INTEL,
+      size: ComponentSize.SM,
+      clearable: true,
+      onInput: (val) => {
+        this.searchQuery = val
+        if (!val) {
+          this.debouncedSearch.flush()
+          this.applyInlineSearch()
+        } else {
+          this.debouncedSearch()
+        }
+      },
+      onClear: () => {
+        this.searchQuery = ''
+        this.debouncedSearch.flush()
+        this.applyInlineSearch()
+      }
+    })
+
+    this.contentEl = h('div', { className: cx.content })
+
+    return h('div', { className: 'intel-feed-container' },
+      h('div', { className: cx.searchBar }, this.searchInput.el),
+      this.contentEl
+    )
   }
+
+  private debouncedSearch = useDebounce(() => this.applyInlineSearch(), 200)
+
+  private applyInlineSearch(): void {
+    const base = this.baseArticles
+    if (!this.searchQuery) {
+      this.renderGrid(base)
+      return
+    }
+
+    const filtered = base.filter(a =>
+      tokenMatch(
+        this.searchQuery,
+        a.title, a.description, a.sourceName,
+        a.domain, a.country, a.intelSource,
+        a.publishedAt?.slice(0, 10)
+      )
+    )
+
+    this.renderGrid(filtered)
+  }
+
+  // ─── Public API ─────────────────────────────────────────────────
 
   async load(): Promise<IntelArticle[]> {
     this.showLoader()
@@ -114,24 +162,38 @@ export class NewsFeed extends Component {
 
     buildLookups(gdeltArticles, gnewsArticles)
     this.allArticles = mergeAndDedupe(gdeltArticles, gnewsArticles)
-    this.render(this.allArticles)
+    this.baseArticles = this.allArticles
+    this.renderGrid(this.allArticles)
     return this.allArticles
   }
 
   applyFilter(filter: SightingFilter): void {
-    const filtered = filterArticles(this.allArticles, filter.search ?? '')
-    this.render(filtered)
+    // Global filter narrows from allArticles → baseArticles
+    if (!filter.search) {
+      this.baseArticles = this.allArticles
+    } else {
+      const lower = filter.search.toLowerCase()
+      this.baseArticles = this.allArticles.filter(a =>
+        a.title.toLowerCase().includes(lower) ||
+        (a.sourceName && a.sourceName.toLowerCase().includes(lower)) ||
+        (a.description && a.description.toLowerCase().includes(lower)) ||
+        (a.country && a.country.toLowerCase().includes(lower))
+      )
+    }
+
+    // Then apply inline search on top
+    this.applyInlineSearch()
   }
 
   getCount(): number {
     return this.allArticles.length
   }
 
-  render(articles: IntelArticle[]): void {
-    clearChildren(this.el)
+  private renderGrid(articles: IntelArticle[]): void {
+    clearChildren(this.contentEl)
 
     if (articles.length === 0) {
-      this.el.appendChild(
+      this.contentEl.appendChild(
         h('div', { className: cx.emptyState },
           h('span', { className: cx.emptyText },
             this.allArticles.length === 0 ? INTEL_FEED.EMPTY : INTEL_FEED.EMPTY_FILTERED
@@ -148,7 +210,7 @@ export class NewsFeed extends Component {
       emptyText: INTEL_FEED.EMPTY_FILTERED
     })
 
-    this.el.appendChild(this.grid.el)
+    this.contentEl.appendChild(this.grid.el)
   }
 
   private openModal(article: IntelArticle, trigger: HTMLElement): void {
@@ -162,8 +224,8 @@ export class NewsFeed extends Component {
   }
 
   showLoader(loader?: HTMLElement): void {
-    clearChildren(this.el)
-    this.el.appendChild(
+    clearChildren(this.contentEl)
+    this.contentEl.appendChild(
       loader ?? h('div', { className: 'app-loader' }, new Loader({}).el)
     )
   }

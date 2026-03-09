@@ -30,7 +30,6 @@ import { Timeline } from '@/components/timeline'
 import { NewsFeed } from '@/components/news-feed'
 import { Highlights } from '@/components/highlights'
 import { Hero } from '@/components/hero'
-import { Drawer } from '@/components/drawer'
 import { Button } from '@/components/button'
 import { iconSearch } from '@/components/icons'
 import { SECTION, ARIA } from '@/data/strings'
@@ -51,7 +50,7 @@ export class App extends Component {
   private newsFeed!: NewsFeed
   private sightingMap!: SightingMap
   private timeline!: Timeline
-  private filterDrawer!: Drawer
+  private controlsForm!: HTMLElement
   private fab!: Button
   private renderVersion = 0
   private yearRangeReady = false
@@ -137,35 +136,18 @@ export class App extends Component {
   // ─── Phase: Build controls ─────────────────────────────────────
 
   private buildControls(): void {
-    const filterToolbar = new FilterToolbar({ inputSize: ComponentSize.MD, selectSize: ComponentSize.MD })
+    const filterToolbar = new FilterToolbar({ inputSize: ComponentSize.LG, selectSize: ComponentSize.LG })
 
-    const controlsForm = h('form', {
+    this.controlsForm = h('form', {
       className: 'controls-form',
       autocomplete: 'off',
       onSubmit: (e: Event) => e.preventDefault()
     },
-      new YearSelector({ selectSize: ComponentSize.MD }).el,
+      new YearSelector({ selectSize: ComponentSize.LG }).el,
       filterToolbar.el
     )
 
-    // ── Filter drawer (mobile) — wraps controlsForm ─────────────
-    this.filterDrawer = new Drawer({
-      content: controlsForm,
-      onOpen: () => {
-        // Focus search after slide transition completes
-        const panel = this.filterDrawer.el.querySelector('.drawer__panel')
-        if (panel) {
-          panel.addEventListener('transitionend', () => {
-            filterToolbar.focusSearch()
-          }, { once: true })
-        } else {
-          filterToolbar.focusSearch()
-        }
-      },
-      onClose: () => this.fab.el.focus()
-    })
-
-    // ── FAB (mobile) — opens the drawer ─────────────────────────
+    // ── FAB (mobile only) — scrolls to inline controls ──────────
     this.fab = new Button({
       label: ARIA.FILTER_TOGGLE,
       variant: 'filled',
@@ -173,7 +155,10 @@ export class App extends Component {
       size: ButtonSize.XL,
       round: true,
       icon: () => iconSearch(22),
-      onClick: () => this.filterDrawer.toggle()
+      onClick: () => {
+        this.controlsForm.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        filterToolbar.focusSearch()
+      }
     })
     this.fab.el.classList.add('fab')
 
@@ -187,7 +172,7 @@ export class App extends Component {
     })
     this.main.appendChild(hero.el)
 
-    this.main.appendChild(this.filterDrawer.el)
+    this.main.appendChild(this.controlsForm)
     this.main.appendChild(this.timeline.el)
     this.main.appendChild(new Highlights({}).el)
     this.main.appendChild(this.sightingMap.el)

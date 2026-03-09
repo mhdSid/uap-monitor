@@ -34,7 +34,30 @@
 .controls-form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-md);
+}
+
+.controls-form .year-selector {
+  border: none;
+  padding: var(--space-sm) 0;
+  background: transparent;
+  gap: var(--space-md);
+}
+
+.controls-form .filter-toolbar {
+  border: none;
+  padding: 0;
+  background: transparent;
+  gap: var(--space-md);
+}
+
+.controls-form .filter-toolbar__selects {
+  gap: var(--space-sm);
+}
+
+.controls-form .filter-toolbar__sources {
+  gap: var(--space-sm);
+  padding-top: var(--space-3);
 }
 
 /* ── FAB — floating action button (mobile only) ──────────────────── */
@@ -54,32 +77,8 @@
   }
 }
 
-/* ── Desktop: drawer is a static passthrough, FAB hidden ─────────── */
+/* ── Desktop: FAB hidden, controls always inline ─────────────────── */
 
 @media (min-width: 768px) {
-  .fab { display: none; }
-
-  .drawer {
-    position: static;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .drawer__overlay { display: none; }
-
-  .drawer__panel {
-    position: static;
-    transform: none;
-    max-height: none;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-  }
-
-  .drawer__handle { display: none; }
-
-  .drawer__body {
-    padding: 0;
-    overflow: visible;
-  }
+  .fab { display: none !important; }
 }
