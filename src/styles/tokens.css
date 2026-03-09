@@ -11,6 +11,7 @@
  *    --space-24 → 48px  --space-32 → 64px
  *
  *  Font scale (base 2, readable sizes):
+ *  TYPOGRAPHY (mobile-first, desktop scale +1-2px via media query):
  *    --fs-3xs → 8px   --fs-2xs → 10px  --fs-xxs → 11px
  *    --fs-xs  → 12px  --fs-sm  → 13px  --fs-body → 14px
  *    --fs-title → 16px  --fs-lg → 18px  --fs-xl → 20px
@@ -188,6 +189,27 @@
   --z-drawer:  999999;
   --z-toast:   9999999;
   --z-scanlines: 99999999;
+}
+
+/* ─── Desktop typography scale ─────────────────────────────────────
+ *  Bumps font tokens for comfortable reading on desktop monitors.
+ *  SP values (above) are the base; PC gets +1px on body sizes, +2px on headings.
+ *  Inputs/selects use these same tokens — a 1px proportional bump keeps them
+ *  consistent with surrounding content rather than looking undersized.
+ * ─────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+  :root {
+    --fs-3xs:  9px;
+    --fs-2xs: 11px;
+    --fs-xxs: 12px;
+    --fs-xs:  13px;
+    --fs-sm:  14px;
+    --fs-body: 15px;
+    --fs-title: 18px;
+    --fs-lg:  20px;
+    --fs-xl:  24px;
+  }
 }
 
 /* ─── Light theme ──────────────────────────────────────────────────
