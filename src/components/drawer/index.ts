@@ -7,6 +7,8 @@ import { ARIA } from '@/data/strings'
 export interface DrawerProps {
   /** Content to render inside the drawer body */
   content: HTMLElement
+  /** Called when drawer opens */
+  onOpen?: () => void
   /** Called when drawer is dismissed (overlay click, Escape, or swipe down) */
   onClose?: () => void
 }
@@ -128,6 +130,7 @@ export class Drawer extends Component<DrawerProps> {
     this.overlay.style.opacity = ''
     this.panel.focus()
     document.body.style.overflow = 'hidden'
+    this.props.onOpen?.()
   }
 
   close(): void {

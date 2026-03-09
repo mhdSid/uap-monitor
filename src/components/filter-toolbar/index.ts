@@ -63,15 +63,20 @@ export class FilterToolbar extends Component {
       placeholder: FILTER.SEARCH_PLACEHOLDER,
       ariaLabel: ARIA.SEARCH,
       size: 'md',
+      clearable: true,
       onInput: (val) => {
         this.currentFilter.search = val || undefined
         if (!val) {
-          // Clear: flush immediately so map/grids update instantly
           this.emitDebounced.flush()
           store.filter.set({ ...this.currentFilter })
         } else {
           this.emitDebounced()
         }
+      },
+      onClear: () => {
+        this.currentFilter.search = undefined
+        this.emitDebounced.flush()
+        store.filter.set({ ...this.currentFilter })
       }
     })
 
@@ -146,6 +151,10 @@ export class FilterToolbar extends Component {
         ...sourceChips.map(cb => cb.el)
       )
     )
+  }
+
+  focusSearch(): void {
+    this.searchInput.focus()
   }
 
   private updateCountryOptions(): void {

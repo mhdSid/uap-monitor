@@ -2,6 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/utils/dom'
+import { iconClose } from '@/components/icons'
+import { ARIA } from '@/data/strings'
 
 export type TextInputSize = 'sm' | 'md'
 
@@ -11,33 +13,70 @@ export interface TextInputProps {
   placeholder?: string
   ariaLabel: string
   size?: TextInputSize
+  clearable?: boolean
   onInput?: (value: string) => void
+  onClear?: () => void
 }
 
 export class TextInput extends Component<TextInputProps> {
   private input!: HTMLInputElement
+  private clearBtn!: HTMLButtonElement | null
 
   protected create(): HTMLElement {
-    const { id, name, placeholder, ariaLabel, size = 'md', onInput } = this.props
+    const { id, name, placeholder, ariaLabel, size = 'md', clearable = false, onInput, onClear } = this.props
 
     this.input = h('input', {
-      className: `${cx.root} ${cx[size]}`,
+      className: `${cx.input} ${cx[size]}`,
       type: 'text',
       autocomplete: 'off',
-      autofocus: 1,
       ...(id && { id }),
       ...(name && { name }),
       ...(placeholder && { placeholder }),
       'aria-label': ariaLabel
     }) as HTMLInputElement
 
-    if (onInput) {
-      this.input.addEventListener('input', () => {
-        onInput(this.input.value.trim())
-      })
+    if (!clearable) {
+      if (onInput) {
+        this.input.addEventListener('input', () => {
+          onInput(this.input.value.trim())
+        })
+      }
+      return this.input
     }
 
-    return this.input
+    // Clearable: wrap in container with clear button
+    this.clearBtn = h('button', {
+      className: cx.clearBtn,
+      type: 'button',
+      'aria-label': ARIA.CLEAR_SEARCH,
+      tabIndex: -1
+    }, iconClose(12)) as HTMLButtonElement
+
+    this.clearBtn.style.display = 'none'
+
+    const updateClearVisibility = (): void => {
+      if (this.clearBtn) {
+        this.clearBtn.style.display = this.input.value.length > 0 ? '' : 'none'
+      }
+    }
+
+    this.input.addEventListener('input', () => {
+      updateClearVisibility()
+      onInput?.(this.input.value.trim())
+    })
+
+    this.clearBtn.addEventListener('click', () => {
+      this.input.value = ''
+      updateClearVisibility()
+      this.input.focus()
+      onInput?.('')
+      onClear?.()
+    })
+
+    return h('div', { className: cx.wrapper },
+      this.input,
+      this.clearBtn
+    )
   }
 
   get value(): string {
@@ -46,6 +85,9 @@ export class TextInput extends Component<TextInputProps> {
 
   set value(v: string) {
     this.input.value = v
+    if (this.clearBtn) {
+      this.clearBtn.style.display = v.length > 0 ? '' : 'none'
+    }
   }
 
   focus(): void {

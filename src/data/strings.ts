@@ -28,7 +28,8 @@ export const ARIA = {
   ARTICLE_IMAGE: 'Article thumbnail image',
   VISIT_SOURCE: 'Visit source website',
   THEME_TOGGLE: 'Toggle light and dark mode',
-  FILTER_TOGGLE: 'Toggle search filters'
+  FILTER_TOGGLE: 'Toggle search filters',
+  CLEAR_SEARCH: 'Clear search'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────

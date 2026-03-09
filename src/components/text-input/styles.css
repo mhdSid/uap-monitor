@@ -1,3 +1,47 @@
+/* ── Wrapper (clearable mode) ────────────────────────────────────── */
+
+.text-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.text-input-wrapper .text-input {
+  padding-right: var(--space-xl);
+}
+
+/* ── Clear button ────────────────────────────────────────────────── */
+
+.text-input__clear {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-lg);
+  height: var(--space-lg);
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-dim);
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.text-input__clear:hover {
+  color: var(--color-text);
+  background: var(--c-neutral-400-08);
+}
+
+.text-input__clear:focus-visible {
+  outline: 1px solid var(--color-green);
+  outline-offset: 1px;
+}
+
+/* ── Input base ──────────────────────────────────────────────────── */
+
 .text-input {
   width: 100%;
   background: var(--color-bg);
@@ -19,7 +63,8 @@
   border-color: var(--color-green);
 }
 
-/* Sizes */
+/* ── Sizes ───────────────────────────────────────────────────────── */
+
 .text-input--sm {
   font-size: var(--fs-xs);
   padding: var(--space-2) var(--space-3);

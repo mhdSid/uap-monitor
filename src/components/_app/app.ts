@@ -137,18 +137,24 @@ export class App extends Component {
   // ─── Phase: Build controls ─────────────────────────────────────
 
   private buildControls(): void {
+    const filterToolbar = new FilterToolbar({})
+
     const controlsForm = h('form', {
       className: 'controls-form',
       autocomplete: 'off',
       onSubmit: (e: Event) => e.preventDefault()
     },
       new YearSelector({}).el,
-      new FilterToolbar({}).el
+      filterToolbar.el
     )
 
     // ── Filter drawer (mobile) — wraps controlsForm ─────────────
     this.filterDrawer = new Drawer({
       content: controlsForm,
+      onOpen: () => {
+        // Delay focus until slide animation settles (avoids iOS keyboard fighting transition)
+        setTimeout(() => filterToolbar.focusSearch(), 300)
+      },
       onClose: () => this.fab.el.focus()
     })
 
@@ -323,10 +329,8 @@ export class App extends Component {
     const version = ++this.renderVersion
     const release = this.grids.lockHeight()
 
-    this.showAllLoaders()
-
-    const filtered = await minDelay(() =>
-      filterSightings(this.store.sightings.get(), this.store.filter.get())
+    const filtered = await filterSightings(
+      this.store.sightings.get(), this.store.filter.get()
     )
 
     if (version !== this.renderVersion) {
@@ -344,7 +348,6 @@ export class App extends Component {
     const filter = this.store.filter.get()
     this.newsFeed.applyFilter(filter)
 
-    this.hideAllLoaders()
     this.store.shownCount.set(filtered.length)
   }
 
