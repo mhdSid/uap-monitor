@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, el } from '@/utils/dom'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -23,9 +23,10 @@ export class Checkbox extends Component<CheckboxProps> {
   private inputEl!: HTMLInputElement
 
   protected create(): HTMLElement {
-    this.inputEl = document.createElement('input')
-    this.inputEl.type = 'checkbox'
-    this.inputEl.className = cx.input
+    this.inputEl = el('input', {
+      type: 'checkbox',
+      className: cx.input
+    })
     this.inputEl.checked = this.props.checked ?? true
 
     this.inputEl.addEventListener('change', () => {

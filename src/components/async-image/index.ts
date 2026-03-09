@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { Loader } from '@/components/loader'
-import { h, addClass } from '@/utils/dom'
+import { h, el, addClass } from '@/utils/dom'
 
 export interface AsyncImageProps {
   src: string
@@ -37,10 +37,11 @@ export class AsyncImage extends Component<AsyncImageProps> {
     placeholder.appendChild(loader.el)
 
     // Image element — hidden until loaded
-    const img = document.createElement('img')
-    img.className = cx.img
-    img.alt = this.props.alt
-    img.decoding = 'async'
+    const img = el('img', {
+      className: cx.img,
+      alt: this.props.alt,
+      decoding: 'async'
+    })
 
     img.addEventListener('load', () => {
       addClass(img, cx.imgLoaded)

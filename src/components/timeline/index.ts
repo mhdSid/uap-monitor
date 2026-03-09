@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, el } from '@/utils/dom'
 import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
 
@@ -58,8 +58,7 @@ export class Timeline extends Component<TimelineProps> {
   private barArea = 0                  // cached bar drawing area height
 
   protected create(): HTMLElement {
-    this.canvas = document.createElement('canvas')
-    this.canvas.className = cx.canvas
+    this.canvas = el('canvas', { className: cx.canvas })
     // Prevent broken canvas icon on mobile before first resize
     this.canvas.width = 1
     this.canvas.height = 1
