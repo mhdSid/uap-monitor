@@ -184,7 +184,7 @@ export class SightingGrids extends Component {
       name: `sighting-search-${continent.toLowerCase()}`,
       placeholder: FILTER.SEARCH_PLACEHOLDER,
       ariaLabel: ARIA.SEARCH_SIGHTINGS,
-      size: ComponentSize.SM,
+      size: ComponentSize.MD,
       clearable: true,
       onInput: (val) => {
         sectionState.query = val

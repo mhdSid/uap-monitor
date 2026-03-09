@@ -100,7 +100,7 @@ export class NewsFeed extends Component {
       name: 'intel-search',
       placeholder: INTEL_FEED.SEARCH_PLACEHOLDER,
       ariaLabel: ARIA.SEARCH_INTEL,
-      size: ComponentSize.SM,
+      size: ComponentSize.MD,
       clearable: true,
       onInput: (val) => {
         this.searchQuery = val
