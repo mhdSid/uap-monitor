@@ -8,9 +8,9 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { h, clearChildren } from '@/utils/dom'
-import { formatLocation } from '@/utils/format'
 import { Modal } from '@/components/modal'
 import { SightingModal } from '@/components/sighting-modal'
+import { BookmarkListItem } from './bookmark-list-item'
 import { Button } from '@/components/button'
 import { useBookmarks, useAppStore } from '@/composables'
 import { useToast } from '@/components/toast'
@@ -59,24 +59,12 @@ export class BookmarksModal {
           const s = sightingMap.get(id)
           if (!s) continue
 
-          const date = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
-          const location = formatLocation(s.region, s.country)
-          const src = s.subSource || s.source
-
-          const item = h('div', { className: cx.item },
-            h('span', { className: cx.itemDate }, date),
-            h('span', { className: cx.itemLocation }, location),
-            h('span', { className: cx.itemSummary },
-              (s.summary || '').slice(0, 120) + (s.summary?.length > 120 ? '…' : '')
-            ),
-            h('span', { className: cx.itemMeta }, `${src} · ${s.shape}`)
+          list.appendChild(
+            new BookmarkListItem({
+              sighting: s,
+              onClick: (sighting) => BookmarksModal.openSighting(sighting)
+            }).el
           )
-
-          item.addEventListener('click', () => {
-            BookmarksModal.openSighting(s)
-          })
-
-          list.appendChild(item)
         }
 
         container.appendChild(list)
