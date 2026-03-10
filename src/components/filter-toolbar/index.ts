@@ -70,6 +70,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       name: 'filter-search',
       placeholder: FILTER.SEARCH_PLACEHOLDER,
       ariaLabel: ARIA.SEARCH,
+      autofocus: true,
       size: inputSize,
       clearable: true,
       onInput: (val) => {

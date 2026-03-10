@@ -10,6 +10,7 @@ export interface TextInputProps {
   id?: string
   name?: string
   placeholder?: string
+  autofocus?: boolean
   ariaLabel: string
   size?: ComponentSize
   clearable?: boolean
@@ -22,7 +23,7 @@ export class TextInput extends Component<TextInputProps> {
   private clearBtn!: HTMLButtonElement | null
 
   protected create(): HTMLElement {
-    const { id, name, placeholder, ariaLabel, size = ComponentSize.MD, clearable = false, onInput, onClear } = this.props
+    const { id, name, placeholder, ariaLabel, autofocus, size = ComponentSize.MD, clearable = false, onInput, onClear } = this.props
 
     const SIZE_CX: Record<ComponentSize, string> = {
       [ComponentSize.SM]: cx.sm,
@@ -34,6 +35,7 @@ export class TextInput extends Component<TextInputProps> {
       className: `${cx.input} ${SIZE_CX[size]}`,
       type: 'text',
       autocomplete: 'off',
+      ...autofocus && { autofocus },
       ...(id && { id }),
       ...(name && { name }),
       ...(placeholder && { placeholder }),
