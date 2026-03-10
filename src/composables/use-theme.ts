@@ -11,7 +11,7 @@ const ATTR = 'data-theme'
 
 let instance: { theme: Signal<Theme>; toggle: () => void } | null = null
 
-export function useTheme() {
+export function useTheme () {
   if (instance) return instance
 
   const initial = resolveInitial()
@@ -19,7 +19,7 @@ export function useTheme() {
 
   apply(initial)
 
-  function toggle(): void {
+  function toggle (): void {
     const next: Theme = theme.get() === 'dark' ? 'light' : 'dark'
     theme.set(next)
     apply(next)
@@ -32,7 +32,7 @@ export function useTheme() {
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
-function resolveInitial(): Theme {
+function resolveInitial (): Theme {
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
     if (stored === 'dark' || stored === 'light') return stored
@@ -41,7 +41,7 @@ function resolveInitial(): Theme {
   return 'dark'
 }
 
-function apply(theme: Theme): void {
+function apply (theme: Theme): void {
   if (theme === 'dark') {
     document.documentElement.removeAttribute(ATTR)
   } else {

@@ -13,7 +13,7 @@
  *
  * Ancient dates from the Hatch pipeline are stored as "0070-05-21T00:00:00".
  */
-export function formatDate(iso: string): string {
+export function formatDate (iso: string): string {
   if (!iso) return '—'
 
   // Extract year directly from ISO prefix "YYYY-..."
@@ -45,7 +45,7 @@ export function formatDate(iso: string): string {
  *   - Leading/trailing separators → trimmed
  *   - Multiple spaces → single space
  */
-export function formatLocation(...parts: (string | undefined | null)[]): string {
+export function formatLocation (...parts: (string | undefined | null)[]): string {
   // Step 1: Remove empty parts and trim
   const trimmed = parts.map(p => (p || '').trim()).filter(Boolean)
 
@@ -74,7 +74,7 @@ export function formatLocation(...parts: (string | undefined | null)[]): string 
  * "Mar 15" for current year, "Mar '24" for other modern years,
  * "70 AD" for ancient.
  */
-export function formatDateCompact(iso: string): string {
+export function formatDateCompact (iso: string): string {
   if (!iso) return '—'
 
   const year = parseInt(iso.slice(0, 4), 10)

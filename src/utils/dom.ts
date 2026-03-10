@@ -25,7 +25,7 @@ export interface DomProps {
  *   h('span', 'just text')
  *   h('br')
  */
-export function h(
+export function h (
   tag: string,
   propsOrChild?: DomProps | DomChild | null,
   ...children: DomChild[]
@@ -53,7 +53,7 @@ export function h(
  * Backward-compatible alias preserving narrow return types
  * (e.g. HTMLTableElement, HTMLButtonElement).
  */
-export function el<K extends keyof HTMLElementTagNameMap>(
+export function el<K extends keyof HTMLElementTagNameMap> (
   tag: K,
   attrs?: Record<string, string>,
   children?: (HTMLElement | string | null)[]
@@ -82,12 +82,12 @@ export function el<K extends keyof HTMLElementTagNameMap>(
 }
 
 /** Create a plain text node. */
-export function text(value: string | number): Text {
+export function text (value: string | number): Text {
   return document.createTextNode(String(value))
 }
 
 /** Group children without a wrapper element. */
-export function fragment(...children: DomChild[]): DocumentFragment {
+export function fragment (...children: DomChild[]): DocumentFragment {
   const frag = document.createDocumentFragment()
   appendChildren(frag, children)
   return frag
@@ -96,18 +96,18 @@ export function fragment(...children: DomChild[]): DocumentFragment {
 // ─── Mounting & children ─────────────────────────────────────────────
 
 /** Replace all children of `parent` with a single child. */
-export function mount(parent: HTMLElement, child: Node): void {
+export function mount (parent: HTMLElement, child: Node): void {
   clearChildren(parent)
   parent.appendChild(child)
 }
 
 /** Remove every child node from an element. */
-export function clearChildren(node: Element | DocumentFragment): void {
+export function clearChildren (node: Element | DocumentFragment): void {
   while (node.lastChild) node.removeChild(node.lastChild)
 }
 
 /** Atomically swap all children with new ones via DocumentFragment. */
-export function replaceChildren(
+export function replaceChildren (
   node: Element,
   ...children: DomChild[]
 ): void {
@@ -120,17 +120,17 @@ export function replaceChildren(
 // ─── Visibility ──────────────────────────────────────────────────────
 
 /** Hide an element (display: none). */
-export function hide(node: HTMLElement): void {
+export function hide (node: HTMLElement): void {
   node.style.display = 'none'
 }
 
 /** Show a previously hidden element. Pass original display value if needed. */
-export function show(node: HTMLElement, display = ''): void {
+export function show (node: HTMLElement, display = ''): void {
   node.style.display = display
 }
 
 /** Toggle visibility. Returns `true` when the element becomes visible. */
-export function toggle(node: HTMLElement, display = ''): boolean {
+export function toggle (node: HTMLElement, display = ''): boolean {
   const hidden = node.style.display === 'none'
   node.style.display = hidden ? display : 'none'
   return hidden
@@ -138,15 +138,15 @@ export function toggle(node: HTMLElement, display = ''): boolean {
 
 // ─── Class helpers ───────────────────────────────────────────────────
 
-export function addClass(node: Element, ...names: string[]): void {
+export function addClass (node: Element, ...names: string[]): void {
   node.classList.add(...names)
 }
 
-export function removeClass(node: Element, ...names: string[]): void {
+export function removeClass (node: Element, ...names: string[]): void {
   node.classList.remove(...names)
 }
 
-export function toggleClass(
+export function toggleClass (
   node: Element,
   name: string,
   force?: boolean
@@ -154,14 +154,14 @@ export function toggleClass(
   return node.classList.toggle(name, force)
 }
 
-export function hasClass(node: Element, name: string): boolean {
+export function hasClass (node: Element, name: string): boolean {
   return node.classList.contains(name)
 }
 
 // ─── Attributes ──────────────────────────────────────────────────────
 
 /** Set / remove one or more attributes. null | undefined | false removes. */
-export function setAttrs(
+export function setAttrs (
   node: Element,
   attrs: Record<string, string | number | boolean | null | undefined>
 ): void {
@@ -180,7 +180,7 @@ export function setAttrs(
 // ─── HTML injection (safe & raw) ─────────────────────────────────────
 
 /** Parse raw HTML into a DocumentFragment. No sanitisation — use with care. */
-export function rawHtml(html: string): DocumentFragment {
+export function rawHtml (html: string): DocumentFragment {
   const tpl = document.createElement('template')
   tpl.innerHTML = html
   return tpl.content
@@ -198,7 +198,7 @@ const SAFE_ATTRS = new Set([
  * Like rawHtml() but strips tags and attributes not in the allow-list.
  * Ideal for rendering user-submitted NUFORC report text safely.
  */
-export function safeHtml(html: string): DocumentFragment {
+export function safeHtml (html: string): DocumentFragment {
   const tpl = document.createElement('template')
   tpl.innerHTML = html
   const walk = (parent: Element | DocumentFragment) => {
@@ -236,14 +236,14 @@ export function safeHtml(html: string): DocumentFragment {
 // ─── IDs ─────────────────────────────────────────────────────────────
 
 /** Generate a short random id (8 chars, a-z0-9). */
-export function generateId(): string {
+export function generateId (): string {
   return Math.random().toString(36).slice(2, 10)
 }
 
 // ─── Query helpers ───────────────────────────────────────────────────
 
 /** querySelector that throws when nothing is found. */
-export function qs<T extends Element = HTMLElement>(
+export function qs<T extends Element = HTMLElement> (
   selector: string,
   parent: Element | Document = document
 ): T {
@@ -253,7 +253,7 @@ export function qs<T extends Element = HTMLElement>(
 }
 
 /** querySelectorAll returning a real Array. */
-export function qsa<T extends Element = HTMLElement>(
+export function qsa<T extends Element = HTMLElement> (
   selector: string,
   parent: Element | Document = document
 ): T[] {
@@ -262,7 +262,7 @@ export function qsa<T extends Element = HTMLElement>(
 
 // ─── Internals ───────────────────────────────────────────────────────
 
-function applyProps(node: HTMLElement, props: DomProps): void {
+function applyProps (node: HTMLElement, props: DomProps): void {
   for (const key in props) {
     const value = props[key]
     if (value == null || value === false) continue
@@ -293,7 +293,7 @@ function applyProps(node: HTMLElement, props: DomProps): void {
   }
 }
 
-function appendChildren(
+function appendChildren (
   parent: Element | DocumentFragment,
   children: DomChild[]
 ): void {

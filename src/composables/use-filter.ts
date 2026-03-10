@@ -5,7 +5,7 @@ import { yieldThread } from './use-timing'
  * Non-blocking filter that processes sightings in chunks,
  * yielding to the main thread between chunks to keep UI responsive.
  */
-export async function filterSightings(
+export async function filterSightings (
   all: Sighting[],
   filter: SightingFilter
 ): Promise<Sighting[]> {

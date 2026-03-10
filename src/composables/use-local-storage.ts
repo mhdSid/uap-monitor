@@ -17,9 +17,9 @@ export interface LocalStorageHandle<T> {
   remove(): void
 }
 
-export function useLocalStorage<T>(key: string): LocalStorageHandle<T> {
+export function useLocalStorage<T> (key: string): LocalStorageHandle<T> {
   return {
-    get(): T | null {
+    get (): T | null {
       try {
         const raw = localStorage.getItem(key)
         if (raw === null) return null
@@ -29,7 +29,7 @@ export function useLocalStorage<T>(key: string): LocalStorageHandle<T> {
       }
     },
 
-    set(value: T): boolean {
+    set (value: T): boolean {
       try {
         localStorage.setItem(key, JSON.stringify(value))
         return true
@@ -39,7 +39,7 @@ export function useLocalStorage<T>(key: string): LocalStorageHandle<T> {
       }
     },
 
-    remove(): void {
+    remove (): void {
       try {
         localStorage.removeItem(key)
       } catch {

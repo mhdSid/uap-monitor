@@ -31,7 +31,7 @@ export abstract class Component<P extends object = Record<string, never>> {
 
   private _disposed = false
 
-  constructor(protected readonly props: P) {
+  constructor (protected readonly props: P) {
     this.el = this.create()
     this.didMount()
   }
@@ -42,10 +42,10 @@ export abstract class Component<P extends object = Record<string, never>> {
   protected abstract create(): HTMLElement
 
   /** Called immediately after create(). Bind events, start timers, etc. */
-  protected didMount(): void {}
+  protected didMount (): void {}
 
   /** Remove the element and release resources. Always call super.destroy(). */
-  destroy(): void {
+  destroy (): void {
     if (this._disposed) return
     this._disposed = true
     this.el.remove()
@@ -53,17 +53,17 @@ export abstract class Component<P extends object = Record<string, never>> {
 
   // ─── Queries ─────────────────────────────────────────────────────
 
-  get disposed(): boolean {
+  get disposed (): boolean {
     return this._disposed
   }
 
   /** Query a child element within this component's root. */
-  protected query<T extends Element = HTMLElement>(selector: string): T | null {
+  protected query<T extends Element = HTMLElement> (selector: string): T | null {
     return this.el.querySelector<T>(selector)
   }
 
   /** Query all matching child elements. */
-  protected queryAll<T extends Element = HTMLElement>(selector: string): T[] {
+  protected queryAll<T extends Element = HTMLElement> (selector: string): T[] {
     return Array.from(this.el.querySelectorAll<T>(selector))
   }
 }

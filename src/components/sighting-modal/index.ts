@@ -18,7 +18,7 @@ import { MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
 import { useAnalytics, getSourceUrl, useFireball, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
 
-function resolveSourceLabel(s: Sighting): string {
+function resolveSourceLabel (s: Sighting): string {
   if (s.source === DataSourceId.CHRONOLOGY && s.subSource) {
     return SUB_SOURCE_LABELS[s.subSource] || s.subSource
   }
@@ -26,7 +26,7 @@ function resolveSourceLabel(s: Sighting): string {
 }
 
 export class SightingModal {
-  static open(sighting: Sighting, trigger?: HTMLElement): void {
+  static open (sighting: Sighting, trigger?: HTMLElement): void {
     const analytics = useAnalytics()
     analytics.sightingViewed(sighting)
 
@@ -40,7 +40,7 @@ export class SightingModal {
 
   // ─── Slots ──────────────────────────────────────────────────────
 
-  private static buildHeader(s: Sighting): HTMLElement {
+  private static buildHeader (s: Sighting): HTMLElement {
     const actions = h('span', { className: cx.actions },
       new BookmarkButton({ sightingId: s.id }).el,
       new ShareButton({ sightingId: s.id, title: s.summary?.slice(0, 60) }).el
@@ -53,7 +53,7 @@ export class SightingModal {
     )
   }
 
-  private static buildContent(s: Sighting): HTMLElement {
+  private static buildContent (s: Sighting): HTMLElement {
     const coordsStr = s.coordinates
       ? `${s.coordinates.lat.toFixed(2)}°N, ${s.coordinates.lng.toFixed(2)}°E`
       : s.location
@@ -143,7 +143,7 @@ export class SightingModal {
     return h('div', { className: cx.content }, ...children)
   }
 
-  private static buildFooter(s: Sighting): HTMLElement {
+  private static buildFooter (s: Sighting): HTMLElement {
     return h('div', { className: cx.footer },
       new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el
     )
@@ -151,7 +151,7 @@ export class SightingModal {
 
   // ─── Related content ────────────────────────────────────────────
 
-  private static buildRelatedFireballs(s: Sighting, fireballs: Fireball[]): HTMLElement {
+  private static buildRelatedFireballs (s: Sighting, fireballs: Fireball[]): HTMLElement {
     const section = h('div', { className: cx.relatedSection })
     section.appendChild(h('div', { className: cx.relatedTitle }, RELATED.FIREBALLS_TITLE))
 
@@ -188,7 +188,7 @@ export class SightingModal {
     return section
   }
 
-  private static buildRelatedNews(
+  private static buildRelatedNews (
     gdelt: GdeltArticle[],
     gnews: GnewsArticle[]
   ): HTMLElement {

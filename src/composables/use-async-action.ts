@@ -1,7 +1,7 @@
 import type { AsyncState } from '@/types'
 import { useToast } from '@/components/toast'
 
-export function useAsyncAction<T>() {
+export function useAsyncAction<T> () {
   const toast = useToast()
   const state: AsyncState<T> = {
     data: null,
@@ -9,7 +9,7 @@ export function useAsyncAction<T>() {
     error: null
   }
 
-  async function execute(
+  async function execute (
     callback: () => Promise<T>,
     onSuccess?: (data: T) => void
   ): Promise<void> {

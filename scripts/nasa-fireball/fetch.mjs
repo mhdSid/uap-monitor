@@ -25,7 +25,7 @@ const SOURCE_FILE = resolve(PROJECT_ROOT, '__sources', 'nasa-fireballs.json')
 
 // ─── CLI args ───────────────────────────────────────────────────────
 
-function parseArgs() {
+function parseArgs () {
   const args = process.argv.slice(2)
   const opts = { out: '' }
   for (let i = 0; i < args.length; i++) {
@@ -42,7 +42,7 @@ function parseArgs() {
 
 const API_URL = 'https://ssd-api.jpl.nasa.gov/fireball.api?req-loc=true&vel-comp=true'
 
-async function fetchFireballs() {
+async function fetchFireballs () {
   console.log('Fetching from NASA Fireball API...')
   const res = await fetch(API_URL)
   if (!res.ok) throw new Error(`API returned ${res.status}: ${res.statusText}`)
@@ -51,25 +51,25 @@ async function fetchFireballs() {
 
 // ─── Transform ──────────────────────────────────────────────────────
 
-function parseCoord(value, dir) {
+function parseCoord (value, dir) {
   if (value == null || dir == null) return null
   const num = parseFloat(value)
   if (isNaN(num)) return null
   return (dir === 'S' || dir === 'W') ? -num : num
 }
 
-function parseDate(dateStr) {
+function parseDate (dateStr) {
   if (!dateStr) return null
   // "2015-10-13 12:23:08" → "2015-10-13T12:23:08Z"
   return dateStr.replace(' ', 'T') + 'Z'
 }
 
-function generateId(date, lat, lng) {
+function generateId (date, lat, lng) {
   const raw = `fireball-${date}-${lat}-${lng}`
   return createHash('sha256').update(raw).digest('hex').slice(0, 12)
 }
 
-function transformRow(fields, row) {
+function transformRow (fields, row) {
   const get = (name) => {
     const idx = fields.indexOf(name)
     return idx >= 0 ? row[idx] : null
@@ -100,7 +100,7 @@ function transformRow(fields, row) {
 
 // ─── Main ───────────────────────────────────────────────────────────
 
-async function main() {
+async function main () {
   const opts = parseArgs()
   const raw = await fetchFireballs()
 
@@ -121,7 +121,7 @@ async function main() {
   console.log(`Transformed: ${fireballs.length} total, ${withCoords.length} with coordinates`)
 
   // Merge with existing source file
-  
+
   mkdirSync(dirname(SOURCE_FILE), { recursive: true })
 
   const { merged } = mergeArticles(SOURCE_FILE, fireballs, {

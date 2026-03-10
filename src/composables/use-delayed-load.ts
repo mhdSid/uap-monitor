@@ -14,7 +14,7 @@ export interface DelayedLoadOptions {
   delayMs?: number
 }
 
-export function useDelayedLoad(
+export function useDelayedLoad (
   callback: () => void,
   options: DelayedLoadOptions = {}
 ): void {

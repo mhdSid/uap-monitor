@@ -31,7 +31,7 @@ import nodeFetch from "node-fetch"
 
 // Lazy-load Tor agent only when --tor is used
 let torAgent = null
-async function getTorAgent() {
+async function getTorAgent () {
   if (!torAgent) {
     const { SocksProxyAgent } = await import("socks-proxy-agent")
     torAgent = new SocksProxyAgent("socks5h://127.0.0.1:9050")
@@ -76,32 +76,32 @@ const opts = program.opts()
 
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
-function log(...args) {
+function log (...args) {
   console.log(`[${new Date().toISOString()}]`, ...args)
 }
 
-function debug(...args) {
+function debug (...args) {
   if (opts.verbose) console.log(`  [debug]`, ...args)
 }
 
-function sleep(ms) {
+function sleep (ms) {
   return new Promise((r) => setTimeout(r, ms))
 }
 
-function parseYearRange(rangeStr) {
+function parseYearRange (rangeStr) {
   if (!rangeStr) return null
   const parts = rangeStr.split("-").map(Number)
   if (parts.length === 1) return { from: parts[0], to: parts[0] }
   return { from: parts[0], to: parts[1] }
 }
 
-function yearFromOccurred(occurred) {
+function yearFromOccurred (occurred) {
   if (!occurred) return null
   const match = occurred.match(/(\d{4})/)
   return match ? parseInt(match[1]) : null
 }
 
-function matchesYearFilter(record, yearRange) {
+function matchesYearFilter (record, yearRange) {
   if (!yearRange) return true
   const year = yearFromOccurred(record.occurred)
   if (!year) return true
@@ -120,7 +120,7 @@ function matchesYearFilter(record, yearRange) {
 // node-fetch supports the standard `agent` option which works correctly
 // with SocksProxyAgent, https-proxy-agent, etc.
 
-async function buildFetchOptions() {
+async function buildFetchOptions () {
   const fetchOpts = {
     headers: {
       "User-Agent":
@@ -135,7 +135,7 @@ async function buildFetchOptions() {
   return fetchOpts
 }
 
-async function fetchPage(url) {
+async function fetchPage (url) {
   const fetchOpts = await buildFetchOptions()
   const res = await nodeFetch(url, fetchOpts)
   if (!res.ok) {
@@ -144,7 +144,7 @@ async function fetchPage(url) {
   return await res.text()
 }
 
-async function fetchWithRetry(url, retries = 3) {
+async function fetchWithRetry (url, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const fetchOpts = await buildFetchOptions()
@@ -178,7 +178,7 @@ async function fetchWithRetry(url, retries = 3) {
  * Strategy: line-by-line filtering first (catches full lines of CSS/JS),
  * then inline cleanup (catches fragments within mixed lines).
  */
-function sanitizeText(text) {
+function sanitizeText (text) {
   if (!text) return null
 
   // ── Phase 1: Line-level filtering ────────────────────────────────────
@@ -290,7 +290,7 @@ function sanitizeText(text) {
  */
 const TEXT_FIELDS_TO_SANITIZE = ["summary", "description", "location_details"]
 
-function sanitizeRecord(record) {
+function sanitizeRecord (record) {
   const cleaned = { ...record }
   for (const field of TEXT_FIELDS_TO_SANITIZE) {
     if (cleaned[field] && typeof cleaned[field] === "string") {
@@ -300,7 +300,7 @@ function sanitizeRecord(record) {
   return cleaned
 }
 
-function parseDetailPage(html, sightingId) {
+function parseDetailPage (html, sightingId) {
   const $ = cheerio.load(html)
 
   const primary = $("#primary")
@@ -443,7 +443,7 @@ function parseDetailPage(html, sightingId) {
 
 // ─── Schema Transformation ──────────────────────────────────────────────────
 
-function transformRecord(raw, schema) {
+function transformRecord (raw, schema) {
   if (typeof schema === "string") {
     return resolveMapping(raw, schema)
   }
@@ -460,7 +460,7 @@ function transformRecord(raw, schema) {
   return schema
 }
 
-function resolveMapping(raw, mappingStr) {
+function resolveMapping (raw, mappingStr) {
   mappingStr = mappingStr.trim()
 
   if (mappingStr.startsWith("$literal:")) {
@@ -492,7 +492,7 @@ function resolveMapping(raw, mappingStr) {
   return raw[mappingStr] ?? null
 }
 
-function applyDirective(name, arg, value) {
+function applyDirective (name, arg, value) {
   switch (name) {
     case "int": {
       if (value === null || value === undefined) return 0
@@ -526,7 +526,7 @@ function applyDirective(name, arg, value) {
   }
 }
 
-function splitValue(value, delimiter) {
+function splitValue (value, delimiter) {
   if (value === null || value === undefined) return []
   if (Array.isArray(value)) return value
   return String(value)
@@ -535,7 +535,7 @@ function splitValue(value, delimiter) {
     .filter(Boolean)
 }
 
-function normalizeDate(value, suffix) {
+function normalizeDate (value, suffix) {
   if (!value || typeof value !== "string") return null
 
   let normalized = value.trim()
@@ -565,13 +565,13 @@ function normalizeDate(value, suffix) {
   return suffix ? `${normalized} ${suffix}` : normalized
 }
 
-function transformAllRecords(records, schema) {
+function transformAllRecords (records, schema) {
   return records.map((raw) => transformRecord(raw, schema))
 }
 
 // ─── Main Orchestration ─────────────────────────────────────────────────────
 
-async function loadRawCache(filePath) {
+async function loadRawCache (filePath) {
   try {
     const content = await fs.readFile(filePath, "utf-8")
     return JSON.parse(content)
@@ -581,7 +581,7 @@ async function loadRawCache(filePath) {
   }
 }
 
-async function saveRawCache(filePath, data) {
+async function saveRawCache (filePath, data) {
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8")
 }
 
@@ -603,7 +603,7 @@ async function saveRawCache(filePath, data) {
  *   getByPath({ a: { b: 1 } }, "a.b") → 1
  *   getByPath({ id: 5 }, "id") → 5
  */
-function getByPath(obj, keyPath) {
+function getByPath (obj, keyPath) {
   const parts = keyPath.split(".")
   let current = obj
   for (const part of parts) {
@@ -617,7 +617,7 @@ function getByPath(obj, keyPath) {
  * Create a hidden backup of a file.
  *   __sources/nuforc.json → __sources/.nuforc.json.backup
  */
-async function createBackup(filePath) {
+async function createBackup (filePath) {
   const dir = path.dirname(filePath)
   const ext = path.extname(filePath)
   const base = path.basename(filePath, ext)
@@ -637,7 +637,7 @@ async function createBackup(filePath) {
  * @param {string} strategy       - "keep-existing" or "keep-new"
  * @returns {{ merged: Array, stats: { kept: number, added: number, updated: number } }}
  */
-function mergeRecords(existingRecords, newRecords, mergeKey, strategy) {
+function mergeRecords (existingRecords, newRecords, mergeKey, strategy) {
   const map = new Map()
   let kept = 0
   let updated = 0
@@ -686,7 +686,7 @@ function mergeRecords(existingRecords, newRecords, mergeKey, strategy) {
 /**
  * Load a JSON array file, returning [] if it doesn't exist.
  */
-async function loadJsonArray(filePath) {
+async function loadJsonArray (filePath) {
   try {
     const content = await fs.readFile(filePath, "utf-8")
     const parsed = JSON.parse(content)
@@ -701,7 +701,7 @@ async function loadJsonArray(filePath) {
   }
 }
 
-function buildCacheData(records, yearRange, collected, notFound, outOfRange) {
+function buildCacheData (records, yearRange, collected, notFound, outOfRange) {
   return {
     metadata: {
       scraped_at: new Date().toISOString(),
@@ -715,7 +715,7 @@ function buildCacheData(records, yearRange, collected, notFound, outOfRange) {
 
 // ─── ID Discovery ───────────────────────────────────────────────────────────
 
-async function probeId(id) {
+async function probeId (id) {
   try {
     const text = await fetchPage(DETAIL_URL(id))
     return text.includes("Occurred")
@@ -725,7 +725,7 @@ async function probeId(id) {
   }
 }
 
-async function discoverLatestId() {
+async function discoverLatestId () {
   let lo = 1
   let hi = 250000
   let lastValid = null
@@ -759,7 +759,7 @@ async function discoverLatestId() {
 
 // ─── Scrape Mode ────────────────────────────────────────────────────────────
 
-async function runScrapeMode() {
+async function runScrapeMode () {
   const yearRange = parseYearRange(opts.years)
   const limit = opts.limit || Infinity
   const concurrency = opts.concurrency
@@ -968,7 +968,7 @@ async function runScrapeMode() {
 
 // ─── Cache Mode ─────────────────────────────────────────────────────────────
 
-async function runCacheMode() {
+async function runCacheMode () {
   const yearRange = parseYearRange(opts.years)
 
   log("=== NUFORC Scraper — Cache Mode ===")
@@ -1063,7 +1063,7 @@ async function runCacheMode() {
 
 // ─── Entry Point ─────────────────────────────────────────────────────────────
 
-async function main() {
+async function main () {
   try {
     if (opts.cache) {
       await runCacheMode()

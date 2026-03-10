@@ -33,7 +33,7 @@ const PER_PAGE = 10  // GNews free tier hard limit
 
 // ─── CLI args ───────────────────────────────────────────────────────
 
-function parseArgs() {
+function parseArgs () {
   const args = process.argv.slice(2)
   const opts = { out: '', days: 14, query: '', lang: 'en', limit: 500, pages: 60 }
   for (let i = 0; i < args.length; i++) {
@@ -55,13 +55,13 @@ function parseArgs() {
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
-function daysAgoISO(days) {
+function daysAgoISO (days) {
   const d = new Date()
   d.setDate(d.getDate() - days)
   return d.toISOString()
 }
 
-function transformArticle(raw) {
+function transformArticle (raw) {
   const url = raw.url || ''
   return {
     id: urlToId(url),
@@ -78,7 +78,7 @@ function transformArticle(raw) {
 
 // ─── Main ───────────────────────────────────────────────────────────
 
-async function main() {
+async function main () {
   const apiKey = process.env.GNEWS_API_KEY
   if (!apiKey) {
     console.error('Error: GNEWS_API_KEY environment variable is required.')

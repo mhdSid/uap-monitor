@@ -34,7 +34,7 @@ interface ContinentSection {
 
 // ─── Shared sighting search fields ──────────────────────────────────
 
-function matchSighting(query: string, s: Sighting): boolean {
+function matchSighting (query: string, s: Sighting): boolean {
   return tokenMatch(
     query,
     s.summary, s.description, s.location, s.region,
@@ -52,7 +52,7 @@ export class SightingGrids extends Component {
   private activeGrids!: DataGrid<Sighting>[]
   private sections = new Map<Continent, ContinentSection>()
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.columns = sightingColumns()
     this.activeGrids = []
     return h('div', { className: 'grids-container' })
@@ -60,7 +60,7 @@ export class SightingGrids extends Component {
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  async render(sightings: Sighting[], isRerender = false): Promise<void> {
+  async render (sightings: Sighting[], isRerender = false): Promise<void> {
     const store = useAppStore()
     const selected = store.selectedContinent.get()
     const version = ++this.renderVersion
@@ -120,7 +120,7 @@ export class SightingGrids extends Component {
 
   // ─── Per-continent section builder ──────────────────────────────
 
-  private createContinentSection(continent: Continent, items: Sighting[]): { wrapper: HTMLElement } {
+  private createContinentSection (continent: Continent, items: Sighting[]): { wrapper: HTMLElement } {
     const gridContainer = h('div', {})
     const grid = new DataGrid<Sighting>({
       columns: this.columns,
@@ -212,25 +212,25 @@ export class SightingGrids extends Component {
     return { wrapper }
   }
 
-  private rebuildActiveGrids(): void {
+  private rebuildActiveGrids (): void {
     this.activeGrids = [...this.sections.values()].map(s => s.grid)
   }
 
   // ─── Scroll + utilities ─────────────────────────────────────────
 
-  scrollToSighting(sightingId: string): boolean {
+  scrollToSighting (sightingId: string): boolean {
     for (const grid of this.activeGrids) {
       if (grid.scrollToItem(s => s.id === sightingId)) return true
     }
     return false
   }
 
-  showLoader(loader: HTMLElement): void {
+  showLoader (loader: HTMLElement): void {
     clearChildren(this.el)
     this.el.appendChild(loader)
   }
 
-  lockHeight(): () => void {
+  lockHeight (): () => void {
     const prev = this.el.offsetHeight
     if (prev > 0) this.el.style.minHeight = `${prev}px`
     return () => {

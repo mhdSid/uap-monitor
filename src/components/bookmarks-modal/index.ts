@@ -21,7 +21,7 @@ import type { Sighting } from '@/types'
 const TRANSITION_MS = 250
 
 export class BookmarksModal {
-  static open(trigger?: HTMLElement): void {
+  static open (trigger?: HTMLElement): void {
     const bookmarks = useBookmarks()
     const store = useAppStore()
     const toast = useToast()
@@ -95,16 +95,22 @@ export class BookmarksModal {
       const clearBtn = new Button({
         label: BOOKMARKS.CLEAR,
         variant: 'ghost',
-        color: 'error',
+        color: 'neutral',
         size: ButtonSize.SM,
         onClick: () => {
-          if (bookmarks.count.get() === 0) return
           bookmarks.clear()
           toast.info(BOOKMARKS.CLEARED)
         }
       })
 
       footer.appendChild(clearBtn.el)
+
+      const updateFooter = (): void => {
+        footer.style.display = bookmarks.count.get() > 0 ? '' : 'none'
+      }
+      updateFooter()
+      bookmarks.count.subscribe(updateFooter)
+
       return footer
     }
 
@@ -115,7 +121,7 @@ export class BookmarksModal {
     }, trigger)
   }
 
-  private static openSighting(sighting: Sighting): void {
+  private static openSighting (sighting: Sighting): void {
     Modal.close()
     // Wait for close transition before opening detail modal
     setTimeout(() => {

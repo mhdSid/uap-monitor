@@ -19,7 +19,7 @@ export interface ChronologySource {
 
 let _instance: ChronologySource | null = null
 
-export function useChronology(): ChronologySource {
+export function useChronology (): ChronologySource {
   if (_instance) return _instance
 
   const loader = createSourceLoader<ChronologyManifest>({

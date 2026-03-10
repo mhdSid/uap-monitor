@@ -41,7 +41,7 @@ const TONE_BANDS = [
 
 // ─── CLI args ───────────────────────────────────────────────────────
 
-function parseArgs() {
+function parseArgs () {
   const args = process.argv.slice(2)
   const opts = { out: '', days: 90, query: '', max: 3750, window: 30 }
   for (let i = 0; i < args.length; i++) {
@@ -62,13 +62,13 @@ function parseArgs() {
 
 // ─── Date helpers ───────────────────────────────────────────────────
 
-function toGdeltDatetime(date) {
+function toGdeltDatetime (date) {
   const pad = (n) => String(n).padStart(2, '0')
   return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}` +
          `${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}`
 }
 
-function buildWindows(totalDays, windowSize) {
+function buildWindows (totalDays, windowSize) {
   const now = new Date()
   const windows = []
   let remaining = totalDays
@@ -90,7 +90,7 @@ function buildWindows(totalDays, windowSize) {
 
 // ─── Transform ──────────────────────────────────────────────────────
 
-function parseGdeltDate(str) {
+function parseGdeltDate (str) {
   if (!str) return null
   const match = str.match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})?(\d{2})?(\d{2})?$/)
   if (!match) return null
@@ -98,7 +98,7 @@ function parseGdeltDate(str) {
   return `${y}-${m}-${d}T${hh}:${mm}:${ss}Z`
 }
 
-function transformArticle(raw, bandTone) {
+function transformArticle (raw, bandTone) {
   const url = raw.url || ''
   return {
     id: urlToId(url),
@@ -118,7 +118,7 @@ function transformArticle(raw, bandTone) {
 
 // ─── Main ───────────────────────────────────────────────────────────
 
-async function main() {
+async function main () {
   const opts = parseArgs()
   const baseQuery = opts.query || `(${GDELT_NEWS_QUERY})`
   const windows = buildWindows(opts.days, opts.window)

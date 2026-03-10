@@ -34,12 +34,12 @@ const DEFAULT_MESSAGES: TickerMessage[] = [
 type MessageGenerator = (sightings: Sighting[]) => TickerMessage | null
 
 /** Pick a random item from an array. */
-function pick<T>(arr: T[]): T {
+function pick<T> (arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]!
 }
 
 /** Count sightings per continent. */
-function countByContinent(sightings: Sighting[]): Map<Continent, number> {
+function countByContinent (sightings: Sighting[]): Map<Continent, number> {
   const map = new Map<Continent, number>()
   for (const s of sightings) {
     map.set(s.continent, (map.get(s.continent) ?? 0) + 1)
@@ -48,7 +48,7 @@ function countByContinent(sightings: Sighting[]): Map<Continent, number> {
 }
 
 /** Count sightings per shape. */
-function countByShape(sightings: Sighting[]): Map<string, number> {
+function countByShape (sightings: Sighting[]): Map<string, number> {
   const map = new Map<string, number>()
   for (const s of sightings) {
     map.set(s.shape, (map.get(s.shape) ?? 0) + 1)
@@ -129,12 +129,12 @@ const GENERATORS: MessageGenerator[] = [
 
 // ─── Composable ─────────────────────────────────────────────────────
 
-export function useTicker(): UseTickerReturn {
-  function getDefaultMessages(): TickerMessage[] {
+export function useTicker (): UseTickerReturn {
+  function getDefaultMessages (): TickerMessage[] {
     return [...DEFAULT_MESSAGES]
   }
 
-  function generateMessages(sightings: Sighting[]): TickerMessage[] {
+  function generateMessages (sightings: Sighting[]): TickerMessage[] {
     if (sightings.length === 0) return getDefaultMessages()
 
     const messages: TickerMessage[] = []

@@ -17,7 +17,7 @@ let sharedPopup: HTMLElement | null = null
 let activeWrapper: HTMLElement | null = null
 let activeCleanup: (() => void) | null = null
 
-function getSharedPopup(): HTMLElement {
+function getSharedPopup (): HTMLElement {
   if (!sharedPopup) {
     sharedPopup = h('div', {
       className: cx.tooltipPopup,
@@ -28,14 +28,14 @@ function getSharedPopup(): HTMLElement {
   return sharedPopup
 }
 
-function closeSharedPopup(): void {
+function closeSharedPopup (): void {
   if (!activeCleanup) return
   activeCleanup()
   activeCleanup = null
   activeWrapper = null
 }
 
-function positionPopup(popup: HTMLElement, trigger: HTMLElement): void {
+function positionPopup (popup: HTMLElement, trigger: HTMLElement): void {
   const rect = trigger.getBoundingClientRect()
   const vw = window.innerWidth
   const vh = window.innerHeight
@@ -72,7 +72,7 @@ function positionPopup(popup: HTMLElement, trigger: HTMLElement): void {
 export class Tooltip extends Component<TooltipProps> {
   private trigger!: HTMLElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const wrapper = h('div', { className: cx.tooltipWrapper })
 
     this.trigger = h('button', {
@@ -85,7 +85,7 @@ export class Tooltip extends Component<TooltipProps> {
     return wrapper
   }
 
-  protected didMount(): void {
+  protected didMount (): void {
     this.trigger.addEventListener('click', (e) => {
       e.stopPropagation()
       if (activeWrapper === this.el) {
@@ -96,7 +96,7 @@ export class Tooltip extends Component<TooltipProps> {
     })
   }
 
-  private open(): void {
+  private open (): void {
     closeSharedPopup()
 
     const popup = getSharedPopup()

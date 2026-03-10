@@ -187,7 +187,7 @@ const SOURCE_REGISTRY: DataSource[] = [
   }
 ]
 
-function updateSourceStatus(id: DataSourceId, hasData: boolean): void {
+function updateSourceStatus (id: DataSourceId, hasData: boolean): void {
   const newStatus = hasData ? DataSourceStatus.ONLINE : DataSourceStatus.OFFLINE
   for (const source of SOURCE_REGISTRY) {
     if (source.id === id) {
@@ -196,13 +196,13 @@ function updateSourceStatus(id: DataSourceId, hasData: boolean): void {
   }
 }
 
-function mergeSorted(a: Sighting[], b: Sighting[]): Sighting[] {
+function mergeSorted (a: Sighting[], b: Sighting[]): Sighting[] {
   if (a.length === 0) return b
   if (b.length === 0) return a
   return [...a, ...b].sort((x, y) => y.occurredAt.localeCompare(x.occurredAt))
 }
 
-export function useDataSource() {
+export function useDataSource () {
   const nuforc = useNuforc()
   const hatch = useHatchUdb()
   const chronology = useChronology()
@@ -210,7 +210,7 @@ export function useDataSource() {
   /**
    * Load all manifests in parallel. Each can fail independently.
    */
-  async function loadManifests(): Promise<void> {
+  async function loadManifests (): Promise<void> {
     await Promise.allSettled([
       nuforc.loadManifest(),
       hatch.loadManifest(),
@@ -224,7 +224,7 @@ export function useDataSource() {
   /**
    * Fetch default sightings (latest 2 years from NUFORC + matching Hatch range).
    */
-  async function fetchSightings(): Promise<Sighting[]> {
+  async function fetchSightings (): Promise<Sighting[]> {
     const sightings = await nuforc.loadDefault()
     updateSourceStatus(DataSourceId.NUFORC, sightings.length > 0)
     return sightings
@@ -233,7 +233,7 @@ export function useDataSource() {
   /**
    * Fetch a year range from ALL active sources, merge results.
    */
-  async function fetchYearRange(from: number, to: number): Promise<Sighting[]> {
+  async function fetchYearRange (from: number, to: number): Promise<Sighting[]> {
     const [nuforcData, hatchData, chronData] = await Promise.all([
       nuforc.loadYearRange(from, to),
       hatch.loadYearRange(from, to),
@@ -250,7 +250,7 @@ export function useDataSource() {
    * Progressive load from all sources. NUFORC loads progressively (newest first),
    * Hatch and Chronology load in parallel as batches (smaller/historical datasets).
    */
-  async function fetchProgressive(
+  async function fetchProgressive (
     from: number,
     to: number,
     onChunk: (sightings: Sighting[]) => void
@@ -310,7 +310,7 @@ export function useDataSource() {
   /**
    * Union of available years from all active sources (sorted descending).
    */
-  function getAvailableYears(): number[] {
+  function getAvailableYears (): number[] {
     const nuforcYears = nuforc.getAvailableYears()
     const hatchYears = hatch.getAvailableYears()
     const chronYears = chronology.getAvailableYears()
@@ -322,14 +322,14 @@ export function useDataSource() {
   /**
    * Total record count across all sources.
    */
-  function getTotalCount(): number {
+  function getTotalCount (): number {
     return nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount()
   }
 
   /**
    * Merged year counts from all source manifests (for timeline density).
    */
-  function getYearCounts(): Map<number, number> {
+  function getYearCounts (): Map<number, number> {
     const merged = new Map<number, number>()
     for (const source of [nuforc.getYearCounts(), hatch.getYearCounts(), chronology.getYearCounts()]) {
       for (const [year, count] of source) {
@@ -339,7 +339,7 @@ export function useDataSource() {
     return merged
   }
 
-  function getSources(): DataSource[] {
+  function getSources (): DataSource[] {
     return SOURCE_REGISTRY
   }
 
@@ -362,7 +362,7 @@ export function useDataSource() {
  * Look up the URL for a data source (or sub-source).
  * Usable outside the composable lifecycle.
  */
-export function getSourceUrl(sourceId: string, subSourceId?: string): string | undefined {
+export function getSourceUrl (sourceId: string, subSourceId?: string): string | undefined {
   for (const s of SOURCE_REGISTRY) {
     if (s.id === sourceId) {
       if (subSourceId && s.subSourceId === subSourceId) return s.url

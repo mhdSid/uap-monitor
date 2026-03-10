@@ -10,7 +10,7 @@ const BADGE_LABEL: Record<string, string> = {
   gnews: INTEL_FEED.SOURCE_GNEWS
 }
 
-export function intelFeedColumns(): DataGridColumn<IntelArticle>[] {
+export function intelFeedColumns (): DataGridColumn<IntelArticle>[] {
   return [
     {
       key: 'title',

@@ -23,14 +23,14 @@ const SOURCE_CHIPS: { id: DataSourceId; label: string; color: string }[] = [
 
 // ─── Option builders ────────────────────────────────────────────────
 
-function shapeOptions(): SelectOption[] {
+function shapeOptions (): SelectOption[] {
   return [
     { value: '', label: FILTER.ALL_SHAPES },
     ...Object.values(SightingShape).map(s => ({ value: s, label: s.toUpperCase() }))
   ]
 }
 
-function continentOptions(): SelectOption[] {
+function continentOptions (): SelectOption[] {
   return [
     { value: '', label: FILTER.ALL_REGIONS },
     ...Object.entries(CONTINENT_LABELS).map(([value, label]) => ({ value, label }))
@@ -52,7 +52,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
   private countrySelect!: Select
   private emitDebounced!: ReturnType<typeof useDebounce>
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.currentFilter = {}
     const store = useAppStore()
     const inputSize = this.props.inputSize ?? ComponentSize.MD
@@ -165,11 +165,11 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
     )
   }
 
-  focusSearch(): void {
+  focusSearch (): void {
     this.searchInput.focus()
   }
 
-  private updateCountryOptions(): void {
+  private updateCountryOptions (): void {
     const store = useAppStore()
     const sightings = store.sightings.get()
     const counts = new Map<string, number>()

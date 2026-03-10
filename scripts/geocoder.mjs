@@ -169,7 +169,7 @@ const byCityOnly = new Map()         // "city" → [{ lat, lng, pop, country }] 
 const byState = new Map()            // "state|iso" → { lat, lng } (largest city)
 const byCountry = new Map()          // "iso" → { lat, lng } (largest city)
 
-function buildIndex() {
+function buildIndex () {
   if (indexBuilt) return
   indexBuilt = true
 
@@ -224,7 +224,7 @@ function buildIndex() {
  * @param {string} country - our format ("USA", "Russia", etc.)
  * @returns {{ lat: number, lng: number } | null}
  */
-export function resolveCoordinates(city, state, country) {
+export function resolveCoordinates (city, state, country) {
   buildIndex()
 
   let iso = COUNTRY_TO_ISO[country] || country
@@ -277,7 +277,7 @@ export function resolveCoordinates(city, state, country) {
  * @param {string} raw
  * @returns {{ city: string, state: string, country: string }}
  */
-export function normalizeLocationString(raw) {
+export function normalizeLocationString (raw) {
   if (!raw || typeof raw !== 'string') return { city: '', state: '', country: '' }
 
   let s = raw.trim()
@@ -330,7 +330,7 @@ export function normalizeLocationString(raw) {
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
-function resolveCountryName(raw) {
+function resolveCountryName (raw) {
   if (!raw) return ''
   const trimmed = raw.trim().replace(/\.$/, '').trim()
   if (COUNTRY_TO_ISO[trimmed]) return trimmed
@@ -341,7 +341,7 @@ function resolveCountryName(raw) {
   return ''
 }
 
-function parseInner(s) {
+function parseInner (s) {
   const parenMatch = s.match(/^(.+?)\s*\(([^)]+)\)\s*$/)
   if (parenMatch) return { city: parenMatch[1].trim(), state: parenMatch[2].trim() }
   const parts = s.split(',').map(p => p.trim())
@@ -353,7 +353,7 @@ function parseInner(s) {
 
 let stats = { total: 0, cityLevel: 0, stateLevel: 0, countryLevel: 0, unresolved: 0 }
 
-export function resolveWithStats(city, state, country) {
+export function resolveWithStats (city, state, country) {
   buildIndex()
   stats.total++
 
@@ -382,7 +382,7 @@ export function resolveWithStats(city, state, country) {
   return result
 }
 
-export function printStats(label = 'Geocoder') {
+export function printStats (label = 'Geocoder') {
   const pct = (n) => stats.total ? `${((n / stats.total) * 100).toFixed(1)}%` : '0%'
   console.log(`\n[${label}] Resolution stats:`)
   console.log(`  Total:    ${stats.total}`)
@@ -392,6 +392,6 @@ export function printStats(label = 'Geocoder') {
   console.log(`  None:     ${stats.unresolved} (${pct(stats.unresolved)})`)
 }
 
-export function resetStats() {
+export function resetStats () {
   stats = { total: 0, cityLevel: 0, stateLevel: 0, countryLevel: 0, unresolved: 0 }
 }

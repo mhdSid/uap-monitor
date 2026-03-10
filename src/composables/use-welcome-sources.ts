@@ -30,26 +30,26 @@ const CHRONOLOGY_META: Record<string, { name: string; period: string; tier: Welc
 
 // ─── Helpers ─────────────────────────────────────────────────────────
 
-function formatSourceCount(n: number): string {
+function formatSourceCount (n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
   if (n >= 10_000)    return `${Math.round(n / 1_000)}K`
   if (n >= 1_000)     return `${(n / 1_000).toFixed(1)}K`
   return `${n}`
 }
 
-function formatRecordCount(n: number): string {
+function formatRecordCount (n: number): string {
   // Floor to nearest 1,000 and append + to signal "at least this many"
   const floored = Math.floor(n / 1_000) * 1_000
   return `${floored.toLocaleString()}+`
 }
 
-function formatYear(year: number): string {
+function formatYear (year: number): string {
   if (year < 0)   return `${Math.abs(year)} BC`
   if (year < 100) return `${year} AD`
   return `${year}`
 }
 
-function yearRangeStr(years: number[]): string {
+function yearRangeStr (years: number[]): string {
   if (years.length === 0) return 'unknown'
   const min = years[years.length - 1]
   const max = years[0]
@@ -62,7 +62,7 @@ function yearRangeStr(years: number[]): string {
  * Derive live stats + source list from loaded manifests and article collections.
  * Called once all network requests have settled inside WelcomeModal.
  */
-export function useDeriveWelcomeData(params: {
+export function useDeriveWelcomeData (params: {
   nuforc: ManifestSource
   hatch: ManifestSource
   chronology: ManifestSource

@@ -7,7 +7,7 @@ import { h } from '@/utils/dom'
 import { createDataSourceTag } from '@/components/tags'
 
 export class DataSources extends Component<DataSourcesProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const wrapper = h('div', { className: cx.root })
 
     for (const source of this.props.sources) {
@@ -17,7 +17,7 @@ export class DataSources extends Component<DataSourcesProps> {
     return wrapper
   }
 
-  private renderItem(source: DataSource): HTMLElement {
+  private renderItem (source: DataSource): HTMLElement {
     const isDisabled = source.status === DataSourceStatus.DISABLED
     const tag = createDataSourceTag(source.label, source.status, isDisabled)
 

@@ -7,8 +7,8 @@ const loader = createArticleLoader<GnewsArticle, GnewsCollection>({
   searchFields: ['title', 'description', 'content', 'sourceName']
 })
 
-export function useGnews() {
-  function filterArticles(articles: GnewsArticle[], filter: SightingFilter) {
+export function useGnews () {
+  function filterArticles (articles: GnewsArticle[], filter: SightingFilter) {
     return loader.filterArticles(articles, filter.search ?? '')
   }
 

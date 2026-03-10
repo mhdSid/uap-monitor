@@ -109,14 +109,14 @@ const seenCharacteristics = new Map() // characteristic → count
 
 // ─── Parsing helpers ────────────────────────────────────────────────
 
-function parseNuforcDate(raw) {
+function parseNuforcDate (raw) {
   if (!raw) return null
   const match = raw.match(/^(\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2})/)
   if (!match) return null
   return match[1].replace(' ', 'T')
 }
 
-function parseLocation(raw) {
+function parseLocation (raw) {
   const fallback = {
     city: '', state: '', country: Shape.UNKNOWN,
     region: '', continent: Continent.AMERICAS
@@ -187,7 +187,7 @@ function parseLocation(raw) {
   return { city, state, country, region, continent }
 }
 
-function normalizeShape(raw) {
+function normalizeShape (raw) {
   if (!raw) return Shape.UNKNOWN
   const trimmed = raw.trim()
   if (VALID_SHAPES.has(trimmed)) return trimmed
@@ -208,7 +208,7 @@ function normalizeShape(raw) {
  * We do NOT whitelist — NUFORC defines the vocabulary, not us.
  * Unknown characteristics are tracked for awareness but never dropped.
  */
-function parseCharacteristics(raw) {
+function parseCharacteristics (raw) {
   if (!Array.isArray(raw)) return []
 
   return raw.filter(c => {
@@ -224,7 +224,7 @@ function parseCharacteristics(raw) {
  * Factors: observer count, characteristic detail, duration specificity, summary length.
  * Placeholder until a proper scoring model is built.
  */
-function computeCredibility(record) {
+function computeCredibility (record) {
   let score = CREDIBILITY_BASELINE
 
   const observers = record['No of observers'] || 0
@@ -249,7 +249,7 @@ function computeCredibility(record) {
 
 // ─── Main ───────────────────────────────────────────────────────────
 
-function main() {
+function main () {
   const inputPath = process.argv[2] || DEFAULT_INPUT
 
   if (!existsSync(inputPath)) {

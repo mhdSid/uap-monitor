@@ -49,7 +49,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
   // ─── Lifecycle ──────────────────────────────────────────────────
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     // Init fields here — field initializers run AFTER super(), but
     // create() runs DURING super(), so we must self-initialize.
     this.sortState = { key: '', direction: 'none' }
@@ -115,7 +115,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     return wrapper
   }
 
-  protected didMount(): void {
+  protected didMount (): void {
     requestAnimationFrame(() => this.scroll.observe(this.sentinel, this.el))
   }
 
@@ -124,7 +124,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
   /**
    * Find the first item matching predicate, expand scroll, and focus it.
    */
-  scrollToItem(predicate: (item: T) => boolean): boolean {
+  scrollToItem (predicate: (item: T) => boolean): boolean {
     const idx = this.currentData.findIndex(predicate)
     if (idx === -1) return false
 
@@ -150,7 +150,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
   // ─── Row rendering ─────────────────────────────────────────────
 
-  private rebuildRows(items: T[]): void {
+  private rebuildRows (items: T[]): void {
     clearChildren(this.tbody)
 
     if (items.length === 0) {
@@ -176,7 +176,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     this.tbody.appendChild(frag)
   }
 
-  private renderRow(row: T): HTMLTableRowElement {
+  private renderRow (row: T): HTMLTableRowElement {
     const { columns, onRowClick } = this.props
     const tr = el('tr', { className: cx.row })
 
@@ -222,7 +222,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
   // ─── Sorting ───────────────────────────────────────────────────
 
-  private handleSort(key: string, clickedTh: HTMLTableCellElement): void {
+  private handleSort (key: string, clickedTh: HTMLTableCellElement): void {
     let newDir: SortDirection = 'asc'
     if (this.sortState.key === key) {
       if (this.sortState.direction === 'asc') newDir = 'desc'
@@ -263,7 +263,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     this.scroll.setItems(this.currentData)
   }
 
-  private setSortIcon(th: HTMLTableCellElement, col: { label: string; tooltip?: string }, direction: SortDirection | 'hint'): void {
+  private setSortIcon (th: HTMLTableCellElement, col: { label: string; tooltip?: string }, direction: SortDirection | 'hint'): void {
     clearChildren(th)
     th.textContent = col.label
 
@@ -286,7 +286,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     }
   }
 
-  private static compareValues<T>(a: T, b: T, key: string): number {
+  private static compareValues<T> (a: T, b: T, key: string): number {
     const aVal = (a as Record<string, unknown>)[key]
     const bVal = (b as Record<string, unknown>)[key]
 

@@ -9,7 +9,7 @@ export interface CardProps {
 }
 
 export class Card extends Component<CardProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const interactive = !!this.props.onClick
 
     const root = h('article', {

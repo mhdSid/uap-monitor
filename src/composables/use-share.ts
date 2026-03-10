@@ -33,22 +33,22 @@ export interface Share {
 
 let instance: Share | null = null
 
-export function useShare(): Share {
+export function useShare (): Share {
   if (instance) return instance
 
-  function parseShareParam(): string | null {
+  function parseShareParam (): string | null {
     const params = new URLSearchParams(window.location.search)
     return params.get('s') || null
   }
 
-  function clearShareParam(): void {
+  function clearShareParam (): void {
     const url = new URL(window.location.href)
     url.searchParams.delete('s')
     const clean = url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '')
     window.history.replaceState(null, '', clean)
   }
 
-  function buildUrl(id: string): string {
+  function buildUrl (id: string): string {
     const url = new URL(window.location.href)
     url.searchParams.set('s', id)
     // Remove hash if present
@@ -56,7 +56,7 @@ export function useShare(): Share {
     return url.toString()
   }
 
-  async function shareSighting(id: string, title?: string): Promise<ShareResult> {
+  async function shareSighting (id: string, title?: string): Promise<ShareResult> {
     const url = buildUrl(id)
     const shareTitle = title || 'UAP Sighting Report'
     const shareText = `${shareTitle} — UAP Monitor`

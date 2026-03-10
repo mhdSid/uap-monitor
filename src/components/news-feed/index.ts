@@ -17,7 +17,7 @@ import type { IntelArticle, GdeltArticle, GnewsArticle, DataGridColumn, Sighting
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
-function gdeltToIntel(a: GdeltArticle): IntelArticle {
+function gdeltToIntel (a: GdeltArticle): IntelArticle {
   return {
     id: a.id,
     title: a.title,
@@ -32,7 +32,7 @@ function gdeltToIntel(a: GdeltArticle): IntelArticle {
   }
 }
 
-function gnewsToIntel(a: GnewsArticle): IntelArticle {
+function gnewsToIntel (a: GnewsArticle): IntelArticle {
   return {
     id: a.id,
     title: a.title,
@@ -45,7 +45,7 @@ function gnewsToIntel(a: GnewsArticle): IntelArticle {
   }
 }
 
-function mergeAndDedupe(gdelt: GdeltArticle[], gnews: GnewsArticle[]): IntelArticle[] {
+function mergeAndDedupe (gdelt: GdeltArticle[], gnews: GnewsArticle[]): IntelArticle[] {
   const seen = new Set<string>()
   const merged: IntelArticle[] = []
 
@@ -72,7 +72,7 @@ function mergeAndDedupe(gdelt: GdeltArticle[], gnews: GnewsArticle[]): IntelArti
 let gdeltLookup = new Map<string, GdeltArticle>()
 let gnewsLookup = new Map<string, GnewsArticle>()
 
-function buildLookups(gdelt: GdeltArticle[], gnews: GnewsArticle[]): void {
+function buildLookups (gdelt: GdeltArticle[], gnews: GnewsArticle[]): void {
   gdeltLookup = new Map(gdelt.map(a => [a.id, a]))
   gnewsLookup = new Map(gnews.map(a => [a.id, a]))
 }
@@ -91,7 +91,7 @@ export class NewsFeed extends Component {
   private searchInput!: TextInput
   private contentEl!: HTMLElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.columns = intelFeedColumns()
     this.grid = null
 
@@ -128,7 +128,7 @@ export class NewsFeed extends Component {
 
   private debouncedSearch = useDebounce(() => this.applyInlineSearch(), 200)
 
-  private applyInlineSearch(): void {
+  private applyInlineSearch (): void {
     const base = this.baseArticles
     if (!this.searchQuery) {
       this.renderGrid(base)
@@ -149,7 +149,7 @@ export class NewsFeed extends Component {
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  async load(): Promise<IntelArticle[]> {
+  async load (): Promise<IntelArticle[]> {
     this.showLoader()
 
     const [gdeltArticles, gnewsArticles] = await Promise.all([
@@ -167,7 +167,7 @@ export class NewsFeed extends Component {
     return this.allArticles
   }
 
-  applyFilter(filter: SightingFilter): void {
+  applyFilter (filter: SightingFilter): void {
     // Global filter narrows from allArticles → baseArticles
     if (!filter.search) {
       this.baseArticles = this.allArticles
@@ -185,11 +185,11 @@ export class NewsFeed extends Component {
     this.applyInlineSearch()
   }
 
-  getCount(): number {
+  getCount (): number {
     return this.allArticles.length
   }
 
-  private renderGrid(articles: IntelArticle[]): void {
+  private renderGrid (articles: IntelArticle[]): void {
     clearChildren(this.contentEl)
 
     if (articles.length === 0) {
@@ -213,7 +213,7 @@ export class NewsFeed extends Component {
     this.contentEl.appendChild(this.grid.el)
   }
 
-  private openModal(article: IntelArticle, trigger: HTMLElement): void {
+  private openModal (article: IntelArticle, trigger: HTMLElement): void {
     if (article.intelSource === 'gdelt') {
       const original = gdeltLookup.get(article.id)
       if (original) GdeltModal.open(original, trigger)
@@ -223,7 +223,7 @@ export class NewsFeed extends Component {
     }
   }
 
-  showLoader(loader?: HTMLElement): void {
+  showLoader (loader?: HTMLElement): void {
     clearChildren(this.contentEl)
     this.contentEl.appendChild(
       loader ?? h('div', { className: 'app-loader' }, new Loader({}).el)

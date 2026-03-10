@@ -47,7 +47,7 @@ const STATUS_VARIANT: Record<string, TagVariant> = {
 }
 
 export class Tag extends Component<TagProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const style = TAG_STYLES[this.props.variant]
     const size = this.props.size ?? TagSize.MD
     const borderColor = style.border
@@ -64,7 +64,7 @@ export class Tag extends Component<TagProps> {
 }
 
 export class LiveTag extends Component {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const tag = new Tag({ variant: TagVariant.LIVE, label: TAGS.LIVE })
     const dot = h('span', { className: `${cx.dot} ${cx.dotBlink}` })
     tag.el.prepend(dot)
@@ -73,7 +73,7 @@ export class LiveTag extends Component {
 }
 
 export class StatusTag extends Component<StatusTagProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const variant = STATUS_VARIANT[this.props.status] ?? TagVariant.STATUS_PENDING
     return new Tag({ variant, label: this.props.status, size: TagSize.RESPONSIVE }).el
   }
@@ -81,7 +81,7 @@ export class StatusTag extends Component<StatusTagProps> {
 
 // ─── Tone tag helper ────────────────────────────────────────────────
 
-export function resolveToneVariant(tone: number): TagVariant {
+export function resolveToneVariant (tone: number): TagVariant {
   if (tone > GDELT_TONE_BANDS.VERY_POSITIVE.min) return TagVariant.TONE_VERY_POSITIVE
   if (tone > GDELT_TONE_BANDS.POSITIVE.min) return TagVariant.TONE_POSITIVE
   if (tone < GDELT_TONE_BANDS.VERY_NEGATIVE.max) return TagVariant.TONE_VERY_NEGATIVE
@@ -89,7 +89,7 @@ export function resolveToneVariant(tone: number): TagVariant {
   return TagVariant.TONE_NEUTRAL
 }
 
-export function createToneTag(tone: number): HTMLElement {
+export function createToneTag (tone: number): HTMLElement {
   const variant = resolveToneVariant(tone)
   return new Tag({ variant, size: TagSize.RESPONSIVE }).el
 }
@@ -103,16 +103,16 @@ const SOURCE_VARIANT: Record<string, TagVariant> = {
   [DataSourceId.EXPERIENCER]: TagVariant.SOURCE_EXPERIENCER
 }
 
-export function resolveSourceVariant(sourceId: string): TagVariant {
+export function resolveSourceVariant (sourceId: string): TagVariant {
   return SOURCE_VARIANT[sourceId] ?? TagVariant.SOURCE_NUFORC
 }
 
-export function createSourceTag(sourceId: string, label: string): HTMLElement {
+export function createSourceTag (sourceId: string, label: string): HTMLElement {
   const variant = resolveSourceVariant(sourceId)
   return new Tag({ variant, label, size: TagSize.RESPONSIVE }).el
 }
 
-export function createNewsSourceTag(label: string): HTMLElement {
+export function createNewsSourceTag (label: string): HTMLElement {
   return new Tag({ variant: TagVariant.SOURCE_NEWS, label, size: TagSize.RESPONSIVE }).el
 }
 
@@ -123,14 +123,14 @@ const INTEL_SOURCE_VARIANT: Record<string, TagVariant> = {
   gnews: TagVariant.SOURCE_GNEWS
 }
 
-export function createIntelSourceTag(source: string, label: string): HTMLElement {
+export function createIntelSourceTag (source: string, label: string): HTMLElement {
   const variant = INTEL_SOURCE_VARIANT[source] ?? TagVariant.SOURCE_NEWS
   return new Tag({ variant, label, size: TagSize.RESPONSIVE }).el
 }
 
 // ─── Count tag helper (section counts) ──────────────────────────────
 
-export function createCountTag(count: number | string): HTMLElement {
+export function createCountTag (count: number | string): HTMLElement {
   return new Tag({
     variant: TagVariant.COUNT,
     label: String(count),
@@ -147,7 +147,7 @@ const STATUS_DOT_COLORS: Record<string, string> = {
   DISABLED: 'var(--color-muted)'
 }
 
-export function createDataSourceTag(
+export function createDataSourceTag (
   label: string,
   status: string,
   disabled = false

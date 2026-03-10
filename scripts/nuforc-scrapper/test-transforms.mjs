@@ -7,7 +7,7 @@
 
 // ─── Copy of transform functions (imported inline for standalone test) ──────
 
-function resolveMapping(raw, mappingStr) {
+function resolveMapping (raw, mappingStr) {
   mappingStr = mappingStr.trim()
 
   if (mappingStr.startsWith("$literal:")) {
@@ -39,7 +39,7 @@ function resolveMapping(raw, mappingStr) {
   return raw[mappingStr] ?? null
 }
 
-function applyDirective(name, arg, value) {
+function applyDirective (name, arg, value) {
   switch (name) {
     case "int": {
       if (value === null || value === undefined) return 0
@@ -72,13 +72,13 @@ function applyDirective(name, arg, value) {
   }
 }
 
-function splitValue(value, delimiter) {
+function splitValue (value, delimiter) {
   if (value === null || value === undefined) return []
   if (Array.isArray(value)) return value
   return String(value).split(delimiter).map((s) => s.trim()).filter(Boolean)
 }
 
-function normalizeDate(value, suffix) {
+function normalizeDate (value, suffix) {
   if (!value || typeof value !== "string") return null
 
   let normalized = value.trim()
@@ -102,7 +102,7 @@ function normalizeDate(value, suffix) {
   return suffix ? `${normalized} ${suffix}` : normalized
 }
 
-function transformRecord(raw, schema) {
+function transformRecord (raw, schema) {
   if (typeof schema === "string") return resolveMapping(raw, schema)
   if (Array.isArray(schema)) return schema.map((item) => transformRecord(raw, item))
   if (typeof schema === "object" && schema !== null) {
@@ -141,7 +141,7 @@ const mockRaw = {
 let pass = 0
 let fail = 0
 
-function assert(label, actual, expected) {
+function assert (label, actual, expected) {
   const actualStr = JSON.stringify(actual)
   const expectedStr = JSON.stringify(expected)
   if (actualStr === expectedStr) {

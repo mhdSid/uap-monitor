@@ -25,7 +25,7 @@ export interface SelectProps {
 export class Select extends Component<SelectProps> {
   private select!: HTMLSelectElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const {
       id, name, ariaLabel, options, selected,
       size = ComponentSize.MD, color = 'default', onChange
@@ -62,16 +62,16 @@ export class Select extends Component<SelectProps> {
     return this.select
   }
 
-  get value(): string {
+  get value (): string {
     return this.select.value
   }
 
-  set value(v: string) {
+  set value (v: string) {
     this.select.value = v
   }
 
   /** Replace all options (preserves current selection if possible) */
-  setOptions(options: SelectOption[]): void {
+  setOptions (options: SelectOption[]): void {
     const currentVal = this.select.value
 
     while (this.select.options.length > 0) {
@@ -87,14 +87,14 @@ export class Select extends Component<SelectProps> {
   }
 
   /** Append a single option */
-  addOption(opt: SelectOption): void {
+  addOption (opt: SelectOption): void {
     this.select.appendChild(
       h('option', { value: opt.value }, opt.label)
     )
   }
 
   /** Remove all options after the first N (useful for resetting dynamic lists) */
-  truncateOptions(keepFirst: number): void {
+  truncateOptions (keepFirst: number): void {
     while (this.select.options.length > keepFirst) {
       this.select.remove(keepFirst)
     }

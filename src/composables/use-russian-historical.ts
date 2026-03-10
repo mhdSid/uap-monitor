@@ -34,7 +34,7 @@ interface RawRussianSighting {
 
 // ─── Normalize ──────────────────────────────────────────────────────
 
-function normalize(raw: RawRussianSighting): Sighting {
+function normalize (raw: RawRussianSighting): Sighting {
   return {
     id: raw.id,
     source: DataSourceId.CHRONOLOGY,
@@ -65,8 +65,8 @@ function normalize(raw: RawRussianSighting): Sighting {
 
 let cached: Sighting[] | null = null
 
-export function useRussianHistorical() {
-  async function load(): Promise<Sighting[]> {
+export function useRussianHistorical () {
+  async function load (): Promise<Sighting[]> {
     if (cached) return cached
 
     try {
@@ -80,11 +80,11 @@ export function useRussianHistorical() {
     }
   }
 
-  function getAll(): Sighting[] {
+  function getAll (): Sighting[] {
     return cached || []
   }
 
-  function getCount(): number {
+  function getCount (): number {
     return cached?.length || 0
   }
 

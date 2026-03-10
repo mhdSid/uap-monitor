@@ -705,7 +705,7 @@ export const US_LOCATIONS = new Set([
 
 // ─── Utility functions ──────────────────────────────────────────────
 
-export function truncate(text, maxLen) {
+export function truncate (text, maxLen) {
   if (!text) return ''
   const cleaned = text.replace(/\n{3,}/g, '\n\n').trim()
   if (cleaned.length <= maxLen) return cleaned
@@ -834,7 +834,7 @@ const JUNK_TITLES = new Set([
   'untitled', 'no title'
 ])
 
-export function isNoiseArticle(article) {
+export function isNoiseArticle (article) {
   const domain = (article.domain || extractDomain(article.url || '')).toLowerCase()
 
   // Block known entertainment domains
@@ -862,7 +862,7 @@ export function isNoiseArticle(article) {
   return false
 }
 
-function extractDomain(url) {
+function extractDomain (url) {
   try {
     return new URL(url).hostname.replace(/^www\./, '')
   } catch {
@@ -874,7 +874,7 @@ function extractDomain(url) {
  * Deep-deduplicate articles by id, URL, normalized title, and normalized description.
  * Keeps the first occurrence (assumes input is already sorted by date desc).
  */
-export function deduplicateArticles(articles) {
+export function deduplicateArticles (articles) {
   const seenIds = new Set()
   const seenUrls = new Set()
   const seenTitles = new Set()
@@ -909,7 +909,7 @@ export function deduplicateArticles(articles) {
 }
 
 /** Deterministic short ID from a URL string. */
-export function urlToId(url) {
+export function urlToId (url) {
   return createHash('sha256').update(url).digest('hex').slice(0, 12)
 }
 
@@ -925,7 +925,7 @@ export function urlToId(url) {
  * @param {number} max - Max articles to keep after merge
  * @returns {{ merged: object[], existing: number, added: number }}
  */
-export function mergeArticles(filePath, newArticles, {
+export function mergeArticles (filePath, newArticles, {
   arrayField = 'articles',
   urlField = 'url',
   dateField = 'publishedAt',

@@ -22,7 +22,7 @@ export class TextInput extends Component<TextInputProps> {
   private input!: HTMLInputElement
   private clearBtn!: HTMLButtonElement | null
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { id, name, placeholder, ariaLabel, autofocus, size = ComponentSize.MD, clearable = false, onInput, onClear } = this.props
 
     const SIZE_CX: Record<ComponentSize, string> = {
@@ -86,18 +86,18 @@ export class TextInput extends Component<TextInputProps> {
     )
   }
 
-  get value(): string {
+  get value (): string {
     return this.input.value
   }
 
-  set value(v: string) {
+  set value (v: string) {
     this.input.value = v
     if (this.clearBtn) {
       this.clearBtn.style.display = v.length > 0 ? '' : 'none'
     }
   }
 
-  focus(): void {
+  focus (): void {
     this.input.focus()
   }
 }

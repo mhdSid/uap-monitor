@@ -10,11 +10,12 @@
 .bookmarks-modal__item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-sm) 0;
+  gap: var(--space-2);
+  padding: var(--space-sm);
   border-bottom: 1px solid var(--color-border);
   cursor: pointer;
   transition: background var(--transition-fast);
+  border-radius: var(--radius-md);
 }
 
 .bookmarks-modal__item:last-child {

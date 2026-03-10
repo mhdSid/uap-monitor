@@ -11,7 +11,7 @@ import { useAppStore } from '@/composables'
 import type { Sighting } from '@/types'
 
 export class Highlights extends Component {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const store = useAppStore()
 
     const cards = HIGHLIGHTS.ITEMS.map(item => {
@@ -60,7 +60,7 @@ export class Highlights extends Component {
     )
   }
 
-  private static findSighting(sightings: Sighting[], year: string, searchKey: string): Sighting | null {
+  private static findSighting (sightings: Sighting[], year: string, searchKey: string): Sighting | null {
     const key = searchKey.toLowerCase()
 
     // Pass 1: year + location

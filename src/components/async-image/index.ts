@@ -20,7 +20,7 @@ export interface AsyncImageProps {
  *   container.appendChild(img.el)
  */
 export class AsyncImage extends Component<AsyncImageProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const root = h('div', {
       className: cx.root,
       role: 'img',

@@ -27,14 +27,14 @@ const SUB_SOURCE_SHORT: Record<string, string> = {
   DOLAN: 'DOLN'
 }
 
-function resolveGridSourceLabel(row: Sighting): string {
+function resolveGridSourceLabel (row: Sighting): string {
   if (row.source === DataSourceId.CHRONOLOGY && row.subSource) {
     return SUB_SOURCE_SHORT[row.subSource] || 'CHRON'
   }
   return SOURCE_LABELS[row.source] ?? row.source
 }
 
-export function sightingColumns(): DataGridColumn<Sighting>[] {
+export function sightingColumns (): DataGridColumn<Sighting>[] {
   return [
     {
       key: 'summary',

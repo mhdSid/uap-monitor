@@ -10,7 +10,7 @@ export interface SectionCreateProps extends SectionProps {
 }
 
 export class Section extends Component<SectionCreateProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { title, live, tooltip, tag, count, content } = this.props
 
     const header = h('div', { className: cx.header },

@@ -169,7 +169,7 @@ const US_STATE_FROM_NAME = Object.fromEntries(
 
 // ─── Date parsing ───────────────────────────────────────────────────
 
-function parseChronologyDate(raw, altBasicDate) {
+function parseChronologyDate (raw, altBasicDate) {
   if (!raw) return null
 
   const cleaned = raw
@@ -236,7 +236,7 @@ function parseChronologyDate(raw, altBasicDate) {
 
 const unmappedLocations = new Map()
 
-function parseChronologyLocation(raw) {
+function parseChronologyLocation (raw) {
   const fallback = {
     location: '',
     region: '',
@@ -522,7 +522,7 @@ function parseChronologyLocation(raw) {
 
 // ─── Reference normalization ────────────────────────────────────────
 
-function normalizeRef(raw) {
+function normalizeRef (raw) {
   if (!raw) return ''
   if (Array.isArray(raw)) return raw.join('; ')
   return String(raw)
@@ -543,7 +543,7 @@ const SUB_SOURCE_TIER = {
   OVERMEIRE: 3       // Broad catalog
 }
 
-function computeChronologyCredibility(record, subSourceId, loc, ref, desc, parsed) {
+function computeChronologyCredibility (record, subSourceId, loc, ref, desc, parsed) {
   let score = 20 // baseline
 
   // Sub-source tier (0-15)
@@ -580,7 +580,7 @@ function computeChronologyCredibility(record, subSourceId, loc, ref, desc, parse
 
 // ─── Year → chunk key ───────────────────────────────────────────────
 
-function yearToChunkKey(year) {
+function yearToChunkKey (year) {
   if (year < DECADE_CHUNK_START) return ANCIENT_CHUNK
   if (year < MODERN_YEAR_START) {
     const decade = Math.floor(year / 10) * 10
@@ -591,7 +591,7 @@ function yearToChunkKey(year) {
 
 // ─── Extract records from JSON ──────────────────────────────────────
 
-function extractRecords(data) {
+function extractRecords (data) {
   if (Array.isArray(data)) return data
 
   const topKey = Object.keys(data)[0]
@@ -610,7 +610,7 @@ function extractRecords(data) {
 
 // ─── Clean JSON (BOM / null bytes) ──────────────────────────────────
 
-function readCleanJson(filepath) {
+function readCleanJson (filepath) {
   const buf = readFileSync(filepath)
   const str = buf.toString('utf8').replace(/^\uFEFF/, '').replace(/\0/g, '')
   return JSON.parse(str)
@@ -618,7 +618,7 @@ function readCleanJson(filepath) {
 
 // ─── Download source files ──────────────────────────────────────────
 
-function downloadSources() {
+function downloadSources () {
   const allFiles = new Set()
   for (const src of SOURCES) {
     for (const f of src.files) allFiles.add(f)
@@ -645,7 +645,7 @@ function downloadSources() {
 
 // ─── Main processing ───────────────────────────────────────────────
 
-function main() {
+function main () {
   const doDownload = process.argv.includes('--download')
 
   if (doDownload) downloadSources()

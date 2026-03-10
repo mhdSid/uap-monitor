@@ -39,7 +39,7 @@ export class WelcomeModal {
 
   // ─── Public API ────────────────────────────────────────────────
 
-  static show(): boolean {
+  static show (): boolean {
     Modal.open({
       header:  () => WelcomeModal.buildHeader(),
       content: () => WelcomeModal.buildContent(),
@@ -56,14 +56,14 @@ export class WelcomeModal {
 
   // ─── Slots ──────────────────────────────────────────────────────
 
-  private static buildHeader(): HTMLElement {
+  private static buildHeader (): HTMLElement {
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, WELCOME.TITLE),
       h('span', { className: cx.subtitle }, WELCOME.SUBTITLE)
     )
   }
 
-  private static buildContent(): HTMLElement {
+  private static buildContent (): HTMLElement {
     const wrapper = h('div', { className: cx.bodyLoader },
       new Loader({}).el
     )
@@ -74,7 +74,7 @@ export class WelcomeModal {
     return wrapper
   }
 
-  private static buildFooter(): HTMLElement {
+  private static buildFooter (): HTMLElement {
     const btn = new Button({
       label: WELCOME.CTA,
       variant: 'solid',
@@ -89,7 +89,7 @@ export class WelcomeModal {
 
   // ─── Data loading ───────────────────────────────────────────────
 
-  private static async loadAndRender(): Promise<void> {
+  private static async loadAndRender (): Promise<void> {
     const nuforc = useNuforc()
     const hatch = useHatchUdb()
     const chronology = useChronology()
@@ -129,7 +129,7 @@ export class WelcomeModal {
 
   // ─── Rendering ─────────────────────────────────────────────────
 
-  private static renderBody(
+  private static renderBody (
     body: HTMLElement,
     stats: WelcomeStats,
     sources: WelcomeSource[]
@@ -168,7 +168,7 @@ export class WelcomeModal {
 
   // ─── Helpers ────────────────────────────────────────────────────
 
-  private static stat(value: string, label: string): HTMLElement {
+  private static stat (value: string, label: string): HTMLElement {
     return h('div', { className: cx.stat },
       h('span', { className: cx.statValue }, value),
       h('span', { className: cx.statLabel }, label)

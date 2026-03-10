@@ -12,7 +12,7 @@ export interface HighlightCardProps {
 }
 
 export class HighlightCard extends Component<HighlightCardProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const content = [
       h('span', { className: cx.year }, this.props.year),
       h('span', { className: cx.location }, this.props.location),

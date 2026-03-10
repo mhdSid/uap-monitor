@@ -9,7 +9,7 @@ import { formatDate } from '@/utils/format'
 import { GDELT_MODAL, ARIA } from '@/data/strings'
 
 export class GdeltModal {
-  static open(article: GdeltArticle, trigger?: HTMLElement): void {
+  static open (article: GdeltArticle, trigger?: HTMLElement): void {
     Modal.open({
       header: () => GdeltModal.buildHeader(article),
       content: () => GdeltModal.buildContent(article),
@@ -17,14 +17,14 @@ export class GdeltModal {
     }, trigger)
   }
 
-  private static buildHeader(a: GdeltArticle): HTMLElement {
+  private static buildHeader (a: GdeltArticle): HTMLElement {
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, a.title || GDELT_MODAL.EMPTY_VALUE),
       h('span', { className: cx.domain }, a.domain)
     )
   }
 
-  private static buildContent(a: GdeltArticle): HTMLElement {
+  private static buildContent (a: GdeltArticle): HTMLElement {
     const children: HTMLElement[] = []
 
     // Article image (if available)
@@ -72,7 +72,7 @@ export class GdeltModal {
     return h('div', { className: cx.content }, ...children)
   }
 
-  private static buildFooter(a: GdeltArticle): HTMLElement {
+  private static buildFooter (a: GdeltArticle): HTMLElement {
     return h('div', { className: cx.footer },
       h('span', { className: cx.sourceTag },
         `${GDELT_MODAL.FOOTER_PREFIX}${GDELT_MODAL.FOOTER_SEPARATOR}${a.domain}`

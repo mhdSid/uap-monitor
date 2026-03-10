@@ -7,7 +7,7 @@
  * Splits query into lowercase tokens, checks each token against all fields.
  * All tokens must match (AND logic). Each token can match any field.
  */
-export function tokenMatch(query: string, ...fields: (string | undefined | null)[]): boolean {
+export function tokenMatch (query: string, ...fields: (string | undefined | null)[]): boolean {
   if (!query) return true
 
   const tokens = query.toLowerCase().split(/\s+/).filter(Boolean)

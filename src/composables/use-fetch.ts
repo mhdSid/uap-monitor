@@ -17,18 +17,18 @@ import { Continent, DataSourceId, SightingShape, SightingStatus } from '@/enums'
 
 const DATA_DIR = 'data'
 
-function resolveBaseUrl(): string {
+function resolveBaseUrl (): string {
   const base = import.meta.env.BASE_URL ?? '/'
   return base.endsWith('/') ? base : `${base}/`
 }
 
-export function dataUrl(filename: string): string {
+export function dataUrl (filename: string): string {
   return `${resolveBaseUrl()}${DATA_DIR}/${filename}`
 }
 
 // ─── JSON fetch ─────────────────────────────────────────────────────
 
-export async function fetchJson<T>(url: string): Promise<T> {
+export async function fetchJson<T> (url: string): Promise<T> {
   const response = await fetch(url)
 
   if (!response.ok) {
@@ -67,7 +67,7 @@ interface ChunkedIndex {
   envelope?: Record<string, unknown>
 }
 
-function isChunkedIndex(data: unknown): data is ChunkedIndex {
+function isChunkedIndex (data: unknown): data is ChunkedIndex {
   return (
     typeof data === 'object' &&
     data !== null &&
@@ -76,7 +76,7 @@ function isChunkedIndex(data: unknown): data is ChunkedIndex {
   )
 }
 
-async function reassembleChunked<T>(index: ChunkedIndex, originalUrl: string): Promise<T> {
+async function reassembleChunked<T> (index: ChunkedIndex, originalUrl: string): Promise<T> {
   const baseUrl = originalUrl.substring(0, originalUrl.lastIndexOf('/') + 1)
 
   const chunkPromises = index.files.map(async (file) => {
@@ -112,7 +112,7 @@ const VALID_SOURCES = new Set<string>(Object.values(DataSourceId))
  * @param raw  - Unknown JSON value
  * @param defaultSource - Fallback DataSourceId when raw.source is missing/invalid
  */
-export function parseSighting(raw: unknown, defaultSource: DataSourceId): Sighting | null {
+export function parseSighting (raw: unknown, defaultSource: DataSourceId): Sighting | null {
   if (typeof raw !== 'object' || raw === null) return null
   const r = raw as Record<string, unknown>
 
@@ -173,7 +173,7 @@ export function parseSighting(raw: unknown, defaultSource: DataSourceId): Sighti
   }
 }
 
-export function parseChunk(raw: unknown, defaultSource: DataSourceId): Sighting[] {
+export function parseChunk (raw: unknown, defaultSource: DataSourceId): Sighting[] {
   if (!Array.isArray(raw)) return []
   const sightings: Sighting[] = []
   for (const item of raw) {
@@ -185,14 +185,14 @@ export function parseChunk(raw: unknown, defaultSource: DataSourceId): Sighting[
 
 // ─── Sort helper ────────────────────────────────────────────────────
 
-export function sortNewestFirst(sightings: Sighting[]): Sighting[] {
+export function sortNewestFirst (sightings: Sighting[]): Sighting[] {
   return sightings.sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))
 }
 
 // ─── Manifest validation ────────────────────────────────────────────
 
 /** Base manifest shape: generatedAt + totalRecords + years */
-export function isValidManifest(data: unknown): boolean {
+export function isValidManifest (data: unknown): boolean {
   if (typeof data !== 'object' || data === null) return false
   const obj = data as Record<string, unknown>
   return (
@@ -210,7 +210,7 @@ export function isValidManifest(data: unknown): boolean {
  * Handles: numeric years ("1947"), decade keys ("1800s"), and "ancient".
  * For simple year-only manifests, pass `simpleYears: true` to skip decade/ancient logic.
  */
-export function getChunkKeysForRange(
+export function getChunkKeysForRange (
   yearKeys: string[],
   fromYear: number,
   toYear: number,
@@ -291,7 +291,7 @@ export interface SourceLoader<M extends ManifestLike = ManifestLike> {
  * Create a source loader with built-in caching, dedup, progressive loading.
  * Each source composable calls this once and extends with source-specific helpers.
  */
-export function createSourceLoader<M extends ManifestLike = ManifestLike>(
+export function createSourceLoader<M extends ManifestLike = ManifestLike> (
   config: SourceLoaderConfig
 ): SourceLoader<M> {
   let manifest: M | null = null
@@ -303,7 +303,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
 
   // ── Manifest ────────────────────────────────────────────────────
 
-  async function loadManifest(): Promise<M | null> {
+  async function loadManifest (): Promise<M | null> {
     if (manifest) return manifest
     if (manifestError) return null
 
@@ -329,7 +329,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
 
   // ── Chunks ──────────────────────────────────────────────────────
 
-  async function loadChunk(key: string): Promise<Sighting[]> {
+  async function loadChunk (key: string): Promise<Sighting[]> {
     if (chunkCache.has(key)) return chunkCache.get(key)!
     if (pendingFetches.has(key)) return pendingFetches.get(key)!
 
@@ -357,7 +357,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
 
   // ── Range loading ───────────────────────────────────────────────
 
-  function resolveKeys(fromYear: number, toYear: number): string[] {
+  function resolveKeys (fromYear: number, toYear: number): string[] {
     if (!manifest) return []
     return getChunkKeysForRange(
       Object.keys(manifest.years),
@@ -367,7 +367,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     )
   }
 
-  async function loadYearRange(fromYear: number, toYear: number): Promise<Sighting[]> {
+  async function loadYearRange (fromYear: number, toYear: number): Promise<Sighting[]> {
     const m = await loadManifest()
     if (!m) return []
 
@@ -376,7 +376,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     return sortNewestFirst(chunks.flat())
   }
 
-  async function loadProgressive(
+  async function loadProgressive (
     fromYear: number,
     toYear: number,
     onChunk: (sightings: Sighting[]) => void
@@ -400,7 +400,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
 
   // ── Query helpers ───────────────────────────────────────────────
 
-  function getAvailableYears(): number[] {
+  function getAvailableYears (): number[] {
     if (!manifest) return []
 
     if (config.simpleYears) {
@@ -420,11 +420,11 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     return years.sort((a, b) => b - a)
   }
 
-  function getTotalCount(): number {
+  function getTotalCount (): number {
     return manifest?.totalRecords ?? 0
   }
 
-  function getYearCounts(): Map<number, number> {
+  function getYearCounts (): Map<number, number> {
     const counts = new Map<number, number>()
     if (!manifest) return counts
     for (const [key, meta] of Object.entries(manifest.years)) {
@@ -443,7 +443,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     return counts
   }
 
-  function getLoadedCount(): number {
+  function getLoadedCount (): number {
     let count = 0
     for (const chunk of chunkCache.values()) {
       count += chunk.length
@@ -451,7 +451,7 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike>(
     return count
   }
 
-  function getManifest(): M | null {
+  function getManifest (): M | null {
     return manifest
   }
 
@@ -491,13 +491,13 @@ export interface ArticleLoader<A, C extends ArticleCollection<A>> {
 export function createArticleLoader<
   A extends object,
   C extends ArticleCollection<A>
->(config: ArticleLoaderConfig<A>): ArticleLoader<A, C>{
+> (config: ArticleLoaderConfig<A>): ArticleLoader<A, C>{
   let cachedArticles: A[] | null = null
   let cachedCollection: C | null = null
 
   const reportError = config.onError ?? ((msg) => console.warn(`[${config.label}] ${msg}`))
 
-  async function load(): Promise<A[]> {
+  async function load (): Promise<A[]> {
     if (cachedArticles) return cachedArticles
 
     try {
@@ -512,7 +512,7 @@ export function createArticleLoader<
     }
   }
 
-  function filterArticles(articles: A[], search: string): A[] {
+  function filterArticles (articles: A[], search: string): A[] {
     if (!search) return articles
     const q = search.toLowerCase()
     return articles.filter(a =>
@@ -523,11 +523,11 @@ export function createArticleLoader<
     )
   }
 
-  function getCollection(): C | null {
+  function getCollection (): C | null {
     return cachedCollection
   }
 
-  function getCount(): number {
+  function getCount (): number {
     return cachedArticles?.length ?? 0
   }
 

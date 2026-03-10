@@ -35,7 +35,7 @@ export interface ButtonProps {
 // ─── Component ──────────────────────────────────────────────────────
 
 export class Button extends Component<ButtonProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const {
       label,
       variant = 'solid',

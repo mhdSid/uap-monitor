@@ -12,7 +12,7 @@ export interface HeroProps {
 }
 
 export class Hero extends Component<HeroProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const store = useAppStore()
 
     const sightingsValue = h('span', { className: cx.statValue }, '—')

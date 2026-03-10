@@ -23,7 +23,7 @@ const VARIANT_COLORS: Record<AlertVariant, { border: string; text: string; icon:
 }
 
 export class Alert extends Component<AlertProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const colors = VARIANT_COLORS[this.props.variant]
 
     const alert = h('div', {

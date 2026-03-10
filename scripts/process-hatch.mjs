@@ -141,7 +141,7 @@ const attributeCounts = new Map()
  *
  * Hatch dates before year 100 are genuine ancient dates, NOT 19xx/20xx.
  */
-function parseHatchDate(raw) {
+function parseHatchDate (raw) {
   if (!raw) return null
 
   // Strip uncertainty markers
@@ -203,7 +203,7 @@ function parseHatchDate(raw) {
  * Use alt_basic_date to get a more reliable year when basic_date is ambiguous.
  * alt_basic_date format: "M/D/YYYY" with full 4-digit year always.
  */
-function extractYearFromAlt(altDate) {
+function extractYearFromAlt (altDate) {
   if (!altDate) return null
   const parts = altDate.split('/')
   if (parts.length < 2) return null
@@ -216,7 +216,7 @@ function extractYearFromAlt(altDate) {
 
 // ─── Shape extraction from attributes ───────────────────────────────
 
-function extractShape(attributes) {
+function extractShape (attributes) {
   if (!Array.isArray(attributes)) return Shape.UNKNOWN
 
   for (const attr of attributes) {
@@ -229,7 +229,7 @@ function extractShape(attributes) {
 
 // ─── Tag extraction from attributes ─────────────────────────────────
 
-function extractTags(attributes) {
+function extractTags (attributes) {
   if (!Array.isArray(attributes)) return []
   const tags = []
 
@@ -246,7 +246,7 @@ function extractTags(attributes) {
 
 // ─── Characteristics from attributes ────────────────────────────────
 
-function extractCharacteristics(attributes) {
+function extractCharacteristics (attributes) {
   if (!Array.isArray(attributes)) return []
   // Use the full human-readable descriptions from the source
   return attributes.map(a => {
@@ -257,7 +257,7 @@ function extractCharacteristics(attributes) {
 
 // ─── Coordinate parsing ─────────────────────────────────────────────
 
-function parseLatLong(latLongStr) {
+function parseLatLong (latLongStr) {
   if (!latLongStr) return null
   const parts = latLongStr.trim().split(/\s+/)
   if (parts.length !== 2) return null
@@ -273,7 +273,7 @@ function parseLatLong(latLongStr) {
 
 // ─── Year → chunk key mapping ───────────────────────────────────────
 
-function yearToChunkKey(year) {
+function yearToChunkKey (year) {
   if (year < DECADE_CHUNK_START) return ANCIENT_CHUNK
   if (year < MODERN_YEAR_START) {
     const decade = Math.floor(year / 10) * 10
@@ -286,7 +286,7 @@ function yearToChunkKey(year) {
 
 // ─── Main ───────────────────────────────────────────────────────────
 
-function main() {
+function main () {
   let inputPath = process.argv[2] || DEFAULT_INPUT
 
   // Auto-download if requested or file doesn't exist

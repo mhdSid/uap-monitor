@@ -103,6 +103,11 @@
 .btn--ghost.btn--primary:hover:not(:disabled) {
   background: var(--c-green-500-06);
 }
+.btn--ghost.btn--neutral { color: var(--color-muted); }
+.btn--ghost.btn--neutral:hover:not(:disabled) {
+  color: var(--color-text);
+  background: var(--c-neutral-400-08);
+}
 
 /* Soft variants */
 .btn--soft.btn--primary {

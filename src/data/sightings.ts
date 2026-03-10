@@ -18,7 +18,7 @@ const CONTINENT_ORDER: Continent[] = [
  * Always returns all 5 continents in a stable order,
  * even if some have zero items.
  */
-export function groupByContinent<T extends { continent: Continent }>(items: T[]): ContinentGroup<T>[] {
+export function groupByContinent<T extends { continent: Continent }> (items: T[]): ContinentGroup<T>[] {
   const grouped = new Map<Continent, T[]>()
 
   for (const item of items) {

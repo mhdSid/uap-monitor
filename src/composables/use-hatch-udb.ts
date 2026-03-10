@@ -4,7 +4,7 @@ import { createSourceLoader } from './use-fetch'
 
 // ─── Composable ─────────────────────────────────────────────────────
 
-export function useHatchUdb() {
+export function useHatchUdb () {
   const loader = createSourceLoader<SourceManifest>({
     manifestFile: 'hatch-manifest.json',
     defaultSource: DataSourceId.HATCH_UDB,

@@ -7,8 +7,8 @@ const loader = createArticleLoader<GdeltArticle, GdeltCollection>({
   searchFields: ['title', 'domain', 'country', 'sourceName']
 })
 
-export function useGdelt() {
-  function filterArticles(articles: GdeltArticle[], filter: SightingFilter) {
+export function useGdelt () {
+  function filterArticles (articles: GdeltArticle[], filter: SightingFilter) {
     return loader.filterArticles(articles, filter.search ?? '')
   }
 

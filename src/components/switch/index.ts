@@ -17,7 +17,7 @@ export class Switch extends Component<SwitchProps> {
   private iconOffEl!: SVGSVGElement
   private rootEl!: HTMLButtonElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this._checked = this.props.checked ?? false
 
     this.iconOnEl = this.props.iconOn()
@@ -50,16 +50,16 @@ export class Switch extends Component<SwitchProps> {
     return this.rootEl
   }
 
-  get checked(): boolean {
+  get checked (): boolean {
     return this._checked
   }
 
-  set checked(val: boolean) {
+  set checked (val: boolean) {
     this._checked = val
     this.update()
   }
 
-  private update(): void {
+  private update (): void {
     this.rootEl.setAttribute('aria-checked', String(this._checked))
     if (this._checked) {
       this.rootEl.classList.add(cx.checked)

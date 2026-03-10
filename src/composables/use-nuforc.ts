@@ -10,7 +10,7 @@ const DEFAULT_RANGE_YEARS = 2
 
 // ─── Composable ─────────────────────────────────────────────────────
 
-export function useNuforc() {
+export function useNuforc () {
   const toast = useToast()
 
   const loader = createSourceLoader<SourceManifest>({
@@ -24,7 +24,7 @@ export function useNuforc() {
   /**
    * Load the default range (latest N years from the manifest).
    */
-  async function loadDefault(): Promise<Sighting[]> {
+  async function loadDefault (): Promise<Sighting[]> {
     const m = await loader.loadManifest()
     if (!m) return []
 

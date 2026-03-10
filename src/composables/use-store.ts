@@ -24,19 +24,19 @@ interface Trackable {
 
 const trackStack: Set<Trackable>[] = []
 
-function track(t: Trackable): void {
+function track (t: Trackable): void {
   const frame = trackStack[trackStack.length - 1]
   if (frame) frame.add(t)
 }
 
-function collectDeps(fn: () => void): Set<Trackable> {
+function collectDeps (fn: () => void): Set<Trackable> {
   const deps = new Set<Trackable>()
   trackStack.push(deps)
   try { fn() } finally { trackStack.pop() }
   return deps
 }
 
-function subAll(deps: Set<Trackable>, cb: Listener): () => void {
+function subAll (deps: Set<Trackable>, cb: Listener): () => void {
   const unsubs: (() => void)[] = []
   for (const d of deps) unsubs.push(d._sub(cb))
   return () => { for (const u of unsubs) u() }
@@ -48,7 +48,7 @@ let batchDepth = 0
 const batchQueue: Listener[] = []
 
 /** Snapshot listeners, then schedule or call them. */
-function emit(listeners: Set<Listener>): void {
+function emit (listeners: Set<Listener>): void {
   if (listeners.size === 0) return
   const snap = [...listeners]
   if (batchDepth > 0) {
@@ -60,7 +60,7 @@ function emit(listeners: Set<Listener>): void {
 
 // ─── Batch ──────────────────────────────────────────────────────────
 
-export function batch(fn: () => void): void {
+export function batch (fn: () => void): void {
   batchDepth++
   try { fn() } finally {
     if (--batchDepth === 0) {
@@ -85,29 +85,29 @@ export interface Signal<T> extends ReadonlySignal<T> {
   update(fn: (prev: T) => T): void
 }
 
-export function signal<T>(initial: T): Signal<T> {
+export function signal<T> (initial: T): Signal<T> {
   let val = initial
   const subs = new Set<Listener>()
 
   const self: Signal<T> = {
-    get()              { track(self); return val },
-    set(v: T)          { if (!Object.is(v, val)) { val = v; emit(subs) } },
-    update(fn)         { self.set(fn(val)) },
-    subscribe(fn)      { const w = () => fn(val);  subs.add(w); return () => { subs.delete(w) } },
-    _sub(fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } }
+    get ()              { track(self); return val },
+    set (v: T)          { if (!Object.is(v, val)) { val = v; emit(subs) } },
+    update (fn)         { self.set(fn(val)) },
+    subscribe (fn)      { const w = () => fn(val);  subs.add(w); return () => { subs.delete(w) } },
+    _sub (fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } }
   }
   return self
 }
 
 // ─── Computed ───────────────────────────────────────────────────────
 
-export function computed<T>(fn: () => T): ReadonlySignal<T> {
+export function computed<T> (fn: () => T): ReadonlySignal<T> {
   let value: T
   let teardown: (() => void) | null = null
   let ready = false                     // skip first emit (no subscribers yet)
   const subs = new Set<Listener>()
 
-  function recompute(): void {
+  function recompute (): void {
     if (teardown) { teardown(); teardown = null }
 
     let next: T
@@ -126,9 +126,9 @@ export function computed<T>(fn: () => T): ReadonlySignal<T> {
   ready = true
 
   const self: ReadonlySignal<T> = {
-    get()              { track(self); return value },
-    subscribe(fn)      { const w = () => fn(value); subs.add(w); return () => { subs.delete(w) } },
-    _sub(fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } }
+    get ()              { track(self); return value },
+    subscribe (fn)      { const w = () => fn(value); subs.add(w); return () => { subs.delete(w) } },
+    _sub (fn: Listener) { subs.add(fn); return () => { subs.delete(fn) } }
   }
   return self
 }
@@ -140,13 +140,13 @@ export function computed<T>(fn: () => T): ReadonlySignal<T> {
  * Coalesces via microtask — multiple dep changes in one tick = one re-run.
  * May return a cleanup function (called before re-run and on dispose).
  */
-export function effect(fn: () => void | (() => void)): () => void {
+export function effect (fn: () => void | (() => void)): () => void {
   let teardown: (() => void) | null = null
   let cleanup: (() => void) | void
   let disposed = false
   let queued = false
 
-  function run(): void {
+  function run (): void {
     if (disposed) return
     queued = false
 

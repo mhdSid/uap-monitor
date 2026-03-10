@@ -8,7 +8,7 @@ import { formatDate } from '@/utils/format'
 import { GNEWS_MODAL, ARIA } from '@/data/strings'
 
 export class GnewsModal {
-  static open(article: GnewsArticle, trigger?: HTMLElement): void {
+  static open (article: GnewsArticle, trigger?: HTMLElement): void {
     Modal.open({
       header: () => GnewsModal.buildHeader(article),
       content: () => GnewsModal.buildContent(article),
@@ -16,14 +16,14 @@ export class GnewsModal {
     }, trigger)
   }
 
-  private static buildHeader(a: GnewsArticle): HTMLElement {
+  private static buildHeader (a: GnewsArticle): HTMLElement {
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, a.title || GNEWS_MODAL.EMPTY_VALUE),
       h('span', { className: cx.sourceName }, a.sourceName)
     )
   }
 
-  private static buildContent(a: GnewsArticle): HTMLElement {
+  private static buildContent (a: GnewsArticle): HTMLElement {
     const children: HTMLElement[] = []
 
     // Article image (if available)
@@ -63,7 +63,7 @@ export class GnewsModal {
     return h('div', { className: cx.content }, ...children)
   }
 
-  private static buildFooter(a: GnewsArticle): HTMLElement {
+  private static buildFooter (a: GnewsArticle): HTMLElement {
     const sourceTarget = a.sourceUrl || a.url
 
     return h('div', { className: cx.footer },

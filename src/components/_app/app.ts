@@ -60,7 +60,7 @@ export class App extends Component {
 
   // ─── Shell ─────────────────────────────────────────────────────
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.main = h('main', { className: 'app-main', role: 'main' },
       h('div', { className: 'app-loader' }, new Loader({}).el)
     )
@@ -92,7 +92,7 @@ export class App extends Component {
 
   // ─── Initialization ────────────────────────────────────────────
 
-  async init(): Promise<void> {
+  async init (): Promise<void> {
     const analytics = useAnalytics()
     analytics.init()
     analytics.pageView()
@@ -117,13 +117,13 @@ export class App extends Component {
 
   // ─── Phase: Load manifests ─────────────────────────────────────
 
-  private async loadManifests(): Promise<void> {
+  private async loadManifests (): Promise<void> {
     await this.dataSource.loadManifests()
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
 
-  private hydrateStore(): void {
+  private hydrateStore (): void {
     const years = this.dataSource.getAvailableYears()
     const newest = years[0] ?? new Date().getFullYear()
     const defaultFrom = newest - DEFAULT_YEAR_OFFSET
@@ -138,7 +138,7 @@ export class App extends Component {
 
   // ─── Phase: Build controls ─────────────────────────────────────
 
-  private buildControls(): void {
+  private buildControls (): void {
     // ── Desktop: inline controls under hero (hidden on SP via CSS) ─
     this.desktopControls = h('form', {
       className: 'controls-form controls-form--desktop',
@@ -220,7 +220,7 @@ export class App extends Component {
 
   // ─── Phase: Bind reactions ─────────────────────────────────────
 
-  private bindReactions(): void {
+  private bindReactions (): void {
     this.store.filter.subscribe(() => this.onFilterChange())
 
     this.store.yearRange.subscribe(async () => {
@@ -240,7 +240,7 @@ export class App extends Component {
 
   // ─── Phase: Progressive load ───────────────────────────────────
 
-  private async progressiveLoad(): Promise<Sighting[]> {
+  private async progressiveLoad (): Promise<Sighting[]> {
     const { from, to } = this.store.yearRange.get()
 
     return this.dataSource.fetchProgressive(from, to, (partial) => {
@@ -252,7 +252,7 @@ export class App extends Component {
 
   // ─── Phase: Below-fold content ─────────────────────────────────
 
-  private buildBelowFold(): void {
+  private buildBelowFold (): void {
     // ── Data sources section ────────────────────────────────────
     const sourcesBody = h('div', {
       style: { display: 'flex', flexDirection: 'column', gap: '10px' }
@@ -284,7 +284,7 @@ export class App extends Component {
 
   // ─── Phase: Finalize ───────────────────────────────────────────
 
-  private finalize(): void {
+  private finalize (): void {
     // Merge Russian Historical sightings into main dataset
     const russianSightings = this.russianHistorical.getAll()
     if (russianSightings.length > 0) {
@@ -330,7 +330,7 @@ export class App extends Component {
     this.handleShareUrl()
   }
 
-  private handleShareUrl(): void {
+  private handleShareUrl (): void {
     const share = useShare()
     const sharedId = share.parseShareParam()
     if (!sharedId) return
@@ -347,19 +347,19 @@ export class App extends Component {
 
   // ─── Reactions ─────────────────────────────────────────────────
 
-  private showAllLoaders(): void {
+  private showAllLoaders (): void {
     const loader = () => h('div', { className: 'app-loader' }, new Loader({}).el)
     this.grids.showLoader(loader())
     this.timeline.showLoader(loader())
     this.sightingMap.showLoader(loader())
   }
 
-  private hideAllLoaders(): void {
+  private hideAllLoaders (): void {
     this.timeline.hideLoader()
     this.sightingMap.hideLoader()
   }
 
-  private async onFilterChange(): Promise<void> {
+  private async onFilterChange (): Promise<void> {
     const version = ++this.renderVersion
     const release = this.grids.lockHeight()
 
@@ -385,7 +385,7 @@ export class App extends Component {
     this.store.shownCount.set(filtered.length)
   }
 
-  private async onYearRangeChange(): Promise<void> {
+  private async onYearRangeChange (): Promise<void> {
     this.store.loading.set(true)
     this.showAllLoaders()
 
@@ -412,7 +412,7 @@ export class App extends Component {
 
 // ─── Entry point ──────────────────────────────────────────────────
 
-export async function createApp(root: HTMLElement): Promise<void> {
+export async function createApp (root: HTMLElement): Promise<void> {
   const app = new App({})
   mount(root, app.el)
   await app.init()

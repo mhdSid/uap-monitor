@@ -40,7 +40,7 @@ declare global {
 
 // ─── Shallow sighting projection ────────────────────────────────────
 
-function toShallow(s: Sighting): SightingShallow {
+function toShallow (s: Sighting): SightingShallow {
   return {
     id: s.id,
     source: s.source,
@@ -60,14 +60,14 @@ class Analytics {
 
   // ─── Initialization ───────────────────────────────────────────
 
-  init(): void {
+  init (): void {
     if (this.injected) return
     useDelayedLoad(() => this.inject(), { delayMs: GTM_DELAY_MS })
   }
 
   // ─── GTM injection ────────────────────────────────────────────
 
-  private inject(): void {
+  private inject (): void {
     if (this.injected) return
     this.injected = true
 
@@ -97,7 +97,7 @@ class Analytics {
 
   // ─── DataLayer push ───────────────────────────────────────────
 
-  private push(event: DataLayerEvent): void {
+  private push (event: DataLayerEvent): void {
     if (this.injected && window.dataLayer) {
       window.dataLayer.push(event)
     } else {
@@ -107,22 +107,22 @@ class Analytics {
 
   // ─── Public event methods ─────────────────────────────────────
 
-  pageView(): void {
+  pageView (): void {
     this.push({ event: 'page_view' })
   }
 
-  welcomeModalClosed(): void {
+  welcomeModalClosed (): void {
     this.push({ event: 'welcome_modal_closed' })
   }
 
-  sightingViewed(sighting: Sighting): void {
+  sightingViewed (sighting: Sighting): void {
     this.push({
       event: 'sighting_viewed',
       sighting: toShallow(sighting)
     })
   }
 
-  sightingDismissed(sighting: Sighting): void {
+  sightingDismissed (sighting: Sighting): void {
     this.push({
       event: 'sighting_dismissed',
       sighting: toShallow(sighting)
@@ -134,7 +134,7 @@ class Analytics {
 
 let instance: Analytics | null = null
 
-export function useAnalytics(): Analytics {
+export function useAnalytics (): Analytics {
   if (!instance) {
     instance = new Analytics()
   }

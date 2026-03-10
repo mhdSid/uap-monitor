@@ -29,7 +29,7 @@ export class Modal {
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  static open(slots: ModalSlots, trigger?: HTMLElement | null): void {
+  static open (slots: ModalSlots, trigger?: HTMLElement | null): void {
     Modal.close()
 
     Modal.trigger = trigger ?? (document.activeElement as HTMLElement | null)
@@ -89,7 +89,7 @@ export class Modal {
     requestAnimationFrame(() => addClass(overlay, 'modal-overlay--visible'))
   }
 
-  static close(): void {
+  static close (): void {
     if (!Modal.overlay) return
 
     removeClass(Modal.overlay, 'modal-overlay--visible')
@@ -120,17 +120,17 @@ export class Modal {
     }, TRANSITION_MS)
   }
 
-  static get isOpen(): boolean {
+  static get isOpen (): boolean {
     return Modal.overlay !== null
   }
 
   // ─── Internal ───────────────────────────────────────────────────
 
-  private static getFocusable(root: HTMLElement): HTMLElement[] {
+  private static getFocusable (root: HTMLElement): HTMLElement[] {
     return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE))
   }
 
-  private static handleKeydown(e: KeyboardEvent): void {
+  private static handleKeydown (e: KeyboardEvent): void {
     if (e.key === 'Escape') {
       Modal.close()
       return

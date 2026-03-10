@@ -7,7 +7,7 @@ const DEG_TO_RAD = Math.PI / 180
 const EARTH_RADIUS_KM = 6371
 
 /** Haversine distance in km between two lat/lng points. */
-export function haversineKm(
+export function haversineKm (
   lat1: number, lng1: number,
   lat2: number, lng2: number
 ): number {
@@ -20,14 +20,14 @@ export function haversineKm(
 }
 
 /** Absolute difference in hours between two ISO date strings. */
-function hoursBetween(a: string, b: string): number {
+function hoursBetween (a: string, b: string): number {
   const da = new Date(a).getTime()
   const db = new Date(b).getTime()
   return Math.abs(da - db) / (1000 * 60 * 60)
 }
 
 /** Absolute difference in days between two ISO date strings. */
-function daysBetween(a: string, b: string): number {
+function daysBetween (a: string, b: string): number {
   return hoursBetween(a, b) / 24
 }
 
@@ -36,8 +36,8 @@ function daysBetween(a: string, b: string): number {
 let cached: Fireball[] | null = null
 let cachedCollection: FireballCollection | null = null
 
-export function useFireball() {
-  async function load(): Promise<Fireball[]> {
+export function useFireball () {
+  async function load (): Promise<Fireball[]> {
     if (cached) return cached
 
     try {
@@ -51,15 +51,15 @@ export function useFireball() {
     }
   }
 
-  function getCount(): number {
+  function getCount (): number {
     return cached?.length ?? 0
   }
 
-  function getCollection(): FireballCollection | null {
+  function getCollection (): FireballCollection | null {
     return cachedCollection
   }
 
-  function getAll(): Fireball[] {
+  function getAll (): Fireball[] {
     return cached ?? []
   }
 
@@ -69,7 +69,7 @@ export function useFireball() {
    * Find fireballs near a sighting.
    * Default: within 200km and ±72 hours.
    */
-  function findNearSighting(
+  function findNearSighting (
     sighting: Sighting,
     opts?: { maxKm?: number; maxHours?: number }
   ): Fireball[] {
@@ -94,7 +94,7 @@ export function useFireball() {
    * Find news articles related to a sighting by date proximity.
    * Default: within ±7 days.
    */
-  function findRelatedNews(
+  function findRelatedNews (
     sighting: Sighting,
     gdeltArticles: GdeltArticle[],
     gnewsArticles: GnewsArticle[],

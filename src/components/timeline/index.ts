@@ -57,7 +57,7 @@ export class Timeline extends Component<TimelineProps> {
   private rootWidth = 0                // cached root rect width
   private barArea = 0                  // cached bar drawing area height
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.canvas = el('canvas', { className: cx.canvas })
     // Prevent broken canvas icon on mobile before first resize
     this.canvas.width = 1
@@ -91,7 +91,7 @@ export class Timeline extends Component<TimelineProps> {
     return wrapper
   }
 
-  protected didMount(): void {
+  protected didMount (): void {
     const ro = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
@@ -103,13 +103,13 @@ export class Timeline extends Component<TimelineProps> {
     ro.observe(this.el)
   }
 
-  destroy(): void {
+  destroy (): void {
     super.destroy()
   }
 
   // ─── Perf: pre-compute everything data-dependent ──────────────
 
-  private computeMaxCount(): void {
+  private computeMaxCount (): void {
     let max = 0
     for (let y = this.dataFrom; y <= this.dataTo; y++) {
       const c = this.yearCounts.get(y) || 0
@@ -119,7 +119,7 @@ export class Timeline extends Component<TimelineProps> {
   }
 
   /** Pre-compute pixel heights for every year bar. Called on data/resize. */
-  private computeBarHeights(): void {
+  private computeBarHeights (): void {
     const yearSpan = this.dataTo - this.dataFrom + 1
     this.barHeights = new Float32Array(yearSpan)
 
@@ -135,7 +135,7 @@ export class Timeline extends Component<TimelineProps> {
   }
 
   /** Cache layout rects. Called on resize only. */
-  private cacheLayout(): void {
+  private cacheLayout (): void {
     const scrollerRect = this.scroller.getBoundingClientRect()
     this.scrollerLeft = scrollerRect.left
 
@@ -146,19 +146,19 @@ export class Timeline extends Component<TimelineProps> {
 
   // ─── Loading overlay ──────────────────────────────────────────
 
-  showLoader(el?: HTMLElement): void {
+  showLoader (el?: HTMLElement): void {
     this.loaderEl.textContent = ''
     if (el) this.loaderEl.appendChild(el)
     this.loaderEl.style.display = ''
   }
 
-  hideLoader(): void {
+  hideLoader (): void {
     this.loaderEl.style.display = 'none'
   }
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  setSightings(sightings: Sighting[]): void {
+  setSightings (sightings: Sighting[]): void {
     this.yearCounts.clear()
     for (const s of sightings) {
       const y = parseInt(s.occurredAt?.slice(0, 4), 10)
@@ -168,21 +168,21 @@ export class Timeline extends Component<TimelineProps> {
     this.resize()
   }
 
-  setYearRange(from: number, to: number): void {
+  setYearRange (from: number, to: number): void {
     this.dataFrom = from
     this.dataTo = to
     this.computeMaxCount()
     this.resize()
   }
 
-  setActiveRange(from: number, to: number): void {
+  setActiveRange (from: number, to: number): void {
     this.activeFrom = from
     this.activeTo = to
     this.draw()
     this.scrollToRange(from, to)
   }
 
-  setAllSightings(sightings: Sighting[], availableFrom: number, availableTo: number): void {
+  setAllSightings (sightings: Sighting[], availableFrom: number, availableTo: number): void {
     this.yearCounts.clear()
     for (const s of sightings) {
       const y = parseInt(s.occurredAt?.slice(0, 4), 10)
@@ -194,7 +194,7 @@ export class Timeline extends Component<TimelineProps> {
     this.resize()
   }
 
-  setManifestCounts(counts: Map<number, number>, availableFrom: number, availableTo: number): void {
+  setManifestCounts (counts: Map<number, number>, availableFrom: number, availableTo: number): void {
     this.yearCounts = new Map(counts)
     this.dataFrom = availableFrom
     this.dataTo = availableTo
@@ -204,7 +204,7 @@ export class Timeline extends Component<TimelineProps> {
 
   // ─── Layout ───────────────────────────────────────────────────
 
-  private resize(): void {
+  private resize (): void {
     if (!this.mounted) return
 
     const yearSpan = this.dataTo - this.dataFrom + 1
@@ -246,7 +246,7 @@ export class Timeline extends Component<TimelineProps> {
     }
   }
 
-  private scrollToRange(from: number, to: number): void {
+  private scrollToRange (from: number, to: number): void {
     const midYear = Math.floor((from + to) / 2)
     const x = PAD_X + (midYear - this.dataFrom) * BAR_STEP
     const viewW = this.scroller.clientWidth
@@ -255,7 +255,7 @@ export class Timeline extends Component<TimelineProps> {
 
   // ─── Custom scrollbar ────────────────────────────────────────
 
-  private syncThumb(): void {
+  private syncThumb (): void {
     const scrollW = this.scroller.scrollWidth
     const clientW = this.scroller.clientWidth
     if (scrollW <= clientW) {
@@ -275,7 +275,7 @@ export class Timeline extends Component<TimelineProps> {
     this.scrollThumb.style.transform = `translateX(${thumbX}px)`
   }
 
-  private scrollFromThumbX(trackClientX: number): void {
+  private scrollFromThumbX (trackClientX: number): void {
     const trackRect = this.scrollTrack.getBoundingClientRect()
     const trackW = trackRect.width
     const thumbW = this.scrollThumb.offsetWidth
@@ -289,11 +289,11 @@ export class Timeline extends Component<TimelineProps> {
   // ─── Drawing (canvas — only on data/range change) ─────────────
 
   /** Force canvas redraw — call on theme change */
-  redraw(): void {
+  redraw (): void {
     this.draw()
   }
 
-  private draw(): void {
+  private draw (): void {
     const ctx = this.canvas.getContext('2d')
     if (!ctx) return
 
@@ -359,7 +359,7 @@ export class Timeline extends Component<TimelineProps> {
     }
   }
 
-  private labelInterval(yearSpan: number): number {
+  private labelInterval (yearSpan: number): number {
     if (yearSpan <= 50) return 5
     if (yearSpan <= 200) return 10
     if (yearSpan <= 500) return 25
@@ -373,7 +373,7 @@ export class Timeline extends Component<TimelineProps> {
    * Converts clientX → year index using only cached numbers.
    * Zero DOM queries. Pure arithmetic.
    */
-  private yearFromClientX(clientX: number): number | null {
+  private yearFromClientX (clientX: number): number | null {
     const x = clientX - this.scrollerLeft + this.scroller.scrollLeft
     const idx = Math.floor((x - PAD_X) / BAR_STEP)
     const yearSpan = this.dataTo - this.dataFrom + 1
@@ -385,7 +385,7 @@ export class Timeline extends Component<TimelineProps> {
    * Moves the CSS hover-bar div + sets its ::after height.
    * GPU-composited transform — no layout, no paint, no canvas.
    */
-  private applyHover(year: number | null, clientX: number): void {
+  private applyHover (year: number | null, clientX: number): void {
     if (year == null || this.maxCount === 0) {
       this.hoverBar.style.display = 'none'
       this.tooltip.style.display = 'none'
@@ -417,7 +417,7 @@ export class Timeline extends Component<TimelineProps> {
 
   // ─── Events ───────────────────────────────────────────────────
 
-  private bindEvents(): void {
+  private bindEvents (): void {
     this.scroller.addEventListener('scroll', () => {
       if (!this.isDragging) this.syncThumb()
     }, { passive: true })

@@ -15,7 +15,7 @@ export interface ShareButtonProps {
 const ARIA_SHARE = 'Share sighting'
 
 export class ShareButton extends Component<ShareButtonProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { sightingId, title, size = 14 } = this.props
     const share = useShare()
     const toast = useToast()

@@ -23,14 +23,14 @@ const OUTPUT = resolve(ROOT, 'public/data/russian-historical.json')
 const SOURCE = 'CHRONOLOGY'
 const SUB_SOURCE = 'RUSSIAN_HISTORICAL'
 
-function generateId(date, location) {
+function generateId (date, location) {
   return createHash('sha256')
     .update(`russian-${date}-${location}`)
     .digest('hex')
     .slice(0, 12)
 }
 
-function process() {
+function process () {
   const raw = JSON.parse(readFileSync(INPUT, 'utf-8'))
   console.log(`Read ${raw.length} sightings from __sources/russia.json`)
 

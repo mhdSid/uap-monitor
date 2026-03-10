@@ -5,7 +5,7 @@ import { h, rawHtml } from '@/utils/dom'
 import { ARIA } from '@/data/strings'
 
 export class Loader extends Component {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const sweep = h('div', { className: cx.sweep })
     sweep.appendChild(rawHtml(`
       <svg viewBox="0 0 80 80" width="80" height="80" aria-hidden="true">

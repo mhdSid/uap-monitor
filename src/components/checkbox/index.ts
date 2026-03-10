@@ -22,7 +22,7 @@ export interface CheckboxGroupProps {
 export class Checkbox extends Component<CheckboxProps> {
   private inputEl!: HTMLInputElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.inputEl = el('input', {
       type: 'checkbox',
       className: cx.input
@@ -53,15 +53,15 @@ export class Checkbox extends Component<CheckboxProps> {
     return root
   }
 
-  get checked(): boolean {
+  get checked (): boolean {
     return this.inputEl.checked
   }
 
-  set checked(value: boolean) {
+  set checked (value: boolean) {
     this.inputEl.checked = value
   }
 
-  private static checkSvg(): SVGSVGElement {
+  private static checkSvg (): SVGSVGElement {
     const ns = 'http://www.w3.org/2000/svg'
     const svg = document.createElementNS(ns, 'svg')
     svg.setAttribute('class', cx.check)
@@ -86,14 +86,14 @@ export class Checkbox extends Component<CheckboxProps> {
 export class CheckboxGroup extends Component<CheckboxGroupProps> {
   private checkboxes!: Checkbox[]
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.checkboxes = this.props.items.map(item => new Checkbox(item))
     return h('div', { className: cx.group },
       ...this.checkboxes.map(cb => cb.el)
     )
   }
 
-  getCheckbox(index: number): Checkbox | undefined {
+  getCheckbox (index: number): Checkbox | undefined {
     return this.checkboxes[index]
   }
 }

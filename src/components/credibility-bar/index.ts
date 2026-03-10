@@ -16,14 +16,14 @@ const LEVEL_COLORS: Record<CredibilityLevel, string> = {
   [CredibilityLevel.LOW]: 'var(--color-muted)'
 }
 
-function getLevel(value: number): CredibilityLevel {
+function getLevel (value: number): CredibilityLevel {
   if (value > 80) return CredibilityLevel.HIGH
   if (value > 65) return CredibilityLevel.MEDIUM
   return CredibilityLevel.LOW
 }
 
 export class CredibilityBar extends Component<CredibilityBarProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { value } = this.props
     const color = LEVEL_COLORS[getLevel(value)]
 

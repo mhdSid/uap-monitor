@@ -9,7 +9,7 @@ export interface CarouselProps {
 }
 
 export class Carousel extends Component<CarouselProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const track = h('div', { className: cx.track }, ...this.props.children)
 
     return h('div', { className: cx.root, 'aria-label': this.props.label },

@@ -21,7 +21,7 @@ export class HeaderAction extends Component<HeaderActionProps> {
   private defaultIcon!: SVGSVGElement
   private activeIcon!: SVGSVGElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.defaultIcon = this.props.iconDefault()
     this.activeIcon = this.props.iconActive()
     this.activeIcon.style.display = 'none'
@@ -51,7 +51,7 @@ export class HeaderAction extends Component<HeaderActionProps> {
   }
 
   /** Programmatically close */
-  close(): void {
+  close (): void {
     if (!this.active) return
     this.active = false
     document.documentElement.removeAttribute(this.props.dataAttr)

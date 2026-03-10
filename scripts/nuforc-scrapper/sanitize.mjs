@@ -34,7 +34,7 @@ const fields = opts.fields.split(",").map(f => f.trim())
 
 // ─── Sanitizer ──────────────────────────────────────────────────────────────
 
-function sanitizeText(text) {
+function sanitizeText (text) {
   if (!text || typeof text !== "string") return text
 
   const lines = text.split("\n")
@@ -118,7 +118,7 @@ function sanitizeText(text) {
 
 // ─── Field access (dot notation) ────────────────────────────────────────────
 
-function getByPath(obj, keyPath) {
+function getByPath (obj, keyPath) {
   const parts = keyPath.split(".")
   let current = obj
   for (const part of parts) {
@@ -128,7 +128,7 @@ function getByPath(obj, keyPath) {
   return current
 }
 
-function setByPath(obj, keyPath, value) {
+function setByPath (obj, keyPath, value) {
   const parts = keyPath.split(".")
   let current = obj
   for (let i = 0; i < parts.length - 1; i++) {
@@ -140,7 +140,7 @@ function setByPath(obj, keyPath, value) {
 
 // ─── Main ───────────────────────────────────────────────────────────────────
 
-async function main() {
+async function main () {
   const raw = await fs.readFile(inputFile, "utf-8")
   const data = JSON.parse(raw)
 

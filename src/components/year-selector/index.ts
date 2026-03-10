@@ -14,7 +14,7 @@ export interface YearSelectorProps {
 }
 
 export class YearSelector extends Component<YearSelectorProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const store = useAppStore()
     const years = store.availableYears.get()
     const { from: defaultFrom, to: defaultTo } = store.yearRange.get()

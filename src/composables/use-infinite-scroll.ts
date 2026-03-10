@@ -21,7 +21,7 @@ export interface InfiniteScrollActions<T> {
 
 // ─── Composable ─────────────────────────────────────────────────────
 
-export function useInfiniteScroll<T>(
+export function useInfiniteScroll<T> (
   pageSize: number = DEFAULT_PAGE_SIZE,
   onUpdate?: (state: InfiniteScrollState<T>) => void
 ): InfiniteScrollActions<T> {
@@ -29,7 +29,7 @@ export function useInfiniteScroll<T>(
   let visibleCount = 0
   let observer: IntersectionObserver | null = null
 
-  function getState(): InfiniteScrollState<T> {
+  function getState (): InfiniteScrollState<T> {
     return {
       allItems,
       visibleItems: allItems.slice(0, visibleCount),
@@ -38,26 +38,26 @@ export function useInfiniteScroll<T>(
     }
   }
 
-  function setItems(items: T[]): void {
+  function setItems (items: T[]): void {
     allItems = items
     visibleCount = Math.min(pageSize, items.length)
     onUpdate?.(getState())
   }
 
-  function loadMore(): void {
+  function loadMore (): void {
     if (visibleCount >= allItems.length) return
     visibleCount = Math.min(visibleCount + pageSize, allItems.length)
     onUpdate?.(getState())
   }
 
-  function expandTo(index: number): void {
+  function expandTo (index: number): void {
     const target = index + 1 // need the item at index to be visible
     if (target <= visibleCount) return
     visibleCount = Math.min(target + pageSize, allItems.length) // add buffer
     onUpdate?.(getState())
   }
 
-  function observe(sentinel: HTMLElement, scrollRoot: HTMLElement): void {
+  function observe (sentinel: HTMLElement, scrollRoot: HTMLElement): void {
     destroy()
     observer = new IntersectionObserver(
       (entries) => {
@@ -70,7 +70,7 @@ export function useInfiniteScroll<T>(
     observer.observe(sentinel)
   }
 
-  function destroy(): void {
+  function destroy (): void {
     observer?.disconnect()
     observer = null
   }

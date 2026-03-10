@@ -27,7 +27,7 @@ import { join, basename, extname } from 'node:path'
 
 // ─── CLI args ───────────────────────────────────────────────────────
 
-function parseArgs() {
+function parseArgs () {
   const args = process.argv.slice(2)
   const opts = { dir: 'public/data', limit: 24 }
   for (let i = 0; i < args.length; i++) {
@@ -39,11 +39,11 @@ function parseArgs() {
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
-function sizeMB(bytes) {
+function sizeMB (bytes) {
   return (bytes / (1024 * 1024)).toFixed(2)
 }
 
-function removeExistingChunks(dir, stem) {
+function removeExistingChunks (dir, stem) {
   const pattern = new RegExp(`^${escapeRegex(stem)}\\.chunk-\\d+\\.json$`)
   for (const f of readdirSync(dir)) {
     if (pattern.test(f)) {
@@ -52,14 +52,14 @@ function removeExistingChunks(dir, stem) {
   }
 }
 
-function escapeRegex(str) {
+function escapeRegex (str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 /**
  * Find the largest array field in an object.
  */
-function findLargestArrayField(obj) {
+function findLargestArrayField (obj) {
   let best = null
   let bestLen = 0
   for (const [key, val] of Object.entries(obj)) {
@@ -75,7 +75,7 @@ function findLargestArrayField(obj) {
  * Split an array into N roughly-equal parts where each serialized chunk
  * stays under the byte limit.
  */
-function splitArray(arr, limitBytes) {
+function splitArray (arr, limitBytes) {
   // Estimate total size from array length proportionally
   const fullJson = JSON.stringify(arr)
   const totalBytes = Buffer.byteLength(fullJson, 'utf-8')
@@ -91,7 +91,7 @@ function splitArray(arr, limitBytes) {
 
 // ─── Main ───────────────────────────────────────────────────────────
 
-function main() {
+function main () {
   const opts = parseArgs()
   const limitBytes = opts.limit * 1024 * 1024
 

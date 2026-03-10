@@ -40,7 +40,7 @@ export function useDebounce<T extends (...args: unknown[]) => void>(
   let timer: ReturnType<typeof setTimeout> | null = null
   let latestArgs: Parameters<T> | null = null
 
-  function cancel(): void {
+  function cancel (): void {
     if (timer !== null) {
       clearTimeout(timer)
       timer = null
@@ -48,7 +48,7 @@ export function useDebounce<T extends (...args: unknown[]) => void>(
     latestArgs = null
   }
 
-  function flush(): void {
+  function flush (): void {
     if (timer !== null && latestArgs !== null) {
       clearTimeout(timer)
       timer = null
@@ -101,7 +101,7 @@ export function useThrottle<T extends (...args: unknown[]) => void>(
   let lastRun = 0
   let trailingArgs: Parameters<T> | null = null
 
-  function cancel(): void {
+  function cancel (): void {
     if (timer !== null) {
       clearTimeout(timer)
       timer = null
@@ -145,7 +145,7 @@ export function useThrottle<T extends (...args: unknown[]) => void>(
  * Yield to the main thread so the browser can paint and handle events.
  * Use between chunks of synchronous work to prevent UI freezing.
  */
-export function yieldThread(): Promise<void> {
+export function yieldThread (): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, 0))
 }
 
@@ -161,7 +161,7 @@ export function yieldThread(): Promise<void> {
  * const data = await minDelay(() => fetchData(), 800)
  * hideLoader()  // guaranteed ≥800ms of loader visibility
  */
-export async function minDelay<T>(fn: () => Promise<T>, ms = 800): Promise<T> {
+export async function minDelay<T> (fn: () => Promise<T>, ms = 800): Promise<T> {
   const [result] = await Promise.all([
     fn(),
     new Promise<void>((r) => setTimeout(r, ms))

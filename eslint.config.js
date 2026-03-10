@@ -12,6 +12,7 @@ export default tsEslint.config(
       semi: ['error', 'never'],
       '@stylistic/comma-dangle': ['error', 'never'],
       'no-trailing-spaces': 'error',
+      'space-before-function-paren': ['error', 'always'],
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/explicit-function-return-type': 'off'
     }

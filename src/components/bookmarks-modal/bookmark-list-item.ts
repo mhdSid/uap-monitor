@@ -10,7 +10,7 @@ export interface BookmarkListItemProps {
 }
 
 export class BookmarkListItem extends Component<BookmarkListItemProps> {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { sighting: s, onClick } = this.props
 
     const date = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'

@@ -11,7 +11,7 @@ import { useTheme, useBookmarks } from '@/composables'
 export class Header extends Component {
   private clockTimer!: number
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.clockTimer = 0
     const radar = iconRadar(16)
     radar.style.color = 'var(--color-green)'
@@ -79,7 +79,7 @@ export class Header extends Component {
     return h('header', { className: cx.root, role: 'banner' }, left, right)
   }
 
-  destroy(): void {
+  destroy (): void {
     clearInterval(this.clockTimer)
     super.destroy()
   }

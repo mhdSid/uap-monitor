@@ -8,7 +8,7 @@ import { TermsModal } from '@/components/terms-modal'
 import { WelcomeModal } from '@/components/welcome-modal'
 
 export class Footer extends Component {
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const year = new Date().getFullYear()
 
     const aboutLink = h('button', {

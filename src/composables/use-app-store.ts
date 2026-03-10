@@ -62,7 +62,7 @@ export interface AppStore {
 
 let instance: AppStore | null = null
 
-export function useAppStore(): AppStore {
+export function useAppStore (): AppStore {
   if (instance) return instance
 
   const sightings = signal<Sighting[]>([])

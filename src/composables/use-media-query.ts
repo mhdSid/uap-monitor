@@ -9,7 +9,7 @@ const SP_BREAKPOINT = '(max-width: 767px)'
 
 let instance: ReturnType<typeof createMediaQuery> | null = null
 
-function createMediaQuery() {
+function createMediaQuery () {
   const mql = window.matchMedia(SP_BREAKPOINT)
   const listeners = new Set<(isSp: boolean) => void>()
 
@@ -20,7 +20,7 @@ function createMediaQuery() {
   const isSp = (): boolean => mql.matches
   const isPc = (): boolean => !mql.matches
 
-  function onChange(fn: (isSp: boolean) => void): () => void {
+  function onChange (fn: (isSp: boolean) => void): () => void {
     listeners.add(fn)
     return () => listeners.delete(fn)
   }
@@ -29,7 +29,7 @@ function createMediaQuery() {
 }
 
 /** Singleton — safe to call from any component. */
-export function useMediaQuery() {
+export function useMediaQuery () {
   if (!instance) instance = createMediaQuery()
   return instance
 }

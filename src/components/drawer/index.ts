@@ -26,7 +26,7 @@ export class Drawer extends Component<DrawerProps> {
   private startY = 0
   private currentY = 0
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.overlay = h('div', {
       className: cx.overlay,
       onClick: () => this.close()
@@ -80,7 +80,7 @@ export class Drawer extends Component<DrawerProps> {
 
   // ── Drag handlers ───────────────────────────────────────────────
 
-  private onDragStart(y: number): void {
+  private onDragStart (y: number): void {
     if (!this.isOpen) return
     this.dragging = true
     this.startY = y
@@ -90,7 +90,7 @@ export class Drawer extends Component<DrawerProps> {
     document.body.style.cursor = 'grabbing'
   }
 
-  private onDragMove(y: number): void {
+  private onDragMove (y: number): void {
     if (!this.dragging) return
     this.currentY = y
     const delta = Math.max(0, this.currentY - this.startY)
@@ -101,7 +101,7 @@ export class Drawer extends Component<DrawerProps> {
     this.overlay.style.opacity = String(1 - progress * 0.5)
   }
 
-  private onDragEnd(): void {
+  private onDragEnd (): void {
     if (!this.dragging) return
     this.dragging = false
     const delta = this.currentY - this.startY
@@ -122,7 +122,7 @@ export class Drawer extends Component<DrawerProps> {
 
   // ── Public API ──────────────────────────────────────────────────
 
-  open(): void {
+  open (): void {
     if (this.isOpen) return
     this.isOpen = true
     this.el.classList.add(cx.rootOpen)
@@ -139,7 +139,7 @@ export class Drawer extends Component<DrawerProps> {
     }
   }
 
-  close(): void {
+  close (): void {
     if (!this.isOpen) return
     this.isOpen = false
     this.el.classList.remove(cx.rootOpen)
@@ -149,12 +149,12 @@ export class Drawer extends Component<DrawerProps> {
     this.props.onClose?.()
   }
 
-  toggle(): void {
+  toggle (): void {
     if (this.isOpen) this.close()
     else this.open()
   }
 
-  get opened(): boolean {
+  get opened (): boolean {
     return this.isOpen
   }
 }

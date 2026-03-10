@@ -39,7 +39,7 @@ export interface Bookmarks {
 
 let instance: Bookmarks | null = null
 
-export function useBookmarks(): Bookmarks {
+export function useBookmarks (): Bookmarks {
   if (instance) return instance
 
   const storage = useLocalStorage<string[]>(STORAGE_KEY)
@@ -49,13 +49,13 @@ export function useBookmarks(): Bookmarks {
   const ids = signal(initial)
   const count = signal(initial.size)
 
-  function persist(): void {
+  function persist (): void {
     const current = ids.get()
     count.set(current.size)
     storage.set([...current])
   }
 
-  function add(id: string): void {
+  function add (id: string): void {
     const current = ids.get()
     if (current.has(id)) return
     const next = new Set(current)
@@ -64,7 +64,7 @@ export function useBookmarks(): Bookmarks {
     persist()
   }
 
-  function remove(id: string): void {
+  function remove (id: string): void {
     const current = ids.get()
     if (!current.has(id)) return
     const next = new Set(current)
@@ -73,7 +73,7 @@ export function useBookmarks(): Bookmarks {
     persist()
   }
 
-  function toggle(id: string): boolean {
+  function toggle (id: string): boolean {
     const current = ids.get()
     if (current.has(id)) {
       remove(id)
@@ -84,11 +84,11 @@ export function useBookmarks(): Bookmarks {
     }
   }
 
-  function has(id: string): boolean {
+  function has (id: string): boolean {
     return ids.get().has(id)
   }
 
-  function clear(): void {
+  function clear (): void {
     ids.set(new Set())
     persist()
   }

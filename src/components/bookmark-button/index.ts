@@ -22,7 +22,7 @@ export class BookmarkButton extends Component<BookmarkButtonProps> {
   private filledIcon!: SVGSVGElement
   private isActive = false
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { sightingId, size = 14 } = this.props
     const bookmarks = useBookmarks()
     const toast = useToast()
@@ -58,12 +58,12 @@ export class BookmarkButton extends Component<BookmarkButtonProps> {
     return this.btn
   }
 
-  private syncIcons(): void {
+  private syncIcons (): void {
     this.outlineIcon.style.display = this.isActive ? 'none' : ''
     this.filledIcon.style.display = this.isActive ? '' : 'none'
   }
 
-  private syncState(): void {
+  private syncState (): void {
     this.syncIcons()
     if (this.isActive) {
       addClass(this.btn, cx.active)

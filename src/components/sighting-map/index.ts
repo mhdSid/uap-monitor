@@ -52,7 +52,7 @@ export class SightingMap extends Component<SightingMapProps> {
   private resizeObserver!: ResizeObserver
   private isVisible = false
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.wrapper = h('div', { className: cx.sightingMap })
     const mapEl = h('div', { className: cx.sightingMapCanvas })
     this.loaderEl = h('div', { className: cx.sightingMapLoader })
@@ -102,7 +102,7 @@ export class SightingMap extends Component<SightingMapProps> {
     return outer
   }
 
-  private initMap(container: HTMLElement): void {
+  private initMap (container: HTMLElement): void {
     this.map = L.map(container, {
       center: DEFAULT_CENTER,
       zoom: DEFAULT_ZOOM,
@@ -173,13 +173,13 @@ export class SightingMap extends Component<SightingMapProps> {
 
   // ─── Loading overlay ─────────────────────────────────────────────
 
-  showLoader(el?: HTMLElement): void {
+  showLoader (el?: HTMLElement): void {
     this.loaderEl.textContent = ''
     if (el) this.loaderEl.appendChild(el)
     this.loaderEl.style.display = ''
   }
 
-  hideLoader(): void {
+  hideLoader (): void {
     this.loaderEl.style.display = 'none'
     if (this.map) {
       setTimeout(() => this.map.invalidateSize({ animate: false }), 50)
@@ -188,7 +188,7 @@ export class SightingMap extends Component<SightingMapProps> {
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  setSightings(sightings: Sighting[], fitBounds = false): void {
+  setSightings (sightings: Sighting[], fitBounds = false): void {
     if (!this.clusterGroup) return
 
     this.clusterGroup.clearLayers()
@@ -250,7 +250,7 @@ export class SightingMap extends Component<SightingMapProps> {
     })
   }
 
-  setFireballs(fireballs: Fireball[]): void {
+  setFireballs (fireballs: Fireball[]): void {
     if (!this.fireballLayer) return
 
     this.fireballLayer.clearLayers()
@@ -293,7 +293,7 @@ export class SightingMap extends Component<SightingMapProps> {
     }
   }
 
-  fitToData(): void {
+  fitToData (): void {
     if (!this.map || !this.clusterGroup) return
     const bounds = this.clusterGroup.getBounds()
     if (bounds.isValid()) {
@@ -301,25 +301,25 @@ export class SightingMap extends Component<SightingMapProps> {
     }
   }
 
-  setTheme(theme: 'dark' | 'light'): void {
+  setTheme (theme: 'dark' | 'light'): void {
     if (!this.map || !this.tileLayer) return
     const url = theme === 'light' ? LIGHT_TILES : DARK_TILES
     this.tileLayer.setUrl(url)
   }
 
-  invalidateSize(): void {
+  invalidateSize (): void {
     if (this.map) this.map.invalidateSize()
   }
 
   // ─── Layer toggles ─────────────────────────────────────────────
 
-  private toggleSightings(visible: boolean): void {
+  private toggleSightings (visible: boolean): void {
     if (!this.map || !this.clusterGroup) return
     if (visible) this.map.addLayer(this.clusterGroup)
     else this.map.removeLayer(this.clusterGroup)
   }
 
-  private toggleFireballs(visible: boolean): void {
+  private toggleFireballs (visible: boolean): void {
     if (!this.map || !this.fireballLayer) return
     if (visible) this.map.addLayer(this.fireballLayer)
     else this.map.removeLayer(this.fireballLayer)
@@ -327,7 +327,7 @@ export class SightingMap extends Component<SightingMapProps> {
 
   // ─── Popup ────────────────────────────────────────────────────
 
-  private createPopup(s: Sighting): HTMLElement {
+  private createPopup (s: Sighting): HTMLElement {
     const year = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
     const src = s.subSource || s.source
 

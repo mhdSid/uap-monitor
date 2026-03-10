@@ -5,7 +5,7 @@ import { Modal } from '@/components/modal'
 import { TERMS } from '@/data/legal'
 
 export class TermsModal {
-  static open(trigger?: HTMLElement | null): void {
+  static open (trigger?: HTMLElement | null): void {
     Modal.open({
       header: () => h('h2', { className: cx.title }, TERMS.TITLE),
       content: () => {

@@ -44,7 +44,7 @@ export class Ticker extends Component<TickerProps> {
 
   // ─── Lifecycle ──────────────────────────────────────────────────
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     this.messages = [...DEFAULT_MESSAGES]
     this.msgIdx = 0
     this.lineIdx = 0
@@ -69,7 +69,7 @@ export class Ticker extends Component<TickerProps> {
     }, this.contentEl, this.ghostEl)
   }
 
-  protected didMount(): void {
+  protected didMount (): void {
     this.el.addEventListener('click', () => this.handleClick())
     this.el.addEventListener('keydown', (e: Event) => {
       const ke = e as KeyboardEvent
@@ -82,14 +82,14 @@ export class Ticker extends Component<TickerProps> {
     this.tick()
   }
 
-  destroy(): void {
+  destroy (): void {
     if (this.timer) clearTimeout(this.timer)
     super.destroy()
   }
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  setMessages(messages: TickerMessage[]): void {
+  setMessages (messages: TickerMessage[]): void {
     if (messages.length === 0) return
 
     this.messages = messages
@@ -108,21 +108,21 @@ export class Ticker extends Component<TickerProps> {
 
   // ─── Animation engine ──────────────────────────────────────────
 
-  private getCurrentSightingId(): string | undefined {
+  private getCurrentSightingId (): string | undefined {
     return this.messages[this.msgIdx % this.messages.length]?.sightingId
   }
 
-  private getCurrentLines(): string[] {
+  private getCurrentLines (): string[] {
     const msg = this.messages[this.msgIdx % this.messages.length]
     if (!msg) return [PREFIX + '...']
     return msg.lines.map(line => PREFIX + line)
   }
 
-  private updateLineClass(count: number): void {
+  private updateLineClass (count: number): void {
     toggleClass(this.el, 'ticker--lines-2', count >= 2)
   }
 
-  private render(): void {
+  private render (): void {
     const lines = this.getCurrentLines()
     this.contentEl.textContent = ''
 
@@ -148,7 +148,7 @@ export class Ticker extends Component<TickerProps> {
     this.updateLineClass(renderedCount)
   }
 
-  private tick(): void {
+  private tick (): void {
     if (this.messages.length === 0) return
     const lines = this.getCurrentLines()
 
@@ -179,7 +179,7 @@ export class Ticker extends Component<TickerProps> {
     }
   }
 
-  private advanceMessage(): void {
+  private advanceMessage (): void {
     removeClass(this.cursorEl, cx.cursorBlink)
     this.msgIdx = (this.msgIdx + 1) % this.messages.length
     this.lineIdx = 0
@@ -189,7 +189,7 @@ export class Ticker extends Component<TickerProps> {
     this.tick()
   }
 
-  private handleClick(): void {
+  private handleClick (): void {
     if (!this.dataLoaded) return
     const id = this.getCurrentSightingId()
     if (id && this.props.onClick) this.props.onClick(id)

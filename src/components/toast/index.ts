@@ -14,14 +14,14 @@ const VARIANT_CLASS: Record<ToastVariant, string> = {
 
 let container: HTMLElement | null = null
 
-function ensureContainer(): HTMLElement {
+function ensureContainer (): HTMLElement {
   if (container && document.body.contains(container)) return container
   container = h('div', { className: cx.container, 'aria-live': 'polite' })
   document.body.appendChild(container)
   return container
 }
 
-function removeToast(id: string) {
+function removeToast (id: string) {
   const matches = qsa(`[data-id="${id}"]`)
   const el = matches[0]
   if (!el) return
@@ -29,7 +29,7 @@ function removeToast(id: string) {
   setTimeout(() => el.remove(), 300)
 }
 
-function renderToast(message: ToastMessage): HTMLElement {
+function renderToast (message: ToastMessage): HTMLElement {
   const variantClass = VARIANT_CLASS[message.variant]
   return h('div', {
     className: `${cx.root} ${variantClass}`,
@@ -38,8 +38,8 @@ function renderToast(message: ToastMessage): HTMLElement {
   }, message.text)
 }
 
-export function useToast() {
-  function show(text: string, variant: ToastVariant = ToastVariant.INFO) {
+export function useToast () {
+  function show (text: string, variant: ToastVariant = ToastVariant.INFO) {
     const id = generateId()
     const toastEl = renderToast({ id, text, variant })
     const c = ensureContainer()
