@@ -57,14 +57,31 @@
   letter-spacing: 0.5px;
 }
 
-/* ── Action trigger — hidden until hover, always visible on touch ── */
+/* ── Action trigger ──────────────────────────────────────────────── */
+/* PC: hidden, fades in on row hover. SP: always visible with fade.  */
 
 .bookmarks-modal__item-trigger {
   position: absolute;
-  top: var(--space-sm);
-  right: var(--space-sm);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding-right: var(--space-2);
+  padding-left: var(--space-xl);
   opacity: 0;
   transition: opacity var(--transition-fast);
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-surface) 40%
+  );
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.bookmarks-modal__item-trigger > * {
+  pointer-events: auto;
 }
 
 .bookmarks-modal__item:hover .bookmarks-modal__item-trigger {
@@ -79,6 +96,12 @@
 
   .bookmarks-modal__item-trigger {
     opacity: 1;
+    padding-left: var(--space-2xl);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--color-surface) 35%
+    );
   }
 }
 
