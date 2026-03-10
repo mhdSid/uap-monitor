@@ -1,0 +1,57 @@
+.bookmark-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-10);
+  height: var(--space-10);
+  padding: 0;
+  background: var(--c-neutral-400-08);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--color-dim);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bookmark-btn:hover {
+  color: var(--color-green);
+  border-color: var(--color-green);
+  background: transparent;
+}
+
+.bookmark-btn:active {
+  transform: scale(0.92);
+}
+
+.bookmark-btn:focus-visible {
+  outline: 1px solid var(--color-green);
+  outline-offset: 1px;
+}
+
+.bookmark-btn--active {
+  color: var(--color-green);
+  background: var(--c-green-500-08);
+  border-color: var(--c-green-500-08);
+}
+
+.bookmark-btn--active:hover {
+  border-color: var(--color-green);
+}
+
+.bookmark-btn--pulse {
+  animation: bookmark-pulse 0.3s ease-out;
+}
+
+@keyframes bookmark-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+@media (pointer: coarse) {
+  .bookmark-btn {
+    width: var(--space-xl);
+    height: var(--space-xl);
+  }
+}

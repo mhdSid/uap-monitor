@@ -2,6 +2,7 @@ import { h } from '@/utils/dom'
 import { formatDate, formatDateCompact, formatLocation } from '@/utils/format'
 import { StatusTag, createSourceTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'
+import { BookmarkButton } from '@/components/bookmark-button'
 import { DataSourceId } from '@/enums'
 import { cx } from './cx'
 import type { Sighting, DataGridColumn } from '@/types'
@@ -68,7 +69,8 @@ export function sightingColumns(): DataGridColumn<Sighting>[] {
           meta,
           h('span', { className: cx.bottom },
             badges,
-            inlineCred.el
+            inlineCred.el,
+            new BookmarkButton({ sightingId: row.id, size: 12 }).el
           )
         )
       }

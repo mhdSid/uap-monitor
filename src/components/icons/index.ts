@@ -132,3 +132,53 @@ export function iconSearch(size = 16): SVGSVGElement {
   `
   return svg
 }
+
+/** Radar signal — outline variant (bookmark: inactive). */
+export function iconRadarSignalOutline(size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <circle cx="3" cy="13" r="1.5" fill="currentColor"/>
+    <path d="M6 13a3 3 0 0 0-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M9 13a6 6 0 0 0-6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M12 13a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  `
+  return svg
+}
+
+/** Radar signal — filled variant (bookmark: active). */
+export function iconRadarSignalFilled(size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <circle cx="3" cy="13" r="1.5" fill="currentColor"/>
+    <path d="M6 13a3 3 0 0 0-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M9 13a6 6 0 0 0-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M12 13a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  `
+  return svg
+}
+
+/** Share icon — arrow out of box. */
+export function iconShare(size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <path d="M8 1v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M5 4l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 8v5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  `
+  return svg
+}

@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, batch, effect, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, useShare, batch, effect, minDelay, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -25,6 +25,7 @@ import { Footer } from '@/components/footer'
 import { YearSelector } from '@/components/year-selector'
 import { FilterToolbar } from '@/components/filter-toolbar'
 import { SightingGrids } from '@/components/sighting-grid'
+import { SightingModal } from '@/components/sighting-modal'
 import { SightingMap } from '@/components/sighting-map'
 import { Timeline } from '@/components/timeline'
 import { NewsFeed } from '@/components/news-feed'
@@ -324,6 +325,24 @@ export class App extends Component {
     this.hideAllLoaders()
 
     this.yearRangeReady = true
+
+    // ── Handle share URL: ?s=<sightingId> ───────────────────────
+    this.handleShareUrl()
+  }
+
+  private handleShareUrl(): void {
+    const share = useShare()
+    const sharedId = share.parseShareParam()
+    if (!sharedId) return
+
+    const sighting = this.store.sightings.get().find(s => s.id === sharedId)
+    if (sighting) {
+      share.clearShareParam()
+      // Delay to let render settle
+      requestAnimationFrame(() => {
+        SightingModal.open(sighting, document.body)
+      })
+    }
   }
 
   // ─── Reactions ─────────────────────────────────────────────────

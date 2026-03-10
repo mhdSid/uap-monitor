@@ -12,6 +12,7 @@ export const cx = {
   summaryWithDesc: 'modal-sighting__summary--with-desc',
   summaryLabel: 'modal-sighting__summary-label',
   title: 'modal-sighting__title',
+  actions: 'modal-sighting__actions',
   value: 'modal-sighting__value',
   sourceLink: 'modal-sighting__source-link',
   relatedSection: 'modal-sighting__related',

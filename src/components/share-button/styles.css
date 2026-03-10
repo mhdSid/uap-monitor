@@ -1,0 +1,37 @@
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-10);
+  height: var(--space-10);
+  padding: 0;
+  background: var(--c-neutral-400-08);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--color-dim);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.share-btn:hover {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan);
+  background: transparent;
+}
+
+.share-btn:active {
+  transform: scale(0.92);
+}
+
+.share-btn:focus-visible {
+  outline: 1px solid var(--color-green);
+  outline-offset: 1px;
+}
+
+@media (pointer: coarse) {
+  .share-btn {
+    width: var(--space-xl);
+    height: var(--space-xl);
+  }
+}

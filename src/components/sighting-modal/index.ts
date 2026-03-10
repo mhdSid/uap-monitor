@@ -11,6 +11,8 @@ import { DataSourceId, TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
 import { formatLocation } from '@/utils/format'
 import { StatusTag, Tag } from '@/components/tags'
+import { BookmarkButton } from '@/components/bookmark-button'
+import { ShareButton } from '@/components/share-button'
 import { Modal } from '@/components/modal'
 import { MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
 import { useAnalytics, getSourceUrl, useFireball, useAppStore } from '@/composables'
@@ -39,8 +41,14 @@ export class SightingModal {
   // ─── Slots ──────────────────────────────────────────────────────
 
   private static buildHeader(s: Sighting): HTMLElement {
+    const actions = h('span', { className: cx.actions },
+      new BookmarkButton({ sightingId: s.id }).el,
+      new ShareButton({ sightingId: s.id, title: s.summary?.slice(0, 60) }).el
+    )
+
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, formatLocation(s.region, s.country)),
+      actions,
       new StatusTag({ status: s.status }).el
     )
   }
