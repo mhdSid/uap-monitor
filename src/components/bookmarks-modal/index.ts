@@ -12,7 +12,7 @@ import { Modal } from '@/components/modal'
 import { SightingModal } from '@/components/sighting-modal'
 import { BookmarkListItem } from './bookmark-list-item'
 import { Button } from '@/components/button'
-import { useBookmarks, useAppStore } from '@/composables'
+import { useBookmarks, useAppStore, useShare } from '@/composables'
 import { useToast } from '@/components/toast'
 import { ButtonSize } from '@/enums'
 import { BOOKMARKS } from '@/data/strings'
@@ -21,9 +21,10 @@ import type { Sighting } from '@/types'
 const TRANSITION_MS = 250
 
 export class BookmarksModal {
-  static open (trigger?: HTMLElement): void {
+  static open(trigger?: HTMLElement): void {
     const bookmarks = useBookmarks()
     const store = useAppStore()
+    const share = useShare()
     const toast = useToast()
 
     const buildHeader = (): HTMLElement => {
@@ -62,7 +63,19 @@ export class BookmarksModal {
           list.appendChild(
             new BookmarkListItem({
               sighting: s,
-              onClick: (sighting) => BookmarksModal.openSighting(sighting)
+              onClick: (sighting) => BookmarksModal.openSighting(sighting),
+              onRemove: (sighting) => {
+                bookmarks.remove(sighting.id)
+                toast.success('BOOKMARK REMOVED')
+              },
+              onShare: async (sighting) => {
+                const result = await share.shareSighting(sighting.id, sighting.summary?.slice(0, 60))
+                if (result.success) {
+                  toast.success(result.method === 'native' ? 'SHARED' : 'LINK COPIED')
+                } else {
+                  toast.error('COULD NOT SHARE')
+                }
+              }
             }).el
           )
         }
@@ -121,7 +134,7 @@ export class BookmarksModal {
     }, trigger)
   }
 
-  private static openSighting (sighting: Sighting): void {
+  private static openSighting(sighting: Sighting): void {
     Modal.close()
     // Wait for close transition before opening detail modal
     setTimeout(() => {

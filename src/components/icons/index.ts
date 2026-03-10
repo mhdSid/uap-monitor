@@ -5,7 +5,7 @@
  *  All icons are aria-hidden and sized via the `size` parameter.      *
  * ------------------------------------------------------------------ */
 
-function createSvg (innerHTML: string, size = 16): SVGSVGElement {
+function createSvg(innerHTML: string, size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('width', String(size))
   svg.setAttribute('height', String(size))
@@ -16,7 +16,7 @@ function createSvg (innerHTML: string, size = 16): SVGSVGElement {
   return svg
 }
 
-export function iconRadar (size = 16): SVGSVGElement {
+export function iconRadar(size = 16): SVGSVGElement {
   return createSvg(`
     <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1" opacity="0.3"/>
     <circle cx="8" cy="8" r="4" stroke="currentColor" stroke-width="1" opacity="0.5"/>
@@ -25,7 +25,7 @@ export function iconRadar (size = 16): SVGSVGElement {
   `, size)
 }
 
-export function iconClose (size = 16): SVGSVGElement {
+export function iconClose(size = 16): SVGSVGElement {
   // Symmetric margins: 3px inset from each edge
   const p = 3
   const end = size - p
@@ -35,19 +35,19 @@ export function iconClose (size = 16): SVGSVGElement {
   `, size)
 }
 
-export function iconChevron (size = 16): SVGSVGElement {
+export function iconChevron(size = 16): SVGSVGElement {
   return createSvg(`
     <polyline points="6,3 11,8 6,13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   `, size)
 }
 
-export function iconDot (size = 6): SVGSVGElement {
+export function iconDot(size = 6): SVGSVGElement {
   return createSvg(`
     <circle cx="3" cy="3" r="3" fill="currentColor"/>
   `, size)
 }
 
-export function iconExternal (size = 12): SVGSVGElement {
+export function iconExternal(size = 12): SVGSVGElement {
   return createSvg(`
     <path d="M5 1H1v10h10V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
     <path d="M7 1h4v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -55,7 +55,7 @@ export function iconExternal (size = 12): SVGSVGElement {
   `, size)
 }
 
-export function iconGithub (size = 16): SVGSVGElement {
+export function iconGithub(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('width', String(size))
   svg.setAttribute('height', String(size))
@@ -66,26 +66,26 @@ export function iconGithub (size = 16): SVGSVGElement {
   return svg
 }
 
-export function iconSortDefault (size = 10): SVGSVGElement {
+export function iconSortDefault(size = 10): SVGSVGElement {
   return createSvg(`
     <path d="M3 4L5 1.5L7 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     <path d="M3 6L5 8.5L7 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   `, size)
 }
 
-export function iconSortAsc (size = 10): SVGSVGElement {
+export function iconSortAsc(size = 10): SVGSVGElement {
   return createSvg(`
     <path d="M2.5 6.5L5 3L7.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   `, size)
 }
 
-export function iconSortDesc (size = 10): SVGSVGElement {
+export function iconSortDesc(size = 10): SVGSVGElement {
   return createSvg(`
     <path d="M2.5 3.5L5 7L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   `, size)
 }
 
-export function iconSun (size = 16): SVGSVGElement {
+export function iconSun(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('width', String(size))
   svg.setAttribute('height', String(size))
@@ -106,7 +106,7 @@ export function iconSun (size = 16): SVGSVGElement {
   return svg
 }
 
-export function iconMoon (size = 16): SVGSVGElement {
+export function iconMoon(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('width', String(size))
   svg.setAttribute('height', String(size))
@@ -119,7 +119,7 @@ export function iconMoon (size = 16): SVGSVGElement {
   return svg
 }
 
-export function iconSearch (size = 16): SVGSVGElement {
+export function iconSearch(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('viewBox', '0 0 16 16')
   svg.setAttribute('width', String(size))
@@ -134,7 +134,7 @@ export function iconSearch (size = 16): SVGSVGElement {
 }
 
 /** Radar signal — outline variant (bookmark: inactive). */
-export function iconRadarSignalOutline (size = 16): SVGSVGElement {
+export function iconRadarSignalOutline(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('viewBox', '0 0 16 16')
   svg.setAttribute('width', String(size))
@@ -151,7 +151,7 @@ export function iconRadarSignalOutline (size = 16): SVGSVGElement {
 }
 
 /** Radar signal — filled variant (bookmark: active). */
-export function iconRadarSignalFilled (size = 16): SVGSVGElement {
+export function iconRadarSignalFilled(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('viewBox', '0 0 16 16')
   svg.setAttribute('width', String(size))
@@ -168,7 +168,7 @@ export function iconRadarSignalFilled (size = 16): SVGSVGElement {
 }
 
 /** Share icon — arrow out of box. */
-export function iconShare (size = 16): SVGSVGElement {
+export function iconShare(size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('viewBox', '0 0 16 16')
   svg.setAttribute('width', String(size))
@@ -179,6 +179,22 @@ export function iconShare (size = 16): SVGSVGElement {
     <path d="M8 1v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
     <path d="M5 4l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M3 8v5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  `
+  return svg
+}
+
+/** Vertical three-dot menu icon. */
+export function iconMore(size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <circle cx="8" cy="3" r="1.25" fill="currentColor"/>
+    <circle cx="8" cy="8" r="1.25" fill="currentColor"/>
+    <circle cx="8" cy="13" r="1.25" fill="currentColor"/>
   `
   return svg
 }

@@ -16,6 +16,7 @@
   cursor: pointer;
   transition: background var(--transition-fast);
   border-radius: var(--radius-md);
+  position: relative;
 }
 
 .bookmarks-modal__item:last-child {
@@ -56,6 +57,31 @@
   letter-spacing: 0.5px;
 }
 
+/* ── Action trigger — hidden until hover, always visible on touch ── */
+
+.bookmarks-modal__item-trigger {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.bookmarks-modal__item:hover .bookmarks-modal__item-trigger {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .bookmarks-modal__item {
+    padding: var(--space-md) var(--space-sm);
+    min-height: 44px;
+  }
+
+  .bookmarks-modal__item-trigger {
+    opacity: 1;
+  }
+}
+
 .bookmarks-modal__empty {
   display: flex;
   justify-content: center;
@@ -88,11 +114,4 @@
 .bookmarks-modal__footer {
   display: flex;
   justify-content: flex-end;
-}
-
-@media (pointer: coarse) {
-  .bookmarks-modal__item {
-    padding: var(--space-md) 0;
-    min-height: 44px;
-  }
 }
