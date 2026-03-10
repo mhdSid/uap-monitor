@@ -11,6 +11,12 @@
   color: var(--color-text-strong);
   letter-spacing: 0.5px;
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* Standard property for future support */
+  line-clamp: 2;
 }
 
 .gnews-modal__source-name {

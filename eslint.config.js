@@ -23,6 +23,7 @@ export default tsEslint.config(
       globals: {
         process: 'readonly',
         fetch: 'readonly',
+        URL: 'readonly',
         console: 'readonly',
         setTimeout: 'readonly',
         Buffer: 'readonly',

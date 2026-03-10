@@ -42,7 +42,7 @@ let popup: HTMLElement | null = null
 let activeTrigger: HTMLElement | null = null
 let cleanup: (() => void) | null = null
 
-function getPopup(): HTMLElement {
+function getPopup (): HTMLElement {
   if (!popup) {
     popup = h('div', { className: cx.popup, role: 'menu' })
     document.body.appendChild(popup)
@@ -50,14 +50,14 @@ function getPopup(): HTMLElement {
   return popup
 }
 
-function closeMenu(): void {
+function closeMenu (): void {
   if (!cleanup) return
   cleanup()
   cleanup = null
   activeTrigger = null
 }
 
-function positionPopup(el: HTMLElement, trigger: HTMLElement): void {
+function positionPopup (el: HTMLElement, trigger: HTMLElement): void {
   const rect = trigger.getBoundingClientRect()
   const vw = window.innerWidth
   const vh = window.innerHeight
@@ -88,7 +88,7 @@ function positionPopup(el: HTMLElement, trigger: HTMLElement): void {
 export class ActionMenu extends Component<ActionMenuProps> {
   private triggerEl!: HTMLButtonElement
 
-  protected create(): HTMLElement {
+  protected create (): HTMLElement {
     const { ariaLabel, triggerSize = 14 } = this.props
 
     this.triggerEl = h('button', {
@@ -101,7 +101,7 @@ export class ActionMenu extends Component<ActionMenuProps> {
     return this.triggerEl
   }
 
-  protected didMount(): void {
+  protected didMount (): void {
     this.triggerEl.addEventListener('click', (e) => {
       e.stopPropagation()
       e.preventDefault()
@@ -114,7 +114,7 @@ export class ActionMenu extends Component<ActionMenuProps> {
     })
   }
 
-  private open(): void {
+  private open (): void {
     closeMenu()
 
     const el = getPopup()
