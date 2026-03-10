@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, setAttrs, setStyles, hide, show } from '@/utils/dom'
+import { h, setStyles, hide, show, setText } from '@/utils/dom'
 import { iconRadar, iconSun, iconMoon, iconRadarSignalOutline } from '@/components/icons'
 import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
@@ -9,10 +9,7 @@ import { APP_NAME, ARIA } from '@/data/strings'
 import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
-  private clockTimer!: number
-
   protected create (): HTMLElement {
-    this.clockTimer = 0
     const radar = iconRadar(16)
     setStyles(radar, { color: 'var(--color-green)' })
 
@@ -21,29 +18,13 @@ export class Header extends Component {
       h('span', { className: cx.title }, APP_NAME)
     )
 
-    const clock = h('time', {
-      className: cx.clock,
-      'aria-label': ARIA.CLOCK
-    })
-
-    const updateClock = (): void => {
-      const now = new Date()
-      const pad = (n: number) => String(n).padStart(2, '0')
-      setAttrs(clock, { datetime: now.toISOString() })
-      clock.textContent =
-        `${now.getUTCFullYear()}-${pad(now.getUTCMonth() + 1)}-${pad(now.getUTCDate())} ` +
-        `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())} UTC`
-    }
-    updateClock()
-    this.clockTimer = window.setInterval(updateClock, 1000)
-
     // ── Bookmarks trigger ────────────────────────────────────────
     const bookmarks = useBookmarks()
     const badge = h('span', { className: cx.bookmarkBadge })
 
     const updateBadge = (): void => {
       const count = bookmarks.count.get()
-      badge.textContent = count > 99 ? '99+' : count > 0 ? String(count) : ''
+      setText(badge, count > 99 ? '99+' : count > 0 ? String(count) : '')
       if (count > 0) show(badge); else hide(badge)
     }
     updateBadge()
@@ -71,7 +52,6 @@ export class Header extends Component {
     })
 
     const right = h('div', { className: cx.right },
-      clock,
       bookmarkBtn,
       themeSwitch.el
     )
@@ -80,7 +60,6 @@ export class Header extends Component {
   }
 
   destroy (): void {
-    clearInterval(this.clockTimer)
     super.destroy()
   }
 }

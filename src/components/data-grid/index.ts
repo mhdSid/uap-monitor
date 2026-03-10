@@ -12,7 +12,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { Tooltip } from '@/components/tooltip'
 import type { DataGridProps } from '@/types'
-import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment, hide, show, setStyles } from '@/utils/dom'
+import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment, hide, show, setStyles, setText } from '@/utils/dom'
 import { useInfiniteScroll } from '@/composables/use-infinite-scroll'
 import { iconSortDefault, iconSortAsc, iconSortDesc } from '@/components/icons'
 import { FILTER } from '@/data/strings'
@@ -76,11 +76,11 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
       setStyles(th, { padding: `${CELL_PAD_COMPACT} ${CELL_PAD}` })
 
       if (col.tooltip) {
-        th.textContent = col.label
+        setText(th, col.label)
         const tip = new Tooltip({ content: col.tooltip, ariaLabel: col.label + ' info' })
         th.appendChild(tip.el)
       } else {
-        th.textContent = col.label
+        setText(th, col.label)
       }
 
       if (col.sortable !== false && col.label) {
@@ -158,7 +158,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
         className: cx.empty,
         colSpan: String(this.props.columns.length)
       })
-      emptyCell.textContent = this.props.emptyText ?? FILTER.EMPTY_DEFAULT
+      setText(emptyCell, this.props.emptyText ?? FILTER.EMPTY_DEFAULT)
       const emptyRow = el('tr')
       emptyRow.appendChild(emptyCell)
       this.tbody.appendChild(emptyRow)
@@ -191,11 +191,15 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
       if (col.render) {
         const rendered = col.render(row)
-        if (typeof rendered === 'string') td.textContent = rendered
-        else td.appendChild(rendered)
+        if (typeof rendered === 'string') {
+          setText(td, rendered)
+        }
+        else {
+          td.appendChild(rendered)
+        }
       } else {
         const key = col.key as keyof T
-        td.textContent = String(row[key] ?? '')
+        setText(td, String(row[key] ?? ''))
       }
 
       tr.appendChild(td)
@@ -241,7 +245,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
       if (isSortable) this.setSortIcon(this.headerCells[i], col, 'hint')
       else {
         clearChildren(this.headerCells[i])
-        this.headerCells[i].textContent = col.label
+        setText(this.headerCells[i], col.label)
       }
     }
 
@@ -265,7 +269,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
   private setSortIcon (th: HTMLTableCellElement, col: { label: string; tooltip?: string }, direction: SortDirection | 'hint'): void {
     clearChildren(th)
-    th.textContent = col.label
+    setText(th, col.label)
 
     if (col.tooltip) {
       const tip = new Tooltip({ content: col.tooltip, ariaLabel: col.label + ' info' })

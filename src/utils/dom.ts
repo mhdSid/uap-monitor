@@ -198,6 +198,16 @@ export function setStyles (
   }
 }
 
+// ─── Text management ───────────────────────────────────────────────────
+
+/** Set text content on element. */
+export function setText (
+  node: HTMLElement,
+  text: string
+): void {
+  node.textContent = text
+}
+
 // ─── HTML injection (safe & raw) ─────────────────────────────────────
 
 /** Parse raw HTML into a DocumentFragment. No sanitisation — use with care. */

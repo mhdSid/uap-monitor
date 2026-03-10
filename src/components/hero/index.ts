@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, setText } from '@/utils/dom'
 import { Button } from '@/components/button'
 import { HERO } from '@/data/strings'
 import { ButtonSize } from '@/enums'
@@ -21,7 +21,7 @@ export class Hero extends Component<HeroProps> {
 
     effect(() => {
       const total = store.totalCount.get()
-      sightingsValue.textContent = total > 0 ? total.toLocaleString() : '—'
+      setText(sightingsValue, total > 0 ? total.toLocaleString() : '—')
     })
 
     effect(() => {
@@ -29,7 +29,7 @@ export class Hero extends Component<HeroProps> {
       if (years.length > 0) {
         const oldest = years[years.length - 1]
         const newest = years[0]
-        yearsValue.textContent = `${newest - oldest}+`
+        setText(yearsValue, `${newest - oldest}+`)
       }
     })
 

@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, el, hide, show, addClass, removeClass, setStyles } from '@/utils/dom'
+import { h, el, hide, show, addClass, removeClass, setStyles, setText } from '@/utils/dom'
 import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
 
@@ -147,7 +147,7 @@ export class Timeline extends Component<TimelineProps> {
   // ─── Loading overlay ──────────────────────────────────────────
 
   showLoader (el?: HTMLElement): void {
-    this.loaderEl.textContent = ''
+    setText(this.loaderEl, '')
     if (el) this.loaderEl.appendChild(el)
     show(this.loaderEl)
   }
@@ -407,7 +407,7 @@ export class Timeline extends Component<TimelineProps> {
 
     // Tooltip
     const count = this.yearCounts.get(year) || 0
-    this.tooltip.textContent = `${year}: ${count.toLocaleString()} sightings`
+    setText(this.tooltip, `${year}: ${count.toLocaleString()} sightings`)
     show(this.tooltip, 'block')
 
     const tx = clientX - this.rootLeft

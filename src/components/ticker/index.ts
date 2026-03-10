@@ -9,7 +9,7 @@ import { cx } from './cx'
 
 import { Component } from '@/core'
 import type { TickerMessage } from '@/composables/use-ticker'
-import { h, addClass, removeClass, toggleClass } from '@/utils/dom'
+import { h, addClass, removeClass, toggleClass, setText } from '@/utils/dom'
 import { TICKER, ARIA } from '@/data/strings'
 
 export interface TickerProps {
@@ -124,7 +124,7 @@ export class Ticker extends Component<TickerProps> {
 
   private render (): void {
     const lines = this.getCurrentLines()
-    this.contentEl.textContent = ''
+    setText(this.contentEl, '')
 
     let renderedCount = 0
 
@@ -132,12 +132,12 @@ export class Ticker extends Component<TickerProps> {
       const lineEl = h('div', { className: cx.line })
 
       if (i < this.lineIdx) {
-        lineEl.textContent = lines[i]
+        setText(lineEl, lines[i])
       } else if (this.phase === 'holding') {
-        lineEl.textContent = lines[i]
+        setText(lineEl, lines[i])
         lineEl.appendChild(this.cursorEl)
       } else {
-        lineEl.textContent = lines[i].slice(0, this.charIdx)
+        setText(lineEl, lines[i].slice(0, this.charIdx))
         lineEl.appendChild(this.cursorEl)
       }
 

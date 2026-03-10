@@ -7,12 +7,12 @@
  * ------------------------------------------------------------------ */
 
 import type { Sighting } from '@/types'
-import { h, el } from '@/utils/dom'
+import { h, el, setStyles } from '@/utils/dom'
 import { useDelayedLoad } from './use-delayed-load'
 
 // ─── Configuration ──────────────────────────────────────────────────
 
-const GTM_ID = 'GTM-MX49W83H'
+const GTM_ID = import.meta.env.VITE_GTM_ID
 const GTM_DELAY_MS = 2000
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -89,8 +89,10 @@ class Analytics {
       height: '0',
       width: '0'
     })
-    iframe.style.display = 'none'
-    iframe.style.visibility = 'hidden'
+    setStyles(iframe, {
+      display: 'none',
+      visibility: 'hidden'
+    })
     const noscript = h('noscript', null, iframe)
     document.body.insertBefore(noscript, document.body.firstChild)
   }

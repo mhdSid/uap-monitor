@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, setText } from '@/utils/dom'
 import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 import { Select } from '@/components/select'
@@ -93,7 +93,7 @@ export class YearSelector extends Component<YearSelectorProps> {
     const countEl = h('span', { className: cx.count }, '')
 
     effect(() => {
-      countEl.textContent = store.displayCount.get()
+      setText(countEl, store.displayCount.get())
     })
 
     // Sync selects when yearRange changes externally

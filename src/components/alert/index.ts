@@ -3,7 +3,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { AlertVariant } from '@/enums'
 import { ARIA } from '@/data/strings'
-import { h, setStyles } from '@/utils/dom'
+import { h, setStyles, setText } from '@/utils/dom'
 
 export interface AlertProps {
   variant: AlertVariant
@@ -50,7 +50,7 @@ export class Alert extends Component<AlertProps> {
 
     const content = h('div', { className: cx.content })
     if (typeof this.props.content === 'string') {
-      content.textContent = this.props.content
+      setText(content, this.props.content)
     } else {
       content.appendChild(this.props.content)
     }

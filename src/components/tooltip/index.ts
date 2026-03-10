@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass, setStyles } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles, setText } from '@/utils/dom'
 import { ARIA } from '@/data/strings'
 
 export interface TooltipProps {
@@ -96,7 +96,7 @@ export class Tooltip extends Component<TooltipProps> {
     closeSharedPopup()
 
     const popup = getSharedPopup()
-    popup.textContent = this.props.content
+    setText(popup, this.props.content)
     activeWrapper = this.el
 
     const reposition = (): void => positionPopup(popup, this.trigger)

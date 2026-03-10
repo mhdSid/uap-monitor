@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, show } from '@/utils/dom'
+import { h, hide, setText, show } from '@/utils/dom'
 import { formatLocation } from '@/utils/format'
 import { colors } from '@/styles/palette'
 import { CheckboxGroup } from '@/components/checkbox'
@@ -174,7 +174,7 @@ export class SightingMap extends Component<SightingMapProps> {
   // ─── Loading overlay ─────────────────────────────────────────────
 
   showLoader (el?: HTMLElement): void {
-    this.loaderEl.textContent = ''
+    setText( this.loaderEl, '')
     if (el) this.loaderEl.appendChild(el)
     show(this.loaderEl)
   }
