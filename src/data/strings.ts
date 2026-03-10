@@ -31,7 +31,8 @@ export const ARIA = {
   FILTER_TOGGLE: 'Toggle search filters',
   CLEAR_SEARCH: 'Clear search',
   SEARCH_SIGHTINGS: 'Search sighting reports',
-  SEARCH_INTEL: 'Search intelligence articles'
+  SEARCH_INTEL: 'Search intelligence articles',
+  OPEN_BOOKMARKS: 'Open saved sightings'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -413,4 +414,12 @@ export const SUB_SOURCE_LABELS: Record<string, string> = {
   PRE_ROSWELL: 'Pre-Roswell (Rife)',
   DOLAN: 'Dolan',
   RUSSIAN_HISTORICAL: 'Russian Historical'
+} as const
+
+export const BOOKMARKS = {
+  TITLE: 'SAVED SIGHTINGS',
+  EMPTY: 'No saved sightings yet. Tap the radar icon on any sighting to save it here.',
+  CLEAR: 'CLEAR ALL',
+  CLEAR_CONFIRM: 'Remove all saved sightings?',
+  CLEARED: 'ALL BOOKMARKS CLEARED'
 } as const

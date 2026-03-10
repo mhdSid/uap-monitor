@@ -1,0 +1,110 @@
+.bookmarks-modal__content {
+  min-height: 120px;
+}
+
+.bookmarks-modal__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookmarks-modal__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.bookmarks-modal__item:last-child {
+  border-bottom: none;
+}
+
+.bookmarks-modal__item:hover {
+  background: var(--c-green-500-03);
+}
+
+.bookmarks-modal__item:active {
+  background: var(--c-green-500-08);
+}
+
+.bookmarks-modal__item-date {
+  font-size: var(--fs-3xs);
+  color: var(--color-green);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.bookmarks-modal__item-location {
+  font-size: var(--fs-sm);
+  color: var(--c-neutral-250);
+  line-height: 1.3;
+}
+
+.bookmarks-modal__item-summary {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.bookmarks-modal__item-meta {
+  font-size: var(--fs-3xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+.bookmarks-modal__item-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.bookmarks-modal__empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.bookmarks-modal__empty-text {
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+.bookmarks-modal__title {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 1px;
+}
+
+.bookmarks-modal__count {
+  font-size: var(--fs-3xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+  margin-left: var(--space-sm);
+}
+
+.bookmarks-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (pointer: coarse) {
+  .bookmarks-modal__item {
+    padding: var(--space-md) 0;
+    min-height: 44px;
+  }
+}

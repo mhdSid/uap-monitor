@@ -2,10 +2,11 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h, setAttrs } from '@/utils/dom'
-import { iconRadar, iconSun, iconMoon } from '@/components/icons'
+import { iconRadar, iconSun, iconMoon, iconRadarSignalOutline } from '@/components/icons'
 import { Switch } from '@/components/switch'
+import { BookmarksModal } from '@/components/bookmarks-modal'
 import { APP_NAME, ARIA } from '@/data/strings'
-import { useTheme } from '@/composables'
+import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
   private clockTimer!: number
@@ -36,6 +37,29 @@ export class Header extends Component {
     updateClock()
     this.clockTimer = window.setInterval(updateClock, 1000)
 
+    // ── Bookmarks trigger ────────────────────────────────────────
+    const bookmarks = useBookmarks()
+    const badge = h('span', { className: cx.bookmarkBadge })
+
+    const updateBadge = (): void => {
+      const count = bookmarks.count.get()
+      badge.textContent = count > 99 ? '99+' : count > 0 ? String(count) : ''
+      badge.style.display = count > 0 ? '' : 'none'
+    }
+    updateBadge()
+    bookmarks.count.subscribe(updateBadge)
+
+    const bookmarkBtn = h('button', {
+      className: cx.bookmarkBtn,
+      type: 'button',
+      'aria-label': ARIA.OPEN_BOOKMARKS
+    }, iconRadarSignalOutline(14), badge) as HTMLButtonElement
+
+    bookmarkBtn.addEventListener('click', () => {
+      BookmarksModal.open(bookmarkBtn)
+    })
+
+    // ── Theme switch ─────────────────────────────────────────────
     const { theme, toggle } = useTheme()
 
     const themeSwitch = new Switch({
@@ -48,6 +72,7 @@ export class Header extends Component {
 
     const right = h('div', { className: cx.right },
       clock,
+      bookmarkBtn,
       themeSwitch.el
     )
 
