@@ -187,7 +187,10 @@ export function setStyles (
   for (const key in styles) {
     const v = styles[key]
     if (v != null) {
-      node.style[key as any] = v
+      node.style.setProperty(
+        key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`),
+        v as string
+      )
     }
   }
 }
