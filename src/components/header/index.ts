@@ -10,7 +10,7 @@ import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
   protected create (): HTMLElement {
-    const radar = iconRadar(16)
+    const radar = iconRadar(22)
     setStyles(radar, { color: 'var(--color-green)' })
 
     const left = h('div', { className: cx.left },

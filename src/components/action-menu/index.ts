@@ -88,7 +88,7 @@ export class ActionMenu extends Component<ActionMenuProps> {
   private triggerEl!: HTMLButtonElement
 
   protected create (): HTMLElement {
-    const { ariaLabel, triggerSize = 14 } = this.props
+    const { ariaLabel, triggerSize = 16 } = this.props
 
     this.triggerEl = h('button', {
       className: cx.trigger,

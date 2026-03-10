@@ -41,6 +41,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  max-width: 90%;
 }
 
 /* Location second */
@@ -72,11 +73,6 @@
   opacity: 0;
   transition: opacity var(--transition-fast);
   pointer-events: none;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--color-surface) 40%
-  );
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
@@ -97,11 +93,6 @@
   .bookmarks-modal__item-trigger {
     opacity: 1;
     padding-left: var(--space-2xl);
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      var(--color-surface) 35%
-    );
   }
 }
 

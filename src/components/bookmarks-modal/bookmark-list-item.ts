@@ -27,12 +27,12 @@ export class BookmarkListItem extends Component<BookmarkListItemProps> {
       items: [
         {
           label: 'Remove bookmark',
-          icon: () => iconRadarSignalFilled(12),
+          icon: () => iconRadarSignalFilled(16),
           onClick: () => onRemove(s)
         },
         {
           label: 'Share',
-          icon: () => iconShare(12),
+          icon: () => iconShare(16),
           onClick: () => onShare(s)
         }
       ]
