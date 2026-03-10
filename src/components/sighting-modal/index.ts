@@ -48,8 +48,7 @@ export class SightingModal {
 
     return h('div', { className: cx.header },
       h('span', { className: cx.title }, formatLocation(s.region, s.country)),
-      actions,
-      new StatusTag({ status: s.status }).el
+      actions
     )
   }
 
@@ -60,7 +59,16 @@ export class SightingModal {
 
     const children: HTMLElement[] = []
 
-    // Summary + description at the top
+    // Status bar — status tag + occurred date + shape as compact top row
+    const date = s.occurredAt ? s.occurredAt.slice(0, 10) : '—'
+    const statusBar = h('div', { className: cx.statusBar },
+      new StatusTag({ status: s.status }).el,
+      h('span', { className: cx.statusDate }, date),
+      h('span', { className: cx.statusShape }, s.shape)
+    )
+    children.push(statusBar)
+
+    // Summary + description
     const hasSummary = !!s.summary
     const hasDescription = !!s.description
 
