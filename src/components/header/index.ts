@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, setAttrs } from '@/utils/dom'
+import { h, setAttrs, setStyles, hide, show } from '@/utils/dom'
 import { iconRadar, iconSun, iconMoon, iconRadarSignalOutline } from '@/components/icons'
 import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
@@ -14,7 +14,7 @@ export class Header extends Component {
   protected create (): HTMLElement {
     this.clockTimer = 0
     const radar = iconRadar(16)
-    radar.style.color = 'var(--color-green)'
+    setStyles(radar, { color: 'var(--color-green)' })
 
     const left = h('div', { className: cx.left },
       radar,
@@ -44,7 +44,7 @@ export class Header extends Component {
     const updateBadge = (): void => {
       const count = bookmarks.count.get()
       badge.textContent = count > 99 ? '99+' : count > 0 ? String(count) : ''
-      badge.style.display = count > 0 ? '' : 'none'
+      if (count > 0) show(badge); else hide(badge)
     }
     updateBadge()
     bookmarks.count.subscribe(updateBadge)

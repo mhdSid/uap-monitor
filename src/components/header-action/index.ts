@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, hide, show, addClass, removeClass, setAttrs } from '@/utils/dom'
 
 export interface HeaderActionProps {
   /** SVG icon factory for default state */
@@ -24,7 +24,7 @@ export class HeaderAction extends Component<HeaderActionProps> {
   protected create (): HTMLElement {
     this.defaultIcon = this.props.iconDefault()
     this.activeIcon = this.props.iconActive()
-    this.activeIcon.style.display = 'none'
+    hide(this.activeIcon)
 
     const btn = h('button', {
       className: cx.root,
@@ -36,13 +36,13 @@ export class HeaderAction extends Component<HeaderActionProps> {
     btn.addEventListener('click', () => {
       this.active = !this.active
       document.documentElement.toggleAttribute(this.props.dataAttr, this.active)
-      btn.setAttribute('aria-expanded', String(this.active))
+      setAttrs(btn, { 'aria-expanded': String(this.active) })
 
-      this.defaultIcon.style.display = this.active ? 'none' : ''
-      this.activeIcon.style.display = this.active ? '' : 'none'
+      if (this.active) hide(this.defaultIcon); else show(this.defaultIcon)
+      if (this.active) show(this.activeIcon); else hide(this.activeIcon)
 
-      if (this.active) btn.classList.add(cx.active)
-      else btn.classList.remove(cx.active)
+      if (this.active) addClass(btn, cx.active)
+      else removeClass(btn, cx.active)
 
       this.props.onChange?.(this.active)
     })
@@ -55,9 +55,9 @@ export class HeaderAction extends Component<HeaderActionProps> {
     if (!this.active) return
     this.active = false
     document.documentElement.removeAttribute(this.props.dataAttr)
-    this.el.setAttribute('aria-expanded', 'false')
-    this.defaultIcon.style.display = ''
-    this.activeIcon.style.display = 'none'
-    this.el.classList.remove(cx.active)
+    setAttrs(this.el, { 'aria-expanded': 'false' })
+    show(this.defaultIcon)
+    hide(this.activeIcon)
+    removeClass(this.el, cx.active)
   }
 }

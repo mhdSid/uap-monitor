@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, addClass } from '@/utils/dom'
 import { Card } from '@/components/card'
 
 export interface HighlightCardProps {
@@ -24,7 +24,7 @@ export class HighlightCard extends Component<HighlightCardProps> {
       onClick: this.props.onClick
     })
 
-    card.el.classList.add(cx.root)
+    addClass(card.el, cx.root)
     return card.el
   }
 }

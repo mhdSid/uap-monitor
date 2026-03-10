@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, addClass, removeClass, setAttrs } from '@/utils/dom'
 
 export interface SwitchProps {
   checked?: boolean
@@ -22,8 +22,8 @@ export class Switch extends Component<SwitchProps> {
 
     this.iconOnEl = this.props.iconOn()
     this.iconOffEl = this.props.iconOff()
-    this.iconOnEl.classList.add(cx.icon)
-    this.iconOffEl.classList.add(cx.icon)
+    addClass(this.iconOnEl, cx.icon)
+    addClass(this.iconOffEl, cx.icon)
 
     const thumb = h('span', { className: cx.thumb })
 
@@ -60,11 +60,11 @@ export class Switch extends Component<SwitchProps> {
   }
 
   private update (): void {
-    this.rootEl.setAttribute('aria-checked', String(this._checked))
+    setAttrs(this.rootEl, { 'aria-checked': String(this._checked) })
     if (this._checked) {
-      this.rootEl.classList.add(cx.checked)
+      addClass(this.rootEl, cx.checked)
     } else {
-      this.rootEl.classList.remove(cx.checked)
+      removeClass(this.rootEl, cx.checked)
     }
   }
 }

@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, el } from '@/utils/dom'
+import { h, el, hide, show, addClass, removeClass, setStyles } from '@/utils/dom'
 import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
 
@@ -62,15 +62,15 @@ export class Timeline extends Component<TimelineProps> {
     // Prevent broken canvas icon on mobile before first resize
     this.canvas.width = 1
     this.canvas.height = 1
-    this.canvas.style.visibility = 'hidden'
+    setStyles(this.canvas, { visibility: 'hidden' })
 
     this.hoverBar = h('div', { className: cx.hoverBar })
 
     this.tooltip = h('div', { className: cx.tooltip })
-    this.tooltip.style.display = 'none'
+    hide(this.tooltip)
 
     this.loaderEl = h('div', { className: cx.loader })
-    this.loaderEl.style.display = 'none'
+    hide(this.loaderEl)
 
     this.scroller = h('div', { className: cx.scroller },
       this.canvas,
@@ -149,11 +149,11 @@ export class Timeline extends Component<TimelineProps> {
   showLoader (el?: HTMLElement): void {
     this.loaderEl.textContent = ''
     if (el) this.loaderEl.appendChild(el)
-    this.loaderEl.style.display = ''
+    show(this.loaderEl)
   }
 
   hideLoader (): void {
-    this.loaderEl.style.display = 'none'
+    hide(this.loaderEl)
   }
 
   // ─── Public API ─────────────────────────────────────────────────
@@ -225,11 +225,11 @@ export class Timeline extends Component<TimelineProps> {
 
     this.canvas.width = totalW * dpr
     this.canvas.height = canvasH * dpr
-    this.canvas.style.width = totalW + 'px'
-    this.canvas.style.height = canvasH + 'px'
+    setStyles(this.canvas, { width: totalW + 'px' })
+    setStyles(this.canvas, { height: canvasH + 'px' })
 
     // Set hover bar height to match bar area (exclude labels)
-    this.hoverBar.style.bottom = LABEL_H + 'px'
+    setStyles(this.hoverBar, { bottom: LABEL_H + 'px' })
 
     this.computeBarHeights()
     this.cacheLayout()
@@ -238,7 +238,7 @@ export class Timeline extends Component<TimelineProps> {
 
     // Show canvas after first successful draw (hidden until layout resolved)
     if (this.canvas.style.visibility === 'hidden') {
-      this.canvas.style.visibility = 'visible'
+      setStyles(this.canvas, { visibility: 'visible' })
     }
 
     if (this.activeFrom > 0) {
@@ -259,10 +259,10 @@ export class Timeline extends Component<TimelineProps> {
     const scrollW = this.scroller.scrollWidth
     const clientW = this.scroller.clientWidth
     if (scrollW <= clientW) {
-      this.scrollTrack.style.display = 'none'
+      hide(this.scrollTrack)
       return
     }
-    this.scrollTrack.style.display = ''
+    show(this.scrollTrack)
 
     const trackW = this.scrollTrack.clientWidth
     const ratio = clientW / scrollW
@@ -271,8 +271,8 @@ export class Timeline extends Component<TimelineProps> {
     const scrollFrac = maxScroll > 0 ? this.scroller.scrollLeft / maxScroll : 0
     const thumbX = Math.round(scrollFrac * (trackW - thumbW))
 
-    this.scrollThumb.style.width = thumbW + 'px'
-    this.scrollThumb.style.transform = `translateX(${thumbX}px)`
+    setStyles(this.scrollThumb, { width: thumbW + 'px' })
+    setStyles(this.scrollThumb, { transform: `translateX(${thumbX}px)` })
   }
 
   private scrollFromThumbX (trackClientX: number): void {
@@ -387,8 +387,8 @@ export class Timeline extends Component<TimelineProps> {
    */
   private applyHover (year: number | null, clientX: number): void {
     if (year == null || this.maxCount === 0) {
-      this.hoverBar.style.display = 'none'
-      this.tooltip.style.display = 'none'
+      hide(this.hoverBar)
+      hide(this.tooltip)
       return
     }
 
@@ -398,8 +398,8 @@ export class Timeline extends Component<TimelineProps> {
     // const isActive = year >= this.activeFrom && year <= this.activeTo
 
     // Position the highlight column
-    this.hoverBar.style.display = 'block'
-    this.hoverBar.style.transform = `translateX(${x - 1}px)`
+    show(this.hoverBar, 'block')
+    setStyles(this.hoverBar, { transform: `translateX(${x - 1}px)` })
 
     // Set bar overlay height + color via CSS custom properties
     this.hoverBar.style.setProperty('--bar-h', barH > 0 ? barH + 'px' : '0px')
@@ -408,11 +408,11 @@ export class Timeline extends Component<TimelineProps> {
     // Tooltip
     const count = this.yearCounts.get(year) || 0
     this.tooltip.textContent = `${year}: ${count.toLocaleString()} sightings`
-    this.tooltip.style.display = 'block'
+    show(this.tooltip, 'block')
 
     const tx = clientX - this.rootLeft
     const tooltipW = 140
-    this.tooltip.style.left = `${Math.max(4, Math.min(tx - tooltipW / 2, this.rootWidth - tooltipW - 4))}px`
+    setStyles(this.tooltip, { left: `${Math.max(4, Math.min(tx - tooltipW / 2, this.rootWidth - tooltipW - 4))}px` })
   }
 
   // ─── Events ───────────────────────────────────────────────────
@@ -442,8 +442,8 @@ export class Timeline extends Component<TimelineProps> {
     this.scroller.addEventListener('mouseleave', () => {
       if (raf !== null) { cancelAnimationFrame(raf); raf = null }
       this.hoverYear = null
-      this.hoverBar.style.display = 'none'
-      this.tooltip.style.display = 'none'
+      hide(this.hoverBar)
+      hide(this.tooltip)
     })
 
     // ── Click ────────────────────────────────────────────────────
@@ -482,7 +482,7 @@ export class Timeline extends Component<TimelineProps> {
       this.isDragging = true
       this.dragStartX = e.clientX
       this.dragStartScroll = this.scroller.scrollLeft
-      this.scrollThumb.classList.add(cx.scrollThumbActive)
+      addClass(this.scrollThumb, cx.scrollThumbActive)
     })
 
     window.addEventListener('mousemove', (e) => {
@@ -501,7 +501,7 @@ export class Timeline extends Component<TimelineProps> {
     window.addEventListener('mouseup', () => {
       if (!this.isDragging) return
       this.isDragging = false
-      this.scrollThumb.classList.remove(cx.scrollThumbActive)
+      removeClass(this.scrollThumb, cx.scrollThumbActive)
     })
 
     // ── Thumb drag (touch) ───────────────────────────────────────
@@ -511,7 +511,7 @@ export class Timeline extends Component<TimelineProps> {
       this.isDragging = true
       this.dragStartX = e.touches[0].clientX
       this.dragStartScroll = this.scroller.scrollLeft
-      this.scrollThumb.classList.add(cx.scrollThumbActive)
+      addClass(this.scrollThumb, cx.scrollThumbActive)
     })
 
     window.addEventListener('touchmove', (e) => {
@@ -532,7 +532,7 @@ export class Timeline extends Component<TimelineProps> {
     window.addEventListener('touchend', () => {
       if (!this.isDragging) return
       this.isDragging = false
-      this.scrollThumb.classList.remove(cx.scrollThumbActive)
+      removeClass(this.scrollThumb, cx.scrollThumbActive)
     })
 
     // ── Track click ──────────────────────────────────────────────

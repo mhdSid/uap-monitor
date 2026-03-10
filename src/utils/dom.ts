@@ -177,6 +177,21 @@ export function setAttrs (
   }
 }
 
+// ─── Inline styles ───────────────────────────────────────────────────
+
+/** Set one or more inline styles. Empty string resets to default. */
+export function setStyles (
+  node: HTMLElement,
+  styles: Partial<CSSStyleDeclaration>
+): void {
+  for (const key in styles) {
+    const v = styles[key]
+    if (v != null) {
+      node.style[key as any] = v
+    }
+  }
+}
+
 // ─── HTML injection (safe & raw) ─────────────────────────────────────
 
 /** Parse raw HTML into a DocumentFragment. No sanitisation — use with care. */

@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { Loader } from '@/components/loader'
-import { h, el, addClass } from '@/utils/dom'
+import { h, el, addClass, setStyles, setAttrs } from '@/utils/dom'
 
 export interface AsyncImageProps {
   src: string
@@ -28,7 +28,7 @@ export class AsyncImage extends Component<AsyncImageProps> {
     })
 
     if (this.props.aspect) {
-      root.style.aspectRatio = this.props.aspect
+      setStyles(root, { aspectRatio: this.props.aspect })
     }
 
     // Loader placeholder — centered in the reserved space
@@ -50,7 +50,7 @@ export class AsyncImage extends Component<AsyncImageProps> {
 
     img.addEventListener('error', () => {
       addClass(root, cx.error)
-      root.setAttribute('aria-hidden', 'true')
+      setAttrs(root, { 'aria-hidden': 'true' })
     })
 
     img.src = this.props.src

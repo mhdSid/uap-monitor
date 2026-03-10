@@ -1,4 +1,4 @@
-import { h } from '@/utils/dom'
+import { h, addClass } from '@/utils/dom'
 import { formatDate, formatDateCompact, formatLocation } from '@/utils/format'
 import { StatusTag, createSourceTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'
@@ -62,7 +62,7 @@ export function sightingColumns (): DataGridColumn<Sighting>[] {
 
         // Inline credibility for mobile (CRED column hidden on SP)
         const inlineCred = new CredibilityBar({ value: row.credibility })
-        inlineCred.el.classList.add(cx.inlineCred)
+        addClass(inlineCred.el, cx.inlineCred)
 
         return h('div', { className: cx.root },
           h('span', { className: cx.summary }, row.summary || '—'),

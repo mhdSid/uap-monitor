@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, hide, show } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 import { ComponentSize } from '@/enums'
@@ -59,11 +59,11 @@ export class TextInput extends Component<TextInputProps> {
       tabIndex: -1
     }, iconClose(12)) as HTMLButtonElement
 
-    this.clearBtn.style.display = 'none'
+    hide(this.clearBtn)
 
     const updateClearVisibility = (): void => {
       if (this.clearBtn) {
-        this.clearBtn.style.display = this.input.value.length > 0 ? '' : 'none'
+        if (this.input.value.length > 0) show(this.clearBtn); else hide(this.clearBtn)
       }
     }
 
@@ -93,7 +93,7 @@ export class TextInput extends Component<TextInputProps> {
   set value (v: string) {
     this.input.value = v
     if (this.clearBtn) {
-      this.clearBtn.style.display = v.length > 0 ? '' : 'none'
+      if (v.length > 0) show(this.clearBtn); else hide(this.clearBtn)
     }
   }
 

@@ -1,4 +1,4 @@
-import { h } from '@/utils/dom'
+import { h, addClass } from '@/utils/dom'
 import { formatDate, formatDateCompact } from '@/utils/format'
 import { cx } from './cx'
 import { createToneTag, createNewsSourceTag, createIntelSourceTag } from '@/components/tags'
@@ -38,7 +38,7 @@ export function intelFeedColumns (): DataGridColumn<IntelArticle>[] {
         // Inline tone for mobile (column hidden on SP)
         if (row.tone != null) {
           const inlineTone = createToneTag(row.tone)
-          inlineTone.classList.add(cx.inlineTone)
+          addClass(inlineTone, cx.inlineTone)
           bottom.appendChild(inlineTone)
         }
 

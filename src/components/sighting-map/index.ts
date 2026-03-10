@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, hide, show } from '@/utils/dom'
 import { formatLocation } from '@/utils/format'
 import { colors } from '@/styles/palette'
 import { CheckboxGroup } from '@/components/checkbox'
@@ -56,7 +56,7 @@ export class SightingMap extends Component<SightingMapProps> {
     this.wrapper = h('div', { className: cx.sightingMap })
     const mapEl = h('div', { className: cx.sightingMapCanvas })
     this.loaderEl = h('div', { className: cx.sightingMapLoader })
-    this.loaderEl.style.display = 'none'
+    hide(this.loaderEl)
 
     const controls = new CheckboxGroup({
       items: [
@@ -176,11 +176,11 @@ export class SightingMap extends Component<SightingMapProps> {
   showLoader (el?: HTMLElement): void {
     this.loaderEl.textContent = ''
     if (el) this.loaderEl.appendChild(el)
-    this.loaderEl.style.display = ''
+    show(this.loaderEl)
   }
 
   hideLoader (): void {
-    this.loaderEl.style.display = 'none'
+    hide(this.loaderEl)
     if (this.map) {
       setTimeout(() => this.map.invalidateSize({ animate: false }), 50)
     }

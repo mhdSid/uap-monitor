@@ -17,7 +17,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, addClass, removeClass } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles } from '@/utils/dom'
 import { iconMore } from '@/components/icons'
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -79,8 +79,7 @@ function positionPopup (el: HTMLElement, trigger: HTMLElement): void {
   if (left < 4) left = 4
   if (left + popupW > vw - 4) left = vw - popupW - 4
 
-  el.style.top = `${top}px`
-  el.style.left = `${left}px`
+  setStyles(el, { top: `${top}px`, left: `${left}px` })
 }
 
 // ─── Component ──────────────────────────────────────────────────────
@@ -161,7 +160,7 @@ export class ActionMenu extends Component<ActionMenuProps> {
     }
 
     cleanup = () => {
-      el.style.opacity = '0'
+      setStyles(el, { opacity: '0' })
       removeClass(el, cx.popupVisible)
       document.removeEventListener('click', handleOutsideClick)
       document.removeEventListener('keydown', handleEscape)
@@ -170,11 +169,11 @@ export class ActionMenu extends Component<ActionMenuProps> {
     }
 
     // Make visible (display:block) but transparent, then position, then fade in
-    el.style.opacity = '0'
+    setStyles(el, { opacity: '0' })
     addClass(el, cx.popupVisible)
     requestAnimationFrame(() => {
       reposition()
-      el.style.opacity = '1'
+      setStyles(el, { opacity: '1' })
       const firstItem = el.querySelector<HTMLElement>('[role="menuitem"]')
       if (firstItem) firstItem.focus()
     })

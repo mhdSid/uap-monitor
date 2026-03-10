@@ -12,7 +12,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { Tooltip } from '@/components/tooltip'
 import type { DataGridProps } from '@/types'
-import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment } from '@/utils/dom'
+import { h, el, addClass, removeClass, clearChildren, setAttrs, fragment, hide, show, setStyles } from '@/utils/dom'
 import { useInfiniteScroll } from '@/composables/use-infinite-scroll'
 import { iconSortDefault, iconSortAsc, iconSortDesc } from '@/components/icons'
 import { FILTER } from '@/data/strings'
@@ -72,8 +72,8 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
       if (col.align === 'right') addClass(th, cx.thRight)
       else if (col.align === 'center') addClass(th, cx.thCenter)
 
-      if (col.width) th.style.width = col.width
-      th.style.padding = `${CELL_PAD_COMPACT} ${CELL_PAD}`
+      if (col.width) setStyles(th, { width: col.width })
+      setStyles(th, { padding: `${CELL_PAD_COMPACT} ${CELL_PAD}` })
 
       if (col.tooltip) {
         th.textContent = col.label
@@ -102,7 +102,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
     // Infinite scroll
     this.scroll = useInfiniteScroll<T>(PAGE_SIZE, (state) => {
       this.rebuildRows(state.visibleItems)
-      this.sentinel.style.display = state.hasMore ? '' : 'none'
+      if (state.hasMore) show(this.sentinel); else hide(this.sentinel)
     })
 
     table.appendChild(thead)
@@ -186,8 +186,8 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
       if (col.align === 'right') addClass(td, cx.tdRight)
       else if (col.align === 'center') addClass(td, cx.tdCenter)
 
-      if (col.width) td.style.width = col.width
-      td.style.padding = `${CELL_PAD_COMPACT} ${CELL_PAD}`
+      if (col.width) setStyles(td, { width: col.width })
+      setStyles(td, { padding: `${CELL_PAD_COMPACT} ${CELL_PAD}` })
 
       if (col.render) {
         const rendered = col.render(row)

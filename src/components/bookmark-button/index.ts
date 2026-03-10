@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass } from '@/utils/dom'
+import { h, addClass, removeClass, hide, show, setAttrs } from '@/utils/dom'
 import { iconRadarSignalOutline, iconRadarSignalFilled } from '@/components/icons'
 import { useBookmarks } from '@/composables'
 import { useToast } from '@/components/toast'
@@ -59,8 +59,8 @@ export class BookmarkButton extends Component<BookmarkButtonProps> {
   }
 
   private syncIcons (): void {
-    this.outlineIcon.style.display = this.isActive ? 'none' : ''
-    this.filledIcon.style.display = this.isActive ? '' : 'none'
+    if (this.isActive) hide(this.outlineIcon); else show(this.outlineIcon)
+    if (this.isActive) show(this.filledIcon); else hide(this.filledIcon)
   }
 
   private syncState (): void {
@@ -70,7 +70,6 @@ export class BookmarkButton extends Component<BookmarkButtonProps> {
     } else {
       removeClass(this.btn, cx.active)
     }
-    this.btn.setAttribute('aria-label', this.isActive ? ARIA_UNSAVE : ARIA_SAVE)
-    this.btn.setAttribute('aria-pressed', String(this.isActive))
+    setAttrs(this.btn, { 'aria-label': this.isActive ? ARIA_UNSAVE : ARIA_SAVE, 'aria-pressed': String(this.isActive) })
   }
 }

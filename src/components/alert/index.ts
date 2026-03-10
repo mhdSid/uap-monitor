@@ -3,7 +3,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { AlertVariant } from '@/enums'
 import { ARIA } from '@/data/strings'
-import { h } from '@/utils/dom'
+import { h, setStyles } from '@/utils/dom'
 
 export interface AlertProps {
   variant: AlertVariant
@@ -65,7 +65,7 @@ export class Alert extends Component<AlertProps> {
           className: cx.close,
           'aria-label': ARIA.DISMISS_ALERT,
           onClick: () => {
-            alert.style.opacity = '0'
+            setStyles(alert, { opacity: '0' })
             setTimeout(() => alert.remove(), 200)
           }
         }, '×')

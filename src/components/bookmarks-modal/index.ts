@@ -7,7 +7,7 @@ import { cx } from './cx'
  *  Remove button removes from bookmarks without closing.              *
  * ------------------------------------------------------------------ */
 
-import { h, clearChildren } from '@/utils/dom'
+import { h, clearChildren, hide, show } from '@/utils/dom'
 import { Modal } from '@/components/modal'
 import { SightingModal } from '@/components/sighting-modal'
 import { BookmarkListItem } from './bookmark-list-item'
@@ -129,9 +129,9 @@ export class BookmarksModal {
 
     // After modal renders, set up footer visibility watcher
     const updateFooter = (): void => {
-      const show = bookmarks.count.get() > 0
+      const hasItems = bookmarks.count.get() > 0
       const wrapper = document.querySelector('.modal__footer') as HTMLElement | null
-      if (wrapper) wrapper.style.display = show ? '' : 'none'
+      if (wrapper) { if (hasItems) show(wrapper); else hide(wrapper) }
     }
     updateFooter()
     bookmarks.count.subscribe(() => {

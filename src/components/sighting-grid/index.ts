@@ -8,7 +8,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, clearChildren } from '@/utils/dom'
+import { h, clearChildren, setStyles } from '@/utils/dom'
 import { Section } from '@/components/layout'
 import { DataGrid } from '@/components/data-grid'
 import { SightingModal } from '@/components/sighting-modal'
@@ -232,9 +232,9 @@ export class SightingGrids extends Component {
 
   lockHeight (): () => void {
     const prev = this.el.offsetHeight
-    if (prev > 0) this.el.style.minHeight = `${prev}px`
+    if (prev > 0) setStyles(this.el, { minHeight: `${prev}px` })
     return () => {
-      requestAnimationFrame(() => { this.el.style.minHeight = '' })
+      requestAnimationFrame(() => { setStyles(this.el, { minHeight: '' }) })
     }
   }
 }

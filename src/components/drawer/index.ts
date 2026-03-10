@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles } from '@/utils/dom'
 import { ARIA } from '@/data/strings'
 
 export interface DrawerProps {
@@ -85,20 +85,20 @@ export class Drawer extends Component<DrawerProps> {
     this.dragging = true
     this.startY = y
     this.currentY = y
-    this.panel.style.transition = 'none'
-    this.overlay.style.transition = 'none'
-    document.body.style.cursor = 'grabbing'
+    setStyles(this.panel, { transition: 'none' })
+    setStyles(this.overlay, { transition: 'none' })
+    setStyles(document.body, { cursor: 'grabbing' })
   }
 
   private onDragMove (y: number): void {
     if (!this.dragging) return
     this.currentY = y
     const delta = Math.max(0, this.currentY - this.startY)
-    this.panel.style.transform = `translateY(${delta}px)`
+    setStyles(this.panel, { transform: `translateY(${delta}px)` })
 
     // Fade overlay proportionally
     const progress = Math.min(delta / CLOSE_THRESHOLD, 1)
-    this.overlay.style.opacity = String(1 - progress * 0.5)
+    setStyles(this.overlay, { opacity: String(1 - progress * 0.5) })
   }
 
   private onDragEnd (): void {
@@ -107,16 +107,16 @@ export class Drawer extends Component<DrawerProps> {
     const delta = this.currentY - this.startY
 
     // Restore transitions + cursor
-    this.panel.style.transition = ''
-    this.overlay.style.transition = ''
-    document.body.style.cursor = ''
+    setStyles(this.panel, { transition: '' })
+    setStyles(this.overlay, { transition: '' })
+    setStyles(document.body, { cursor: '' })
 
     if (delta > CLOSE_THRESHOLD) {
       this.close()
     } else {
       // Snap back
-      this.panel.style.transform = 'translateY(0)'
-      this.overlay.style.opacity = '1'
+      setStyles(this.panel, { transform: 'translateY(0)' })
+      setStyles(this.overlay, { opacity: '1' })
     }
   }
 
@@ -125,10 +125,10 @@ export class Drawer extends Component<DrawerProps> {
   open (): void {
     if (this.isOpen) return
     this.isOpen = true
-    this.el.classList.add(cx.rootOpen)
-    this.panel.style.transform = ''
-    this.overlay.style.opacity = ''
-    document.body.style.overflow = 'hidden'
+    addClass(this.el, cx.rootOpen)
+    setStyles(this.panel, { transform: '' })
+    setStyles(this.overlay, { opacity: '' })
+    setStyles(document.body, { overflow: 'hidden' })
 
     // If onOpen is provided, let it handle focus (e.g. auto-focus search input).
     // Otherwise focus the panel for keyboard accessibility.
@@ -142,10 +142,10 @@ export class Drawer extends Component<DrawerProps> {
   close (): void {
     if (!this.isOpen) return
     this.isOpen = false
-    this.el.classList.remove(cx.rootOpen)
-    this.panel.style.transform = ''
-    this.overlay.style.opacity = ''
-    document.body.style.overflow = ''
+    removeClass(this.el, cx.rootOpen)
+    setStyles(this.panel, { transform: '' })
+    setStyles(this.overlay, { opacity: '' })
+    setStyles(document.body, { overflow: '' })
     this.props.onClose?.()
   }
 

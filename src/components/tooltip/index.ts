@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles } from '@/utils/dom'
 import { ARIA } from '@/data/strings'
 
 export interface TooltipProps {
@@ -40,11 +40,9 @@ function positionPopup (popup: HTMLElement, trigger: HTMLElement): void {
   const vw = window.innerWidth
   const vh = window.innerHeight
 
-  popup.style.visibility = 'hidden'
-  popup.style.display = 'block'
+  setStyles(popup, { visibility: 'hidden', display: 'block' })
   const popupH = popup.offsetHeight || 80
-  popup.style.visibility = ''
-  popup.style.display = ''
+  setStyles(popup, { visibility: '', display: '' })
 
   let top: number
   if (rect.bottom + GAP + popupH <= vh) {
@@ -64,9 +62,7 @@ function positionPopup (popup: HTMLElement, trigger: HTMLElement): void {
     left = Math.max(4, vw - POPUP_WIDTH - 4)
   }
 
-  popup.style.position = 'fixed'
-  popup.style.top = `${top}px`
-  popup.style.left = `${left}px`
+  setStyles(popup, { position: 'fixed', top: `${top}px`, left: `${left}px` })
 }
 
 export class Tooltip extends Component<TooltipProps> {

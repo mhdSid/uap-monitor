@@ -12,7 +12,7 @@
 
 import './app.css'
 import { Component } from '@/core'
-import { h, mount, clearChildren } from '@/utils/dom'
+import { h, mount, clearChildren, addClass } from '@/utils/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, useShare, batch, effect, minDelay, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Header } from '@/components/header'
@@ -183,7 +183,7 @@ export class App extends Component {
       icon: () => iconSearch(22),
       onClick: () => this.filterDrawer.toggle()
     })
-    this.fab.el.classList.add('fab')
+    addClass(this.fab.el, 'fab')
 
     this.showAllLoaders()
 

@@ -54,7 +54,7 @@ export class Modal {
     if (titleEl) {
       const titleId = titleEl.id || `modal-title-${Date.now()}`
       titleEl.id = titleId
-      dialog.setAttribute('aria-labelledby', titleId)
+      setAttrs(dialog, { 'aria-labelledby': titleId })
     }
 
     if (slots.content) {

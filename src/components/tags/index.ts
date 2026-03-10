@@ -3,7 +3,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { TagVariant, SightingStatus, DataSourceId, TagSize } from '@/enums'
 import type { TagProps, StatusTagProps } from '@/types'
-import { h, text } from '@/utils/dom'
+import { h, text, setStyles } from '@/utils/dom'
 import { GDELT_TONE_BANDS, TAGS } from '@/data/strings'
 import { useMediaQuery } from '@/composables/use-media-query'
 import { effect } from '@/composables'
@@ -164,7 +164,7 @@ export function createDataSourceTag (
   })
   tag.el.prepend(dot)
 
-  if (disabled) tag.el.style.opacity = '0.35'
+  if (disabled) setStyles(tag.el, { opacity: '0.35' })
 
   return tag.el
 }
