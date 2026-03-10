@@ -119,18 +119,21 @@ export function replaceChildren (
 
 // ─── Visibility ──────────────────────────────────────────────────────
 
+/** Any element with an inline style property. */
+type Styleable = HTMLElement | SVGElement
+
 /** Hide an element (display: none). */
-export function hide (node: HTMLElement): void {
+export function hide (node: Styleable): void {
   node.style.display = 'none'
 }
 
 /** Show a previously hidden element. Pass original display value if needed. */
-export function show (node: HTMLElement, display = ''): void {
+export function show (node: Styleable, display = ''): void {
   node.style.display = display
 }
 
 /** Toggle visibility. Returns `true` when the element becomes visible. */
-export function toggle (node: HTMLElement, display = ''): boolean {
+export function toggle (node: Styleable, display = ''): boolean {
   const hidden = node.style.display === 'none'
   node.style.display = hidden ? display : 'none'
   return hidden
@@ -181,7 +184,7 @@ export function setAttrs (
 
 /** Set one or more inline styles. Empty string resets to default. */
 export function setStyles (
-  node: HTMLElement,
+  node: HTMLElement | SVGElement,
   styles: Partial<CSSStyleDeclaration>
 ): void {
   for (const key in styles) {
