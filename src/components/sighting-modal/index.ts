@@ -43,7 +43,7 @@ export class SightingModal {
   private static buildHeader (s: Sighting): HTMLElement {
     const actions = h('span', { className: cx.actions },
       new BookmarkButton({ sightingId: s.id }).el,
-      new ShareButton({ sightingId: s.id, title: s.summary?.slice(0, 60) }).el
+      new ShareButton({ sightingId: s.id, year: s.occurredAt ? parseInt(s.occurredAt, 10) : undefined, title: s.summary?.slice(0, 60) }).el
     )
 
     return h('div', { className: cx.header },

@@ -35,7 +35,7 @@ import { Drawer } from '@/components/drawer'
 import { Button } from '@/components/button'
 import { iconSearch } from '@/components/icons'
 import { SECTION, ARIA } from '@/data/strings'
-import { DEFAULT_YEAR_OFFSET } from '@/data/config'
+import { DEFAULT_YEAR_OFFSET, MAX_YEAR_SPAN } from '@/data/config'
 
 import type { Sighting } from '@/types'
 
@@ -332,17 +332,39 @@ export class App extends Component {
 
   private handleShareUrl (): void {
     const share = useShare()
-    const sharedId = share.parseShareParam()
-    if (!sharedId) return
+    const parsed = share.parseShareParam()
+    if (!parsed) return
 
-    const sighting = this.store.sightings.get().find(s => s.id === sharedId)
-    if (sighting) {
-      share.clearShareParam()
-      // Delay to let render settle
-      requestAnimationFrame(() => {
-        SightingModal.open(sighting, document.body)
-      })
+    const { id, year } = parsed
+    share.clearShareParam()
+
+    // Try current sightings first
+    const match = this.store.sightings.get().find(s => s.id === id)
+    if (match) {
+      requestAnimationFrame(() => SightingModal.open(match, document.body))
+      return
     }
+
+    // Sighting not in current range — load the right year window
+    if (!year) return
+
+    const years = this.store.availableYears.get()
+    const oldest = years[years.length - 1] ?? 1900
+    const newest = years[0] ?? new Date().getFullYear()
+    const from = Math.max(oldest, year)
+    const to = Math.min(newest, from + MAX_YEAR_SPAN)
+
+    this.store.yearRange.set({ from, to })
+
+    // Wait for loading to complete, then open
+    const unsub = this.store.loading.subscribe((loading) => {
+      if (loading) return
+      unsub()
+      const sighting = this.store.sightings.get().find(s => s.id === id)
+      if (sighting) {
+        requestAnimationFrame(() => SightingModal.open(sighting, document.body))
+      }
+    })
   }
 
   // ─── Reactions ─────────────────────────────────────────────────

@@ -8,6 +8,7 @@ import { useToast } from '@/components/toast'
 
 export interface ShareButtonProps {
   sightingId: string
+  year?: number
   title?: string
   size?: number
 }
@@ -16,7 +17,7 @@ const ARIA_SHARE = 'Share sighting'
 
 export class ShareButton extends Component<ShareButtonProps> {
   protected create (): HTMLElement {
-    const { sightingId, title, size = 14 } = this.props
+    const { sightingId, year, title, size = 14 } = this.props
     const share = useShare()
     const toast = useToast()
 
@@ -30,7 +31,7 @@ export class ShareButton extends Component<ShareButtonProps> {
       e.stopPropagation()
       e.preventDefault()
 
-      const result = await share.shareSighting(sightingId, title)
+      const result = await share.shareSighting(sightingId, year, title)
       if (result.success) {
         toast.success(result.method === 'native' ? 'SHARED' : 'LINK COPIED')
       } else {

@@ -69,7 +69,8 @@ export class BookmarksModal {
                 toast.success('BOOKMARK REMOVED')
               },
               onShare: async (sighting) => {
-                const result = await share.shareSighting(sighting.id, sighting.summary?.slice(0, 60))
+                const sYear = sighting.occurredAt ? parseInt(sighting.occurredAt, 10) : undefined
+                const result = await share.shareSighting(sighting.id, sYear, sighting.summary?.slice(0, 60))
                 if (result.success) {
                   toast.success(result.method === 'native' ? 'SHARED' : 'LINK COPIED')
                 } else {

@@ -62,7 +62,9 @@ export class YearSelector extends Component<YearSelectorProps> {
         const from = Number(fromSelect.value)
         let to = Number(toSelect.value)
 
-        if (from > to) to = from
+        // FROM crossed past TO — expand to a full 10-year window
+        if (from > to) to = nearestAfter(Math.min(from + MAX_YEAR_SPAN, newest))
+        // Still too wide — clamp TO
         if (to - from > MAX_YEAR_SPAN) to = nearestAfter(from + MAX_YEAR_SPAN)
 
         toSelect.value = String(to)
@@ -82,7 +84,9 @@ export class YearSelector extends Component<YearSelectorProps> {
         let from = Number(fromSelect.value)
         const to = Number(toSelect.value)
 
-        if (to < from) from = to
+        // TO crossed below FROM — expand to a full 10-year window
+        if (to < from) from = nearestBefore(Math.max(to - MAX_YEAR_SPAN, oldest))
+        // Still too wide — clamp FROM
         if (to - from > MAX_YEAR_SPAN) from = nearestBefore(to - MAX_YEAR_SPAN)
 
         fromSelect.value = String(from)

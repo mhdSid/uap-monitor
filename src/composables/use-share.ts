@@ -1,16 +1,15 @@
 /**
  * useShare — sighting sharing via URL query param + clipboard/native share.
  *
- * URL format: ?s=<sightingId>
+ * URL format: ?s=<sightingId>&y=<year>
  *
- * On page load, parseShareParam() extracts the sighting ID from the URL.
- * shareSighting() builds the URL and copies to clipboard (or uses
- * navigator.share on mobile).
+ * The year param ensures the app can load the correct year range
+ * when opening a shared link for a sighting outside the default window.
  *
  * Usage:
  *   const share = useShare()
- *   const id = share.parseShareParam()     // on init
- *   share.shareSighting(id, title)          // from modal/grid
+ *   const params = share.parseShareParam()   // on init
+ *   share.shareSighting(id, year, title)      // from modal/grid
  */
 
 export interface ShareResult {
@@ -18,15 +17,20 @@ export interface ShareResult {
   method: 'native' | 'clipboard' | 'none'
 }
 
+export interface ShareParam {
+  id: string
+  year: number | null
+}
+
 export interface Share {
-  /** Extract sighting ID from current URL. Returns null if not present. */
-  parseShareParam(): string | null
-  /** Clear the ?s= param from URL without reload. */
+  /** Extract sighting ID + year from current URL. Returns null if not present. */
+  parseShareParam(): ShareParam | null
+  /** Clear the ?s= and ?y= params from URL without reload. */
   clearShareParam(): void
   /** Build share URL and copy/share. Returns result with method used. */
-  shareSighting(id: string, title?: string): Promise<ShareResult>
+  shareSighting(id: string, year?: number, title?: string): Promise<ShareResult>
   /** Build the full share URL for a sighting. */
-  buildUrl(id: string): string
+  buildUrl(id: string, year?: number): string
 }
 
 // ─── Singleton ──────────────────────────────────────────────────────
@@ -36,28 +40,33 @@ let instance: Share | null = null
 export function useShare (): Share {
   if (instance) return instance
 
-  function parseShareParam (): string | null {
+  function parseShareParam (): ShareParam | null {
     const params = new URLSearchParams(window.location.search)
-    return params.get('s') || null
+    const id = params.get('s')
+    if (!id) return null
+    const yearStr = params.get('y')
+    const year = yearStr ? parseInt(yearStr, 10) : null
+    return { id, year: year && !isNaN(year) ? year : null }
   }
 
   function clearShareParam (): void {
     const url = new URL(window.location.href)
     url.searchParams.delete('s')
+    url.searchParams.delete('y')
     const clean = url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '')
     window.history.replaceState(null, '', clean)
   }
 
-  function buildUrl (id: string): string {
+  function buildUrl (id: string, year?: number): string {
     const url = new URL(window.location.href)
     url.searchParams.set('s', id)
-    // Remove hash if present
+    if (year) url.searchParams.set('y', String(year))
     url.hash = ''
     return url.toString()
   }
 
-  async function shareSighting (id: string, title?: string): Promise<ShareResult> {
-    const url = buildUrl(id)
+  async function shareSighting (id: string, year?: number, title?: string): Promise<ShareResult> {
+    const url = buildUrl(id, year)
     const shareTitle = title || 'UAP Sighting Report'
     const shareText = `${shareTitle} — UAP Monitor`
 
