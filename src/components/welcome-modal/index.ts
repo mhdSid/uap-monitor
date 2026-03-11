@@ -122,7 +122,7 @@ export class WelcomeModal {
     })
 
     clearChildren(WelcomeModal.contentEl)
-    setAttrs(WelcomeModal.contentEl, { className: cx.body })
+    setAttrs(WelcomeModal.contentEl, { class: cx.body })
 
     WelcomeModal.renderBody(WelcomeModal.contentEl, stats, sources)
   }
