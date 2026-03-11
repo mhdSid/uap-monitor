@@ -277,9 +277,9 @@ export function generateId (): string {
 export function qs<T extends Element = HTMLElement> (
   selector: string,
   parent: Element | Document = document
-): T {
+): T | null {
   const node = parent.querySelector<T>(selector)
-  if (!node) throw new Error(`[dom] Element not found: ${selector}`)
+  // if (!node) throw new Error(`[dom] Element not found: ${selector}`)
   return node
 }
 

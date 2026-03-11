@@ -17,7 +17,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, addClass, removeClass, setStyles } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles, qs } from '@/utils/dom'
 import { iconMore } from '@/components/icons'
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -174,7 +174,7 @@ export class ActionMenu extends Component<ActionMenuProps> {
     requestAnimationFrame(() => {
       reposition()
       setStyles(el, { opacity: '1' })
-      const firstItem = el.querySelector<HTMLElement>('[role="menuitem"]')
+      const firstItem = qs('[role="menuitem"]', el)
       if (firstItem) firstItem.focus()
     })
 

@@ -12,7 +12,7 @@
 
 import './app.css'
 import { Component } from '@/core'
-import { h, mount, clearChildren, addClass } from '@/utils/dom'
+import { h, mount, clearChildren, addClass, qs } from '@/utils/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, useShare, batch, effect, minDelay, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Header } from '@/components/header'
@@ -32,6 +32,7 @@ import { NewsFeed } from '@/components/news-feed'
 import { Highlights } from '@/components/highlights'
 import { Hero } from '@/components/hero'
 import { Drawer } from '@/components/drawer'
+import { cx as drawerCx } from '@/components/drawer/cx'
 import { Button } from '@/components/button'
 import { iconSearch } from '@/components/icons'
 import { SECTION, ARIA } from '@/data/strings'
@@ -163,7 +164,7 @@ export class App extends Component {
     this.filterDrawer = new Drawer({
       content: drawerForm,
       onOpen: () => {
-        const panel = this.filterDrawer.el.querySelector('.drawer__panel')
+        const panel = qs(`.${drawerCx.panel}`, this.filterDrawer.el)
         if (panel) {
           panel.addEventListener('transitionend', () => {
             drawerToolbar.focusSearch()

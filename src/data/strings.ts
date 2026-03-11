@@ -439,3 +439,8 @@ export const BOOKMARKS = {
   CLEAR_CONFIRM: 'Remove all saved sightings?',
   CLEARED: 'ALL BOOKMARKS CLEARED'
 } as const
+
+export const THEME = {
+  LIGHT: 'light',
+  DARK: 'dark'
+} as const

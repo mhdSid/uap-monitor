@@ -12,7 +12,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import type { ModalSlots } from '@/types'
-import { h, addClass, removeClass, setAttrs } from '@/utils/dom'
+import { h, addClass, removeClass, setAttrs, qs } from '@/utils/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 
@@ -50,11 +50,11 @@ export class Modal {
       'aria-modal': 'true'
     }, headerBar)
 
-    const titleEl = headerBar.querySelector('.modal-sighting__title, .modal__title, .welcome__title')
-    if (titleEl) {
-      const titleId = titleEl.id || `modal-title-${Date.now()}`
-      titleEl.id = titleId
-      setAttrs(dialog, { 'aria-labelledby': titleId })
+    const headerEl = qs(`.${cx.header}`, headerBar)
+    if (headerEl) {
+      const headerId = headerEl.id || `modal-header-${Date.now()}`
+      headerEl.id = headerId
+      setAttrs(dialog, { 'aria-labelledby': headerId })
     }
 
     if (slots.content) {

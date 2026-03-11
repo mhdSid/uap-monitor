@@ -313,7 +313,7 @@ export class Timeline extends Component<TimelineProps> {
 
     if (this.maxCount === 0) {
       ctx.fillStyle = palette.white15
-      ctx.font = '11px monospace'
+      ctx.font = 'bold 11px monospace'
       ctx.textAlign = 'center'
       ctx.fillText('No data for this range', w / 2, cH / 2)
       return
@@ -332,12 +332,12 @@ export class Timeline extends Component<TimelineProps> {
       const colors = this.getBarColors(isActive)
 
       if (isActive) {
-        ctx.fillStyle = palette.green400_08
+        ctx.fillStyle = colors.selectedAreaMesh
         ctx.fillRect(x - 1, 0, BAR_STEP, barArea)
       }
 
       if (barH > 0) {
-        ctx.fillStyle = isActive ? palette.green400_70 : palette.amber500_40
+        ctx.fillStyle = colors.bar
         const by = barArea - barH
         const r = Math.min(BAR_RADIUS, BAR_W / 2, barH / 2)
         ctx.beginPath()
@@ -356,23 +356,27 @@ export class Timeline extends Component<TimelineProps> {
       const showLabel = (year % labelEvery === 0) || i === 0 || i === yearSpan - 1
       if (showLabel) {
         ctx.fillStyle = colors.year
-        ctx.font = '9px monospace'
+        ctx.font = 'bold 9px monospace'
         ctx.textAlign = 'center'
         ctx.fillText(String(year), x + BAR_W / 2, cH - 3)
       }
     }
   }
 
-  private getBarColors (isActive?: boolean): { year: string, bar: string} {
-    const { theme } = useTheme()
-    const isLightTheme = theme.get() === 'light'
+  private getBarColors (isActive?: boolean): { year: string, bar: string, selectedAreaMesh: string } {
+    const { isLightTheme } = useTheme()
+    const isLight = isLightTheme()
 
     const textColorLight = isActive ?  palette.green600_80 : palette.black500_30
     const textColorDark = isActive ? palette.green500_50 : palette.white50
+    const barColorDark = isActive ? palette.green400_70 : palette.amber500_40
+    const barColorLight = isActive ? palette.green600_80 : palette.amber500_90
+    const selectedAreaMeshColor = palette.green400_20
 
     return {
-      year: isLightTheme ? textColorLight : textColorDark,
-      bar: isLightTheme ? palette.green400_30 : palette.green600_80
+      year: isLight ? textColorLight : textColorDark,
+      bar: isLight ? barColorLight : barColorDark,
+      selectedAreaMesh: selectedAreaMeshColor
     }
   }
 

@@ -1,3 +1,4 @@
+import { THEME } from '@/data/strings'
 import { signal, type Signal } from './use-store'
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -9,7 +10,12 @@ const ATTR = 'data-theme'
 
 // ─── Singleton ──────────────────────────────────────────────────────
 
-let instance: { theme: Signal<Theme>; toggle: () => void } | null = null
+let instance: {
+  theme: Signal<Theme>
+  toggle: () => void
+  isLightTheme: () => boolean
+  isDarkTheme: () => boolean
+} | null = null
 
 export function useTheme () {
   if (instance) return instance
@@ -20,13 +26,16 @@ export function useTheme () {
   apply(initial)
 
   function toggle (): void {
-    const next: Theme = theme.get() === 'dark' ? 'light' : 'dark'
+    const next: Theme = theme.get() === THEME.DARK ? THEME.LIGHT : THEME.DARK
     theme.set(next)
     apply(next)
     try { localStorage.setItem(STORAGE_KEY, next) } catch { /* private mode */ }
   }
 
-  instance = { theme, toggle }
+  const isLightTheme = () => theme.get() === THEME.LIGHT
+  const isDarkTheme = () => theme.get() === THEME.DARK
+
+  instance = { theme, toggle, isLightTheme, isDarkTheme }
   return instance
 }
 
