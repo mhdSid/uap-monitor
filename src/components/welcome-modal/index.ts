@@ -15,7 +15,7 @@ import { Modal } from '@/components/modal'
 import { Button } from '@/components/button'
 import { ButtonSize } from '@/enums'
 import { Loader } from '@/components/loader'
-import { h, clearChildren, setAttrs } from '@/utils/dom'
+import { h, clearChildren, setAttrs, addClass } from '@/utils/dom'
 import { WELCOME } from '@/data/strings'
 import { useAnalytics, useNuforc, useHatchUdb, useChronology, useGdelt, useGnews, useFireball } from '@/composables'
 import { useDeriveWelcomeData } from '@/composables/use-welcome-sources'
@@ -122,7 +122,7 @@ export class WelcomeModal {
     })
 
     clearChildren(WelcomeModal.contentEl)
-    setAttrs(WelcomeModal.contentEl, { class: cx.body })
+    addClass(WelcomeModal.contentEl, cx.body )
 
     WelcomeModal.renderBody(WelcomeModal.contentEl, stats, sources)
   }
