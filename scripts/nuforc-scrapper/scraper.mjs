@@ -137,11 +137,24 @@ async function buildFetchOptions () {
 
 async function fetchPage (url) {
   const fetchOpts = await buildFetchOptions()
-  const res = await nodeFetch(url, fetchOpts)
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} for ${url}`)
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10000)
+
+  try {
+    const res = await nodeFetch(url, {
+      ...fetchOpts,
+      signal: controller.signal
+    })
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status} for ${url}`)
+    }
+
+    return await res.text()
+  } finally {
+    clearTimeout(timeout)
   }
-  return await res.text()
 }
 
 async function fetchWithRetry (url, retries = 3) {
@@ -727,7 +740,7 @@ async function probeId (id) {
 
 async function discoverLatestId () {
   let lo = 1
-  let hi = 250000
+  let hi = 196319
   let lastValid = null
 
   log("Binary search for latest sighting ID...")
