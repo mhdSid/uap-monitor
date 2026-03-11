@@ -279,7 +279,6 @@ export function qs<T extends Element = HTMLElement> (
   parent: Element | Document = document
 ): T | null {
   const node = parent.querySelector<T>(selector)
-  // if (!node) throw new Error(`[dom] Element not found: ${selector}`)
   return node
 }
 
