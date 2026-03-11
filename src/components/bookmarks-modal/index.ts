@@ -15,7 +15,7 @@ import { Button } from '@/components/button'
 import { useBookmarks, useAppStore, useShare } from '@/composables'
 import { useToast } from '@/components/toast'
 import { ButtonSize } from '@/enums'
-import { BOOKMARKS } from '@/data/strings'
+import { BOOKMARKS, TOAST_MESSAGES } from '@/data/strings'
 import type { Sighting } from '@/types'
 
 const TRANSITION_MS = 250
@@ -66,15 +66,15 @@ export class BookmarksModal {
               onClick: (sighting) => BookmarksModal.openSighting(sighting),
               onRemove: (sighting) => {
                 bookmarks.remove(sighting.id)
-                toast.success('BOOKMARK REMOVED')
+                toast.success(TOAST_MESSAGES.BOOKARK_REMOVED)
               },
               onShare: async (sighting) => {
                 const sYear = sighting.occurredAt ? parseInt(sighting.occurredAt, 10) : undefined
                 const result = await share.shareSighting(sighting.id, sYear, sighting.summary?.slice(0, 60))
                 if (result.success) {
-                  toast.success(result.method === 'native' ? 'SHARED' : 'LINK COPIED')
+                  toast.success(result.method === 'native' ? TOAST_MESSAGES.SHARED : TOAST_MESSAGES.LINK_COPIED)
                 } else {
-                  toast.error('COULD NOT SHARE')
+                  toast.error(TOAST_MESSAGES.SHARE_ERROR)
                 }
               }
             }).el

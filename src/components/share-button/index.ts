@@ -5,6 +5,7 @@ import { h } from '@/utils/dom'
 import { iconShare } from '@/components/icons'
 import { useShare } from '@/composables'
 import { useToast } from '@/components/toast'
+import { ARIA, TOAST_MESSAGES } from '@/data/strings'
 
 export interface ShareButtonProps {
   sightingId: string
@@ -12,8 +13,6 @@ export interface ShareButtonProps {
   title?: string
   size?: number
 }
-
-const ARIA_SHARE = 'Share sighting'
 
 export class ShareButton extends Component<ShareButtonProps> {
   protected create (): HTMLElement {
@@ -24,7 +23,7 @@ export class ShareButton extends Component<ShareButtonProps> {
     const btn = h('button', {
       className: cx.root,
       type: 'button',
-      'aria-label': ARIA_SHARE
+      'aria-label': ARIA.SHARE_SIGHTING
     }, iconShare(size)) as HTMLButtonElement
 
     btn.addEventListener('click', async (e) => {
@@ -33,9 +32,9 @@ export class ShareButton extends Component<ShareButtonProps> {
 
       const result = await share.shareSighting(sightingId, year, title)
       if (result.success) {
-        toast.success(result.method === 'native' ? 'SHARED' : 'LINK COPIED')
+        toast.success(result.method === 'native' ? TOAST_MESSAGES.SHARED : TOAST_MESSAGES.LINK_COPIED)
       } else {
-        toast.error('COULD NOT SHARE')
+        toast.error(TOAST_MESSAGES.SHARE_ERROR)
       }
     })
 

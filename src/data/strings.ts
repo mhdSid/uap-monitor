@@ -32,7 +32,9 @@ export const ARIA = {
   CLEAR_SEARCH: 'Clear search',
   SEARCH_SIGHTINGS: 'Search sighting reports',
   SEARCH_INTEL: 'Search intelligence articles',
-  OPEN_BOOKMARKS: 'Open saved sightings'
+  OPEN_BOOKMARKS: 'Open saved sightings',
+  SIGHTING_ACTIONS: 'Sighting actions',
+  SHARE_SIGHTING: 'Share sighting'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -129,6 +131,20 @@ export const GDELT_TONE_BANDS = {
   NEGATIVE:      { min: -5, max: 0, label: 'NEGATIVE', color: 'negative-dim' },
   VERY_NEGATIVE: { max: -5, label: 'VERY NEGATIVE', color: 'negative' }
 } as const
+
+// Action Menu
+export const ACTION_MENU_LABELS = {
+  REMOVE_BOOKMARK: 'Remove bookmark',
+  SHARE: 'Share'
+}
+
+// Toast
+export const TOAST_MESSAGES = {
+  BOOKARK_REMOVED: 'BOOKMARK REMOVED',
+  SHARED: 'SHARED',
+  LINK_COPIED: 'LINK COPIED',
+  SHARE_ERROR: 'COULD NOT SHARE'
+}
 
 // ─── Sighting modal labels ──────────────────────────────────────────
 

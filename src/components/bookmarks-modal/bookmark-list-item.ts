@@ -5,7 +5,8 @@ import { formatLocation } from '@/utils/format'
 import { ActionMenu } from '@/components/action-menu'
 import { iconRadarSignalFilled, iconShare } from '@/components/icons'
 import type { Sighting } from '@/types'
-
+import { ACTION_MENU_LABELS, ARIA } from '@/data/strings'
+import { cx as actionMenuCx } from '../action-menu/cx'
 export interface BookmarkListItemProps {
   sighting: Sighting
   onClick: (sighting: Sighting) => void
@@ -23,15 +24,15 @@ export class BookmarkListItem extends Component<BookmarkListItemProps> {
     const metaParts = [date, src, s.shape].filter(Boolean).join(' · ')
 
     const menu = new ActionMenu({
-      ariaLabel: 'Sighting actions',
+      ariaLabel: ARIA.SIGHTING_ACTIONS,
       items: [
         {
-          label: 'Remove bookmark',
+          label: ACTION_MENU_LABELS.REMOVE_BOOKMARK,
           icon: () => iconRadarSignalFilled(16),
           onClick: () => onRemove(s)
         },
         {
-          label: 'Share',
+          label: ACTION_MENU_LABELS.SHARE,
           icon: () => iconShare(16),
           onClick: () => onShare(s)
         }
@@ -49,7 +50,7 @@ export class BookmarkListItem extends Component<BookmarkListItemProps> {
 
     item.addEventListener('click', (e) => {
       // Don't navigate if clicking the menu trigger area
-      if ((e.target as HTMLElement).closest('.action-menu__trigger')) return
+      if ((e.target as HTMLElement).closest(actionMenuCx.trigger)) return
       onClick(s)
     })
 
