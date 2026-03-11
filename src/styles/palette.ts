@@ -12,13 +12,21 @@ export const palette = {
   black: '#000',
   white: '#fff',
 
+  green600: 'rgb(0, 143, 36)',
   green500: '#00ff41',
   green400: '#00ff88',
-  green500_70: 'rgba(0, 255, 65, 0.7)',
+  green500_20: 'rgba(0, 255, 65, 0.2)',
   green500_50: 'rgba(0, 255, 65, 0.5)',
+  green500_70: 'rgba(0, 255, 65, 0.7)',
+  green500_90: 'rgba(0, 255, 65, 0.9)',
   green400_70: 'rgba(0, 255, 136, 0.7)',
   green400_30: 'rgba(0, 255, 136, 0.3)',
   green400_08: 'rgba(0, 255, 136, 0.08)',
+  green600_20: 'rgba(0, 143, 36, 0.2)',
+  green600_80: 'rgba(0, 143, 36, 0.8)',
+
+  black500_50: 'rgba(0, 0, 0, 0.5)',
+  black500_30: 'rgba(0, 0, 0, 0.3)',
 
   amber500: '#f59e0b',
   amber400: '#ffb400',
@@ -30,11 +38,10 @@ export const palette = {
   cyan400: '#00d4ff',
   purple500: '#a78bfa',
 
+  white50: 'rgba(255, 255, 255, 0.5)',
   white20: 'rgba(255, 255, 255, 0.2)',
   white15: 'rgba(255, 255, 255, 0.15)',
-  white08: 'rgba(255, 255, 255, 0.08)',
-
-  green500_20: 'rgba(0, 255, 65, 0.2)'
+  white08: 'rgba(255, 255, 255, 0.08)'
 } as const
 
 // ─── Semantic tokens (JS-side) ──────────────────────────────────────

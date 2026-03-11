@@ -4,6 +4,7 @@ import { Component } from '@/core'
 import { h, el, hide, show, addClass, removeClass, setStyles, setText } from '@/utils/dom'
 import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
+import { useTheme } from '@/composables'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -295,6 +296,7 @@ export class Timeline extends Component<TimelineProps> {
 
   private draw (): void {
     const ctx = this.canvas.getContext('2d')
+
     if (!ctx) return
 
     const w = this.canvasW
@@ -327,6 +329,8 @@ export class Timeline extends Component<TimelineProps> {
 
       const isActive = year >= this.activeFrom && year <= this.activeTo
 
+      const colors = this.getBarColors(isActive)
+
       if (isActive) {
         ctx.fillStyle = palette.green400_08
         ctx.fillRect(x - 1, 0, BAR_STEP, barArea)
@@ -351,11 +355,24 @@ export class Timeline extends Component<TimelineProps> {
 
       const showLabel = (year % labelEvery === 0) || i === 0 || i === yearSpan - 1
       if (showLabel) {
-        ctx.fillStyle = isActive ? palette.green500_50 : palette.white20
+        ctx.fillStyle = colors.year
         ctx.font = '9px monospace'
         ctx.textAlign = 'center'
         ctx.fillText(String(year), x + BAR_W / 2, cH - 3)
       }
+    }
+  }
+
+  private getBarColors (isActive?: boolean): { year: string, bar: string} {
+    const { theme } = useTheme()
+    const isLightTheme = theme.get() === 'light'
+
+    const textColorLight = isActive ?  palette.green600_80 : palette.black500_30
+    const textColorDark = isActive ? palette.green500_50 : palette.white50
+
+    return {
+      year: isLightTheme ? textColorLight : textColorDark,
+      bar: isLightTheme ? palette.green400_30 : palette.green600_80
     }
   }
 
