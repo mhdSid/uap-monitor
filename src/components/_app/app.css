@@ -38,7 +38,7 @@
 }
 
 /* Desktop controls: hidden on SP */
-.controls-form--desktop {
+.controls-form--desktop .filter-toolbar {
   display: none;
 }
 
@@ -62,7 +62,7 @@
 /* ── Desktop: inline controls visible, FAB + drawer hidden ───────── */
 
 @media (min-width: 768px) {
-  .controls-form--desktop {
+  .controls-form--desktop .filter-toolbar {
     display: flex;
   }
 
