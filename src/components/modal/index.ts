@@ -22,7 +22,7 @@ const TRANSITION_MS = 200
 export class Modal {
   // ─── Singleton state ────────────────────────────────────────────
   private static overlay: HTMLElement | null = null
-  private static dialog: HTMLElement | null = null
+  public static dialog: HTMLElement | null = null
   private static trigger: HTMLElement | null = null
   private static onKeydown: ((e: KeyboardEvent) => void) | null = null
   private static onCloseCallback: (() => void) | null = null

@@ -97,7 +97,7 @@
 .welcome__sources {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-xs) var(--space-md);
+  gap: var(--space-xs) var(--space-xl);
   margin-bottom: var(--space-sm);
   width: 100%;
 }
@@ -152,10 +152,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--space-xl) var(--space-md);
+  /* padding: var(--space-xl) var(--space-md); */
 }
 
 .welcome__footer .btn { width: 100%; }
+
+.welcome__modal-root {
+  max-width: 800px;
+}
 
 @media (min-width: 768px) {
   .welcome__stats { grid-template-columns: repeat(4, 1fr); }

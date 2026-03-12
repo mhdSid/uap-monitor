@@ -51,6 +51,8 @@ export class WelcomeModal {
       }
     })
 
+    addClass(Modal.dialog as HTMLHtmlElement, cx.root)
+
     return true
   }
 

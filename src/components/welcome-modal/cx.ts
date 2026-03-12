@@ -1,4 +1,5 @@
 export const cx = {
+  root: 'welcome__modal-root',
   body: 'welcome__body',
   bodyLoader: 'welcome__body-loader',
   divider: 'welcome__divider',
