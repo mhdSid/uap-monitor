@@ -22,13 +22,13 @@
     "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 184389 --concurrency 3 --delay 300 --years 2024",
     "scrape:nuforc:2025": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --concurrency 1 --years 2025",
     "scrape:nuforc:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196319 --concurrency 1 --years 2026",
-    "scrape:nuforc": "node scripts/nuforc-scrapper/scraper.mjs --resume --concurrency 1",
     "scrape:nuforc:cache:full": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/full.json",
     "scrape:nuforc:cache:huggingface": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/huggingface.json --output nuforc_scraped.json --merge __sources/nuforc.json",
     "scrape:nuforc:cache:minimal": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/minimal.json",
     "scrape:nuforc:test-transforms": "node scripts/nuforc-scrapper/test-transforms.mjs",
     "scrape:nuforc:test:tor": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose --tor",
-    "scrape:nuforc:test": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose"
+    "scrape:nuforc:test": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 196128 --years 2026 --limit 5 --verbose",
+    "scrape:nuforc": "node scripts/nuforc-scrapper/scraper.mjs --resume --concurrency 1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
