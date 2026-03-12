@@ -5407,6 +5407,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"twitter-api-v2@npm:^1.29.0":
+  version: 1.29.0
+  resolution: "twitter-api-v2@npm:1.29.0"
+  checksum: 10c0/355e71fb74cbed567f2528e0c824ceff2dfea72c653d37e047fdcc05a1bcdd4297c1c0fa146f6d82550c7b87238d8ebcf4afb3120082aa4bed258c56534295ca
+  languageName: node
+  linkType: hard
+
 "type-check@npm:^0.4.0, type-check@npm:~0.4.0":
   version: 0.4.0
   resolution: "type-check@npm:0.4.0"
@@ -5528,6 +5535,7 @@ __metadata:
     leaflet.markercluster: "npm:^1.5.3"
     node-fetch: "npm:^3.3.2"
     socks-proxy-agent: "npm:^8.0.5"
+    twitter-api-v2: "npm:^1.29.0"
     typescript: "npm:~5.9.3"
     typescript-eslint: "npm:^8.56.1"
     vite: "npm:^7.3.1"

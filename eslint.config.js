@@ -24,6 +24,8 @@ export default tsEslint.config(
         process: 'readonly',
         fetch: 'readonly',
         URL: 'readonly',
+        AbortController: 'readonly',
+        clearTimeout: 'readonly',
         console: 'readonly',
         setTimeout: 'readonly',
         Buffer: 'readonly',

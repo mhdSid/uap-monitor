@@ -1,0 +1,166 @@
+.twitter-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.twitter-modal__title {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 0.5px;
+}
+
+.twitter-modal__author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.twitter-modal__link {
+  color: var(--color-green);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.twitter-modal__link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.twitter-modal__author-name {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.twitter-modal__author-handle {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+}
+
+.twitter-modal__verified {
+  font-size: var(--fs-3xs);
+  color: var(--color-cyan);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.twitter-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.twitter-modal__image {
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+
+.twitter-modal__text {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0 0 var(--space-md);
+  white-space: pre-line;
+}
+
+/* ── Engagement stats ────────────────────────────────────────────── */
+
+.twitter-modal__stats {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-sm) 0;
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--c-neutral-900);
+}
+
+.twitter-modal__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.twitter-modal__stat-value {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 0.5px;
+}
+
+.twitter-modal__stat-label {
+  font-size: var(--fs-3xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ── Metadata rows ───────────────────────────────────────────────── */
+
+.twitter-modal__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--c-neutral-900);
+}
+
+.twitter-modal__label {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.twitter-modal__value:not(.twitter-modal__link) {
+  color: var(--color-text-strong);
+}
+
+.twitter-modal__value {
+  font-size: var(--fs-sm);
+  text-align: left;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+
+.twitter-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.twitter-modal__footer-link {
+  color: var(--color-green);
+  text-decoration: none;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.twitter-modal__footer-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+.twitter-modal__source-tag {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 768px) {
+  .twitter-modal__row {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+  .twitter-modal__value { text-align: right; }
+}

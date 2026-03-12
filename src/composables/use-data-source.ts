@@ -159,6 +159,15 @@ const SOURCE_REGISTRY: DataSource[] = [
     dataLabel: 'JSON'
   },
   {
+    id: DataSourceId.TWITTER,
+    label: 'X / Twitter',
+    status: DataSourceStatus.SYNCING,
+    url: 'https://x.com',
+    description: DATA_SOURCE_DESCRIPTIONS.TWITTER,
+    dataUrl: '/data/twitter-articles.json',
+    dataLabel: 'JSON'
+  },
+  {
     id: DataSourceId.AARO,
     label: 'AARO',
     status: DataSourceStatus.DISABLED,

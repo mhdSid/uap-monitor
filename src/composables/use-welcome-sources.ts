@@ -1,4 +1,4 @@
-import type { ChronologyManifest, FireballCollection, GdeltCollection, GnewsCollection, ManifestSource, WelcomeData, WelcomeSource, WelcomeStats } from '@/types'
+import type { ChronologyManifest, FireballCollection, GdeltCollection, GnewsCollection, TwitterCollection, ManifestSource, WelcomeData, WelcomeSource, WelcomeStats } from '@/types'
 
 // ─── Chronology sub-source display metadata ──────────────────────────
 
@@ -69,9 +69,10 @@ export function useDeriveWelcomeData (params: {
   chronologyManifest: ChronologyManifest | null
   gdeltCollection: GdeltCollection | null
   gnewsCollection: GnewsCollection | null
+  twitterCollection: TwitterCollection | null
   fireballCollection: FireballCollection | null
 }): WelcomeData {
-  const { nuforc, hatch, chronology, chronologyManifest, gdeltCollection, gnewsCollection, fireballCollection } = params
+  const { nuforc, hatch, chronology, chronologyManifest, gdeltCollection, gnewsCollection, twitterCollection, fireballCollection } = params
 
   // ── Stats ────────────────────────────────────────────────────────
 
@@ -98,6 +99,7 @@ export function useDeriveWelcomeData (params: {
     subSourceCount +
     (gdeltCollection != null ? 1 : 0) +
     (gnewsCollection != null ? 1 : 0) +
+    (twitterCollection != null ? 1 : 0) +
     (fireballCollection != null ? 1 : 0)
   const sources = activeCount > 0 ? `${activeCount} active` : '14 active'
 
@@ -177,6 +179,17 @@ export function useDeriveWelcomeData (params: {
     records: gnewsCount != null ? `${formatSourceCount(gnewsCount)} articles` : 'Live',
     period: gnewsCollection?.generatedAt
       ? new Date(gnewsCollection.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      : 'Daily',
+    tier: 'mid'
+  })
+
+  // Twitter / X
+  const twitterCount = twitterCollection?.totalResults
+  sourceList.push({
+    name: 'X / Twitter',
+    records: twitterCount != null ? `${formatSourceCount(twitterCount)} posts` : 'Live',
+    period: twitterCollection?.generatedAt
+      ? new Date(twitterCollection.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       : 'Daily',
     tier: 'mid'
   })

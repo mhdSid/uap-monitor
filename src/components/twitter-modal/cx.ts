@@ -1,0 +1,22 @@
+export const cx = {
+  header: 'twitter-modal__header',
+  title: 'twitter-modal__title',
+  author: 'twitter-modal__author',
+  authorName: 'twitter-modal__author-name',
+  authorHandle: 'twitter-modal__author-handle',
+  verified: 'twitter-modal__verified',
+  content: 'twitter-modal__content',
+  image: 'twitter-modal__image',
+  text: 'twitter-modal__text',
+  stats: 'twitter-modal__stats',
+  stat: 'twitter-modal__stat',
+  link: 'twitter-modal__link',
+  statValue: 'twitter-modal__stat-value',
+  statLabel: 'twitter-modal__stat-label',
+  row: 'twitter-modal__row',
+  label: 'twitter-modal__label',
+  value: 'twitter-modal__value',
+  footer: 'twitter-modal__footer',
+  footerLink: 'twitter-modal__footer-link',
+  sourceTag: 'twitter-modal__source-tag'
+} as const

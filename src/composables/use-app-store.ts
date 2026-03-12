@@ -17,7 +17,7 @@
  * └─────────────────────────────────────────────────────────┘
  */
 
-import type { Sighting, SightingFilter, DataSource, GdeltArticle, GnewsArticle, Fireball } from '@/types'
+import type { Sighting, SightingFilter, DataSource, GdeltArticle, GnewsArticle, TwitterArticle, Fireball } from '@/types'
 import type { Continent } from '@/enums'
 import { signal, computed } from './use-store'
 import type { Signal, ReadonlySignal } from './use-store'
@@ -46,6 +46,7 @@ export interface AppStore {
   gdeltArticles: Signal<GdeltArticle[]>
   /** GNews articles (loaded separately). */
   gnewsArticles: Signal<GnewsArticle[]>
+  twitterArticles: Signal<TwitterArticle[]>
   /** NASA Fireball events. */
   fireballs: Signal<Fireball[]>
 
@@ -75,6 +76,7 @@ export function useAppStore (): AppStore {
   const shownCount = signal(0)
   const gdeltArticles = signal<GdeltArticle[]>([])
   const gnewsArticles = signal<GnewsArticle[]>([])
+  const twitterArticles = signal<TwitterArticle[]>([])
   const fireballs = signal<Fireball[]>([])
 
   const selectedContinent = computed<Continent | undefined>(
@@ -101,6 +103,7 @@ export function useAppStore (): AppStore {
     shownCount,
     gdeltArticles,
     gnewsArticles,
+    twitterArticles,
     fireballs,
     selectedContinent,
     hasActiveFilter,

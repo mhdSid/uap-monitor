@@ -7,7 +7,8 @@ import type { IntelArticle, DataGridColumn } from '@/types'
 
 const BADGE_LABEL: Record<string, string> = {
   gdelt: INTEL_FEED.SOURCE_GDELT,
-  gnews: INTEL_FEED.SOURCE_GNEWS
+  gnews: INTEL_FEED.SOURCE_GNEWS,
+  twitter: INTEL_FEED.SOURCE_TWITTER
 }
 
 export function intelFeedColumns (): DataGridColumn<IntelArticle>[] {

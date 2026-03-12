@@ -171,9 +171,35 @@ export interface GnewsCollection {
   articles: GnewsArticle[]
 }
 
+// ─── Twitter / X layer ──────────────────────────────────────────────
+
+export interface TwitterArticle {
+  id: string
+  text: string
+  url: string
+  publishedAt: string
+  lang: string
+  authorName: string
+  authorUsername: string
+  authorImageUrl?: string | null
+  authorVerified: boolean
+  imageUrl?: string | null
+  likeCount: number
+  repostCount: number
+  replyCount: number
+  quoteCount: number
+}
+
+export interface TwitterCollection {
+  generatedAt: string
+  queries: number
+  totalResults: number
+  articles: TwitterArticle[]
+}
+
 // ─── Unified intelligence feed ──────────────────────────────────────
 
-export type IntelSource = 'gdelt' | 'gnews'
+export type IntelSource = 'gdelt' | 'gnews' | 'twitter'
 
 export interface IntelArticle {
   id: string
@@ -189,6 +215,11 @@ export interface IntelArticle {
   /** GNews-specific */
   description?: string
   imageUrl?: string | null
+  /** Twitter-specific */
+  authorUsername?: string
+  authorVerified?: boolean
+  likeCount?: number
+  repostCount?: number
 }
 
 export interface DataSource {

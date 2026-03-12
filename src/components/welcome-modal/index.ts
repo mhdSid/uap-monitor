@@ -17,7 +17,7 @@ import { ButtonSize } from '@/enums'
 import { Loader } from '@/components/loader'
 import { h, clearChildren, setAttrs, addClass } from '@/utils/dom'
 import { WELCOME } from '@/data/strings'
-import { useAnalytics, useNuforc, useHatchUdb, useChronology, useGdelt, useGnews, useFireball } from '@/composables'
+import { useAnalytics, useNuforc, useHatchUdb, useChronology, useGdelt, useGnews, useTwitter, useFireball } from '@/composables'
 import { useDeriveWelcomeData } from '@/composables/use-welcome-sources'
 import type { WelcomeSource, WelcomeStats } from '@/types'
 
@@ -97,6 +97,7 @@ export class WelcomeModal {
     const chronology = useChronology()
     const gdelt = useGdelt()
     const gnews = useGnews()
+    const twitter = useTwitter()
     const fireball = useFireball()
 
     // All requests are independent — parallelise. Composables cache results
@@ -107,6 +108,7 @@ export class WelcomeModal {
       chronology.loadManifest(),
       gdelt.load(),
       gnews.load(),
+      twitter.load(),
       fireball.load()
     ])
 
@@ -120,6 +122,7 @@ export class WelcomeModal {
       chronologyManifest:  await chronology.loadManifest(), // cached, free
       gdeltCollection:     gdelt.getCollection(),
       gnewsCollection:     gnews.getCollection(),
+      twitterCollection:   twitter.getCollection(),
       fireballCollection:  fireball.getCollection()
     })
 
