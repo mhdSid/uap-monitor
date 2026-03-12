@@ -1,14 +1,16 @@
 import { h, addClass } from '@/utils/dom'
 import { formatDate, formatDateCompact } from '@/utils/format'
 import { cx } from './cx'
-import { createToneTag, createNewsSourceTag, createIntelSourceTag } from '@/components/tags'
+import { createToneTag, createNewsSourceTag, createIntelSourceTag, Tag } from '@/components/tags'
 import { INTEL_FEED } from '@/data/strings'
 import type { IntelArticle, DataGridColumn } from '@/types'
+import { TagSize, TagVariant } from '@/enums'
 
 const BADGE_LABEL: Record<string, string> = {
   gdelt: INTEL_FEED.SOURCE_GDELT,
   gnews: INTEL_FEED.SOURCE_GNEWS,
-  twitter: INTEL_FEED.SOURCE_TWITTER
+  twitter: INTEL_FEED.SOURCE_TWITTER,
+  reddit: INTEL_FEED.SOURCE_REDDIT
 }
 
 export function intelFeedColumns (): DataGridColumn<IntelArticle>[] {
@@ -53,7 +55,7 @@ export function intelFeedColumns (): DataGridColumn<IntelArticle>[] {
       label: 'TONE',
       width: '110px',
       align: 'right',
-      render: (row) => row.tone != null ? createToneTag(row.tone) : h('span', {})
+      render: (row) => row.tone != null ? createToneTag(row.tone) : new Tag({ variant: TagVariant.DISABLED, label: 'N/A', size: TagSize.RESPONSIVE }).el
     },
     {
       key: 'publishedAt',

@@ -28,6 +28,7 @@ export const ARIA = {
   ARTICLE_IMAGE: 'Article thumbnail image',
   VISIT_SOURCE: 'Visit source website',
   VISIT_ON_X: 'View tweet on X',
+  VISIT_ON_REDDIT: 'View post on Reddit',
   THEME_TOGGLE: 'Toggle light and dark mode',
   FILTER_TOGGLE: 'Toggle search filters',
   CLEAR_SEARCH: 'Clear search',
@@ -121,7 +122,7 @@ export const SECTION = {
   GNEWS: 'GNEWS FEED',
   GNEWS_TOOLTIP: 'Latest UAP/UFO news aggregated from 60,000+ worldwide sources via GNews. English-language articles sorted by recency.',
   INTEL_FEED: 'INTELLIGENCE NEWS FEED',
-  INTEL_FEED_TOOLTIP: 'Unified UAP/UFO news from three sources: GDELT Project (broadcast, print, and web across 100+ languages with sentiment analysis), GNews (60,000+ worldwide sources, English-language), and X/Twitter (real-time public posts from witnesses and researchers). Merged and sorted by date.',
+  INTEL_FEED_TOOLTIP: 'Unified UAP/UFO intelligence feed combining four sources: GDELT Project (global broadcast, print, and web monitoring across 100+ languages with sentiment analysis), GNews (international news coverage), X/Twitter (real-time public sightings and researcher posts), and Reddit (community eyewitness reports and discussions). Results are merged and sorted chronologically.',
   SIGHTING_REPORTS: 'SIGHTING REPORTS'
 } as const
 
@@ -241,6 +242,22 @@ export const TWITTER_MODAL = {
   VERIFIED: 'Verified'
 } as const
 
+// ─── Reddit modal ──────────────────────────────────────────────────
+
+export const REDDIT_MODAL = {
+  SUBREDDIT: 'Subreddit',
+  AUTHOR: 'Author',
+  PUBLISHED: 'Published',
+  DOMAIN: 'Domain',
+  FOOTER_PREFIX: 'Reddit',
+  FOOTER_SEPARATOR: ' · ',
+  EMPTY_VALUE: '—',
+  IMAGE_ALT: 'Reddit post preview',
+  VIEW_ON_REDDIT: 'View on Reddit',
+  SCORE: 'score',
+  COMMENTS: 'comments'
+} as const
+
 // ─── GNews grid ─────────────────────────────────────────────────────
 
 export const GNEWS_GRID = {
@@ -249,11 +266,12 @@ export const GNEWS_GRID = {
 } as const
 
 export const INTEL_FEED = {
-  EMPTY: 'No articles available.',
+   EMPTY: 'No articles available.',
   EMPTY_FILTERED: 'No articles match current filters.',
   SOURCE_GDELT: 'GDELT',
   SOURCE_GNEWS: 'GNews',
   SOURCE_TWITTER: 'X',
+  SOURCE_REDDIT: 'Reddit',
   SEARCH_PLACEHOLDER: 'SEARCH ARTICLES...'
 } as const
 
@@ -303,6 +321,7 @@ export const DATA_SOURCE_DESCRIPTIONS = {
   GDELT: 'Global Database of Events — UAP-related news from CJK and Russian media',
   GNEWS: 'GNews — UAP/UFO news aggregation from 60,000+ worldwide sources via API',
   TWITTER: 'X / Twitter — real-time public posts from UAP witnesses and researchers',
+  REDDIT: 'Reddit — public eyewitness posts and discussion threads from UAP/UFO communities',
   AARO: 'All-domain Anomaly Resolution Office — US DoD official UAP investigations',
   GEIPAN: 'French space agency UAP research unit — European sighting database',
   ENIGMA: 'International catalogue of UFO events and encounter classifications',

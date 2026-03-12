@@ -9,12 +9,13 @@ import { TextInput } from '@/components/text-input'
 import { GdeltModal } from '@/components/gdelt-modal'
 import { GnewsModal } from '@/components/gnews-modal'
 import { TwitterModal } from '@/components/twitter-modal'
+import { RedditModal } from '@/components/reddit-modal'
 import { INTEL_FEED, ARIA } from '@/data/strings'
 import { ComponentSize } from '@/enums'
 import { intelFeedColumns } from './columns'
-import { useGdelt, useGnews, useTwitter, useAppStore, useDebounce } from '@/composables'
+import { useGdelt, useGnews, useTwitter, useReddit, useAppStore, useDebounce } from '@/composables'
 import { tokenMatch } from '@/utils/search'
-import type { IntelArticle, GdeltArticle, GnewsArticle, TwitterArticle, DataGridColumn, SightingFilter } from '@/types'
+import type { IntelArticle, GdeltArticle, GnewsArticle, TwitterArticle, RedditArticle, DataGridColumn, SightingFilter } from '@/types'
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
@@ -62,7 +63,29 @@ function twitterToIntel (a: TwitterArticle): IntelArticle {
   }
 }
 
-function mergeAndDedupe (gdelt: GdeltArticle[], gnews: GnewsArticle[], twitter: TwitterArticle[]): IntelArticle[] {
+function redditToIntel (a: RedditArticle): IntelArticle {
+  return {
+    id: a.id,
+    title: a.title,
+    url: a.url,
+    publishedAt: a.publishedAt,
+    sourceName: a.sourceName,
+    intelSource: 'reddit',
+    description: a.description,
+    imageUrl: a.imageUrl,
+    subreddit: a.subreddit,
+    commentCount: a.commentCount,
+    score: a.score,
+    domain: a.domain
+  }
+}
+
+function mergeAndDedupe (
+  gdelt: GdeltArticle[],
+  gnews: GnewsArticle[],
+  twitter: TwitterArticle[],
+  reddit: RedditArticle[]
+): IntelArticle[] {
   const seen = new Set<string>()
   const merged: IntelArticle[] = []
 
@@ -75,6 +98,9 @@ function mergeAndDedupe (gdelt: GdeltArticle[], gnews: GnewsArticle[], twitter: 
   for (const a of twitter) {
     if (!seen.has(a.id)) { seen.add(a.id); merged.push(twitterToIntel(a)) }
   }
+  for (const a of reddit) {
+    if (!seen.has(a.id)) { seen.add(a.id); merged.push(redditToIntel(a)) }
+  }
 
   merged.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
   return merged
@@ -85,11 +111,18 @@ function mergeAndDedupe (gdelt: GdeltArticle[], gnews: GnewsArticle[], twitter: 
 let gdeltLookup = new Map<string, GdeltArticle>()
 let gnewsLookup = new Map<string, GnewsArticle>()
 let twitterLookup = new Map<string, TwitterArticle>()
+let redditLookup = new Map<string, RedditArticle>()
 
-function buildLookups (gdelt: GdeltArticle[], gnews: GnewsArticle[], twitter: TwitterArticle[]): void {
+function buildLookups (
+  gdelt: GdeltArticle[],
+  gnews: GnewsArticle[],
+  twitter: TwitterArticle[],
+  reddit: RedditArticle[]
+): void {
   gdeltLookup = new Map(gdelt.map(a => [a.id, a]))
   gnewsLookup = new Map(gnews.map(a => [a.id, a]))
   twitterLookup = new Map(twitter.map(a => [a.id, a]))
+  redditLookup = new Map(reddit.map(a => [a.id, a]))
 }
 
 // ─── Component ──────────────────────────────────────────────────────
@@ -100,6 +133,7 @@ export class NewsFeed extends Component {
   private gdelt = useGdelt()
   private gnews = useGnews()
   private twitter = useTwitter()
+  private reddit = useReddit()
   private store = useAppStore()
   private allArticles: IntelArticle[] = []
   private baseArticles: IntelArticle[] = []
@@ -168,18 +202,20 @@ export class NewsFeed extends Component {
   async load (): Promise<IntelArticle[]> {
     this.showLoader()
 
-    const [gdeltArticles, gnewsArticles, twitterArticles] = await Promise.all([
+    const [gdeltArticles, gnewsArticles, twitterArticles, redditArticles] = await Promise.all([
       this.gdelt.load(),
       this.gnews.load(),
-      this.twitter.load()
+      this.twitter.load(),
+      this.reddit.load()
     ])
 
     this.store.gdeltArticles.set(gdeltArticles)
     this.store.gnewsArticles.set(gnewsArticles)
     this.store.twitterArticles.set(twitterArticles)
+    this.store.redditArticles.set(redditArticles)
 
-    buildLookups(gdeltArticles, gnewsArticles, twitterArticles)
-    this.allArticles = mergeAndDedupe(gdeltArticles, gnewsArticles, twitterArticles)
+    buildLookups(gdeltArticles, gnewsArticles, twitterArticles, redditArticles)
+    this.allArticles = mergeAndDedupe(gdeltArticles, gnewsArticles, twitterArticles, redditArticles)
     this.baseArticles = this.allArticles
     this.renderGrid(this.allArticles)
     return this.allArticles
@@ -241,6 +277,10 @@ export class NewsFeed extends Component {
     } else if (article.intelSource === 'twitter') {
       const original = twitterLookup.get(article.id)
       if (original) TwitterModal.open(original, trigger)
+    } else if (article.intelSource === 'reddit') {
+      const full = redditLookup.get(article.id)
+      if (full) RedditModal.open(full, trigger)
+      return
     }
   }
 

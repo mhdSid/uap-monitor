@@ -15,35 +15,39 @@ import { Modal } from '@/components/modal'
 import { Button } from '@/components/button'
 import { ButtonSize } from '@/enums'
 import { Loader } from '@/components/loader'
-import { h, clearChildren, setAttrs, addClass } from '@/utils/dom'
+import { h, clearChildren, addClass } from '@/utils/dom'
 import { WELCOME } from '@/data/strings'
-import { useAnalytics, useNuforc, useHatchUdb, useChronology, useGdelt, useGnews, useTwitter, useFireball } from '@/composables'
+import {
+  useAnalytics,
+  useNuforc,
+  useHatchUdb,
+  useChronology,
+  useGdelt,
+  useGnews,
+  useTwitter,
+  useReddit,
+  useFireball
+} from '@/composables'
 import { useDeriveWelcomeData } from '@/composables/use-welcome-sources'
 import type { WelcomeSource, WelcomeStats } from '@/types'
 
 const TIER_CX: Record<WelcomeSource['tier'], string> = {
   high: cx.sourceTierHigh,
-  mid:  cx.sourceTierMid,
+  mid: cx.sourceTierMid,
   base: cx.sourceTierBase
 }
 
 export class WelcomeModal {
   private static dismissed = false
-
-  /**
-   * Reference to the content wrapper. Set on open, cleared on close.
-   * loadAndRender() checks this before writing — guards against the user
-   * dismissing the modal while data is still in flight.
-   */
   private static contentEl: HTMLElement | null = null
 
   // ─── Public API ────────────────────────────────────────────────
 
   static show (): boolean {
     Modal.open({
-      header:  () => WelcomeModal.buildHeader(),
+      header: () => WelcomeModal.buildHeader(),
       content: () => WelcomeModal.buildContent(),
-      footer:  () => WelcomeModal.buildFooter(),
+      footer: () => WelcomeModal.buildFooter(),
       onClose: () => {
         WelcomeModal.dismissed = true
         WelcomeModal.contentEl = null
@@ -98,10 +102,9 @@ export class WelcomeModal {
     const gdelt = useGdelt()
     const gnews = useGnews()
     const twitter = useTwitter()
+    const reddit = useReddit()
     const fireball = useFireball()
 
-    // All requests are independent — parallelise. Composables cache results
-    // so concurrent calls from app.ts share the same in-flight fetches.
     await Promise.all([
       nuforc.loadManifest(),
       hatch.loadManifest(),
@@ -109,25 +112,28 @@ export class WelcomeModal {
       gdelt.load(),
       gnews.load(),
       twitter.load(),
+      reddit.load(),
       fireball.load()
     ])
 
-    // Guard: user may have dismissed the modal while loading
     if (!WelcomeModal.contentEl) return
+
+    const chronologyManifest = await chronology.loadManifest()
 
     const { stats, sources } = useDeriveWelcomeData({
       nuforc,
       hatch,
       chronology,
-      chronologyManifest:  await chronology.loadManifest(), // cached, free
-      gdeltCollection:     gdelt.getCollection(),
-      gnewsCollection:     gnews.getCollection(),
-      twitterCollection:   twitter.getCollection(),
-      fireballCollection:  fireball.getCollection()
+      chronologyManifest,
+      gdeltCollection: gdelt.getCollection(),
+      gnewsCollection: gnews.getCollection(),
+      twitterCollection: twitter.getCollection(),
+      redditCollection: reddit.getCollection(),
+      fireballCollection: fireball.getCollection()
     })
 
     clearChildren(WelcomeModal.contentEl)
-    addClass(WelcomeModal.contentEl, cx.body )
+    addClass(WelcomeModal.contentEl, cx.body)
 
     WelcomeModal.renderBody(WelcomeModal.contentEl, stats, sources)
   }
@@ -145,10 +151,10 @@ export class WelcomeModal {
 
     body.appendChild(
       h('div', { className: cx.stats },
-        WelcomeModal.stat(stats.timespan,  WELCOME.STAT_TIMESPAN_LABEL),
-        WelcomeModal.stat(stats.records,   WELCOME.STAT_RECORDS_LABEL),
-        WelcomeModal.stat(stats.sources,   WELCOME.STAT_SOURCES_LABEL),
-        WelcomeModal.stat(stats.coverage,  WELCOME.STAT_COVERAGE_LABEL)
+        WelcomeModal.stat(stats.timespan, WELCOME.STAT_TIMESPAN_LABEL),
+        WelcomeModal.stat(stats.records, WELCOME.STAT_RECORDS_LABEL),
+        WelcomeModal.stat(stats.sources, WELCOME.STAT_SOURCES_LABEL),
+        WelcomeModal.stat(stats.coverage, WELCOME.STAT_COVERAGE_LABEL)
       )
     )
 

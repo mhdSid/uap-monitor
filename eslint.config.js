@@ -25,6 +25,7 @@ export default tsEslint.config(
         fetch: 'readonly',
         URL: 'readonly',
         AbortController: 'readonly',
+        URLSearchParams: 'readonly',
         clearTimeout: 'readonly',
         console: 'readonly',
         setTimeout: 'readonly',

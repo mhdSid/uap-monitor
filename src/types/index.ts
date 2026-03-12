@@ -199,7 +199,7 @@ export interface TwitterCollection {
 
 // ─── Unified intelligence feed ──────────────────────────────────────
 
-export type IntelSource = 'gdelt' | 'gnews' | 'twitter'
+export type IntelSource = 'gdelt' | 'gnews' | 'twitter' | 'reddit'
 
 export interface IntelArticle {
   id: string
@@ -220,6 +220,10 @@ export interface IntelArticle {
   authorVerified?: boolean
   likeCount?: number
   repostCount?: number
+  /** Reddit-specific */
+  subreddit?: string
+  commentCount?: number
+  score?: number
 }
 
 export interface DataSource {
@@ -391,4 +395,32 @@ export interface WelcomeStats {
 export interface WelcomeData {
   stats: WelcomeStats
   sources: WelcomeSource[]
+}
+
+// ─── Reddit layer ───────────────────────────────────────────────────
+
+export interface RedditArticle {
+  id: string
+  title: string
+  description: string
+  content: string
+  url: string
+  sourceUrl?: string | null
+  imageUrl?: string | null
+  publishedAt: string
+  sourceName: string
+  authorName: string
+  score: number
+  commentCount: number
+  over18: boolean
+  isVideo: boolean
+  domain: string
+  subreddit: string
+}
+
+export interface RedditCollection {
+  generatedAt: string
+  queries: number
+  totalResults: number
+  articles: RedditArticle[]
 }

@@ -168,6 +168,14 @@ const SOURCE_REGISTRY: DataSource[] = [
     dataLabel: 'JSON'
   },
   {
+    id: DataSourceId.REDDIT,
+    label: 'Reddit',
+    status: DataSourceStatus.SYNCING,
+    url: 'https://www.reddit.com/r/UFOs/',
+    description: DATA_SOURCE_DESCRIPTIONS.REDDIT,
+    dataUrl: '/data/reddit-articles.json'
+  },
+  {
     id: DataSourceId.AARO,
     label: 'AARO',
     status: DataSourceStatus.DISABLED,

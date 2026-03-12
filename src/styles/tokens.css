@@ -71,6 +71,12 @@
   /* Purple */
   --c-purple-500: #a78bfa;
 
+  /* Reddit */
+  --c-reddit-500: #ff4500;
+  --c-reddit-500-20: rgba(255, 69, 0, 0.2);
+  --c-reddit-500-12: rgba(255, 69, 0, 0.12);
+  --c-reddit-500-08: rgba(255, 69, 0, 0.08);
+
   /* Neutral */
   --c-neutral-975: #050505;
   --c-neutral-960: #0e0e0e;
@@ -113,11 +119,13 @@
   --color-red: var(--c-red-500);
   --color-cyan: var(--c-cyan-500);
   --color-purple: var(--c-purple-500);
+  --color-reddit: var(--c-reddit-500);
 
   /* Source marker colors */
   --color-source-nuforc: var(--c-green-400);
   --color-source-hatch: var(--c-cyan-400);
   --color-source-chronology: var(--c-amber-400);
+  --color-source-reddit: var(--c-reddit-500);
 
   /* Credibility tier colors */
   --color-cred-high: var(--c-green-500);
@@ -128,48 +136,43 @@
   --font-mono: 'Menlo', 'Monaco', 'Cascadia Mono', 'Courier New', monospace;
 
   /* Font scale — base 2, multiples of 2px where possible */
-  --fs-3xs:  8px;   /* micro: map overlays, ultra-compact badges */
-  --fs-2xs: 10px;   /* extra micro: source meta, footer domain */
-  --fs-xxs: 11px;   /* extra extra small: tooltip triggers, hints */
-  --fs-xs:  12px;   /* extra small: labels, tags, secondary data */
-  --fs-sm:  13px;   /* small: table cells, modal values */
-  --fs-body: 14px;  /* body: default prose, grid rows */
-  --fs-title: 16px; /* title: section headers, card titles */
-  --fs-lg:  18px;   /* large: modal titles, welcome header */
-  --fs-xl:  20px;   /* xl: feature headings (reserved) */
+  --fs-3xs:  8px;
+  --fs-2xs: 10px;
+  --fs-xxs: 11px;
+  --fs-xs:  12px;
+  --fs-sm:  13px;
+  --fs-body: 14px;
+  --fs-title: 16px;
+  --fs-lg:  18px;
+  --fs-xl:  20px;
 
-  /* ── Spacing scale ────────────────────────────────────────────────
-   *  Base unit: 2px. All values are multiples of 2.
-   *  Numeric vars are the canonical scale; semantic aliases layer on top.
-   * ──────────────────────────────────────────────────────────────── */
-
-  /* Primitive scale */
-  --space-px: 1px;   /* Hair-line: sentinel height, 1px offsets */
-  --space-1:  2px;   /* 1× base */
-  --space-2:  4px;   /* 2× base */
-  --space-3:  6px;   /* 3× base */
-  --space-4:  8px;   /* 4× base */
-  --space-5: 10px;   /* 5× base */
-  --space-6: 12px;   /* 6× base */
-  --space-7: 14px;   /* 7× base */
-  --space-8: 16px;   /* 8× base */
-  --space-10: 20px;  /* 10× base */
-  --space-12: 24px;  /* 12× base */
-  --space-14: 28px;  /* 14× base */
-  --space-16: 32px;  /* 16× base */
-  --space-20: 40px;  /* 20× base */
-  --space-24: 48px;  /* 24× base */
-  --space-28: 56px;  /* 28× base */
-  --space-32: 64px;  /* 32× base */
+  /* ── Spacing scale ──────────────────────────────────────────────── */
+  --space-px: 1px;
+  --space-1:  2px;
+  --space-2:  4px;
+  --space-3:  6px;
+  --space-4:  8px;
+  --space-5: 10px;
+  --space-6: 12px;
+  --space-7: 14px;
+  --space-8: 16px;
+  --space-10: 20px;
+  --space-12: 24px;
+  --space-14: 28px;
+  --space-16: 32px;
+  --space-20: 40px;
+  --space-24: 48px;
+  --space-28: 56px;
+  --space-32: 64px;
 
   /* Semantic aliases */
-  --space-xs:  var(--space-2);   /*  4px */
-  --space-sm:  var(--space-4);   /*  8px */
-  --space-md:  var(--space-6);   /* 12px */
-  --space-lg:  var(--space-8);   /* 16px */
-  --space-xl:  var(--space-12);  /* 24px */
-  --space-2xl: var(--space-16);  /* 32px */
-  --space-3xl: var(--space-24);  /* 48px */
+  --space-xs:  var(--space-2);
+  --space-sm:  var(--space-4);
+  --space-md:  var(--space-6);
+  --space-lg:  var(--space-8);
+  --space-xl:  var(--space-12);
+  --space-2xl: var(--space-16);
+  --space-3xl: var(--space-24);
 
   /* ── Border radius ────────────────────────────────────────────────── */
   --radius-sm: 2px;
@@ -181,23 +184,18 @@
   /* --bp-sm: 768px;  → @media (min-width: 768px)                    */
 
   /* ── Z-index layers ───────────────────────────────────────────────── */
-  --z-base:    1;
-  --z-sticky:  10;
+  --z-base: 1;
+  --z-sticky: 10;
   --z-tooltip: 100;
-  --z-fab:     9999;
-  --z-modal:   99999;
+  --z-fab: 9999;
+  --z-modal: 99999;
   --z-dropdown: 199999;
-  --z-drawer:  999999;
-  --z-toast:   9999999;
+  --z-drawer: 999999;
+  --z-toast: 9999999;
   --z-scanlines: 99999999;
 }
 
-/* ─── Desktop typography scale ─────────────────────────────────────
- *  Bumps font tokens for comfortable reading on desktop monitors.
- *  SP values (above) are the base; PC gets +1px on body sizes, +2px on headings.
- *  Inputs/selects use these same tokens — a 1px proportional bump keeps them
- *  consistent with surrounding content rather than looking undersized.
- * ─────────────────────────────────────────────────────────────────── */
+/* ─── Desktop typography scale ───────────────────────────────────── */
 
 @media (min-width: 768px) {
   :root {
@@ -213,11 +211,7 @@
   }
 }
 
-/* ─── Light theme ──────────────────────────────────────────────────
- *  Overrides raw palette + semantic tokens.
- *  All component CSS references vars, so no component changes needed.
- *  WCAG AA: text ≥ 4.5:1, UI elements ≥ 3:1 against backgrounds.
- * ─────────────────────────────────────────────────────────────────── */
+/* ─── Light theme ────────────────────────────────────────────────── */
 
 [data-theme="light"] {
   /* ── Neutral palette overrides ───────────────────────────────────── */
@@ -281,7 +275,7 @@
   --c-amber-400-20: rgba(194, 97, 12, 0.2);
   --c-amber-400-12: rgba(194, 97, 12, 0.12);
 
-  /* ── Red / Cyan / Purple ───────────────────────────────────────── */
+  /* ── Red / Cyan / Purple / Reddit ──────────────────────────────── */
   --c-red-500: #dc2626;
   --c-cyan-500: #0891b2;
   --c-cyan-400: #0284a8;
@@ -291,6 +285,10 @@
   --c-cyan-400-20: rgba(2, 132, 168, 0.2);
   --c-cyan-400-12: rgba(2, 132, 168, 0.12);
   --c-purple-500: #7c3aed;
+  --c-reddit-500: #d93a00;
+  --c-reddit-500-20: rgba(217, 58, 0, 0.2);
+  --c-reddit-500-12: rgba(217, 58, 0, 0.12);
+  --c-reddit-500-08: rgba(217, 58, 0, 0.08);
 
   /* ── Semantic (auto-derived from overridden palette) ────────────── */
   --color-bg: var(--c-neutral-950);
@@ -306,9 +304,11 @@
   --color-red: var(--c-red-500);
   --color-cyan: var(--c-cyan-500);
   --color-purple: var(--c-purple-500);
+  --color-reddit: var(--c-reddit-500);
   --color-source-nuforc: var(--c-green-400);
   --color-source-hatch: var(--c-cyan-400);
   --color-source-chronology: var(--c-amber-400);
+  --color-source-reddit: var(--c-reddit-500);
 
   /* ── Transitions ─────────────────────────────────────────────── */
   --transition-fast: 0.15s ease;

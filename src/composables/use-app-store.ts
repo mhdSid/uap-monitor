@@ -17,7 +17,16 @@
  * └─────────────────────────────────────────────────────────┘
  */
 
-import type { Sighting, SightingFilter, DataSource, GdeltArticle, GnewsArticle, TwitterArticle, Fireball } from '@/types'
+import type {
+  Sighting,
+  SightingFilter,
+  DataSource,
+  GdeltArticle,
+  GnewsArticle,
+  TwitterArticle,
+  RedditArticle,
+  Fireball
+} from '@/types'
 import type { Continent } from '@/enums'
 import { signal, computed } from './use-store'
 import type { Signal, ReadonlySignal } from './use-store'
@@ -46,7 +55,10 @@ export interface AppStore {
   gdeltArticles: Signal<GdeltArticle[]>
   /** GNews articles (loaded separately). */
   gnewsArticles: Signal<GnewsArticle[]>
+  /** X / Twitter posts (loaded separately). */
   twitterArticles: Signal<TwitterArticle[]>
+  /** Reddit posts (loaded separately). */
+  redditArticles: Signal<RedditArticle[]>
   /** NASA Fireball events. */
   fireballs: Signal<Fireball[]>
 
@@ -77,6 +89,7 @@ export function useAppStore (): AppStore {
   const gdeltArticles = signal<GdeltArticle[]>([])
   const gnewsArticles = signal<GnewsArticle[]>([])
   const twitterArticles = signal<TwitterArticle[]>([])
+  const redditArticles = signal<RedditArticle[]>([])
   const fireballs = signal<Fireball[]>([])
 
   const selectedContinent = computed<Continent | undefined>(
@@ -104,6 +117,7 @@ export function useAppStore (): AppStore {
     gdeltArticles,
     gnewsArticles,
     twitterArticles,
+    redditArticles,
     fireballs,
     selectedContinent,
     hasActiveFilter,

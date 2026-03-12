@@ -33,6 +33,11 @@ const TAG_STYLES: Record<TagVariant, TagStyle> = {
   [TagVariant.SOURCE_GDELT]: { color: 'var(--color-amber)', bg: 'transparent', border: 'var(--color-amber)' },
   [TagVariant.SOURCE_GNEWS]: { color: 'var(--color-cyan)', bg: 'transparent', border: 'var(--color-cyan)' },
   [TagVariant.SOURCE_TWITTER]: { color: 'var(--color-text)', bg: 'transparent', border: 'var(--color-dim)' },
+  [TagVariant.SOURCE_REDDIT]: {
+    color: 'var(--color-reddit)',
+    bg: 'transparent',
+    border: 'var(--color-reddit)'
+  },
   [TagVariant.COUNT]: { color: 'var(--color-muted)', bg: 'transparent', border: 'var(--color-border)' },
   [TagVariant.STATUS_VERIFIED]: { color: 'var(--color-green)', bg: 'transparent' },
   [TagVariant.STATUS_PENDING]: { color: 'var(--color-amber)', bg: 'transparent' },
@@ -122,7 +127,8 @@ export function createNewsSourceTag (label: string): HTMLElement {
 const INTEL_SOURCE_VARIANT: Record<string, TagVariant> = {
   gdelt: TagVariant.SOURCE_GDELT,
   gnews: TagVariant.SOURCE_GNEWS,
-  twitter: TagVariant.SOURCE_TWITTER
+  twitter: TagVariant.SOURCE_TWITTER,
+  reddit: TagVariant.SOURCE_REDDIT
 }
 
 export function createIntelSourceTag (source: string, label: string): HTMLElement {

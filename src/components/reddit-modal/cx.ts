@@ -1,0 +1,22 @@
+export const cx = {
+  header: 'reddit-modal__header',
+  title: 'reddit-modal__title',
+  meta: 'reddit-modal__meta',
+  subreddit: 'reddit-modal__subreddit',
+  author: 'reddit-modal__author',
+  content: 'reddit-modal__content',
+  image: 'reddit-modal__image',
+  titleText: 'reddit-modal__title-text',
+  description: 'reddit-modal__description',
+  stats: 'reddit-modal__stats',
+  stat: 'reddit-modal__stat',
+  statValue: 'reddit-modal__stat-value',
+  statLabel: 'reddit-modal__stat-label',
+  row: 'reddit-modal__row',
+  label: 'reddit-modal__label',
+  value: 'reddit-modal__value',
+  link: 'reddit-modal__link',
+  footer: 'reddit-modal__footer',
+  footerLink: 'reddit-modal__footer-link',
+  sourceTag: 'reddit-modal__source-tag'
+} as const
