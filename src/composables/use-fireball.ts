@@ -1,4 +1,4 @@
-import type { Fireball, FireballCollection, Sighting, GdeltArticle, GnewsArticle } from '@/types'
+import type { Fireball, FireballCollection, Sighting, GdeltArticle, GnewsArticle, TwitterArticle, RedditArticle } from '@/types'
 import { fetchJson, dataUrl } from './use-fetch'
 
 // ─── Geo helpers ────────────────────────────────────────────────────
@@ -98,8 +98,10 @@ export function useFireball () {
     sighting: Sighting,
     gdeltArticles: GdeltArticle[],
     gnewsArticles: GnewsArticle[],
+    twitterArticles: TwitterArticle[],
+    redditArticles: RedditArticle[],
     opts?: { maxDays?: number; limit?: number }
-  ): { gdelt: GdeltArticle[]; gnews: GnewsArticle[] } {
+  ): { gdelt: GdeltArticle[], gnews: GnewsArticle[], twitterNews: TwitterArticle[], redditNews: RedditArticle[] } {
     const maxDays = opts?.maxDays ?? 7
     const limit = opts?.limit ?? 5
 
@@ -111,7 +113,15 @@ export function useFireball () {
       .filter(a => daysBetween(sighting.occurredAt, a.publishedAt) <= maxDays)
       .slice(0, limit)
 
-    return { gdelt, gnews }
+    const twitterNews = twitterArticles
+      .filter(a => daysBetween(sighting.occurredAt, a.publishedAt) <= maxDays)
+      .slice(0, limit)
+
+    const redditNews = redditArticles
+      .filter(a => daysBetween(sighting.occurredAt, a.publishedAt) <= maxDays)
+      .slice(0, limit)
+
+    return { gdelt, gnews, twitterNews, redditNews }
   }
 
   return {

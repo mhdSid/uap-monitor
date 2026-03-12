@@ -6,7 +6,7 @@ import { cx } from './cx'
  *  Opens via Modal.open() with structured header/content/footer.      *
  * ------------------------------------------------------------------ */
 
-import type { Sighting, Fireball, GdeltArticle, GnewsArticle } from '@/types'
+import type { Sighting, Fireball, GdeltArticle, GnewsArticle, TwitterArticle, RedditArticle } from '@/types'
 import { DataSourceId, TagVariant } from '@/enums'
 import { h } from '@/utils/dom'
 import { formatLocation } from '@/utils/format'
@@ -14,7 +14,7 @@ import { StatusTag, Tag } from '@/components/tags'
 import { BookmarkButton } from '@/components/bookmark-button'
 import { ShareButton } from '@/components/share-button'
 import { Modal } from '@/components/modal'
-import { MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
+import { ACTIVE_SOURCES, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
 import { useAnalytics, getSourceUrl, useFireball, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
 
@@ -143,10 +143,12 @@ export class SightingModal {
     const related = fireball.findRelatedNews(
       s,
       store.gdeltArticles.get(),
-      store.gnewsArticles.get()
+      store.gnewsArticles.get(),
+      store.twitterArticles.get(),
+      store.redditArticles.get()
     )
 
-    children.push(SightingModal.buildRelatedNews(related.gdelt, related.gnews))
+    children.push(SightingModal.buildRelatedNews(related.gdelt, related.gnews, related.twitterNews, related.redditNews))
 
     return h('div', { className: cx.content }, ...children)
   }
@@ -198,14 +200,18 @@ export class SightingModal {
 
   private static buildRelatedNews (
     gdelt: GdeltArticle[],
-    gnews: GnewsArticle[]
+    gnews: GnewsArticle[],
+    twitterNews: TwitterArticle[],
+    redditNews: RedditArticle[]
   ): HTMLElement {
     const section = h('div', { className: cx.relatedSection })
     section.appendChild(h('div', { className: cx.relatedTitle }, RELATED.NEWS_TITLE))
 
     const allNews = [
       ...gdelt.map(a => ({ title: a.title, url: a.url, date: a.publishedAt, source: a.domain })),
-      ...gnews.map(a => ({ title: a.title, url: a.url, date: a.publishedAt, source: a.sourceName }))
+      ...gnews.map(a => ({ title: a.title, url: a.url, date: a.publishedAt, source: a.sourceName })),
+      ...twitterNews.map(a => ({ title: a.text, url: a.url, date: a.publishedAt, source: DataSourceId.TWITTER })),
+      ...redditNews.map(a => ({ title: a.title, url: a.url, date: a.publishedAt, source: DataSourceId.REDDIT }))
     ].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5)
 
     if (allNews.length === 0) {

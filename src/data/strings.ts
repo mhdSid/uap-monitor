@@ -266,7 +266,7 @@ export const GNEWS_GRID = {
 } as const
 
 export const INTEL_FEED = {
-   EMPTY: 'No articles available.',
+  EMPTY: 'No articles available.',
   EMPTY_FILTERED: 'No articles match current filters.',
   SOURCE_GDELT: 'GDELT',
   SOURCE_GNEWS: 'GNews',
