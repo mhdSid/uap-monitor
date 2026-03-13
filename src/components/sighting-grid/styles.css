@@ -90,6 +90,13 @@
   gap: var(--space-6);
 }
 
+.grids-list {
+  contain: layout style;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
 /* SP: hide CRED + STATUS, show DATE. Inline cred visible in bottom row. */
 .grids-container .data-grid__th:nth-child(2),
 .grids-container .data-grid__td:nth-child(2),
@@ -152,7 +159,7 @@
 
 .grids-heading {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-md);
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--color-text-strong);

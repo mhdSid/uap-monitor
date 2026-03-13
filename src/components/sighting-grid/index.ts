@@ -8,7 +8,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, clearChildren, setStyles } from '@/utils/dom'
+import { h, clearChildren, setStyles, addClass } from '@/utils/dom'
 import { Section } from '@/components/layout'
 import { DataGrid } from '@/components/data-grid'
 import { SightingModal } from '@/components/sighting-modal'
@@ -83,37 +83,51 @@ export class SightingGrids extends Component {
 
     frag.appendChild(h('h2', { className: cx.heading }, SECTION.SIGHTING_REPORTS))
 
+    const domSections: Section[] = []
+
     for (const group of groups) {
       if (version !== this.renderVersion) return
 
       if (group.count > 0) {
         const section = this.createContinentSection(group.continent, group.items)
 
-        frag.appendChild(
-          new Section({
-            title: group.label,
-            count: group.count,
-            tooltip: CONTINENT_TOOLTIPS[group.continent],
-            content: section.wrapper
-          }).el
-        )
+        const sectionComp = new Section({
+          title: group.label,
+          count: group.count,
+          tooltip: CONTINENT_TOOLTIPS[group.continent],
+          content: section.wrapper
+        })
+
+        addClass(sectionComp.el, cx[group.continent])
+
+        domSections.push(sectionComp)
       } else if (!selected) {
-        frag.appendChild(
-          new Section({
-            title: group.label,
-            count: group.count,
-            tooltip: CONTINENT_TOOLTIPS[group.continent],
-            content: h('div', { className: `${cx.emptyState} ${cx.emptyStateCompact}` },
-              h('span', { className: cx.emptyStateText },
-                CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT
-              )
+        const sectionComp = new Section({
+          title: group.label,
+          count: group.count,
+          tooltip: CONTINENT_TOOLTIPS[group.continent],
+          content: h('div', { className: `${cx.emptyState} ${cx.emptyStateCompact}` },
+            h('span', { className: cx.emptyStateText },
+              CONTINENT_EMPTY[group.continent] ?? FILTER.EMPTY_DEFAULT
             )
-          }).el
-        )
+          )
+        })
+
+        addClass(sectionComp.el, cx[group.continent])
+        domSections.push(sectionComp)
       }
 
       if (isRerender) await yieldThread()
     }
+
+    frag.appendChild(
+      h('div',
+        {
+          className: cx.gridsList
+        },
+        ...domSections.map(domSection => domSection.el)
+      )
+    )
 
     this.el.appendChild(frag)
   }
@@ -127,6 +141,7 @@ export class SightingGrids extends Component {
       data: items,
       onRowClick: (s, trigger) => SightingModal.open(s, trigger)
     })
+
     this.activeGrids.push(grid)
     gridContainer.appendChild(grid.el)
 
