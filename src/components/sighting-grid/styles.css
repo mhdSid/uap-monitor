@@ -124,6 +124,76 @@
   width: 55px;
 }
 
+/* ── Americas ───────────────────────────────────────────────────── */
+
+.grids-americas {
+  border: 1px solid var(--color-continent-americas);
+}
+
+.grids-americas .section__header {
+  border-bottom: 1px solid var(--color-continent-americas);
+}
+
+/* ── Europe ─────────────────────────────────────────────────────── */
+
+.grids-europe {
+  border: 1px solid var(--color-continent-europe);
+}
+
+.grids-europe .section__header {
+  border-bottom: 1px solid var(--color-continent-europe);
+}
+
+/* ── Eurasia ────────────────────────────────────────────────────── */
+
+.grids-eurasia {
+  border: 1px solid var(--color-continent-eurasia);
+}
+
+.grids-eurasia .section__header {
+  border-bottom: 1px solid var(--color-continent-eurasia);
+}
+
+/* ── Asia – Middle East ─────────────────────────────────────────── */
+
+.grids-asia-middleeast {
+  border: 1px solid var(--color-continent-asia-middleeast);
+}
+
+.grids-asia-middleeast .section__header {
+  border-bottom: 1px solid var(--color-continent-asia-middleeast);
+}
+
+/* ── Asia – Pacific ─────────────────────────────────────────────── */
+
+.grids-asia-pacific {
+  border: 1px solid var(--color-continent-asia-pacific);
+}
+
+.grids-asia-pacific .section__header {
+  border-bottom: 1px solid var(--color-continent-asia-pacific);
+}
+
+/* ── Oceania ────────────────────────────────────────────────────── */
+
+.grids-oceania {
+  border: 1px solid var(--color-continent-oceania);
+}
+
+.grids-oceania .section__header {
+  border-bottom: 1px solid var(--color-continent-oceania);
+}
+
+/* ── Africa ─────────────────────────────────────────────────────── */
+
+.grids-africa {
+  border: 1px solid var(--color-continent-africa);
+}
+
+.grids-africa .section__header {
+  border-bottom: 1px solid var(--color-continent-africa);
+}
+
 /* Desktop: show all columns with fixed widths */
 @media (min-width: 768px) {
   .cell-report__summary { -webkit-line-clamp: 2; }

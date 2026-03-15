@@ -1,8 +1,63 @@
 {
-  "generatedAt": "2026-03-13T00:52:02.500Z",
+  "generatedAt": "2026-03-15T05:06:39.847Z",
   "queries": 8,
-  "totalResults": 38,
+  "totalResults": 43,
   "articles": [
+    {
+      "id": "2f01e48c378f",
+      "title": "Channel 5 star beats hasty retreat after 'dangerously close encounter'",
+      "description": "One TV star and adventurer had to move fast to avoid a potentially dangerous situation.",
+      "content": "TV star Steve Backshall had a \"dangerously close encounter\" as he filmed a series about hippos.\nThe naturalist and explorer got up close to the animals while making Hippo Watch with Steve Backshall, which can be seen on Channel 5. But a clip from the... [2777 chars]",
+      "url": "https://www.express.co.uk/showbiz/tv-radio/2182268/channel-5-star-beats-hasty-retreat-steve-backshall-hippos",
+      "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/20/1200x630/6801108.jpg",
+      "publishedAt": "2026-03-14T17:05:00Z",
+      "sourceName": "Daily Express",
+      "sourceUrl": "https://www.express.co.uk"
+    },
+    {
+      "id": "3019e0af77a4",
+      "title": "Mystery Source Behind Trump's July 8 UFO Speech Claim Allegedly Leaked in New Interview",
+      "description": "A new interview sheds light on the mysterious source behind claims that Donald Trump prepared a July 8 UFO disclosure speech, with speculation pointing towards billionaire researcher Robert Bigelow.",
+      "content": "The mystery behind claims that Donald Trump planned a dramatic UFO disclosure speech on July 8 has taken a new twist after filmmaker Mark Christopher Lee suggested his source may be a well known scientist and businessman with deep ties to UFO researc... [4214 chars]",
+      "url": "https://www.ibtimes.com/mystery-source-behind-trumps-july-8-ufo-speech-claim-allegedly-leaked-new-interview-3799098",
+      "imageUrl": "https://d.ibtimes.com/en/full/4640820/tim-burchett-warns-uaps-are-real-concealed-specific.png",
+      "publishedAt": "2026-03-13T11:22:25Z",
+      "sourceName": "International Business Times",
+      "sourceUrl": "https://www.ibtimes.com"
+    },
+    {
+      "id": "be6e17908f29",
+      "title": "Mysterious trio of lights 'chasing each other' spotted over New York City in eerie UFO sighting",
+      "description": "A swarm of strange lights over a New York City neighborhood have opened up a new mystery as speculation about UFOs continues to grow.",
+      "content": "A strange trio of objects flying over New York City appeared to have all the signs of a real UFO encounter.\nCharlie Correa, from New York's borough of Queens, spotted a single bright light in the sky on March 8 around 8.30pm ET.\nThinking it was a sho... [3382 chars]",
+      "url": "https://www.dailymail.co.uk/sciencetech/article-15639553/ufo-lights-new-york-city-sighting.html",
+      "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/13/09/107088191-0-image-m-24_1773392463457.jpg",
+      "publishedAt": "2026-03-13T03:37:02Z",
+      "sourceName": "Daily Mail Online",
+      "sourceUrl": "https://www.dailymail.co.uk"
+    },
+    {
+      "id": "738789b73f01",
+      "title": "While the US government is investigating unidentified anomalous phenomena, academic researchers studying them face stigma",
+      "description": "Surveys have found that researchers studying UAPs can face pushback from mentors and colleagues, even from people who think it’s an important line of research.",
+      "content": "President Donald Trump directed the Pentagon and other federal agencies to begin releasing government files related to UFOs and unidentified anomalous phenomena – called UAP – in February 2026, following years of pressure from Congress, military whis... [7638 chars]",
+      "url": "https://theconversation.com/while-the-us-government-is-investigating-unidentified-anomalous-phenomena-academic-researchers-studying-them-face-stigma-277722",
+      "imageUrl": "https://images.theconversation.com/files/722607/original/file-20260306-57-v6lipj.jpg?ixlib=rb-4.1.0&rect=502%2C307%2C1325%2C662&q=45&auto=format&w=1356&h=668&fit=crop",
+      "publishedAt": "2026-03-13T00:00:00Z",
+      "sourceName": "The Conversation",
+      "sourceUrl": "https://theconversation.com"
+    },
+    {
+      "id": "857f1ad70c7f",
+      "title": "UFO Disclosure survival guide can save human race from catastrophe",
+      "description": "Ufologist and filmmaker Mark Christopher Lee has created a survival guide so the human race can cope with UFO disclosure.",
+      "content": "Mark Christopher Lee has written a survival guide so the human race can cope with UFO disclosure.\nThe British ufologist has penned UFO Disclosure And How To Survive It as the time aliens reveal their existence to the world approaches.\nLee believes UF... [2913 chars]",
+      "url": "https://www.perthnow.com.au/news/world/ufo-disclosure-survival-guide-can-save-human-race-from-catastrophe-c-21925355",
+      "imageUrl": "https://images.perthnow.com.au/publication/C-21925355/c37e1e7c197ae21ef6aa29f348216fc68576cfff-16x9-x0y192w2048h1152.jpg?imwidth=1200",
+      "publishedAt": "2026-03-12T16:50:39Z",
+      "sourceName": "PerthNow",
+      "sourceUrl": "https://www.perthnow.com.au"
+    },
     {
       "id": "ece043eea303",
       "title": "Hollywood is Taking UFOs Seriously With Rival \"Disclosure\" Projects",
