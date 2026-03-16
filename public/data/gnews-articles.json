@@ -1,8 +1,30 @@
 {
-  "generatedAt": "2026-03-15T05:06:39.847Z",
+  "generatedAt": "2026-03-16T09:23:58.700Z",
   "queries": 8,
-  "totalResults": 43,
+  "totalResults": 45,
   "articles": [
+    {
+      "id": "50d3c8693fb0",
+      "title": "The government is very serious about UFOs. So why are researchers being stymied?",
+      "description": "An unidentified anomalous phenomena researcher discusses the stigma faced by similar experts conducting their studies into other UAP events while the government continues to release reports on the topic.",
+      "content": "President Donald Trump directed the Pentagon and other federal agencies to begin releasing government files related to UFOs and unidentified anomalous phenomena — called UAP — in February 2026, following years of pressure from Congress, military whis... [7658 chars]",
+      "url": "https://www.livescience.com/space/extraterrestrial-life/the-government-is-very-serious-about-ufos-so-why-are-researchers-being-stymied",
+      "imageUrl": "https://cdn.mos.cms.futurecdn.net/9djqga9zFCiMF8QLu4saRK-1920-80.jpg",
+      "publishedAt": "2026-03-15T12:00:00Z",
+      "sourceName": "Livescience.com",
+      "sourceUrl": "https://www.livescience.com"
+    },
+    {
+      "id": "25b6adc5447d",
+      "title": "Trump UFO Directive Could Shake Religion Science And Power Structures Worldwide",
+      "description": "By Samuel A. Lopez | USA Herald - Something unusual is happening in Washington. President Donald Trump has ordered federal agencies to release long-classified UFO and unidentified aerial phenomena records. And depending on what emerges, the consequences could extend far beyond science or national security. The potential impact may reach into something far deeper: human belief itself. For Trump’s UFO disclosure directive could shake science, religion, and global power structures as questions grow about alien technology, consciousness, and hidden government research.",
+      "content": "By Samuel A. Lopez | USA Herald - Something unusual is happening in Washington. President Donald Trump has ordered federal agencies to release long-classified UFO and unidentified aerial phenomena records. And depending on what emerges, the consequen... [6743 chars]",
+      "url": "https://usaherald.com/trump-ufo-directive-could-shake-religion-science-and-power-structures-worldwide/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-03-14T23:49:03Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
+    },
     {
       "id": "2f01e48c378f",
       "title": "Channel 5 star beats hasty retreat after 'dangerously close encounter'",
