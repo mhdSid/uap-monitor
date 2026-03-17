@@ -116,11 +116,13 @@ export class SightingMap extends Component<SightingMapProps> {
       zoom: DEFAULT_ZOOM,
       minZoom: MIN_ZOOM,
       maxZoom: MAX_ZOOM,
-      zoomControl: true,
+      zoomControl: false,
       attributionControl: true,
       preferCanvas: true,
       worldCopyJump: true
     })
+
+    L.control.zoom({ position: 'bottomleft' }).addTo(this.map)
 
     this.tileLayer = L.tileLayer(DARK_TILES, {
       attribution: TILE_ATTR,
@@ -336,7 +338,13 @@ export class SightingMap extends Component<SightingMapProps> {
           h('div', { className: cx.mapPopupLocation }, nf.name),
           h('div', { className: cx.mapPopupMeta }, `${typeLabel} · ${statusLabel}`),
           h('div', { className: cx.mapPopupMeta }, nf.country)
-        ), { maxWidth: 260, closeButton: true }
+        ), {
+          maxWidth: 260,
+          minWidth: isTouchDevice ? 220 : 200,
+          closeButton: true,
+          autoPan: true,
+          autoPanPadding: L.point(40, 40)
+        }
       )
 
       this.nuclearLayer.addLayer(marker)
