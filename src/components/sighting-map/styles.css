@@ -260,6 +260,17 @@
   }
 }
 
+/* ── Nuclear facility icon ────────────────────────────────────────── */
+
+.map-nuclear-icon {
+  background: none !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+}
+
 @media (min-width: 768px) {
   .sighting-map {
     max-height: 500px;

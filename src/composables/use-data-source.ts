@@ -180,6 +180,15 @@ const SOURCE_REGISTRY: DataSource[] = [
     dataUrl: '/data/reddit-articles.json'
   },
   {
+    id: DataSourceId.NUCLEAR,
+    label: 'Nuclear Facilities',
+    status: DataSourceStatus.ONLINE,
+    url: 'https://pris.iaea.org',
+    description: DATA_SOURCE_DESCRIPTIONS.NUCLEAR,
+    dataUrl: '/data/nuclear-facilities.json',
+    dataLabel: 'JSON'
+  },
+  {
     id: DataSourceId.AARO,
     label: 'AARO',
     status: DataSourceStatus.DISABLED,

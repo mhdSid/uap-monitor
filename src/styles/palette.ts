@@ -61,5 +61,6 @@ export const colors = {
   sourceHatch: palette.cyan400,
   sourceChronology: palette.amber400,
   sourceExperiencer: palette.purple500,
-  sourceFireball: '#ff6b35'
+  sourceFireball: '#ff6b35',
+  sourceNuclear: '#fbbf24'
 } as const

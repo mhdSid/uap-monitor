@@ -15,8 +15,9 @@ import { BookmarkButton } from '@/components/bookmark-button'
 import { ShareButton } from '@/components/share-button'
 import { Modal } from '@/components/modal'
 import { ACTIVE_SOURCES, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
-import { useAnalytics, getSourceUrl, useFireball, useAppStore } from '@/composables'
+import { useAnalytics, getSourceUrl, useFireball, useNuclear, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
+import type { NearbyFacility } from '@/composables/use-nuclear'
 
 function resolveSourceLabel (s: Sighting): string {
   if (s.source === DataSourceId.CHRONOLOGY && s.subSource) {
@@ -150,6 +151,11 @@ export class SightingModal {
 
     children.push(SightingModal.buildRelatedNews(related.gdelt, related.gnews, related.twitterNews, related.redditNews))
 
+    // ── Nearby nuclear facilities ─────────────────────────────────
+    const nuclear = useNuclear()
+    const nearbyNuclear = nuclear.findNearSighting(s)
+    children.push(SightingModal.buildRelatedNuclear(nearbyNuclear))
+
     return h('div', { className: cx.content }, ...children)
   }
 
@@ -231,6 +237,43 @@ export class SightingModal {
           h('span', { className: cx.relatedItemMeta },
             `${item.source} · ${item.date.slice(0, 10)}`
           )
+        )
+      )
+    }
+
+    return section
+  }
+
+  // ─── Nuclear type label lookup ──────────────────────────────────
+
+  private static readonly NUCLEAR_TYPE_LABEL: Record<string, string> = {
+    reactor: RELATED.NUCLEAR_TYPE_REACTOR,
+    weapons_lab: RELATED.NUCLEAR_TYPE_WEAPONS_LAB,
+    test_site: RELATED.NUCLEAR_TYPE_TEST_SITE,
+    enrichment: RELATED.NUCLEAR_TYPE_ENRICHMENT,
+    research: RELATED.NUCLEAR_TYPE_RESEARCH,
+    reprocessing: RELATED.NUCLEAR_TYPE_REPROCESSING,
+    storage: RELATED.NUCLEAR_TYPE_STORAGE,
+    decommissioned: RELATED.NUCLEAR_TYPE_DECOMMISSIONED
+  }
+
+  private static buildRelatedNuclear (nearby: NearbyFacility[]): HTMLElement {
+    const section = h('div', { className: cx.relatedSection })
+    section.appendChild(h('div', { className: cx.relatedTitle }, RELATED.NUCLEAR_TITLE))
+
+    if (nearby.length === 0) {
+      section.appendChild(h('div', { className: cx.relatedEmpty }, RELATED.NUCLEAR_EMPTY))
+      return section
+    }
+
+    for (const { facility, distanceKm } of nearby) {
+      const typeLabel = SightingModal.NUCLEAR_TYPE_LABEL[facility.type] ?? facility.type
+
+      section.appendChild(
+        h('div', { className: cx.relatedItem },
+          h('span', { className: cx.relatedItemDate }, typeLabel),
+          h('span', { className: cx.relatedItemMeta }, `${facility.name} · ${facility.country}`),
+          h('span', { className: cx.relatedItemDistance }, `${distanceKm}${RELATED.NUCLEAR_DISTANCE_UNIT}`)
         )
       )
     }

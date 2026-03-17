@@ -128,6 +128,28 @@ export interface FireballCollection {
   fireballs: Fireball[]
 }
 
+// ─── Nuclear facilities layer ───────────────────────────────────────
+
+export type NuclearFacilityType = 'reactor' | 'weapons_lab' | 'test_site' | 'enrichment' | 'research' | 'reprocessing' | 'storage' | 'decommissioned'
+
+export type NuclearFacilityStatus = 'operational' | 'decommissioned' | 'shutdown' | 'under_construction'
+
+export interface NuclearFacility {
+  id: string
+  name: string
+  type: NuclearFacilityType
+  status: NuclearFacilityStatus
+  country: string
+  lat: number
+  lng: number
+}
+
+export interface NuclearCollection {
+  generatedAt: string
+  totalResults: number
+  facilities: NuclearFacility[]
+}
+
 // ─── GDELT news layer ───────────────────────────────────────────────
 
 export interface GdeltArticle {

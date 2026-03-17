@@ -1,0 +1,1266 @@
+{
+  "generatedAt": "2026-03-17T14:38:43.522Z",
+  "totalResults": 140,
+  "facilities": [
+    {
+      "id": "nf-001",
+      "name": "Palo Verde Nuclear Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 33.3886,
+      "lng": -112.8617
+    },
+    {
+      "id": "nf-002",
+      "name": "Diablo Canyon Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.2112,
+      "lng": -120.8548
+    },
+    {
+      "id": "nf-003",
+      "name": "San Onofre Nuclear Generating Station",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 33.3682,
+      "lng": -117.557
+    },
+    {
+      "id": "nf-004",
+      "name": "Indian Point Energy Center",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 41.2698,
+      "lng": -73.9523
+    },
+    {
+      "id": "nf-005",
+      "name": "Three Mile Island",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 40.1531,
+      "lng": -76.7253
+    },
+    {
+      "id": "nf-006",
+      "name": "Calvert Cliffs Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 38.4346,
+      "lng": -76.4417
+    },
+    {
+      "id": "nf-007",
+      "name": "South Texas Nuclear Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 28.7959,
+      "lng": -96.0489
+    },
+    {
+      "id": "nf-008",
+      "name": "Vogtle Electric Generating Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 33.1423,
+      "lng": -81.7634
+    },
+    {
+      "id": "nf-009",
+      "name": "Watts Bar Nuclear Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.6033,
+      "lng": -84.7883
+    },
+    {
+      "id": "nf-010",
+      "name": "Browns Ferry Nuclear Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 34.7042,
+      "lng": -87.1186
+    },
+    {
+      "id": "nf-011",
+      "name": "Sequoyah Nuclear Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.2266,
+      "lng": -85.0888
+    },
+    {
+      "id": "nf-012",
+      "name": "Comanche Peak Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 32.2981,
+      "lng": -97.7853
+    },
+    {
+      "id": "nf-013",
+      "name": "Columbia Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 46.4712,
+      "lng": -119.3331
+    },
+    {
+      "id": "nf-014",
+      "name": "Grand Gulf Nuclear Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 32.007,
+      "lng": -91.0483
+    },
+    {
+      "id": "nf-015",
+      "name": "Surry Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 37.1658,
+      "lng": -76.6981
+    },
+    {
+      "id": "nf-016",
+      "name": "North Anna Nuclear Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 38.0608,
+      "lng": -77.7898
+    },
+    {
+      "id": "nf-017",
+      "name": "Perry Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 41.8007,
+      "lng": -81.1442
+    },
+    {
+      "id": "nf-018",
+      "name": "Davis-Besse Nuclear Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 41.5969,
+      "lng": -83.0876
+    },
+    {
+      "id": "nf-019",
+      "name": "Limerick Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 40.2242,
+      "lng": -75.5886
+    },
+    {
+      "id": "nf-020",
+      "name": "Peach Bottom Atomic Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "USA",
+      "lat": 39.7589,
+      "lng": -76.2689
+    },
+    {
+      "id": "nf-021",
+      "name": "Los Alamos National Laboratory",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.8444,
+      "lng": -106.2867
+    },
+    {
+      "id": "nf-022",
+      "name": "Lawrence Livermore National Laboratory",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "USA",
+      "lat": 37.6889,
+      "lng": -121.7056
+    },
+    {
+      "id": "nf-023",
+      "name": "Sandia National Laboratories",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.0586,
+      "lng": -106.5375
+    },
+    {
+      "id": "nf-024",
+      "name": "Oak Ridge National Laboratory",
+      "type": "research",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.9308,
+      "lng": -84.3106
+    },
+    {
+      "id": "nf-025",
+      "name": "Idaho National Laboratory",
+      "type": "research",
+      "status": "operational",
+      "country": "USA",
+      "lat": 43.5152,
+      "lng": -112.9305
+    },
+    {
+      "id": "nf-026",
+      "name": "Hanford Site",
+      "type": "reprocessing",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 46.5508,
+      "lng": -119.4888
+    },
+    {
+      "id": "nf-027",
+      "name": "Savannah River Site",
+      "type": "reprocessing",
+      "status": "operational",
+      "country": "USA",
+      "lat": 33.3483,
+      "lng": -81.7389
+    },
+    {
+      "id": "nf-028",
+      "name": "Pantex Plant",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.3172,
+      "lng": -101.9558
+    },
+    {
+      "id": "nf-029",
+      "name": "Y-12 National Security Complex",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "USA",
+      "lat": 35.9847,
+      "lng": -84.2536
+    },
+    {
+      "id": "nf-030",
+      "name": "Nevada National Security Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 37,
+      "lng": -116.05
+    },
+    {
+      "id": "nf-031",
+      "name": "Yucca Mountain",
+      "type": "storage",
+      "status": "shutdown",
+      "country": "USA",
+      "lat": 36.8386,
+      "lng": -116.4258
+    },
+    {
+      "id": "nf-032",
+      "name": "Portsmouth Gaseous Diffusion Plant",
+      "type": "enrichment",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 38.9939,
+      "lng": -83.2289
+    },
+    {
+      "id": "nf-033",
+      "name": "Paducah Gaseous Diffusion Plant",
+      "type": "enrichment",
+      "status": "decommissioned",
+      "country": "USA",
+      "lat": 37.1097,
+      "lng": -88.8089
+    },
+    {
+      "id": "nf-034",
+      "name": "URENCO USA (Eunice)",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "USA",
+      "lat": 32.4272,
+      "lng": -103.3192
+    },
+    {
+      "id": "nf-035",
+      "name": "Kursk Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 51.6714,
+      "lng": 35.6025
+    },
+    {
+      "id": "nf-036",
+      "name": "Novovoronezh Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 51.2722,
+      "lng": 39.2139
+    },
+    {
+      "id": "nf-037",
+      "name": "Leningrad Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 59.8331,
+      "lng": 29.0442
+    },
+    {
+      "id": "nf-038",
+      "name": "Kalinin Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 57.775,
+      "lng": 36.2639
+    },
+    {
+      "id": "nf-039",
+      "name": "Balakovo Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 52.0917,
+      "lng": 47.955
+    },
+    {
+      "id": "nf-040",
+      "name": "Beloyarsk Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 56.8422,
+      "lng": 61.3219
+    },
+    {
+      "id": "nf-041",
+      "name": "Kola Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 67.4631,
+      "lng": 32.4744
+    },
+    {
+      "id": "nf-042",
+      "name": "Rostov Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 47.5272,
+      "lng": 42.0958
+    },
+    {
+      "id": "nf-043",
+      "name": "Smolensk Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 54.1508,
+      "lng": 33.2275
+    },
+    {
+      "id": "nf-044",
+      "name": "Sarov (Arzamas-16)",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 54.935,
+      "lng": 43.315
+    },
+    {
+      "id": "nf-045",
+      "name": "Snezhinsk (Chelyabinsk-70)",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 56.0853,
+      "lng": 60.7319
+    },
+    {
+      "id": "nf-046",
+      "name": "Semipalatinsk Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Kazakhstan",
+      "lat": 50.07,
+      "lng": 78.43
+    },
+    {
+      "id": "nf-047",
+      "name": "Novaya Zemlya Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Russia",
+      "lat": 73.36,
+      "lng": 55.19
+    },
+    {
+      "id": "nf-048",
+      "name": "Mayak Production Association",
+      "type": "reprocessing",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 55.7133,
+      "lng": 60.7797
+    },
+    {
+      "id": "nf-049",
+      "name": "Tomsk-7 (Seversk)",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "Russia",
+      "lat": 56.6003,
+      "lng": 84.8517
+    },
+    {
+      "id": "nf-050",
+      "name": "Gravelines Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "France",
+      "lat": 51.0156,
+      "lng": 2.1067
+    },
+    {
+      "id": "nf-051",
+      "name": "Cattenom Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "France",
+      "lat": 49.4061,
+      "lng": 6.2192
+    },
+    {
+      "id": "nf-052",
+      "name": "Paluel Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "France",
+      "lat": 49.8586,
+      "lng": 0.6306
+    },
+    {
+      "id": "nf-053",
+      "name": "Tricastin Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "France",
+      "lat": 44.3308,
+      "lng": 4.7317
+    },
+    {
+      "id": "nf-054",
+      "name": "Flamanville Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "France",
+      "lat": 49.5376,
+      "lng": -1.8808
+    },
+    {
+      "id": "nf-055",
+      "name": "Fessenheim Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "France",
+      "lat": 47.9083,
+      "lng": 7.5628
+    },
+    {
+      "id": "nf-056",
+      "name": "La Hague Reprocessing Plant",
+      "type": "reprocessing",
+      "status": "operational",
+      "country": "France",
+      "lat": 49.68,
+      "lng": -1.88
+    },
+    {
+      "id": "nf-057",
+      "name": "CEA Cadarache",
+      "type": "research",
+      "status": "operational",
+      "country": "France",
+      "lat": 43.687,
+      "lng": 5.7625
+    },
+    {
+      "id": "nf-058",
+      "name": "Marcoule Nuclear Site",
+      "type": "reprocessing",
+      "status": "operational",
+      "country": "France",
+      "lat": 44.145,
+      "lng": 4.7053
+    },
+    {
+      "id": "nf-059",
+      "name": "Pierrelatte Enrichment Plant",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "France",
+      "lat": 44.3486,
+      "lng": 4.7169
+    },
+    {
+      "id": "nf-060",
+      "name": "Moruroa Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "France",
+      "lat": -21.85,
+      "lng": -138.9
+    },
+    {
+      "id": "nf-061",
+      "name": "Hinkley Point C",
+      "type": "reactor",
+      "status": "under_construction",
+      "country": "United Kingdom",
+      "lat": 51.2084,
+      "lng": -3.1314
+    },
+    {
+      "id": "nf-062",
+      "name": "Sizewell B",
+      "type": "reactor",
+      "status": "operational",
+      "country": "United Kingdom",
+      "lat": 52.2155,
+      "lng": 1.6198
+    },
+    {
+      "id": "nf-063",
+      "name": "Torness Nuclear Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "United Kingdom",
+      "lat": 55.969,
+      "lng": -2.3975
+    },
+    {
+      "id": "nf-064",
+      "name": "Sellafield",
+      "type": "reprocessing",
+      "status": "operational",
+      "country": "United Kingdom",
+      "lat": 54.4203,
+      "lng": -3.4977
+    },
+    {
+      "id": "nf-065",
+      "name": "AWE Aldermaston",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "United Kingdom",
+      "lat": 51.3558,
+      "lng": -1.1498
+    },
+    {
+      "id": "nf-066",
+      "name": "Dounreay",
+      "type": "research",
+      "status": "decommissioned",
+      "country": "United Kingdom",
+      "lat": 58.5775,
+      "lng": -3.7454
+    },
+    {
+      "id": "nf-067",
+      "name": "Daya Bay Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "China",
+      "lat": 22.5983,
+      "lng": 114.5419
+    },
+    {
+      "id": "nf-068",
+      "name": "Qinshan Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "China",
+      "lat": 30.4361,
+      "lng": 120.9606
+    },
+    {
+      "id": "nf-069",
+      "name": "Tianwan Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "China",
+      "lat": 34.6867,
+      "lng": 119.4536
+    },
+    {
+      "id": "nf-070",
+      "name": "Fuqing Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "China",
+      "lat": 25.4417,
+      "lng": 119.4478
+    },
+    {
+      "id": "nf-071",
+      "name": "Taishan Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "China",
+      "lat": 21.9167,
+      "lng": 112.9833
+    },
+    {
+      "id": "nf-072",
+      "name": "Lop Nur Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "China",
+      "lat": 41.5483,
+      "lng": 88.7281
+    },
+    {
+      "id": "nf-073",
+      "name": "China Academy of Engineering Physics (Mianyang)",
+      "type": "weapons_lab",
+      "status": "operational",
+      "country": "China",
+      "lat": 31.4678,
+      "lng": 104.7419
+    },
+    {
+      "id": "nf-074",
+      "name": "Lanzhou Gaseous Diffusion Plant",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "China",
+      "lat": 36.03,
+      "lng": 103.8
+    },
+    {
+      "id": "nf-075",
+      "name": "Fukushima Daiichi",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Japan",
+      "lat": 37.4207,
+      "lng": 141.0328
+    },
+    {
+      "id": "nf-076",
+      "name": "Fukushima Daini",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Japan",
+      "lat": 37.3168,
+      "lng": 141.0251
+    },
+    {
+      "id": "nf-077",
+      "name": "Kashiwazaki-Kariwa",
+      "type": "reactor",
+      "status": "shutdown",
+      "country": "Japan",
+      "lat": 37.4263,
+      "lng": 138.597
+    },
+    {
+      "id": "nf-078",
+      "name": "Takahama Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Japan",
+      "lat": 35.5219,
+      "lng": 135.45
+    },
+    {
+      "id": "nf-079",
+      "name": "Sendai Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Japan",
+      "lat": 31.8336,
+      "lng": 130.1899
+    },
+    {
+      "id": "nf-080",
+      "name": "Ōi Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Japan",
+      "lat": 35.5413,
+      "lng": 135.6596
+    },
+    {
+      "id": "nf-081",
+      "name": "Ikata Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Japan",
+      "lat": 33.4905,
+      "lng": 132.3131
+    },
+    {
+      "id": "nf-082",
+      "name": "Tokai Reprocessing Plant",
+      "type": "reprocessing",
+      "status": "operational",
+      "country": "Japan",
+      "lat": 36.4594,
+      "lng": 140.6013
+    },
+    {
+      "id": "nf-083",
+      "name": "Rokkasho Reprocessing Plant",
+      "type": "reprocessing",
+      "status": "under_construction",
+      "country": "Japan",
+      "lat": 40.9597,
+      "lng": 141.3258
+    },
+    {
+      "id": "nf-084",
+      "name": "Kudankulam Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "India",
+      "lat": 8.1674,
+      "lng": 77.7116
+    },
+    {
+      "id": "nf-085",
+      "name": "Tarapur Atomic Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "India",
+      "lat": 19.8305,
+      "lng": 72.6696
+    },
+    {
+      "id": "nf-086",
+      "name": "Rawatbhata Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "India",
+      "lat": 24.8811,
+      "lng": 75.5858
+    },
+    {
+      "id": "nf-087",
+      "name": "Kaiga Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "India",
+      "lat": 14.8522,
+      "lng": 74.4378
+    },
+    {
+      "id": "nf-088",
+      "name": "Bhabha Atomic Research Centre",
+      "type": "research",
+      "status": "operational",
+      "country": "India",
+      "lat": 19.0113,
+      "lng": 72.9261
+    },
+    {
+      "id": "nf-089",
+      "name": "Pokhran Test Range",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "India",
+      "lat": 26.73,
+      "lng": 71.75
+    },
+    {
+      "id": "nf-090",
+      "name": "Karachi Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Pakistan",
+      "lat": 24.8423,
+      "lng": 66.7861
+    },
+    {
+      "id": "nf-091",
+      "name": "Chashma Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Pakistan",
+      "lat": 32.3781,
+      "lng": 71.4592
+    },
+    {
+      "id": "nf-092",
+      "name": "Kahuta Research Laboratories",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "Pakistan",
+      "lat": 33.5886,
+      "lng": 73.3864
+    },
+    {
+      "id": "nf-093",
+      "name": "Ras Koh Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Pakistan",
+      "lat": 28.83,
+      "lng": 64.95
+    },
+    {
+      "id": "nf-094",
+      "name": "Kori Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "South Korea",
+      "lat": 35.3208,
+      "lng": 129.2953
+    },
+    {
+      "id": "nf-095",
+      "name": "Hanbit Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "South Korea",
+      "lat": 35.4142,
+      "lng": 126.4211
+    },
+    {
+      "id": "nf-096",
+      "name": "Hanul Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "South Korea",
+      "lat": 37.0928,
+      "lng": 129.3828
+    },
+    {
+      "id": "nf-097",
+      "name": "Wolsong Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "South Korea",
+      "lat": 35.7122,
+      "lng": 129.4739
+    },
+    {
+      "id": "nf-098",
+      "name": "Grohnde Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Germany",
+      "lat": 52.035,
+      "lng": 9.4133
+    },
+    {
+      "id": "nf-099",
+      "name": "Brokdorf Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Germany",
+      "lat": 53.85,
+      "lng": 9.3453
+    },
+    {
+      "id": "nf-100",
+      "name": "Emsland Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Germany",
+      "lat": 52.4742,
+      "lng": 7.3186
+    },
+    {
+      "id": "nf-101",
+      "name": "Isar Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Germany",
+      "lat": 48.6063,
+      "lng": 12.2917
+    },
+    {
+      "id": "nf-102",
+      "name": "Chernobyl Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Ukraine",
+      "lat": 51.3891,
+      "lng": 30.0986
+    },
+    {
+      "id": "nf-103",
+      "name": "Zaporizhzhia Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Ukraine",
+      "lat": 47.5088,
+      "lng": 34.5859
+    },
+    {
+      "id": "nf-104",
+      "name": "Rivne Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Ukraine",
+      "lat": 51.3266,
+      "lng": 25.8986
+    },
+    {
+      "id": "nf-105",
+      "name": "South Ukraine Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Ukraine",
+      "lat": 47.8159,
+      "lng": 31.2238
+    },
+    {
+      "id": "nf-106",
+      "name": "Khmelnytskyi Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Ukraine",
+      "lat": 50.3,
+      "lng": 26.65
+    },
+    {
+      "id": "nf-107",
+      "name": "Bruce Nuclear Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Canada",
+      "lat": 44.3253,
+      "lng": -81.5983
+    },
+    {
+      "id": "nf-108",
+      "name": "Darlington Nuclear Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Canada",
+      "lat": 43.8726,
+      "lng": -78.7199
+    },
+    {
+      "id": "nf-109",
+      "name": "Pickering Nuclear Generating Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Canada",
+      "lat": 43.8112,
+      "lng": -79.0665
+    },
+    {
+      "id": "nf-110",
+      "name": "Chalk River Laboratories",
+      "type": "research",
+      "status": "operational",
+      "country": "Canada",
+      "lat": 46.0536,
+      "lng": -77.3614
+    },
+    {
+      "id": "nf-111",
+      "name": "Bushehr Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Iran",
+      "lat": 28.8313,
+      "lng": 50.8845
+    },
+    {
+      "id": "nf-112",
+      "name": "Natanz Enrichment Facility",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "Iran",
+      "lat": 33.7247,
+      "lng": 51.7272
+    },
+    {
+      "id": "nf-113",
+      "name": "Fordow Enrichment Facility",
+      "type": "enrichment",
+      "status": "operational",
+      "country": "Iran",
+      "lat": 34.8833,
+      "lng": 51.225
+    },
+    {
+      "id": "nf-114",
+      "name": "Dimona Nuclear Research Center",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Israel",
+      "lat": 31.0033,
+      "lng": 35.1457
+    },
+    {
+      "id": "nf-115",
+      "name": "Yongbyon Nuclear Complex",
+      "type": "reactor",
+      "status": "operational",
+      "country": "North Korea",
+      "lat": 39.7964,
+      "lng": 125.7552
+    },
+    {
+      "id": "nf-116",
+      "name": "Barakah Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "UAE",
+      "lat": 23.96,
+      "lng": 52.26
+    },
+    {
+      "id": "nf-117",
+      "name": "Koeberg Nuclear Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "South Africa",
+      "lat": -33.6769,
+      "lng": 18.4342
+    },
+    {
+      "id": "nf-118",
+      "name": "Atucha Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Argentina",
+      "lat": -34.06,
+      "lng": -59.21
+    },
+    {
+      "id": "nf-119",
+      "name": "Angra Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Brazil",
+      "lat": -23.0078,
+      "lng": -44.4572
+    },
+    {
+      "id": "nf-120",
+      "name": "CANDU Cernavodă",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Romania",
+      "lat": 44.3203,
+      "lng": 28.0578
+    },
+    {
+      "id": "nf-121",
+      "name": "Paks Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Hungary",
+      "lat": 46.57,
+      "lng": 18.85
+    },
+    {
+      "id": "nf-122",
+      "name": "Temelín Nuclear Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Czech Republic",
+      "lat": 49.1814,
+      "lng": 14.3767
+    },
+    {
+      "id": "nf-123",
+      "name": "Dukovany Nuclear Power Station",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Czech Republic",
+      "lat": 49.085,
+      "lng": 16.1478
+    },
+    {
+      "id": "nf-124",
+      "name": "Mochovce Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Slovakia",
+      "lat": 48.2778,
+      "lng": 18.4397
+    },
+    {
+      "id": "nf-125",
+      "name": "Bohunice Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Slovakia",
+      "lat": 48.4894,
+      "lng": 17.7214
+    },
+    {
+      "id": "nf-126",
+      "name": "Olkiluoto Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Finland",
+      "lat": 61.2353,
+      "lng": 21.4478
+    },
+    {
+      "id": "nf-127",
+      "name": "Loviisa Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Finland",
+      "lat": 60.3733,
+      "lng": 26.3561
+    },
+    {
+      "id": "nf-128",
+      "name": "Forsmark Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Sweden",
+      "lat": 60.4083,
+      "lng": 18.1681
+    },
+    {
+      "id": "nf-129",
+      "name": "Ringhals Nuclear Power Plant",
+      "type": "reactor",
+      "status": "operational",
+      "country": "Sweden",
+      "lat": 57.2639,
+      "lng": 12.1128
+    },
+    {
+      "id": "nf-130",
+      "name": "Ignalina Nuclear Power Plant",
+      "type": "reactor",
+      "status": "decommissioned",
+      "country": "Lithuania",
+      "lat": 55.6047,
+      "lng": 26.5575
+    },
+    {
+      "id": "nf-131",
+      "name": "Kudankulam Nuclear Power Plant II",
+      "type": "reactor",
+      "status": "under_construction",
+      "country": "India",
+      "lat": 8.1674,
+      "lng": 77.7116
+    },
+    {
+      "id": "nf-132",
+      "name": "Akkuyu Nuclear Power Plant",
+      "type": "reactor",
+      "status": "under_construction",
+      "country": "Turkey",
+      "lat": 36.1444,
+      "lng": 33.5344
+    },
+    {
+      "id": "nf-133",
+      "name": "ITER",
+      "type": "research",
+      "status": "under_construction",
+      "country": "France",
+      "lat": 43.7075,
+      "lng": 5.7775
+    },
+    {
+      "id": "nf-134",
+      "name": "Bikini Atoll Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Marshall Islands",
+      "lat": 11.5833,
+      "lng": 165.3833
+    },
+    {
+      "id": "nf-135",
+      "name": "Enewetak Atoll Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Marshall Islands",
+      "lat": 11.5,
+      "lng": 162.25
+    },
+    {
+      "id": "nf-136",
+      "name": "Christmas Island Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Australia",
+      "lat": -10.4475,
+      "lng": 105.6904
+    },
+    {
+      "id": "nf-137",
+      "name": "Maralinga Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Australia",
+      "lat": -30.1636,
+      "lng": 131.5819
+    },
+    {
+      "id": "nf-138",
+      "name": "Monte Bello Islands Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Australia",
+      "lat": -20.41,
+      "lng": 115.56
+    },
+    {
+      "id": "nf-139",
+      "name": "Reggane Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Algeria",
+      "lat": 26.3167,
+      "lng": 0.0667
+    },
+    {
+      "id": "nf-140",
+      "name": "In Ekker Test Site",
+      "type": "test_site",
+      "status": "decommissioned",
+      "country": "Algeria",
+      "lat": 24.05,
+      "lng": 5.05
+    }
+  ]
+}

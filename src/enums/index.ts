@@ -73,6 +73,7 @@ export enum DataSourceId {
   GNEWS = 'GNEWS',
   TWITTER = 'TWITTER',
   REDDIT = 'REDDIT',
+  NUCLEAR = 'NUCLEAR',
   EXPERIENCER = 'EXPERIENCER'
 }
 

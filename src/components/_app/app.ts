@@ -13,7 +13,7 @@
 import './app.css'
 import { Component } from '@/core'
 import { h, mount, clearChildren, addClass, qs } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useRussianHistorical, useTheme, useShare, batch, effect, minDelay, filterSightings } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useTheme, useShare, batch, effect, minDelay, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Header } from '@/components/header'
 import { Ticker } from '@/components/ticker'
@@ -45,6 +45,7 @@ export class App extends Component {
   private dataSource = useDataSource()
   private tickerMessages = useTicker()
   private fireball = useFireball()
+  private nuclear = useNuclear()
   private russianHistorical = useRussianHistorical()
 
   private main!: HTMLElement
@@ -103,6 +104,7 @@ export class App extends Component {
       this.loadManifests(),
       this.newsFeed.load(),
       this.fireball.load(),
+      this.nuclear.load(),
       this.russianHistorical.load()
     ])
 
@@ -316,6 +318,8 @@ export class App extends Component {
     const fireballs = this.fireball.getAll()
     this.store.fireballs.set(fireballs)
     this.sightingMap.setFireballs(fireballs.filter(f => f.lat != null))
+
+    this.sightingMap.setNuclearFacilities(this.nuclear.getAll())
 
     this.timeline.setManifestCounts(
       this.dataSource.getYearCounts(),

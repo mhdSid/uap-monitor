@@ -1,6 +1,7 @@
 import type {
   ChronologyManifest,
   FireballCollection,
+  NuclearCollection,
   GdeltCollection,
   GnewsCollection,
   TwitterCollection,
@@ -91,6 +92,7 @@ export function useDeriveWelcomeData (params: {
   twitterCollection: TwitterCollection | null
   redditCollection: RedditCollection | null
   fireballCollection: FireballCollection | null
+  nuclearCollection: NuclearCollection | null
 }): WelcomeData {
   const {
     nuforc,
@@ -101,7 +103,8 @@ export function useDeriveWelcomeData (params: {
     gnewsCollection,
     twitterCollection,
     redditCollection,
-    fireballCollection
+    fireballCollection,
+    nuclearCollection
   } = params
 
   // ── Stats ────────────────────────────────────────────────────────
@@ -130,7 +133,8 @@ export function useDeriveWelcomeData (params: {
     (gnewsCollection != null ? 1 : 0) +
     (twitterCollection != null ? 1 : 0) +
     (redditCollection != null ? 1 : 0) +
-    (fireballCollection != null ? 1 : 0)
+    (fireballCollection != null ? 1 : 0) +
+    (nuclearCollection != null ? 1 : 0)
 
   const sources = activeCount > 0 ? `${activeCount} active` : '15 active'
 
@@ -228,6 +232,15 @@ export function useDeriveWelcomeData (params: {
     records: fireballCount != null ? `${formatSourceCount(fireballCount)} events` : '900+',
     period: '1988–present',
     tier: 'high'
+  })
+
+  // Nuclear Facilities
+  const nuclearCount = nuclearCollection?.totalResults
+  sourceList.push({
+    name: 'Nuclear Facilities',
+    records: nuclearCount != null ? `${formatSourceCount(nuclearCount)} sites` : '140+',
+    period: 'Current',
+    tier: 'mid'
   })
 
   return { stats, sources: sourceList }

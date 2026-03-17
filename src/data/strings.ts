@@ -100,7 +100,8 @@ export const FILTER = {
 
 export const MAP_LAYERS = {
   SIGHTINGS: 'Sightings',
-  FIREBALLS: 'Fireballs'
+  FIREBALLS: 'Fireballs',
+  NUCLEAR: 'Nuclear Sites'
 } as const
 
 export const MAP_INFO = {
@@ -176,6 +177,17 @@ export const RELATED = {
   FIREBALLS_EMPTY: 'No NASA fireball events within 200 km / 72 hrs',
   NEWS_TITLE: 'RELATED NEWS',
   NEWS_EMPTY: 'No related news articles within ±7 days',
+  NUCLEAR_TITLE: 'NEARBY NUCLEAR FACILITIES',
+  NUCLEAR_EMPTY: 'No nuclear facilities within 150 km',
+  NUCLEAR_TYPE_REACTOR: 'Reactor',
+  NUCLEAR_TYPE_WEAPONS_LAB: 'Weapons Lab',
+  NUCLEAR_TYPE_TEST_SITE: 'Test Site',
+  NUCLEAR_TYPE_ENRICHMENT: 'Enrichment',
+  NUCLEAR_TYPE_RESEARCH: 'Research',
+  NUCLEAR_TYPE_REPROCESSING: 'Reprocessing',
+  NUCLEAR_TYPE_STORAGE: 'Storage',
+  NUCLEAR_TYPE_DECOMMISSIONED: 'Decommissioned',
+  NUCLEAR_DISTANCE_UNIT: ' km',
   FIREBALL_ENERGY: 'Energy',
   FIREBALL_IMPACT: 'Impact',
   FIREBALL_ALTITUDE: 'Alt',
@@ -321,6 +333,7 @@ export const DATA_SOURCE_DESCRIPTIONS = {
   GDELT: 'Global Database of Events — UAP-related news from CJK and Russian media',
   GNEWS: 'GNews — UAP/UFO news aggregation from 60,000+ worldwide sources via API',
   TWITTER: 'X / Twitter — real-time public posts from UAP witnesses and researchers',
+  NUCLEAR: 'Nuclear facilities worldwide — reactors, weapons labs, test sites, enrichment and reprocessing plants from IAEA, NRC, and public records',
   REDDIT: 'Reddit — public eyewitness posts and discussion threads from UAP/UFO communities',
   AARO: 'All-domain Anomaly Resolution Office — US DoD official UAP investigations',
   GEIPAN: 'French space agency UAP research unit — European sighting database',

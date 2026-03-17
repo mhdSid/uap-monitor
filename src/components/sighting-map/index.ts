@@ -5,7 +5,7 @@ import { h, hide, setText, show } from '@/utils/dom'
 import { formatLocation } from '@/utils/format'
 import { colors } from '@/styles/palette'
 import { CheckboxGroup } from '@/components/checkbox'
-import type { Sighting, Fireball } from '@/types'
+import type { Sighting, Fireball, NuclearFacility } from '@/types'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.markercluster'
@@ -47,6 +47,7 @@ export class SightingMap extends Component<SightingMapProps> {
   private tileLayer!: L.TileLayer
   private clusterGroup!: L.MarkerClusterGroup
   private fireballLayer!: L.LayerGroup
+  private nuclearLayer!: L.LayerGroup
   private wrapper!: HTMLElement
   private loaderEl!: HTMLElement
   private resizeObserver!: ResizeObserver
@@ -71,6 +72,12 @@ export class SightingMap extends Component<SightingMapProps> {
           color: colors.sourceFireball,
           checked: true,
           onChange: (on) => this.toggleFireballs(on)
+        },
+        {
+          label: MAP_LAYERS.NUCLEAR,
+          color: colors.sourceNuclear,
+          checked: true,
+          onChange: (on) => this.toggleNuclear(on)
         }
       ]
     })
@@ -149,6 +156,9 @@ export class SightingMap extends Component<SightingMapProps> {
 
     this.fireballLayer = L.layerGroup()
     this.map.addLayer(this.fireballLayer)
+
+    this.nuclearLayer = L.layerGroup()
+    this.map.addLayer(this.nuclearLayer)
 
     // Emit bounds change on move/zoom
     if (this.props.onBoundsChange) {
@@ -293,6 +303,77 @@ export class SightingMap extends Component<SightingMapProps> {
     }
   }
 
+  setNuclearFacilities (facilities: NuclearFacility[]): void {
+    if (!this.nuclearLayer) return
+
+    this.nuclearLayer.clearLayers()
+    const color = colors.sourceNuclear
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const nuclearRadius = isTouchDevice ? 10 : 7
+
+    for (const nf of facilities) {
+      const marker = L.circleMarker([nf.lat, nf.lng], {
+        radius: nuclearRadius,
+        color,
+        fillColor: color,
+        fillOpacity: 0.6,
+        weight: 1.5,
+        opacity: 0.9,
+        interactive: true,
+        bubblingMouseEvents: false
+      })
+
+      const typeLabel = nf.type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+      const statusLabel = nf.status.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+
+      marker.bindPopup(() =>
+        h('div', { className: cx.mapPopup },
+          h('div', { className: cx.mapPopupDate }, typeLabel),
+          h('div', { className: cx.mapPopupLocation }, nf.name),
+          h('div', { className: cx.mapPopupMeta }, `${nf.country} · ${statusLabel}`)
+        ), { maxWidth: 280, closeButton: true }
+      )
+
+      this.nuclearLayer.addLayer(marker)
+    }
+  }
+
+  setNuclearFacilities (facilities: NuclearFacility[]): void {
+    if (!this.nuclearLayer) return
+
+    this.nuclearLayer.clearLayers()
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const size = isTouchDevice ? 20 : 14
+
+    for (const nf of facilities) {
+      const icon = L.divIcon({
+        className: 'map-nuclear-icon',
+        iconSize: L.point(size, size),
+        iconAnchor: L.point(size / 2, size / 2),
+        html: `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="${colors.sourceNuclear}" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 2a10 10 0 0 1 8.66 5h-3.46a7 7 0 0 0-10.4 0H3.34A10 10 0 0 1 12 2z" opacity=".85"/><path d="M2 17a10 10 0 0 1 1.34-5h3.46a7 7 0 0 0 5.2 9.8A10 10 0 0 1 2 17z" opacity=".85"/><path d="M22 17a10 10 0 0 1-10 5 10 10 0 0 1-0.2 0 7 7 0 0 0 5.2-9.8h3.46A10 10 0 0 1 22 17z" opacity=".85"/></svg>`
+      })
+
+      const marker = L.marker([nf.lat, nf.lng], {
+        icon,
+        interactive: true,
+        bubblingMouseEvents: false
+      })
+
+      const typeLabel = nf.type.replace(/_/g, ' ')
+      const statusLabel = nf.status.replace(/_/g, ' ')
+
+      marker.bindPopup(() =>
+        h('div', { className: cx.mapPopup },
+          h('div', { className: cx.mapPopupLocation }, nf.name),
+          h('div', { className: cx.mapPopupMeta }, `${typeLabel} · ${statusLabel}`),
+          h('div', { className: cx.mapPopupMeta }, nf.country)
+        ), { maxWidth: 260, closeButton: true }
+      )
+
+      this.nuclearLayer.addLayer(marker)
+    }
+  }
+
   fitToData (): void {
     if (!this.map || !this.clusterGroup) return
     const bounds = this.clusterGroup.getBounds()
@@ -323,6 +404,12 @@ export class SightingMap extends Component<SightingMapProps> {
     if (!this.map || !this.fireballLayer) return
     if (visible) this.map.addLayer(this.fireballLayer)
     else this.map.removeLayer(this.fireballLayer)
+  }
+
+  private toggleNuclear (visible: boolean): void {
+    if (!this.map || !this.nuclearLayer) return
+    if (visible) this.map.addLayer(this.nuclearLayer)
+    else this.map.removeLayer(this.nuclearLayer)
   }
 
   // ─── Popup ────────────────────────────────────────────────────
