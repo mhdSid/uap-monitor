@@ -127,6 +127,14 @@
   --color-source-chronology: var(--c-amber-400);
   --color-source-reddit: var(--c-reddit-500);
 
+  --color-continent-americas: var(--c-green-400);
+  --color-continent-europe: var(--c-cyan-400);
+  --color-continent-eurasia: var(--c-purple-500);
+  --color-continent-asia-middleeast: var(--c-amber-500);
+  --color-continent-asia-pacific: var(--c-green-300);
+  --color-continent-oceania: var(--c-red-500);
+  --color-continent-africa: var(--c-amber-400);
+
   /* Credibility tier colors */
   --color-cred-high: var(--c-green-500);
   --color-cred-mid: var(--c-amber-500);
@@ -309,14 +317,6 @@
   --color-source-hatch: var(--c-cyan-400);
   --color-source-chronology: var(--c-amber-400);
   --color-source-reddit: var(--c-reddit-500);
-  
-  --color-continent-americas: var(--c-green-400);
-  --color-continent-europe: var(--c-cyan-400);
-  --color-continent-eurasia: var(--c-purple-500);
-  --color-continent-asia-middleeast: var(--c-amber-500);
-  --color-continent-asia-pacific: var(--c-cyan-500);
-  --color-continent-oceania: var(--c-cyan-400);
-  --color-continent-africa: var(--c-amber-400);
 
   /* ── Transitions ─────────────────────────────────────────────── */
   --transition-fast: 0.15s ease;
