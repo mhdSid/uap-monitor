@@ -1,9 +1,10 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, setText, show } from '@/utils/dom'
+import { h, hide, setText, show, setStyles } from '@/utils/dom'
 import { formatLocation } from '@/utils/format'
 import { colors } from '@/styles/palette'
+import { iconRadiation } from '@/components/icons'
 import { CheckboxGroup } from '@/components/checkbox'
 import type { Sighting, Fireball, NuclearFacility } from '@/types'
 import L from 'leaflet'
@@ -70,7 +71,7 @@ export class SightingMap extends Component<SightingMapProps> {
         {
           label: MAP_LAYERS.FIREBALLS,
           color: colors.sourceFireball,
-          checked: true,
+          checked: false,
           onChange: (on) => this.toggleFireballs(on)
         },
         {
@@ -155,7 +156,7 @@ export class SightingMap extends Component<SightingMapProps> {
     this.map.addLayer(this.clusterGroup)
 
     this.fireballLayer = L.layerGroup()
-    this.map.addLayer(this.fireballLayer)
+    // this.map.addLayer(this.fireballLayer)
 
     this.nuclearLayer = L.layerGroup()
     this.map.addLayer(this.nuclearLayer)
@@ -309,13 +310,16 @@ export class SightingMap extends Component<SightingMapProps> {
     this.nuclearLayer.clearLayers()
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
     const size = isTouchDevice ? 20 : 14
+    const svgEl = iconRadiation(size)
+    setStyles(svgEl, { color: colors.sourceNuclear })
+    const svgHtml = svgEl.outerHTML
 
     for (const nf of facilities) {
       const icon = L.divIcon({
         className: 'map-nuclear-icon',
         iconSize: L.point(size, size),
         iconAnchor: L.point(size / 2, size / 2),
-        html: `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="${colors.sourceNuclear}" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 2a10 10 0 0 1 8.66 5h-3.46a7 7 0 0 0-10.4 0H3.34A10 10 0 0 1 12 2z" opacity=".85"/><path d="M2 17a10 10 0 0 1 1.34-5h3.46a7 7 0 0 0 5.2 9.8A10 10 0 0 1 2 17z" opacity=".85"/><path d="M22 17a10 10 0 0 1-10 5 10 10 0 0 1-0.2 0 7 7 0 0 0 5.2-9.8h3.46A10 10 0 0 1 22 17z" opacity=".85"/></svg>`
+        html: svgHtml
       })
 
       const marker = L.marker([nf.lat, nf.lng], {

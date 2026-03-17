@@ -50,7 +50,7 @@ export function useNuclear () {
    * Find nuclear facilities within `radiusKm` of a sighting.
    * Returns sorted by distance (nearest first).
    */
-  function findNearSighting (sighting: Sighting, radiusKm = 150): NearbyFacility[] {
+  function findNearSighting (sighting: Sighting, radiusKm = 300): NearbyFacility[] {
     if (!cached || !sighting.coordinates) return []
 
     const { lat, lng } = sighting.coordinates

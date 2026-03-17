@@ -198,3 +198,20 @@ export function iconMore (size = 16): SVGSVGElement {
   `
   return svg
 }
+
+/** Radiation trefoil — nuclear facility marker. */
+export function iconRadiation (size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 24 24')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('fill', 'currentColor')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <circle cx="12" cy="12" r="2.5"/>
+    <path d="M12 2a10 10 0 0 1 8.66 5h-3.46a7 7 0 0 0-10.4 0H3.34A10 10 0 0 1 12 2z" opacity=".85"/>
+    <path d="M2 17a10 10 0 0 1 1.34-5h3.46a7 7 0 0 0 5.2 9.8A10 10 0 0 1 2 17z" opacity=".85"/>
+    <path d="M22 17a10 10 0 0 1-10 5 10 10 0 0 1-0.2 0 7 7 0 0 0 5.2-9.8h3.46A10 10 0 0 1 22 17z" opacity=".85"/>
+  `
+  return svg
+}
