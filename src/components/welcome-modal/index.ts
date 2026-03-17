@@ -26,7 +26,8 @@ import {
   useGnews,
   useTwitter,
   useReddit,
-  useFireball
+  useFireball,
+  useNuclear
 } from '@/composables'
 import { useDeriveWelcomeData } from '@/composables/use-welcome-sources'
 import type { WelcomeSource, WelcomeStats } from '@/types'
@@ -104,6 +105,7 @@ export class WelcomeModal {
     const twitter = useTwitter()
     const reddit = useReddit()
     const fireball = useFireball()
+    const nuclear = useNuclear()
 
     await Promise.all([
       nuforc.loadManifest(),
@@ -129,7 +131,8 @@ export class WelcomeModal {
       gnewsCollection: gnews.getCollection(),
       twitterCollection: twitter.getCollection(),
       redditCollection: reddit.getCollection(),
-      fireballCollection: fireball.getCollection()
+      fireballCollection: fireball.getCollection(),
+      nuclearCollection: nuclear.getCollection()
     })
 
     clearChildren(WelcomeModal.contentEl)
