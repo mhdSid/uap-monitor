@@ -307,41 +307,6 @@ export class SightingMap extends Component<SightingMapProps> {
     if (!this.nuclearLayer) return
 
     this.nuclearLayer.clearLayers()
-    const color = colors.sourceNuclear
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-    const nuclearRadius = isTouchDevice ? 10 : 7
-
-    for (const nf of facilities) {
-      const marker = L.circleMarker([nf.lat, nf.lng], {
-        radius: nuclearRadius,
-        color,
-        fillColor: color,
-        fillOpacity: 0.6,
-        weight: 1.5,
-        opacity: 0.9,
-        interactive: true,
-        bubblingMouseEvents: false
-      })
-
-      const typeLabel = nf.type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
-      const statusLabel = nf.status.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
-
-      marker.bindPopup(() =>
-        h('div', { className: cx.mapPopup },
-          h('div', { className: cx.mapPopupDate }, typeLabel),
-          h('div', { className: cx.mapPopupLocation }, nf.name),
-          h('div', { className: cx.mapPopupMeta }, `${nf.country} · ${statusLabel}`)
-        ), { maxWidth: 280, closeButton: true }
-      )
-
-      this.nuclearLayer.addLayer(marker)
-    }
-  }
-
-  setNuclearFacilities (facilities: NuclearFacility[]): void {
-    if (!this.nuclearLayer) return
-
-    this.nuclearLayer.clearLayers()
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
     const size = isTouchDevice ? 20 : 14
 
