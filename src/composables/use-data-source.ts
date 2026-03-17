@@ -4,6 +4,10 @@ import { useNuforc } from './use-nuforc'
 import { useHatchUdb } from './use-hatch-udb'
 import { useChronology } from './use-chronology'
 import { DATA_SOURCE_DESCRIPTIONS } from '@/data/strings'
+import { useGnews } from './use-gnews'
+import { useGdelt } from './use-gdelt'
+import { useTwitter } from './use-twitter'
+import { useReddit } from './use-reddit'
 
 // ─── Chronology sub-source definitions ──────────────────────────────
 // Static metadata for the 10 researcher chronologies. Status is updated
@@ -223,6 +227,10 @@ export function useDataSource () {
   const nuforc = useNuforc()
   const hatch = useHatchUdb()
   const chronology = useChronology()
+  const gnews = useGnews()
+  const gdelt = useGdelt()
+  const twitter = useTwitter()
+  const reddit = useReddit()
 
   /**
    * Load all manifests in parallel. Each can fail independently.
@@ -340,7 +348,7 @@ export function useDataSource () {
    * Total record count across all sources.
    */
   function getTotalCount (): number {
-    return nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount()
+    return nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount() + gnews.getCount() + gdelt.getCount() + twitter.getCount() + reddit.getCount()
   }
 
   /**
