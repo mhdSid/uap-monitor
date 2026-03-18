@@ -1,0 +1,177 @@
+/* ─── Geomagnetic View ─────────────────────────────────────────────── */
+
+.geo-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+  padding: var(--space-md);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Stats bar ──────────────────────────────────────────────────────── */
+
+.geo-view__stats {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.geo-view__stat {
+  padding: var(--space-8) var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 120px;
+  flex: 1;
+}
+
+.geo-view__stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xxs);
+  color: var(--color-muted);
+  letter-spacing: 1.5px;
+  margin-bottom: var(--space-3);
+}
+
+.geo-view__stat-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.geo-view__stat-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-dim);
+  margin-top: var(--space-2);
+  letter-spacing: 0.5px;
+}
+
+/* ── Section headers ────────────────────────────────────────────────── */
+
+.geo-view__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.geo-view__section-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-green);
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.geo-view__section-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+/* ── Panel (wraps canvas) ──────────────────────────────────────────── */
+
+.geo-view__panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-10) var(--space-8) var(--space-6);
+  position: relative;
+}
+
+/* ── Canvas ─────────────────────────────────────────────────────────── */
+
+.geo-view__canvas {
+  display: block;
+  width: 100%;
+}
+
+/* ── Kp heatmap strip ──────────────────────────────────────────────── */
+
+.geo-view__heat-strip {
+  display: flex;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.geo-view__heat-strip-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--color-dim);
+  letter-spacing: 1px;
+  margin-bottom: var(--space-2);
+}
+
+/* ── Legend ──────────────────────────────────────────────────────────── */
+
+.geo-view__legend {
+  display: flex;
+  gap: var(--space-10);
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.geo-view__legend-item {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.geo-view__legend-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────────── */
+
+.geo-view__tooltip {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: var(--c-panel-95);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xxs);
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+}
+
+/* ── States ──────────────────────────────────────────────────────────── */
+
+.geo-view__loader {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-20) 0;
+}
+
+.geo-view__no-data {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  text-align: center;
+  padding: var(--space-20) 0;
+  letter-spacing: 1px;
+}
+
+.geo-view__note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: var(--space-4);
+  letter-spacing: 0.5px;
+}

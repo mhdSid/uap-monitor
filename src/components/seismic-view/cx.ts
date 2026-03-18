@@ -1,0 +1,23 @@
+export const cx = {
+  root: 'seis-view',
+  stats: 'seis-view__stats',
+  stat: 'seis-view__stat',
+  statLabel: 'seis-view__stat-label',
+  statValue: 'seis-view__stat-value',
+  statSub: 'seis-view__stat-sub',
+  section: 'seis-view__section',
+  sectionTitle: 'seis-view__section-title',
+  sectionSub: 'seis-view__section-sub',
+  panel: 'seis-view__panel',
+  canvas: 'seis-view__canvas',
+  legend: 'seis-view__legend',
+  legendItem: 'seis-view__legend-item',
+  legendSwatch: 'seis-view__legend-swatch',
+  tooltip: 'seis-view__tooltip',
+  table: 'seis-view__table',
+  tableRow: 'seis-view__table-row',
+  tableHead: 'seis-view__table-head',
+  tableCell: 'seis-view__table-cell',
+  loader: 'seis-view__loader',
+  noData: 'seis-view__no-data'
+} as const

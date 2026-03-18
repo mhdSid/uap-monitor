@@ -1,0 +1,183 @@
+/* ─── Seismic View ─────────────────────────────────────────────────── */
+
+.seis-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+  padding: var(--space-md);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Stats bar ──────────────────────────────────────────────────────── */
+
+.seis-view__stats {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.seis-view__stat {
+  padding: var(--space-8) var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 120px;
+  flex: 1;
+}
+
+.seis-view__stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xxs);
+  color: var(--color-muted);
+  letter-spacing: 1.5px;
+  margin-bottom: var(--space-3);
+}
+
+.seis-view__stat-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.seis-view__stat-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-dim);
+  margin-top: var(--space-2);
+  letter-spacing: 0.5px;
+}
+
+/* ── Section headers ────────────────────────────────────────────────── */
+
+.seis-view__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.seis-view__section-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-green);
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.seis-view__section-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+/* ── Panel ──────────────────────────────────────────────────────────── */
+
+.seis-view__panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-10) var(--space-8) var(--space-6);
+  position: relative;
+}
+
+/* ── Canvas ─────────────────────────────────────────────────────────── */
+
+.seis-view__canvas {
+  display: block;
+  width: 100%;
+}
+
+/* ── Legend ──────────────────────────────────────────────────────────── */
+
+.seis-view__legend {
+  display: flex;
+  gap: var(--space-10);
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.seis-view__legend-item {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.seis-view__legend-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────────── */
+
+.seis-view__tooltip {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: var(--c-panel-95);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xxs);
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+}
+
+/* ── Table ──────────────────────────────────────────────────────────── */
+
+.seis-view__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xxs);
+}
+
+.seis-view__table-head {
+  padding: var(--space-5) var(--space-8);
+  text-align: left;
+  color: var(--color-muted);
+  font-size: var(--fs-3xs);
+  letter-spacing: 1.5px;
+  font-weight: 400;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.seis-view__table-row {
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s ease;
+}
+
+.seis-view__table-row:hover {
+  background: var(--c-white-08);
+}
+
+.seis-view__table-cell {
+  padding: var(--space-5) var(--space-8);
+  color: var(--color-text);
+}
+
+/* ── States ──────────────────────────────────────────────────────────── */
+
+.seis-view__loader {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-20) 0;
+}
+
+.seis-view__no-data {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  text-align: center;
+  padding: var(--space-20) 0;
+  letter-spacing: 1px;
+}

@@ -72,3 +72,11 @@
     display: none;
   }
 }
+
+/* ── View containers (geomagnetic / seismic) ─────────────────────── */
+
+.app-view-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}

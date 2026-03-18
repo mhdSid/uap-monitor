@@ -446,3 +446,77 @@ export interface RedditCollection {
   totalResults: number
   articles: RedditArticle[]
 }
+
+// ─── Geomagnetic data layer ─────────────────────────────────────────
+
+/** A single day of Kp/ap geomagnetic index data (8 three-hour intervals) */
+export interface GeomagneticRecord {
+  /** ISO date string YYYY-MM-DD */
+  date: string
+  /** Kp values for 8 three-hour intervals (0–9 scale, null = missing) */
+  kp: (number | null)[]
+  /** ap values for 8 three-hour intervals (linear equivalent, null = missing) */
+  ap: (number | null)[]
+  /** Daily Ap average (null = missing) */
+  apDaily: number | null
+}
+
+export interface GeomagneticCollection {
+  generatedAt: string
+  source: string
+  totalDays: number
+  dateRange: { from: string; to: string }
+  data: GeomagneticRecord[]
+}
+
+/** Result of looking up Kp for a specific sighting */
+export interface SightingKpResult {
+  /** Kp value for the 3-hour window containing the sighting (null = no data) */
+  kp: number | null
+  /** Daily Ap value */
+  apDaily: number | null
+  /** Maximum Kp that day */
+  kpMax: number | null
+  /** Whether this qualifies as a geomagnetic storm (Kp ≥ 5) */
+  isStorm: boolean
+}
+
+// ─── Seismic data layer ─────────────────────────────────────────────
+
+export interface Earthquake {
+  id: string
+  /** ISO timestamp */
+  time: string
+  lat: number | null
+  lng: number | null
+  /** Depth in km */
+  depth: number | null
+  magnitude: number | null
+  magType: string | null
+  place: string | null
+}
+
+/** Manifest for year-windowed earthquake loading */
+export interface EarthquakeManifest {
+  generatedAt: string
+  source: string
+  totalRecords: number
+  dateRange: { from: string; to: string }
+  minMagnitude: number
+  years: Record<string, EarthquakeYearMeta>
+}
+
+export interface EarthquakeYearMeta {
+  count: number
+  file: string
+}
+
+/** Earthquake found near a sighting */
+export interface NearbyEarthquake {
+  earthquake: Earthquake
+  distanceKm: number
+  /** Positive = quake before sighting, negative = quake after */
+  hoursDelta: number
+  /** Whether this is a candidate for earthquake lights */
+  isEQLCandidate: boolean
+}

@@ -540,3 +540,83 @@ export const SUBMIT_FORM = {
 export const HEADER = {
   SUBMIT_CTA: '+ REPORT'
 } as const
+
+// ─── Navigation ─────────────────────────────────────────────────────
+
+export const NAV = {
+  MONITOR: 'MONITOR',
+  GEOMAGNETIC: 'GEOMAGNETIC',
+  SEISMIC: 'SEISMIC'
+} as const
+
+// ─── Geomagnetic visualizer ─────────────────────────────────────────
+
+export const GEOMAGNETIC = {
+  TITLE: 'GEOMAGNETIC CORRELATION',
+  SUBTITLE: 'Kp index vs UAP sighting density — testing geomagnetic storm correlation',
+  SOURCE: 'GFZ Potsdam (CC BY 4.0)',
+  STAT_TOTAL: 'TOTAL SIGHTINGS',
+  STAT_STORM_PCT: 'DURING Kp ≥ 5',
+  STAT_AVG_KP: 'AVG Kp',
+  STAT_PEAK_KP: 'PEAK Kp',
+  STAT_OVERREP: 'OVERREPRESENTATION',
+  STAT_OVERREP_SUB: 'at Kp ≥ 5 vs expected',
+  TIMELINE_TITLE: 'TEMPORAL CORRELATION',
+  TIMELINE_SUBTITLE: 'Monthly Kp index vs sighting density',
+  DIST_TITLE: 'SIGHTING DISTRIBUTION BY Kp',
+  DIST_SUBTITLE: 'Observed sighting counts per Kp level vs expected from random distribution',
+  LEGEND_CALM: 'CALM (Kp < 5)',
+  LEGEND_STORM: 'STORM (Kp ≥ 5)',
+  LABEL_KP_INDEX: 'Kp INDEX',
+  LABEL_SIGHTINGS: 'SIGHTINGS',
+  LABEL_OBSERVED: 'OBSERVED',
+  LABEL_EXPECTED: 'EXPECTED',
+  NO_DATA: 'No geomagnetic data available',
+  LOADING: 'Loading geomagnetic data...'
+} as const
+
+// ─── Seismic visualizer ─────────────────────────────────────────────
+
+export const SEISMIC = {
+  TITLE: 'SEISMIC CORRELATION',
+  SUBTITLE: 'Earthquake proximity vs UAP sightings — identifying earthquake light candidates',
+  SOURCE: 'USGS Earthquake Hazards Program',
+  STAT_PAIRS: 'CORRELATED PAIRS',
+  STAT_PAIRS_SUB: 'sighting ↔ quake',
+  STAT_EQL: 'EQL CANDIDATES',
+  STAT_EQL_SUB: '< 120km, < 48h, M4.5+',
+  STAT_AVG_DIST: 'AVG DISTANCE',
+  STAT_AVG_DIST_SUB: 'sighting to epicenter',
+  STAT_AVG_MAG: 'AVG MAGNITUDE',
+  STAT_AVG_MAG_SUB: 'correlated quakes',
+  SCATTER_TITLE: 'PROXIMITY-TIME SCATTER',
+  SCATTER_SUBTITLE: 'Each dot is a sighting–earthquake pair',
+  SCATTER_X: 'HOURS RELATIVE TO QUAKE',
+  SCATTER_Y: 'DISTANCE (km)',
+  TABLE_TITLE: 'STRONGEST CORRELATIONS',
+  TABLE_SUBTITLE: 'Earthquakes with the most UAP sightings within 300 km / 72 hours',
+  TABLE_COL_LOCATION: 'LOCATION',
+  TABLE_COL_MAG: 'MAG',
+  TABLE_COL_DATE: 'DATE',
+  TABLE_COL_SIGHTINGS: 'SIGHTINGS',
+  TABLE_COL_DIST: 'AVG DIST',
+  LEGEND_PAIR: 'CORRELATED PAIR',
+  LEGEND_EQL: 'EQL CANDIDATE ZONE',
+  NO_DATA: 'No seismic data available',
+  LOADING: 'Loading seismic data...',
+  POSSIBLE_EQL: 'POSSIBLE EQL'
+} as const
+
+// ─── Sighting modal — environmental context ─────────────────────────
+
+export const ENV_CONTEXT = {
+  GEOMAGNETIC_LABEL: 'Geomagnetic',
+  SEISMIC_LABEL: 'Seismic Activity',
+  KP_LABEL: 'Kp',
+  KP_STORM: 'STORM',
+  KP_CALM: 'CALM',
+  KP_MODERATE: 'MODERATE',
+  NO_KP_DATA: 'No Kp data for this date',
+  NO_SEISMIC: 'No earthquakes within 300 km / 72 hrs',
+  EQL_FLAG: 'Possible earthquake lights'
+} as const

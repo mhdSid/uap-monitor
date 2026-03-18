@@ -11,11 +11,13 @@
  * ------------------------------------------------------------------ */
 
 import './app.css'
-import { Component } from '@/core'
-import { h, mount, clearChildren, addClass, qs } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useTheme, useShare, batch, effect, minDelay, filterSightings } from '@/composables'
+import { Component, createRouter, RouteName } from '@/core'
+import type { Router } from '@/core'
+import { h, mount, clearChildren, addClass, qs, hide, show } from '@/utils/dom'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useTheme, useShare, useGeomagnetic, useSeismic, batch, effect, minDelay, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Header } from '@/components/header'
+import { NavTabs } from '@/components/nav-tabs'
 import { Ticker } from '@/components/ticker'
 import { Loader } from '@/components/loader'
 import { Section } from '@/components/layout'
@@ -35,6 +37,8 @@ import { Drawer } from '@/components/drawer'
 import { cx as drawerCx } from '@/components/drawer/cx'
 import { Button } from '@/components/button'
 import { iconSearch } from '@/components/icons'
+import { GeomagneticView } from '@/components/geomagnetic-view'
+import { SeismicView } from '@/components/seismic-view'
 import { SECTION, ARIA } from '@/data/strings'
 import { DEFAULT_YEAR_OFFSET, MAX_YEAR_SPAN } from '@/data/config'
 
@@ -47,6 +51,8 @@ export class App extends Component {
   private fireball = useFireball()
   private nuclear = useNuclear()
   private russianHistorical = useRussianHistorical()
+  private geomagnetic = useGeomagnetic()
+  private seismic = useSeismic()
 
   private main!: HTMLElement
   private ticker!: Ticker
@@ -59,6 +65,14 @@ export class App extends Component {
   private fab!: Button
   private renderVersion = 0
   private yearRangeReady = false
+
+  // ── Router + views ──────────────────────────────────────────────
+  private router!: Router
+  private navTabs!: NavTabs
+  private geoView: GeomagneticView | null = null
+  private seisView: SeismicView | null = null
+  private geoContainer!: HTMLElement
+  private seisContainer!: HTMLElement
 
   // ─── Shell ─────────────────────────────────────────────────────
 
@@ -84,11 +98,27 @@ export class App extends Component {
       }
     })
 
+    // ── View containers for geomagnetic / seismic ────────────────
+    this.geoContainer = h('div', { className: 'app-view-container' })
+    hide(this.geoContainer)
+
+    this.seisContainer = h('div', { className: 'app-view-container' })
+    hide(this.seisContainer)
+
+    // ── Nav tabs ─────────────────────────────────────────────────
+    this.navTabs = new NavTabs({
+      active: RouteName.MONITOR,
+      onNavigate: (route) => this.router?.navigate(route)
+    })
+
     return h('div', { className: 'app' },
       h('div', { className: 'scanlines' }),
       new Header({}).el,
+      this.navTabs.el,
       this.ticker.el,
-      this.main
+      this.main,
+      this.geoContainer,
+      this.seisContainer
     )
   }
 
@@ -105,7 +135,9 @@ export class App extends Component {
       this.newsFeed.load(),
       this.fireball.load(),
       this.nuclear.load(),
-      this.russianHistorical.load()
+      this.russianHistorical.load(),
+      this.geomagnetic.load(),
+      this.seismic.load()
     ])
 
     // ── Sequential: each step depends on the one before ──
@@ -116,6 +148,9 @@ export class App extends Component {
     await this.progressiveLoad()
     this.buildBelowFold()
     this.finalize()
+
+    // ── Router: enable view switching after main view is ready ──
+    this.initRouter()
   }
 
   // ─── Phase: Load manifests ─────────────────────────────────────
@@ -198,10 +233,10 @@ export class App extends Component {
     })
     this.main.appendChild(hero.el)
 
+    this.main.appendChild(new Highlights({}).el)
     this.main.appendChild(this.desktopControls)
     this.main.appendChild(this.filterDrawer.el)
     this.main.appendChild(this.timeline.el)
-    this.main.appendChild(new Highlights({}).el)
     this.main.appendChild(this.sightingMap.el)
 
     // ── Intelligence feed (merged GDELT + GNews) ─────────────────
@@ -434,6 +469,70 @@ export class App extends Component {
     this.ticker.setMessages(
       this.tickerMessages.generateMessages(sightings)
     )
+  }
+
+  // ─── Router ─────────────────────────────────────────────────────
+
+  private initRouter (): void {
+    this.router = createRouter()
+
+    this.router.onChange((route) => {
+      this.switchView(route)
+    })
+
+    // Handle initial route (e.g. user lands on #/geomagnetic directly)
+    const initial = this.router.current()
+    if (initial !== RouteName.MONITOR) {
+      this.switchView(initial)
+    }
+  }
+
+  private switchView (route: RouteName): void {
+    this.navTabs.setActive(route)
+
+    // Hide all view containers
+    hide(this.main)
+    hide(this.geoContainer)
+    hide(this.seisContainer)
+
+    // Hide FAB on non-monitor views
+    if (this.fab) {
+      if (route === RouteName.MONITOR) show(this.fab.el)
+      else hide(this.fab.el)
+    }
+
+    switch (route) {
+      case RouteName.MONITOR:
+        show(this.main)
+        break
+
+      case RouteName.GEOMAGNETIC:
+        show(this.geoContainer)
+        if (!this.geoView) {
+          this.geoView = new GeomagneticView({})
+          this.geoContainer.appendChild(this.geoView.el)
+          this.geoView.load()
+        }
+        break
+
+      case RouteName.SEISMIC:
+        show(this.seisContainer)
+        if (!this.seisView) {
+          this.seisView = new SeismicView({})
+          this.seisContainer.appendChild(this.seisView.el)
+          this.seisView.load()
+        }
+        break
+    }
+  }
+
+  // ─── Cleanup ────────────────────────────────────────────────────
+
+  destroy (): void {
+    this.router?.destroy()
+    this.geoView?.destroy()
+    this.seisView?.destroy()
+    super.destroy()
   }
 }
 

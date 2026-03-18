@@ -1,0 +1,22 @@
+export const cx = {
+  root: 'geo-view',
+  stats: 'geo-view__stats',
+  stat: 'geo-view__stat',
+  statLabel: 'geo-view__stat-label',
+  statValue: 'geo-view__stat-value',
+  statSub: 'geo-view__stat-sub',
+  section: 'geo-view__section',
+  sectionTitle: 'geo-view__section-title',
+  sectionSub: 'geo-view__section-sub',
+  panel: 'geo-view__panel',
+  canvas: 'geo-view__canvas',
+  heatStrip: 'geo-view__heat-strip',
+  heatStripLabel: 'geo-view__heat-strip-label',
+  legend: 'geo-view__legend',
+  legendItem: 'geo-view__legend-item',
+  legendSwatch: 'geo-view__legend-swatch',
+  tooltip: 'geo-view__tooltip',
+  loader: 'geo-view__loader',
+  noData: 'geo-view__no-data',
+  note: 'geo-view__note'
+} as const
