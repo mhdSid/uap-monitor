@@ -80,6 +80,14 @@ function redditToIntel (a: RedditArticle): IntelArticle {
   }
 }
 
+/** Source priority: lower = higher rank when publishedAt is equal */
+const SOURCE_PRIORITY: Record<string, number> = {
+  twitter: 0,
+  reddit: 1,
+  gnews: 2,
+  gdelt: 3
+}
+
 function mergeAndDedupe (
   twitter: TwitterArticle[],
   reddit: RedditArticle[],
@@ -102,7 +110,11 @@ function mergeAndDedupe (
     if (!seen.has(a.url)) { seen.add(a.url); merged.push(gdeltToIntel(a)) }
   }
 
-  merged.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  merged.sort((a, b) => {
+    const dateCompare = b.publishedAt.localeCompare(a.publishedAt)
+    if (dateCompare !== 0) return dateCompare
+    return (SOURCE_PRIORITY[a.intelSource] ?? 9) - (SOURCE_PRIORITY[b.intelSource] ?? 9)
+  })
   return merged
 }
 
