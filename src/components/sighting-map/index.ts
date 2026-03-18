@@ -54,6 +54,11 @@ export class SightingMap extends Component<SightingMapProps> {
   private resizeObserver!: ResizeObserver
   private isVisible = false
 
+  // Pending data — buffered when set before initMap completes
+  private pendingSightings: { sightings: Sighting[]; fitBounds: boolean } | null = null
+  private pendingFireballs: Fireball[] | null = null
+  private pendingNuclear: NuclearFacility[] | null = null
+
   protected create (): HTMLElement {
     this.wrapper = h('div', { className: cx.sightingMap })
     const mapEl = h('div', { className: cx.sightingMapCanvas })
@@ -182,6 +187,27 @@ export class SightingMap extends Component<SightingMapProps> {
     })
     this.resizeObserver.observe(this.wrapper)
     this.isVisible = true
+
+    // Flush any data that was set before the map initialized
+    this.flushPending()
+  }
+
+  private flushPending (): void {
+    if (this.pendingSightings) {
+      const { sightings, fitBounds } = this.pendingSightings
+      this.pendingSightings = null
+      this.setSightings(sightings, fitBounds)
+    }
+    if (this.pendingFireballs) {
+      const fireballs = this.pendingFireballs
+      this.pendingFireballs = null
+      this.setFireballs(fireballs)
+    }
+    if (this.pendingNuclear) {
+      const facilities = this.pendingNuclear
+      this.pendingNuclear = null
+      this.setNuclearFacilities(facilities)
+    }
   }
 
   // ─── Loading overlay ─────────────────────────────────────────────
@@ -202,7 +228,10 @@ export class SightingMap extends Component<SightingMapProps> {
   // ─── Public API ─────────────────────────────────────────────────
 
   setSightings (sightings: Sighting[], fitBounds = false): void {
-    if (!this.clusterGroup) return
+    if (!this.clusterGroup) {
+      this.pendingSightings = { sightings, fitBounds }
+      return
+    }
 
     this.clusterGroup.clearLayers()
 
@@ -264,7 +293,10 @@ export class SightingMap extends Component<SightingMapProps> {
   }
 
   setFireballs (fireballs: Fireball[]): void {
-    if (!this.fireballLayer) return
+    if (!this.fireballLayer) {
+      this.pendingFireballs = fireballs
+      return
+    }
 
     this.fireballLayer.clearLayers()
     const color = colors.sourceFireball
@@ -307,7 +339,10 @@ export class SightingMap extends Component<SightingMapProps> {
   }
 
   setNuclearFacilities (facilities: NuclearFacility[]): void {
-    if (!this.nuclearLayer) return
+    if (!this.nuclearLayer) {
+      this.pendingNuclear = facilities
+      return
+    }
 
     this.nuclearLayer.clearLayers()
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
