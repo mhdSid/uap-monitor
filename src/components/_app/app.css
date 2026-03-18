@@ -16,64 +16,13 @@
   display: none;
 }
 
-.app-main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-  padding: var(--space-md);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 .app-loader {
   display: flex;
   justify-content: center;
   padding: var(--space-20) 0;
 }
 
-.controls-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-/* Desktop controls: hidden on SP */
-.controls-form--desktop .filter-toolbar {
-  display: none;
-}
-
-/* ── FAB — floating action button (mobile only) ──────────────────── */
-
-.fab {
-  position: fixed;
-  bottom: var(--space-lg);
-  right: var(--space-lg);
-  z-index: var(--z-fab);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Space at bottom so FAB doesn't overlap footer content */
-@media (max-width: 767px) {
-  .app-main {
-    padding-bottom: calc(var(--space-3xl) + var(--space-xl));
-  }
-}
-
-/* ── Desktop: inline controls visible, FAB + drawer hidden ───────── */
-
-@media (min-width: 768px) {
-  .controls-form--desktop .filter-toolbar {
-    display: flex;
-  }
-
-  .fab { display: none !important; }
-
-  .drawer {
-    display: none;
-  }
-}
-
-/* ── View containers (geomagnetic / seismic) ─────────────────────── */
+/* ── View containers (monitor / geomagnetic / seismic) ───────────── */
 
 .app-view-container {
   display: flex;

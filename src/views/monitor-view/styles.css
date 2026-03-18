@@ -1,0 +1,66 @@
+/* ─── Monitor View ─────────────────────────────────────────────────── */
+
+.mon-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mon-view__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.mon-view__loader {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-20) 0;
+}
+
+/* ── Controls form ──────────────────────────────────────────────────── */
+
+.mon-view__controls-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Desktop controls: hide filter toolbar on SP */
+.mon-view__controls-form--desktop .filter-toolbar {
+  display: none;
+}
+
+/* ── FAB — floating action button (mobile only) ──────────────────── */
+
+.mon-view__fab {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  z-index: var(--z-fab);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Space at bottom so FAB doesn't overlap footer content */
+@media (max-width: 767px) {
+  .mon-view {
+    padding-bottom: calc(var(--space-3xl) + var(--space-xl));
+  }
+}
+
+/* ── Desktop: inline controls visible, FAB + drawer hidden ───────── */
+
+@media (min-width: 768px) {
+  .mon-view__controls-form--desktop .filter-toolbar {
+    display: flex;
+  }
+
+  .mon-view__fab { display: none !important; }
+
+  .mon-view .drawer {
+    display: none;
+  }
+}
