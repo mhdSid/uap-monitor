@@ -98,10 +98,6 @@ export class App extends Component {
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
-    const analytics = useAnalytics()
-    analytics.init()
-    analytics.pageView()
-
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -120,6 +116,10 @@ export class App extends Component {
 
     // ── Router: enable view switching after data is ready ──
     this.initRouter()
+
+    const analytics = useAnalytics()
+    analytics.init()
+    analytics.pageView()
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
