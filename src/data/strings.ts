@@ -36,7 +36,16 @@ export const ARIA = {
   SEARCH_INTEL: 'Search intelligence articles',
   OPEN_BOOKMARKS: 'Open saved sightings',
   SIGHTING_ACTIONS: 'Sighting actions',
-  SHARE_SIGHTING: 'Share sighting'
+  SHARE_SIGHTING: 'Share sighting',
+  SUBMIT_SIGHTING: 'Open sighting report form',
+  SUBMIT_DATE: 'Date of sighting',
+  SUBMIT_LOCATION: 'Sighting location',
+  SUBMIT_SHAPE: 'Object shape',
+  SUBMIT_DURATION: 'Sighting duration',
+  SUBMIT_OBSERVERS: 'Number of observers',
+  SUBMIT_TITLE: 'Sighting title',
+  SUBMIT_DESCRIPTION: 'Sighting description',
+  SUBMIT_EMAIL: 'Contact email'
 } as const
 
 // ─── Continent labels ───────────────────────────────────────────────
@@ -124,7 +133,9 @@ export const SECTION = {
   GNEWS_TOOLTIP: 'Latest UAP/UFO news aggregated from 60,000+ worldwide sources via GNews. English-language articles sorted by recency.',
   INTEL_FEED: 'INTELLIGENCE NEWS FEED',
   INTEL_FEED_TOOLTIP: 'Unified UAP/UFO intelligence feed combining four sources: GDELT Project (global broadcast, print, and web monitoring across 100+ languages with sentiment analysis), GNews (international news coverage), X/Twitter (real-time public sightings and researcher posts), and Reddit (community eyewitness reports and discussions). Results are merged and sorted chronologically.',
-  SIGHTING_REPORTS: 'SIGHTING REPORTS'
+  SIGHTING_REPORTS: 'SIGHTING REPORTS',
+  SUBMIT_SIGHTING: 'REPORT A SIGHTING',
+  SUBMIT_SIGHTING_TOOLTIP: 'Submit a firsthand UAP sighting report. No account required. All submissions are reviewed before being added to the dataset.'
 } as const
 
 export const GDELT_TONE_BANDS = {
@@ -495,4 +506,37 @@ export const BOOKMARKS = {
 export const THEME = {
   LIGHT: 'light',
   DARK: 'dark'
+} as const
+
+// Submit Form
+export const SUBMIT_FORM = {
+  MODAL_TITLE: 'REPORT A SIGHTING',
+  MODAL_SUBTITLE: 'Your report is *anonymous*. No account required.',
+  DATE_LABEL: 'DATE OF SIGHTING',
+  LOCATION_LABEL: 'LOCATION',
+  LOCATION_PLACEHOLDER: 'City, State, Country',
+  SHAPE_LABEL: 'SHAPE',
+  SHAPE_DEFAULT: 'Select shape...',
+  DURATION_LABEL: 'DURATION',
+  DURATION_PLACEHOLDER: 'e.g. 30 seconds, 5 minutes',
+  OBSERVERS_LABEL: 'OBSERVERS',
+  OBSERVERS_PLACEHOLDER: '1',
+  TITLE_LABEL: 'TITLE',
+  TITLE_PLACEHOLDER: 'Add a title to what you saw.',
+  DESCRIPTION_LABEL: 'DESCRIPTION',
+  DESCRIPTION_PLACEHOLDER: 'Describe what you saw — direction, altitude, movement pattern, color, sounds, any details you remember.',
+  EMAIL_LABEL: 'CONTACT EMAIL',
+  EMAIL_PLACEHOLDER: 'Optional — for follow-up questions only',
+  EMAIL_HINT: 'Optional. Never shared publicly. Used only if we need to verify details.',
+  SUBMIT_LABEL: 'SUBMIT REPORT',
+  SUCCESS_ICON: '✓',
+  SUCCESS_MESSAGE: 'Report submitted. Thank you for contributing to the global UAP dataset. Your submission will be reviewed and added.',
+  TOAST_SUCCESS: 'SIGHTING REPORT SUBMITTED',
+  ERROR_REQUIRED: 'Please fill in all required fields (date, location, shape, description).',
+  ERROR_GENERIC: 'Submission failed. Please try again.',
+  ERROR_NETWORK: 'Network error. Check your connection and try again.'
+} as const
+
+export const HEADER = {
+  SUBMIT_CTA: '+ REPORT'
 } as const

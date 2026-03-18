@@ -1,0 +1,7 @@
+name = "uap-monitor"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "uap_monitor"
+id = "df9f6a6b9ce44281905277fd63a65a57"
+preview_id = "ec5258b5ba0b4c318f84efa7bab5059c"

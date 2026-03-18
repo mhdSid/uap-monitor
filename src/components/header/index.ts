@@ -5,7 +5,8 @@ import { h, setStyles, hide, show, setText } from '@/utils/dom'
 import { iconRadar, iconSun, iconMoon, iconRadarSignalOutline } from '@/components/icons'
 import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
-import { APP_NAME, ARIA } from '@/data/strings'
+import { SubmitModal } from '@/components/submit-modal'
+import { APP_NAME, ARIA, HEADER } from '@/data/strings'
 import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
@@ -17,6 +18,17 @@ export class Header extends Component {
       radar,
       h('span', { className: cx.title }, APP_NAME)
     )
+
+    // ── Submit sighting CTA ──────────────────────────────────────
+    const submitBtn = h('button', {
+      className: cx.submitBtn,
+      type: 'button',
+      'aria-label': ARIA.SUBMIT_SIGHTING
+    }, HEADER.SUBMIT_CTA) as HTMLButtonElement
+
+    submitBtn.addEventListener('click', () => {
+      SubmitModal.open(submitBtn)
+    })
 
     // ── Bookmarks trigger ────────────────────────────────────────
     const bookmarks = useBookmarks()
@@ -52,6 +64,7 @@ export class Header extends Component {
     })
 
     const right = h('div', { className: cx.right },
+      submitBtn,
       bookmarkBtn,
       themeSwitch.el
     )

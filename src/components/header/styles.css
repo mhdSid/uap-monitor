@@ -32,6 +32,32 @@
   gap: var(--space-md);
 }
 
+/* ── Submit sighting CTA ─────────────────────────────────────────── */
+
+.app-header__submit {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--color-green);
+  background: transparent;
+  border: 1px solid var(--color-green);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.app-header__submit:hover {
+  background: var(--c-green-500-08);
+}
+
+.app-header__submit:active {
+  background: var(--c-green-500-20);
+}
+
 /* ── Bookmark trigger ────────────────────────────────────────────── */
 
 .app-header__bookmark {
@@ -55,10 +81,7 @@
   color: var(--color-green);
 }
 
-.app-header__bookmark:focus-visible {
-  outline: 1px solid var(--color-green);
-  outline-offset: 1px;
-}
+/* focus-visible handled by global base.css */
 
 .app-header__bookmark-badge {
   position: absolute;

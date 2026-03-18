@@ -1,0 +1,19 @@
+.submit-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.submit-modal__title {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  letter-spacing: 1px;
+}
+
+.submit-modal__subtitle {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+}

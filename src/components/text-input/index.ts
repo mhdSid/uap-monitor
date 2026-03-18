@@ -6,14 +6,19 @@ import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 import { ComponentSize } from '@/enums'
 
+export type TextInputType = 'text' | 'date' | 'email' | 'number'
+
 export interface TextInputProps {
   id?: string
   name?: string
   placeholder?: string
   autofocus?: boolean
   ariaLabel: string
+  inputType?: TextInputType
   size?: ComponentSize
   clearable?: boolean
+  min?: string
+  max?: string
   onInput?: (value: string) => void
   onClear?: () => void
 }
@@ -23,7 +28,7 @@ export class TextInput extends Component<TextInputProps> {
   private clearBtn!: HTMLButtonElement | null
 
   protected create (): HTMLElement {
-    const { id, name, placeholder, ariaLabel, autofocus, size = ComponentSize.MD, clearable = false, onInput, onClear } = this.props
+    const { id, name, placeholder, ariaLabel, autofocus, inputType = 'text', size = ComponentSize.MD, clearable = false, min, max, onInput, onClear } = this.props
 
     const SIZE_CX: Record<ComponentSize, string> = {
       [ComponentSize.SM]: cx.sm,
@@ -33,12 +38,14 @@ export class TextInput extends Component<TextInputProps> {
 
     this.input = h('input', {
       className: `${cx.input} ${SIZE_CX[size]}`,
-      type: 'text',
+      type: inputType,
       autocomplete: 'off',
       ...autofocus && { autofocus },
       ...(id && { id }),
       ...(name && { name }),
       ...(placeholder && { placeholder }),
+      ...(min && { min }),
+      ...(max && { max }),
       'aria-label': ariaLabel
     }) as HTMLInputElement
 

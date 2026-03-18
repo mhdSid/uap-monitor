@@ -1,4 +1,4 @@
-import { Continent } from "@/enums";
+import { Continent } from "@/enums"
 
 /** Class name constants for sighting-grid. Auto-generated — edit styles.css, re-run gen. */
 export const cx = {
