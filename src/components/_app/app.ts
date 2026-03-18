@@ -212,9 +212,9 @@ export class App extends Component {
   // ─── Router ────────────────────────────────────────────────────
 
   private parseInitialRoute (): RouteName {
-    const raw = window.location.hash.replace(/^#/, '')
-    if (raw === '/geomagnetic') return RouteName.GEOMAGNETIC
-    if (raw === '/seismic') return RouteName.SEISMIC
+    const path = window.location.pathname
+    if (path === '/geomagnetic') return RouteName.GEOMAGNETIC
+    if (path === '/seismic') return RouteName.SEISMIC
     return RouteName.MONITOR
   }
 

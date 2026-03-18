@@ -1,13 +1,13 @@
 /* ------------------------------------------------------------------ *
- *  UAP Monitor — Hash router                                         *
+ *  UAP Monitor — History router                                       *
  *                                                                     *
- *  Minimal hash-based router for switching between app views.         *
- *  No dependencies, no framework, no history API.                     *
+ *  Minimal pushState router for switching between app views.          *
+ *  No dependencies, no framework, real URL paths.                     *
  *                                                                     *
  *  Routes:                                                            *
- *    #/              → Monitor (main view)                            *
- *    #/geomagnetic   → Geomagnetic correlation view                   *
- *    #/seismic       → Seismic correlation view                       *
+ *    /              → Monitor (main view)                             *
+ *    /geomagnetic   → Geomagnetic correlation view                    *
+ *    /seismic       → Seismic correlation view                        *
  * ------------------------------------------------------------------ */
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -24,17 +24,17 @@ export type RouteChangeHandler = (route: RouteName) => void
 
 // ─── Constants ──────────────────────────────────────────────────────
 
-const HASH_MAP: Record<string, RouteName> = {
+const PATH_MAP: Record<string, RouteName> = {
   '': RouteName.MONITOR,
   '/': RouteName.MONITOR,
   '/geomagnetic': RouteName.GEOMAGNETIC,
   '/seismic': RouteName.SEISMIC
 } as const
 
-const ROUTE_TO_HASH: Record<RouteName, string> = {
-  [RouteName.MONITOR]: '#/',
-  [RouteName.GEOMAGNETIC]: '#/geomagnetic',
-  [RouteName.SEISMIC]: '#/seismic'
+const ROUTE_TO_PATH: Record<RouteName, string> = {
+  [RouteName.MONITOR]: '/',
+  [RouteName.GEOMAGNETIC]: '/geomagnetic',
+  [RouteName.SEISMIC]: '/seismic'
 } as const
 
 // ─── Router ─────────────────────────────────────────────────────────
@@ -50,31 +50,30 @@ export interface Router {
   destroy: () => void
 }
 
-function parseHash (): RouteName {
-  const raw = window.location.hash.replace(/^#/, '')
-  return HASH_MAP[raw] ?? RouteName.MONITOR
+function parsePath (): RouteName {
+  const raw = window.location.pathname
+  return PATH_MAP[raw] ?? RouteName.MONITOR
 }
 
 export function createRouter (): Router {
-  let currentRoute = parseHash()
+  let currentRoute = parsePath()
   const handlers: RouteChangeHandler[] = []
 
-  function onHashChange (): void {
-    const next = parseHash()
+  function onPopState (): void {
+    const next = parsePath()
     if (next === currentRoute) return
     currentRoute = next
     for (const h of handlers) h(currentRoute)
   }
 
-  window.addEventListener('hashchange', onHashChange)
+  window.addEventListener('popstate', onPopState)
 
   return {
     current: () => currentRoute,
 
     navigate (route: RouteName): void {
       if (route === currentRoute) return
-      window.location.hash = ROUTE_TO_HASH[route]
-      // hashchange fires async — apply immediately for snappy UX
+      window.history.pushState(null, '', ROUTE_TO_PATH[route])
       currentRoute = route
       for (const h of handlers) h(route)
     },
@@ -84,7 +83,7 @@ export function createRouter (): Router {
     },
 
     destroy (): void {
-      window.removeEventListener('hashchange', onHashChange)
+      window.removeEventListener('popstate', onPopState)
       handlers.length = 0
     }
   }
