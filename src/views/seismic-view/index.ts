@@ -6,6 +6,7 @@
  *  EQL candidates highlighted in amber.                               *
  *                                                                     *
  *  Theme-aware canvas (same pattern as Timeline).                     *
+ *  Canvas wrapped in scroll container for narrow viewports.           *
  * ------------------------------------------------------------------ */
 
 import './styles.css'
@@ -22,14 +23,33 @@ import type { Sighting, NearbyEarthquake } from '@/types'
 // ─── Canvas constants ───────────────────────────────────────────────
 
 const SCATTER_H = 320
-const PAD_X = 52
 const PAD_Y = 20
 const PAD_BOTTOM = 42
 const MAX_HOURS = 72
 const MAX_DIST_KM = 300
 const DOT_MIN_R = 3
-const DOT_MAX_R = 12
 const EQL_DIST_LINE = 120
+const MIN_SCATTER_W = 420
+
+// ─── Responsive helpers ─────────────────────────────────────────────
+
+/** Y-axis label gutter — narrower on small screens */
+function getPadX (canvasW: number): number {
+  return canvasW < 300 ? 32 : 52
+}
+
+/** Max dot radius — smaller on narrow viewports to reduce overlap */
+function getDotMaxR (canvasW: number): number {
+  return canvasW < 300 ? 8 : 12
+}
+
+/** X-axis hour labels — drop ±72 on very small screens */
+const HOUR_STEPS_FULL = [-72, -48, -24, 0, 24, 48, 72]
+const HOUR_STEPS_COMPACT = [-48, -24, 0, 24, 48]
+
+function getHourSteps (canvasW: number): number[] {
+  return canvasW < 300 ? HOUR_STEPS_COMPACT : HOUR_STEPS_FULL
+}
 
 // ─── Theme-aware canvas colors ──────────────────────────────────────
 
@@ -99,6 +119,7 @@ export class SeismicView extends Component {
   private built = false
 
   private scatterCanvas!: HTMLCanvasElement
+  private scatterScrollWrapper!: HTMLElement
   private scatterTooltip!: HTMLElement
   private tableBody!: HTMLElement
 
@@ -115,6 +136,9 @@ export class SeismicView extends Component {
   private avgDist = 0
   private avgMag = 0
   private loaded = false
+
+  // Resize observer for responsive canvas redraw
+  private resizeObserver: ResizeObserver | null = null
 
   protected create (): HTMLElement {
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
@@ -157,6 +181,8 @@ export class SeismicView extends Component {
     requestAnimationFrame(() => {
       this.drawScatter()
     })
+
+    this.bindResizeObserver()
 
     // Re-compute when sightings change (year range or filter)
     store.sightings.subscribe(async (newSightings) => {
@@ -266,8 +292,12 @@ export class SeismicView extends Component {
     this.scatterTooltip = h('div', { className: cx.tooltip })
     hide(this.scatterTooltip)
 
+    this.scatterScrollWrapper = h('div', { className: cx.scrollWrapper },
+      this.scatterCanvas
+    )
+
     const scatterPanel = h('div', { className: cx.panel },
-      this.scatterCanvas,
+      this.scatterScrollWrapper,
       this.scatterTooltip,
       this.buildLegend([
         { label: SEISMIC.LEGEND_PAIR, color: 'var(--color-cyan)' },
@@ -419,27 +449,44 @@ export class SeismicView extends Component {
     return h('div', { className: cx.note }, list)
   }
 
+  // ─── Resize observer ───────────────────────────────────────────
+
+  private bindResizeObserver (): void {
+    let rafId = 0
+    this.resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        this.drawScatter()
+      })
+    })
+    this.resizeObserver.observe(this.contentEl)
+  }
+
   // ─── Scatter canvas ─────────────────────────────────────────────
 
   private drawScatter (): void {
     const canvas = this.scatterCanvas
-    const rect = canvas.parentElement?.getBoundingClientRect()
-    if (!rect) return
+    const wrapper = this.scatterScrollWrapper
+    const viewportW = wrapper.getBoundingClientRect().width
+    if (viewportW <= 0) return
 
-    const w = rect.width - 32
-    if (w <= 0) return
+    const contentW = Math.max(viewportW, MIN_SCATTER_W)
+    const padX = getPadX(contentW)
+    const dotMaxR = getDotMaxR(contentW)
+    const hourSteps = getHourSteps(contentW)
 
     const dpr = window.devicePixelRatio || 1
-    canvas.width = w * dpr
+    canvas.width = contentW * dpr
     canvas.height = SCATTER_H * dpr
-    setStyles(canvas, { width: w + 'px', height: SCATTER_H + 'px' })
+    setStyles(canvas, { width: contentW + 'px', height: SCATTER_H + 'px' })
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
     const c = getCanvasColors()
-    const plotW = w - PAD_X - 16
+    const w = contentW
+    const plotW = w - padX - 16
     const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
 
     // Grid
@@ -447,13 +494,12 @@ export class SeismicView extends Component {
     ctx.lineWidth = 1
 
     // X-axis grid + labels (hours)
-    const hourSteps = [-72, -48, -24, 0, 24, 48, 72]
     ctx.font = 'bold 8px monospace'
     ctx.fillStyle = c.text
     ctx.textAlign = 'center'
 
     for (const hrs of hourSteps) {
-      const x = PAD_X + ((hrs + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
+      const x = padX + ((hrs + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
       ctx.strokeStyle = c.grid
       ctx.beginPath()
       ctx.moveTo(x, PAD_Y)
@@ -470,17 +516,17 @@ export class SeismicView extends Component {
       const y = PAD_Y + (km / MAX_DIST_KM) * plotH
       ctx.strokeStyle = c.grid
       ctx.beginPath()
-      ctx.moveTo(PAD_X, y)
+      ctx.moveTo(padX, y)
       ctx.lineTo(w - 16, y)
       ctx.stroke()
       ctx.fillStyle = c.text
-      ctx.fillText(`${km}`, PAD_X - 6, y + 3)
+      ctx.fillText(`${km}`, padX - 6, y + 3)
     }
 
     // Reference lines
     ctx.setLineDash([4, 4])
 
-    const zeroX = PAD_X + (MAX_HOURS / (MAX_HOURS * 2)) * plotW
+    const zeroX = padX + (MAX_HOURS / (MAX_HOURS * 2)) * plotW
     ctx.strokeStyle = c.refLine
     ctx.beginPath()
     ctx.moveTo(zeroX, PAD_Y)
@@ -490,7 +536,7 @@ export class SeismicView extends Component {
     const eqlY = PAD_Y + (EQL_DIST_LINE / MAX_DIST_KM) * plotH
     ctx.strokeStyle = c.refLineEql
     ctx.beginPath()
-    ctx.moveTo(PAD_X, eqlY)
+    ctx.moveTo(padX, eqlY)
     ctx.lineTo(w - 16, eqlY)
     ctx.stroke()
     ctx.setLineDash([])
@@ -499,7 +545,7 @@ export class SeismicView extends Component {
     ctx.fillStyle = c.text
     ctx.font = 'bold 8px monospace'
     ctx.textAlign = 'center'
-    ctx.fillText(SEISMIC.SCATTER_X, PAD_X + plotW / 2, SCATTER_H - 4)
+    ctx.fillText(SEISMIC.SCATTER_X, padX + plotW / 2, SCATTER_H - 4)
 
     ctx.save()
     ctx.translate(10, PAD_Y + plotH / 2)
@@ -514,14 +560,14 @@ export class SeismicView extends Component {
     })
 
     for (const d of sorted) {
-      const x = PAD_X + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
+      const x = padX + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
       const y = PAD_Y + (d.distKm / MAX_DIST_KM) * plotH
 
-      if (x < PAD_X || x > PAD_X + plotW) continue
+      if (x < padX || x > padX + plotW) continue
       if (y < PAD_Y || y > PAD_Y + plotH) continue
 
       const magNorm = (d.magnitude - 4) / 4
-      const r = DOT_MIN_R + magNorm * (DOT_MAX_R - DOT_MIN_R)
+      const r = DOT_MIN_R + magNorm * (dotMaxR - DOT_MIN_R)
 
       ctx.globalAlpha = d.isEQL ? 0.85 : 0.35
       ctx.fillStyle = d.isEQL ? c.dotEql : c.dot
@@ -542,14 +588,15 @@ export class SeismicView extends Component {
       const mx = clientX - rect.left
       const my = clientY - rect.top
 
-      const plotW = rect.width - PAD_X - 16
+      const padX = getPadX(canvas.clientWidth)
+      const plotW = canvas.clientWidth - padX - 16
       const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
 
       let nearest: ScatterPoint | null = null
       let minDist = Infinity
 
       for (const d of this.scatterData) {
-        const x = PAD_X + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
+        const x = padX + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
         const y = PAD_Y + (d.distKm / MAX_DIST_KM) * plotH
         const dist = Math.hypot(mx - x, my - y)
         if (dist < 20 && dist < minDist) {
@@ -578,5 +625,13 @@ export class SeismicView extends Component {
       }
     }, { passive: true })
     canvas.addEventListener('touchend', () => { hide(this.scatterTooltip) }, { passive: true })
+  }
+
+  // ─── Cleanup ────────────────────────────────────────────────────
+
+  destroy (): void {
+    this.resizeObserver?.disconnect()
+    this.resizeObserver = null
+    super.destroy()
   }
 }

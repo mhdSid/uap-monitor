@@ -11,6 +11,7 @@ export const cx = {
   sectionSub: 'seis-view__section-sub',
   panel: 'seis-view__panel',
   canvas: 'seis-view__canvas',
+  scrollWrapper: 'seis-view__scroll-wrapper',
   legend: 'seis-view__legend',
   legendItem: 'seis-view__legend-item',
   legendSwatch: 'seis-view__legend-swatch',

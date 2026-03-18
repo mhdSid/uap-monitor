@@ -18,6 +18,7 @@
 import './app.css'
 import { Component, createRouter, RouteName } from '@/core'
 import type { Router } from '@/core'
+import type { Sighting } from '@/types'
 import { h, mount, clearChildren, hide, show } from '@/utils/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, batch, minDelay } from '@/composables'
 import { Header } from '@/components/header'
@@ -98,6 +99,10 @@ export class App extends Component {
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
+    const analytics = useAnalytics()
+    analytics.init()
+    analytics.pageView()
+
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -116,10 +121,6 @@ export class App extends Component {
 
     // ── Router: enable view switching after data is ready ──
     this.initRouter()
-
-    const analytics = useAnalytics()
-    analytics.init()
-    analytics.pageView()
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
@@ -151,15 +152,12 @@ export class App extends Component {
   // ─── Phase: Finalize shared data ───────────────────────────────
 
   private finalizeData (): void {
-    // Merge Russian Historical sightings into main dataset
-    const russianSightings = this.russianHistorical.getAll()
-    if (russianSightings.length > 0) {
-      const current = this.store.sightings.get()
-      const ids = new Set(current.map(s => s.id))
-      const newOnes = russianSightings.filter(s => !ids.has(s.id))
-      if (newOnes.length > 0) {
-        this.store.sightings.set([...current, ...newOnes])
-      }
+    // Merge Russian Historical sightings within current year range
+    const { from, to } = this.store.yearRange.get()
+    const current = this.store.sightings.get()
+    const merged = this.mergeRussianHistorical(current, from, to)
+    if (merged !== current) {
+      this.store.sightings.set(merged)
     }
 
     const sightings = this.store.sightings.get()
@@ -197,16 +195,34 @@ export class App extends Component {
     const { from, to } = this.store.yearRange.get()
     const sightings = await minDelay(() => this.dataSource.fetchYearRange(from, to))
 
+    // Re-merge Russian historical for new year range
+    const merged = this.mergeRussianHistorical(sightings, from, to)
+
     batch(() => {
-      this.store.sightings.set(sightings)
-      this.store.shownCount.set(sightings.length)
+      this.store.sightings.set(merged)
+      this.store.shownCount.set(merged.length)
       this.store.loading.set(false)
     })
 
     // Update ticker with new sightings
     this.ticker.setMessages(
-      this.tickerMessages.generateMessages(sightings)
+      this.tickerMessages.generateMessages(merged)
     )
+  }
+
+  /** Merge Russian historical sightings within [from, to] into a sightings array. */
+  private mergeRussianHistorical (sightings: Sighting[], from: number, to: number): Sighting[] {
+    const russianSightings = this.russianHistorical.getAll()
+    if (russianSightings.length === 0) return sightings
+
+    const ids = new Set(sightings.map(s => s.id))
+    const newOnes = russianSightings.filter(s => {
+      if (ids.has(s.id)) return false
+      const year = parseInt(s.occurredAt?.slice(0, 4) ?? '0', 10)
+      return year >= from && year <= to
+    })
+
+    return newOnes.length > 0 ? [...sightings, ...newOnes] : sightings
   }
 
   // ─── Router ────────────────────────────────────────────────────

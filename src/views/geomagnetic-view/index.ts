@@ -6,6 +6,8 @@
  *    2. Kp distribution: observed vs expected sighting counts by Kp   *
  *                                                                     *
  *  All rendering via <canvas> — zero chart library dependencies.      *
+ *  Canvases are wrapped in scroll containers so long datasets         *
+ *  (1932–2026) remain fully accessible on small viewports.            *
  * ------------------------------------------------------------------ */
 
 import './styles.css'
@@ -25,11 +27,18 @@ const BAR_GAP = 2
 const BAR_MIN_W = 6
 const BAR_RADIUS = 2
 const LABEL_H = 20
-const PAD_X = 40
 const PAD_TOP = 8
 const TIMELINE_H = 200
 const DIST_H = 220
 const KP_LEVELS = 10
+const MIN_KP_GROUP_W = 30
+
+// ─── Responsive helpers ─────────────────────────────────────────────
+
+/** Y-axis label gutter — narrower on small screens */
+function getPadX (canvasW: number): number {
+  return canvasW < 300 ? 28 : 40
+}
 
 // ─── Theme-aware canvas colors (same pattern as Timeline) ───────────
 
@@ -99,9 +108,11 @@ export class GeomagneticView extends Component {
 
   // Canvas refs
   private timelineCanvas!: HTMLCanvasElement
+  private timelineScrollWrapper!: HTMLElement
   private timelineTooltip!: HTMLElement
   private heatStrip!: HTMLElement
   private distCanvas!: HTMLCanvasElement
+  private distScrollWrapper!: HTMLElement
   private distTooltip!: HTMLElement
 
   // Stat value elements (for re-render)
@@ -118,6 +129,9 @@ export class GeomagneticView extends Component {
   private kpDistExpected: number[] = []
   private loaded = false
   private timelineHoverIdx = -1
+
+  // Resize observer for responsive canvas redraw
+  private resizeObserver: ResizeObserver | null = null
 
   protected create (): HTMLElement {
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
@@ -159,6 +173,8 @@ export class GeomagneticView extends Component {
       this.drawTimeline()
       this.drawDistribution()
     })
+
+    this.bindResizeObserver()
 
     // Re-compute when sightings change (year range or filter)
     store.sightings.subscribe((newSightings) => {
@@ -253,10 +269,14 @@ export class GeomagneticView extends Component {
     this.timelineTooltip = h('div', { className: cx.tooltip })
     hide(this.timelineTooltip)
 
+    this.timelineScrollWrapper = h('div', { className: cx.scrollWrapper },
+      this.heatStrip,
+      this.timelineCanvas
+    )
+
     const timelinePanel = h('div', { className: cx.panel },
       h('div', { className: cx.heatStripLabel }, GEOMAGNETIC.LABEL_KP_INDEX),
-      this.heatStrip,
-      this.timelineCanvas,
+      this.timelineScrollWrapper,
       this.timelineTooltip,
       this.buildLegend([
         { label: GEOMAGNETIC.LEGEND_CALM, color: 'var(--color-green)' },
@@ -277,8 +297,12 @@ export class GeomagneticView extends Component {
     this.distTooltip = h('div', { className: cx.tooltip })
     hide(this.distTooltip)
 
+    this.distScrollWrapper = h('div', { className: cx.scrollWrapper },
+      this.distCanvas
+    )
+
     const distPanel = h('div', { className: cx.panel },
-      this.distCanvas,
+      this.distScrollWrapper,
       this.distTooltip,
       this.buildLegend([
         { label: GEOMAGNETIC.LABEL_OBSERVED, color: 'var(--color-green)' },
@@ -357,7 +381,8 @@ export class GeomagneticView extends Component {
       const kp = bucket.avgKp
       const color = kp < 3 ? 'var(--color-green)' : kp < 5 ? 'var(--color-amber)' : 'var(--color-red)'
       setStyles(cell, {
-        flex: '1',
+        flex: '1 0 auto',
+        minWidth: (BAR_MIN_W + BAR_GAP) + 'px',
         background: color,
         opacity: String(0.15 + (kp / 9) * 0.85)
       })
@@ -385,32 +410,52 @@ export class GeomagneticView extends Component {
     return legend
   }
 
+  // ─── Resize observer ───────────────────────────────────────────
+
+  private bindResizeObserver (): void {
+    let rafId = 0
+    this.resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        this.drawTimeline()
+        this.drawDistribution()
+      })
+    })
+    this.resizeObserver.observe(this.contentEl)
+  }
+
   // ─── Timeline canvas ───────────────────────────────────────────
 
   private drawTimeline (): void {
     const canvas = this.timelineCanvas
-    const rect = canvas.parentElement?.getBoundingClientRect()
-    if (!rect) return
+    const wrapper = this.timelineScrollWrapper
+    const viewportW = wrapper.getBoundingClientRect().width
+    if (viewportW <= 0) return
 
-    const w = rect.width - 32
-    if (w <= 0) return
+    const data = this.monthlyData
+    if (data.length === 0) return
+
+    const padX = getPadX(viewportW)
+    const step = BAR_MIN_W + BAR_GAP
+    const contentW = Math.max(viewportW, data.length * step + padX)
 
     const dpr = window.devicePixelRatio || 1
-    canvas.width = w * dpr
+    canvas.width = contentW * dpr
     canvas.height = TIMELINE_H * dpr
-    setStyles(canvas, { width: w + 'px', height: TIMELINE_H + 'px' })
+    setStyles(canvas, { width: contentW + 'px', height: TIMELINE_H + 'px' })
+
+    // Sync heatStrip width with canvas
+    setStyles(this.heatStrip, { width: contentW + 'px' })
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
     const c = getCanvasColors()
-    const data = this.monthlyData
-    if (data.length === 0) return
-
+    const w = contentW
     const barArea = TIMELINE_H - LABEL_H - PAD_TOP
-    const barW = Math.max(BAR_MIN_W, Math.floor((w - PAD_X) / data.length) - BAR_GAP)
-    const step = barW + BAR_GAP
+    const barW = Math.max(BAR_MIN_W, Math.floor((w - padX) / data.length) - BAR_GAP)
+    const barStep = barW + BAR_GAP
     const maxCount = Math.max(1, ...data.map(d => d.sightingCount))
 
     // Y-axis
@@ -421,11 +466,11 @@ export class GeomagneticView extends Component {
       const val = Math.round((maxCount / ySteps) * i)
       const y = PAD_TOP + barArea - (barArea * (i / ySteps))
       ctx.fillStyle = c.text
-      ctx.fillText(String(val), PAD_X - 6, y + 3)
+      ctx.fillText(String(val), padX - 6, y + 3)
       ctx.strokeStyle = c.grid
       ctx.lineWidth = 1
       ctx.beginPath()
-      ctx.moveTo(PAD_X, y)
+      ctx.moveTo(padX, y)
       ctx.lineTo(w, y)
       ctx.stroke()
     }
@@ -433,7 +478,7 @@ export class GeomagneticView extends Component {
     // Bars
     for (let i = 0; i < data.length; i++) {
       const d = data[i]
-      const x = PAD_X + i * step
+      const x = padX + i * barStep
       const barH = Math.max(0, (d.sightingCount / maxCount) * barArea)
       const y = PAD_TOP + barArea - barH
       const isHover = i === this.timelineHoverIdx
@@ -441,7 +486,7 @@ export class GeomagneticView extends Component {
       // Hover highlight column
       if (isHover) {
         ctx.fillStyle = c.grid
-        ctx.fillRect(x - 1, PAD_TOP, step, barArea)
+        ctx.fillRect(x - 1, PAD_TOP, barStep, barArea)
       }
 
       ctx.fillStyle = d.avgKp >= 5
@@ -473,24 +518,26 @@ export class GeomagneticView extends Component {
 
   private drawDistribution (): void {
     const canvas = this.distCanvas
-    const rect = canvas.parentElement?.getBoundingClientRect()
-    if (!rect) return
+    const wrapper = this.distScrollWrapper
+    const viewportW = wrapper.getBoundingClientRect().width
+    if (viewportW <= 0) return
 
-    const w = rect.width - 32
-    if (w <= 0) return
+    const padX = getPadX(viewportW)
+    const contentW = Math.max(viewportW, KP_LEVELS * MIN_KP_GROUP_W + padX)
 
     const dpr = window.devicePixelRatio || 1
-    canvas.width = w * dpr
+    canvas.width = contentW * dpr
     canvas.height = DIST_H * dpr
-    setStyles(canvas, { width: w + 'px', height: DIST_H + 'px' })
+    setStyles(canvas, { width: contentW + 'px', height: DIST_H + 'px' })
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
     const c = getCanvasColors()
+    const w = contentW
     const barArea = DIST_H - LABEL_H - PAD_TOP
-    const groupW = Math.floor((w - PAD_X) / KP_LEVELS)
+    const groupW = Math.floor((w - padX) / KP_LEVELS)
     const barW = Math.max(4, Math.floor((groupW - BAR_GAP * 3) / 2))
     const maxVal = Math.max(1, ...this.kpDistObserved, ...this.kpDistExpected)
 
@@ -502,17 +549,17 @@ export class GeomagneticView extends Component {
       const val = Math.round((maxVal / ySteps) * i)
       const y = PAD_TOP + barArea - (barArea * (i / ySteps))
       ctx.fillStyle = c.text
-      ctx.fillText(String(val), PAD_X - 6, y + 3)
+      ctx.fillText(String(val), padX - 6, y + 3)
       ctx.strokeStyle = c.grid
       ctx.lineWidth = 1
       ctx.beginPath()
-      ctx.moveTo(PAD_X, y)
+      ctx.moveTo(padX, y)
       ctx.lineTo(w, y)
       ctx.stroke()
     }
 
     for (let kp = 0; kp < KP_LEVELS; kp++) {
-      const groupX = PAD_X + kp * groupW
+      const groupX = padX + kp * groupW
       const obs = this.kpDistObserved[kp] ?? 0
       const exp = this.kpDistExpected[kp] ?? 0
       const ratio = exp > 0 ? obs / exp : 0
@@ -562,9 +609,10 @@ export class GeomagneticView extends Component {
       const data = this.monthlyData
       if (data.length === 0) { hide(this.timelineTooltip); return }
 
-      const barW = Math.max(BAR_MIN_W, Math.floor((rect.width - PAD_X) / data.length) - BAR_GAP)
+      const padX = getPadX(this.timelineScrollWrapper.getBoundingClientRect().width)
+      const barW = Math.max(BAR_MIN_W, Math.floor((canvas.clientWidth - padX) / data.length) - BAR_GAP)
       const step = barW + BAR_GAP
-      const idx = Math.floor((x - PAD_X) / step)
+      const idx = Math.floor((x - padX) / step)
 
       if (idx < 0 || idx >= data.length) {
         if (lastIdx !== -1) {
@@ -611,8 +659,9 @@ export class GeomagneticView extends Component {
     const handleHover = (clientX: number) => {
       const rect = canvas.getBoundingClientRect()
       const x = clientX - rect.left
-      const groupW = Math.floor((rect.width - PAD_X) / KP_LEVELS)
-      const kp = Math.floor((x - PAD_X) / groupW)
+      const padX = getPadX(this.distScrollWrapper.getBoundingClientRect().width)
+      const groupW = Math.floor((canvas.clientWidth - padX) / KP_LEVELS)
+      const kp = Math.floor((x - padX) / groupW)
 
       if (kp < 0 || kp >= KP_LEVELS) { hide(this.distTooltip); lastKp = -1; return }
       if (kp === lastKp) return
@@ -645,5 +694,13 @@ export class GeomagneticView extends Component {
       expHigh += this.kpDistExpected[kp] ?? 0
     }
     return expHigh > 0 ? (obsHigh / expHigh).toFixed(1) : '0'
+  }
+
+  // ─── Cleanup ────────────────────────────────────────────────────
+
+  destroy (): void {
+    this.resizeObserver?.disconnect()
+    this.resizeObserver = null
+    super.destroy()
   }
 }

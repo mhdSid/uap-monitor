@@ -100,7 +100,23 @@
 
 .seis-view__canvas {
   display: block;
-  width: 100%;
+}
+
+/* ── Scroll wrapper (horizontal scroll for wide canvases on SP) ───── */
+
+.seis-view__scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.seis-view__scroll-wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.seis-view__scroll-wrapper::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
 }
 
 /* ── Legend ──────────────────────────────────────────────────────────── */

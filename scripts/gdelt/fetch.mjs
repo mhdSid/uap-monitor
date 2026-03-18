@@ -146,7 +146,7 @@ async function main () {
     console.log(`── Window: ${win.label} ──`)
 
     for (const band of TONE_BANDS) {
-      const query = `${baseQuery} ${band.filter}`
+      const query = `${baseQuery} ${band.filter} sourcelang:english`
       const label = `  [${band.label}]`
 
       // eslint-disable-next-line
@@ -167,7 +167,9 @@ async function main () {
 
       let added = 0
       let noise = 0
+      let nonEn = 0
       for (const raw of rawArticles) {
+        if ((raw.language || '').toLowerCase() !== 'english') { nonEn++; continue }
         const article = transformArticle(raw, band.tone)
         if (seen.has(article.url)) continue
         if (isNoiseArticle(article)) { noise++; continue }
@@ -176,7 +178,7 @@ async function main () {
         added++
       }
 
-      console.log(`${label} ${rawArticles.length} fetched, ${added} new${noise > 0 ? `, ${noise} noise filtered` : ''}`)
+      console.log(`${label} ${rawArticles.length} fetched, ${added} new${noise > 0 ? `, ${noise} noise` : ''}${nonEn > 0 ? `, ${nonEn} non-en` : ''}`)
 
       // Courtesy delay between requests
       await new Promise(r => setTimeout(r, 1200))
@@ -192,12 +194,18 @@ async function main () {
   // Merge with existing source of truth
   mkdirSync(dirname(SOURCE_FILE), { recursive: true })
 
-  const { merged } = mergeArticles(SOURCE_FILE, trimmed, {
+  const { merged: rawMerged } = mergeArticles(SOURCE_FILE, trimmed, {
     arrayField: 'articles',
     urlField: 'url',
     dateField: 'publishedAt',
     max: opts.max
   })
+
+  // Final English-only filter (catches legacy non-en from existing source)
+  const merged = rawMerged.filter(a => a.language === 'en' || a.language === 'English' || !a.language)
+  if (rawMerged.length !== merged.length) {
+    console.log(`Filtered ${rawMerged.length - merged.length} non-English from merged set`)
+  }
 
   const output = {
     generatedAt: new Date().toISOString(),

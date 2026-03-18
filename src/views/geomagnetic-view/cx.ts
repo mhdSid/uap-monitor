@@ -11,6 +11,7 @@ export const cx = {
   sectionSub: 'geo-view__section-sub',
   panel: 'geo-view__panel',
   canvas: 'geo-view__canvas',
+  scrollWrapper: 'geo-view__scroll-wrapper',
   heatStrip: 'geo-view__heat-strip',
   heatStripLabel: 'geo-view__heat-strip-label',
   legend: 'geo-view__legend',
