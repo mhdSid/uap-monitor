@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc && node scripts/chunk-public-data.mjs --dir public/data --limit 24 && vite build",
     "chunk": "node scripts/chunk-public-data.mjs --dir public/data --limit 24",
+    "cf:deploy": "yarn build && wrangler pages deploy dist",
     "dev": "vite",
     "eslint": "eslint . --ext .ts,.js,.mjs",
     "fetch:fireball": "node scripts/nasa-fireball/fetch.mjs --out public/data/nasa-fireballs.json",

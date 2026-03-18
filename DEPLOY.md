@@ -47,7 +47,7 @@ name = "uap-monitor"
 compatibility_date = "2024-01-01"
 
 [[kv_namespaces]]
-binding = "UAP_SUBMISSIONS"
+binding = "uap-monitor"
 id = "<production-id-from-step-above>"
 preview_id = "<preview-id-from-step-above>"
 ```
@@ -58,7 +58,7 @@ If deploying via the Cloudflare Pages dashboard (Git integration):
 
 1. Go to **Workers & Pages** → your project → **Settings** → **Functions**
 2. Under **KV namespace bindings**, add:
-   - Variable name: `UAP_SUBMISSIONS`
+   - Variable name: `uap-monitor`
    - KV namespace: select the one you created
 3. Save
 
@@ -86,7 +86,7 @@ The `functions/api/submit.ts` file is automatically detected by Cloudflare Pages
 yarn dev
 
 # Or with wrangler (includes KV bindings):
-wrangler pages dev dist --kv UAP_SUBMISSIONS
+wrangler pages dev dist --kv uap-monitor
 ```
 
 ## 6. Data Pipeline
