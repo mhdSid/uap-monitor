@@ -47,6 +47,21 @@ export const palette = {
   amber500_20: 'rgba(245, 158, 11, 0.2)',
   green500_30: 'rgba(0, 255, 65, 0.3)',
 
+  // ── Light-mode canvas equivalents (darker for contrast on white bg) ──
+  green600_70: 'rgba(0, 143, 36, 0.7)',
+  green600_30: 'rgba(0, 143, 36, 0.3)',
+  red600: '#dc2626',
+  red600_70: 'rgba(220, 38, 38, 0.7)',
+  red600_30: 'rgba(220, 38, 38, 0.3)',
+  cyan600: '#0891b2',
+  cyan600_70: 'rgba(8, 145, 178, 0.7)',
+  cyan600_35: 'rgba(8, 145, 178, 0.35)',
+  amber600: '#b45309',
+  amber600_70: 'rgba(180, 83, 9, 0.7)',
+  amber600_20: 'rgba(180, 83, 9, 0.2)',
+  black_08: 'rgba(0, 0, 0, 0.08)',
+  black_15: 'rgba(0, 0, 0, 0.15)',
+
   white50: 'rgba(255, 255, 255, 0.5)',
   white20: 'rgba(255, 255, 255, 0.2)',
   white15: 'rgba(255, 255, 255, 0.15)',

@@ -5,7 +5,7 @@
  *  Each dot = one sighting–earthquake pair, sized by magnitude.       *
  *  EQL candidates highlighted in amber.                               *
  *                                                                     *
- *  Table: strongest earthquake–sighting correlations.                 *
+ *  Theme-aware canvas (same pattern as Timeline).                     *
  * ------------------------------------------------------------------ */
 
 import './styles.css'
@@ -13,8 +13,9 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { h, el, hide, show, setText, setStyles } from '@/utils/dom'
 import { palette } from '@/styles/palette'
-import { useSeismic, useAppStore } from '@/composables'
+import { useSeismic, useAppStore, useTheme } from '@/composables'
 import { Loader } from '@/components/loader'
+import { YearSelector } from '@/components/year-selector'
 import { SEISMIC } from '@/data/strings'
 import type { Sighting, NearbyEarthquake } from '@/types'
 
@@ -29,6 +30,49 @@ const MAX_DIST_KM = 300
 const DOT_MIN_R = 3
 const DOT_MAX_R = 12
 const EQL_DIST_LINE = 120
+
+// ─── Theme-aware canvas colors ──────────────────────────────────────
+
+interface CanvasColors {
+  text: string
+  grid: string
+  dot: string
+  dotEql: string
+  refLine: string
+  refLineEql: string
+  magLow: string
+  magMid: string
+  magHigh: string
+}
+
+function getCanvasColors (): CanvasColors {
+  const { isLightTheme } = useTheme()
+  const isLight = isLightTheme()
+
+  return isLight
+    ? {
+      text: palette.black500_30,
+      grid: palette.black_08,
+      dot: palette.cyan600_35,
+      dotEql: palette.amber600_70,
+      refLine: palette.amber600_20,
+      refLineEql: palette.red600_30,
+      magLow: palette.cyan600,
+      magMid: palette.amber600,
+      magHigh: palette.red600
+    }
+    : {
+      text: palette.white50,
+      grid: palette.white08,
+      dot: palette.cyan500_35,
+      dotEql: palette.amber500_70,
+      refLine: palette.amber500_20,
+      refLineEql: palette.red500_30,
+      magLow: palette.cyan500,
+      magMid: palette.amber500,
+      magHigh: palette.red500
+    }
+}
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -52,9 +96,17 @@ interface TopCorrelation {
 export class SeismicView extends Component {
   private loaderEl!: HTMLElement
   private contentEl!: HTMLElement
+  private built = false
 
   private scatterCanvas!: HTMLCanvasElement
   private scatterTooltip!: HTMLElement
+  private tableBody!: HTMLElement
+
+  // Stat value elements
+  private statPairsVal!: HTMLElement
+  private statEqlVal!: HTMLElement
+  private statDistVal!: HTMLElement
+  private statMagVal!: HTMLElement
 
   private scatterData: ScatterPoint[] = []
   private topCorrelations: TopCorrelation[] = []
@@ -66,7 +118,8 @@ export class SeismicView extends Component {
 
   protected create (): HTMLElement {
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { style: 'display:none' })
+    this.contentEl = h('div', { className: cx.content })
+    hide(this.contentEl)
 
     return h('div', { className: cx.root },
       this.loaderEl,
@@ -84,28 +137,51 @@ export class SeismicView extends Component {
 
     const store = useAppStore()
     const sightings = store.sightings.get()
-
-    // Load earthquake year files matching the current sighting range
     const { from, to } = store.yearRange.get()
+
     await seismic.ensureYears(from, to)
 
-    this.computeData(sightings)
-    this.buildContent()
-    this.loaded = true
+    await this.computeData(sightings)
 
+    if (!this.built) {
+      this.buildContent()
+      this.built = true
+    }
+    this.updateStats()
+    this.updateTable()
+
+    this.loaded = true
     hide(this.loaderEl)
     show(this.contentEl)
 
     requestAnimationFrame(() => {
       this.drawScatter()
     })
+
+    // Re-compute when sightings change (year range or filter)
+    store.sightings.subscribe(async (newSightings) => {
+      if (!this.loaded) return
+      const { from: f, to: t } = store.yearRange.get()
+      await seismic.ensureYears(f, t)
+      await this.computeData(newSightings)
+      this.updateStats()
+      this.updateTable()
+      requestAnimationFrame(() => this.drawScatter())
+    })
+
+    // Redraw on theme change
+    const { theme } = useTheme()
+    theme.subscribe(() => {
+      if (!this.loaded) return
+      requestAnimationFrame(() => this.drawScatter())
+    })
   }
 
   // ─── Data computation ───────────────────────────────────────────
 
-  private computeData (sightings: Sighting[]): void {
+  private async computeData (sightings: Sighting[]): Promise<void> {
     const seismic = useSeismic()
-    const pairs = seismic.getCorrelatedPairs(sightings)
+    const pairs = await seismic.getCorrelatedPairsAsync(sightings)
 
     this.totalPairs = pairs.length
     this.scatterData = pairs.map(p => ({
@@ -120,9 +196,11 @@ export class SeismicView extends Component {
     if (pairs.length > 0) {
       this.avgDist = Math.round(pairs.reduce((s, p) => s + p.distanceKm, 0) / pairs.length)
       this.avgMag = +(pairs.reduce((s, p) => s + (p.earthquake.magnitude ?? 0), 0) / pairs.length).toFixed(1)
+    } else {
+      this.avgDist = 0
+      this.avgMag = 0
     }
 
-    // Build top correlations: group by earthquake ID, count sightings
     this.topCorrelations = this.buildTopCorrelations(pairs)
   }
 
@@ -165,18 +243,25 @@ export class SeismicView extends Component {
       }))
   }
 
-  // ─── Build DOM ──────────────────────────────────────────────────
+  // ─── Build DOM (once) ───────────────────────────────────────────
 
   private buildContent (): void {
+    const yearSelector = new YearSelector({})
+
     // Stats
+    this.statPairsVal = h('div', { className: cx.statValue })
+    this.statEqlVal = h('div', { className: cx.statValue })
+    this.statDistVal = h('div', { className: cx.statValue })
+    this.statMagVal = h('div', { className: cx.statValue })
+
     const statsBar = h('div', { className: cx.stats },
-      this.createStat(SEISMIC.STAT_PAIRS, String(this.totalPairs), SEISMIC.STAT_PAIRS_SUB, palette.cyan500),
-      this.createStat(SEISMIC.STAT_EQL, String(this.eqlCount), SEISMIC.STAT_EQL_SUB, palette.amber500),
-      this.createStat(SEISMIC.STAT_AVG_DIST, `${this.avgDist} km`, SEISMIC.STAT_AVG_DIST_SUB, palette.green500),
-      this.createStat(SEISMIC.STAT_AVG_MAG, `M${this.avgMag}`, SEISMIC.STAT_AVG_MAG_SUB, palette.cyan500)
+      this.buildStatShell(SEISMIC.STAT_PAIRS, this.statPairsVal, SEISMIC.STAT_PAIRS_SUB),
+      this.buildStatShell(SEISMIC.STAT_EQL, this.statEqlVal, SEISMIC.STAT_EQL_SUB),
+      this.buildStatShell(SEISMIC.STAT_AVG_DIST, this.statDistVal, SEISMIC.STAT_AVG_DIST_SUB),
+      this.buildStatShell(SEISMIC.STAT_AVG_MAG, this.statMagVal, SEISMIC.STAT_AVG_MAG_SUB)
     )
 
-    // Scatter section
+    // Scatter
     this.scatterCanvas = el('canvas', { className: cx.canvas })
     this.scatterCanvas.height = SCATTER_H
     this.scatterTooltip = h('div', { className: cx.tooltip })
@@ -186,11 +271,10 @@ export class SeismicView extends Component {
       this.scatterCanvas,
       this.scatterTooltip,
       this.buildLegend([
-        { label: SEISMIC.LEGEND_PAIR, color: palette.cyan500 },
-        { label: SEISMIC.LEGEND_EQL, color: palette.amber500 }
+        { label: SEISMIC.LEGEND_PAIR, color: 'var(--color-cyan)' },
+        { label: SEISMIC.LEGEND_EQL, color: 'var(--color-amber)' }
       ])
     )
-
     this.bindScatterHover()
 
     const scatterSection = h('div', { className: cx.section },
@@ -199,20 +283,98 @@ export class SeismicView extends Component {
       scatterPanel
     )
 
-    // Table section
-    const tableSection = this.buildTableSection()
+    // Table
+    const columns = [
+      SEISMIC.TABLE_COL_LOCATION,
+      SEISMIC.TABLE_COL_MAG,
+      SEISMIC.TABLE_COL_DATE,
+      SEISMIC.TABLE_COL_SIGHTINGS,
+      SEISMIC.TABLE_COL_DIST
+    ]
 
+    const thead = el('thead')
+    const headRow = el('tr')
+    for (const col of columns) {
+      const th = el('th', { className: cx.tableHead })
+      th.textContent = col
+      headRow.appendChild(th)
+    }
+    thead.appendChild(headRow)
+
+    this.tableBody = el('tbody')
+
+    const table = el('table', { className: cx.table })
+    table.appendChild(thead)
+    table.appendChild(this.tableBody)
+
+    const tablePanel = h('div', { className: cx.panel, style: 'padding: 0; overflow: hidden' }, table)
+
+    const tableSection = h('div', { className: cx.section },
+      h('div', { className: cx.sectionTitle }, SEISMIC.TABLE_TITLE),
+      h('div', { className: cx.sectionSub }, SEISMIC.TABLE_SUBTITLE),
+      tablePanel
+    )
+
+    this.contentEl.appendChild(yearSelector.el)
     this.contentEl.appendChild(statsBar)
     this.contentEl.appendChild(scatterSection)
-    if (tableSection) this.contentEl.appendChild(tableSection)
+    this.contentEl.appendChild(tableSection)
   }
 
-  // ─── Stat card factory ──────────────────────────────────────────
+  // ─── Stats update ───────────────────────────────────────────────
 
-  private createStat (label: string, value: string, sub: string, color: string): HTMLElement {
-    const valueEl = h('div', { className: cx.statValue }, value)
-    setStyles(valueEl, { color })
+  private updateStats (): void {
+    setText(this.statPairsVal, String(this.totalPairs))
+    setStyles(this.statPairsVal, { color: 'var(--color-cyan)' })
 
+    setText(this.statEqlVal, String(this.eqlCount))
+    setStyles(this.statEqlVal, { color: 'var(--color-amber)' })
+
+    setText(this.statDistVal, `${this.avgDist} km`)
+    setStyles(this.statDistVal, { color: 'var(--color-green)' })
+
+    setText(this.statMagVal, `M${this.avgMag}`)
+    setStyles(this.statMagVal, { color: 'var(--color-cyan)' })
+  }
+
+  // ─── Table update ───────────────────────────────────────────────
+
+  private updateTable (): void {
+    while (this.tableBody.firstChild) this.tableBody.removeChild(this.tableBody.firstChild)
+
+    for (const row of this.topCorrelations) {
+      const tr = el('tr', { className: cx.tableRow })
+
+      const locCell = el('td', { className: cx.tableCell })
+      locCell.textContent = row.location
+
+      const magCell = el('td', { className: cx.tableCell })
+      magCell.textContent = `M${row.magnitude}`
+      const c = getCanvasColors()
+      setStyles(magCell, { color: row.magnitude < 5 ? c.magLow : row.magnitude < 6 ? c.magMid : c.magHigh })
+
+      const dateCell = el('td', { className: cx.tableCell })
+      dateCell.textContent = row.date
+
+      const sightingsCell = el('td', { className: cx.tableCell })
+      sightingsCell.textContent = String(row.sightingCount)
+      setStyles(sightingsCell, { color: 'var(--color-green)' })
+
+      const distCell = el('td', { className: cx.tableCell })
+      distCell.textContent = `${row.avgDistKm} km`
+
+      tr.appendChild(locCell)
+      tr.appendChild(magCell)
+      tr.appendChild(dateCell)
+      tr.appendChild(sightingsCell)
+      tr.appendChild(distCell)
+      this.tableBody.appendChild(tr)
+    }
+  }
+
+  // ─── Stat card shell ────────────────────────────────────────────
+
+  private buildStatShell (label: string, valueEl: HTMLElement, sub: string): HTMLElement {
     return h('div', { className: cx.stat },
       h('div', { className: cx.statLabel }, label),
       valueEl,
@@ -253,25 +415,28 @@ export class SeismicView extends Component {
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
+    const c = getCanvasColors()
     const plotW = w - PAD_X - 16
     const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
 
     // Grid
-    ctx.strokeStyle = palette.white08
+    ctx.strokeStyle = c.grid
     ctx.lineWidth = 1
 
     // X-axis grid + labels (hours)
     const hourSteps = [-72, -48, -24, 0, 24, 48, 72]
     ctx.font = 'bold 8px monospace'
-    ctx.fillStyle = palette.white50
+    ctx.fillStyle = c.text
     ctx.textAlign = 'center'
 
     for (const hrs of hourSteps) {
       const x = PAD_X + ((hrs + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
+      ctx.strokeStyle = c.grid
       ctx.beginPath()
       ctx.moveTo(x, PAD_Y)
       ctx.lineTo(x, PAD_Y + plotH)
       ctx.stroke()
+      ctx.fillStyle = c.text
       ctx.fillText(`${hrs}h`, x, SCATTER_H - 8)
     }
 
@@ -280,26 +445,27 @@ export class SeismicView extends Component {
     const distSteps = [0, 100, 200, 300]
     for (const km of distSteps) {
       const y = PAD_Y + (km / MAX_DIST_KM) * plotH
+      ctx.strokeStyle = c.grid
       ctx.beginPath()
       ctx.moveTo(PAD_X, y)
       ctx.lineTo(w - 16, y)
       ctx.stroke()
+      ctx.fillStyle = c.text
       ctx.fillText(`${km}`, PAD_X - 6, y + 3)
     }
 
     // Reference lines
-    // Vertical: 0 hours (earthquake moment)
-    ctx.strokeStyle = palette.amber500_20
     ctx.setLineDash([4, 4])
+
     const zeroX = PAD_X + (MAX_HOURS / (MAX_HOURS * 2)) * plotW
+    ctx.strokeStyle = c.refLine
     ctx.beginPath()
     ctx.moveTo(zeroX, PAD_Y)
     ctx.lineTo(zeroX, PAD_Y + plotH)
     ctx.stroke()
 
-    // Horizontal: EQL distance threshold
-    ctx.strokeStyle = palette.red500_30
     const eqlY = PAD_Y + (EQL_DIST_LINE / MAX_DIST_KM) * plotH
+    ctx.strokeStyle = c.refLineEql
     ctx.beginPath()
     ctx.moveTo(PAD_X, eqlY)
     ctx.lineTo(w - 16, eqlY)
@@ -307,7 +473,7 @@ export class SeismicView extends Component {
     ctx.setLineDash([])
 
     // Axis labels
-    ctx.fillStyle = palette.white50
+    ctx.fillStyle = c.text
     ctx.font = 'bold 8px monospace'
     ctx.textAlign = 'center'
     ctx.fillText(SEISMIC.SCATTER_X, PAD_X + plotW / 2, SCATTER_H - 1)
@@ -318,18 +484,16 @@ export class SeismicView extends Component {
     ctx.fillText(SEISMIC.SCATTER_Y, 0, 0)
     ctx.restore()
 
-    // Sort: draw non-EQL first, EQL on top
+    // Sort: non-EQL first, EQL on top
     const sorted = [...this.scatterData].sort((a, b) => {
       if (a.isEQL === b.isEQL) return 0
       return a.isEQL ? 1 : -1
     })
 
-    // Dots
     for (const d of sorted) {
       const x = PAD_X + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
       const y = PAD_Y + (d.distKm / MAX_DIST_KM) * plotH
 
-      // Clamp to plot area
       if (x < PAD_X || x > PAD_X + plotW) continue
       if (y < PAD_Y || y > PAD_Y + plotH) continue
 
@@ -337,7 +501,7 @@ export class SeismicView extends Component {
       const r = DOT_MIN_R + magNorm * (DOT_MAX_R - DOT_MIN_R)
 
       ctx.globalAlpha = d.isEQL ? 0.85 : 0.35
-      ctx.fillStyle = d.isEQL ? palette.amber500 : palette.cyan500
+      ctx.fillStyle = d.isEQL ? c.dotEql : c.dot
       ctx.beginPath()
       ctx.arc(x, y, r, 0, Math.PI * 2)
       ctx.fill()
@@ -358,7 +522,6 @@ export class SeismicView extends Component {
       const plotW = rect.width - PAD_X - 16
       const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
 
-      // Find nearest point
       let nearest: ScatterPoint | null = null
       let minDist = Infinity
 
@@ -372,97 +535,16 @@ export class SeismicView extends Component {
         }
       }
 
-      if (!nearest) {
-        hide(this.scatterTooltip)
-        return
-      }
+      if (!nearest) { hide(this.scatterTooltip); return }
 
       const deltaLabel = nearest.hoursDelta > 0
         ? `${nearest.hoursDelta}h after quake`
         : `${Math.abs(nearest.hoursDelta)}h before quake`
       const eqlLabel = nearest.isEQL ? ` — ${SEISMIC.POSSIBLE_EQL}` : ''
       setText(this.scatterTooltip, `M${nearest.magnitude} — ${nearest.distKm} km — ${deltaLabel}${eqlLabel}`)
-      setStyles(this.scatterTooltip, { color: nearest.isEQL ? palette.amber500 : palette.cyan500 })
       show(this.scatterTooltip)
     })
 
-    canvas.addEventListener('mouseleave', () => {
-      hide(this.scatterTooltip)
-    })
-  }
-
-  // ─── Top correlations table ─────────────────────────────────────
-
-  private buildTableSection (): HTMLElement | null {
-    if (this.topCorrelations.length === 0) return null
-
-    const columns = [
-      SEISMIC.TABLE_COL_LOCATION,
-      SEISMIC.TABLE_COL_MAG,
-      SEISMIC.TABLE_COL_DATE,
-      SEISMIC.TABLE_COL_SIGHTINGS,
-      SEISMIC.TABLE_COL_DIST
-    ]
-
-    const thead = el('thead')
-    const headRow = el('tr')
-    for (const col of columns) {
-      const th = el('th', { className: cx.tableHead })
-      th.textContent = col
-      headRow.appendChild(th)
-    }
-    thead.appendChild(headRow)
-
-    const tbody = el('tbody')
-    for (const row of this.topCorrelations) {
-      const tr = el('tr', { className: cx.tableRow })
-
-      const locCell = el('td', { className: cx.tableCell })
-      locCell.textContent = row.location
-      setStyles(locCell, { color: palette.white50 })
-
-      const magCell = el('td', { className: cx.tableCell })
-      magCell.textContent = `M${row.magnitude}`
-      setStyles(magCell, { color: this.magColor(row.magnitude) })
-
-      const dateCell = el('td', { className: cx.tableCell })
-      dateCell.textContent = row.date
-      setStyles(dateCell, { color: palette.white50 })
-
-      const sightingsCell = el('td', { className: cx.tableCell })
-      sightingsCell.textContent = String(row.sightingCount)
-      setStyles(sightingsCell, { color: palette.green500 })
-
-      const distCell = el('td', { className: cx.tableCell })
-      distCell.textContent = `${row.avgDistKm} km`
-      setStyles(distCell, { color: palette.white50 })
-
-      tr.appendChild(locCell)
-      tr.appendChild(magCell)
-      tr.appendChild(dateCell)
-      tr.appendChild(sightingsCell)
-      tr.appendChild(distCell)
-      tbody.appendChild(tr)
-    }
-
-    const table = el('table', { className: cx.table })
-    table.appendChild(thead)
-    table.appendChild(tbody)
-
-    const tablePanel = h('div', { className: cx.panel, style: 'padding: 0; overflow: hidden' },
-      table
-    )
-
-    return h('div', { className: cx.section },
-      h('div', { className: cx.sectionTitle }, SEISMIC.TABLE_TITLE),
-      h('div', { className: cx.sectionSub }, SEISMIC.TABLE_SUBTITLE),
-      tablePanel
-    )
-  }
-
-  private magColor (mag: number): string {
-    if (mag < 5) return palette.cyan500
-    if (mag < 6) return palette.amber500
-    return palette.red500
+    canvas.addEventListener('mouseleave', () => { hide(this.scatterTooltip) })
   }
 }

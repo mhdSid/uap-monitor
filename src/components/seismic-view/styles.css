@@ -1,53 +1,65 @@
 /* ─── Seismic View ─────────────────────────────────────────────────── */
 
 .seis-view {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-14);
-  padding: var(--space-md);
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
+  padding: var(--space-md);
+}
+
+.seis-view__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
 }
 
 /* ── Stats bar ──────────────────────────────────────────────────────── */
 
 .seis-view__stats {
-  display: flex;
-  gap: var(--space-6);
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--space-4);
 }
 
 .seis-view__stat {
-  padding: var(--space-8) var(--space-10);
+  padding: var(--space-6) var(--space-8);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  min-width: 120px;
-  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .seis-view__stat-label {
   font-family: var(--font-mono);
-  font-size: var(--fs-xxs);
+  font-size: var(--fs-3xs);
   color: var(--color-muted);
-  letter-spacing: 1.5px;
-  margin-bottom: var(--space-3);
+  letter-spacing: 1px;
+  margin-bottom: var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .seis-view__stat-value {
   font-family: var(--font-mono);
-  font-size: var(--fs-xl);
+  font-size: var(--fs-lg);
   font-weight: 600;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .seis-view__stat-sub {
   font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-3xs);
   color: var(--color-dim);
-  margin-top: var(--space-2);
+  margin-top: var(--space-1);
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Section headers ────────────────────────────────────────────────── */
@@ -79,11 +91,12 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-10) var(--space-8) var(--space-6);
+  padding: var(--space-8) var(--space-8) var(--space-6);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
-
-/* ── Canvas ─────────────────────────────────────────────────────────── */
 
 .seis-view__canvas {
   display: block;
@@ -96,12 +109,13 @@
   display: flex;
   gap: var(--space-10);
   justify-content: center;
-  margin-top: var(--space-4);
+  margin-top: var(--space-2);
 }
 
 .seis-view__legend-item {
   font-family: var(--font-mono);
   font-size: var(--fs-3xs);
+  color: var(--color-muted);
   letter-spacing: 0.5px;
   display: flex;
   align-items: center;
@@ -124,9 +138,10 @@
   background: var(--c-panel-95);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-2) var(--space-4);
   font-family: var(--font-mono);
-  font-size: var(--fs-xxs);
+  font-size: var(--fs-2xs);
+  color: var(--color-text);
   pointer-events: none;
   z-index: var(--z-tooltip);
   white-space: nowrap;
@@ -138,17 +153,18 @@
   width: 100%;
   border-collapse: collapse;
   font-family: var(--font-mono);
-  font-size: var(--fs-xxs);
+  font-size: var(--fs-2xs);
 }
 
 .seis-view__table-head {
-  padding: var(--space-5) var(--space-8);
+  padding: var(--space-4) var(--space-6);
   text-align: left;
   color: var(--color-muted);
   font-size: var(--fs-3xs);
   letter-spacing: 1.5px;
   font-weight: 400;
   border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
 }
 
 .seis-view__table-row {
@@ -161,8 +177,9 @@
 }
 
 .seis-view__table-cell {
-  padding: var(--space-5) var(--space-8);
+  padding: var(--space-4) var(--space-6);
   color: var(--color-text);
+  white-space: nowrap;
 }
 
 /* ── States ──────────────────────────────────────────────────────────── */

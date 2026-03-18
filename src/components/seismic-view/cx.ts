@@ -1,5 +1,6 @@
 export const cx = {
   root: 'seis-view',
+  content: 'seis-view__content',
   stats: 'seis-view__stats',
   stat: 'seis-view__stat',
   statLabel: 'seis-view__stat-label',

@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------ *
  *  GeomagneticView — Kp index vs sighting density visualizer          *
  *                                                                     *
- *  Two canvas charts:                                                 *
+ *  Two canvas charts (theme-aware, same pattern as Timeline):         *
  *    1. Temporal correlation: monthly Kp heatstrip + sighting bars    *
  *    2. Kp distribution: observed vs expected sighting counts by Kp   *
  *                                                                     *
@@ -13,8 +13,9 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { h, el, hide, show, setText, setStyles } from '@/utils/dom'
 import { palette } from '@/styles/palette'
-import { useGeomagnetic, useAppStore } from '@/composables'
+import { useGeomagnetic, useAppStore, useTheme, yieldThread } from '@/composables'
 import { Loader } from '@/components/loader'
+import { YearSelector } from '@/components/year-selector'
 import { GEOMAGNETIC } from '@/data/strings'
 import type { Sighting } from '@/types'
 
@@ -30,21 +31,47 @@ const TIMELINE_H = 200
 const DIST_H = 220
 const KP_LEVELS = 10
 
-// ─── Helpers ────────────────────────────────────────────────────────
+// ─── Theme-aware canvas colors (same pattern as Timeline) ───────────
 
-function kpColor (kp: number): string {
-  if (kp < 3) return palette.green500
-  if (kp < 5) return palette.amber500
-  return palette.red500
+interface CanvasColors {
+  text: string
+  textStrong: string
+  grid: string
+  barCalm: string
+  barStorm: string
+  barExpected: string
+  barOverrep: string
+  barNormal: string
+  barUnder: string
 }
 
-function kpBarColor (kp: number): string {
-  if (kp >= 5) return palette.red500_70
-  return palette.green500_30
-}
+function getCanvasColors (): CanvasColors {
+  const { isLightTheme } = useTheme()
+  const isLight = isLightTheme()
 
-function kpHeatOpacity (kp: number): number {
-  return 0.15 + (kp / 9) * 0.85
+  return isLight
+    ? {
+      text: palette.black500_30,
+      textStrong: palette.black500_50,
+      grid: palette.black_08,
+      barCalm: palette.green600_30,
+      barStorm: palette.red600_70,
+      barExpected: palette.black_15,
+      barOverrep: palette.red600_70,
+      barNormal: palette.amber600_70,
+      barUnder: palette.green600_70
+    }
+    : {
+      text: palette.white50,
+      textStrong: palette.white50,
+      grid: palette.white08,
+      barCalm: palette.green500_30,
+      barStorm: palette.red500_70,
+      barExpected: palette.white15,
+      barOverrep: palette.red500_70,
+      barNormal: palette.amber500_70,
+      barUnder: palette.green400_70
+    }
 }
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -62,23 +89,24 @@ interface MonthlyBucket {
 export class GeomagneticView extends Component {
   private loaderEl!: HTMLElement
   private contentEl!: HTMLElement
+  private built = false
 
-  // Stats
-  private statTotalEl!: HTMLElement
-  private statStormEl!: HTMLElement
-  private statAvgEl!: HTMLElement
-  private statPeakEl!: HTMLElement
-  private statOverrepEl!: HTMLElement
-
-  // Timeline
-  private heatStrip!: HTMLElement
+  // Canvas refs
   private timelineCanvas!: HTMLCanvasElement
   private timelineTooltip!: HTMLElement
-
-  // Distribution
+  private heatStrip!: HTMLElement
   private distCanvas!: HTMLCanvasElement
   private distTooltip!: HTMLElement
 
+  // Stat value elements (for re-render)
+  private statTotalVal!: HTMLElement
+  private statStormVal!: HTMLElement
+  private statStormSub!: HTMLElement
+  private statAvgVal!: HTMLElement
+  private statPeakVal!: HTMLElement
+  private statOverrepVal!: HTMLElement
+
+  // Data
   private monthlyData: MonthlyBucket[] = []
   private kpDistObserved: number[] = []
   private kpDistExpected: number[] = []
@@ -86,7 +114,8 @@ export class GeomagneticView extends Component {
 
   protected create (): HTMLElement {
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { style: 'display:none' })
+    this.contentEl = h('div', { className: cx.content })
+    hide(this.contentEl)
 
     return h('div', { className: cx.root },
       this.loaderEl,
@@ -105,17 +134,45 @@ export class GeomagneticView extends Component {
     const store = useAppStore()
     const sightings = store.sightings.get()
 
+    // Yield before heavy computation so spinner renders
+    await yieldThread()
     this.computeData(sightings)
-    this.buildContent()
-    this.loaded = true
 
+    if (!this.built) {
+      this.buildContent()
+      this.built = true
+    }
+    this.updateStats()
+
+    this.loaded = true
     hide(this.loaderEl)
     show(this.contentEl)
 
-    // Defer draw to next frame so layout is resolved
     requestAnimationFrame(() => {
       this.drawTimeline()
       this.drawDistribution()
+    })
+
+    // Re-compute when sightings change (year range or filter)
+    store.sightings.subscribe((newSightings) => {
+      if (!this.loaded) return
+      this.computeData(newSightings)
+      this.updateStats()
+      this.rebuildHeatStrip()
+      requestAnimationFrame(() => {
+        this.drawTimeline()
+        this.drawDistribution()
+      })
+    })
+
+    // Redraw on theme change (canvas colors differ)
+    const { theme } = useTheme()
+    theme.subscribe(() => {
+      if (!this.loaded) return
+      requestAnimationFrame(() => {
+        this.drawTimeline()
+        this.drawDistribution()
+      })
     })
   }
 
@@ -125,7 +182,6 @@ export class GeomagneticView extends Component {
     const geo = useGeomagnetic()
     const monthly = geo.getMonthlyCorrelation(sightings)
 
-    // Sort by month key
     const keys = Array.from(monthly.keys()).sort()
     this.monthlyData = keys.map(key => {
       const val = monthly.get(key)!
@@ -138,10 +194,8 @@ export class GeomagneticView extends Component {
       }
     })
 
-    // Kp distribution
     this.kpDistObserved = geo.getKpDistribution(sightings)
 
-    // Expected: proportional to how often each Kp level occurs in the dataset
     const allRecords = geo.getAll()
     const kpFreq = new Array<number>(KP_LEVELS).fill(0)
     let totalIntervals = 0
@@ -161,34 +215,26 @@ export class GeomagneticView extends Component {
     )
   }
 
-  // ─── Build DOM ──────────────────────────────────────────────────
+  // ─── Build DOM (once) ───────────────────────────────────────────
 
   private buildContent (): void {
-    // Stats
-    const total = this.monthlyData.reduce((s, d) => s + d.sightingCount, 0)
-    const stormTotal = this.monthlyData.reduce((s, d) => s + d.stormSightingCount, 0)
-    const stormPct = total > 0 ? ((stormTotal / total) * 100).toFixed(1) : '0'
-    const avgKp = this.monthlyData.length > 0
-      ? (this.monthlyData.reduce((s, d) => s + d.avgKp, 0) / this.monthlyData.length).toFixed(1)
-      : '0'
-    const peakKp = this.monthlyData.length > 0
-      ? Math.max(...this.monthlyData.map(d => d.maxKp)).toFixed(1)
-      : '0'
+    // Year selector
+    const yearSelector = new YearSelector({})
 
-    const overrep = this.computeOverrepresentation()
-
-    this.statTotalEl = this.createStat(GEOMAGNETIC.STAT_TOTAL, total.toLocaleString(), GEOMAGNETIC.SOURCE, palette.green500)
-    this.statStormEl = this.createStat(GEOMAGNETIC.STAT_STORM_PCT, `${stormPct}%`, `${stormTotal.toLocaleString()} sightings`, palette.red500)
-    this.statAvgEl = this.createStat(GEOMAGNETIC.STAT_AVG_KP, avgKp, 'dataset period', palette.amber500)
-    this.statPeakEl = this.createStat(GEOMAGNETIC.STAT_PEAK_KP, peakKp, 'maximum observed', palette.red500)
-    this.statOverrepEl = this.createStat(GEOMAGNETIC.STAT_OVERREP, `${overrep}×`, GEOMAGNETIC.STAT_OVERREP_SUB, palette.red500)
+    // Stats (values set by updateStats)
+    this.statTotalVal = h('div', { className: cx.statValue })
+    this.statStormVal = h('div', { className: cx.statValue })
+    this.statStormSub = h('div', { className: cx.statSub })
+    this.statAvgVal = h('div', { className: cx.statValue })
+    this.statPeakVal = h('div', { className: cx.statValue })
+    this.statOverrepVal = h('div', { className: cx.statValue })
 
     const statsBar = h('div', { className: cx.stats },
-      this.statTotalEl,
-      this.statStormEl,
-      this.statAvgEl,
-      this.statPeakEl,
-      this.statOverrepEl
+      this.buildStatShell(GEOMAGNETIC.STAT_TOTAL, this.statTotalVal, GEOMAGNETIC.SOURCE),
+      this.buildStatShell(GEOMAGNETIC.STAT_STORM_PCT, this.statStormVal, this.statStormSub),
+      this.buildStatShell(GEOMAGNETIC.STAT_AVG_KP, this.statAvgVal, 'dataset period'),
+      this.buildStatShell(GEOMAGNETIC.STAT_PEAK_KP, this.statPeakVal, 'maximum observed'),
+      this.buildStatShell(GEOMAGNETIC.STAT_OVERREP, this.statOverrepVal, GEOMAGNETIC.STAT_OVERREP_SUB)
     )
 
     // Timeline section
@@ -206,11 +252,10 @@ export class GeomagneticView extends Component {
       this.timelineCanvas,
       this.timelineTooltip,
       this.buildLegend([
-        { label: GEOMAGNETIC.LEGEND_CALM, color: palette.green500 },
-        { label: GEOMAGNETIC.LEGEND_STORM, color: palette.red500 }
+        { label: GEOMAGNETIC.LEGEND_CALM, color: 'var(--color-green)' },
+        { label: GEOMAGNETIC.LEGEND_STORM, color: 'var(--color-red)' }
       ])
     )
-
     this.bindTimelineHover()
 
     const timelineSection = h('div', { className: cx.section },
@@ -229,14 +274,13 @@ export class GeomagneticView extends Component {
       this.distCanvas,
       this.distTooltip,
       this.buildLegend([
-        { label: GEOMAGNETIC.LABEL_OBSERVED, color: palette.green500 },
-        { label: GEOMAGNETIC.LABEL_EXPECTED, color: palette.white50 }
+        { label: GEOMAGNETIC.LABEL_OBSERVED, color: 'var(--color-green)' },
+        { label: GEOMAGNETIC.LABEL_EXPECTED, color: 'var(--color-muted)' }
       ]),
       h('div', { className: cx.note },
         'Red bars indicate overrepresentation vs random expectation'
       )
     )
-
     this.bindDistHover()
 
     const distSection = h('div', { className: cx.section },
@@ -245,21 +289,56 @@ export class GeomagneticView extends Component {
       distPanel
     )
 
+    this.contentEl.appendChild(yearSelector.el)
     this.contentEl.appendChild(statsBar)
     this.contentEl.appendChild(timelineSection)
     this.contentEl.appendChild(distSection)
   }
 
-  // ─── Stat card factory ──────────────────────────────────────────
+  // ─── Stats update ───────────────────────────────────────────────
 
-  private createStat (label: string, value: string, sub: string, color: string): HTMLElement {
-    const valueEl = h('div', { className: cx.statValue }, value)
-    setStyles(valueEl, { color })
+  private updateStats (): void {
+    const total = this.monthlyData.reduce((s, d) => s + d.sightingCount, 0)
+    const stormTotal = this.monthlyData.reduce((s, d) => s + d.stormSightingCount, 0)
+    const stormPct = total > 0 ? ((stormTotal / total) * 100).toFixed(1) : '0'
+    const avgKp = this.monthlyData.length > 0
+      ? (this.monthlyData.reduce((s, d) => s + d.avgKp, 0) / this.monthlyData.length).toFixed(1)
+      : '0'
+    const peakKp = this.monthlyData.length > 0
+      ? Math.max(...this.monthlyData.map(d => d.maxKp)).toFixed(1)
+      : '0'
+    const overrep = this.computeOverrepresentation()
+
+    setText(this.statTotalVal, total.toLocaleString())
+    setStyles(this.statTotalVal, { color: 'var(--color-green)' })
+
+    setText(this.statStormVal, `${stormPct}%`)
+    setStyles(this.statStormVal, { color: 'var(--color-red)' })
+    if (this.statStormSub instanceof HTMLElement) {
+      setText(this.statStormSub, `${stormTotal.toLocaleString()} sightings`)
+    }
+
+    setText(this.statAvgVal, avgKp)
+    setStyles(this.statAvgVal, { color: 'var(--color-amber)' })
+
+    setText(this.statPeakVal, peakKp)
+    setStyles(this.statPeakVal, { color: 'var(--color-red)' })
+
+    setText(this.statOverrepVal, `${overrep}×`)
+    setStyles(this.statOverrepVal, { color: 'var(--color-red)' })
+  }
+
+  // ─── Stat card shell ────────────────────────────────────────────
+
+  private buildStatShell (label: string, valueEl: HTMLElement, subContent: string | HTMLElement): HTMLElement {
+    const subEl = typeof subContent === 'string'
+      ? h('div', { className: cx.statSub }, subContent)
+      : subContent
 
     return h('div', { className: cx.stat },
       h('div', { className: cx.statLabel }, label),
       valueEl,
-      h('div', { className: cx.statSub }, sub)
+      subEl
     )
   }
 
@@ -268,14 +347,21 @@ export class GeomagneticView extends Component {
   private buildHeatStrip (): void {
     for (const bucket of this.monthlyData) {
       const cell = h('div')
+      const kp = bucket.avgKp
+      const color = kp < 3 ? 'var(--color-green)' : kp < 5 ? 'var(--color-amber)' : 'var(--color-red)'
       setStyles(cell, {
         flex: '1',
-        background: kpColor(bucket.avgKp),
-        opacity: String(kpHeatOpacity(bucket.avgKp))
+        background: color,
+        opacity: String(0.15 + (kp / 9) * 0.85)
       })
       cell.title = `${bucket.label}: Kp ${bucket.avgKp}`
       this.heatStrip.appendChild(cell)
     }
+  }
+
+  private rebuildHeatStrip (): void {
+    while (this.heatStrip.firstChild) this.heatStrip.removeChild(this.heatStrip.firstChild)
+    this.buildHeatStrip()
   }
 
   // ─── Legend factory ─────────────────────────────────────────────
@@ -299,7 +385,7 @@ export class GeomagneticView extends Component {
     const rect = canvas.parentElement?.getBoundingClientRect()
     if (!rect) return
 
-    const w = rect.width - 32 // panel padding
+    const w = rect.width - 32
     if (w <= 0) return
 
     const dpr = window.devicePixelRatio || 1
@@ -311,6 +397,7 @@ export class GeomagneticView extends Component {
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
+    const c = getCanvasColors()
     const data = this.monthlyData
     if (data.length === 0) return
 
@@ -319,18 +406,16 @@ export class GeomagneticView extends Component {
     const step = barW + BAR_GAP
     const maxCount = Math.max(1, ...data.map(d => d.sightingCount))
 
-    // Y-axis labels
+    // Y-axis
     ctx.font = 'bold 9px monospace'
-    ctx.fillStyle = palette.white50
     ctx.textAlign = 'right'
     const ySteps = 4
     for (let i = 0; i <= ySteps; i++) {
       const val = Math.round((maxCount / ySteps) * i)
       const y = PAD_TOP + barArea - (barArea * (i / ySteps))
+      ctx.fillStyle = c.text
       ctx.fillText(String(val), PAD_X - 6, y + 3)
-
-      // Grid line
-      ctx.strokeStyle = palette.white08
+      ctx.strokeStyle = c.grid
       ctx.lineWidth = 1
       ctx.beginPath()
       ctx.moveTo(PAD_X, y)
@@ -345,7 +430,7 @@ export class GeomagneticView extends Component {
       const barH = Math.max(0, (d.sightingCount / maxCount) * barArea)
       const y = PAD_TOP + barArea - barH
 
-      ctx.fillStyle = kpBarColor(d.avgKp)
+      ctx.fillStyle = d.avgKp >= 5 ? c.barStorm : c.barCalm
       if (barH > 0) {
         const r = Math.min(BAR_RADIUS, barW / 2, barH / 2)
         ctx.beginPath()
@@ -358,10 +443,9 @@ export class GeomagneticView extends Component {
         ctx.fill()
       }
 
-      // X-axis labels (every ~12 months)
       const labelEvery = Math.max(1, Math.floor(data.length / 10))
       if (i % labelEvery === 0 || i === data.length - 1) {
-        ctx.fillStyle = palette.white50
+        ctx.fillStyle = c.text
         ctx.font = 'bold 8px monospace'
         ctx.textAlign = 'center'
         ctx.fillText(d.label, x + barW / 2, TIMELINE_H - 4)
@@ -388,6 +472,7 @@ export class GeomagneticView extends Component {
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
+    const c = getCanvasColors()
     const barArea = DIST_H - LABEL_H - PAD_TOP
     const groupW = Math.floor((w - PAD_X) / KP_LEVELS)
     const barW = Math.max(4, Math.floor((groupW - BAR_GAP * 3) / 2))
@@ -395,14 +480,14 @@ export class GeomagneticView extends Component {
 
     // Y-axis
     ctx.font = 'bold 9px monospace'
-    ctx.fillStyle = palette.white50
     ctx.textAlign = 'right'
     const ySteps = 4
     for (let i = 0; i <= ySteps; i++) {
       const val = Math.round((maxVal / ySteps) * i)
       const y = PAD_TOP + barArea - (barArea * (i / ySteps))
+      ctx.fillStyle = c.text
       ctx.fillText(String(val), PAD_X - 6, y + 3)
-      ctx.strokeStyle = palette.white08
+      ctx.strokeStyle = c.grid
       ctx.lineWidth = 1
       ctx.beginPath()
       ctx.moveTo(PAD_X, y)
@@ -419,32 +504,32 @@ export class GeomagneticView extends Component {
       // Expected bar (dim)
       const expH = (exp / maxVal) * barArea
       const expY = PAD_TOP + barArea - expH
-      ctx.fillStyle = palette.white15
+      ctx.fillStyle = c.barExpected
       this.drawRoundedBar(ctx, groupX, expY, barW, expH)
 
       // Observed bar (colored by overrepresentation)
       const obsH = (obs / maxVal) * barArea
       const obsY = PAD_TOP + barArea - obsH
-      ctx.fillStyle = ratio > 1.2 ? palette.red500_70 : ratio > 0.9 ? palette.amber500_70 : palette.green400_70
+      ctx.fillStyle = ratio > 1.2 ? c.barOverrep : ratio > 0.9 ? c.barNormal : c.barUnder
       this.drawRoundedBar(ctx, groupX + barW + BAR_GAP, obsY, barW, obsH)
 
       // Kp label
-      ctx.fillStyle = palette.white50
+      ctx.fillStyle = c.text
       ctx.font = 'bold 10px monospace'
       ctx.textAlign = 'center'
       ctx.fillText(String(kp), groupX + groupW / 2, DIST_H - 4)
     }
   }
 
-  private drawRoundedBar (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number): void {
-    if (h <= 0) return
-    const r = Math.min(BAR_RADIUS, w / 2, h / 2)
+  private drawRoundedBar (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, bh: number): void {
+    if (bh <= 0) return
+    const r = Math.min(BAR_RADIUS, w / 2, bh / 2)
     ctx.beginPath()
-    ctx.moveTo(x, y + h)
+    ctx.moveTo(x, y + bh)
     ctx.lineTo(x, y + r)
     ctx.arcTo(x, y, x + r, y, r)
     ctx.arcTo(x + w, y, x + w, y + r, r)
-    ctx.lineTo(x + w, y + h)
+    ctx.lineTo(x + w, y + bh)
     ctx.closePath()
     ctx.fill()
   }
@@ -459,31 +544,22 @@ export class GeomagneticView extends Component {
       const rect = canvas.getBoundingClientRect()
       const x = e.clientX - rect.left
       const data = this.monthlyData
-      if (data.length === 0) return
+      if (data.length === 0) { hide(this.timelineTooltip); return }
 
       const barW = Math.max(BAR_MIN_W, Math.floor((rect.width - PAD_X) / data.length) - BAR_GAP)
       const step = barW + BAR_GAP
       const idx = Math.floor((x - PAD_X) / step)
 
-      if (idx < 0 || idx >= data.length) {
-        hide(this.timelineTooltip)
-        lastIdx = -1
-        return
-      }
-
+      if (idx < 0 || idx >= data.length) { hide(this.timelineTooltip); lastIdx = -1; return }
       if (idx === lastIdx) return
       lastIdx = idx
 
       const d = data[idx]
       setText(this.timelineTooltip, `${d.label} — Kp ${d.avgKp} — ${d.sightingCount} sightings`)
-      setStyles(this.timelineTooltip, { color: kpColor(d.avgKp) })
       show(this.timelineTooltip)
     })
 
-    canvas.addEventListener('mouseleave', () => {
-      hide(this.timelineTooltip)
-      lastIdx = -1
-    })
+    canvas.addEventListener('mouseleave', () => { hide(this.timelineTooltip); lastIdx = -1 })
   }
 
   private bindDistHover (): void {
@@ -496,12 +572,7 @@ export class GeomagneticView extends Component {
       const groupW = Math.floor((rect.width - PAD_X) / KP_LEVELS)
       const kp = Math.floor((x - PAD_X) / groupW)
 
-      if (kp < 0 || kp >= KP_LEVELS) {
-        hide(this.distTooltip)
-        lastKp = -1
-        return
-      }
-
+      if (kp < 0 || kp >= KP_LEVELS) { hide(this.distTooltip); lastKp = -1; return }
       if (kp === lastKp) return
       lastKp = kp
 
@@ -512,10 +583,7 @@ export class GeomagneticView extends Component {
       show(this.distTooltip)
     })
 
-    canvas.addEventListener('mouseleave', () => {
-      hide(this.distTooltip)
-      lastKp = -1
-    })
+    canvas.addEventListener('mouseleave', () => { hide(this.distTooltip); lastKp = -1 })
   }
 
   // ─── Helpers ────────────────────────────────────────────────────

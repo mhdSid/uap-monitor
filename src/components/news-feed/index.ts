@@ -81,10 +81,10 @@ function redditToIntel (a: RedditArticle): IntelArticle {
 }
 
 function mergeAndDedupe (
-  gdelt: GdeltArticle[],
-  gnews: GnewsArticle[],
   twitter: TwitterArticle[],
-  reddit: RedditArticle[]
+  reddit: RedditArticle[],
+  gnews: GnewsArticle[],
+  gdelt: GdeltArticle[]
 ): IntelArticle[] {
   const seen = new Set<string>()
   const merged: IntelArticle[] = []
@@ -215,7 +215,7 @@ export class NewsFeed extends Component {
     this.store.redditArticles.set(redditArticles)
 
     buildLookups(gdeltArticles, gnewsArticles, twitterArticles, redditArticles)
-    this.allArticles = mergeAndDedupe(gdeltArticles, gnewsArticles, twitterArticles, redditArticles)
+    this.allArticles = mergeAndDedupe(twitterArticles, redditArticles, gnewsArticles, gdeltArticles)
     this.baseArticles = this.allArticles
     this.renderGrid(this.allArticles)
     return this.allArticles

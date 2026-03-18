@@ -1,9 +1,20 @@
 {
-  "generatedAt": "2026-03-17T06:41:16.263Z",
+  "generatedAt": "2026-03-18T08:48:11.854Z",
   "source": "NASA/JPL CNEOS Fireball Data API",
-  "totalResults": 866,
-  "withCoordinates": 866,
+  "totalResults": 867,
+  "withCoordinates": 867,
   "fireballs": [
+    {
+      "id": "19d8bcc11d19",
+      "date": "2026-03-17T12:56:42Z",
+      "lat": 41.2,
+      "lng": -82,
+      "altitude": 45,
+      "velocity": 14.9,
+      "energy": 12.6,
+      "impactEnergy": 0.37,
+      "source": "NASA_CNEOS"
+    },
     {
       "id": "6f6b4543cf6e",
       "date": "2026-02-10T14:26:26Z",

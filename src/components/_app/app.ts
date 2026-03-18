@@ -77,9 +77,24 @@ export class App extends Component {
   // ─── Shell ─────────────────────────────────────────────────────
 
   protected create (): HTMLElement {
+    // Detect initial route early to avoid monitor flash on direct URL
+    const initialHash = window.location.hash.replace(/^#/, '')
+    const isDirectGeo = initialHash === '/geomagnetic'
+    const isDirectSeis = initialHash === '/seismic'
+    const initialRoute = isDirectGeo
+      ? RouteName.GEOMAGNETIC
+      : isDirectSeis
+        ? RouteName.SEISMIC
+        : RouteName.MONITOR
+
     this.main = h('main', { className: 'app-main', role: 'main' },
       h('div', { className: 'app-loader' }, new Loader({}).el)
     )
+
+    // Hide main if landing on a non-monitor route
+    if (initialRoute !== RouteName.MONITOR) {
+      hide(this.main)
+    }
 
     this.ticker = new Ticker({
       onClick: (id) => this.grids.scrollToSighting(id)
@@ -99,15 +114,20 @@ export class App extends Component {
     })
 
     // ── View containers for geomagnetic / seismic ────────────────
-    this.geoContainer = h('div', { className: 'app-view-container' })
-    hide(this.geoContainer)
+    // Include a loader so direct URL access shows spinner immediately
+    this.geoContainer = h('div', { className: 'app-view-container' },
+      h('div', { className: 'app-loader' }, new Loader({}).el)
+    )
+    if (initialRoute !== RouteName.GEOMAGNETIC) hide(this.geoContainer)
 
-    this.seisContainer = h('div', { className: 'app-view-container' })
-    hide(this.seisContainer)
+    this.seisContainer = h('div', { className: 'app-view-container' },
+      h('div', { className: 'app-loader' }, new Loader({}).el)
+    )
+    if (initialRoute !== RouteName.SEISMIC) hide(this.seisContainer)
 
     // ── Nav tabs ─────────────────────────────────────────────────
     this.navTabs = new NavTabs({
-      active: RouteName.MONITOR,
+      active: initialRoute,
       onNavigate: (route) => this.router?.navigate(route)
     })
 
@@ -510,6 +530,7 @@ export class App extends Component {
         show(this.geoContainer)
         if (!this.geoView) {
           this.geoView = new GeomagneticView({})
+          clearChildren(this.geoContainer)
           this.geoContainer.appendChild(this.geoView.el)
           this.geoView.load()
         }
@@ -519,6 +540,7 @@ export class App extends Component {
         show(this.seisContainer)
         if (!this.seisView) {
           this.seisView = new SeismicView({})
+          clearChildren(this.seisContainer)
           this.seisContainer.appendChild(this.seisView.el)
           this.seisView.load()
         }
