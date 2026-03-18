@@ -89,17 +89,17 @@ function mergeAndDedupe (
   const seen = new Set<string>()
   const merged: IntelArticle[] = []
 
-  for (const a of gdelt) {
-    if (!seen.has(a.url)) { seen.add(a.url); merged.push(gdeltToIntel(a)) }
-  }
-  for (const a of gnews) {
-    if (!seen.has(a.url)) { seen.add(a.url); merged.push(gnewsToIntel(a)) }
-  }
   for (const a of twitter) {
     if (!seen.has(a.id)) { seen.add(a.id); merged.push(twitterToIntel(a)) }
   }
   for (const a of reddit) {
     if (!seen.has(a.id)) { seen.add(a.id); merged.push(redditToIntel(a)) }
+  }
+  for (const a of gnews) {
+    if (!seen.has(a.url)) { seen.add(a.url); merged.push(gnewsToIntel(a)) }
+  }
+  for (const a of gdelt) {
+    if (!seen.has(a.url)) { seen.add(a.url); merged.push(gdeltToIntel(a)) }
   }
 
   merged.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
