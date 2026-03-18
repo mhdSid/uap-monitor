@@ -21,5 +21,8 @@ export const cx = {
   tableCell: 'seis-view__table-cell',
   loader: 'seis-view__loader',
   noData: 'seis-view__no-data',
-  note: 'seis-view__note'
+  note: 'seis-view__note',
+  noteList: 'seis-view__note-list',
+  noteItem: 'seis-view__note-item',
+  noteLabel: 'seis-view__note-label'
 } as const

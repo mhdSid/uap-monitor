@@ -273,7 +273,7 @@ export class SeismicView extends Component {
         { label: SEISMIC.LEGEND_PAIR, color: 'var(--color-cyan)' },
         { label: SEISMIC.LEGEND_EQL, color: 'var(--color-amber)' }
       ]),
-      h('div', { className: cx.note }, SEISMIC.SCATTER_NOTE)
+      this.buildScatterNote()
     )
     this.bindScatterHover()
 
@@ -394,6 +394,29 @@ export class SeismicView extends Component {
       )
     }
     return legend
+  }
+
+  // ─── Scatter note (colored bullet list) ─────────────────────────
+
+  private buildScatterNote (): HTMLElement {
+    const items: Array<{ label: string; desc: string; color: string }> = [
+      { label: SEISMIC.NOTE_BLUE_LABEL, desc: SEISMIC.NOTE_BLUE_DESC, color: 'var(--color-cyan)' },
+      { label: SEISMIC.NOTE_ORANGE_LABEL, desc: SEISMIC.NOTE_ORANGE_DESC, color: 'var(--color-amber)' },
+      { label: SEISMIC.NOTE_SIZE_LABEL, desc: SEISMIC.NOTE_SIZE_DESC, color: 'var(--color-muted)' }
+    ]
+
+    const list = h('ul', { className: cx.noteList })
+
+    for (const item of items) {
+      const labelSpan = h('span', { className: cx.noteLabel }, item.label)
+      setStyles(labelSpan, { color: item.color })
+
+      list.appendChild(
+        h('li', { className: cx.noteItem }, labelSpan, ` ${item.desc}`)
+      )
+    }
+
+    return h('div', { className: cx.note }, list)
   }
 
   // ─── Scatter canvas ─────────────────────────────────────────────
