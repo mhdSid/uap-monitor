@@ -198,3 +198,12 @@
   padding: var(--space-20) 0;
   letter-spacing: 1px;
 }
+
+.seis-view__note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--color-muted);
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+  margin-top: var(--space-2);
+}

@@ -24,7 +24,7 @@ import type { Sighting, NearbyEarthquake } from '@/types'
 const SCATTER_H = 320
 const PAD_X = 52
 const PAD_Y = 20
-const PAD_BOTTOM = 28
+const PAD_BOTTOM = 36
 const MAX_HOURS = 72
 const MAX_DIST_KM = 300
 const DOT_MIN_R = 3
@@ -231,9 +231,8 @@ export class SeismicView extends Component {
     }
 
     return Array.from(quakeMap.values())
-      .filter(e => e.sightingIds.size >= 2)
       .sort((a, b) => b.sightingIds.size - a.sightingIds.size)
-      .slice(0, 8)
+      .slice(0, 15)
       .map(e => ({
         location: e.location,
         magnitude: e.magnitude,
@@ -273,7 +272,8 @@ export class SeismicView extends Component {
       this.buildLegend([
         { label: SEISMIC.LEGEND_PAIR, color: 'var(--color-cyan)' },
         { label: SEISMIC.LEGEND_EQL, color: 'var(--color-amber)' }
-      ])
+      ]),
+      h('div', { className: cx.note }, SEISMIC.SCATTER_NOTE)
     )
     this.bindScatterHover()
 
@@ -514,10 +514,10 @@ export class SeismicView extends Component {
   private bindScatterHover (): void {
     const canvas = this.scatterCanvas
 
-    canvas.addEventListener('mousemove', (e: MouseEvent) => {
+    const handleHover = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect()
-      const mx = e.clientX - rect.left
-      const my = e.clientY - rect.top
+      const mx = clientX - rect.left
+      const my = clientY - rect.top
 
       const plotW = rect.width - PAD_X - 16
       const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
@@ -543,8 +543,17 @@ export class SeismicView extends Component {
       const eqlLabel = nearest.isEQL ? ` — ${SEISMIC.POSSIBLE_EQL}` : ''
       setText(this.scatterTooltip, `M${nearest.magnitude} — ${nearest.distKm} km — ${deltaLabel}${eqlLabel}`)
       show(this.scatterTooltip)
-    })
+    }
 
+    canvas.addEventListener('mousemove', (e: MouseEvent) => handleHover(e.clientX, e.clientY))
     canvas.addEventListener('mouseleave', () => { hide(this.scatterTooltip) })
+
+    // Touch support
+    canvas.addEventListener('touchstart', (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        handleHover(e.touches[0].clientX, e.touches[0].clientY)
+      }
+    }, { passive: true })
+    canvas.addEventListener('touchend', () => { hide(this.scatterTooltip) }, { passive: true })
   }
 }

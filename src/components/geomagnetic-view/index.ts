@@ -38,7 +38,9 @@ interface CanvasColors {
   textStrong: string
   grid: string
   barCalm: string
+  barCalmHover: string
   barStorm: string
+  barStormHover: string
   barExpected: string
   barOverrep: string
   barNormal: string
@@ -55,7 +57,9 @@ function getCanvasColors (): CanvasColors {
       textStrong: palette.black500_50,
       grid: palette.black_08,
       barCalm: palette.green600_30,
+      barCalmHover: palette.green600_70,
       barStorm: palette.red600_70,
+      barStormHover: palette.red600,
       barExpected: palette.black_15,
       barOverrep: palette.red600_70,
       barNormal: palette.amber600_70,
@@ -66,7 +70,9 @@ function getCanvasColors (): CanvasColors {
       textStrong: palette.white50,
       grid: palette.white08,
       barCalm: palette.green500_30,
+      barCalmHover: palette.green500_70,
       barStorm: palette.red500_70,
+      barStormHover: palette.red500,
       barExpected: palette.white15,
       barOverrep: palette.red500_70,
       barNormal: palette.amber500_70,
@@ -111,6 +117,7 @@ export class GeomagneticView extends Component {
   private kpDistObserved: number[] = []
   private kpDistExpected: number[] = []
   private loaded = false
+  private timelineHoverIdx = -1
 
   protected create (): HTMLElement {
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
@@ -429,8 +436,17 @@ export class GeomagneticView extends Component {
       const x = PAD_X + i * step
       const barH = Math.max(0, (d.sightingCount / maxCount) * barArea)
       const y = PAD_TOP + barArea - barH
+      const isHover = i === this.timelineHoverIdx
 
-      ctx.fillStyle = d.avgKp >= 5 ? c.barStorm : c.barCalm
+      // Hover highlight column
+      if (isHover) {
+        ctx.fillStyle = c.grid
+        ctx.fillRect(x - 1, PAD_TOP, step, barArea)
+      }
+
+      ctx.fillStyle = d.avgKp >= 5
+        ? (isHover ? c.barStormHover : c.barStorm)
+        : (isHover ? c.barCalmHover : c.barCalm)
       if (barH > 0) {
         const r = Math.min(BAR_RADIUS, barW / 2, barH / 2)
         ctx.beginPath()
@@ -540,9 +556,9 @@ export class GeomagneticView extends Component {
     const canvas = this.timelineCanvas
     let lastIdx = -1
 
-    canvas.addEventListener('mousemove', (e: MouseEvent) => {
+    const handleHover = (clientX: number) => {
       const rect = canvas.getBoundingClientRect()
-      const x = e.clientX - rect.left
+      const x = clientX - rect.left
       const data = this.monthlyData
       if (data.length === 0) { hide(this.timelineTooltip); return }
 
@@ -550,25 +566,51 @@ export class GeomagneticView extends Component {
       const step = barW + BAR_GAP
       const idx = Math.floor((x - PAD_X) / step)
 
-      if (idx < 0 || idx >= data.length) { hide(this.timelineTooltip); lastIdx = -1; return }
+      if (idx < 0 || idx >= data.length) {
+        if (lastIdx !== -1) {
+          this.timelineHoverIdx = -1
+          lastIdx = -1
+          hide(this.timelineTooltip)
+          this.drawTimeline()
+        }
+        return
+      }
       if (idx === lastIdx) return
       lastIdx = idx
+      this.timelineHoverIdx = idx
 
       const d = data[idx]
       setText(this.timelineTooltip, `${d.label} — Kp ${d.avgKp} — ${d.sightingCount} sightings`)
       show(this.timelineTooltip)
-    })
+      this.drawTimeline()
+    }
 
-    canvas.addEventListener('mouseleave', () => { hide(this.timelineTooltip); lastIdx = -1 })
+    const clearHover = () => {
+      if (lastIdx !== -1) {
+        this.timelineHoverIdx = -1
+        lastIdx = -1
+        hide(this.timelineTooltip)
+        this.drawTimeline()
+      }
+    }
+
+    canvas.addEventListener('mousemove', (e: MouseEvent) => handleHover(e.clientX))
+    canvas.addEventListener('mouseleave', clearHover)
+
+    // Touch support
+    canvas.addEventListener('touchstart', (e: TouchEvent) => {
+      if (e.touches.length === 1) handleHover(e.touches[0].clientX)
+    }, { passive: true })
+    canvas.addEventListener('touchend', clearHover, { passive: true })
   }
 
   private bindDistHover (): void {
     const canvas = this.distCanvas
     let lastKp = -1
 
-    canvas.addEventListener('mousemove', (e: MouseEvent) => {
+    const handleHover = (clientX: number) => {
       const rect = canvas.getBoundingClientRect()
-      const x = e.clientX - rect.left
+      const x = clientX - rect.left
       const groupW = Math.floor((rect.width - PAD_X) / KP_LEVELS)
       const kp = Math.floor((x - PAD_X) / groupW)
 
@@ -581,9 +623,16 @@ export class GeomagneticView extends Component {
       const ratio = exp > 0 ? (obs / exp).toFixed(2) : 'N/A'
       setText(this.distTooltip, `Kp ${kp}: ${obs} observed / ${exp} expected (${ratio}×)`)
       show(this.distTooltip)
-    })
+    }
 
+    canvas.addEventListener('mousemove', (e: MouseEvent) => handleHover(e.clientX))
     canvas.addEventListener('mouseleave', () => { hide(this.distTooltip); lastKp = -1 })
+
+    // Touch support
+    canvas.addEventListener('touchstart', (e: TouchEvent) => {
+      if (e.touches.length === 1) handleHover(e.touches[0].clientX)
+    }, { passive: true })
+    canvas.addEventListener('touchend', () => { hide(this.distTooltip); lastKp = -1 }, { passive: true })
   }
 
   // ─── Helpers ────────────────────────────────────────────────────

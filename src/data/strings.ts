@@ -559,7 +559,7 @@ export const GEOMAGNETIC = {
   STAT_STORM_PCT: 'DURING Kp ≥ 5',
   STAT_AVG_KP: 'AVG Kp',
   STAT_PEAK_KP: 'PEAK Kp',
-  STAT_OVERREP: 'OVERREPRESENTATION',
+  STAT_OVERREP: 'OVERREP.',
   STAT_OVERREP_SUB: 'at Kp ≥ 5 vs expected',
   TIMELINE_TITLE: 'TEMPORAL CORRELATION',
   TIMELINE_SUBTITLE: 'Monthly Kp index vs sighting density',
@@ -602,6 +602,8 @@ export const SEISMIC = {
   TABLE_COL_DIST: 'AVG DIST',
   LEGEND_PAIR: 'CORRELATED PAIR',
   LEGEND_EQL: 'EQL CANDIDATE ZONE',
+  SCATTER_NOTE: 'Blue dots: UAP sightings that occurred near an earthquake. Orange dots: sightings within 120 km and 48 hours of an M4.5+ shallow quake — potential earthquake light (EQL) candidates. Dot size = magnitude.',
+  TABLE_NOTE: 'Showing earthquakes with at least one nearby UAP sighting',
   NO_DATA: 'No seismic data available',
   LOADING: 'Loading seismic data...',
   POSSIBLE_EQL: 'POSSIBLE EQL'
