@@ -24,7 +24,7 @@ import type { Sighting, NearbyEarthquake } from '@/types'
 const SCATTER_H = 320
 const PAD_X = 52
 const PAD_Y = 20
-const PAD_BOTTOM = 36
+const PAD_BOTTOM = 42
 const MAX_HOURS = 72
 const MAX_DIST_KM = 300
 const DOT_MIN_R = 3
@@ -437,7 +437,7 @@ export class SeismicView extends Component {
       ctx.lineTo(x, PAD_Y + plotH)
       ctx.stroke()
       ctx.fillStyle = c.text
-      ctx.fillText(`${hrs}h`, x, SCATTER_H - 8)
+      ctx.fillText(`${hrs}h`, x, SCATTER_H - 20)
     }
 
     // Y-axis grid + labels (distance)
@@ -476,7 +476,7 @@ export class SeismicView extends Component {
     ctx.fillStyle = c.text
     ctx.font = 'bold 8px monospace'
     ctx.textAlign = 'center'
-    ctx.fillText(SEISMIC.SCATTER_X, PAD_X + plotW / 2, SCATTER_H - 1)
+    ctx.fillText(SEISMIC.SCATTER_X, PAD_X + plotW / 2, SCATTER_H - 4)
 
     ctx.save()
     ctx.translate(10, PAD_Y + plotH / 2)
