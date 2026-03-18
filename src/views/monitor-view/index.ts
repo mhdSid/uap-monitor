@@ -13,7 +13,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h, clearChildren, addClass, qs } from '@/utils/dom'
-import { useAppStore, useDataSource, useFireball, useNuclear, useTheme, useShare, effect, filterSightings } from '@/composables'
+import { useAppStore, useFireball, useNuclear, useTheme, useShare, effect, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Section } from '@/components/layout'
 import { DataSources } from '@/components/data-sources'
@@ -40,7 +40,6 @@ import { MAX_YEAR_SPAN } from '@/data/config'
 
 export class MonitorView extends Component {
   private store = useAppStore()
-  private dataSource = useDataSource()
   private fireball = useFireball()
   private nuclear = useNuclear()
 
@@ -225,7 +224,7 @@ export class MonitorView extends Component {
 
     // Timeline
     this.timeline.setManifestCounts(
-      this.dataSource.getYearCounts(),
+      this.store.yearCounts.get(),
       years[years.length - 1] ?? 1900,
       years[0] ?? new Date().getFullYear()
     )

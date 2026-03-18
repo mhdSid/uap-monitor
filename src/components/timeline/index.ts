@@ -41,7 +41,6 @@ export class Timeline extends Component<TimelineProps> {
   private activeFrom = 0
   private activeTo = 0
   private hoverYear: number | null = null
-  private mounted = false
   private canvasW = 0
   private canvasH = 0
 
@@ -96,7 +95,6 @@ export class Timeline extends Component<TimelineProps> {
     const ro = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
-          this.mounted = true
           this.resize()
         }
       }
@@ -206,13 +204,17 @@ export class Timeline extends Component<TimelineProps> {
   // ─── Layout ───────────────────────────────────────────────────
 
   private resize (): void {
-    if (!this.mounted) return
+    // Direct dimension check — no async mounted flag needed.
+    // getBoundingClientRect forces synchronous layout so this works
+    // even when called immediately after DOM insertion.
+    const rootRect = this.el.getBoundingClientRect()
+    if (rootRect.width <= 0 || rootRect.height <= 0) return
 
     const yearSpan = this.dataTo - this.dataFrom + 1
     if (yearSpan <= 0) return
 
     const totalW = PAD_X * 2 + yearSpan * BAR_STEP
-    const containerH = Math.max(120, Math.floor(this.el.getBoundingClientRect().height))
+    const containerH = Math.max(120, Math.floor(rootRect.height))
     const trackH = this.scrollTrack.getBoundingClientRect().height || 14
     const canvasH = containerH - trackH
 

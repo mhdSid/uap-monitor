@@ -61,6 +61,8 @@ export interface AppStore {
   redditArticles: Signal<RedditArticle[]>
   /** NASA Fireball events. */
   fireballs: Signal<Fireball[]>
+  /** Manifest-based year → sighting count (for timeline density). */
+  yearCounts: Signal<Map<number, number>>
 
   // ── Derived (readonly) ────────────────────────────────────────
   /** Currently selected continent from filter, or undefined for all. */
@@ -91,6 +93,7 @@ export function useAppStore (): AppStore {
   const twitterArticles = signal<TwitterArticle[]>([])
   const redditArticles = signal<RedditArticle[]>([])
   const fireballs = signal<Fireball[]>([])
+  const yearCounts = signal<Map<number, number>>(new Map())
 
   const selectedContinent = computed<Continent | undefined>(
     () => filter.get().continent
@@ -119,6 +122,7 @@ export function useAppStore (): AppStore {
     twitterArticles,
     redditArticles,
     fireballs,
+    yearCounts,
     selectedContinent,
     hasActiveFilter,
     displayCount

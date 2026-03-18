@@ -20,7 +20,7 @@ import { Component, createRouter, RouteName } from '@/core'
 import type { Router } from '@/core'
 import type { Sighting } from '@/types'
 import { h, mount, clearChildren, hide, show } from '@/utils/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, batch, minDelay } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, useGdelt, useGnews, useTwitter, useReddit, batch, minDelay } from '@/composables'
 import { Header } from '@/components/header'
 import { NavTabs } from '@/components/nav-tabs'
 import { Ticker } from '@/components/ticker'
@@ -99,10 +99,6 @@ export class App extends Component {
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
-    const analytics = useAnalytics()
-    analytics.init()
-    analytics.pageView()
-
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -110,7 +106,11 @@ export class App extends Component {
       this.nuclear.load(),
       this.russianHistorical.load(),
       this.geomagnetic.load(),
-      this.seismic.load()
+      this.seismic.load(),
+      useGdelt().load(),
+      useGnews().load(),
+      useTwitter().load(),
+      useReddit().load()
     ])
 
     // ── Sequential: each step depends on the one before ──
@@ -121,6 +121,12 @@ export class App extends Component {
 
     // ── Router: enable view switching after data is ready ──
     this.initRouter()
+
+    setTimeout(() => {
+      const analytics = useAnalytics()
+      analytics.init()
+      analytics.pageView()
+    }, 1)
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
@@ -134,6 +140,7 @@ export class App extends Component {
       this.store.availableYears.set(years)
       this.store.totalCount.set(this.dataSource.getTotalCount())
       this.store.sources.set(this.dataSource.getSources())
+      this.store.yearCounts.set(this.dataSource.getYearCounts())
       this.store.yearRange.set({ from: defaultFrom, to: newest })
     })
   }
