@@ -1,15 +1,15 @@
 /**
  * POST /api/submit — UAP Sighting Report Submission
  *
- * Cloudflare Pages Function.
+ * Cloudflare Worker handler.
  * Validates the payload, generates a unique key, and stores it in Workers KV.
  *
- * KV binding: UAP_SUBMISSIONS (configured in wrangler.toml / dashboard)
+ * KV binding: uap-monitor (configured in wrangler.toml / dashboard)
  * Key format: sub:<timestamp>:<random-id>
  */
 
 interface Env {
-  UAP_SUBMISSIONS: KVNamespace
+  'uap-monitor': KVNamespace
 }
 
 interface SubmissionPayload {
@@ -43,6 +43,9 @@ const ERROR_DESCRIPTION_TOO_LONG = 'Description must be under 10,000 characters'
 const ERROR_INVALID_OBSERVERS = 'Observers must be a number between 1 and 10,000'
 const ERROR_KV_NOT_BOUND = 'Storage not configured'
 const ERROR_INTERNAL = 'Internal server error'
+const ERROR_NOT_FOUND = 'Not found'
+const CONTENT_TYPE_JSON = 'application/json'
+const API_SUBMIT_PATH = '/api/submit'
 
 function generateId (): string {
   const timestamp = Date.now().toString(36)
@@ -87,10 +90,15 @@ function validatePayload (body: Record<string, unknown>): SubmissionPayload | st
   }
 }
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request, env } = context
+async function handleSubmit (request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'POST') {
+    return Response.json(
+      { error: ERROR_METHOD_NOT_ALLOWED },
+      { status: 405 }
+    )
+  }
 
-  if (!env.UAP_SUBMISSIONS) {
+  if (!env['uap-monitor']) {
     return Response.json(
       { success: false, error: ERROR_KV_NOT_BOUND },
       { status: 500 }
@@ -124,7 +132,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   try {
-    await env.UAP_SUBMISSIONS.put(key, JSON.stringify(record))
+    await env['uap-monitor'].put(key, JSON.stringify(record))
   } catch {
     return Response.json(
       { success: false, error: ERROR_INTERNAL },
@@ -135,9 +143,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   return Response.json({ success: true, id: key })
 }
 
-export const onRequestGet: PagesFunction = async () => {
-  return Response.json(
-    { error: ERROR_METHOD_NOT_ALLOWED },
-    { status: 405 }
-  )
-}
+export default {
+  async fetch (request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url)
+
+    if (url.pathname === API_SUBMIT_PATH) {
+      return handleSubmit(request, env)
+    }
+
+    // All other routes are served by the [assets] directive in wrangler.toml
+    return Response.json({ error: ERROR_NOT_FOUND }, { status: 404 })
+  }
+} satisfies ExportedHandler<Env>
