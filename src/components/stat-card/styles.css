@@ -48,7 +48,7 @@
 .stat-card-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
+  gap: var(--space-8);
 }
 
 @media (min-width: 540px) {
