@@ -15,7 +15,7 @@ import { Modal } from '@/components/modal'
 import { Button } from '@/components/button'
 import { ButtonSize } from '@/enums'
 import { Loader } from '@/components/loader'
-import { h, clearChildren, addClass } from '@/utils/dom'
+import { h, clearChildren, addClass } from '@/core/dom'
 import { WELCOME } from '@/data/strings'
 import {
   useAnalytics,

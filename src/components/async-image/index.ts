@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { Loader } from '@/components/loader'
-import { h, el, addClass, setStyles, setAttrs } from '@/utils/dom'
+import { h, el, addClass, setStyles, setAttrs } from '@/core/dom'
 
 export interface AsyncImageProps {
   src: string

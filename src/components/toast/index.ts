@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import type { ToastMessage } from '@/types'
 import { ToastVariant } from '@/enums'
-import { h, addClass, generateId, qsa } from '@/utils/dom'
+import { h, addClass, generateId, qsa } from '@/core/dom'
 
 const TOAST_DURATION = 4000
 

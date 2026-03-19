@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { RouteName } from '@/core/router'
-import { h, addClass, removeClass } from '@/utils/dom'
+import { h, addClass, removeClass } from '@/core/dom'
 import { NAV } from '@/data/strings'
 
 // ─── Types ──────────────────────────────────────────────────────────

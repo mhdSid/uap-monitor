@@ -8,7 +8,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, show } from '@/utils/dom'
+import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
 import { NewsFeed } from '@/components/news-feed'
 

@@ -1,4 +1,4 @@
-import { h, addClass } from '@/utils/dom'
+import { h, addClass } from '@/core/dom'
 import { formatDate, formatDateCompact, formatLocation } from '@/utils/format'
 import { StatusTag, createSourceTag } from '@/components/tags'
 import { CredibilityBar } from '@/components/credibility-bar'

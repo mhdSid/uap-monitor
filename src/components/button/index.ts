@@ -10,7 +10,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, addClass } from '@/utils/dom'
+import { h, addClass } from '@/core/dom'
 import { ButtonSize } from '@/enums'
 
 // ─── Types ──────────────────────────────────────────────────────────

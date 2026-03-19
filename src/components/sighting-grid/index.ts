@@ -8,7 +8,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, clearChildren, setStyles, addClass } from '@/utils/dom'
+import { h, clearChildren, setStyles, addClass } from '@/core/dom'
 import { Section } from '@/components/layout'
 import { DataGrid } from '@/components/data-grid'
 import { SightingModal } from '@/components/sighting-modal'

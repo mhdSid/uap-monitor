@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, setStyles, hide, show, setText } from '@/utils/dom'
+import { h, setStyles, hide, show, setText } from '@/core/dom'
 import { iconRadar, iconSun, iconMoon, iconRadarSignalOutline } from '@/components/icons'
 import { Button } from '@/components/button'
 import { Switch } from '@/components/switch'

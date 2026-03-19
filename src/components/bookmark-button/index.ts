@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass, hide, show, setAttrs } from '@/utils/dom'
+import { h, addClass, removeClass, hide, show, setAttrs } from '@/core/dom'
 import { iconRadarSignalOutline, iconRadarSignalFilled } from '@/components/icons'
 import { useBookmarks } from '@/composables'
 import { useToast } from '@/components/toast'

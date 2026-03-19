@@ -8,7 +8,7 @@ import { cx } from './cx'
 
 import type { Sighting, Fireball, GdeltArticle, GnewsArticle, TwitterArticle, RedditArticle } from '@/types'
 import { DataSourceId, TagVariant } from '@/enums'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { formatLocation } from '@/utils/format'
 import { StatusTag, Tag } from '@/components/tags'
 import { BookmarkButton } from '@/components/bookmark-button'

@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, setText, show, setStyles } from '@/utils/dom'
+import { h, hide, setText, show, setStyles } from '@/core/dom'
 import { formatLocation } from '@/utils/format'
 import { colors } from '@/styles/palette'
 import { iconRadiation } from '@/components/icons'

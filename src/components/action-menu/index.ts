@@ -17,7 +17,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, addClass, removeClass, setStyles, qs } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles, qs } from '@/core/dom'
 import { iconMore } from '@/components/icons'
 
 // ─── Types ──────────────────────────────────────────────────────────

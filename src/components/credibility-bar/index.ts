@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import type { CredibilityBarProps } from '@/types'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 
 enum CredibilityLevel {
   HIGH = 'high',

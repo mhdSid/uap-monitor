@@ -1,6 +1,6 @@
 import './styles.css'
 import { cx } from './cx'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { Modal } from '@/components/modal'
 import { TERMS } from '@/data/legal'
 

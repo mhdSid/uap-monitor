@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, rawHtml } from '@/utils/dom'
+import { h, rawHtml } from '@/core/dom'
 import { ARIA } from '@/data/strings'
 
 export class Loader extends Component {

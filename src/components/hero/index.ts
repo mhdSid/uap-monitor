@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, setText } from '@/utils/dom'
+import { h, setText } from '@/core/dom'
 import { Button } from '@/components/button'
 import { HERO } from '@/data/strings'
 import { ButtonSize } from '@/enums'

@@ -12,7 +12,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, el, hide, show, setText, setStyles } from '@/utils/dom'
+import { h, el, hide, show, setText, setStyles } from '@/core/dom'
 import { palette } from '@/styles/palette'
 import { useSeismic, useAppStore, useTheme } from '@/composables'
 import { Loader } from '@/components/loader'

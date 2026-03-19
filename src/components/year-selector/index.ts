@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, setText } from '@/utils/dom'
+import { h, setText } from '@/core/dom'
 import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, effect } from '@/composables'
 import { Select } from '@/components/select'

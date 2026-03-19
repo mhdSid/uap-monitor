@@ -1,6 +1,6 @@
 import { Component } from '@/core'
 import type { SectionProps } from '@/types'
-import { h, setStyles } from '@/utils/dom'
+import { h, setStyles } from '@/core/dom'
 import { LiveTag, createCountTag } from '@/components/tags'
 import { Tooltip } from '@/components/tooltip'
 import { cx } from './cx'

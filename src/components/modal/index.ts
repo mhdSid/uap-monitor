@@ -12,7 +12,7 @@ import { cx } from './cx'
  * ------------------------------------------------------------------ */
 
 import type { ModalSlots } from '@/types'
-import { h, addClass, removeClass, setAttrs, qs } from '@/utils/dom'
+import { h, addClass, removeClass, setAttrs, qs } from '@/core/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 

@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import type { GdeltArticle } from '@/types'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { Modal } from '@/components/modal'
 import { AsyncImage } from '@/components/async-image'
 import { createToneTag } from '@/components/tags'

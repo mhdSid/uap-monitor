@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, el, hide, show, addClass, removeClass, setStyles, setText } from '@/utils/dom'
+import { h, el, hide, show, addClass, removeClass, setStyles, setText } from '@/core/dom'
 import { palette } from '@/styles/palette'
 import type { Sighting } from '@/types'
 import { useTheme } from '@/composables'

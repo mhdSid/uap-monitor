@@ -10,7 +10,7 @@
  *    /seismic       → Seismic correlation view                        *
  * ------------------------------------------------------------------ */
 
-import { qs, setAttrs } from "@/utils/dom"
+import { qs, setAttrs } from "@/core/dom"
 
 // ─── Types ──────────────────────────────────────────────────────────
 

@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass, setStyles, setText } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles, setText } from '@/core/dom'
 import { ARIA } from '@/data/strings'
 
 export interface TooltipProps {

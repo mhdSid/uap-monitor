@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { APP_FOOTER_NAME, APP_FOOTER_TAGLINE, APP_URL } from '@/data/strings'
 import { FOOTER_LINKS, CONTACT } from '@/data/legal'
 import { TermsModal } from '@/components/terms-modal'

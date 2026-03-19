@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { Continent, SightingShape, DataSourceId } from '@/enums'
 import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
 import { useAppStore, useDebounce } from '@/composables'

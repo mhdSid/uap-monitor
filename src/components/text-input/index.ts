@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, show } from '@/utils/dom'
+import { h, hide, show } from '@/core/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
 import { ComponentSize } from '@/enums'

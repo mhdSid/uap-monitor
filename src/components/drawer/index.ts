@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass, setStyles } from '@/utils/dom'
+import { h, addClass, removeClass, setStyles } from '@/core/dom'
 import { ARIA } from '@/data/strings'
 
 export interface DrawerProps {

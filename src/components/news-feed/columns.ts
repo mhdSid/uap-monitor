@@ -1,4 +1,4 @@
-import { h, addClass } from '@/utils/dom'
+import { h, addClass } from '@/core/dom'
 import { formatDate, formatDateCompact } from '@/utils/format'
 import { cx } from './cx'
 import { createToneTag, createNewsSourceTag, createIntelSourceTag, Tag } from '@/components/tags'

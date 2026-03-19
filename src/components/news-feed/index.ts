@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 
 import { Component } from '@/core'
-import { h, clearChildren } from '@/utils/dom'
+import { h, clearChildren } from '@/core/dom'
 import { DataGrid } from '@/components/data-grid'
 import { Loader } from '@/components/loader'
 import { TextInput } from '@/components/text-input'

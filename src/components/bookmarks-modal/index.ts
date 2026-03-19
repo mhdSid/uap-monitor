@@ -7,7 +7,7 @@ import { cx } from './cx'
  *  Remove button removes from bookmarks without closing.              *
  * ------------------------------------------------------------------ */
 
-import { h, clearChildren, hide, show, qs } from '@/utils/dom'
+import { h, clearChildren, hide, show, qs } from '@/core/dom'
 import { Modal } from '@/components/modal'
 import { SightingModal } from '@/components/sighting-modal'
 import { BookmarkListItem } from './bookmark-list-item'

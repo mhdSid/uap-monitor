@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import type { RedditArticle } from '@/types'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { Modal } from '@/components/modal'
 import { AsyncImage } from '@/components/async-image'
 import { formatDate } from '@/utils/format'

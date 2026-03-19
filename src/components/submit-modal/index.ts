@@ -1,6 +1,6 @@
 import './styles.css'
 import { cx } from './cx'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { Modal } from '@/components/modal'
 import { SubmitForm } from '@/components/submit-form'
 import { SUBMIT_FORM } from '@/data/strings'

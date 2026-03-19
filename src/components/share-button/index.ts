@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { iconShare } from '@/components/icons'
 import { useShare } from '@/composables'
 import { useToast } from '@/components/toast'

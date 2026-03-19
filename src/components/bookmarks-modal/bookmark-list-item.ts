@@ -1,6 +1,6 @@
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { formatLocation } from '@/utils/format'
 import { ActionMenu } from '@/components/action-menu'
 import { iconRadarSignalFilled, iconShare } from '@/components/icons'

@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, el } from '@/utils/dom'
+import { h, el } from '@/core/dom'
 
 // ─── Types ──────────────────────────────────────────────────────────
 

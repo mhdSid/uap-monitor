@@ -9,7 +9,7 @@ import { cx } from './cx'
 
 import { Component } from '@/core'
 import type { TickerMessage } from '@/composables/use-ticker'
-import { h, addClass, removeClass, toggleClass, setText } from '@/utils/dom'
+import { h, addClass, removeClass, toggleClass, setText } from '@/core/dom'
 import { TICKER, ARIA } from '@/data/strings'
 
 export interface TickerProps {

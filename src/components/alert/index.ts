@@ -3,7 +3,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { AlertVariant } from '@/enums'
 import { ARIA } from '@/data/strings'
-import { h, setStyles, setText } from '@/utils/dom'
+import { h, setStyles, setText } from '@/core/dom'
 
 export interface AlertProps {
   variant: AlertVariant

@@ -7,7 +7,7 @@
  * ------------------------------------------------------------------ */
 
 import type { Sighting } from '@/types'
-import { h, el, setStyles } from '@/utils/dom'
+import { h, el, setStyles } from '@/core/dom'
 import { useDelayedLoad } from './use-delayed-load'
 
 // ─── Configuration ──────────────────────────────────────────────────

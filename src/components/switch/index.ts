@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, addClass, removeClass, setAttrs } from '@/utils/dom'
+import { h, addClass, removeClass, setAttrs } from '@/core/dom'
 
 export interface SwitchProps {
   checked?: boolean

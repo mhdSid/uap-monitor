@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, show, setAttrs } from '@/utils/dom'
+import { h, hide, show, setAttrs } from '@/core/dom'
 import { TextInput } from '@/components/text-input'
 import { TextArea } from '@/components/text-area'
 import { Select } from '@/components/select'

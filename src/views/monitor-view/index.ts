@@ -12,7 +12,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, clearChildren, addClass, qs } from '@/utils/dom'
+import { h, clearChildren, addClass, qs } from '@/core/dom'
 import { useAppStore, useFireball, useNuclear, useTheme, useShare, effect, filterSightings } from '@/composables'
 import { AlertVariant, ButtonSize } from '@/enums'
 import { Section } from '@/components/layout'

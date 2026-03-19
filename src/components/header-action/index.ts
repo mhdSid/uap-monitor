@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { h, hide, show, addClass, removeClass, setAttrs } from '@/utils/dom'
+import { h, hide, show, addClass, removeClass, setAttrs } from '@/core/dom'
 
 export interface HeaderActionProps {
   /** SVG icon factory for default state */

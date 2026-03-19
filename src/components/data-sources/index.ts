@@ -3,7 +3,7 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import type { DataSourcesProps, DataSource } from '@/types'
 import { DataSourceStatus } from '@/enums'
-import { h } from '@/utils/dom'
+import { h } from '@/core/dom'
 import { createDataSourceTag } from '@/components/tags'
 
 export class DataSources extends Component<DataSourcesProps> {
