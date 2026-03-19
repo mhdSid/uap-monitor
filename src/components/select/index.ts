@@ -27,8 +27,14 @@ export class Select extends Component<SelectProps> {
 
   protected create (): HTMLElement {
     const {
-      id, name, ariaLabel, options, selected,
-      size = ComponentSize.MD, color = 'default', onChange
+      id,
+      name,
+      ariaLabel,
+      options,
+      selected,
+      size = ComponentSize.MD,
+      color = 'default',
+      onChange
     } = this.props
 
     const SIZE_CX: Record<ComponentSize, string> = {

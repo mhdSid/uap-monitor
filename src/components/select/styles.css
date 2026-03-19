@@ -21,23 +21,22 @@
   letter-spacing: 1px;
 }
 
-/* Size: sm (compact — year selectors) */
+/* Size: sm (compact — year selectors, inline controls) */
 .select--sm {
-  font-size: var(--fs-sm);
-  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-xs);
+  padding: var(--space-2) var(--space-3);
 }
 
-/* Size: md (standard — filter selects) */
+/* Size: md (standard — filter selects, forms) */
 .select--md {
-  font-size: var(--fs-xs);
-  padding: var(--space-3);
+  font-size: var(--fs-sm);
+  padding: var(--space-3) var(--space-4);
   flex: 1;
 }
 
-/* Size: lg (touch-friendly — drawer / mobile) */
+/* Size: lg (spacious — wide layouts) */
 .select--lg {
-  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
-  padding: var(--space-5) var(--space-md);
-  min-height: 44px;
+  font-size: var(--fs-body);
+  padding: var(--space-4) var(--space-6);
   flex: 1;
 }

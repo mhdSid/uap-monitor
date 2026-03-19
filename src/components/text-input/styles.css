@@ -63,7 +63,7 @@
   border-color: var(--color-green);
 }
 
-/* ── Sizes ───────────────────────────────────────────────────────── */
+/* ── Sizes (unified with select/text-area) ───────────────────────── */
 
 .text-input--sm {
   font-size: var(--fs-xs);
@@ -71,27 +71,19 @@
 }
 
 .text-input--md {
-  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
-  padding: var(--space-3) var(--space-sm);
+  font-size: var(--fs-sm);
+  padding: var(--space-3) var(--space-4);
 }
 
 .text-input--md::placeholder {
   font-size: var(--fs-xs);
 }
 
-/* Size: lg (touch-friendly — drawer / mobile) */
 .text-input--lg {
-  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
-  padding: var(--space-5) var(--space-md);
-  min-height: 44px;
+  font-size: var(--fs-body);
+  padding: var(--space-4) var(--space-6);
 }
 
 .text-input--lg::placeholder {
   font-size: var(--fs-sm);
-}
-
-@media (min-width: 768px) {
-  .text-input--md {
-    font-size: var(--fs-sm);
-  }
 }

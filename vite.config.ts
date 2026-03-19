@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { resolve } from 'path'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
   base: process.env.VITE_BASE_URL ?? '/',
@@ -8,6 +9,9 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src')
     }
+  },
+  server: {
+    https: true
   },
   build: {
     target: 'es2022',
@@ -25,6 +29,7 @@ export default defineConfig({
     }
   },
   plugins: [
+    basicSsl(),
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: null,

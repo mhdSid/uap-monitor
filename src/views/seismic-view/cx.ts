@@ -15,6 +15,7 @@ export const cx = {
   tableRow: 'seis-view__table-row',
   tableHead: 'seis-view__table-head',
   tableCell: 'seis-view__table-cell',
+  tableEmpty: 'seis-view__table-empty',
   loader: 'seis-view__loader',
   noData: 'seis-view__no-data',
   note: 'seis-view__note',

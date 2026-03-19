@@ -610,6 +610,7 @@ export const SEISMIC = {
   NOTE_SIZE_DESC: 'Scaled by earthquake magnitude.',
   TABLE_NOTE: 'Showing earthquakes with at least one nearby UAP sighting',
   NO_DATA: 'No seismic data available',
+  NO_PAIRS: 'No sighting–earthquake correlations for this year range',
   LOADING: 'Loading seismic data...',
   POSSIBLE_EQL: 'POSSIBLE EQL'
 } as const

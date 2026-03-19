@@ -48,28 +48,28 @@ export class SubmitForm extends Component {
       name: 'date',
       ariaLabel: ARIA.SUBMIT_DATE,
       inputType: 'date',
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.locationInput = new TextInput({
       name: 'location',
       placeholder: SUBMIT_FORM.LOCATION_PLACEHOLDER,
       ariaLabel: ARIA.SUBMIT_LOCATION,
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.shapeSelect = new Select({
       name: 'shape',
       ariaLabel: ARIA.SUBMIT_SHAPE,
       options: SHAPE_OPTIONS,
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.durationInput = new TextInput({
       name: 'duration',
       placeholder: SUBMIT_FORM.DURATION_PLACEHOLDER,
       ariaLabel: ARIA.SUBMIT_DURATION,
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.observersInput = new TextInput({
@@ -79,14 +79,14 @@ export class SubmitForm extends Component {
       inputType: 'number',
       min: '1',
       max: '10000',
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.titleInput = new TextInput({
       name: 'title',
       placeholder: SUBMIT_FORM.TITLE_PLACEHOLDER,
       ariaLabel: ARIA.SUBMIT_TITLE,
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.descriptionTextarea = new TextArea({
@@ -94,7 +94,7 @@ export class SubmitForm extends Component {
       placeholder: SUBMIT_FORM.DESCRIPTION_PLACEHOLDER,
       ariaLabel: ARIA.SUBMIT_DESCRIPTION,
       rows: 5,
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     this.emailInput = new TextInput({
@@ -102,7 +102,7 @@ export class SubmitForm extends Component {
       placeholder: SUBMIT_FORM.EMAIL_PLACEHOLDER,
       ariaLabel: ARIA.SUBMIT_EMAIL,
       inputType: 'email',
-      size: ComponentSize.MD
+      size: ComponentSize.LG
     })
 
     // ── Layout ──────────────────────────────────────────────────

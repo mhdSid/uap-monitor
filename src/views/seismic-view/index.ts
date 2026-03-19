@@ -386,6 +386,16 @@ export class SeismicView extends Component {
   private updateTable (): void {
     while (this.tableBody.firstChild) this.tableBody.removeChild(this.tableBody.firstChild)
 
+    if (this.topCorrelations.length === 0) {
+      const tr = el('tr', { className: cx.tableRow })
+      const td = el('td', { className: cx.tableEmpty })
+      td.setAttribute('colspan', '5')
+      td.textContent = SEISMIC.NO_PAIRS
+      tr.appendChild(td)
+      this.tableBody.appendChild(tr)
+      return
+    }
+
     for (const row of this.topCorrelations) {
       const tr = el('tr', { className: cx.tableRow })
 
@@ -492,6 +502,15 @@ export class SeismicView extends Component {
     const w = contentW
     const plotW = w - padX - 16
     const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
+
+    // Empty state
+    if (this.scatterData.length === 0) {
+      ctx.fillStyle = c.text
+      ctx.font = 'bold 11px monospace'
+      ctx.textAlign = 'center'
+      ctx.fillText(SEISMIC.NO_PAIRS, w / 2, SCATTER_H / 2)
+      return
+    }
 
     // Grid
     ctx.strokeStyle = c.grid

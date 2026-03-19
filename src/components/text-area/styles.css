@@ -30,7 +30,7 @@
   border-color: var(--color-green);
 }
 
-/* ── Sizes ───────────────────────────────────────────────────────── */
+/* ── Sizes (unified with select/text-input) ──────────────────────── */
 
 .text-area--sm {
   font-size: var(--fs-xs);
@@ -39,8 +39,8 @@
 }
 
 .text-area--md {
-  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
-  padding: var(--space-3) var(--space-sm);
+  font-size: var(--fs-sm);
+  padding: var(--space-3) var(--space-4);
   min-height: 120px;
 }
 
@@ -49,17 +49,11 @@
 }
 
 .text-area--lg {
-  font-size: var(--fs-title); /* 16px — prevents iOS auto-zoom */
-  padding: var(--space-5) var(--space-md);
+  font-size: var(--fs-body);
+  padding: var(--space-4) var(--space-6);
   min-height: 160px;
 }
 
 .text-area--lg::placeholder {
   font-size: var(--fs-sm);
-}
-
-@media (min-width: 768px) {
-  .text-area--md {
-    font-size: var(--fs-sm);
-  }
 }

@@ -8,7 +8,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  width: -webkit-fill-available;
+}
+
+.submit-form__row, .submit-form__row input {
+  width: -webkit-fill-available !important;
 }
 
 .submit-form__row--half {

@@ -149,6 +149,14 @@
   white-space: nowrap;
 }
 
+.seis-view__table-empty {
+  padding: var(--space-14) var(--space-6);
+  color: var(--color-muted);
+  text-align: center;
+  font-size: var(--fs-xs);
+  letter-spacing: 1px;
+}
+
 /* ── States ──────────────────────────────────────────────────────────── */
 
 .seis-view__loader {

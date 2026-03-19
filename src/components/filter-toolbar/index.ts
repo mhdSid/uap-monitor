@@ -55,8 +55,8 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
   protected create (): HTMLElement {
     this.currentFilter = {}
     const store = useAppStore()
-    const inputSize = this.props.inputSize ?? ComponentSize.MD
-    const selectSize = this.props.selectSize ?? ComponentSize.MD
+    const inputSize = this.props.inputSize ?? ComponentSize.LG
+    const selectSize = this.props.selectSize ?? ComponentSize.LG
 
     const emit = (): void => {
       store.filter.set({ ...this.currentFilter })
