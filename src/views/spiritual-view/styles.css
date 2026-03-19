@@ -113,7 +113,8 @@
   cursor: pointer;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   text-transform: uppercase;
-  z-index: var(--z-scanlines);
+  z-index: 2;
+  position: relative;
 }
 
 .spirit-view__enter-btn:hover {
@@ -132,9 +133,8 @@
   position: absolute;
   top: var(--space-8);
   left: var(--space-8);
-  justify-content: space-between;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: var(--space-4);
   z-index: 10;
   opacity: 0;
@@ -167,36 +167,36 @@
   text-shadow: 0 0 8px var(--c-green-500-30);
 }
 
-/* ── Controls panel (bottom-right) ──────────────────────────────────── */
+/* ── FAB — floating action button to open drawer ────────────────────── */
 
-.spirit-view__controls {
+.spirit-view__fab {
   position: absolute;
-  bottom: var(--space-8);
-  right: var(--space-8);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  z-index: 10;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 20;
+  box-shadow: var(--shadow-lg);
   opacity: 0;
-  transition: opacity 0.8s ease;
   pointer-events: none;
-  background: var(--c-panel-70);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-6) var(--space-8);
-  min-width: 180px;
-  backdrop-filter: blur(8px);
+  transition: opacity 0.5s ease;
 }
 
-.spirit-view--active .spirit-view__controls {
+.spirit-view--active .spirit-view__fab {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* ── Controls form (inside drawer body) ─────────────────────────────── */
+
+.spirit-view__controls-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .spirit-view__control-group {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
 }
 
 .spirit-view__control-label {
@@ -206,6 +206,12 @@
   letter-spacing: 1.5px;
   display: flex;
   justify-content: space-between;
+}
+
+.spirit-view__control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
 .spirit-view__slider {
@@ -222,8 +228,8 @@
 .spirit-view__slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--color-green);
   box-shadow: 0 0 6px var(--c-green-500-40);
@@ -231,8 +237,8 @@
 }
 
 .spirit-view__slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border: none;
   border-radius: 50%;
   background: var(--color-green);
@@ -240,7 +246,54 @@
   cursor: pointer;
 }
 
-/* ── Exit button ────────────────────────────────────────────────────── */
+/* ── Mode / Geometry toggle buttons ─────────────────────────────────── */
+
+.spirit-view__mode-btn {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 1px;
+  color: var(--color-dim);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.spirit-view__mode-btn:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.spirit-view__mode-btn--active {
+  color: var(--color-green);
+  border-color: var(--c-green-500-40);
+  background: var(--c-green-500-08);
+}
+
+/* ── Palette selector dots ──────────────────────────────────────────── */
+
+.spirit-view__palette-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+}
+
+.spirit-view__palette-btn:hover {
+  border-color: var(--color-border-strong);
+}
+
+.spirit-view__palette-btn--active {
+  border-color: var(--color-green);
+  box-shadow: 0 0 8px var(--c-green-500-30);
+}
+
+/* ── Exit button (inside drawer) ────────────────────────────────────── */
 
 .spirit-view__exit {
   font-family: var(--font-mono);
@@ -250,10 +303,11 @@
   background: transparent;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-6);
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
-  align-self: flex-end;
+  align-self: center;
+  margin-top: var(--space-4);
 }
 
 .spirit-view__exit:hover {
@@ -280,21 +334,13 @@
     left: var(--space-4);
   }
 
-  .spirit-view__controls {
-    bottom: var(--space-4);
-    right: var(--space-4);
-    left: var(--space-4);
-    min-width: 0;
+  .spirit-view__fab {
+    bottom: var(--space-8);
+    right: var(--space-8);
   }
 
   .spirit-view__title {
     font-size: var(--fs-lg);
     letter-spacing: 4px;
-  }
-}
-
-@media (min-width: 768px) {
-  .spirit-view__hud {
-    flex-direction: column;
   }
 }

@@ -6,7 +6,7 @@ import { WelcomeSource } from '@/types'
 export const APP_NAME = 'UAP MONITOR'
 export const APP_FOOTER_NAME = 'UAP MONITOR'
 export const APP_FOOTER_TAGLINE = 'Global UAP Intelligence Platform'
-export const APP_URL = import.meta.env.VITE_REPO_URL
+export const APP_URL = 'https://uapmonitor.org'
 
 // ─── Aria labels ────────────────────────────────────────────────────
 
@@ -645,9 +645,22 @@ export const SPIRITUAL = {
   HUD_FIELD: 'FIELD STRENGTH',
   CONTROL_SPEED: 'FLOW SPEED',
   CONTROL_COMPLEXITY: 'FRACTAL DEPTH',
+  CONTROL_ZOOM: 'ZOOM DEPTH',
   CONTROL_PALETTE: 'SPECTRUM',
+  CONTROL_GEOMETRY: 'GEOMETRY',
+  CONTROL_MODE: 'RENDER MODE',
   PALETTE_COSMIC: 'COSMIC',
   PALETTE_ETHEREAL: 'ETHEREAL',
   PALETTE_SOLAR: 'SOLAR',
-  PALETTE_VOID: 'VOID'
+  PALETTE_VOID: 'VOID',
+  GEO_FLOWER: 'FLOWER',
+  GEO_YANTRA: 'YANTRA',
+  GEO_METATRON: 'METATRON',
+  GEO_TORUS: 'TORUS',
+  MODE_FRACTAL: 'FRACTAL',
+  MODE_TUNNEL: 'TUNNEL',
+  MODE_MANDELBROT: 'MANDELBROT',
+  MODE_FIELD: 'FIELD',
+  FAB_LABEL: 'Open realm controls',
+  DRAWER_CLOSE: 'Close controls'
 } as const
