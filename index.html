@@ -78,8 +78,43 @@
       "name": "UAP Monitor",
       "url": "https://uapmonitor.org",
       "logo": "https://uapmonitor.org/og-image.png",
-      "sameAs": []
+      "sameAs": [
+        "https://github.com/UAPMonitor"
+      ]
       }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "UAP Monitor Global Sightings Database",
+      "description": "Aggregated UAP and UFO sighting reports from NUFORC, Hatch UDB, and historical chronologies spanning 70 AD to present, with credibility scoring, geolocation, and shape classification.",
+      "url": "https://uapmonitor.org/",
+      "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "temporalCoverage": "0070/..",
+      "spatialCoverage": {
+        "@type": "Place",
+        "geo": {
+          "@type": "GeoShape",
+          "box": "-90 -180 90 180"
+        }
+      },
+      "variableMeasured": [
+        "Sighting date and time",
+        "Geographic coordinates",
+        "Object shape classification",
+        "Credibility score",
+        "Observer count",
+        "Duration"
+      ],
+      "keywords": ["UAP", "UFO", "NUFORC", "sighting data", "aerial phenomena", "fireball", "geomagnetic correlation"],
+      "creator": {
+        "@type": "Organization",
+        "name": "UAP Monitor",
+        "url": "https://uapmonitor.org"
+      }
+    }
     </script>
 
     <style>
@@ -93,11 +128,18 @@
   </head>
   <body>
     <noscript>
-      <h1>UAP Monitor</h1>
+      <h1>UAP Monitor — Global UFO & UAP Sightings Intelligence Platform</h1>
       <p>
-      Global UFO and UAP sightings database covering 70 AD to present with
-      credibility scoring, shape analysis, and NASA fireball correlation.
+        UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15
+        verified sources including NUFORC, Hatch UDB, and historical chronologies
+        spanning 70 AD to present. Features include an interactive sighting map,
+        credibility scoring, shape classification, and NASA CNEOS fireball correlation.
       </p>
+      <nav>
+        <a href="/">Sighting Monitor</a> |
+        <a href="/geomagnetic">Geomagnetic Correlation</a> |
+        <a href="/seismic">Seismic Correlation</a>
+      </nav>
     </noscript>
     <div id="app">
       <div class="shell" aria-label="Loading UAP Monitor">
