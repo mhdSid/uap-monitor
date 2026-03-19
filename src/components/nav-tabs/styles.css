@@ -45,3 +45,9 @@
   color: var(--color-green);
   border-bottom-color: var(--color-green);
 }
+
+@media (min-width: 768px) {
+  .nav-tabs {
+    justify-content: center;
+  }
+}
