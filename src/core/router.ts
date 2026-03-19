@@ -37,8 +37,9 @@ export interface RouteDef<K extends string> {
   title: string
   /** Meta description for SEO. */
   description: string
-  /** Factory — creates the view component. Called once per visit. */
-  factory: () => Loadable
+  /** Factory — creates the view component. Called once per visit.
+   *  May return a Promise for code-split views loaded via dynamic import(). */
+  factory: () => Loadable | Promise<Loadable>
   /** If true, the container gets 'router-viewport-lock' class. */
   viewportLock?: boolean
   /** Called after the view is mounted and loaded. */
@@ -163,7 +164,7 @@ export function createRouter<K extends string> (
     await new Promise(r => requestAnimationFrame(r))
 
     // Create view and load data
-    const view = def.factory()
+    const view = await def.factory()
     activeView = view
     await view.load()
 

@@ -21,15 +21,12 @@ import { cx } from './cx'
 import { Component, RouteName, createRouter } from '@/core'
 import type { Sighting } from '@/types'
 import { h, mount, show, hide } from '@/core/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, useGdelt, useGnews, useTwitter, useReddit, batch, minDelay } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, batch, minDelay } from '@/composables'
 import type { RouterInstance, RouteNames } from '@/core'
 import { Header } from '@/components/header'
 import { NavTabs } from '@/components/nav-tabs'
 import { Ticker } from '@/components/ticker'
 import { MonitorView } from '@/views/monitor-view'
-import { GeomagneticView } from '@/views/geomagnetic-view'
-import { SeismicView } from '@/views/seismic-view'
-import { IntelView } from '@/views/intel-view'
 import { DEFAULT_YEAR_OFFSET } from '@/data/config'
 import { Loader } from '@/components/loader'
 
@@ -42,8 +39,6 @@ export class App extends Component {
   private fireball = useFireball()
   private nuclear = useNuclear()
   private russianHistorical = useRussianHistorical()
-  private geomagnetic = useGeomagnetic()
-  private seismic = useSeismic()
 
   private ticker!: Ticker
   private yearRangeReady = false
@@ -89,13 +84,7 @@ export class App extends Component {
       this.dataSource.loadManifests(),
       this.fireball.load(),
       this.nuclear.load(),
-      this.russianHistorical.load(),
-      this.geomagnetic.load(),
-      this.seismic.load(),
-      useGdelt().load(),
-      useGnews().load(),
-      useTwitter().load(),
-      useReddit().load()
+      this.russianHistorical.load()
     ])
 
     // ── Sequential: each step depends on the one before ──
@@ -242,14 +231,20 @@ export class App extends Component {
           path: '/geomagnetic',
           title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
           description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.',
-          factory: () => new GeomagneticView({})
+          factory: async () => {
+            const { GeomagneticView } = await import('@/views/geomagnetic-view')
+            return new GeomagneticView({})
+          }
         },
 
         [RouteName.SEISMIC]: {
           path: '/seismic',
           title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
           description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.',
-          factory: () => new SeismicView({})
+          factory: async () => {
+            const { SeismicView } = await import('@/views/seismic-view')
+            return new SeismicView({})
+          }
         },
 
         [RouteName.INTEL]: {
@@ -257,7 +252,10 @@ export class App extends Component {
           title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
           description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.',
           viewportLock: true,
-          factory: () => new IntelView({})
+          factory: async () => {
+            const { IntelView } = await import('@/views/intel-view')
+            return new IntelView({})
+          }
         }
       },
 
