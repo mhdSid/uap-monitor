@@ -632,19 +632,19 @@ export const ENV_CONTEXT = {
 } as const
 
 export const ROUTER_META = {
-  [RouteName.MONITOR]: {
+  MONITOR: {
     title: 'UAP Monitor — Global UFO & UAP Sightings Database, Map & Intelligence Platform',
     description: 'UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15 verified sources spanning 70 AD to present. Interactive map, credibility scoring, and NASA fireball correlation.'
   },
-  [RouteName.GEOMAGNETIC]: {
+  GEOMAGNETIC: {
     title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
     description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.'
   },
-  [RouteName.SEISMIC]: {
+  SEISMIC: {
     title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
     description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.'
   },
-  [RouteName.INTEL]: {
+  INTEL: {
     title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
     description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.'
   }

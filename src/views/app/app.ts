@@ -217,7 +217,7 @@ export class App extends Component {
 
       routes: {
         [RouteName.MONITOR]: {
-          ...ROUTER_META.monitor,
+          ...ROUTER_META.MONITOR,
           path: '/',
           factory: () => {
             const view = new MonitorView({})
@@ -228,7 +228,7 @@ export class App extends Component {
         },
 
         [RouteName.GEOMAGNETIC]: {
-          ...ROUTER_META.geomagnetic,
+          ...ROUTER_META.GEOMAGNETIC,
           path: '/geomagnetic',
           factory: async () => {
             const { GeomagneticView } = await import('@/views/geomagnetic-view')
@@ -237,7 +237,7 @@ export class App extends Component {
         },
 
         [RouteName.SEISMIC]: {
-          ...ROUTER_META.seismic,
+          ...ROUTER_META.SEISMIC,
           path: '/seismic',
           factory: async () => {
             const { SeismicView } = await import('@/views/seismic-view')
@@ -246,7 +246,7 @@ export class App extends Component {
         },
 
         [RouteName.INTEL]: {
-          ...ROUTER_META.intel,
+          ...ROUTER_META.INTEL,
           path: '/intel',
           viewportLock: true,
           factory: async () => {
