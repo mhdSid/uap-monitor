@@ -3,10 +3,12 @@ import { cx } from './cx'
 import { Component } from '@/core'
 import { h, setStyles, hide, show, setText } from '@/utils/dom'
 import { iconRadar, iconSun, iconMoon, iconRadarSignalOutline } from '@/components/icons'
+import { Button } from '@/components/button'
 import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
 import { SubmitModal } from '@/components/submit-modal'
 import { APP_NAME, ARIA, HEADER } from '@/data/strings'
+import { ButtonSize } from '@/enums'
 import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
@@ -19,15 +21,15 @@ export class Header extends Component {
       h('span', { className: cx.title }, APP_NAME)
     )
 
-    // ── Submit sighting CTA ──────────────────────────────────────
-    const submitBtn = h('button', {
-      className: cx.submitBtn,
-      type: 'button',
-      'aria-label': ARIA.SUBMIT_SIGHTING
-    }, HEADER.SUBMIT_CTA) as HTMLButtonElement
-
-    submitBtn.addEventListener('click', () => {
-      SubmitModal.open(submitBtn)
+    // ── Report sighting CTA ──────────────────────────────────────
+    const reportBtn = new Button({
+      label: HEADER.SUBMIT_CTA,
+      variant: 'outline',
+      color: 'primary',
+      pill: true,
+      size: ButtonSize.SM,
+      ariaLabel: ARIA.SUBMIT_SIGHTING,
+      onClick: () => SubmitModal.open(reportBtn.el)
     })
 
     // ── Bookmarks trigger ────────────────────────────────────────
@@ -42,15 +44,20 @@ export class Header extends Component {
     updateBadge()
     bookmarks.count.subscribe(updateBadge)
 
-    const bookmarkBtn = h('button', {
-      className: cx.bookmarkBtn,
-      type: 'button',
-      'aria-label': ARIA.OPEN_BOOKMARKS
-    }, iconRadarSignalOutline(14), badge) as HTMLButtonElement
-
-    bookmarkBtn.addEventListener('click', () => {
-      BookmarksModal.open(bookmarkBtn)
+    const bookmarkBtn = new Button({
+      label: ARIA.OPEN_BOOKMARKS,
+      round: true,
+      variant: 'ghost',
+      color: 'primary',
+      size: ButtonSize.SM,
+      icon: () => iconRadarSignalOutline(14),
+      ariaLabel: ARIA.OPEN_BOOKMARKS,
+      onClick: () => BookmarksModal.open(bookmarkBtn.el)
     })
+
+    // Attach badge to bookmark button
+    setStyles(bookmarkBtn.el, { position: 'relative' })
+    bookmarkBtn.el.appendChild(badge)
 
     // ── Theme switch ─────────────────────────────────────────────
     const { theme, toggle } = useTheme()
@@ -64,15 +71,11 @@ export class Header extends Component {
     })
 
     const right = h('div', { className: cx.right },
-      submitBtn,
-      bookmarkBtn,
+      reportBtn.el,
+      bookmarkBtn.el,
       themeSwitch.el
     )
 
     return h('header', { className: cx.root, role: 'banner' }, left, right)
-  }
-
-  destroy (): void {
-    super.destroy()
   }
 }

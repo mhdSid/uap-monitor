@@ -3,6 +3,7 @@ export const cx = {
   block: 'btn--block',
   filled: 'btn--filled',
   ghost: 'btn--ghost',
+  pill: 'btn--pill',
   lg: 'btn--lg',
   md: 'btn--md',
   neutral: 'btn--neutral',

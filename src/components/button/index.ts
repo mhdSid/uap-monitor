@@ -26,6 +26,7 @@ export interface ButtonProps {
   block?: boolean
   round?: boolean
   disabled?: boolean
+  pill?: boolean
   ariaLabel?: string
   icon?: () => SVGSVGElement
   trailingIcon?: () => SVGSVGElement
@@ -45,6 +46,7 @@ export class Button extends Component<ButtonProps> {
       round = false,
       disabled = false,
       ariaLabel,
+      pill,
       icon,
       trailingIcon,
       onClick
@@ -58,6 +60,7 @@ export class Button extends Component<ButtonProps> {
     ]
     if (block) classes.push(cx.block)
     if (round) classes.push(cx.round)
+    if (pill) classes.push(cx.pill)
 
     const children: (HTMLElement | SVGSVGElement | string)[] = []
 

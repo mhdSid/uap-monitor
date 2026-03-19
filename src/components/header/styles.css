@@ -20,68 +20,13 @@
   color: var(--color-text-strong);
 }
 
-.app-header__version {
-  font-size: var(--fs-xs);
-  color: var(--color-dim);
-  letter-spacing: 1px;
-}
-
 .app-header__right {
   display: flex;
   align-items: center;
   gap: var(--space-md);
 }
 
-/* ── Submit sighting CTA ─────────────────────────────────────────── */
-
-.app-header__submit {
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: var(--color-green);
-  background: transparent;
-  border: 1px solid var(--color-green);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-sm);
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
-  -webkit-tap-highlight-color: transparent;
-  white-space: nowrap;
-}
-
-.app-header__submit:hover {
-  background: var(--c-green-500-08);
-}
-
-.app-header__submit:active {
-  background: var(--c-green-500-20);
-}
-
-/* ── Bookmark trigger ────────────────────────────────────────────── */
-
-.app-header__bookmark {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--space-lg);
-  height: var(--space-lg);
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: var(--radius-sm);
-  color: var(--color-muted);
-  cursor: pointer;
-  transition: color var(--transition-fast);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.app-header__bookmark:hover {
-  color: var(--color-green);
-}
-
-/* focus-visible handled by global base.css */
+/* ── Bookmark badge (positioned on Button) ───────────────────────── */
 
 .app-header__bookmark-badge {
   position: absolute;
