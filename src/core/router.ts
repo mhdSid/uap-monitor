@@ -10,6 +10,8 @@
  *    /seismic       → Seismic correlation view                        *
  * ------------------------------------------------------------------ */
 
+import { qs, setAttrs } from "@/utils/dom"
+
 // ─── Types ──────────────────────────────────────────────────────────
 
 export const RouteName = {
@@ -24,6 +26,8 @@ export type RouteChangeHandler = (route: RouteName) => void
 
 // ─── Constants ──────────────────────────────────────────────────────
 
+const BASE_URL = 'https://uapmonitor.org'
+
 const PATH_MAP: Record<string, RouteName> = {
   '': RouteName.MONITOR,
   '/': RouteName.MONITOR,
@@ -36,6 +40,44 @@ const ROUTE_TO_PATH: Record<RouteName, string> = {
   [RouteName.GEOMAGNETIC]: '/geomagnetic',
   [RouteName.SEISMIC]: '/seismic'
 } as const
+
+interface RouteMeta {
+  title: string
+  description: string
+}
+
+const ROUTE_META: Record<RouteName, RouteMeta> = {
+  [RouteName.MONITOR]: {
+    title: 'UAP Monitor — Global UFO & UAP Sightings Database, Map & Intelligence Platform',
+    description: 'UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15 verified sources spanning 70 AD to present. Interactive map, credibility scoring, and NASA fireball correlation.'
+  },
+  [RouteName.GEOMAGNETIC]: {
+    title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
+    description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.'
+  },
+  [RouteName.SEISMIC]: {
+    title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
+    description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.'
+  }
+}
+
+/** Update document head to reflect the current route — title, description, canonical. */
+function applyRouteMeta (route: RouteName): void {
+  const meta = ROUTE_META[route]
+  const path = ROUTE_TO_PATH[route]
+
+  const title = meta.title
+  const description = meta.description
+  const fullPath = BASE_URL + path
+
+  document.title = title
+
+  setAttrs(qs('meta[name="description"]')!, { content: description })
+  setAttrs(qs('meta[property="og:title"]')!, { content: title })
+  setAttrs(qs('meta[property="og:description"]')!, { content: description })
+  setAttrs(qs('meta[property="og:url"]')!, { content: fullPath })
+  setAttrs(qs('link[rel="canonical"]')!, { href: fullPath })
+}
 
 // ─── Router ─────────────────────────────────────────────────────────
 
@@ -59,10 +101,14 @@ export function createRouter (): Router {
   let currentRoute = parsePath()
   const handlers: RouteChangeHandler[] = []
 
+  // Set meta for initial route (handles direct navigation to /geomagnetic etc.)
+  applyRouteMeta(currentRoute)
+
   function onPopState (): void {
     const next = parsePath()
     if (next === currentRoute) return
     currentRoute = next
+    applyRouteMeta(currentRoute)
     for (const h of handlers) h(currentRoute)
   }
 
@@ -75,6 +121,7 @@ export function createRouter (): Router {
       if (route === currentRoute) return
       window.history.pushState(null, '', ROUTE_TO_PATH[route])
       currentRoute = route
+      applyRouteMeta(route)
       for (const h of handlers) h(route)
     },
 
