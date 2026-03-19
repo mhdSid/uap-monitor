@@ -79,7 +79,7 @@ export const RouteName = {
   INTEL: 'intel'
 } as const
 
-// export type RouteName = typeof RouteName[keyof typeof RouteName]
+export type RouteName = typeof RouteName[keyof typeof RouteName]
 
 // ─── SEO Meta ───────────────────────────────────────────────────────
 

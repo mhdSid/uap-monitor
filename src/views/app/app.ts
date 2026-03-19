@@ -21,7 +21,7 @@ import { Component, RouteName, createRouter } from '@/core'
 import type { Sighting } from '@/types'
 import { h, mount, show, hide } from '@/core/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, useGdelt, useGnews, useTwitter, useReddit, batch, minDelay } from '@/composables'
-import type { RouterInstance } from '@/core'
+import type { RouterInstance, RouteNames } from '@/core'
 import { Header } from '@/components/header'
 import { NavTabs } from '@/components/nav-tabs'
 import { Ticker } from '@/components/ticker'
@@ -47,7 +47,7 @@ export class App extends Component {
   private yearRangeReady = false
 
   // ── Router ──────────────────────────────────────────────────────
-  private router!: RouterInstance<RouteName>
+  private router!: RouterInstance<RouteNames>
   private navTabs!: NavTabs
   private viewContainer!: HTMLElement
 
@@ -214,7 +214,7 @@ export class App extends Component {
   // ─── Router ────────────────────────────────────────────────────
 
   private initRouter (): void {
-    this.router = createRouter<RouteName>({
+    this.router = createRouter<RouteNames>({
       base: 'https://uapmonitor.org',
       container: this.viewContainer,
       fallback: RouteName.MONITOR,
