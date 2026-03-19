@@ -363,8 +363,7 @@ export class SpiritualView extends Component {
 
     for (const item of items) {
       const isActive = item.key === activeKey
-      const classes = [cx.modeBtn]
-      if (isActive) classes.push(cx.modeBtnActive)
+      const classes = [cx.modeBtn, isActive && cx.modeBtnActive].filter(Boolean)
 
       const btn = h('button', {
         className: classes.join(' '),
@@ -395,8 +394,7 @@ export class SpiritualView extends Component {
       const palette = PALETTES[i]
       const [r, g, b] = palette.colors[1]
       const isActive = i === this.paletteIdx
-      const classes = [cx.paletteBtn]
-      if (isActive) classes.push(cx.paletteBtnActive)
+      const classes = [cx.paletteBtn, isActive && cx.paletteBtnActive].filter(Boolean)
 
       const btn = h('button', {
         className: classes.join(' '),
