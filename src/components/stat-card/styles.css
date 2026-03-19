@@ -13,7 +13,7 @@
 
 .stat-card__label {
   font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
+  font-size: var(--fs-xs);
   color: var(--color-muted);
   letter-spacing: 1px;
   margin-bottom: var(--space-2);
@@ -24,7 +24,7 @@
 
 .stat-card__value {
   font-family: var(--font-mono);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-xl);
   font-weight: 600;
   letter-spacing: 0.5px;
   white-space: nowrap;
@@ -34,7 +34,7 @@
 
 .stat-card__sub {
   font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
+  font-size: var(--fs-2xs);
   color: var(--color-dim);
   margin-top: var(--space-1);
   letter-spacing: 0.5px;
@@ -73,6 +73,6 @@
 
 @media (max-width: 374px) {
   .stat-card__value {
-    font-size: var(--fs-md);
+    font-size: var(--fs-lg);
   }
 }

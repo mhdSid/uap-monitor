@@ -23,10 +23,11 @@
 
 .seis-view__section-title {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   color: var(--color-green);
   letter-spacing: 2px;
   font-weight: 600;
+  margin: 0;
 }
 
 .seis-view__section-sub {

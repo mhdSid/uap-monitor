@@ -323,7 +323,7 @@ export class SeismicView extends Component {
     this.bindScatterHover()
 
     const scatterSection = h('div', { className: cx.section },
-      h('div', { className: cx.sectionTitle }, SEISMIC.SCATTER_TITLE),
+      el('h2', { className: cx.sectionTitle }, [SEISMIC.SCATTER_TITLE]),
       h('div', { className: cx.sectionSub }, SEISMIC.SCATTER_SUBTITLE),
       scatterPanel
     )
@@ -355,7 +355,7 @@ export class SeismicView extends Component {
     const tablePanel = h('div', { className: cx.panel, style: 'padding: 0; overflow: hidden' }, table)
 
     const tableSection = h('div', { className: cx.section },
-      h('div', { className: cx.sectionTitle }, SEISMIC.TABLE_TITLE),
+      el('h2', { className: cx.sectionTitle }, [SEISMIC.TABLE_TITLE]),
       h('div', { className: cx.sectionSub }, SEISMIC.TABLE_SUBTITLE),
       tablePanel
     )

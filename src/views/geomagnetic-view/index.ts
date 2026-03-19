@@ -300,7 +300,7 @@ export class GeomagneticView extends Component {
     this.bindTimelineHover()
 
     const timelineSection = h('div', { className: cx.section },
-      h('div', { className: cx.sectionTitle }, GEOMAGNETIC.TIMELINE_TITLE),
+      el('h2', { className: cx.sectionTitle }, [GEOMAGNETIC.TIMELINE_TITLE]),
       h('div', { className: cx.sectionSub }, GEOMAGNETIC.TIMELINE_SUBTITLE),
       timelinePanel
     )
@@ -329,7 +329,7 @@ export class GeomagneticView extends Component {
     this.bindDistHover()
 
     const distSection = h('div', { className: cx.section },
-      h('div', { className: cx.sectionTitle }, GEOMAGNETIC.DIST_TITLE),
+      el('h2', { className: cx.sectionTitle }, [GEOMAGNETIC.DIST_TITLE]),
       h('div', { className: cx.sectionSub }, GEOMAGNETIC.DIST_SUBTITLE),
       distPanel
     )
