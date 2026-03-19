@@ -1,0 +1,50 @@
+/* ─── Stat Card ────────────────────────────────────────────────────── */
+
+.stat-card {
+  padding: var(--space-6) var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.stat-card__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+  margin-bottom: var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-card__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-card__sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--color-dim);
+  margin-top: var(--space-1);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Grid container for stat cards ────────────────────────────────── */
+
+.stat-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--space-4);
+}

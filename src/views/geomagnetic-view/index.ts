@@ -18,6 +18,7 @@ import { palette } from '@/styles/palette'
 import { useGeomagnetic, useAppStore, useTheme, yieldThread } from '@/composables'
 import { Loader } from '@/components/loader'
 import { YearSelector } from '@/components/year-selector'
+import { StatCard, createStatValue, createStatSub, StatCardGrid } from '@/components/stat-card'
 import { GEOMAGNETIC } from '@/data/strings'
 import type { Sighting } from '@/types'
 
@@ -133,12 +134,16 @@ export class GeomagneticView extends Component {
   // Resize observer for responsive canvas redraw
   private resizeObserver: ResizeObserver | null = null
 
+  private yearSelectorEl!: HTMLElement
+
   protected create (): HTMLElement {
+    this.yearSelectorEl = new YearSelector({}).el
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
     this.contentEl = h('div', { className: cx.content })
     hide(this.contentEl)
 
     return h('div', { className: cx.root },
+      this.yearSelectorEl,
       this.loaderEl,
       this.contentEl
     )
@@ -186,6 +191,18 @@ export class GeomagneticView extends Component {
         this.drawTimeline()
         this.drawDistribution()
       })
+    })
+
+    // Show/hide loader during year-range refetches
+    store.loading.subscribe((loading) => {
+      if (!this.loaded) return
+      if (loading) {
+        show(this.loaderEl)
+        hide(this.contentEl)
+      } else {
+        hide(this.loaderEl)
+        show(this.contentEl)
+      }
     })
 
     // Redraw on theme change (canvas colors differ)
@@ -241,23 +258,20 @@ export class GeomagneticView extends Component {
   // ─── Build DOM (once) ───────────────────────────────────────────
 
   private buildContent (): void {
-    // Year selector
-    const yearSelector = new YearSelector({})
-
     // Stats (values set by updateStats)
-    this.statTotalVal = h('div', { className: cx.statValue })
-    this.statStormVal = h('div', { className: cx.statValue })
-    this.statStormSub = h('div', { className: cx.statSub })
-    this.statAvgVal = h('div', { className: cx.statValue })
-    this.statPeakVal = h('div', { className: cx.statValue })
-    this.statOverrepVal = h('div', { className: cx.statValue })
+    this.statTotalVal = createStatValue()
+    this.statStormVal = createStatValue()
+    this.statStormSub = createStatSub()
+    this.statAvgVal = createStatValue()
+    this.statPeakVal = createStatValue()
+    this.statOverrepVal = createStatValue()
 
-    const statsBar = h('div', { className: cx.stats },
-      this.buildStatShell(GEOMAGNETIC.STAT_TOTAL, this.statTotalVal, GEOMAGNETIC.SOURCE),
-      this.buildStatShell(GEOMAGNETIC.STAT_STORM_PCT, this.statStormVal, this.statStormSub),
-      this.buildStatShell(GEOMAGNETIC.STAT_AVG_KP, this.statAvgVal, 'dataset period'),
-      this.buildStatShell(GEOMAGNETIC.STAT_PEAK_KP, this.statPeakVal, 'maximum observed'),
-      this.buildStatShell(GEOMAGNETIC.STAT_OVERREP, this.statOverrepVal, GEOMAGNETIC.STAT_OVERREP_SUB)
+    const statsBar = StatCardGrid(
+      new StatCard({ label: GEOMAGNETIC.STAT_TOTAL, valueEl: this.statTotalVal, sub: GEOMAGNETIC.SOURCE }).el,
+      new StatCard({ label: GEOMAGNETIC.STAT_STORM_PCT, valueEl: this.statStormVal, sub: this.statStormSub }).el,
+      new StatCard({ label: GEOMAGNETIC.STAT_AVG_KP, valueEl: this.statAvgVal, sub: 'dataset period' }).el,
+      new StatCard({ label: GEOMAGNETIC.STAT_PEAK_KP, valueEl: this.statPeakVal, sub: 'maximum observed' }).el,
+      new StatCard({ label: GEOMAGNETIC.STAT_OVERREP, valueEl: this.statOverrepVal, sub: GEOMAGNETIC.STAT_OVERREP_SUB }).el
     )
 
     // Timeline section
@@ -320,7 +334,6 @@ export class GeomagneticView extends Component {
       distPanel
     )
 
-    this.contentEl.appendChild(yearSelector.el)
     this.contentEl.appendChild(statsBar)
     this.contentEl.appendChild(timelineSection)
     this.contentEl.appendChild(distSection)
@@ -357,20 +370,6 @@ export class GeomagneticView extends Component {
 
     setText(this.statOverrepVal, `${overrep}×`)
     setStyles(this.statOverrepVal, { color: 'var(--color-red)' })
-  }
-
-  // ─── Stat card shell ────────────────────────────────────────────
-
-  private buildStatShell (label: string, valueEl: HTMLElement, subContent: string | HTMLElement): HTMLElement {
-    const subEl = typeof subContent === 'string'
-      ? h('div', { className: cx.statSub }, subContent)
-      : subContent
-
-    return h('div', { className: cx.stat },
-      h('div', { className: cx.statLabel }, label),
-      valueEl,
-      subEl
-    )
   }
 
   // ─── Kp heatmap strip ──────────────────────────────────────────

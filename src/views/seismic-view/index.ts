@@ -17,6 +17,7 @@ import { palette } from '@/styles/palette'
 import { useSeismic, useAppStore, useTheme } from '@/composables'
 import { Loader } from '@/components/loader'
 import { YearSelector } from '@/components/year-selector'
+import { StatCard, createStatValue, StatCardGrid } from '@/components/stat-card'
 import { SEISMIC } from '@/data/strings'
 import type { Sighting, NearbyEarthquake } from '@/types'
 
@@ -140,12 +141,16 @@ export class SeismicView extends Component {
   // Resize observer for responsive canvas redraw
   private resizeObserver: ResizeObserver | null = null
 
+  private yearSelectorEl!: HTMLElement
+
   protected create (): HTMLElement {
+    this.yearSelectorEl = new YearSelector({}).el
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
     this.contentEl = h('div', { className: cx.content })
     hide(this.contentEl)
 
     return h('div', { className: cx.root },
+      this.yearSelectorEl,
       this.loaderEl,
       this.contentEl
     )
@@ -193,6 +198,18 @@ export class SeismicView extends Component {
       this.updateStats()
       this.updateTable()
       requestAnimationFrame(() => this.drawScatter())
+    })
+
+    // Show/hide loader during year-range refetches
+    store.loading.subscribe((loading) => {
+      if (!this.loaded) return
+      if (loading) {
+        show(this.loaderEl)
+        hide(this.contentEl)
+      } else {
+        hide(this.loaderEl)
+        show(this.contentEl)
+      }
     })
 
     // Redraw on theme change
@@ -271,19 +288,17 @@ export class SeismicView extends Component {
   // ─── Build DOM (once) ───────────────────────────────────────────
 
   private buildContent (): void {
-    const yearSelector = new YearSelector({})
-
     // Stats
-    this.statPairsVal = h('div', { className: cx.statValue })
-    this.statEqlVal = h('div', { className: cx.statValue })
-    this.statDistVal = h('div', { className: cx.statValue })
-    this.statMagVal = h('div', { className: cx.statValue })
+    this.statPairsVal = createStatValue()
+    this.statEqlVal = createStatValue()
+    this.statDistVal = createStatValue()
+    this.statMagVal = createStatValue()
 
-    const statsBar = h('div', { className: cx.stats },
-      this.buildStatShell(SEISMIC.STAT_PAIRS, this.statPairsVal, SEISMIC.STAT_PAIRS_SUB),
-      this.buildStatShell(SEISMIC.STAT_EQL, this.statEqlVal, SEISMIC.STAT_EQL_SUB),
-      this.buildStatShell(SEISMIC.STAT_AVG_DIST, this.statDistVal, SEISMIC.STAT_AVG_DIST_SUB),
-      this.buildStatShell(SEISMIC.STAT_AVG_MAG, this.statMagVal, SEISMIC.STAT_AVG_MAG_SUB)
+    const statsBar = StatCardGrid(
+      new StatCard({ label: SEISMIC.STAT_PAIRS, valueEl: this.statPairsVal, sub: SEISMIC.STAT_PAIRS_SUB }).el,
+      new StatCard({ label: SEISMIC.STAT_EQL, valueEl: this.statEqlVal, sub: SEISMIC.STAT_EQL_SUB }).el,
+      new StatCard({ label: SEISMIC.STAT_AVG_DIST, valueEl: this.statDistVal, sub: SEISMIC.STAT_AVG_DIST_SUB }).el,
+      new StatCard({ label: SEISMIC.STAT_AVG_MAG, valueEl: this.statMagVal, sub: SEISMIC.STAT_AVG_MAG_SUB }).el
     )
 
     // Scatter
@@ -345,7 +360,6 @@ export class SeismicView extends Component {
       tablePanel
     )
 
-    this.contentEl.appendChild(yearSelector.el)
     this.contentEl.appendChild(statsBar)
     this.contentEl.appendChild(scatterSection)
     this.contentEl.appendChild(tableSection)
@@ -400,16 +414,6 @@ export class SeismicView extends Component {
       tr.appendChild(distCell)
       this.tableBody.appendChild(tr)
     }
-  }
-
-  // ─── Stat card shell ────────────────────────────────────────────
-
-  private buildStatShell (label: string, valueEl: HTMLElement, sub: string): HTMLElement {
-    return h('div', { className: cx.stat },
-      h('div', { className: cx.statLabel }, label),
-      valueEl,
-      h('div', { className: cx.statSub }, sub)
-    )
   }
 
   // ─── Legend factory ─────────────────────────────────────────────

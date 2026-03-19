@@ -1,11 +1,6 @@
 export const cx = {
   root: 'geo-view',
   content: 'geo-view__content',
-  stats: 'geo-view__stats',
-  stat: 'geo-view__stat',
-  statLabel: 'geo-view__stat-label',
-  statValue: 'geo-view__stat-value',
-  statSub: 'geo-view__stat-sub',
   section: 'geo-view__section',
   sectionTitle: 'geo-view__section-title',
   sectionSub: 'geo-view__section-sub',
