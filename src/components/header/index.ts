@@ -47,7 +47,7 @@ export class Header extends Component {
       variant: 'ghost',
       color: 'primary',
       size: ButtonSize.SM,
-      icon: () => iconRadarSignalOutline(14),
+      icon: () => iconRadarSignalOutline(18),
       ariaLabel: ARIA.OPEN_BOOKMARKS,
       onClick: () => BookmarksModal.open(bookmarkBtn.el)
     })

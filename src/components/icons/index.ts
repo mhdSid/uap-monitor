@@ -133,11 +133,12 @@ export function iconSearch (size = 16): SVGSVGElement {
 /** Radar signal — outline variant (bookmark: inactive). */
 export function iconRadarSignalOutline (size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('viewBox', `0 0 ${size} ${size}`)
   svg.setAttribute('width', String(size))
   svg.setAttribute('height', String(size))
   svg.setAttribute('fill', 'none')
   svg.setAttribute('aria-hidden', 'true')
+  svg.style.display = 'block'
   svg.innerHTML = `
     <circle cx="3" cy="13" r="1.5" fill="currentColor"/>
     <path d="M6 13a3 3 0 0 0-3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
