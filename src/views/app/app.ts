@@ -7,39 +7,29 @@
  *       fireball/nuclear store population — data consumed by ALL      *
  *       views via the reactive store                                  *
  *    3. Render app chrome: header, nav tabs, ticker                   *
- *    4. Route-based view switching with lazy initialization           *
+ *    4. Route-based view switching via useRouter composable           *
  *                                                                     *
  *  View-specific rendering lives in dedicated view components:        *
  *    MonitorView     — sighting dashboard (hero, map, grids, etc.)    *
  *    GeomagneticView — Kp index vs sighting density                   *
  *    SeismicView     — earthquake proximity vs sightings              *
+ *    IntelView       — full-page intelligence news feed               *
  * ------------------------------------------------------------------ */
 
 import './app.css'
-import { Component, createRouter, RouteName } from '@/core'
-import type { Router } from '@/core'
+import { Component, RouteName, createRouter } from '@/core'
 import type { Sighting } from '@/types'
-import { h, mount, clearChildren, hide, show, addClass, removeClass } from '@/core/dom'
+import { h, mount, show, hide } from '@/core/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, useGdelt, useGnews, useTwitter, useReddit, batch, minDelay } from '@/composables'
+import type { RouterInstance } from '@/core'
 import { Header } from '@/components/header'
 import { NavTabs } from '@/components/nav-tabs'
 import { Ticker } from '@/components/ticker'
-import { Loader } from '@/components/loader'
 import { MonitorView } from '@/views/monitor-view'
 import { GeomagneticView } from '@/views/geomagnetic-view'
 import { SeismicView } from '@/views/seismic-view'
 import { IntelView } from '@/views/intel-view'
 import { DEFAULT_YEAR_OFFSET } from '@/data/config'
-
-// ─── View container factory ─────────────────────────────────────────
-
-function createViewContainer (visible: boolean): HTMLElement {
-  const container = h('div', { className: 'app-view-container' },
-    h('div', { className: 'app-loader' }, new Loader({}).el)
-  )
-  if (!visible) hide(container)
-  return container
-}
 
 // ─── App ────────────────────────────────────────────────────────────
 
@@ -56,36 +46,25 @@ export class App extends Component {
   private ticker!: Ticker
   private yearRangeReady = false
 
-  // ── Router + views ──────────────────────────────────────────────
-  private router!: Router
+  // ── Router ──────────────────────────────────────────────────────
+  private router!: RouterInstance<RouteName>
   private navTabs!: NavTabs
+  private viewContainer!: HTMLElement
 
-  private monContainer!: HTMLElement
-  private geoContainer!: HTMLElement
-  private seisContainer!: HTMLElement
-  private intelContainer!: HTMLElement
-
+  // ── Monitor view reference (needed for ticker + FAB) ────────────
   private monView: MonitorView | null = null
-  private geoView: GeomagneticView | null = null
-  private seisView: SeismicView | null = null
-  private intelView: IntelView | null = null
 
   // ─── Shell ─────────────────────────────────────────────────────
 
   protected create (): HTMLElement {
-    const initialRoute = this.parseInitialRoute()
-
-    this.monContainer = createViewContainer(initialRoute === RouteName.MONITOR)
-    this.geoContainer = createViewContainer(initialRoute === RouteName.GEOMAGNETIC)
-    this.seisContainer = createViewContainer(initialRoute === RouteName.SEISMIC)
-    this.intelContainer = createViewContainer(initialRoute === RouteName.INTEL)
+    this.viewContainer = h('div', { className: 'app-view-container' })
 
     this.ticker = new Ticker({
       onClick: (id) => this.monView?.scrollToSighting(id)
     })
 
     this.navTabs = new NavTabs({
-      active: initialRoute,
+      active: RouteName.MONITOR,
       onNavigate: (route) => this.router?.navigate(route)
     })
 
@@ -94,16 +73,17 @@ export class App extends Component {
       new Header({}).el,
       this.navTabs.el,
       this.ticker.el,
-      this.monContainer,
-      this.geoContainer,
-      this.seisContainer,
-      this.intelContainer
+      this.viewContainer
     )
   }
 
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
+    const analytics = useAnalytics()
+    analytics.init()
+    analytics.pageView()
+
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -126,12 +106,6 @@ export class App extends Component {
 
     // ── Router: enable view switching after data is ready ──
     this.initRouter()
-
-    setTimeout(() => {
-      const analytics = useAnalytics()
-      analytics.init()
-      analytics.pageView()
-    }, 1)
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
@@ -239,97 +213,70 @@ export class App extends Component {
 
   // ─── Router ────────────────────────────────────────────────────
 
-  private parseInitialRoute (): RouteName {
-    const path = window.location.pathname
-    if (path === '/geomagnetic') return RouteName.GEOMAGNETIC
-    if (path === '/seismic') return RouteName.SEISMIC
-    if (path === '/intel') return RouteName.INTEL
-    return RouteName.MONITOR
-  }
-
   private initRouter (): void {
-    this.router = createRouter()
+    this.router = createRouter<RouteName>({
+      base: 'https://uapmonitor.org',
+      container: this.viewContainer,
+      fallback: RouteName.MONITOR,
 
-    this.router.onChange((route) => {
-      this.switchView(route)
+      routes: {
+        [RouteName.MONITOR]: {
+          path: '/',
+          title: 'UAP Monitor — Global UFO & UAP Sightings Database, Map & Intelligence Platform',
+          description: 'UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15 verified sources spanning 70 AD to present. Interactive map, credibility scoring, and NASA fireball correlation.',
+          factory: () => {
+            const view = new MonitorView({})
+            this.monView = view
+            return view
+          },
+          onLeave: () => { this.monView = null }
+        },
+
+        [RouteName.GEOMAGNETIC]: {
+          path: '/geomagnetic',
+          title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
+          description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.',
+          factory: () => new GeomagneticView({})
+        },
+
+        [RouteName.SEISMIC]: {
+          path: '/seismic',
+          title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
+          description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.',
+          factory: () => new SeismicView({})
+        },
+
+        [RouteName.INTEL]: {
+          path: '/intel',
+          title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
+          description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.',
+          viewportLock: true,
+          factory: () => new IntelView({})
+        }
+      },
+
+      onBeforeSwitch: (_from, to) => {
+        this.navTabs.setActive(to)
+      },
+
+      onAfterSwitch: (route) => {
+        // Show/hide monitor FAB
+        if (this.monView) {
+          const fab = this.monView.getFab()
+          if (route === RouteName.MONITOR) show(fab)
+          else hide(fab)
+        }
+      }
     })
 
-    // Activate the initial view (always — including MONITOR)
-    this.switchView(this.router.current())
-  }
-
-  private switchView (route: RouteName): void {
-    this.navTabs.setActive(route)
-
-    // Hide all view containers
-    hide(this.monContainer)
-    hide(this.geoContainer)
-    hide(this.seisContainer)
-    hide(this.intelContainer)
-
-    // Lock viewport for full-height views (intel feed)
-    const appEl = this.el
-    if (route === RouteName.INTEL) addClass(appEl, 'app--viewport-lock')
-    else removeClass(appEl, 'app--viewport-lock')
-
-    // Hide monitor FAB on non-monitor views
-    if (this.monView) {
-      const fab = this.monView.getFab()
-      if (route === RouteName.MONITOR) show(fab)
-      else hide(fab)
-    }
-
-    switch (route) {
-      case RouteName.MONITOR:
-        show(this.monContainer)
-        if (!this.monView) {
-          this.monView = new MonitorView({})
-          clearChildren(this.monContainer)
-          this.monContainer.appendChild(this.monView.el)
-          this.monView.load()
-        }
-        break
-
-      case RouteName.GEOMAGNETIC:
-        show(this.geoContainer)
-        if (!this.geoView) {
-          this.geoView = new GeomagneticView({})
-          clearChildren(this.geoContainer)
-          this.geoContainer.appendChild(this.geoView.el)
-          this.geoView.load()
-        }
-        break
-
-      case RouteName.SEISMIC:
-        show(this.seisContainer)
-        if (!this.seisView) {
-          this.seisView = new SeismicView({})
-          clearChildren(this.seisContainer)
-          this.seisContainer.appendChild(this.seisView.el)
-          this.seisView.load()
-        }
-        break
-
-      case RouteName.INTEL:
-        show(this.intelContainer)
-        if (!this.intelView) {
-          this.intelView = new IntelView({})
-          clearChildren(this.intelContainer)
-          this.intelContainer.appendChild(this.intelView.el)
-          this.intelView.load()
-        }
-        break
-    }
+    // Activate initial route
+    this.router.navigate(this.router.current())
   }
 
   // ─── Cleanup ───────────────────────────────────────────────────
 
   destroy (): void {
     this.router?.destroy()
-    this.monView?.destroy()
-    this.geoView?.destroy()
-    this.seisView?.destroy()
-    this.intelView?.destroy()
     super.destroy()
   }
 }
