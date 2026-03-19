@@ -1,5 +1,5 @@
 import { tokensCSS, baseCSS } from '@/styles'
-import { createApp } from '@/components/_app/app'
+import { createApp } from '@/views/app/app'
 import { qs } from '@/utils/dom'
 
 document.head.insertAdjacentHTML('beforeend', `<style>${tokensCSS}</style>`)
