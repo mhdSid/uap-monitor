@@ -1,0 +1,67 @@
+/* ─── Chip ─────────────────────────────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-dim);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chip:hover {
+  color: var(--color-muted);
+  border-color: var(--color-border-strong);
+}
+
+.chip:focus-visible {
+  outline: 1px solid var(--color-green);
+  outline-offset: 1px;
+}
+
+/* ── Active state — uses --chip-color custom property ─────────────── */
+
+.chip--active {
+  color: var(--chip-color, var(--color-green));
+  border-color: var(--chip-color, var(--color-green));
+  background: color-mix(in srgb, var(--chip-color, var(--color-green)) 8%, transparent);
+}
+
+.chip--active:hover {
+  color: var(--chip-color, var(--color-green));
+  background: color-mix(in srgb, var(--chip-color, var(--color-green)) 14%, transparent);
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────────── */
+
+.chip--sm {
+  font-size: var(--fs-3xs);
+  padding: var(--space-1) var(--space-3);
+}
+
+.chip--md {
+  font-size: var(--fs-2xs);
+  padding: var(--space-2) var(--space-4);
+}
+
+.chip--lg {
+  font-size: var(--fs-xs);
+  padding: var(--space-3) var(--space-6);
+}
+
+/* ─── Chip Group ───────────────────────────────────────────────────── */
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

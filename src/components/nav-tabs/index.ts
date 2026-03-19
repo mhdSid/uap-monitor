@@ -22,7 +22,8 @@ export interface NavTabsProps {
 const TABS: readonly NavTab[] = [
   { label: NAV.MONITOR, route: RouteName.MONITOR },
   { label: NAV.GEOMAGNETIC, route: RouteName.GEOMAGNETIC },
-  { label: NAV.SEISMIC, route: RouteName.SEISMIC }
+  { label: NAV.SEISMIC, route: RouteName.SEISMIC },
+  { label: NAV.INTEL, route: RouteName.INTEL }
 ] as const
 
 // ─── Component ──────────────────────────────────────────────────────

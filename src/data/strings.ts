@@ -546,7 +546,8 @@ export const HEADER = {
 export const NAV = {
   MONITOR: 'MONITOR',
   GEOMAGNETIC: 'GEOMAGNETIC',
-  SEISMIC: 'SEISMIC'
+  SEISMIC: 'SEISMIC',
+  INTEL: 'INTEL FEED'
 } as const
 
 // ─── Geomagnetic visualizer ─────────────────────────────────────────

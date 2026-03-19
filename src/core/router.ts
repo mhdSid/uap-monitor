@@ -17,7 +17,8 @@ import { qs, setAttrs } from "@/utils/dom"
 export const RouteName = {
   MONITOR: 'monitor',
   GEOMAGNETIC: 'geomagnetic',
-  SEISMIC: 'seismic'
+  SEISMIC: 'seismic',
+  INTEL: 'intel'
 } as const
 
 export type RouteName = typeof RouteName[keyof typeof RouteName]
@@ -32,13 +33,15 @@ const PATH_MAP: Record<string, RouteName> = {
   '': RouteName.MONITOR,
   '/': RouteName.MONITOR,
   '/geomagnetic': RouteName.GEOMAGNETIC,
-  '/seismic': RouteName.SEISMIC
+  '/seismic': RouteName.SEISMIC,
+  '/intel': RouteName.INTEL
 } as const
 
 const ROUTE_TO_PATH: Record<RouteName, string> = {
   [RouteName.MONITOR]: '/',
   [RouteName.GEOMAGNETIC]: '/geomagnetic',
-  [RouteName.SEISMIC]: '/seismic'
+  [RouteName.SEISMIC]: '/seismic',
+  [RouteName.INTEL]: '/intel'
 } as const
 
 interface RouteMeta {
@@ -58,6 +61,10 @@ const ROUTE_META: Record<RouteName, RouteMeta> = {
   [RouteName.SEISMIC]: {
     title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
     description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.'
+  },
+  [RouteName.INTEL]: {
+    title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
+    description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.'
   }
 }
 

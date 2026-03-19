@@ -20,8 +20,8 @@
  *   node scripts/geomagnetic/fetch.mjs --out public/data/geomagnetic-kp.json
  */
 
-import { writeFileSync, mkdirSync } from 'node:fs'
-import { dirname } from 'node:path'
+import { writeFileSync, mkdirSync, existsSync, readFileSync, copyFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 
 // ─── CLI ────────────────────────────────────────────────────────────
 
@@ -129,9 +129,39 @@ async function main () {
   console.log(`Parsed ${data.length} days of Kp data`)
   console.log(`Date range: ${data[0]?.date} → ${data[data.length - 1]?.date}`)
 
+  // Merge with existing source of truth
+  const projectRoot = dirname(dirname(dirname(opts.out)))
+  const sourceFile = join(projectRoot, '__sources', 'geomagnetic-kp.json')
+  mkdirSync(dirname(sourceFile), { recursive: true })
+
+  let merged = data
+  if (existsSync(sourceFile)) {
+    try {
+      const existing = JSON.parse(readFileSync(sourceFile, 'utf-8'))
+      const existingData = existing.data || []
+      console.log(`Existing source: ${existingData.length} days`)
+
+      // Dedupe by date — new data wins
+      const seen = new Set()
+      const combined = []
+      for (const d of data) {
+        if (!seen.has(d.date)) { seen.add(d.date); combined.push(d) }
+      }
+      for (const d of existingData) {
+        if (!seen.has(d.date)) { seen.add(d.date); combined.push(d) }
+      }
+      merged = combined.sort((a, b) => a.date.localeCompare(b.date))
+      console.log(`Merge: ${existingData.length} existing + ${data.length} fetched → ${merged.length} deduped`)
+    } catch {
+      console.log('Existing source unreadable, starting fresh')
+    }
+  } else {
+    console.log('No existing source, starting fresh')
+  }
+
   // Compute storm stats
   let stormDays = 0
-  for (const d of data) {
+  for (const d of merged) {
     const maxKp = Math.max(...d.kp.filter(v => v !== null))
     if (maxKp >= 5) stormDays++
   }
@@ -140,19 +170,26 @@ async function main () {
   const output = {
     generatedAt: new Date().toISOString(),
     source: SOURCE_LABEL,
-    totalDays: data.length,
+    totalDays: merged.length,
     dateRange: {
-      from: data[0]?.date,
-      to: data[data.length - 1]?.date
+      from: merged[0]?.date,
+      to: merged[merged.length - 1]?.date
     },
-    data
+    data: merged
   }
 
-  mkdirSync(dirname(opts.out), { recursive: true })
-  writeFileSync(opts.out, JSON.stringify(output), 'utf-8')
+  const json = JSON.stringify(output)
 
-  const sizeKB = (Buffer.byteLength(JSON.stringify(output)) / 1024).toFixed(0)
-  console.log(`Wrote ${sizeKB} KB → ${opts.out}`)
+  // Write source of truth
+  writeFileSync(sourceFile, json, 'utf-8')
+  console.log(`Wrote source of truth → ${sourceFile}`)
+
+  // Copy to public/data
+  mkdirSync(dirname(opts.out), { recursive: true })
+  copyFileSync(sourceFile, opts.out)
+
+  const sizeKB = (Buffer.byteLength(json) / 1024).toFixed(0)
+  console.log(`Copied ${sizeKB} KB → ${opts.out}`)
 }
 
 main().catch(err => {

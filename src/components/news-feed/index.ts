@@ -6,6 +6,7 @@ import { h, clearChildren } from '@/utils/dom'
 import { DataGrid } from '@/components/data-grid'
 import { Loader } from '@/components/loader'
 import { TextInput } from '@/components/text-input'
+import { ChipGroup } from '@/components/chip'
 import { GdeltModal } from '@/components/gdelt-modal'
 import { GnewsModal } from '@/components/gnews-modal'
 import { TwitterModal } from '@/components/twitter-modal'
@@ -111,9 +112,9 @@ function mergeAndDedupe (
   }
 
   merged.sort((a, b) => {
-    const dateCompare = b.publishedAt.localeCompare(a.publishedAt)
-    if (dateCompare !== 0) return dateCompare
-    return (SOURCE_PRIORITY[a.intelSource] ?? 9) - (SOURCE_PRIORITY[b.intelSource] ?? 9)
+    const srcCompare = (SOURCE_PRIORITY[a.intelSource] ?? 9) - (SOURCE_PRIORITY[b.intelSource] ?? 9)
+    if (srcCompare !== 0) return srcCompare
+    return b.publishedAt.localeCompare(a.publishedAt)
   })
   return merged
 }
@@ -151,6 +152,7 @@ export class NewsFeed extends Component {
   private baseArticles: IntelArticle[] = []
   private searchQuery = ''
   private searchInput!: TextInput
+  private sourceChips!: ChipGroup
   private contentEl!: HTMLElement
 
   protected create (): HTMLElement {
@@ -180,10 +182,24 @@ export class NewsFeed extends Component {
       }
     })
 
+    this.sourceChips = new ChipGroup({
+      size: ComponentSize.MD,
+      items: [
+        { key: 'twitter', label: INTEL_FEED.SOURCE_TWITTER, color: 'var(--color-cyan)' },
+        { key: 'reddit', label: INTEL_FEED.SOURCE_REDDIT, color: 'var(--color-reddit)' },
+        { key: 'gnews', label: INTEL_FEED.SOURCE_GNEWS, color: 'var(--color-amber)' },
+        { key: 'gdelt', label: INTEL_FEED.SOURCE_GDELT, color: 'var(--color-green)' }
+      ],
+      onChange: () => this.applyInlineSearch()
+    })
+
     this.contentEl = h('div', { className: cx.content })
 
     return h('div', { className: 'intel-feed-container' },
-      h('div', { className: cx.searchBar }, this.searchInput.el),
+      h('div', { className: cx.searchBar },
+        this.searchInput.el,
+        this.sourceChips.el
+      ),
       this.contentEl
     )
   }
@@ -191,13 +207,15 @@ export class NewsFeed extends Component {
   private debouncedSearch = useDebounce(() => this.applyInlineSearch(), 200)
 
   private applyInlineSearch (): void {
-    const base = this.baseArticles
+    const activeSources = this.sourceChips.activeKeys
+    const sourceFiltered = this.baseArticles.filter(a => activeSources.has(a.intelSource))
+
     if (!this.searchQuery) {
-      this.renderGrid(base)
+      this.renderGrid(sourceFiltered)
       return
     }
 
-    const filtered = base.filter(a =>
+    const filtered = sourceFiltered.filter(a =>
       tokenMatch(
         this.searchQuery,
         a.title, a.description, a.sourceName,

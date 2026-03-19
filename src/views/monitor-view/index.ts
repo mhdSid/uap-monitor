@@ -6,7 +6,7 @@
  *  view-specific rendering of grids, map, timeline, and news feed.    *
  *                                                                     *
  *  Owns: Hero, Highlights, controls, Timeline, SightingMap,           *
- *        NewsFeed, SightingGrids, DataSources, Footer.                *
+ *        SightingGrids, DataSources, Footer.                          *
  * ------------------------------------------------------------------ */
 
 import './styles.css'
@@ -25,7 +25,6 @@ import { SightingGrids } from '@/components/sighting-grid'
 import { SightingModal } from '@/components/sighting-modal'
 import { SightingMap } from '@/components/sighting-map'
 import { Timeline } from '@/components/timeline'
-import { NewsFeed } from '@/components/news-feed'
 import { Highlights } from '@/components/highlights'
 import { Hero } from '@/components/hero'
 import { Drawer } from '@/components/drawer'
@@ -44,7 +43,6 @@ export class MonitorView extends Component {
   private nuclear = useNuclear()
 
   private grids!: SightingGrids
-  private newsFeed!: NewsFeed
   private sightingMap!: SightingMap
   private timeline!: Timeline
   private desktopControls!: HTMLElement
@@ -55,7 +53,6 @@ export class MonitorView extends Component {
 
   protected create (): HTMLElement {
     this.grids = new SightingGrids({})
-    this.newsFeed = new NewsFeed({})
 
     this.sightingMap = new SightingMap({
       onSightingSelect: (id) => this.grids.scrollToSighting(id)
@@ -76,8 +73,6 @@ export class MonitorView extends Component {
 
   async load (): Promise<void> {
     if (this.loaded) return
-
-    await this.newsFeed.load()
 
     this.buildContent()
     this.renderFromStore()
@@ -159,17 +154,6 @@ export class MonitorView extends Component {
     this.el.appendChild(this.filterDrawer.el)
     this.el.appendChild(this.timeline.el)
     this.el.appendChild(this.sightingMap.el)
-
-    // ── Intelligence feed (merged GDELT + GNews) ─────────────────
-    const feedCount = this.newsFeed.getCount()
-    this.el.appendChild(
-      new Section({
-        title: SECTION.INTEL_FEED,
-        tooltip: SECTION.INTEL_FEED_TOOLTIP,
-        count: feedCount || undefined,
-        content: this.newsFeed.el
-      }).el
-    )
 
     this.el.appendChild(this.grids.el)
 
@@ -301,9 +285,6 @@ export class MonitorView extends Component {
     release()
 
     this.sightingMap.setSightings(filtered, this.store.hasActiveFilter.get())
-
-    const filter = this.store.filter.get()
-    this.newsFeed.applyFilter(filter)
 
     this.store.shownCount.set(filtered.length)
   }

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-03-18T08:59:46.184Z",
-  "totalRecords": 152871,
-  "skippedRecords": 29172,
-  "duplicatesRemoved": 132376,
+  "generatedAt": "2026-03-19T10:02:40.273Z",
+  "totalRecords": 152881,
+  "skippedRecords": 32764,
+  "duplicatesRemoved": 147942,
   "years": {
     "1950": {
       "count": 41,
@@ -385,9 +385,9 @@
       "sizeKB": 4314
     },
     "2026": {
-      "count": 411,
+      "count": 421,
       "file": "nuforc-2026.json",
-      "sizeKB": 464
+      "sizeKB": 476
     }
   }
 }

@@ -60,7 +60,10 @@
 }
 
 .intel-feed__search {
-  padding-bottom: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-6);
 }
 
 .intel-feed__content {

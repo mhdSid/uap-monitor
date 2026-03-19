@@ -21,7 +21,7 @@
  *   node scripts/seismic/fetch.mjs --out-dir public/data/earthquakes [--manifest public/data/earthquakes-manifest.json] [--start 1970] [--end 2026] [--min-mag 4.0]
  */
 
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs'
+import { writeFileSync, mkdirSync, existsSync, readFileSync, copyFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 
 // ─── CLI ────────────────────────────────────────────────────────────
@@ -120,11 +120,17 @@ function mergeYearFile (filepath, newQuakes) {
 async function main () {
   const opts = parseArgs()
 
+  // Source of truth directory
+  const projectRoot = dirname(dirname(opts.outDir))
+  const sourcesDir = join(projectRoot, '__sources', 'earthquakes')
+  const sourcesManifest = join(projectRoot, '__sources', 'earthquakes-manifest.json')
+  mkdirSync(sourcesDir, { recursive: true })
   mkdirSync(opts.outDir, { recursive: true })
 
   console.log(`Fetching USGS earthquakes M${opts.minMag}+ from ${opts.startYear} to ${opts.endYear}...`)
-  console.log(`Output dir: ${opts.outDir}`)
-  console.log(`Manifest:   ${opts.manifestOut}\n`)
+  console.log(`Source of truth: ${sourcesDir}`)
+  console.log(`Public output:   ${opts.outDir}`)
+  console.log(`Manifest:        ${opts.manifestOut}\n`)
 
   const years = {}
   let totalQuakes = 0
@@ -133,7 +139,7 @@ async function main () {
     try {
       const quakes = await fetchYear(year, opts.minMag)
 
-      // Deduplicate within year
+      // Deduplicate within fetch
       const seen = new Set()
       const deduped = []
       for (const q of quakes) {
@@ -143,16 +149,20 @@ async function main () {
         }
       }
 
-      // Sort newest first
       deduped.sort((a, b) => b.time.localeCompare(a.time))
 
-      // Merge with existing year file (incremental updates)
-      const yearFile = join(opts.outDir, `${year}.json`)
-      const merged = mergeYearFile(yearFile, deduped)
+      // Merge with existing source of truth year file
+      const sourceYearFile = join(sourcesDir, `${year}.json`)
+      const merged = mergeYearFile(sourceYearFile, deduped)
 
-      // Write year file
       const json = JSON.stringify(merged)
-      writeFileSync(yearFile, json, 'utf-8')
+
+      // Write source of truth
+      writeFileSync(sourceYearFile, json, 'utf-8')
+
+      // Copy to public/data
+      const publicYearFile = join(opts.outDir, `${year}.json`)
+      copyFileSync(sourceYearFile, publicYearFile)
 
       const bytes = Buffer.byteLength(json, 'utf-8')
       console.log(`  ${year}: ${merged.length} earthquakes (${sizeMB(bytes)} MB)`)
@@ -183,11 +193,18 @@ async function main () {
     years
   }
 
+  const manifestJson = JSON.stringify(manifest)
+
+  // Write source of truth manifest
+  writeFileSync(sourcesManifest, manifestJson, 'utf-8')
+
+  // Copy to public
   mkdirSync(dirname(opts.manifestOut), { recursive: true })
-  writeFileSync(opts.manifestOut, JSON.stringify(manifest), 'utf-8')
+  copyFileSync(sourcesManifest, opts.manifestOut)
 
   console.log(`\nTotal: ${totalQuakes} earthquakes across ${Object.keys(years).length} years`)
-  console.log(`Manifest: ${opts.manifestOut}`)
+  console.log(`Source of truth: ${sourcesDir}`)
+  console.log(`Public manifest: ${opts.manifestOut}`)
 }
 
 main().catch(err => {

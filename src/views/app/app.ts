@@ -28,6 +28,7 @@ import { Loader } from '@/components/loader'
 import { MonitorView } from '@/views/monitor-view'
 import { GeomagneticView } from '@/views/geomagnetic-view'
 import { SeismicView } from '@/views/seismic-view'
+import { IntelView } from '@/views/intel-view'
 import { DEFAULT_YEAR_OFFSET } from '@/data/config'
 
 // ─── View container factory ─────────────────────────────────────────
@@ -62,10 +63,12 @@ export class App extends Component {
   private monContainer!: HTMLElement
   private geoContainer!: HTMLElement
   private seisContainer!: HTMLElement
+  private intelContainer!: HTMLElement
 
   private monView: MonitorView | null = null
   private geoView: GeomagneticView | null = null
   private seisView: SeismicView | null = null
+  private intelView: IntelView | null = null
 
   // ─── Shell ─────────────────────────────────────────────────────
 
@@ -75,6 +78,7 @@ export class App extends Component {
     this.monContainer = createViewContainer(initialRoute === RouteName.MONITOR)
     this.geoContainer = createViewContainer(initialRoute === RouteName.GEOMAGNETIC)
     this.seisContainer = createViewContainer(initialRoute === RouteName.SEISMIC)
+    this.intelContainer = createViewContainer(initialRoute === RouteName.INTEL)
 
     this.ticker = new Ticker({
       onClick: (id) => this.monView?.scrollToSighting(id)
@@ -92,13 +96,18 @@ export class App extends Component {
       this.ticker.el,
       this.monContainer,
       this.geoContainer,
-      this.seisContainer
+      this.seisContainer,
+      this.intelContainer
     )
   }
 
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
+    const analytics = useAnalytics()
+    analytics.init()
+    analytics.pageView()
+
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -121,12 +130,6 @@ export class App extends Component {
 
     // ── Router: enable view switching after data is ready ──
     this.initRouter()
-
-    setTimeout(() => {
-      const analytics = useAnalytics()
-      analytics.init()
-      analytics.pageView()
-    }, 1)
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
@@ -238,6 +241,7 @@ export class App extends Component {
     const path = window.location.pathname
     if (path === '/geomagnetic') return RouteName.GEOMAGNETIC
     if (path === '/seismic') return RouteName.SEISMIC
+    if (path === '/intel') return RouteName.INTEL
     return RouteName.MONITOR
   }
 
@@ -259,6 +263,7 @@ export class App extends Component {
     hide(this.monContainer)
     hide(this.geoContainer)
     hide(this.seisContainer)
+    hide(this.intelContainer)
 
     // Hide monitor FAB on non-monitor views
     if (this.monView) {
@@ -297,6 +302,16 @@ export class App extends Component {
           this.seisView.load()
         }
         break
+
+      case RouteName.INTEL:
+        show(this.intelContainer)
+        if (!this.intelView) {
+          this.intelView = new IntelView({})
+          clearChildren(this.intelContainer)
+          this.intelContainer.appendChild(this.intelView.el)
+          this.intelView.load()
+        }
+        break
     }
   }
 
@@ -307,6 +322,7 @@ export class App extends Component {
     this.monView?.destroy()
     this.geoView?.destroy()
     this.seisView?.destroy()
+    this.intelView?.destroy()
     super.destroy()
   }
 }

@@ -1,0 +1,22 @@
+/* ─── Intel View — full-height intelligence feed ───────────────────── */
+
+.intel-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: var(--space-6) var(--space-lg);
+}
+
+.intel-view__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.intel-view__loader {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-20) 0;
+}
