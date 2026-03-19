@@ -22,10 +22,28 @@
   padding: var(--space-20) 0;
 }
 
-/* ── View containers (monitor / geomagnetic / seismic) ───────────── */
+/* ── View containers (monitor / geomagnetic / seismic / intel) ────── */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Lock viewport when intel feed is the active view */
+.app--viewport-lock {
+  height: 100vh;
+  overflow: hidden;
+}
 
 .app-view-container {
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+/* Intel view container fills remaining viewport height */
+.app--viewport-lock .app-view-container:not([style*="display: none"]) {
+  flex: 1;
+  overflow: hidden;
 }

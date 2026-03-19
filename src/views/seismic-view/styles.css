@@ -1,7 +1,7 @@
 /* ─── Seismic View ─────────────────────────────────────────────────── */
 
 .seis-view {
-  max-width: 800px;
+  max-width: 1024px;
   margin: 0 auto;
   width: 100%;
   padding: var(--space-md);

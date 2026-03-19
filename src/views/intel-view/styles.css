@@ -20,3 +20,24 @@
   justify-content: center;
   padding: var(--space-20) 0;
 }
+
+/* ─── Full-height flex chain: view → feed container → content → grid ─ */
+
+.intel-view .intel-feed-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.intel-view .intel-feed__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.intel-view .data-grid__wrapper {
+  flex: 1;
+  max-height: none;
+}

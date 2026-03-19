@@ -19,7 +19,7 @@ import './app.css'
 import { Component, createRouter, RouteName } from '@/core'
 import type { Router } from '@/core'
 import type { Sighting } from '@/types'
-import { h, mount, clearChildren, hide, show } from '@/utils/dom'
+import { h, mount, clearChildren, hide, show, addClass, removeClass } from '@/utils/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useGeomagnetic, useSeismic, useGdelt, useGnews, useTwitter, useReddit, batch, minDelay } from '@/composables'
 import { Header } from '@/components/header'
 import { NavTabs } from '@/components/nav-tabs'
@@ -266,6 +266,11 @@ export class App extends Component {
     hide(this.geoContainer)
     hide(this.seisContainer)
     hide(this.intelContainer)
+
+    // Lock viewport for full-height views (intel feed)
+    const appEl = this.el
+    if (route === RouteName.INTEL) addClass(appEl, 'app--viewport-lock')
+    else removeClass(appEl, 'app--viewport-lock')
 
     // Hide monitor FAB on non-monitor views
     if (this.monView) {
