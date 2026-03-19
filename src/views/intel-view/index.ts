@@ -23,8 +23,8 @@ export class IntelView extends Component {
 
   protected create (): HTMLElement {
     this.newsFeed = new NewsFeed({})
-    this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { className: [cx.content, appCx.appViewContent].join(' ') })
+    this.loaderEl = h('div', { className: appCx.viewLoader }, new Loader({}).el)
+    this.contentEl = h('div', { className: appCx.appViewContent })
     hide(this.contentEl)
 
     return h('div', { className: [cx.root, appCx.appView].join(' ') },

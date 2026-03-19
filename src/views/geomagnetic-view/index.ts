@@ -139,8 +139,8 @@ export class GeomagneticView extends Component {
 
   protected create (): HTMLElement {
     this.yearSelectorEl = new YearSelector({}).el
-    this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { className: [cx.content, appCx.appViewContent].join(' ') })
+    this.loaderEl = h('div', { className: appCx.viewLoader }, new Loader({}).el)
+    this.contentEl = h('div', { className: appCx.appViewContent })
     hide(this.contentEl)
 
     return h('div', { className: [cx.root, appCx.appView].join(' ') },
@@ -279,17 +279,17 @@ export class GeomagneticView extends Component {
     this.heatStrip = h('div', { className: cx.heatStrip })
     this.buildHeatStrip()
 
-    this.timelineCanvas = el('canvas', { className: cx.canvas })
+    this.timelineCanvas = el('canvas', { className: appCx.viewCanvas })
     this.timelineCanvas.height = TIMELINE_H
-    this.timelineTooltip = h('div', { className: cx.tooltip })
+    this.timelineTooltip = h('div', { className: appCx.viewTooltip })
     hide(this.timelineTooltip)
 
-    this.timelineScrollWrapper = h('div', { className: cx.scrollWrapper },
+    this.timelineScrollWrapper = h('div', { className: appCx.viewScrollWrapper },
       this.heatStrip,
       this.timelineCanvas
     )
 
-    const timelinePanel = h('div', { className: cx.panel },
+    const timelinePanel = h('div', { className: appCx.viewPanel },
       h('div', { className: cx.heatStripLabel }, GEOMAGNETIC.LABEL_KP_INDEX),
       this.timelineScrollWrapper,
       this.timelineTooltip,
@@ -300,23 +300,23 @@ export class GeomagneticView extends Component {
     )
     this.bindTimelineHover()
 
-    const timelineSection = h('div', { className: cx.section },
-      el('h2', { className: cx.sectionTitle }, [GEOMAGNETIC.TIMELINE_TITLE]),
-      h('div', { className: cx.sectionSub }, GEOMAGNETIC.TIMELINE_SUBTITLE),
+    const timelineSection = h('div', { className: appCx.viewSection },
+      el('h2', { className: appCx.viewSectionTitle }, [GEOMAGNETIC.TIMELINE_TITLE]),
+      h('div', { className: appCx.viewSectionSub }, GEOMAGNETIC.TIMELINE_SUBTITLE),
       timelinePanel
     )
 
     // Distribution section
-    this.distCanvas = el('canvas', { className: cx.canvas })
+    this.distCanvas = el('canvas', { className: appCx.viewCanvas })
     this.distCanvas.height = DIST_H
-    this.distTooltip = h('div', { className: cx.tooltip })
+    this.distTooltip = h('div', { className: appCx.viewTooltip })
     hide(this.distTooltip)
 
-    this.distScrollWrapper = h('div', { className: cx.scrollWrapper },
+    this.distScrollWrapper = h('div', { className: appCx.viewScrollWrapper },
       this.distCanvas
     )
 
-    const distPanel = h('div', { className: cx.panel },
+    const distPanel = h('div', { className: appCx.viewPanel },
       this.distScrollWrapper,
       this.distTooltip,
       this.buildLegend([
@@ -329,9 +329,9 @@ export class GeomagneticView extends Component {
     )
     this.bindDistHover()
 
-    const distSection = h('div', { className: cx.section },
-      el('h2', { className: cx.sectionTitle }, [GEOMAGNETIC.DIST_TITLE]),
-      h('div', { className: cx.sectionSub }, GEOMAGNETIC.DIST_SUBTITLE),
+    const distSection = h('div', { className: appCx.viewSection },
+      el('h2', { className: appCx.viewSectionTitle }, [GEOMAGNETIC.DIST_TITLE]),
+      h('div', { className: appCx.viewSectionSub }, GEOMAGNETIC.DIST_SUBTITLE),
       distPanel
     )
 
@@ -399,12 +399,12 @@ export class GeomagneticView extends Component {
   // ─── Legend factory ─────────────────────────────────────────────
 
   private buildLegend (items: Array<{ label: string; color: string }>): HTMLElement {
-    const legend = h('div', { className: cx.legend })
+    const legend = h('div', { className: appCx.viewLegend })
     for (const item of items) {
-      const swatch = h('span', { className: cx.legendSwatch })
+      const swatch = h('span', { className: `${appCx.viewLegendSwatch} ${cx.legendSwatch}` })
       setStyles(swatch, { background: item.color })
       legend.appendChild(
-        h('span', { className: cx.legendItem }, swatch, item.label)
+        h('span', { className: appCx.viewLegendItem }, swatch, item.label)
       )
     }
     return legend

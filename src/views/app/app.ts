@@ -17,6 +17,7 @@
  * ------------------------------------------------------------------ */
 
 import './app.css'
+import { cx } from './cx'
 import { Component, RouteName, createRouter } from '@/core'
 import type { Sighting } from '@/types'
 import { h, mount, show, hide } from '@/core/dom'
@@ -59,7 +60,7 @@ export class App extends Component {
 
   protected create (): HTMLElement {
     this.viewContainer = h('div', { className: 'app-view-container' },
-      h('div', { className: 'router-loader' }, new Loader({}).el)
+      h('div', { className: cx.viewLoader }, new Loader({}).el)
     )
 
     this.ticker = new Ticker({

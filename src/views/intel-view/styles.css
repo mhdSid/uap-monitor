@@ -1,14 +1,8 @@
-.intel-view__content {
+/* ─── Full-height flex chain: view → feed container → content → grid ─ */
+
+.intel-view .app-view__content {
   min-height: 0;
 }
-
-.intel-view__loader {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-20) 0;
-}
-
-/* ─── Full-height flex chain: view → feed container → content → grid ─ */
 
 .intel-view .intel-feed-container {
   display: flex;

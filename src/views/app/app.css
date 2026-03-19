@@ -16,12 +16,6 @@
   display: none;
 }
 
-.app-loader {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-20) 0;
-}
-
 /* ── View container ─────────────────────────────────────────────────── */
 
 .app {
@@ -47,12 +41,6 @@
   overflow: hidden;
 }
 
-.router-loader {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-20) 0;
-}
-
 .app-view {
   max-width: 1024px;
   margin: 0 auto;
@@ -72,4 +60,122 @@
   .app-view {
     padding: var(--space-14);
   }
+}
+
+/* ── Shared view utilities ─────────────────────────────────────────── */
+
+.view-loader {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-20) 0;
+}
+
+.view-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.view-section-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-green);
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.view-section-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-dim);
+  letter-spacing: 0.5px;
+}
+
+/* ── Chart panel (wraps canvas) ────────────────────────────────────── */
+
+.view-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-8) var(--space-6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.view-canvas {
+  display: block;
+}
+
+/* ── Scroll wrapper (horizontal scroll for wide canvases on SP) ───── */
+
+.view-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.view-scroll-wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.view-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+/* ── Legend ─────────────────────────────────────────────────────────── */
+
+.view-legend {
+  display: flex;
+  gap: var(--space-10);
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.view-legend-item {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.view-legend-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+}
+
+/* ── Chart tooltip ─────────────────────────────────────────────────── */
+
+.view-tooltip {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: var(--c-panel-95);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-text);
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+}
+
+/* ── Empty / no-data state ─────────────────────────────────────────── */
+
+.view-no-data {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+  text-align: center;
+  padding: var(--space-20) 0;
+  letter-spacing: 1px;
 }

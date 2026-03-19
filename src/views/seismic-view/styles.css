@@ -1,101 +1,7 @@
-.seis-view__section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.seis-view__section-title {
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  color: var(--color-green);
-  letter-spacing: 2px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.seis-view__section-sub {
-  font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
-  color: var(--color-dim);
-  letter-spacing: 0.5px;
-}
-
-/* ── Panel ──────────────────────────────────────────────────────────── */
-
-.seis-view__panel {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-8) var(--space-8) var(--space-6);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.seis-view__canvas {
-  display: block;
-}
-
-/* ── Scroll wrapper (horizontal scroll for wide canvases on SP) ───── */
-
-.seis-view__scroll-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-}
-
-.seis-view__scroll-wrapper::-webkit-scrollbar {
-  height: 4px;
-}
-
-.seis-view__scroll-wrapper::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 2px;
-}
-
-/* ── Legend ──────────────────────────────────────────────────────────── */
-
-.seis-view__legend {
-  display: flex;
-  gap: var(--space-10);
-  justify-content: center;
-  margin-top: var(--space-2);
-}
-
-.seis-view__legend-item {
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  color: var(--color-muted);
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
+/* ── Legend swatch — circle for seismic ─────────────────────────────── */
 
 .seis-view__legend-swatch {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
   border-radius: 50%;
-}
-
-/* ── Tooltip ────────────────────────────────────────────────────────── */
-
-.seis-view__tooltip {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  background: var(--c-panel-95);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
-  color: var(--color-text);
-  pointer-events: none;
-  z-index: var(--z-tooltip);
-  white-space: nowrap;
 }
 
 /* ── Table ──────────────────────────────────────────────────────────── */
@@ -145,22 +51,7 @@
   letter-spacing: 1px;
 }
 
-/* ── States ──────────────────────────────────────────────────────────── */
-
-.seis-view__loader {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-20) 0;
-}
-
-.seis-view__no-data {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--color-dim);
-  text-align: center;
-  padding: var(--space-20) 0;
-  letter-spacing: 1px;
-}
+/* ── Note list ─────────────────────────────────────────────────────── */
 
 .seis-view__note {
   margin-top: var(--space-4);

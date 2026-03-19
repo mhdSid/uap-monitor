@@ -66,7 +66,7 @@ export class MonitorView extends Component {
     })
 
     return h('div', { className: [cx.root, appCx.appView].join(' ') },
-      h('div', { className: cx.loader }, new Loader({}).el)
+      h('div', { className: appCx.viewLoader }, new Loader({}).el)
     )
   }
 
@@ -254,7 +254,7 @@ export class MonitorView extends Component {
   // ─── Loaders ───────────────────────────────────────────────────
 
   private showAllLoaders (): void {
-    const loader = () => h('div', { className: cx.loader }, new Loader({}).el)
+    const loader = () => h('div', { className: appCx.viewLoader }, new Loader({}).el)
     this.grids.showLoader(loader())
     this.timeline.showLoader(loader())
     this.sightingMap.showLoader(loader())

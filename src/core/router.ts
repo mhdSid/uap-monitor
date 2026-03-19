@@ -17,7 +17,8 @@
  *    })                                                               *
  * ------------------------------------------------------------------ */
 
-import { clearChildren, show } from './dom'
+import { cx } from '@/views/app/cx'
+import { clearChildren, h, qs, setAttrs, show } from './dom'
 import { Loader } from '@/components/loader'
 
 // ─── Types ──────────────────────────────────────────────────────────
@@ -98,8 +99,7 @@ function applyMeta<K extends string> (
   ]
 
   for (const [sel, attr, val] of selectors) {
-    const el = document.querySelector(sel)
-    if (el) el.setAttribute(attr, val)
+    setAttrs(qs(sel)!, { [attr]: val })
   }
 }
 
@@ -136,9 +136,7 @@ export function createRouter<K extends string> (
   let destroyed = false
 
   // Initial loader placeholder
-  const loaderEl = document.createElement('div')
-  loaderEl.className = 'router-loader'
-  loaderEl.appendChild(new Loader({}).el)
+  const loaderEl = h('div', { className: cx.viewLoader }, new Loader({}).el)
 
   // ── Apply meta for initial route ──
   applyMeta(base, routes[currentRoute])

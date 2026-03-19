@@ -146,8 +146,8 @@ export class SeismicView extends Component {
 
   protected create (): HTMLElement {
     this.yearSelectorEl = new YearSelector({}).el
-    this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { className: [cx.content, appCx.appViewContent].join(' ') })
+    this.loaderEl = h('div', { className: appCx.viewLoader }, new Loader({}).el)
+    this.contentEl = h('div', { className: appCx.appViewContent })
     hide(this.contentEl)
 
     return h('div', { className: [cx.root, appCx.appView].join(' ') },
@@ -303,16 +303,16 @@ export class SeismicView extends Component {
     )
 
     // Scatter
-    this.scatterCanvas = el('canvas', { className: cx.canvas })
+    this.scatterCanvas = el('canvas', { className: appCx.viewCanvas })
     this.scatterCanvas.height = SCATTER_H
-    this.scatterTooltip = h('div', { className: cx.tooltip })
+    this.scatterTooltip = h('div', { className: appCx.viewTooltip })
     hide(this.scatterTooltip)
 
-    this.scatterScrollWrapper = h('div', { className: cx.scrollWrapper },
+    this.scatterScrollWrapper = h('div', { className: appCx.viewScrollWrapper },
       this.scatterCanvas
     )
 
-    const scatterPanel = h('div', { className: cx.panel },
+    const scatterPanel = h('div', { className: appCx.viewPanel },
       this.scatterScrollWrapper,
       this.scatterTooltip,
       this.buildLegend([
@@ -323,9 +323,9 @@ export class SeismicView extends Component {
     )
     this.bindScatterHover()
 
-    const scatterSection = h('div', { className: cx.section },
-      el('h2', { className: cx.sectionTitle }, [SEISMIC.SCATTER_TITLE]),
-      h('div', { className: cx.sectionSub }, SEISMIC.SCATTER_SUBTITLE),
+    const scatterSection = h('div', { className: appCx.viewSection },
+      el('h2', { className: appCx.viewSectionTitle }, [SEISMIC.SCATTER_TITLE]),
+      h('div', { className: appCx.viewSectionSub }, SEISMIC.SCATTER_SUBTITLE),
       scatterPanel
     )
 
@@ -353,11 +353,11 @@ export class SeismicView extends Component {
     table.appendChild(thead)
     table.appendChild(this.tableBody)
 
-    const tablePanel = h('div', { className: cx.panel, style: 'padding: 0; overflow: hidden' }, table)
+    const tablePanel = h('div', { className: appCx.viewPanel, style: 'padding: 0; overflow: hidden' }, table)
 
-    const tableSection = h('div', { className: cx.section },
-      el('h2', { className: cx.sectionTitle }, [SEISMIC.TABLE_TITLE]),
-      h('div', { className: cx.sectionSub }, SEISMIC.TABLE_SUBTITLE),
+    const tableSection = h('div', { className: appCx.viewSection },
+      el('h2', { className: appCx.viewSectionTitle }, [SEISMIC.TABLE_TITLE]),
+      h('div', { className: appCx.viewSectionSub }, SEISMIC.TABLE_SUBTITLE),
       tablePanel
     )
 
@@ -430,12 +430,12 @@ export class SeismicView extends Component {
   // ─── Legend factory ─────────────────────────────────────────────
 
   private buildLegend (items: Array<{ label: string; color: string }>): HTMLElement {
-    const legend = h('div', { className: cx.legend })
+    const legend = h('div', { className: appCx.viewLegend })
     for (const item of items) {
-      const swatch = h('span', { className: cx.legendSwatch })
+      const swatch = h('span', { className: `${appCx.viewLegendSwatch} ${cx.legendSwatch}` })
       setStyles(swatch, { background: item.color })
       legend.appendChild(
-        h('span', { className: cx.legendItem }, swatch, item.label)
+        h('span', { className: appCx.viewLegendItem }, swatch, item.label)
       )
     }
     return legend
