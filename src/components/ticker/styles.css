@@ -10,6 +10,7 @@
   overflow: hidden;
   outline: none;
   transition: background 0.2s ease;
+  z-index: var(--z-ticker);
 }
 
 /* Only show interactive affordances when ticker links to a sighting */

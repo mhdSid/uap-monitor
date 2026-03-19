@@ -7,7 +7,10 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  justify-content: center;
+  justify-content: start;
+  position: sticky;
+  top: 49px;
+  z-index: var(--z-nav);
 }
 
 .nav-tabs::-webkit-scrollbar {

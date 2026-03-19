@@ -195,12 +195,15 @@
   --z-base: 1;
   --z-sticky: 10;
   --z-tooltip: 100;
+  --z-scanlines: 999;
+  --z-ticker: 999;
+  --z-nav: 9998;
+  --z-header: 9999;
   --z-fab: 9999;
   --z-modal: 99999;
   --z-dropdown: 199999;
   --z-drawer: 999999;
   --z-toast: 9999999;
-  --z-scanlines: 99999999;
 }
 
 /* ─── Desktop typography scale ───────────────────────────────────── */

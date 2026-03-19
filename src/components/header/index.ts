@@ -7,19 +7,16 @@ import { Button } from '@/components/button'
 import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
 import { SubmitModal } from '@/components/submit-modal'
-import { APP_NAME, ARIA, HEADER } from '@/data/strings'
+import { ARIA, HEADER } from '@/data/strings'
 import { ButtonSize } from '@/enums'
 import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
   protected create (): HTMLElement {
-    const radar = iconRadar(22)
+    const radar = iconRadar(24)
     setStyles(radar, { color: 'var(--color-green)' })
 
-    const left = h('div', { className: cx.left },
-      radar,
-      h('span', { className: cx.title }, APP_NAME)
-    )
+    const left = h('a', { className: cx.left, href: '/' }, radar)
 
     // ── Report sighting CTA ──────────────────────────────────────
     const reportBtn = new Button({
