@@ -161,15 +161,17 @@ export function createRouter<K extends string> (
     container.appendChild(loaderEl)
     show(container)
 
-    // Create + mount
+    // Yield to browser so the loader paints
+    await new Promise(r => requestAnimationFrame(r))
+
+    // Create view and load data
     const view = def.factory()
     activeView = view
+    await view.load()
 
+    // Swap loader for loaded view
     clearChildren(container)
     container.appendChild(view.el)
-
-    // Load (async — data fetching, rendering)
-    await view.load()
 
     def.onEnter?.(route)
   }
@@ -210,6 +212,9 @@ export function createRouter<K extends string> (
   }
 
   window.addEventListener('popstate', onPopState)
+
+  // ── Mount initial route ──
+  switchTo(currentRoute)
 
   // ── Public API ──
 

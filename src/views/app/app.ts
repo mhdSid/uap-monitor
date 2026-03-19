@@ -30,6 +30,7 @@ import { GeomagneticView } from '@/views/geomagnetic-view'
 import { SeismicView } from '@/views/seismic-view'
 import { IntelView } from '@/views/intel-view'
 import { DEFAULT_YEAR_OFFSET } from '@/data/config'
+import { Loader } from '@/components/loader'
 
 // ─── App ────────────────────────────────────────────────────────────
 
@@ -57,7 +58,9 @@ export class App extends Component {
   // ─── Shell ─────────────────────────────────────────────────────
 
   protected create (): HTMLElement {
-    this.viewContainer = h('div', { className: 'app-view-container' })
+    this.viewContainer = h('div', { className: 'app-view-container' },
+      h('div', { className: 'router-loader' }, new Loader({}).el)
+    )
 
     this.ticker = new Ticker({
       onClick: (id) => this.monView?.scrollToSighting(id)
@@ -80,10 +83,6 @@ export class App extends Component {
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
-    const analytics = useAnalytics()
-    analytics.init()
-    analytics.pageView()
-
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -106,6 +105,12 @@ export class App extends Component {
 
     // ── Router: enable view switching after data is ready ──
     this.initRouter()
+
+    setTimeout(() => {
+      const analytics = useAnalytics()
+      analytics.init()
+      analytics.pageView()
+    }, 1)
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
