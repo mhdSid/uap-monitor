@@ -11,6 +11,7 @@
 
 import './styles.css'
 import { cx } from './cx'
+import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
 import { h, el, hide, show, setText, setStyles } from '@/core/dom'
 import { palette } from '@/styles/palette'
@@ -146,10 +147,10 @@ export class SeismicView extends Component {
   protected create (): HTMLElement {
     this.yearSelectorEl = new YearSelector({}).el
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { className: cx.content })
+    this.contentEl = h('div', { className: [cx.content, appCx.appViewContent].join(' ') })
     hide(this.contentEl)
 
-    return h('div', { className: cx.root },
+    return h('div', { className: [cx.root, appCx.appView].join(' ') },
       this.yearSelectorEl,
       this.loaderEl,
       this.contentEl

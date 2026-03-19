@@ -11,6 +11,7 @@
 
 import './styles.css'
 import { cx } from './cx'
+import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
 import { h, clearChildren, addClass, qs } from '@/core/dom'
 import { useAppStore, useFireball, useNuclear, useTheme, useShare, effect, filterSightings } from '@/composables'
@@ -64,7 +65,7 @@ export class MonitorView extends Component {
       }
     })
 
-    return h('div', { className: cx.root },
+    return h('div', { className: [cx.root, appCx.appView].join(' ') },
       h('div', { className: cx.loader }, new Loader({}).el)
     )
   }

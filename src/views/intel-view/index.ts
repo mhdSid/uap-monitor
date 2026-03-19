@@ -7,6 +7,7 @@
 
 import './styles.css'
 import { cx } from './cx'
+import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
 import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
@@ -23,10 +24,10 @@ export class IntelView extends Component {
   protected create (): HTMLElement {
     this.newsFeed = new NewsFeed({})
     this.loaderEl = h('div', { className: cx.loader }, new Loader({}).el)
-    this.contentEl = h('div', { className: cx.content })
+    this.contentEl = h('div', { className: [cx.content, appCx.appViewContent].join(' ') })
     hide(this.contentEl)
 
-    return h('div', { className: cx.root },
+    return h('div', { className: [cx.root, appCx.appView].join(' ') },
       this.loaderEl,
       this.contentEl
     )

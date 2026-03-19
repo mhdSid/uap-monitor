@@ -1,21 +1,3 @@
-/* ─── Monitor View ─────────────────────────────────────────────────── */
-
-.mon-view {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-  padding: var(--space-md);
-  max-width: 1024px;
-  width: 100vw;;
-  margin: 0 auto;
-}
-
-.mon-view__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-}
-
 .mon-view__loader {
   display: flex;
   justify-content: center;

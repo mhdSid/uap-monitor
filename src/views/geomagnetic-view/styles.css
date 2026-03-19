@@ -1,20 +1,3 @@
-/* ─── Geomagnetic View ─────────────────────────────────────────────── */
-
-.geo-view {
-  max-width: 1024px;
-  margin: 0 auto;
-  width: 100%;
-  padding: var(--space-md);
-}
-
-.geo-view, .geo-view__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-14);
-}
-
-/* ── Section headers ────────────────────────────────────────────────── */
-
 .geo-view__section {
   display: flex;
   flex-direction: column;
