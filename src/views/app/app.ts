@@ -29,6 +29,7 @@ import { Ticker } from '@/components/ticker'
 import { MonitorView } from '@/views/monitor-view'
 import { DEFAULT_YEAR_OFFSET } from '@/data/config'
 import { Loader } from '@/components/loader'
+import { APP_URL, ROUTER_META } from '@/data/strings'
 
 // ─── App ────────────────────────────────────────────────────────────
 
@@ -100,7 +101,7 @@ export class App extends Component {
       const analytics = useAnalytics()
       analytics.init()
       analytics.pageView()
-    }, 1)
+    }, 1000)
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────
@@ -210,15 +211,14 @@ export class App extends Component {
 
   private initRouter (): void {
     this.router = createRouter<RouteNames>({
-      base: 'https://uapmonitor.org',
+      base: APP_URL,
       container: this.viewContainer,
       fallback: RouteName.MONITOR,
 
       routes: {
         [RouteName.MONITOR]: {
+          ...ROUTER_META.monitor,
           path: '/',
-          title: 'UAP Monitor — Global UFO & UAP Sightings Database, Map & Intelligence Platform',
-          description: 'UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15 verified sources spanning 70 AD to present. Interactive map, credibility scoring, and NASA fireball correlation.',
           factory: () => {
             const view = new MonitorView({})
             this.monView = view
@@ -228,9 +228,8 @@ export class App extends Component {
         },
 
         [RouteName.GEOMAGNETIC]: {
+          ...ROUTER_META.geomagnetic,
           path: '/geomagnetic',
-          title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
-          description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.',
           factory: async () => {
             const { GeomagneticView } = await import('@/views/geomagnetic-view')
             return new GeomagneticView({})
@@ -238,9 +237,8 @@ export class App extends Component {
         },
 
         [RouteName.SEISMIC]: {
+          ...ROUTER_META.seismic,
           path: '/seismic',
-          title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
-          description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.',
           factory: async () => {
             const { SeismicView } = await import('@/views/seismic-view')
             return new SeismicView({})
@@ -248,9 +246,8 @@ export class App extends Component {
         },
 
         [RouteName.INTEL]: {
+          ...ROUTER_META.intel,
           path: '/intel',
-          title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
-          description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.',
           viewportLock: true,
           factory: async () => {
             const { IntelView } = await import('@/views/intel-view')

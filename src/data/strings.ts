@@ -1,3 +1,4 @@
+import { RouteName } from '@/core'
 import { Continent } from '@/enums'
 import { WelcomeSource } from '@/types'
 
@@ -6,7 +7,7 @@ import { WelcomeSource } from '@/types'
 export const APP_NAME = 'UAP MONITOR'
 export const APP_FOOTER_NAME = 'UAP MONITOR'
 export const APP_FOOTER_TAGLINE = 'Global UAP Intelligence Platform'
-export const APP_URL = 'https://uapmonitor.org'
+export const APP_URL = import.meta.env.VITE_REPO_URL
 
 // ─── Aria labels ────────────────────────────────────────────────────
 
@@ -629,3 +630,22 @@ export const ENV_CONTEXT = {
   NO_SEISMIC: 'No earthquakes within 300 km / 72 hrs',
   EQL_FLAG: 'Possible earthquake lights'
 } as const
+
+export const ROUTER_META = {
+  [RouteName.MONITOR]: {
+    title: 'UAP Monitor — Global UFO & UAP Sightings Database, Map & Intelligence Platform',
+    description: 'UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15 verified sources spanning 70 AD to present. Interactive map, credibility scoring, and NASA fireball correlation.'
+  },
+  [RouteName.GEOMAGNETIC]: {
+    title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
+    description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.'
+  },
+  [RouteName.SEISMIC]: {
+    title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
+    description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.'
+  },
+  [RouteName.INTEL]: {
+    title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
+    description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.'
+  }
+}
