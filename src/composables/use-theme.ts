@@ -10,12 +10,14 @@ const ATTR = 'data-theme'
 
 // ─── Singleton ──────────────────────────────────────────────────────
 
-let instance: {
+export interface ITheme {
   theme: Signal<Theme>
-  toggle: () => void
+  toggle: (value?: Theme) => void
   isLightTheme: () => boolean
   isDarkTheme: () => boolean
-} | null = null
+}
+
+let instance: ITheme | null = null
 
 export function useTheme () {
   if (instance) return instance
@@ -25,11 +27,11 @@ export function useTheme () {
 
   apply(initial)
 
-  function toggle (): void {
+  function toggle (value?: Theme): void {
     const next: Theme = theme.get() === THEME.DARK ? THEME.LIGHT : THEME.DARK
-    theme.set(next)
+    theme.set(value ?? next)
     apply(next)
-    try { localStorage.setItem(STORAGE_KEY, next) } catch { /* private mode */ }
+    try { localStorage.setItem(STORAGE_KEY, value ?? next) } catch { /* private mode */ }
   }
 
   const isLightTheme = () => theme.get() === THEME.LIGHT
@@ -44,14 +46,14 @@ export function useTheme () {
 function resolveInitial (): Theme {
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
-    if (stored === 'dark' || stored === 'light') return stored
+    if (stored === THEME.DARK || stored === THEME.LIGHT) return stored
   } catch { /* private mode */ }
 
-  return 'dark'
+  return THEME.DARK
 }
 
 function apply (theme: Theme): void {
-  if (theme === 'dark') {
+  if (theme === THEME.DARK) {
     document.documentElement.removeAttribute(ATTR)
   } else {
     document.documentElement.setAttribute(ATTR, theme)

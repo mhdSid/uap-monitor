@@ -1,0 +1,22 @@
+export const cx = {
+  root: 'spirit-view',
+  canvas: 'spirit-view__canvas',
+  overlay: 'spirit-view__overlay',
+  title: 'spirit-view__title',
+  subtitle: 'spirit-view__subtitle',
+  controls: 'spirit-view__controls',
+  controlGroup: 'spirit-view__control-group',
+  controlLabel: 'spirit-view__control-label',
+  slider: 'spirit-view__slider',
+  exitBtn: 'spirit-view__exit',
+  hud: 'spirit-view__hud',
+  hudItem: 'spirit-view__hud-item',
+  hudLabel: 'spirit-view__hud-label',
+  hudValue: 'spirit-view__hud-value',
+  enterPrompt: 'spirit-view__enter-prompt',
+  enterBtn: 'spirit-view__enter-btn',
+  breatheRing: 'spirit-view__breathe-ring',
+  active: 'spirit-view--active',
+  entering: 'spirit-view--entering',
+  fading: 'spirit-view--fading'
+} as const

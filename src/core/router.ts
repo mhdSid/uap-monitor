@@ -78,7 +78,8 @@ export const RouteName = {
   MONITOR: 'monitor',
   GEOMAGNETIC: 'geomagnetic',
   SEISMIC: 'seismic',
-  INTEL: 'intel'
+  INTEL: 'intel',
+  SPIRITUAL: 'spiritual'
 } as const
 
 export type RouteName = typeof RouteName[keyof typeof RouteName]

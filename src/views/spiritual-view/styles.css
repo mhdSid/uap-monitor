@@ -1,0 +1,300 @@
+/* ─── Spiritual Realm — Immersive canvas view ──────────────────────── */
+
+.spirit-view {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--c-black);
+}
+
+/* ── Canvas (fills entire viewport) ─────────────────────────────────── */
+
+.spirit-view__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Entry prompt (shown before immersion) ──────────────────────────── */
+
+.spirit-view__enter-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  z-index: 10;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.85) 70%,
+    var(--c-black) 100%
+  );
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.spirit-view--active .spirit-view__enter-prompt {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.spirit-view__title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  color: var(--color-green);
+  letter-spacing: 6px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 0 20px var(--c-green-500-40), 0 0 60px var(--c-green-500-20);
+}
+
+.spirit-view__subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-dim);
+  letter-spacing: 1px;
+  text-align: center;
+  max-width: 340px;
+}
+
+/* ── Breathing ring — pulsing circle around enter button ────────────── */
+
+.spirit-view__breathe-ring {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spirit-view__breathe-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--c-green-500-30);
+  animation: spirit-breathe 4s ease-in-out infinite;
+}
+
+.spirit-view__breathe-ring::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 1px solid var(--c-green-500-12);
+  animation: spirit-breathe 4s ease-in-out infinite 0.5s;
+}
+
+@keyframes spirit-breathe {
+  0%, 100% { transform: scale(0.85); opacity: 0.3; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+/* ── Enter button ───────────────────────────────────────────────────── */
+
+.spirit-view__enter-btn {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 3px;
+  color: var(--color-green);
+  background: transparent;
+  border: 1px solid var(--c-green-500-40);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  text-transform: uppercase;
+  z-index: var(--z-scanlines);
+}
+
+.spirit-view__enter-btn:hover {
+  border-color: var(--c-green-500-70);
+  box-shadow: 0 0 30px var(--c-green-500-20), inset 0 0 20px var(--c-green-500-08);
+  background: var(--c-green-500-06);
+}
+
+.spirit-view__enter-btn:active {
+  transform: scale(0.96);
+}
+
+/* ── HUD overlay (visible during immersion) ─────────────────────────── */
+
+.spirit-view__hud {
+  position: absolute;
+  top: var(--space-8);
+  left: var(--space-8);
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-4);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.spirit-view--active .spirit-view__hud {
+  opacity: 1;
+}
+
+.spirit-view__hud-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.spirit-view__hud-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--c-green-500-50);
+  letter-spacing: 2px;
+}
+
+.spirit-view__hud-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-green);
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px var(--c-green-500-30);
+}
+
+/* ── Controls panel (bottom-right) ──────────────────────────────────── */
+
+.spirit-view__controls {
+  position: absolute;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  background: var(--c-panel-70);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-8);
+  min-width: 180px;
+  backdrop-filter: blur(8px);
+}
+
+.spirit-view--active .spirit-view__controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.spirit-view__control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.spirit-view__control-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--c-green-500-50);
+  letter-spacing: 1.5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.spirit-view__slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border);
+  border-radius: 1px;
+  outline: none;
+  cursor: pointer;
+}
+
+.spirit-view__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 6px var(--c-green-500-40);
+  cursor: pointer;
+}
+
+.spirit-view__slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 6px var(--c-green-500-40);
+  cursor: pointer;
+}
+
+/* ── Exit button ────────────────────────────────────────────────────── */
+
+.spirit-view__exit {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 2px;
+  color: var(--color-dim);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  align-self: flex-end;
+}
+
+.spirit-view__exit:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+/* ── Entering transition (brief fade) ───────────────────────────────── */
+
+.spirit-view--entering .spirit-view__canvas {
+  animation: spirit-canvas-enter 2s ease-out forwards;
+}
+
+@keyframes spirit-canvas-enter {
+  from { opacity: 0; filter: blur(20px) brightness(2); }
+  to { opacity: 1; filter: blur(0) brightness(1); }
+}
+
+/* ── Mobile adjustments ─────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .spirit-view__hud {
+    top: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .spirit-view__controls {
+    bottom: var(--space-4);
+    right: var(--space-4);
+    left: var(--space-4);
+    min-width: 0;
+  }
+
+  .spirit-view__title {
+    font-size: var(--fs-lg);
+    letter-spacing: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .spirit-view__hud {
+    flex-direction: column;
+  }
+}

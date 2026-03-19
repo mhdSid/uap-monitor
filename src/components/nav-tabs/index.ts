@@ -23,7 +23,8 @@ const TABS: readonly NavTab[] = [
   { label: NAV.MONITOR, route: RouteName.MONITOR },
   { label: NAV.INTEL, route: RouteName.INTEL },
   { label: NAV.GEOMAGNETIC, route: RouteName.GEOMAGNETIC },
-  { label: NAV.SEISMIC, route: RouteName.SEISMIC }
+  { label: NAV.SEISMIC, route: RouteName.SEISMIC },
+  { label: NAV.SPIRITUAL, route: RouteName.SPIRITUAL }
 ] as const
 
 // ─── Component ──────────────────────────────────────────────────────

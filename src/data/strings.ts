@@ -1,4 +1,3 @@
-import { RouteName } from '@/core'
 import { Continent } from '@/enums'
 import { WelcomeSource } from '@/types'
 
@@ -548,7 +547,8 @@ export const NAV = {
   MONITOR: 'MONITOR',
   GEOMAGNETIC: 'GEOMAGNETIC',
   SEISMIC: 'SEISMIC',
-  INTEL: 'INTEL FEED'
+  INTEL: 'INTEL FEED',
+  SPIRITUAL: 'SPIRITUAL'
 } as const
 
 // ─── Geomagnetic visualizer ─────────────────────────────────────────
@@ -631,21 +631,23 @@ export const ENV_CONTEXT = {
   EQL_FLAG: 'Possible earthquake lights'
 } as const
 
-export const ROUTER_META = {
-  MONITOR: {
-    title: 'UAP Monitor — Global UFO & UAP Sightings Database, Map & Intelligence Platform',
-    description: 'UAP Monitor aggregates 198,000+ UFO and UAP sighting reports from 15 verified sources spanning 70 AD to present. Interactive map, credibility scoring, and NASA fireball correlation.'
-  },
-  GEOMAGNETIC: {
-    title: 'UAP Geomagnetic Correlation — Kp Index & UFO Sighting Analysis | UAP Monitor',
-    description: 'Explore the correlation between geomagnetic storm activity (Kp index) and UAP/UFO sightings. Timeline, distribution, and overrepresentation analysis from NOAA data.'
-  },
-  SEISMIC: {
-    title: 'UAP Seismic Correlation — Earthquake & UFO Sighting Analysis | UAP Monitor',
-    description: 'Analyze proximity between earthquakes and UAP/UFO sightings. Scatter plots, magnitude analysis, and potential earthquake lights detection from USGS data.'
-  },
-  INTEL: {
-    title: 'UAP Intelligence Feed — Real-Time UFO News from GDELT, GNews, X & Reddit | UAP Monitor',
-    description: 'Real-time UAP/UFO intelligence feed combining GDELT global media monitoring, GNews, X/Twitter posts, and Reddit community reports. Filter by source, search, and sentiment analysis.'
-  }
-}
+// ─── Spiritual realm ────────────────────────────────────────────────
+
+export const SPIRITUAL = {
+  TITLE: 'SPIRITUAL REALM',
+  SUBTITLE: 'Immersive consciousness exploration field — enter the beyond',
+  ENTER: 'ENTER THE FIELD',
+  ENTER_SUB: 'Breathe deeply. Release control.',
+  EXIT: 'EXIT REALM',
+  HUD_FREQUENCY: 'FREQUENCY',
+  HUD_COHERENCE: 'COHERENCE',
+  HUD_DEPTH: 'DEPTH',
+  HUD_FIELD: 'FIELD STRENGTH',
+  CONTROL_SPEED: 'FLOW SPEED',
+  CONTROL_COMPLEXITY: 'FRACTAL DEPTH',
+  CONTROL_PALETTE: 'SPECTRUM',
+  PALETTE_COSMIC: 'COSMIC',
+  PALETTE_ETHEREAL: 'ETHEREAL',
+  PALETTE_SOLAR: 'SOLAR',
+  PALETTE_VOID: 'VOID'
+} as const

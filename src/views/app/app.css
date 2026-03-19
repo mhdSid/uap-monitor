@@ -131,7 +131,7 @@
 
 .view-legend-item {
   font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
+  font-size: var(--fs-xs);
   color: var(--color-muted);
   letter-spacing: 0.5px;
   display: flex;

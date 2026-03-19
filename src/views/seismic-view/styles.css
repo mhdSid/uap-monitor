@@ -10,7 +10,7 @@
   width: 100%;
   border-collapse: collapse;
   font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-xs);
 }
 
 .seis-view__table-head {
@@ -68,7 +68,7 @@
 
 .seis-view__note-item {
   font-family: var(--font-mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-xs);
   color: var(--color-dim);
   letter-spacing: 0.3px;
   line-height: 1.5;
