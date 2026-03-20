@@ -1,13 +1,46 @@
 {
-  "generatedAt": "2026-03-19T09:37:09.539Z",
+  "generatedAt": "2026-03-20T13:38:51.392Z",
   "queries": 8,
-  "totalResults": 48,
+  "totalResults": 53,
   "articles": [
     {
+      "id": "792cbaa64191",
+      "title": "In Project Hail Mary, Ryan Gosling has a close encounter of the adorable kind.",
+      "description": "Ryan Gosling is back, and this time his job is space.",
+      "content": "Project Hail Mary is the first movie Phil Lord and Chris Miller have co-directed since 2014, the year of both The Lego Movie and 22 Jump Street. In the years since, the pair has produced and/or written a string of successful films, including the inno... [9530 chars]",
+      "url": "https://slate.com/culture/2026/03/project-hail-mary-movie-ryan-gosling-the-martian.html",
+      "imageUrl": "https://compote.slate.com/images/fd0fe207-c6e1-475d-af46-1bb22900cf82.jpeg?width=1560",
+      "publishedAt": "2026-03-19T20:27:01Z",
+      "sourceName": "Slate",
+      "sourceUrl": "https://slate.com"
+    },
+    {
+      "id": "2b92126eb10b",
+      "title": "US Government Registers Alien.gov Website as Speculation Grows That UFO Disclosure Day May Be Near",
+      "description": "The US government's registration of alien.gov and aliens.gov has triggered global speculation about a potential UFO disclosure and renewed debate over extraterrestrial life.",
+      "content": "In a move that has left UFO enthusiasts across the globe buzzing, the US government has quietly registered the websites alien.gov and aliens.gov. The sudden emergence of these domains has ignited wild speculation that a major announcement about extra... [3281 chars]",
+      "url": "https://www.ibtimes.com/us-government-registers-aliengov-website-speculation-grows-that-ufo-disclosure-day-may-near-3799633",
+      "imageUrl": "https://d.ibtimes.com/en/full/4645759/alien.jpg",
+      "publishedAt": "2026-03-19T10:54:42Z",
+      "sourceName": "International Business Times",
+      "sourceUrl": "https://www.ibtimes.com"
+    },
+    {
+      "id": "db9a6e813d0b",
+      "title": "Why Did White House Just Register ‘Aliens.gov’ Amid UFO Disclosure Push? The Clues Point Somewhere Bigger",
+      "description": "The White House has registered the domain aliens.gov, a legitimate government asset linked to UFOs and potential extraterrestrial life., US News, Times Now",
+      "content": "White House registering aliens.gov fuels speculation as UFO disclosure push raises more questions than answers. (Image: AI Generated)\nThe White House has quietly secured a domain that sounds straight out of science fiction: aliens.gov. Official recor... [5607 chars]",
+      "url": "https://www.timesnownews.com/world/us/us-news/why-did-white-house-just-register-aliens-gov-amid-ufo-disclosure-push-the-clues-point-somewhere-bigger-article-153868760",
+      "imageUrl": "https://images.timesnownews.com/thumb/msid-153868760,width-1280,height-720,resizemode-75/153868760.jpg",
+      "publishedAt": "2026-03-19T02:15:56Z",
+      "sourceName": "Times Now",
+      "sourceUrl": "https://www.timesnownews.com"
+    },
+    {
       "id": "e1902da17f81",
-      "title": "UFO truth will finally be revealed as new government website is spotted amid calls for disclosure",
+      "title": "White House secures 'alien' domain ahead of Trump's anticipated UFO disclosure",
       "description": "The White House has registered a new domain that aligns with President Donald Trump's UFO disclosure plans.",
-      "content": "The White House has registered the domain 'aliens.gov,' sparking fresh speculation that President Donald Trump's long-awaited UFO disclosure may be imminent.\nThe domain, linked to the Executive Office of the President, was flagged on Wednesday by an ... [2325 chars]",
+      "content": "The White House has registered the domain 'aliens.gov,' sparking fresh speculation that President Donald Trump's long-awaited UFO disclosure may be imminent.\nThe domain, linked to the Executive Office of the President, was flagged on Wednesday by an ... [3755 chars]",
       "url": "https://www.dailymail.co.uk/sciencetech/article-15658545/ufo-truth-government-website-disclosure.html",
       "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/18/17/107215753-0-image-a-11_1773855505088.jpg",
       "publishedAt": "2026-03-18T17:40:03Z",
@@ -343,6 +376,28 @@
       "publishedAt": "2026-02-20T07:34:06Z",
       "sourceName": "News18",
       "sourceUrl": "https://www.news18.com"
+    },
+    {
+      "id": "a288f26a0273",
+      "title": "Trump’s UFO Disclosure Order Revives Reagan’s 1987 Warning At The U.N. As Tensions With Iran Reach A Breaking Point",
+      "description": "THREE THINGS HAPPENED ON FEBRUARY 19, 2026, THAT THE COUNTRY CANNOT UNSEE. At 5:13 p.m. Eastern Time, President Donald Trump posted a statement on Truth Social directing the Secretary of Defense and all relevant federal agencies \"to begin the process of identifying and releasing Government files related to alien and extraterrestrial life, unidentified aerial phenomena An exclusive USA Herald investigative series examining Trump's UFO and alien file disclosure directive, its legal implications, national security dimensions, and what decades of government silence may finally be forced to reveal.",
+      "content": "THREE THINGS HAPPENED ON FEBRUARY 19, 2026, THAT THE COUNTRY CANNOT UNSEE.\nAt 5:13 p.m. Eastern Time, President Donald Trump posted a statement on Truth Social directing the Secretary of Defense and all relevant federal agencies \"to begin the process... [11404 chars]",
+      "url": "https://usaherald.com/trumps-ufo-disclosure-order-revives-reagans-1987-warning-at-the-u-n-as-tensions-with-iran-reach-a-breaking-point/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-02-20T07:31:32Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
+    },
+    {
+      "id": "cd7faf6cdec0",
+      "title": "The Disclosure Doctrine: Trump’s Transparency Directive Could Redefine Global UFO Policy And Space Defense",
+      "description": "INSIDE THIS REPORT For decades, Americans were told there was “nothing to see.” Then the U.S. government admitted unidentified aerial phenomena were real. Now, President Donald Trump’s disclosure posture may be setting the stage for the most consequential transparency shift in modern national security history. [USA HERALD] - President Donald Trump has marked a shift in USA Herald examines President Donald Trump’s UFO disclosure posture, its impact on global transparency, and how it could reshape international space defense policy.",
+      "content": "INSIDE THIS REPORT\nFor decades, Americans were told there was “nothing to see.”\nThen the U.S. government admitted unidentified aerial phenomena were real.\nNow, President Donald Trump’s disclosure posture may be setting the stage for the most conseque... [4134 chars]",
+      "url": "https://usaherald.com/the-disclosure-doctrine-trumps-transparency-directive-could-redefine-global-ufo-policy-and-space-defense/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-02-20T06:20:19Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
     },
     {
       "id": "28b091fdce99",
