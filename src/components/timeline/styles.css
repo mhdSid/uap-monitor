@@ -7,6 +7,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  contain: layout style paint;
 }
 
 /* ── Scrollable canvas area ────────────────────────────────────────── */

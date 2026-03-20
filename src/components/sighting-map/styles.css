@@ -54,6 +54,7 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   position: relative;
+  contain: layout style paint;
 }
 
 .sighting-map__canvas {
@@ -91,6 +92,7 @@
   font-family: var(--font-mono);
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  will-change: transform;
 }
 
 /* Enlarge zoom controls on touch */

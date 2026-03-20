@@ -10,6 +10,8 @@
   );
   pointer-events: none;
   z-index: var(--z-scanlines);
+  will-change: transform;
+  contain: strict;
 }
 
 [data-theme="light"] .scanlines {
