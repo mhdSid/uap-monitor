@@ -40,11 +40,9 @@ export async function fetchJson<T> (url: string): Promise<T> {
     throw new Error(`Unexpected content-type "${contentType}" from ${url}`)
   }
 
-  const text = await response.text()
-
   let data: unknown
   try {
-    data = JSON.parse(text)
+    data = await response.json()
   } catch {
     throw new Error(`Invalid JSON from ${url}`)
   }
@@ -173,13 +171,22 @@ export function parseSighting (raw: unknown, defaultSource: DataSourceId): Sight
   }
 }
 
-export function parseChunk (raw: unknown, defaultSource: DataSourceId): Sighting[] {
+/** Batch size for parseChunk yielding — ~2000 records ≈ 15-25ms per batch. */
+const PARSE_BATCH = 2000
+
+export async function parseChunk (raw: unknown, defaultSource: DataSourceId): Promise<Sighting[]> {
   if (!Array.isArray(raw)) return []
   const sightings: Sighting[] = []
-  for (const item of raw) {
-    const parsed = parseSighting(item, defaultSource)
+
+  for (let i = 0; i < raw.length; i++) {
+    const parsed = parseSighting(raw[i], defaultSource)
     if (parsed) sightings.push(parsed)
+
+    if (i > 0 && i % PARSE_BATCH === 0) {
+      await new Promise<void>(r => setTimeout(r, 0))
+    }
   }
+
   return sightings
 }
 
@@ -338,18 +345,21 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike> (
 
     const meta: YearChunkMeta = m.years[key]
 
-    const promise = fetchJson<unknown>(dataUrl(meta.file))
-      .then((raw) => {
-        const sightings = parseChunk(raw, config.defaultSource)
+    const promise = (async () => {
+      try {
+        const raw = await fetchJson<unknown>(dataUrl(meta.file))
+        // Yield between JSON.parse (inside fetchJson) and record transform
+        await new Promise<void>(r => setTimeout(r, 0))
+        const sightings = await parseChunk(raw, config.defaultSource)
         chunkCache.set(key, sightings)
         pendingFetches.delete(key)
         return sightings
-      })
-      .catch((err) => {
+      } catch (err) {
         pendingFetches.delete(key)
         reportError(`Failed to load ${meta.file}: ${err instanceof Error ? err.message : err}`)
         return [] as Sighting[]
-      })
+      }
+    })()
 
     pendingFetches.set(key, promise)
     return promise
@@ -373,7 +383,10 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike> (
 
     const keys = resolveKeys(fromYear, toYear)
     const chunks = await Promise.all(keys.map(loadChunk))
-    return sortNewestFirst(chunks.flat())
+    const flat = chunks.flat()
+    // Yield before sorting — flat() on 50k+ records is already work
+    await new Promise<void>(r => setTimeout(r, 0))
+    return sortNewestFirst(flat)
   }
 
   async function loadProgressive (
@@ -384,15 +397,26 @@ export function createSourceLoader<M extends ManifestLike = ManifestLike> (
     const m = await loadManifest()
     if (!m) return []
 
-    // Most recent first so user sees newest data immediately
+    // Most recent first so user sees newest data immediately.
+    // Each chunk is a single year file, internally sorted newest-first.
+    // Appending older years preserves overall order — no re-sort needed.
     const keys = resolveKeys(fromYear, toYear).reverse()
     let all: Sighting[] = []
 
     for (const key of keys) {
       const chunk = await loadChunk(key)
-      all = [...all, ...chunk]
-      sortNewestFirst(all)
+
+      // Append — older year goes after newer years already in `all`
+      if (all.length === 0) {
+        all = chunk
+      } else {
+        all = all.concat(chunk)
+      }
+
       onChunk(all)
+
+      // Yield to browser between chunks
+      await new Promise<void>(r => setTimeout(r, 0))
     }
 
     return all
