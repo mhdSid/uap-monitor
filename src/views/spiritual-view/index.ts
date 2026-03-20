@@ -188,8 +188,8 @@ export class SpiritualView extends Component {
     const controlsForm = this.buildControlsForm()
 
     this.drawer = new Drawer({
-      density: 'compact',
       content: controlsForm,
+      density: 'compact',
       onClose: () => this.fab.el.focus()
     })
 
@@ -899,9 +899,14 @@ export class SpiritualView extends Component {
     }
 
     const maxIter = Math.floor(40 + this.complexity * 160 + Math.log2(this.mbZoom) * 4)
-    const scale = 3 / this.mbZoom
-    const offsetX = target.x - scale * 0.5
-    const offsetY = target.y - scale * 0.5
+    const baseScale = 3 / this.mbZoom
+    const aspect = w / hh
+
+    // Aspect-correct: keep the set undistorted by scaling the wider axis
+    const scaleX = aspect >= 1 ? baseScale * aspect : baseScale
+    const scaleY = aspect >= 1 ? baseScale : baseScale / aspect
+    const offsetX = target.x - scaleX * 0.5
+    const offsetY = target.y - scaleY * 0.5
 
     // Render at reduced resolution for performance
     const pixelSize = Math.max(2, Math.floor(4 - this.complexity * 2))
@@ -914,8 +919,8 @@ export class SpiritualView extends Component {
 
     for (let py = 0; py < imgH; py++) {
       for (let px = 0; px < imgW; px++) {
-        const x0 = offsetX + (px / imgW) * scale
-        const y0 = offsetY + (py / imgH) * scale
+        const x0 = offsetX + (px / imgW) * scaleX
+        const y0 = offsetY + (py / imgH) * scaleY
 
         let x = 0
         let y = 0
@@ -1049,7 +1054,7 @@ export class SpiritualView extends Component {
     const centerX = w / 2
     const centerY = hh / 2
     const [br, bg, bb] = palette.bg
-    const maxR = Math.min(w, hh) * 0.48
+    const maxR = Math.max(w, hh) * 0.7
 
     this.whPhase += this.speed * 0.008
 
