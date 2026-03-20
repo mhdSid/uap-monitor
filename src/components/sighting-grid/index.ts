@@ -117,7 +117,7 @@ export class SightingGrids extends Component {
         domSections.push(sectionComp)
       }
 
-      if (isRerender) await yieldThread()
+      if (isRerender || groups.length > 1) await yieldThread()
     }
 
     frag.appendChild(

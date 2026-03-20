@@ -197,20 +197,26 @@ export class MonitorView extends Component {
 
   // ─── Initial render from store ─────────────────────────────────
 
-  private renderFromStore (): void {
+  private async renderFromStore (): Promise<void> {
     const sightings = this.store.sightings.get()
     const years = this.store.availableYears.get()
     const { from, to } = this.store.yearRange.get()
 
-    // Grids
+    // Grids (async — yields between continent sections)
     this.grids.render(sightings)
 
-    // Map
+    // Yield before map work
+    await new Promise<void>(r => setTimeout(r, 0))
+
+    // Map (async — yields every 3000 markers)
     this.sightingMap.setSightings(sightings)
 
     const fireballs = this.fireball.getAll()
     this.sightingMap.setFireballs(fireballs.filter(f => f.lat != null))
     this.sightingMap.setNuclearFacilities(this.nuclear.getAll())
+
+    // Yield before timeline
+    await new Promise<void>(r => setTimeout(r, 0))
 
     // Timeline
     this.timeline.setManifestCounts(
