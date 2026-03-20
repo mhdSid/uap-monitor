@@ -64,7 +64,7 @@ export default defineConfig({
   },
   plugins: [
     basicSsl(),
-    cssInlinePlugin(),
+    // cssInlinePlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: null,
