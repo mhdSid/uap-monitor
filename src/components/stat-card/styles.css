@@ -9,6 +9,37 @@
   border-radius: var(--radius-md);
   min-width: 0;
   overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stat-card:hover {
+  border-color: var(--color-border-strong);
+  background: var(--c-green-500-06);
+}
+
+.stat-card:active {
+  background: var(--c-green-500-08);
+  transform: scale(0.97);
+}
+
+.stat-card--active {
+  border-color: var(--c-green-500-40);
+  background: var(--c-green-500-06);
+  box-shadow: 0 0 12px var(--c-green-500-08);
+}
+
+.stat-card:focus, .stat-card:focus-visible {
+  outline: 1px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+.stat-card--active .stat-card__value {
+  color: var(--color-green);
+}
+
+.stat-card--active .stat-card__label {
+  color: var(--c-green-500-70);
 }
 
 .stat-card__label {
