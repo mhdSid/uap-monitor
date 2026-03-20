@@ -10,6 +10,15 @@ createApp(qs('#app')!)
 // Register service worker after app is mounted (non-blocking)
 if ('serviceWorker' in navigator) {
   const base = import.meta.env.BASE_URL ?? '/'
+
+  // Reload when a new SW activates and takes control of this page
+  let refreshing = false
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return
+    refreshing = true
+    window.location.reload()
+  })
+
   window.addEventListener('load', () => {
     navigator.serviceWorker.register(`${base}sw.js`, { scope: base }).catch(() => {})
   })
