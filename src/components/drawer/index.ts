@@ -4,9 +4,13 @@ import { Component } from '@/core'
 import { h, addClass, removeClass, setStyles } from '@/core/dom'
 import { ARIA } from '@/data/strings'
 
+export type DrawerDensity = 'compact' | 'default' | 'spacious'
+
 export interface DrawerProps {
   /** Content to render inside the drawer body */
   content: HTMLElement
+  /** Inner padding density. Default: 'default' */
+  density?: DrawerDensity
   /** Called when drawer opens */
   onOpen?: () => void
   /** Called when drawer is dismissed (overlay click, Escape, or swipe down) */
@@ -37,6 +41,9 @@ export class Drawer extends Component<DrawerProps> {
       'aria-hidden': 'true'
     }, h('div', { className: cx.handleBar }))
 
+    const density = this.props.density ?? 'default'
+    const bodyClasses = [cx.body, cx[`body_${density}` as keyof typeof cx]].filter(Boolean).join(' ')
+
     this.panel = h('div', {
       className: cx.panel,
       role: 'dialog',
@@ -45,7 +52,7 @@ export class Drawer extends Component<DrawerProps> {
       'aria-label': ARIA.FILTER_BAR
     },
       handle,
-      h('div', { className: cx.body }, this.props.content)
+      h('div', { className: bodyClasses }, this.props.content)
     )
 
     // ── Drag to close (from handle only) ───────────────────────────

@@ -6,7 +6,7 @@ import { WelcomeSource } from '@/types'
 export const APP_NAME = 'UAP MONITOR'
 export const APP_FOOTER_NAME = 'UAP MONITOR'
 export const APP_FOOTER_TAGLINE = 'Global UAP Intelligence Platform'
-export const APP_URL = 'https://uapmonitor.org'
+export const APP_URL = import.meta.env.VITE_REPO_URL
 
 // ─── Aria labels ────────────────────────────────────────────────────
 
@@ -661,6 +661,7 @@ export const SPIRITUAL = {
   MODE_TUNNEL: 'TUNNEL',
   MODE_MANDELBROT: 'MANDELBROT',
   MODE_FIELD: 'FIELD',
+  MODE_WORMHOLE: 'WORMHOLE',
   FAB_LABEL: 'Open realm controls',
   DRAWER_CLOSE: 'Close controls'
 } as const

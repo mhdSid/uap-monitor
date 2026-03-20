@@ -14,12 +14,6 @@ export const cx = {
   controlsForm: 'spirit-view__controls-form',
   controlGroup: 'spirit-view__control-group',
   controlLabel: 'spirit-view__control-label',
-  controlRow: 'spirit-view__control-row',
-  slider: 'spirit-view__slider',
-  modeBtn: 'spirit-view__mode-btn',
-  modeBtnActive: 'spirit-view__mode-btn--active',
-  paletteBtn: 'spirit-view__palette-btn',
-  paletteBtnActive: 'spirit-view__palette-btn--active',
   exitBtn: 'spirit-view__exit',
   active: 'spirit-view--active',
   entering: 'spirit-view--entering'

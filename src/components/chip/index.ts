@@ -129,3 +129,62 @@ export class ChipGroup extends Component<ChipGroupProps> {
     return this.chips.find(c => c.key === key)
   }
 }
+
+// ─── ChipSelect (single-select) ────────────────────────────────────
+
+export interface ChipSelectProps {
+  items: ChipItem[]
+  activeKey: string
+  size?: ComponentSize
+  onChange?: (key: string) => void
+}
+
+/**
+ * Single-select chip group — exactly one chip is active at a time.
+ * Clicking a chip deactivates all others and activates the clicked one.
+ */
+export class ChipSelect extends Component<ChipSelectProps> {
+  private chips!: Chip[]
+  private activeKey!: string
+
+  protected create (): HTMLElement {
+    const size = this.props.size ?? ComponentSize.SM
+    this.activeKey = this.props.activeKey
+
+    this.chips = this.props.items.map(item =>
+      new Chip({
+        ...item,
+        active: item.key === this.activeKey,
+        size,
+        onChange: () => this.select(item.key)
+      })
+    )
+
+    return h('div', { className: cx.group },
+      ...this.chips.map(c => c.el)
+    )
+  }
+
+  private select (key: string): void {
+    if (key === this.activeKey) {
+      // Re-activate the clicked chip (prevent deselect)
+      const chip = this.chips.find(c => c.key === key)
+      if (chip && !chip.isActive) chip.toggle(true)
+      return
+    }
+
+    this.activeKey = key
+    for (const chip of this.chips) {
+      chip.toggle(chip.key === key)
+    }
+    this.props.onChange?.(key)
+  }
+
+  get value (): string {
+    return this.activeKey
+  }
+
+  set value (key: string) {
+    this.select(key)
+  }
+}

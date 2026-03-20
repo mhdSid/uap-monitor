@@ -20,12 +20,14 @@ import { useTheme } from '@/composables'
 import type { ITheme, Theme } from '@/composables/use-theme'
 import { Drawer } from '@/components/drawer'
 import { Button } from '@/components/button'
-import { ButtonSize } from '@/enums'
+import { Slider } from '@/components/slider'
+import { ChipSelect } from '@/components/chip'
+import { ButtonSize, ComponentSize } from '@/enums'
 import { iconRadarSignalFilled } from '@/components/icons'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
-type RenderMode = 'fractal' | 'tunnel' | 'mandelbrot' | 'field'
+type RenderMode = 'fractal' | 'tunnel' | 'mandelbrot' | 'field' | 'wormhole'
 type GeometryForm = 'flower' | 'yantra' | 'metatron' | 'torus'
 
 interface Palette {
@@ -89,6 +91,7 @@ const PALETTES: readonly Palette[] = [
 const RENDER_MODES: { key: RenderMode; label: string }[] = [
   { key: 'fractal', label: SPIRITUAL.MODE_FRACTAL },
   { key: 'tunnel', label: SPIRITUAL.MODE_TUNNEL },
+  { key: 'wormhole', label: SPIRITUAL.MODE_WORMHOLE },
   { key: 'mandelbrot', label: SPIRITUAL.MODE_MANDELBROT },
   { key: 'field', label: SPIRITUAL.MODE_FIELD }
 ]
@@ -140,21 +143,15 @@ export class SpiritualView extends Component {
   // Tunnel state
   private tunnelRings: { z: number; rot: number; sides: number }[] = []
 
+  // Wormhole state
+  private whParticles: { angle: number; z: number; speed: number; colorIdx: number; trail: number }[] = []
+  private whPhase = 0
+
   // HUD refs
   private hudFreq!: HTMLElement
   private hudCoherence!: HTMLElement
   private hudDepth!: HTMLElement
   private hudField!: HTMLElement
-
-  // Slider value labels
-  private speedLabel!: HTMLElement
-  private complexityLabel!: HTMLElement
-  private zoomLabel!: HTMLElement
-
-  // Button groups (for toggling active state)
-  private modeBtns!: HTMLButtonElement[]
-  private geoBtns!: HTMLButtonElement[]
-  private paletteBtns!: HTMLButtonElement[]
 
   // Drawer + FAB
   private drawer!: Drawer
@@ -180,10 +177,6 @@ export class SpiritualView extends Component {
     this.hudDepth = h('span', { className: cx.hudValue })
     this.hudField = h('span', { className: cx.hudValue })
 
-    this.modeBtns = []
-    this.geoBtns = []
-    this.paletteBtns = []
-
     const hud = h('div', { className: cx.hud },
       this.buildHudItem(SPIRITUAL.HUD_FREQUENCY, this.hudFreq),
       this.buildHudItem(SPIRITUAL.HUD_COHERENCE, this.hudCoherence),
@@ -195,13 +188,14 @@ export class SpiritualView extends Component {
     const controlsForm = this.buildControlsForm()
 
     this.drawer = new Drawer({
+      density: 'compact',
       content: controlsForm,
       onClose: () => this.fab.el.focus()
     })
 
     this.fab = new Button({
       label: SPIRITUAL.FAB_LABEL,
-      variant: 'filled',
+      variant: 'outline',
       color: 'primary',
       size: ButtonSize.XL,
       round: true,
@@ -243,6 +237,7 @@ export class SpiritualView extends Component {
 
     this.initParticles()
     this.initTunnelRings()
+    this.initWormholeParticles()
     this.resize()
     this.startLoop()
     window.addEventListener('resize', this.onResize)
@@ -260,60 +255,101 @@ export class SpiritualView extends Component {
   // ─── Build controls form ──────────────────────────────────────────
 
   private buildControlsForm (): HTMLElement {
-    this.speedLabel = h('span')
-    this.complexityLabel = h('span')
-    this.zoomLabel = h('span')
+    const fmtPct = (v: number): string => `${Math.round(v)}%`
 
-    const form = h('div', { className: cx.controlsForm },
-      // Render mode
-      this.buildButtonGroup(
-        SPIRITUAL.CONTROL_MODE,
-        RENDER_MODES,
-        this.mode,
-        this.modeBtns,
-        (key) => {
-          this.mode = key as RenderMode
-          this.mbZoom = 1
-          this.mbTargetIdx = Math.floor(Math.random() * MANDELBROT_TARGETS.length)
-        }
-      ),
+    // ── Render mode ──
+    const modeSelect = new ChipSelect({
+      items: RENDER_MODES.map(m => ({ key: m.key, label: m.label })),
+      activeKey: this.mode,
+      size: ComponentSize.MD,
+      onChange: (key) => {
+        this.mode = key as RenderMode
+        this.mbZoom = 1
+        this.mbTargetIdx = Math.floor(Math.random() * MANDELBROT_TARGETS.length)
+      }
+    })
 
-      // Geometry (only for fractal mode but always visible)
-      this.buildButtonGroup(
-        SPIRITUAL.CONTROL_GEOMETRY,
-        GEOMETRY_FORMS,
-        this.geometry,
-        this.geoBtns,
-        (key) => { this.geometry = key as GeometryForm }
-      ),
+    // ── Geometry ──
+    const geoSelect = new ChipSelect({
+      items: GEOMETRY_FORMS.map(g => ({ key: g.key, label: g.label })),
+      activeKey: this.geometry,
+      size: ComponentSize.MD,
+      onChange: (key) => { this.geometry = key as GeometryForm }
+    })
 
-      // Speed slider
-      this.buildSlider(SPIRITUAL.CONTROL_SPEED, this.speedLabel, this.speed,
-        (v) => { this.speed = v }),
+    // ── Sliders ──
+    const speedSlider = new Slider({
+      label: SPIRITUAL.CONTROL_SPEED,
+      min: 0,
+      max: 100,
+      value: Math.round(this.speed * 100),
+      size: ComponentSize.MD,
+      formatValue: fmtPct,
+      onChange: (v) => { this.speed = v / 100 }
+    })
 
-      // Complexity slider
-      this.buildSlider(SPIRITUAL.CONTROL_COMPLEXITY, this.complexityLabel, this.complexity,
-        (v) => { this.complexity = v }),
+    const complexitySlider = new Slider({
+      label: SPIRITUAL.CONTROL_COMPLEXITY,
+      min: 0,
+      max: 100,
+      value: Math.round(this.complexity * 100),
+      size: ComponentSize.MD,
+      formatValue: fmtPct,
+      onChange: (v) => { this.complexity = v / 100 }
+    })
 
-      // Zoom depth slider
-      this.buildSlider(SPIRITUAL.CONTROL_ZOOM, this.zoomLabel, this.zoom,
-        (v) => { this.zoom = v }),
+    const zoomSlider = new Slider({
+      label: SPIRITUAL.CONTROL_ZOOM,
+      min: 0,
+      max: 100,
+      value: Math.round(this.zoom * 100),
+      size: ComponentSize.MD,
+      formatValue: fmtPct,
+      onChange: (v) => { this.zoom = v / 100 }
+    })
 
-      // Palette
-      this.buildPaletteRow(),
+    // ── Palette ──
+    const paletteSelect = new ChipSelect({
+      items: PALETTES.map((p, i) => ({
+        key: String(i),
+        label: p.label,
+        color: `rgb(${p.colors[1].join(',')})`
+      })),
+      activeKey: String(this.paletteIdx),
+      size: ComponentSize.MD,
+      onChange: (key) => { this.paletteIdx = parseInt(key, 10) }
+    })
 
-      // Exit
-      h('button', {
-        className: cx.exitBtn,
-        type: 'button',
-        onClick: () => {
-          this.drawer.close()
-          this.exitImmersion()
-        }
-      }, SPIRITUAL.EXIT)
+    // ── Exit button ──
+    const exitBtn = new Button({
+      label: SPIRITUAL.EXIT,
+      variant: 'soft',
+      color: 'primary',
+      pill: true,
+      size: ButtonSize.SM,
+      onClick: () => {
+        this.drawer.close()
+        this.exitImmersion()
+      }
+    })
+    addClass(exitBtn.el, cx.exitBtn)
+
+    return h('div', { className: cx.controlsForm },
+      this.buildControlGroup(SPIRITUAL.CONTROL_MODE, modeSelect.el),
+      this.buildControlGroup(SPIRITUAL.CONTROL_GEOMETRY, geoSelect.el),
+      speedSlider.el,
+      complexitySlider.el,
+      zoomSlider.el,
+      this.buildControlGroup(SPIRITUAL.CONTROL_PALETTE, paletteSelect.el),
+      exitBtn.el
     )
+  }
 
-    return form
+  private buildControlGroup (label: string, content: HTMLElement): HTMLElement {
+    return h('div', { className: cx.controlGroup },
+      h('div', { className: cx.controlLabel }, label),
+      content
+    )
   }
 
   private buildHudItem (label: string, valueEl: HTMLElement): HTMLElement {
@@ -321,106 +357,6 @@ export class SpiritualView extends Component {
       h('span', { className: cx.hudLabel }, label),
       valueEl
     )
-  }
-
-  private buildSlider (
-    label: string,
-    valueLabel: HTMLElement,
-    initial: number,
-    onChange: (v: number) => void
-  ): HTMLElement {
-    setText(valueLabel, this.fmtPct(initial))
-
-    const slider = h('input', {
-      className: cx.slider,
-      type: 'range',
-      min: '0',
-      max: '100',
-      value: String(Math.round(initial * 100))
-    }) as HTMLInputElement
-
-    slider.addEventListener('input', () => {
-      const v = parseInt(slider.value, 10) / 100
-      onChange(v)
-      setText(valueLabel, this.fmtPct(v))
-    })
-
-    return h('div', { className: cx.controlGroup },
-      h('div', { className: cx.controlLabel }, label, valueLabel),
-      slider
-    )
-  }
-
-  private buildButtonGroup (
-    label: string,
-    items: { key: string; label: string }[],
-    activeKey: string,
-    btnStore: HTMLButtonElement[],
-    onSelect: (key: string) => void
-  ): HTMLElement {
-    btnStore.length = 0
-    const row = h('div', { className: cx.controlRow })
-
-    for (const item of items) {
-      const isActive = item.key === activeKey
-      const classes = [cx.modeBtn, isActive && cx.modeBtnActive].filter(Boolean)
-
-      const btn = h('button', {
-        className: classes.join(' '),
-        type: 'button'
-      }, item.label) as HTMLButtonElement
-
-      btn.addEventListener('click', () => {
-        onSelect(item.key)
-        for (const b of btnStore) removeClass(b, cx.modeBtnActive)
-        addClass(btn, cx.modeBtnActive)
-      })
-
-      btnStore.push(btn)
-      row.appendChild(btn)
-    }
-
-    return h('div', { className: cx.controlGroup },
-      h('div', { className: cx.controlLabel }, label),
-      row
-    )
-  }
-
-  private buildPaletteRow (): HTMLElement {
-    this.paletteBtns = []
-    const row = h('div', { className: cx.controlRow })
-
-    for (let i = 0; i < PALETTES.length; i++) {
-      const palette = PALETTES[i]
-      const [r, g, b] = palette.colors[1]
-      const isActive = i === this.paletteIdx
-      const classes = [cx.paletteBtn, isActive && cx.paletteBtnActive].filter(Boolean)
-
-      const btn = h('button', {
-        className: classes.join(' '),
-        type: 'button',
-        style: `background:rgb(${r},${g},${b})`,
-        title: palette.label
-      }) as HTMLButtonElement
-
-      btn.addEventListener('click', () => {
-        this.paletteIdx = i
-        for (const b of this.paletteBtns) removeClass(b, cx.paletteBtnActive)
-        addClass(btn, cx.paletteBtnActive)
-      })
-
-      this.paletteBtns.push(btn)
-      row.appendChild(btn)
-    }
-
-    return h('div', { className: cx.controlGroup },
-      h('div', { className: cx.controlLabel }, SPIRITUAL.CONTROL_PALETTE),
-      row
-    )
-  }
-
-  private fmtPct (v: number): string {
-    return `${Math.round(v * 100)}%`
   }
 
   // ─── Immersion state ──────────────────────────────────────────────
@@ -480,6 +416,19 @@ export class SpiritualView extends Component {
     }
   }
 
+  private initWormholeParticles (): void {
+    this.whParticles = []
+    for (let i = 0; i < 200; i++) {
+      this.whParticles.push({
+        angle: Math.random() * TAU,
+        z: Math.random() * 4 - 2,
+        speed: 0.3 + Math.random() * 0.7,
+        colorIdx: Math.floor(Math.random() * 5),
+        trail: 0.3 + Math.random() * 0.7
+      })
+    }
+  }
+
   // ─── Render loop ──────────────────────────────────────────────────
 
   private startLoop (): void {
@@ -511,6 +460,9 @@ export class SpiritualView extends Component {
         break
       case 'field':
         this.renderField(ctx, w, hh, palette, alpha)
+        break
+      case 'wormhole':
+        this.renderWormhole(ctx, w, hh, palette, alpha)
         break
     }
   }
@@ -1083,6 +1035,179 @@ export class SpiritualView extends Component {
       ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha * 0.6})`
       ctx.fill()
     }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════
+  //  MODE: WORMHOLE — Hyperboloid throat with gravitational lensing
+  // ═══════════════════════════════════════════════════════════════════
+
+  private renderWormhole (
+    ctx: CanvasRenderingContext2D,
+    w: number, hh: number,
+    palette: Palette, alpha: number
+  ): void {
+    const centerX = w / 2
+    const centerY = hh / 2
+    const [br, bg, bb] = palette.bg
+    const maxR = Math.min(w, hh) * 0.48
+
+    this.whPhase += this.speed * 0.008
+
+    // Hard clear
+    ctx.fillStyle = `rgb(${br},${bg},${bb})`
+    ctx.fillRect(0, 0, w, hh)
+
+    // ── Hyperboloid rings — hourglass profile ──
+    // The throat radius follows a cosh curve: narrow at center, flares at edges
+    const ringCount = Math.floor(30 + this.complexity * 30)
+    const depthRange = 3.0
+
+    for (let i = 0; i < ringCount; i++) {
+      // z goes from -depthRange to +depthRange (throat at z=0)
+      const t = i / (ringCount - 1)
+      const z = (t * 2 - 1) * depthRange
+
+      // Hyperboloid profile: cosh(z) gives the hourglass flare
+      // throat_radius = 1 at z=0, expands outward
+      const throatScale = 0.25 + this.zoom * 0.25
+      const profileR = throatScale + (Math.cosh(z * 0.8) - 1) * 0.35
+
+      // Perspective: rings near camera are larger
+      const perspective = 1 / (1 + Math.abs(z) * 0.3)
+      const ringR = maxR * profileR * perspective
+
+      // Rotation — rings near throat spin faster (frame-dragging effect)
+      const throatProximity = 1 / (1 + z * z * 2)
+      const rot = this.whPhase * (0.3 + throatProximity * 1.5) + z * 0.4
+
+      // Alpha: fade edges, brightest near throat
+      const edgeFade = 1 - Math.pow(Math.abs(z) / depthRange, 2)
+      const ringAlpha = alpha * edgeFade * 0.5 * perspective
+
+      if (ringAlpha <= 0.01 || ringR < 1) continue
+
+      // Ring sides — more sides near throat for smoother appearance
+      const sides = Math.floor(6 + throatProximity * 14)
+      const colorIdx = Math.floor((i + this.whPhase * 3) % palette.colors.length)
+      const [cr, cg, cb] = palette.colors[colorIdx]
+
+      ctx.save()
+      ctx.translate(centerX, centerY)
+      ctx.rotate(rot)
+
+      // Metric distortion — stretch horizontally near throat
+      const stretchX = 1 + throatProximity * 0.3 * Math.sin(this.whPhase * 2)
+      const stretchY = 1 - throatProximity * 0.15 * Math.sin(this.whPhase * 2)
+      ctx.scale(stretchX, stretchY)
+
+      // Draw ring polygon
+      ctx.beginPath()
+      for (let s = 0; s <= sides; s++) {
+        const a = (TAU / sides) * s
+        const x = Math.cos(a) * ringR
+        const y = Math.sin(a) * ringR
+        if (s === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.closePath()
+
+      ctx.strokeStyle = `rgba(${cr},${cg},${cb},${ringAlpha * 0.7})`
+      ctx.lineWidth = 0.5 + perspective * 2.5 * throatProximity
+      ctx.stroke()
+
+      // Glow layer for rings near throat
+      if (throatProximity > 0.3) {
+        ctx.strokeStyle = `rgba(${cr},${cg},${cb},${ringAlpha * 0.12})`
+        ctx.lineWidth = 4 + perspective * 10 * throatProximity
+        ctx.stroke()
+      }
+
+      ctx.restore()
+    }
+
+    // ── Gravitationally lensed particles ──
+    const advance = this.speed * 0.025
+
+    for (const p of this.whParticles) {
+      p.z -= advance * p.speed
+
+      // Wrap around: particle exits one end, enters the other
+      if (p.z < -depthRange) p.z += depthRange * 2
+      if (p.z > depthRange) p.z -= depthRange * 2
+
+      // Same hyperboloid profile for particle orbit radius
+      const profileR = 0.25 + this.zoom * 0.25 + (Math.cosh(p.z * 0.8) - 1) * 0.35
+      const perspective = 1 / (1 + Math.abs(p.z) * 0.3)
+      const throatProximity = 1 / (1 + p.z * p.z * 2)
+
+      // Gravitational lensing — particle angle curves toward throat
+      const lensing = throatProximity * 0.04 * Math.sign(p.z)
+      p.angle += p.speed * this.speed * 0.015 + lensing
+
+      const orbitR = maxR * profileR * perspective * (0.6 + p.trail * 0.4)
+      const px = centerX + Math.cos(p.angle) * orbitR
+      const py = centerY + Math.sin(p.angle) * orbitR * 0.85
+
+      const edgeFade = 1 - Math.pow(Math.abs(p.z) / depthRange, 2)
+      const pAlpha = alpha * edgeFade * 0.5 * perspective * (0.4 + throatProximity * 0.6)
+
+      if (pAlpha <= 0.01) continue
+
+      const [cr, cg, cb] = palette.colors[p.colorIdx]
+      const pSize = (1 + throatProximity * 2) * perspective
+
+      ctx.beginPath()
+      ctx.arc(px, py, pSize, 0, TAU)
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${pAlpha})`
+      ctx.fill()
+
+      // Draw short trail behind particle
+      if (p.trail > 0.5 && throatProximity > 0.2) {
+        const trailAngle = p.angle - p.speed * this.speed * 0.04
+        const tx = centerX + Math.cos(trailAngle) * orbitR
+        const ty = centerY + Math.sin(trailAngle) * orbitR * 0.85
+        ctx.beginPath()
+        ctx.moveTo(px, py)
+        ctx.lineTo(tx, ty)
+        ctx.strokeStyle = `rgba(${cr},${cg},${cb},${pAlpha * 0.3})`
+        ctx.lineWidth = pSize * 0.5
+        ctx.stroke()
+      }
+    }
+
+    // ── Exit light — bright disc at the throat center ──
+    // This is the "other side" of the wormhole — warmer color temperature
+    const exitPulse = 0.6 + Math.sin(this.whPhase * 1.5) * 0.2
+    const exitR = maxR * 0.12 * (0.8 + this.zoom * 0.4)
+
+    // Warm exit light — shift toward last palette color
+    const exitColor = palette.colors[palette.colors.length - 1]
+    const [er, eg, eb] = exitColor
+
+    const exitGrad = ctx.createRadialGradient(
+      centerX, centerY, 0,
+      centerX, centerY, exitR * 3
+    )
+    exitGrad.addColorStop(0, `rgba(${er},${eg},${eb},${alpha * exitPulse * 0.7})`)
+    exitGrad.addColorStop(0.3, `rgba(${er},${eg},${eb},${alpha * exitPulse * 0.25})`)
+    exitGrad.addColorStop(0.6, `rgba(${er},${eg},${eb},${alpha * exitPulse * 0.05})`)
+    exitGrad.addColorStop(1, 'transparent')
+    ctx.fillStyle = exitGrad
+    ctx.fillRect(0, 0, w, hh)
+
+    // Inner bright core
+    const coreGrad = ctx.createRadialGradient(
+      centerX, centerY, 0,
+      centerX, centerY, exitR
+    )
+    coreGrad.addColorStop(0, `rgba(255,255,255,${alpha * exitPulse * 0.3})`)
+    coreGrad.addColorStop(0.5, `rgba(${er},${eg},${eb},${alpha * exitPulse * 0.15})`)
+    coreGrad.addColorStop(1, 'transparent')
+    ctx.fillStyle = coreGrad
+    ctx.fillRect(
+      centerX - exitR, centerY - exitR,
+      exitR * 2, exitR * 2
+    )
   }
 
   // ─── HUD update ───────────────────────────────────────────────────

@@ -1,0 +1,74 @@
+/* ─── Slider ───────────────────────────────────────────────────────── */
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.slider__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.slider__label {
+  font-family: var(--font-mono);
+  color: var(--color-dim);
+  letter-spacing: 1.5px;
+}
+
+.slider__value {
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+  letter-spacing: 1px;
+}
+
+.slider__track {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border);
+  border-radius: 1px;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider__track::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--slider-color, var(--color-green));
+  box-shadow: 0 0 6px color-mix(in srgb, var(--slider-color, var(--color-green)) 40%, transparent);
+  cursor: pointer;
+}
+
+.slider__track::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: var(--slider-color, var(--color-green));
+  box-shadow: 0 0 6px color-mix(in srgb, var(--slider-color, var(--color-green)) 40%, transparent);
+  cursor: pointer;
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────────── */
+
+.slider--sm .slider__label,
+.slider--sm .slider__value {
+  font-size: var(--fs-3xs);
+}
+
+.slider--md .slider__label,
+.slider--md .slider__value {
+  font-size: var(--fs-2xs);
+}
+
+.slider--lg .slider__label,
+.slider--lg .slider__value {
+  font-size: var(--fs-xs);
+}
