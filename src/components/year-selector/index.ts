@@ -14,83 +14,37 @@ export interface YearSelectorProps {
 }
 
 export class YearSelector extends Component<YearSelectorProps> {
+  private fromSelect!: Select
+  private toSelect!: Select
+  private populated = false
+
   protected create (): HTMLElement {
     const store = useAppStore()
-    const years = store.availableYears.get()
-    const { from: defaultFrom, to: defaultTo } = store.yearRange.get()
     const selectSize = this.props.selectSize ?? ComponentSize.SM
 
-    if (years.length === 0) {
-      return h('div', { className: cx.root },
-        h('span', { className: cx.label }, FILTER.NO_DATA)
-      )
-    }
-
-    const oldest = years[years.length - 1]
-    const newest = years[0]
-
-    const yearOptions: SelectOption[] = years.map(y => ({
-      value: String(y),
-      label: String(y)
-    }))
-
-    // Find nearest available year at or after target
-    const nearestAfter = (target: number): number => {
-      for (let i = years.length - 1; i >= 0; i--) {
-        if (years[i] >= target) return years[i]
-      }
-      return newest
-    }
-
-    // Find nearest available year at or before target
-    const nearestBefore = (target: number): number => {
-      for (let i = 0; i < years.length; i++) {
-        if (years[i] <= target) return years[i]
-      }
-      return oldest
-    }
-
-    const fromSelect = new Select({
+    this.fromSelect = new Select({
       id: 'year-from',
       name: 'year-from',
       ariaLabel: ARIA.YEAR_FROM,
-      options: yearOptions,
-      selected: String(Math.max(oldest, defaultFrom)),
+      options: [],
       size: selectSize,
       color: 'primary',
       onChange: () => {
-        const from = Number(fromSelect.value)
-        let to = Number(toSelect.value)
-
-        // FROM crossed past TO — expand to a full 10-year window
-        if (from > to) to = nearestAfter(Math.min(from + MAX_YEAR_SPAN, newest))
-        // Still too wide — clamp TO
-        if (to - from > MAX_YEAR_SPAN) to = nearestAfter(from + MAX_YEAR_SPAN)
-
-        toSelect.value = String(to)
-        store.yearRange.set({ from, to })
+        if (!this.populated) return
+        this.onFromChange(store)
       }
     })
 
-    const toSelect = new Select({
+    this.toSelect = new Select({
       id: 'year-to',
       name: 'year-to',
       ariaLabel: ARIA.YEAR_TO,
-      options: yearOptions,
-      selected: String(Math.min(newest, defaultTo)),
+      options: [],
       size: selectSize,
       color: 'primary',
       onChange: () => {
-        let from = Number(fromSelect.value)
-        const to = Number(toSelect.value)
-
-        // TO crossed below FROM — expand to a full 10-year window
-        if (to < from) from = nearestBefore(Math.max(to - MAX_YEAR_SPAN, oldest))
-        // Still too wide — clamp FROM
-        if (to - from > MAX_YEAR_SPAN) from = nearestBefore(to - MAX_YEAR_SPAN)
-
-        fromSelect.value = String(from)
-        store.yearRange.set({ from, to })
+        if (!this.populated) return
+        this.onToChange(store)
       }
     })
 
@@ -100,18 +54,86 @@ export class YearSelector extends Component<YearSelectorProps> {
       setText(countEl, store.displayCount.get())
     })
 
+    // Populate selects when availableYears arrives (or immediately if already set)
+    effect(() => {
+      const years = store.availableYears.get()
+      if (years.length === 0) return
+      this.populateSelects(years, store)
+    })
+
     // Sync selects when yearRange changes externally
     effect(() => {
       const { from, to } = store.yearRange.get()
-      fromSelect.value = String(from)
-      toSelect.value = String(to)
+      this.fromSelect.value = String(from)
+      this.toSelect.value = String(to)
     })
 
     return h('div', { className: cx.root },
-      fromSelect.el,
+      this.fromSelect.el,
       h('span', { className: cx.separator }, '~'),
-      toSelect.el,
+      this.toSelect.el,
       countEl
     )
+  }
+
+  private populateSelects (years: number[], store: ReturnType<typeof useAppStore>): void {
+    const { from, to } = store.yearRange.get()
+    const oldest = years[years.length - 1]
+    const newest = years[0]
+
+    const options: SelectOption[] = years.map(y => ({
+      value: String(y),
+      label: String(y)
+    }))
+
+    this.fromSelect.setOptions(options)
+    this.toSelect.setOptions(options)
+
+    this.fromSelect.value = String(Math.max(oldest, from))
+    this.toSelect.value = String(Math.min(newest, to))
+
+    this.populated = true
+  }
+
+  private onFromChange (store: ReturnType<typeof useAppStore>): void {
+    const years = store.availableYears.get()
+    const newest = years[0]
+
+    const from = Number(this.fromSelect.value)
+    let to = Number(this.toSelect.value)
+
+    if (from > to) to = this.nearestAfter(years, Math.min(from + MAX_YEAR_SPAN, newest))
+    if (to - from > MAX_YEAR_SPAN) to = this.nearestAfter(years, from + MAX_YEAR_SPAN)
+
+    this.toSelect.value = String(to)
+    store.yearRange.set({ from, to })
+  }
+
+  private onToChange (store: ReturnType<typeof useAppStore>): void {
+    const years = store.availableYears.get()
+    const oldest = years[years.length - 1]
+
+    let from = Number(this.fromSelect.value)
+    const to = Number(this.toSelect.value)
+
+    if (to < from) from = this.nearestBefore(years, Math.max(to - MAX_YEAR_SPAN, oldest))
+    if (to - from > MAX_YEAR_SPAN) from = this.nearestBefore(years, to - MAX_YEAR_SPAN)
+
+    this.fromSelect.value = String(from)
+    store.yearRange.set({ from, to })
+  }
+
+  private nearestAfter (years: number[], target: number): number {
+    for (let i = years.length - 1; i >= 0; i--) {
+      if (years[i] >= target) return years[i]
+    }
+    return years[0]
+  }
+
+  private nearestBefore (years: number[], target: number): number {
+    for (let i = 0; i < years.length; i++) {
+      if (years[i] <= target) return years[i]
+    }
+    return years[years.length - 1]
   }
 }

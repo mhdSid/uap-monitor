@@ -63,6 +63,8 @@ export interface AppStore {
   fireballs: Signal<Fireball[]>
   /** Manifest-based year → sighting count (for timeline density). */
   yearCounts: Signal<Map<number, number>>
+  /** True once manifests are loaded, store is hydrated, and initial sightings are ready. */
+  dataReady: Signal<boolean>
 
   // ── Derived (readonly) ────────────────────────────────────────
   /** Currently selected continent from filter, or undefined for all. */
@@ -94,6 +96,7 @@ export function useAppStore (): AppStore {
   const redditArticles = signal<RedditArticle[]>([])
   const fireballs = signal<Fireball[]>([])
   const yearCounts = signal<Map<number, number>>(new Map())
+  const dataReady = signal(false)
 
   const selectedContinent = computed<Continent | undefined>(
     () => filter.get().continent
@@ -123,6 +126,7 @@ export function useAppStore (): AppStore {
     redditArticles,
     fireballs,
     yearCounts,
+    dataReady,
     selectedContinent,
     hasActiveFilter,
     displayCount

@@ -1,7 +1,41 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { resolve } from 'path'
+import { readFileSync } from 'fs'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+
+/** Inline all extracted CSS into <style> tags — eliminates render-blocking <link>. */
+function cssInlinePlugin () {
+  return {
+    name: 'css-inline',
+    enforce: 'post' as const,
+    apply: 'build' as const,
+    transformIndexHtml: {
+      order: 'post' as const,
+      handler (html: string, ctx: { bundle?: Record<string, { type: string; fileName: string; source?: string }> }) {
+        if (!ctx.bundle) return html
+
+        for (const [, chunk] of Object.entries(ctx.bundle)) {
+          if (chunk.type !== 'asset' || !chunk.fileName.endsWith('.css')) continue
+
+          const css = chunk.source
+            ?? readFileSync(resolve('dist', chunk.fileName), 'utf-8')
+
+          const linkRe = new RegExp(
+            `<link[^>]+href=["']/?${chunk.fileName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*>`,
+            'g'
+          )
+          html = html.replace(linkRe, `<style>${css}</style>`)
+
+          // Remove the now-inlined CSS asset from the bundle
+          delete ctx.bundle[chunk.fileName]
+        }
+
+        return html
+      }
+    }
+  }
+}
 
 export default defineConfig({
   base: process.env.VITE_BASE_URL ?? '/',
@@ -30,6 +64,7 @@ export default defineConfig({
   },
   plugins: [
     basicSsl(),
+    cssInlinePlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: null,

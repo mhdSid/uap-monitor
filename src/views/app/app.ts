@@ -79,6 +79,9 @@ export class App extends Component {
   // ─── Initialization ────────────────────────────────────────────
 
   async init (): Promise<void> {
+    // ── Router: mount view shell immediately for fast LCP ──
+    this.initRouter()
+
     // ── All independent network fetches — parallelize ──
     await Promise.all([
       this.dataSource.loadManifests(),
@@ -91,16 +94,14 @@ export class App extends Component {
     this.hydrateStore()
     await this.progressiveLoad()
     this.finalizeData()
+    this.store.dataReady.set(true)
     this.bindDataReactions()
-
-    // ── Router: enable view switching after data is ready ──
-    this.initRouter()
 
     setTimeout(() => {
       const analytics = useAnalytics()
       analytics.init()
       analytics.pageView()
-    }, 1)
+    }, 2000)
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────

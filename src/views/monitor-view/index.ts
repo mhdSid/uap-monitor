@@ -80,6 +80,11 @@ export class MonitorView extends Component {
     this.bindViewReactions()
     this.handleShareUrl()
 
+    // Data not ready yet — show loaders until pipeline completes
+    if (!this.store.dataReady.get()) {
+      this.showAllLoaders()
+    }
+
     this.loaded = true
   }
 
@@ -219,9 +224,16 @@ export class MonitorView extends Component {
   // ─── View-specific reactions ───────────────────────────────────
 
   private bindViewReactions (): void {
+    // Full re-render once data pipeline completes (covers empty initial render)
+    this.store.dataReady.subscribe((ready) => {
+      if (!ready || !this.loaded) return
+      this.hideAllLoaders()
+      this.renderFromStore()
+    })
+
     // Re-render when sightings change (year range changed by app.ts)
     this.store.sightings.subscribe((sightings) => {
-      if (!this.loaded) return
+      if (!this.loaded || !this.store.dataReady.get()) return
       const { from, to } = this.store.yearRange.get()
 
       this.grids.render(sightings, true)

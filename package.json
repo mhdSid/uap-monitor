@@ -18,7 +18,7 @@
     "fetch:twitter": "node scripts/twitter/fetch.mjs --out public/data/twitter-articles.json --limit 10000 --pages 10000",
     "fetch:nuclear": "node scripts/nuclear/fetch.mjs --out public/data/nuclear-facilities.json",
     "fetch:all": "yarn fetch:nuclear && yarn fetch:fireball && yarn fetch:geomagnetic && yarn fetch:seismic && yarn fetch:gdelt && yarn fetch:gnews && yarn fetch:reddit && yarn fetch:twitter && yarn scrape:nuforc:2026:2026 && yarn scrape:nuforc:cache:huggingface && yarn process:data:pipeline:all",
-    "preview": "vite preview",
+    "preview": "yarn build && vite preview",
     "process:data:pipeline:all": "yarn process:data:pipeline:nuforc && yarn process:data:pipeline:hatch && yarn process:data:pipeline:chronology && yarn process:data:pipeline:russian",
     "process:data:pipeline:chronology": "node scripts/process-chronology.mjs",
     "process:data:pipeline:hatch": "node scripts/process-hatch.mjs",
