@@ -227,7 +227,7 @@ export class SightingMap extends Component<SightingMapProps> {
 
   // ─── Public API ─────────────────────────────────────────────────
 
-  setSightings (sightings: Sighting[], fitBounds = false): void {
+  async setSightings (sightings: Sighting[], fitBounds = false): Promise<void> {
     if (!this.clusterGroup) {
       this.pendingSightings = { sightings, fitBounds }
       return
@@ -239,6 +239,8 @@ export class SightingMap extends Component<SightingMapProps> {
     const markerRadius = isTouchDevice ? 10 : 6
 
     const markers: L.CircleMarker[] = []
+    let batchCount = 0
+
     for (const s of sightings) {
       if (!s.coordinates) continue
       const color = MARKER_COLORS[s.source] || colors.sourceChronology
@@ -277,6 +279,11 @@ export class SightingMap extends Component<SightingMapProps> {
       }
 
       markers.push(marker)
+
+      // Yield every 3000 markers to keep tasks under ~40ms
+      if (++batchCount % 3000 === 0) {
+        await new Promise<void>(r => setTimeout(r, 0))
+      }
     }
 
     this.clusterGroup.addLayers(markers)
