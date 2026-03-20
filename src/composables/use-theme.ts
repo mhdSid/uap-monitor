@@ -29,9 +29,12 @@ export function useTheme () {
 
   function toggle (value?: Theme): void {
     const next: Theme = theme.get() === THEME.DARK ? THEME.LIGHT : THEME.DARK
-    theme.set(value ?? next)
-    apply(next)
-    try { localStorage.setItem(STORAGE_KEY, value ?? next) } catch { /* private mode */ }
+    const themVal = value ?? next
+    theme.set(themVal)
+    apply(themVal)
+    try {
+      localStorage.setItem(STORAGE_KEY, themVal)
+    } catch { /* private mode */ }
   }
 
   const isLightTheme = () => theme.get() === THEME.LIGHT

@@ -7,7 +7,7 @@ import { Button } from '@/components/button'
 import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
 import { SubmitModal } from '@/components/submit-modal'
-import { ARIA, HEADER } from '@/data/strings'
+import { ARIA, HEADER, THEME } from '@/data/strings'
 import { ButtonSize } from '@/enums'
 import { useTheme, useBookmarks } from '@/composables'
 
@@ -60,11 +60,15 @@ export class Header extends Component {
     const { theme, toggle } = useTheme()
 
     const themeSwitch = new Switch({
-      checked: theme.get() === 'light',
+      checked: theme.get() === THEME.LIGHT,
       iconOn: () => iconSun(10),
       iconOff: () => iconMoon(10),
       ariaLabel: ARIA.THEME_TOGGLE,
       onChange: () => toggle()
+    })
+
+    theme.subscribe(themeVal => {
+      themeSwitch.checked = themeVal === THEME.LIGHT
     })
 
     const right = h('div', { className: cx.right },

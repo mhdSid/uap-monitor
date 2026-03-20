@@ -158,7 +158,7 @@ export class SpiritualView extends Component {
   private fab!: Button
 
   // Theme
-  private previousTheme: Theme = 'dark'
+  private previousTheme!: Theme
   private theme!: ITheme
 
   // ─── Create ───────────────────────────────────────────────────────
@@ -166,7 +166,7 @@ export class SpiritualView extends Component {
   protected create (): HTMLElement {
     // Force dark theme
     this.theme = useTheme() as ITheme
-    this.previousTheme = this.theme.theme.get()
+    this.previousTheme = `${this.theme.theme.get()}`
     if (this.theme.isLightTheme()) this.theme.toggle()
 
     this.canvas = h('canvas', { className: cx.canvas }) as HTMLCanvasElement
