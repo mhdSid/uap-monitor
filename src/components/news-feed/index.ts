@@ -2,7 +2,7 @@ import './styles.css'
 import { cx } from './cx'
 
 import { Component } from '@/core'
-import { h, clearChildren } from '@/core/dom'
+import { h, clearChildren, setText } from '@/core/dom'
 import { DataGrid } from '@/components/data-grid'
 import { Loader } from '@/components/loader'
 import { TextInput } from '@/components/text-input'
@@ -14,9 +14,10 @@ import { RedditModal } from '@/components/reddit-modal'
 import { INTEL_FEED, ARIA } from '@/data/strings'
 import { ComponentSize } from '@/enums'
 import { intelFeedColumns } from './columns'
-import { useGdelt, useGnews, useTwitter, useReddit, useAppStore, useDebounce } from '@/composables'
+import { useGdelt, useGnews, useTwitter, useReddit, useAppStore, useDebounce, effect } from '@/composables'
 import { tokenMatch } from '@/utils/search'
 import type { IntelArticle, GdeltArticle, GnewsArticle, TwitterArticle, RedditArticle, DataGridColumn, SightingFilter } from '@/types'
+import { createCountTag } from '../tags'
 
 // ─── Helpers ────────────────────────────────────────────────────────
 
@@ -154,6 +155,7 @@ export class NewsFeed extends Component {
   private searchInput!: TextInput
   private sourceChips!: ChipGroup
   private contentEl!: HTMLElement
+  private countTag!: HTMLElement
 
   protected create (): HTMLElement {
     this.columns = intelFeedColumns()
@@ -195,10 +197,12 @@ export class NewsFeed extends Component {
 
     this.contentEl = h('div', { className: cx.content })
 
+    this.updateCountTag(this.baseArticles)
+
     return h('div', { className: 'intel-feed-container' },
       h('div', { className: cx.searchBar },
         this.searchInput.el,
-        this.sourceChips.el
+        h('div', { className: cx.chipBar }, this.sourceChips.el, this.countTag)
       ),
       this.contentEl
     )
@@ -211,6 +215,7 @@ export class NewsFeed extends Component {
     const sourceFiltered = this.baseArticles.filter(a => activeSources.has(a.intelSource))
 
     if (!this.searchQuery) {
+      this.updateCountTag(sourceFiltered)
       this.renderGrid(sourceFiltered)
       return
     }
@@ -224,7 +229,20 @@ export class NewsFeed extends Component {
       )
     )
 
+    this.updateCountTag(filtered)
+
     this.renderGrid(filtered)
+  }
+
+  private updateCountTag (articles: IntelArticle[]) {
+    const countTagText = articles?.length ?? '-'
+
+    if (!this.countTag) {
+      this.countTag = createCountTag(countTagText.toString())
+      return
+    }
+
+    setText(this.countTag, countTagText.toString())
   }
 
   // ─── Public API ─────────────────────────────────────────────────
@@ -247,6 +265,9 @@ export class NewsFeed extends Component {
     buildLookups(gdeltArticles, gnewsArticles, twitterArticles, redditArticles)
     this.allArticles = mergeAndDedupe(twitterArticles, redditArticles, gnewsArticles, gdeltArticles)
     this.baseArticles = this.allArticles
+
+    this.updateCountTag(this.baseArticles)
+
     this.renderGrid(this.allArticles)
     return this.allArticles
   }

@@ -7,6 +7,7 @@ export const cx = {
   desc: 'intel-row__desc',
   inlineTone: 'intel-row__inline-tone',
   searchBar: 'intel-feed__search',
+  chipBar: 'intel-feed__chip-bar',
   content: 'intel-feed__content',
   emptyState: 'intel-feed__empty',
   emptyText: 'intel-feed__empty-text'
