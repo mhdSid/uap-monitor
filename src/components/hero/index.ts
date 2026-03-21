@@ -19,19 +19,19 @@ export class Hero extends Component<HeroProps> {
     const sourcesValue = h('span', { className: cx.statValue }, '15')
     const yearsValue = h('span', { className: cx.statValue }, '—')
 
-    effect(() => {
+    this.own(effect(() => {
       const total = store.totalCount.get()
       setText(sightingsValue, total > 0 ? total.toLocaleString() : '—')
-    })
+    }))
 
-    effect(() => {
+    this.own(effect(() => {
       const years = store.availableYears.get()
       if (years.length > 0) {
         const oldest = years[years.length - 1]
         const newest = years[0]
         setText(yearsValue, `${newest - oldest}+`)
       }
-    })
+    }))
 
     const cta = new Button({
       label: HERO.CTA,

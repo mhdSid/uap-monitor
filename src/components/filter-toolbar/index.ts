@@ -133,7 +133,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       }
     })
 
-    store.sightings.subscribe(() => this.updateCountryOptions())
+    this.own(store.sightings.subscribe(() => this.updateCountryOptions()))
 
     // ── Source chips ─────────────────────────────────────────────
     const sourceChips = SOURCE_CHIPS.map(src => {

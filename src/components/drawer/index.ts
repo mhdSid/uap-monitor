@@ -57,20 +57,31 @@ export class Drawer extends Component<DrawerProps> {
 
     // ── Drag to close (from handle only) ───────────────────────────
     handle.addEventListener('touchstart', (e: TouchEvent) => this.onDragStart(e.touches[0].clientY), { passive: true })
-    document.addEventListener('touchmove', (e: TouchEvent) => {
+
+    const onTouchMove = (e: TouchEvent): void => {
       if (this.dragging) this.onDragMove(e.touches[0].clientY)
-    }, { passive: true })
-    document.addEventListener('touchend', () => {
+    }
+    const onTouchEnd = (): void => {
       if (this.dragging) this.onDragEnd()
-    })
+    }
+    const onMouseMove = (e: MouseEvent): void => {
+      if (this.dragging) this.onDragMove(e.clientY)
+    }
+    const onMouseUp = (): void => {
+      if (this.dragging) this.onDragEnd()
+    }
+
+    document.addEventListener('touchmove', onTouchMove, { passive: true })
+    document.addEventListener('touchend', onTouchEnd)
+    document.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseup', onMouseUp)
+
+    this.own(() => document.removeEventListener('touchmove', onTouchMove))
+    this.own(() => document.removeEventListener('touchend', onTouchEnd))
+    this.own(() => document.removeEventListener('mousemove', onMouseMove))
+    this.own(() => document.removeEventListener('mouseup', onMouseUp))
 
     handle.addEventListener('mousedown', (e: MouseEvent) => this.onDragStart(e.clientY))
-    document.addEventListener('mousemove', (e: MouseEvent) => {
-      if (this.dragging) this.onDragMove(e.clientY)
-    })
-    document.addEventListener('mouseup', () => {
-      if (this.dragging) this.onDragEnd()
-    })
 
     // Escape key
     this.panel.addEventListener('keydown', (e: KeyboardEvent) => {

@@ -166,7 +166,7 @@ export class SpiritualView extends Component {
   protected create (): HTMLElement {
     // Force dark theme
     this.theme = useTheme() as ITheme
-    this.previousTheme = `${this.theme.theme.get()}`
+    this.previousTheme = this.theme.theme.get()
     if (this.theme.isLightTheme()) this.theme.toggle()
 
     this.canvas = h('canvas', { className: cx.canvas }) as HTMLCanvasElement
@@ -187,11 +187,11 @@ export class SpiritualView extends Component {
     // ── Drawer controls ──
     const controlsForm = this.buildControlsForm()
 
-    this.drawer = new Drawer({
+    this.drawer = this.ownChild(new Drawer({
       content: controlsForm,
       density: 'compact',
       onClose: () => this.fab.el.focus()
-    })
+    }))
 
     this.fab = new Button({
       label: SPIRITUAL.FAB_LABEL,
@@ -241,14 +241,13 @@ export class SpiritualView extends Component {
     this.resize()
     this.startLoop()
     window.addEventListener('resize', this.onResize)
+    this.own(() => window.removeEventListener('resize', this.onResize))
+    this.own(() => cancelAnimationFrame(this.animFrame))
+    this.own(() => this.theme.toggle(this.previousTheme))
     this.loaded = true
   }
 
   destroy (): void {
-    cancelAnimationFrame(this.animFrame)
-    window.removeEventListener('resize', this.onResize)
-    this.drawer.destroy()
-    this.theme.toggle(this.previousTheme)
     super.destroy()
   }
 

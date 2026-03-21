@@ -22,7 +22,7 @@ export class IntelView extends Component {
   private loaded = false
 
   protected create (): HTMLElement {
-    this.newsFeed = new NewsFeed({})
+    this.newsFeed = this.ownChild(new NewsFeed({}))
     this.loaderEl = h('div', { className: appCx.viewLoader }, new Loader({}).el)
     this.contentEl = h('div', { className: appCx.appViewContent })
     hide(this.contentEl)

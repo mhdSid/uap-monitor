@@ -39,7 +39,7 @@ export class Header extends Component {
       if (count > 0) show(badge); else hide(badge)
     }
     updateBadge()
-    bookmarks.count.subscribe(updateBadge)
+    this.own(bookmarks.count.subscribe(updateBadge))
 
     const bookmarkBtn = new Button({
       label: ARIA.OPEN_BOOKMARKS,
@@ -67,9 +67,9 @@ export class Header extends Component {
       onChange: () => toggle()
     })
 
-    theme.subscribe(themeVal => {
-      themeSwitch.checked = themeVal === THEME.LIGHT
-    })
+    this.own(theme.subscribe((t) => {
+      themeSwitch.checked = t === THEME.LIGHT
+    }))
 
     const right = h('div', { className: cx.right },
       reportBtn.el,

@@ -117,6 +117,7 @@ export class DataGrid<T> extends Component<DataGridProps<T>> {
 
   protected didMount (): void {
     requestAnimationFrame(() => this.scroll.observe(this.sentinel, this.el))
+    this.own(() => this.scroll.destroy())
   }
 
   // ─── Public API ─────────────────────────────────────────────────

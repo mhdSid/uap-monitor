@@ -186,6 +186,8 @@ export class SightingMap extends Component<SightingMapProps> {
       if (this.isVisible) this.map.invalidateSize()
     })
     this.resizeObserver.observe(this.wrapper)
+    this.own(() => this.resizeObserver?.disconnect())
+    this.own(() => this.map?.remove())
     this.isVisible = true
 
     // Flush any data that was set before the map initialized
@@ -429,6 +431,12 @@ export class SightingMap extends Component<SightingMapProps> {
     if (!this.map || !this.nuclearLayer) return
     if (visible) this.map.addLayer(this.nuclearLayer)
     else this.map.removeLayer(this.nuclearLayer)
+  }
+
+  // ─── Cleanup ────────────────────────────────────────────────────
+
+  destroy (): void {
+    super.destroy()
   }
 
   // ─── Popup ────────────────────────────────────────────────────

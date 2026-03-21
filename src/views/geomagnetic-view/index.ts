@@ -183,7 +183,7 @@ export class GeomagneticView extends Component {
     this.bindResizeObserver()
 
     // Re-compute when sightings change (year range or filter)
-    store.sightings.subscribe((newSightings) => {
+    this.own(store.sightings.subscribe((newSightings) => {
       if (!this.loaded) return
       this.computeData(newSightings)
       this.updateStats()
@@ -192,10 +192,10 @@ export class GeomagneticView extends Component {
         this.drawTimeline()
         this.drawDistribution()
       })
-    })
+    }))
 
     // Show/hide loader during year-range refetches
-    store.loading.subscribe((loading) => {
+    this.own(store.loading.subscribe((loading) => {
       if (!this.loaded) return
       if (loading) {
         show(this.loaderEl)
@@ -204,17 +204,17 @@ export class GeomagneticView extends Component {
         hide(this.loaderEl)
         show(this.contentEl)
       }
-    })
+    }))
 
     // Redraw on theme change (canvas colors differ)
     const { theme } = useTheme()
-    theme.subscribe(() => {
+    this.own(theme.subscribe(() => {
       if (!this.loaded) return
       requestAnimationFrame(() => {
         this.drawTimeline()
         this.drawDistribution()
       })
-    })
+    }))
   }
 
   // ─── Data computation ───────────────────────────────────────────
@@ -422,6 +422,10 @@ export class GeomagneticView extends Component {
       })
     })
     this.resizeObserver.observe(this.contentEl)
+    this.own(() => {
+      this.resizeObserver?.disconnect()
+      this.resizeObserver = null
+    })
   }
 
   // ─── Timeline canvas ───────────────────────────────────────────
@@ -699,8 +703,6 @@ export class GeomagneticView extends Component {
   // ─── Cleanup ────────────────────────────────────────────────────
 
   destroy (): void {
-    this.resizeObserver?.disconnect()
-    this.resizeObserver = null
     super.destroy()
   }
 }

@@ -65,6 +65,9 @@ export class SightingGrids extends Component {
     const selected = store.selectedContinent.get()
     const version = ++this.renderVersion
 
+    // Destroy previous grids (cleans up IntersectionObservers)
+    for (const grid of this.activeGrids) grid.destroy()
+
     clearChildren(this.el)
     this.activeGrids = []
     this.sections.clear()
@@ -154,6 +157,9 @@ export class SightingGrids extends Component {
     }
 
     const applySearch = (): void => {
+      // Destroy previous grid for this section
+      sectionState.grid.destroy()
+
       clearChildren(sectionState.gridContainer)
       const q = sectionState.query
 
@@ -251,5 +257,11 @@ export class SightingGrids extends Component {
     return () => {
       requestAnimationFrame(() => { setStyles(this.el, { minHeight: '' }) })
     }
+  }
+
+  destroy (): void {
+    for (const grid of this.activeGrids) grid.destroy()
+    this.activeGrids = []
+    super.destroy()
   }
 }

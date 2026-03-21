@@ -191,7 +191,7 @@ export class SeismicView extends Component {
     this.bindResizeObserver()
 
     // Re-compute when sightings change (year range or filter)
-    store.sightings.subscribe(async (newSightings) => {
+    this.own(store.sightings.subscribe(async (newSightings) => {
       if (!this.loaded) return
       const { from: f, to: t } = store.yearRange.get()
       await seismic.ensureYears(f, t)
@@ -199,10 +199,10 @@ export class SeismicView extends Component {
       this.updateStats()
       this.updateTable()
       requestAnimationFrame(() => this.drawScatter())
-    })
+    }))
 
     // Show/hide loader during year-range refetches
-    store.loading.subscribe((loading) => {
+    this.own(store.loading.subscribe((loading) => {
       if (!this.loaded) return
       if (loading) {
         show(this.loaderEl)
@@ -211,14 +211,14 @@ export class SeismicView extends Component {
         hide(this.loaderEl)
         show(this.contentEl)
       }
-    })
+    }))
 
     // Redraw on theme change
     const { theme } = useTheme()
-    theme.subscribe(() => {
+    this.own(theme.subscribe(() => {
       if (!this.loaded) return
       requestAnimationFrame(() => this.drawScatter())
-    })
+    }))
   }
 
   // ─── Data computation ───────────────────────────────────────────
@@ -475,6 +475,10 @@ export class SeismicView extends Component {
       })
     })
     this.resizeObserver.observe(this.contentEl)
+    this.own(() => {
+      this.resizeObserver?.disconnect()
+      this.resizeObserver = null
+    })
   }
 
   // ─── Scatter canvas ─────────────────────────────────────────────
@@ -654,8 +658,6 @@ export class SeismicView extends Component {
   // ─── Cleanup ────────────────────────────────────────────────────
 
   destroy (): void {
-    this.resizeObserver?.disconnect()
-    this.resizeObserver = null
     super.destroy()
   }
 }

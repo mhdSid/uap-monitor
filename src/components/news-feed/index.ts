@@ -295,6 +295,10 @@ export class NewsFeed extends Component {
   }
 
   private renderGrid (articles: IntelArticle[]): void {
+    // Destroy previous grid (cleans up IntersectionObserver)
+    this.grid?.destroy()
+    this.grid = null
+
     clearChildren(this.contentEl)
 
     if (articles.length === 0) {
@@ -340,5 +344,10 @@ export class NewsFeed extends Component {
     this.contentEl.appendChild(
       loader ?? h('div', { className: 'app-loader' }, new Loader({}).el)
     )
+  }
+
+  destroy (): void {
+    this.grid?.destroy()
+    super.destroy()
   }
 }

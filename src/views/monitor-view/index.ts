@@ -53,17 +53,17 @@ export class MonitorView extends Component {
   private loaded = false
 
   protected create (): HTMLElement {
-    this.grids = new SightingGrids({})
+    this.grids = this.ownChild(new SightingGrids({}))
 
-    this.sightingMap = new SightingMap({
+    this.sightingMap = this.ownChild(new SightingMap({
       onSightingSelect: (id) => this.grids.scrollToSighting(id)
-    })
+    }))
 
-    this.timeline = new Timeline({
+    this.timeline = this.ownChild(new Timeline({
       onRangeSelect: (from, to) => {
         this.store.yearRange.set({ from, to })
       }
-    })
+    }))
 
     return h('div', { className: [cx.root, appCx.appView].join(' ') },
       h('div', { className: appCx.viewLoader }, new Loader({}).el)
@@ -122,7 +122,7 @@ export class MonitorView extends Component {
       drawerToolbar.el
     )
 
-    this.filterDrawer = new Drawer({
+    this.filterDrawer = this.ownChild(new Drawer({
       content: drawerForm,
       onOpen: () => {
         const panel = qs(`.${drawerCx.panel}`, this.filterDrawer.el)
@@ -133,7 +133,7 @@ export class MonitorView extends Component {
         }
       },
       onClose: () => this.fab.el.focus()
-    })
+    }))
 
     // ── FAB (mobile only) — opens drawer ────────────────────────
     this.fab = new Button({
@@ -231,42 +231,42 @@ export class MonitorView extends Component {
 
   private bindViewReactions (): void {
     // Full re-render once data pipeline completes (covers empty initial render)
-    this.store.dataReady.subscribe((ready) => {
+    this.own(this.store.dataReady.subscribe((ready) => {
       if (!ready || !this.loaded) return
       this.hideAllLoaders()
       this.renderFromStore()
-    })
+    }))
 
     // Re-render when sightings change (year range changed by app.ts)
-    this.store.sightings.subscribe((sightings) => {
+    this.own(this.store.sightings.subscribe((sightings) => {
       if (!this.loaded || !this.store.dataReady.get()) return
       const { from, to } = this.store.yearRange.get()
 
       this.grids.render(sightings, true)
       this.sightingMap.setSightings(sightings)
       this.timeline.setActiveRange(from, to)
-    })
+    }))
 
     // Show/hide loaders when loading state changes
-    this.store.loading.subscribe((loading) => {
+    this.own(this.store.loading.subscribe((loading) => {
       if (!this.loaded) return
       if (loading) this.showAllLoaders()
       else this.hideAllLoaders()
-    })
+    }))
 
     // Filter — monitor-specific (grids, map, news feed)
-    this.store.filter.subscribe(() => {
+    this.own(this.store.filter.subscribe(() => {
       if (!this.loaded) return
       this.onFilterChange()
-    })
+    }))
 
     // Swap map tiles + redraw canvas on theme change
     const { theme } = useTheme()
-    effect(() => {
+    this.own(effect(() => {
       const t = theme.get()
       this.sightingMap.setTheme(t)
       this.timeline.redraw()
-    })
+    }))
   }
 
   // ─── Loaders ───────────────────────────────────────────────────

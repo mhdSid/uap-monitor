@@ -100,6 +100,7 @@ export class Timeline extends Component<TimelineProps> {
       }
     })
     ro.observe(this.el)
+    this.own(() => ro.disconnect())
   }
 
   destroy (): void {
@@ -508,7 +509,7 @@ export class Timeline extends Component<TimelineProps> {
       addClass(this.scrollThumb, cx.scrollThumbActive)
     })
 
-    window.addEventListener('mousemove', (e) => {
+    const onMouseMove = (e: MouseEvent): void => {
       if (!this.isDragging) return
       const dx = e.clientX - this.dragStartX
       const trackW = this.scrollTrack.clientWidth
@@ -519,13 +520,18 @@ export class Timeline extends Component<TimelineProps> {
       const scrollDelta = (dx / maxThumbTravel) * maxScroll
       this.scroller.scrollLeft = Math.max(0, Math.min(maxScroll, this.dragStartScroll + scrollDelta))
       this.syncThumb()
-    })
+    }
 
-    window.addEventListener('mouseup', () => {
+    const onMouseUp = (): void => {
       if (!this.isDragging) return
       this.isDragging = false
       removeClass(this.scrollThumb, cx.scrollThumbActive)
-    })
+    }
+
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseup', onMouseUp)
+    this.own(() => window.removeEventListener('mousemove', onMouseMove))
+    this.own(() => window.removeEventListener('mouseup', onMouseUp))
 
     // ── Thumb drag (touch) ───────────────────────────────────────
     this.scrollThumb.addEventListener('touchstart', (e) => {
@@ -537,7 +543,7 @@ export class Timeline extends Component<TimelineProps> {
       addClass(this.scrollThumb, cx.scrollThumbActive)
     })
 
-    window.addEventListener('touchmove', (e) => {
+    const onTouchMove = (e: TouchEvent): void => {
       if (!this.isDragging) return
       const touch = e.touches[0]
       if (!touch) return
@@ -550,13 +556,18 @@ export class Timeline extends Component<TimelineProps> {
       const scrollDelta = (dx / maxThumbTravel) * maxScroll
       this.scroller.scrollLeft = Math.max(0, Math.min(maxScroll, this.dragStartScroll + scrollDelta))
       this.syncThumb()
-    }, { passive: true })
+    }
 
-    window.addEventListener('touchend', () => {
+    const onTouchEnd = (): void => {
       if (!this.isDragging) return
       this.isDragging = false
       removeClass(this.scrollThumb, cx.scrollThumbActive)
-    })
+    }
+
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('touchend', onTouchEnd)
+    this.own(() => window.removeEventListener('touchmove', onTouchMove))
+    this.own(() => window.removeEventListener('touchend', onTouchEnd))
 
     // ── Track click ──────────────────────────────────────────────
     this.scrollTrack.addEventListener('click', (e) => {

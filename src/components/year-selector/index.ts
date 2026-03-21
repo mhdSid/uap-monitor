@@ -50,23 +50,23 @@ export class YearSelector extends Component<YearSelectorProps> {
 
     const countEl = h('span', { className: cx.count }, '')
 
-    effect(() => {
+    this.own(effect(() => {
       setText(countEl, store.displayCount.get())
-    })
+    }))
 
     // Populate selects when availableYears arrives (or immediately if already set)
-    effect(() => {
+    this.own(effect(() => {
       const years = store.availableYears.get()
       if (years.length === 0) return
       this.populateSelects(years, store)
-    })
+    }))
 
     // Sync selects when yearRange changes externally
-    effect(() => {
+    this.own(effect(() => {
       const { from, to } = store.yearRange.get()
       this.fromSelect.value = String(from)
       this.toSelect.value = String(to)
-    })
+    }))
 
     return h('div', { className: cx.root },
       this.fromSelect.el,
