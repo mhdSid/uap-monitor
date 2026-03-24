@@ -13,6 +13,10 @@
   font-size: var(--fs-xs);
 }
 
+.seis-view .view-panel {
+  overflow: scroll !important;
+}
+
 .seis-view__table-head {
   padding: var(--space-4) var(--space-6);
   text-align: left;
