@@ -1,8 +1,63 @@
 {
-  "generatedAt": "2026-03-26T12:41:08.237Z",
+  "generatedAt": "2026-03-31T13:15:04.915Z",
   "queries": 8,
-  "totalResults": 59,
+  "totalResults": 65,
   "articles": [
+    {
+      "id": "3f189a821cf4",
+      "title": "TALK OF THE TOWN: Tech billionaire builds a 'flying saucer' dome to house his succulents - and locals are furious",
+      "description": "TALK OF THE TOWN: Koos Bekker is riling neighbours in Somerset with his proposals to erect a so-called 'succulent ecosphere' in the grounds of his retreat The Newt",
+      "content": "It looks like an alien spaceship – and plans for it to land in the verdant grounds of a country estate favoured by the celebrity set have got locals up in arms.\nSouth African tech billionaire Koos Bekker is riling neighbours in Somerset with his prop... [3498 chars]",
+      "url": "https://www.dailymail.co.uk/tvshowbiz/article-15687933/TALK-TOWN-billionaire-builds-flying-saucer-dome-succulents.html",
+      "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/28/21/107499147-0-image-m-37_1774734339136.jpg",
+      "publishedAt": "2026-03-28T23:11:47Z",
+      "sourceName": "Daily Mail Online",
+      "sourceUrl": "https://www.dailymail.co.uk"
+    },
+    {
+      "id": "6da86e52291c",
+      "title": "NASA scientist backs evidence of non-human intelligence in Earth's skies",
+      "description": "A former NASA space telescope scientist has published a scientific paper which seems to confirm previous reports around 'intelligent' saucer-like objects hovering near nuclear sites.",
+      "content": "A former NASA scientist has backed a groundbreaking study investigating mysterious flashes in the skies during the early nuclear age, decades before the first satellites were launched.\nIvo Busko, a retired NASA developer who worked at the Space Teles... [7424 chars]",
+      "url": "https://www.dailymail.co.uk/sciencetech/article-15677677/nasa-scientist-evidence-nonhuman-intelligence-skies.html",
+      "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/27/20/107482041-0-image-m-28_1774643781339.jpg",
+      "publishedAt": "2026-03-28T12:32:11Z",
+      "sourceName": "Daily Mail Online",
+      "sourceUrl": "https://www.dailymail.co.uk"
+    },
+    {
+      "id": "839e4ef46ff0",
+      "title": "‘UFO, Aliens, Second Moon, Or Another Natural Phenomena?’: Video Of ‘Two Moons’ In Sky Puzzles Internet",
+      "description": "A video of a woman spotting “two moons” in the night sky from her roof is going viral on social media, leaving the internet theorising about a possible “UFO or alien sighting”. Take a look…, Viral, Times Now",
+      "content": "‘UFO and alien’ conspiracy theorists yet again got ‘active’, after a rather confusing video began to float around on social media. The clip was shared by a woman who was left stunned after allegedly spotting “two moons” in the night sky from her roof... [1226 chars]",
+      "url": "https://www.timesnownews.com/viral/ufo-aliens-second-moon-or-another-natural-phenomena-viral-video-of-two-moons-in-sky-puzzles-internet-article-153943115",
+      "imageUrl": "https://images.timesnownews.com/thumb/msid-153943115,width-1280,height-720,resizemode-75/153943115.jpg",
+      "publishedAt": "2026-03-28T10:13:20Z",
+      "sourceName": "Times Now",
+      "sourceUrl": "https://www.timesnownews.com"
+    },
+    {
+      "id": "a90b1c450e89",
+      "title": "Near Miss: FAA Investigates Close Call in California Skies",
+      "description": "The FAA is investigating a close encounter between a United Airlines jet and a Black Hawk helicopter over California. The incident, which occurred near John Wayne Airport, involved the aircraft coming within 525 feet of each other. New FAA rules now emphasize radar separation to prevent such near-misses.",
+      "content": "The Federal Aviation Administration (FAA) is probing an alarming incident involving a United Airlines jet and an Army Black Hawk helicopter in California. The near-miss happened on a final approach to John Wayne Airport when the two aircraft were per... [641 chars]",
+      "url": "https://www.devdiscourse.com/article/business/3852301-near-miss-faa-investigates-close-call-in-california-skies",
+      "imageUrl": "https://www.devdiscourse.com/remote.axd?https://devdiscourse.blob.core.windows.net/aiimagegallery/06_04_2025_07_12_47_1596083.png?width=920&format=jpeg",
+      "publishedAt": "2026-03-26T22:41:27Z",
+      "sourceName": "Devdiscourse",
+      "sourceUrl": "https://www.devdiscourse.com"
+    },
+    {
+      "id": "041178954d58",
+      "title": "Chilling Pattern Emerges As Scientists with Nuclear, Exoplanet & UFO Ties Vanish or Die Amid Trump’s Disclosure Push",
+      "description": "[USA HERALD] - On February 20, 2026, President Trump posted on Truth Social directing the Pentagon and other agencies to identify and release files on \"alien and extraterrestrial life, unidentified aerial phenomena (UAP), unidentified flying objects (UFOs),\" citing public interest. This followed comments from former President Obama and renewed calls for transparency. No major releases Mystery deepens as MIT nuclear fusion scientist, Caltech astrophysicist, and retired Air Force Gen. William McCasland with UFO ties go missing or are killed shortly after President Trump's February 2026 UFO disclosure order. One troubling connection to missing rocket engineer Monica Reza now under scrutiny.",
+      "content": "[USA HERALD] - On February 20, 2026, President Trump posted on Truth Social directing the Pentagon and other agencies to identify and release files on \"alien and extraterrestrial life, unidentified aerial phenomena (UAP), unidentified flying objects ... [5809 chars]",
+      "url": "https://usaherald.com/chilling-pattern-emerges-as-scientists-with-nuclear-exoplanet-ufo-ties-vanish-or-die-amid-trumps-disclosure-push/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-03-26T13:58:02Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
+    },
     {
       "id": "4d37686e6cb2",
       "title": "As Trump Readies an Alien Announcement, Buy This 1 ETF Now to Invest in UFOs",
@@ -255,6 +310,17 @@
       "publishedAt": "2026-03-01T16:44:00Z",
       "sourceName": "Portland Press Herald",
       "sourceUrl": "https://www.pressherald.com"
+    },
+    {
+      "id": "dc6f8b4208e0",
+      "title": "ESA Image of 3I/ATLAS Ignites Renewed Interest In Anti",
+      "description": "INSIDE THIS REPORT An interstellar object streaking through our solar system. A European spacecraft capturing unexpected jet activity. And a presidential directive that could reopen what governments have quietly known for years. The European Space Agency has released a new image of 3I/ATLAS, obtained by the JANUS camera aboard the Jupiter Icy Moons Explorer (Juice) spacecraft. An exclusive USA Herald report examining ESA’s anti-sun jet image of 3I/ATLAS, scientific implications, and how Trump’s UFO disclosure directive could reveal previously classified data.",
+      "content": "INSIDE THIS REPORT\nAn interstellar object streaking through our solar system.\nA European spacecraft capturing unexpected jet activity.\nAnd a presidential directive that could reopen what governments have quietly known for years.\nThe European Space Ag... [5227 chars]",
+      "url": "https://usaherald.com/esa-image-of-3i-atlas-ignites-renewed-interest-in-anti-sun-jets-as-trumps-disclosure-order-comes-into-focus/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-03-01T02:34:09Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
     },
     {
       "id": "8962526aadfe",
