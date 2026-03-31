@@ -14,6 +14,7 @@ export const cx = {
   cellTime: 'cell-time',
   cellType: 'cell-type',
   heading: 'grids-heading',
+  headingRow: 'grids-heading-row',
   searchBar: 'grids-search',
   gridsList: 'grids-list',
   [Continent.AFRICA]: 'grids-africa',

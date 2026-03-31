@@ -13,10 +13,13 @@ import { Section } from '@/components/layout'
 import { DataGrid } from '@/components/data-grid'
 import { SightingModal } from '@/components/sighting-modal'
 import { TextInput } from '@/components/text-input'
-import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, FILTER, SECTION, ARIA } from '@/data/strings'
+import { ActionMenu } from '@/components/action-menu'
+import { useToast } from '@/components/toast'
+import { CONTINENT_TOOLTIPS, CONTINENT_EMPTY, EXPORT, FILTER, SECTION, ARIA } from '@/data/strings'
 import { ComponentSize } from '@/enums'
 import { useAppStore, useDebounce, yieldThread } from '@/composables'
 import { tokenMatch } from '@/utils/search'
+import { exportToCsv, exportToJson } from '@/utils/export'
 import { sightingColumns } from './columns'
 import type { Sighting, DataGridColumn } from '@/types'
 import { groupByContinent } from '@/data/sightings'
@@ -51,6 +54,7 @@ export class SightingGrids extends Component {
   private renderVersion = 0
   private activeGrids!: DataGrid<Sighting>[]
   private sections = new Map<Continent, ContinentSection>()
+  private currentSightings: Sighting[] = []
 
   protected create (): HTMLElement {
     this.columns = sightingColumns()
@@ -81,10 +85,38 @@ export class SightingGrids extends Component {
       return
     }
 
+    this.currentSightings = sightings
+
     const groups = groupByContinent(sightings)
     const frag = document.createDocumentFragment()
 
-    frag.appendChild(h('h2', { className: cx.heading }, SECTION.SIGHTING_REPORTS))
+    const toast = useToast()
+    const exportMenu = new ActionMenu({
+      ariaLabel: EXPORT.ARIA_MENU,
+      items: [
+        {
+          label: EXPORT.CSV,
+          onClick: () => {
+            exportToCsv(this.currentSightings)
+            toast.success(EXPORT.TOAST_CSV)
+          }
+        },
+        {
+          label: EXPORT.JSON,
+          onClick: () => {
+            exportToJson(this.currentSightings)
+            toast.success(EXPORT.TOAST_JSON)
+          }
+        }
+      ]
+    })
+
+    frag.appendChild(
+      h('div', { className: cx.headingRow },
+        h('h2', { className: cx.heading }, SECTION.SIGHTING_REPORTS),
+        exportMenu.el
+      )
+    )
 
     const domSections: Section[] = []
 

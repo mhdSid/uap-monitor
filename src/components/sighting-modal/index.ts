@@ -14,8 +14,8 @@ import { StatusTag, Tag } from '@/components/tags'
 import { BookmarkButton } from '@/components/bookmark-button'
 import { ShareButton } from '@/components/share-button'
 import { Modal } from '@/components/modal'
-import { ACTIVE_SOURCES, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
-import { useAnalytics, getSourceUrl, useFireball, useNuclear, useAppStore } from '@/composables'
+import { ACTIVE_SOURCES, ENV_CONTEXT, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
+import { useAnalytics, getSourceUrl, useFireball, useGeomagnetic, useNuclear, useSeismic, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
 import type { NearbyFacility } from '@/composables/use-nuclear'
 
@@ -156,6 +156,9 @@ export class SightingModal {
     const nearbyNuclear = nuclear.findNearSighting(s)
     children.push(SightingModal.buildRelatedNuclear(nearbyNuclear))
 
+    // ── Environmental context (geomagnetic + seismic) ─────────────
+    children.push(SightingModal.buildEnvContext(s))
+
     return h('div', { className: cx.content }, ...children)
   }
 
@@ -277,6 +280,66 @@ export class SightingModal {
         )
       )
     }
+
+    return section
+  }
+
+  // ─── Environmental context ──────────────────────────────────────
+
+  private static buildEnvContext (s: Sighting): HTMLElement {
+    const section = h('div', { className: cx.relatedSection })
+    section.appendChild(h('div', { className: cx.relatedTitle }, ENV_CONTEXT.TITLE))
+
+    // ── Geomagnetic row ─────────────────────────────────────────
+    const geo = useGeomagnetic()
+    const kpResult = geo.findKpForSighting(s)
+    const geoRow = h('div', { className: cx.relatedItem })
+    geoRow.appendChild(h('span', { className: cx.relatedItemDate }, ENV_CONTEXT.GEOMAGNETIC_LABEL))
+
+    if (kpResult.kp !== null) {
+      const kpVal = `${ENV_CONTEXT.KP_LABEL} ${kpResult.kp.toFixed(1)}`
+      const isStorm = kpResult.isStorm
+      const isMod = !isStorm && kpResult.kp >= 3
+      const badgeText = isStorm ? ENV_CONTEXT.KP_STORM : isMod ? ENV_CONTEXT.KP_MODERATE : ENV_CONTEXT.KP_CALM
+      const badgeCls = isStorm
+        ? `${cx.envBadge} ${cx.envBadgeStorm}`
+        : isMod
+          ? `${cx.envBadge} ${cx.envBadgeModerate}`
+          : `${cx.envBadge} ${cx.envBadgeCalm}`
+
+      geoRow.appendChild(h('span', { className: cx.relatedItemMeta }, kpVal))
+      geoRow.appendChild(h('span', { className: badgeCls }, badgeText))
+    } else {
+      geoRow.appendChild(h('span', { className: cx.relatedItemMeta }, ENV_CONTEXT.NO_KP_DATA))
+    }
+    section.appendChild(geoRow)
+
+    // ── Seismic row ──────────────────────────────────────────────
+    const seismicNearby = useSeismic().findNearSighting(s)
+    const nearest = seismicNearby.length > 0
+      ? seismicNearby.reduce((a, b) => Math.abs(a.hoursDelta) < Math.abs(b.hoursDelta) ? a : b)
+      : null
+
+    const seismicRow = h('div', { className: cx.relatedItem })
+    seismicRow.appendChild(h('span', { className: cx.relatedItemDate }, ENV_CONTEXT.SEISMIC_LABEL))
+
+    if (nearest) {
+      const mag = nearest.earthquake.magnitude != null
+        ? `M${nearest.earthquake.magnitude.toFixed(1)}`
+        : 'M?'
+      const dist = `${nearest.distanceKm} km`
+      const delta = nearest.hoursDelta >= 0
+        ? `+${Math.round(nearest.hoursDelta)}h`
+        : `${Math.round(nearest.hoursDelta)}h`
+
+      seismicRow.appendChild(h('span', { className: cx.relatedItemMeta }, `${mag} · ${dist} · ${delta}`))
+      if (nearest.isEQLCandidate) {
+        seismicRow.appendChild(h('span', { className: cx.envEqlFlag }, ENV_CONTEXT.EQL_FLAG))
+      }
+    } else {
+      seismicRow.appendChild(h('span', { className: cx.relatedItemMeta }, ENV_CONTEXT.NO_SEISMIC))
+    }
+    section.appendChild(seismicRow)
 
     return section
   }

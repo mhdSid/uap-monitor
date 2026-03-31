@@ -548,7 +548,8 @@ export const NAV = {
   GEOMAGNETIC: 'GEOMAGNETIC',
   SEISMIC: 'SEISMIC',
   INTEL: 'INTEL FEED',
-  SPIRITUAL: 'SPIRITUAL'
+  SPIRITUAL: 'SPIRITUAL',
+  RESEARCH: 'RESEARCH'
 } as const
 
 // ─── Geomagnetic visualizer ─────────────────────────────────────────
@@ -620,6 +621,7 @@ export const SEISMIC = {
 // ─── Sighting modal — environmental context ─────────────────────────
 
 export const ENV_CONTEXT = {
+  TITLE: 'ENVIRONMENTAL CONTEXT',
   GEOMAGNETIC_LABEL: 'Geomagnetic',
   SEISMIC_LABEL: 'Seismic Activity',
   KP_LABEL: 'Kp',
@@ -664,4 +666,14 @@ export const SPIRITUAL = {
   MODE_WORMHOLE: 'WORMHOLE',
   FAB_LABEL: 'Open realm controls',
   DRAWER_CLOSE: 'Close controls'
+} as const
+
+// ─── Data export ────────────────────────────────────────────────────
+
+export const EXPORT = {
+  ARIA_MENU: 'Export sighting data',
+  CSV: 'Export CSV',
+  JSON: 'Export JSON',
+  TOAST_CSV: 'CSV DOWNLOADED',
+  TOAST_JSON: 'JSON DOWNLOADED'
 } as const

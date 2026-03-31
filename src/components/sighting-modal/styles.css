@@ -209,3 +209,34 @@
 
   .modal-sighting__value { text-align: right; }
 }
+
+/* ── Environmental context badges ────────────────────────────── */
+
+.modal-sighting__env-badge {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.modal-sighting__env-badge--storm {
+  color: var(--color-red);
+}
+
+.modal-sighting__env-badge--calm {
+  color: var(--color-green);
+}
+
+.modal-sighting__env-badge--moderate {
+  color: var(--color-amber);
+}
+
+.modal-sighting__env-eql {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 0.8px;
+  color: var(--color-amber);
+  font-weight: 600;
+  flex-shrink: 0;
+}

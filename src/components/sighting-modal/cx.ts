@@ -25,5 +25,10 @@ export const cx = {
   relatedItemDate: 'modal-sighting__related-item-date',
   relatedItemMeta: 'modal-sighting__related-item-meta',
   relatedItemDistance: 'modal-sighting__related-item-distance',
-  relatedItemLink: 'modal-sighting__related-item-link'
+  relatedItemLink: 'modal-sighting__related-item-link',
+  envBadge: 'modal-sighting__env-badge',
+  envBadgeStorm: 'modal-sighting__env-badge--storm',
+  envBadgeCalm: 'modal-sighting__env-badge--calm',
+  envBadgeModerate: 'modal-sighting__env-badge--moderate',
+  envEqlFlag: 'modal-sighting__env-eql'
 } as const
