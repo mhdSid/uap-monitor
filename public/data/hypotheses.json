@@ -1,0 +1,455 @@
+{
+  "generatedAt": "2026-03-24T05:31:09.841Z",
+  "dataDir": "/Users/mohamedsidani/Desktop/dev/uap-monitor/public/data",
+  "datasetsLoaded": {
+    "sightings": true,
+    "geomagnetic": true,
+    "earthquakes": true,
+    "fireballs": true,
+    "nuclear": true
+  },
+  "totalHypotheses": 8,
+  "completed": 8,
+  "supported": 6,
+  "results": [
+    {
+      "id": "geomagnetic-overrep",
+      "name": "UAP sighting rate differs on geomagnetic storm days vs calm days",
+      "description": "Compare mean daily sighting count on storm days (Kp ≥ 5) vs calm days. A ratio > 1.0 means more sightings on storm days; < 1.0 could indicate weather-correlated suppression (storms often coincide with cloud cover). Stratified by era to control for secular reporting trends.",
+      "status": "completed",
+      "supported": false,
+      "effectSize": -0.211,
+      "samples": {
+        "stormDays": 5565,
+        "calmDays": 28851,
+        "meanSightingsOnStormDays": 4.2,
+        "meanSightingsOnCalmDays": 6.01,
+        "ratio": 0.7,
+        "byEra": [
+          {
+            "era": "1990-2005",
+            "stormDays": 1061,
+            "calmDays": 4783,
+            "meanStorm": 6.5,
+            "meanCalm": 7.11,
+            "ratio": 0.91
+          },
+          {
+            "era": "2006-2015",
+            "stormDays": 224,
+            "calmDays": 3428,
+            "meanStorm": 18.7,
+            "meanCalm": 16.46,
+            "ratio": 1.14
+          },
+          {
+            "era": "2016-2026",
+            "stormDays": 321,
+            "calmDays": 3414,
+            "meanStorm": 12.14,
+            "meanCalm": 13.28,
+            "ratio": 0.91
+          }
+        ]
+      },
+      "summary": "Mean daily sightings: storm days 4.20 vs calm days 6.01 (ratio: 0.70x). Cohen's d = -0.211. Era breakdown: 1990-2005: 0.91x, 2006-2015: 1.14x, 2016-2026: 0.91x.",
+      "elapsedMs": 98
+    },
+    {
+      "id": "geomagnetic-kp-bands",
+      "name": "UAP sighting distribution across Kp bands deviates from uniform expectation",
+      "description": "Bin sightings by the max Kp on their date into bands (0-1, 1-2, ..., 8-9) and compare the observed distribution to the expected distribution based on how many days fall in each band.",
+      "status": "completed",
+      "supported": true,
+      "effectSize": null,
+      "chiSquared": 8876.76,
+      "degreesOfFreedom": 9,
+      "samples": {
+        "totalSightings": 196726,
+        "totalDays": 34416,
+        "bands": [
+          {
+            "band": "Kp 0-1",
+            "days": 718,
+            "sightings": 7209,
+            "expected": 4104.2,
+            "ratio": 1.76
+          },
+          {
+            "band": "Kp 1-2",
+            "days": 4332,
+            "sightings": 32924,
+            "expected": 24762.2,
+            "ratio": 1.33
+          },
+          {
+            "band": "Kp 2-3",
+            "days": 8037,
+            "sightings": 51252,
+            "expected": 45940.5,
+            "ratio": 1.12
+          },
+          {
+            "band": "Kp 3-4",
+            "days": 9284,
+            "sightings": 50372,
+            "expected": 53068.5,
+            "ratio": 0.95
+          },
+          {
+            "band": "Kp 4-5",
+            "days": 6480,
+            "sightings": 31587,
+            "expected": 37040.5,
+            "ratio": 0.85
+          },
+          {
+            "band": "Kp 5-6",
+            "days": 3423,
+            "sightings": 14948,
+            "expected": 19566.3,
+            "ratio": 0.76
+          },
+          {
+            "band": "Kp 6-7",
+            "days": 1376,
+            "sightings": 5403,
+            "expected": 7865.4,
+            "ratio": 0.69
+          },
+          {
+            "band": "Kp 7-8",
+            "days": 519,
+            "sightings": 2015,
+            "expected": 2966.7,
+            "ratio": 0.68
+          },
+          {
+            "band": "Kp 8-9",
+            "days": 220,
+            "sightings": 875,
+            "expected": 1257.5,
+            "ratio": 0.7
+          },
+          {
+            "band": "Kp 9-10",
+            "days": 27,
+            "sightings": 141,
+            "expected": 154.3,
+            "ratio": 0.91
+          }
+        ]
+      },
+      "summary": "χ²(9) = 8876.8. Sighting distribution across Kp bands significantly deviates from the day-count baseline.",
+      "elapsedMs": 78
+    },
+    {
+      "id": "seismic-proximity",
+      "name": "UAP sightings cluster near recent earthquakes",
+      "description": "For each earthquake M4.0+, count sightings within 150 km and ±7 days. Baseline uses time-shifted control: same spatial pairs but with earthquake dates shifted ±90 days to break any real temporal association while preserving geographic co-location.",
+      "status": "completed",
+      "supported": true,
+      "effectSize": 1.05,
+      "samples": {
+        "earthquakes": 523022,
+        "geoSightings": 186666,
+        "radiusKm": 150,
+        "windowDays": 7,
+        "realPairs": 6524,
+        "realQuakesWithPairs": 3158,
+        "controlPairsForward": 6000,
+        "controlPairsBackward": 6436,
+        "controlMean": 6218,
+        "meanDistanceKm": 96.8,
+        "stdDistanceKm": 38.9
+      },
+      "summary": "6524 real sighting–earthquake pairs (within 150 km, ±7 days). Control (±90-day shift): 6218 pairs. Ratio: 1.05x. 3158 earthquakes had nearby sightings.",
+      "elapsedMs": 31305
+    },
+    {
+      "id": "nuclear-proximity",
+      "name": "UAP sightings are disproportionately concentrated near nuclear facilities",
+      "description": "Compare the fraction of sightings within 80 km of nuclear facilities to control sets of the same size (140 random sighting locations). Controls for population density and geographic reporting bias.",
+      "status": "completed",
+      "supported": false,
+      "effectSize": 0.42,
+      "samples": {
+        "facilities": 140,
+        "geoSightings": 186666,
+        "radiusKm": 80,
+        "observedFraction": 22.44,
+        "controlMeanFraction": 54.02,
+        "controlStdFraction": 1.62,
+        "controlSets": 20,
+        "zScore": -19.51,
+        "byType": {
+          "reactor": {
+            "facilities": 92,
+            "nearbySightings": 31993
+          },
+          "weapons_lab": {
+            "facilities": 9,
+            "nearbySightings": 8439
+          },
+          "research": {
+            "facilities": 7,
+            "nearbySightings": 1036
+          },
+          "reprocessing": {
+            "facilities": 8,
+            "nearbySightings": 231
+          },
+          "test_site": {
+            "facilities": 14,
+            "nearbySightings": 23
+          },
+          "storage": {
+            "facilities": 1,
+            "nearbySightings": 1
+          },
+          "enrichment": {
+            "facilities": 9,
+            "nearbySightings": 628
+          }
+        },
+        "byCountry": {
+          "USA": {
+            "facilities": 34,
+            "nearbySightings": 29961
+          },
+          "Russia": {
+            "facilities": 14,
+            "nearbySightings": 173
+          },
+          "Kazakhstan": {
+            "facilities": 1,
+            "nearbySightings": 0
+          },
+          "France": {
+            "facilities": 12,
+            "nearbySightings": 636
+          },
+          "United Kingdom": {
+            "facilities": 6,
+            "nearbySightings": 4396
+          },
+          "China": {
+            "facilities": 8,
+            "nearbySightings": 20
+          },
+          "Japan": {
+            "facilities": 9,
+            "nearbySightings": 21
+          },
+          "India": {
+            "facilities": 7,
+            "nearbySightings": 480
+          },
+          "Pakistan": {
+            "facilities": 4,
+            "nearbySightings": 51
+          },
+          "South Korea": {
+            "facilities": 4,
+            "nearbySightings": 10
+          },
+          "Germany": {
+            "facilities": 4,
+            "nearbySightings": 46
+          },
+          "Ukraine": {
+            "facilities": 5,
+            "nearbySightings": 5
+          },
+          "Canada": {
+            "facilities": 4,
+            "nearbySightings": 6198
+          },
+          "Iran": {
+            "facilities": 3,
+            "nearbySightings": 1
+          },
+          "Israel": {
+            "facilities": 1,
+            "nearbySightings": 0
+          },
+          "North Korea": {
+            "facilities": 1,
+            "nearbySightings": 2
+          },
+          "UAE": {
+            "facilities": 1,
+            "nearbySightings": 0
+          },
+          "South Africa": {
+            "facilities": 1,
+            "nearbySightings": 253
+          },
+          "Argentina": {
+            "facilities": 1,
+            "nearbySightings": 8
+          },
+          "Brazil": {
+            "facilities": 1,
+            "nearbySightings": 17
+          },
+          "Romania": {
+            "facilities": 1,
+            "nearbySightings": 6
+          },
+          "Hungary": {
+            "facilities": 1,
+            "nearbySightings": 8
+          },
+          "Czech Republic": {
+            "facilities": 2,
+            "nearbySightings": 13
+          },
+          "Slovakia": {
+            "facilities": 2,
+            "nearbySightings": 14
+          },
+          "Finland": {
+            "facilities": 2,
+            "nearbySightings": 9
+          },
+          "Sweden": {
+            "facilities": 2,
+            "nearbySightings": 19
+          },
+          "Lithuania": {
+            "facilities": 1,
+            "nearbySightings": 0
+          },
+          "Turkey": {
+            "facilities": 1,
+            "nearbySightings": 0
+          },
+          "Marshall Islands": {
+            "facilities": 2,
+            "nearbySightings": 1
+          },
+          "Australia": {
+            "facilities": 3,
+            "nearbySightings": 3
+          },
+          "Algeria": {
+            "facilities": 2,
+            "nearbySightings": 0
+          }
+        }
+      },
+      "summary": "22.4% of sightings within 80 km of nuclear facilities. Control (20 random sets of 140 sighting locations): 54.0% ± 1.6%. Ratio: 0.42x. z = -19.51.",
+      "elapsedMs": 6343
+    },
+    {
+      "id": "fireball-coincidence",
+      "name": "UAP sightings spike on days with NASA CNEOS fireball events",
+      "description": "Compare the mean sighting count on fireball days vs non-fireball days within the dataset overlap period.",
+      "status": "completed",
+      "supported": true,
+      "effectSize": 0.731,
+      "samples": {
+        "fireballDays": 829,
+        "nonFireballDays": 24717,
+        "meanSightingsOnFireballDays": 14.2,
+        "meanSightingsOnNonFireballDays": 7.59,
+        "ratio": 1.87
+      },
+      "summary": "Mean sightings on fireball days: 14.2 vs non-fireball days: 7.6 (ratio: 1.87x). Cohen's d = 0.731.",
+      "elapsedMs": 49
+    },
+    {
+      "id": "weekend-effect",
+      "name": "UAP sightings are more frequent on weekends (observer bias)",
+      "description": "Test whether Friday–Sunday accounts for a disproportionate share of sightings vs Monday–Thursday. Expected: 3/7 = 42.9%.",
+      "status": "completed",
+      "supported": true,
+      "effectSize": 1.057,
+      "chiSquared": 492.99,
+      "degreesOfFreedom": 1,
+      "samples": {
+        "total": 199276,
+        "weekend": 90309,
+        "weekday": 108967,
+        "weekendPercent": 45.3,
+        "expectedPercent": 42.9
+      },
+      "summary": "45.3% of sightings on Fri–Sun vs expected 42.9%. Overrepresentation: 1.057x. χ²(1) = 493.0.",
+      "elapsedMs": 69
+    },
+    {
+      "id": "summer-seasonality",
+      "name": "UAP sightings peak in Northern Hemisphere summer months",
+      "description": "Test whether June–August accounts for more than 25% (3/12) of sightings. This tests observer availability bias (longer days, outdoor activity, July 4th).",
+      "status": "completed",
+      "supported": true,
+      "effectSize": 1.223,
+      "samples": {
+        "total": 199276,
+        "summer": 60939,
+        "summerPercent": 30.6,
+        "peakMonth": "Jul",
+        "peakCount": 22496,
+        "monthlyCounts": {
+          "Jan": 15297,
+          "Feb": 11963,
+          "Mar": 13755,
+          "Apr": 14108,
+          "May": 14306,
+          "Jun": 17745,
+          "Jul": 22496,
+          "Aug": 20698,
+          "Sep": 18516,
+          "Oct": 19144,
+          "Nov": 16824,
+          "Dec": 14424
+        }
+      },
+      "summary": "30.6% of sightings in Jun–Aug vs expected 25.0%. Overrepresentation: 1.22x. Peak month: Jul (22496 sightings).",
+      "elapsedMs": 46
+    },
+    {
+      "id": "credibility-characteristics",
+      "name": "Sightings with more reported characteristics have higher credibility scores",
+      "description": "Test whether there is a positive correlation between the number of characteristics reported and the credibility score assigned.",
+      "status": "completed",
+      "supported": true,
+      "effectSize": 0.5406,
+      "samples": {
+        "pairs": 199276,
+        "meanCharacteristics": 1.71,
+        "meanCredibility": 61.6,
+        "correlation": 0.5406,
+        "byCharacteristicCount": {
+          "0 chars": {
+            "count": 70671,
+            "meanCredibility": 54.9
+          },
+          "1 chars": {
+            "count": 54754,
+            "meanCredibility": 59.2
+          },
+          "2 chars": {
+            "count": 33020,
+            "meanCredibility": 65
+          },
+          "3 chars": {
+            "count": 14388,
+            "meanCredibility": 70.8
+          },
+          "4 chars": {
+            "count": 6202,
+            "meanCredibility": 74.7
+          },
+          "5+ chars": {
+            "count": 20241,
+            "meanCredibility": 75.3
+          }
+        }
+      },
+      "summary": "Pearson r = 0.5406 across 199276 sightings. Weak positive correlation between characteristic count and credibility.",
+      "elapsedMs": 61
+    }
+  ]
+}

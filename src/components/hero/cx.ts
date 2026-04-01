@@ -4,5 +4,6 @@ export const cx = {
   stats: 'hero__stats',
   stat: 'hero__stat',
   statValue: 'hero__stat-value',
-  statLabel: 'hero__stat-label'
+  statLabel: 'hero__stat-label',
+  statResearch: 'hero__stat--research'
 } as const

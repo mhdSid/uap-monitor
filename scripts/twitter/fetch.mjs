@@ -92,7 +92,7 @@ function transformTweet (tweet, userMap, mediaMap) {
     id: tweet.id,
     text: (tweet.text || '').trim(),
     url: `https://x.com/${author.username || 'i'}/status/${tweet.id}`,
-    publishedAt: tweet.created_at || new Date().toISOString(),
+    publishedAt: tweet.created_at || null,
     lang: tweet.lang || 'en',
     authorName: author.name || '',
     authorUsername: author.username || '',
@@ -178,6 +178,7 @@ async function main () {
     for (const t of tweets) {
       if (seen.has(t.id)) continue
       if (isNoiseTweet(t)) { noise++; continue }
+      if (!t.publishedAt) continue
       seen.add(t.id)
       allArticles.push(t)
       added++

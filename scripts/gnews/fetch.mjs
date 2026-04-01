@@ -70,7 +70,7 @@ function transformArticle (raw) {
     content: (raw.content || '').trim(),
     url,
     imageUrl: raw.image || null,
-    publishedAt: raw.publishedAt || new Date().toISOString(),
+    publishedAt: raw.publishedAt || null,
     sourceName: raw.source?.name || '',
     sourceUrl: raw.source?.url || null
   }
@@ -150,6 +150,7 @@ async function main () {
         const a = transformArticle(raw)
         if (seen.has(a.url)) continue
         if (isNoiseArticle(a)) { noise++; continue }
+        if (!a.publishedAt) continue
         seen.add(a.url)
         allArticles.push(a)
         newCount++

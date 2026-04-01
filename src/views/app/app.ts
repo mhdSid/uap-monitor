@@ -268,6 +268,16 @@ export class App extends Component {
             const { SpiritualView } = await import('@/views/spiritual-view')
             return new SpiritualView({})
           }
+        },
+
+        [RouteName.RESEARCH]: {
+          path: '/research',
+          title: 'UAP Monitor — Research & Statistical Methodology',
+          description: 'Statistical hypothesis testing across 200K+ UAP sighting reports. Nuclear proximity, geomagnetic correlation, seismic clustering, fireball coincidence, and observer bias analysis.',
+          factory: async () => {
+            const { ResearchView } = await import('@/views/research-view')
+            return new ResearchView({})
+          }
         }
       },
 

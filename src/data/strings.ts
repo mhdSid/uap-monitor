@@ -380,7 +380,9 @@ export const HERO = {
   CTA: 'EXPLORE MAP',
   STAT_SIGHTINGS: 'Sightings',
   STAT_SOURCES: 'Sources',
-  STAT_YEARS: 'Years of Data'
+  STAT_YEARS: 'Years of Data',
+  STAT_HYPOTHESES: 'Hypotheses Confirmed',
+  STAT_HYPOTHESES_VALUE: '6/8'
 } as const
 
 
@@ -676,4 +678,24 @@ export const EXPORT = {
   JSON: 'Export JSON',
   TOAST_CSV: 'CSV DOWNLOADED',
   TOAST_JSON: 'JSON DOWNLOADED'
+} as const
+
+// ─── Research view ─────────────────────────────────────────────────
+
+export const RESEARCH = {
+  TITLE: 'RESEARCH & METHODOLOGY',
+  SUBTITLE: 'Statistical hypothesis testing across 200K+ sighting reports and five environmental datasets.',
+  STAT_TOTAL: 'HYPOTHESES TESTED',
+  STAT_SUPPORTED: 'SUPPORTED',
+  STAT_DATASETS: 'DATASETS',
+  STAT_SIGHTINGS: 'SIGHTINGS ANALYZED',
+  CARD_SUPPORTED: 'SUPPORTED',
+  CARD_NOT_SUPPORTED: 'NOT SUPPORTED',
+  CARD_EFFECT: 'Effect',
+  CARD_CHI: 'χ²',
+  LOADING: 'Loading research data...',
+  ERROR: 'Could not load hypothesis results.',
+  METHODOLOGY_TITLE: 'METHODOLOGY NOTES',
+  METHODOLOGY_BODY: 'Population density controls applied via 20 sets of random geographic control points. Time-shifted baselines (±90 days) used for temporal hypotheses to isolate signal from geographic co-location. All p-values are two-tailed. Effect sizes: Cohen\'s d for continuous, odds ratio for proportions.',
+  ATTRIBUTION: 'Data sources: NUFORC, Hatch UDB, Researcher Chronologies, NASA CNEOS, USGS Earthquakes, GFZ Potsdam Kp Index, IAEA Nuclear Facilities.'
 } as const

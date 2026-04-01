@@ -67,7 +67,7 @@ function parseArgs () {
 // ─── Helpers ────────────────────────────────────────────────────────
 
 function epochToISO (seconds) {
-  if (!seconds) return new Date().toISOString()
+  if (!seconds) return null
   return new Date(seconds * 1000).toISOString()
 }
 
@@ -227,6 +227,7 @@ async function main () {
 
       if (seen.has(key)) continue
       if (isNoiseRedditPost(article)) { noise++; continue }
+      if (!article.publishedAt) continue
 
       seen.add(key)
       allArticles.push(article)

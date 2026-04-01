@@ -55,6 +55,19 @@ export class Hero extends Component<HeroProps> {
         h('div', { className: cx.stat },
           yearsValue,
           h('span', { className: cx.statLabel }, HERO.STAT_YEARS)
+        ),
+        h('a', {
+          className: `${cx.stat} ${cx.statResearch}`,
+          href: '/research',
+          'aria-label': HERO.STAT_HYPOTHESES,
+          onClick: (e: Event) => {
+            e.preventDefault()
+            window.history.pushState(null, '', '/research')
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          }
+        },
+          h('span', { className: cx.statValue }, HERO.STAT_HYPOTHESES_VALUE),
+          h('span', { className: cx.statLabel }, HERO.STAT_HYPOTHESES)
         )
       ),
       cta.el

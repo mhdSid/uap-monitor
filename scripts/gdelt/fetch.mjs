@@ -92,7 +92,11 @@ function buildWindows (totalDays, windowSize) {
 
 function parseGdeltDate (str) {
   if (!str) return null
-  const match = str.match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})?(\d{2})?(\d{2})?$/)
+  // Strip trailing timezone info (Z, +HH:MM, -HH:MM) before matching.
+  // GDELT seendate is normally YYYYMMDDTHHmmSS but the API has been observed
+  // returning a trailing Z on some responses, which breaks the digit-only regex.
+  const cleaned = str.replace(/[Z+-].*$/, '')
+  const match = cleaned.match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})?(\d{2})?(\d{2})?$/)
   if (!match) return null
   const [, y, m, d, hh = '00', mm = '00', ss = '00'] = match
   return `${y}-${m}-${d}T${hh}:${mm}:${ss}Z`
@@ -105,7 +109,7 @@ function transformArticle (raw, bandTone) {
     title: (raw.title || '').trim(),
     url,
     domain: raw.domain || '',
-    publishedAt: parseGdeltDate(raw.seendate) || new Date().toISOString(),
+    publishedAt: parseGdeltDate(raw.seendate) || null,
     language: raw.language || 'en',
     sourceName: raw.sourcecountry
       ? raw.domain + ' (' + raw.sourcecountry + ')'
@@ -173,6 +177,7 @@ async function main () {
         const article = transformArticle(raw, band.tone)
         if (seen.has(article.url)) continue
         if (isNoiseArticle(article)) { noise++; continue }
+        if (!article.publishedAt) continue
         seen.add(article.url)
         allArticles.push(article)
         added++

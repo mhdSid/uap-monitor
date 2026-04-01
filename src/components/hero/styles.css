@@ -48,6 +48,34 @@
   text-transform: uppercase;
 }
 
+.hero__stat--research {
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, opacity 0.15s;
+  padding-bottom: var(--space-1);
+}
+
+.hero__stat--research:hover {
+  border-bottom-color: var(--color-green);
+}
+
+.hero__stat--research:hover .hero__stat-value {
+  opacity: 0.85;
+}
+
+.hero__stat--research:hover .hero__stat-label {
+  color: var(--color-text);
+}
+  .hero__stats {
+    gap: var(--space-md);
+  }
+
+  .hero__stat-value {
+    font-size: var(--fs-lg);
+  }
+}
+
 @media (max-width: 480px) {
   .hero__stats {
     gap: var(--space-md);

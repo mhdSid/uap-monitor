@@ -942,19 +942,37 @@ export function mergeArticles (filePath, newArticles, {
     console.log('No existing file, starting fresh')
   }
 
+  // Build a lookup of existing articles by key so we can preserve original
+  // publish dates — article publication dates never change, and the fetch
+  // fallback (null) or a stale re-fetch should never overwrite a correct date.
+  const existingByKey = new Map()
+  for (const a of existing) {
+    const key = a[urlField] || a.id
+    if (key) existingByKey.set(key, a)
+  }
+
   const seen = new Set()
   const merged = []
+  let datePreserved = 0
 
-  // New articles take priority (fresher data)
+  // New articles take metadata priority, but always preserve the original
+  // publish date from the source file when the article already exists.
   for (const a of newArticles) {
     const key = a[urlField] || a.id
     if (!seen.has(key)) {
       seen.add(key)
-      merged.push(a)
+      const existingVersion = existingByKey.get(key)
+      if (existingVersion?.[dateField]) {
+        // Keep the original publish date — it is immutable
+        merged.push({ ...a, [dateField]: existingVersion[dateField] })
+        datePreserved++
+      } else {
+        merged.push(a)
+      }
     }
   }
 
-  // Then append existing that aren't dupes
+  // Append existing articles that were not re-fetched this run
   let kept = 0
   for (const a of existing) {
     const key = a[urlField] || a.id
@@ -969,8 +987,11 @@ export function mergeArticles (filePath, newArticles, {
     .sort((a, b) => (b[dateField] || '').localeCompare(a[dateField] || ''))
     .slice(0, max)
 
-  const added = merged.length - existing.length
-  console.log(`Merge: ${existing.length} existing + ${newArticles.length} fetched -> ${merged.length} deduped -> ${sorted.length} after trim (${Math.max(0, added)} net new)`)
+  const added = newArticles.length - datePreserved
+  console.log(`Merge: ${existing.length} existing + ${newArticles.length} fetched -> ${merged.length} deduped -> ${sorted.length} after trim`)
+  if (datePreserved > 0) {
+    console.log(`  Preserved original publishedAt on ${datePreserved} re-fetched articles`)
+  }
 
   return { merged: sorted, existing: existing.length, added: Math.max(0, added) }
 }
