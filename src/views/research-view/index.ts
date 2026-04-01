@@ -17,6 +17,8 @@ import { Tag } from '@/components/tags'
 import { TagVariant, TagSize } from '@/enums'
 import { fetchJson, dataUrl } from '@/composables/use-fetch'
 import { HypothesisModal } from '@/components/hypothesis-modal'
+import { DataSources } from '@/components/data-sources'
+import { useAppStore } from '@/composables'
 import type { HypothesisEntry } from '@/components/hypothesis-modal'
 
 // ─── Local types (not in global types — research-view only) ─────────
@@ -128,10 +130,15 @@ export class ResearchView extends Component {
       )
     )
 
-    // Attribution
-    this.contentEl.appendChild(
-      h('p', { className: cx.attribution }, RESEARCH.ATTRIBUTION)
-    )
+    // Data sources — reuse existing DataSources component
+    const sources = useAppStore().sources.get()
+    if (sources.length > 0) {
+      this.contentEl.appendChild(
+        h('div', { className: cx.attribution },
+          new DataSources({ sources }).el
+        )
+      )
+    }
   }
 
   private buildError (): void {
@@ -191,7 +198,7 @@ export class ResearchView extends Component {
       role: 'button',
       tabindex: '0',
       'aria-label': result.name,
-      onClick: (e: MouseEvent) => HypothesisModal.open(entry, e.currentTarget as HTMLElement)
+      onClick: () => HypothesisModal.open(entry, card)
     },
       h('div', { className: cx.cardHeader },
         h('span', { className: cx.cardName }, result.name)

@@ -837,7 +837,21 @@ async function main () {
       const rawSrc = h.test.toString()
       const bodyStart = rawSrc.indexOf('{') + 1
       const bodyEnd = rawSrc.lastIndexOf('}')
-      const testSource = rawSrc.slice(bodyStart, bodyEnd).trim()
+      const rawBody = rawSrc.slice(bodyStart, bodyEnd)
+
+      // Dedent: remove the common leading whitespace shared by all non-empty lines
+      // so the extracted body is flush-left regardless of nesting in the source file.
+      const bodyLines = rawBody.split('\n')
+      const minIndent = bodyLines
+        .filter(l => l.trim().length > 0)
+        .reduce((min, l) => {
+          const m = l.match(/^(\s*)/)
+          return Math.min(min, m ? m[1].length : 0)
+        }, Infinity)
+      const testSource = bodyLines
+        .map(l => l.slice(minIndent === Infinity ? 0 : minIndent))
+        .join('\n')
+        .trim()
 
       results.push({
         id: h.id,
