@@ -1,0 +1,156 @@
+/* ── Header ─────────────────────────────────────────────────────── */
+
+.modal-hypothesis__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-hypothesis__title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-strong);
+  line-height: 1.4;
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-hypothesis__badge {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.modal-hypothesis__badge--supported {
+  background: var(--c-green-500-12);
+  color: var(--color-green);
+  border: 1px solid var(--c-green-500-30);
+}
+
+.modal-hypothesis__badge--refuted {
+  background: var(--c-neutral-400-08);
+  color: var(--color-muted);
+  border: 1px solid var(--c-neutral-400-15);
+}
+
+/* ── Content ────────────────────────────────────────────────────── */
+
+.modal-hypothesis__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.modal-hypothesis__section {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--c-neutral-900);
+}
+
+.modal-hypothesis__section:last-child {
+  border-bottom: none;
+}
+
+.modal-hypothesis__section-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1.5px;
+  color: var(--color-muted);
+  margin-bottom: var(--space-3);
+}
+
+.modal-hypothesis__body {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+/* ── Dataset chips ──────────────────────────────────────────────── */
+
+.modal-hypothesis__datasets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.modal-hypothesis__dataset-chip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 0.8px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--c-cyan-400-12);
+  color: var(--color-cyan);
+  border: 1px solid var(--c-cyan-400-20);
+}
+
+/* ── Result row ─────────────────────────────────────────────────── */
+
+.modal-hypothesis__result-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.modal-hypothesis__result-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.modal-hypothesis__result-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 1px;
+  color: var(--color-muted);
+}
+
+.modal-hypothesis__result-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-amber);
+}
+
+/* Summary text sits below the stat row */
+.modal-hypothesis__body + .modal-hypothesis__body {
+  margin-top: var(--space-3);
+  color: var(--color-text);
+}
+
+/* ── Algorithm source ───────────────────────────────────────────── */
+
+.modal-hypothesis__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  line-height: 1.65;
+  color: var(--color-text);
+  background: var(--c-neutral-960);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5);
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+[data-theme='light'] .modal-hypothesis__code {
+  background: var(--c-neutral-200);
+  color: var(--c-neutral-800);
+}
+
+/* ── Footer ─────────────────────────────────────────────────────── */
+
+.modal-hypothesis__footer {
+  display: flex;
+}

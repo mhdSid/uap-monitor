@@ -14,18 +14,23 @@ import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
 import { RESEARCH } from '@/data/strings'
 import { fetchJson, dataUrl } from '@/composables/use-fetch'
+import { HypothesisModal } from '@/components/hypothesis-modal'
+import type { HypothesisEntry } from '@/components/hypothesis-modal'
 
 // ─── Local types (not in global types — research-view only) ─────────
 
 interface HypothesisResult {
   id: string
   name: string
+  description: string
   status: string
   supported: boolean
   effectSize: number | null
   chiSquared?: number | null
   degreesOfFreedom?: number | null
   summary: string
+  datasets?: string[]
+  testSource?: string
 }
 
 interface HypothesesReport {
@@ -137,7 +142,7 @@ export class ResearchView extends Component {
 
   private static buildCard (result: HypothesisResult): HTMLElement {
     const isSupported = result.supported
-    const cardCls = `${cx.card} ${isSupported ? cx.cardSupported : cx.cardRefuted}`
+    const cardCls = `${cx.card} ${cx.cardClickable} ${isSupported ? cx.cardSupported : cx.cardRefuted}`
     const badgeCls = `${cx.badge} ${isSupported ? cx.badgeSupported : cx.badgeRefuted}`
     const badgeText = isSupported ? RESEARCH.CARD_SUPPORTED : RESEARCH.CARD_NOT_SUPPORTED
 
@@ -160,7 +165,26 @@ export class ResearchView extends Component {
       metaItems.push(item)
     }
 
-    return h('div', { className: cardCls },
+    const entry: HypothesisEntry = {
+      id: result.id,
+      name: result.name,
+      description: result.description,
+      datasets: result.datasets ?? [],
+      testSource: result.testSource,
+      supported: result.supported,
+      effectSize: result.effectSize,
+      chiSquared: result.chiSquared,
+      degreesOfFreedom: result.degreesOfFreedom,
+      summary: result.summary
+    }
+
+    const card = h('div', {
+      className: cardCls,
+      role: 'button',
+      tabindex: '0',
+      'aria-label': result.name,
+      onClick: (e: MouseEvent) => HypothesisModal.open(entry, e.currentTarget as HTMLElement)
+    },
       h('div', { className: cx.cardHeader },
         h('span', { className: cx.cardName }, result.name),
         h('span', { className: badgeCls }, badgeText)
@@ -171,5 +195,14 @@ export class ResearchView extends Component {
         : []
       )
     )
+
+    card.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        HypothesisModal.open(entry, card)
+      }
+    })
+
+    return card
   }
 }

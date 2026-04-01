@@ -194,3 +194,17 @@
   padding-top: var(--space-8);
   border-top: 1px solid var(--color-border);
 }
+
+.research-view__card--clickable {
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.research-view__card--clickable:hover {
+  background: var(--c-neutral-900);
+}
+
+.research-view__card--clickable:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}

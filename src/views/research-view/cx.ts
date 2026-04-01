@@ -22,5 +22,6 @@ export const cx = {
   methodology: 'research-view__methodology',
   methodologyTitle: 'research-view__methodology-title',
   methodologyBody: 'research-view__methodology-body',
-  attribution: 'research-view__attribution'
+  attribution: 'research-view__attribution',
+  cardClickable: 'research-view__card--clickable'
 } as const

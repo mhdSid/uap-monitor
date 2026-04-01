@@ -682,6 +682,20 @@ export const EXPORT = {
 
 // ─── Research view ─────────────────────────────────────────────────
 
+export const HYPOTHESIS_MODAL = {
+  SECTION_DESCRIPTION: 'HYPOTHESIS',
+  SECTION_DATASETS: 'DATASETS',
+  SECTION_RESULT: 'RESULT',
+  SECTION_ALGORITHM: 'ALGORITHM',
+  DATASETS_LABEL: 'Required datasets',
+  EFFECT_LABEL: 'Effect size',
+  CHI_LABEL: 'χ²',
+  SUMMARY_LABEL: 'Summary',
+  NOT_SUPPORTED_NOTE: 'This hypothesis was tested and not supported by the data.'
+} as const
+
+// ─── Research view ─────────────────────────────────────────────────
+
 export const RESEARCH = {
   TITLE: 'RESEARCH & METHODOLOGY',
   SUBTITLE: 'Statistical hypothesis testing across 200K+ sighting reports and five environmental datasets.',

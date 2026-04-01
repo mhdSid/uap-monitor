@@ -1,10 +1,22 @@
 {
-  "generatedAt": "2026-03-31T13:14:43.309Z",
+  "generatedAt": "2026-04-01T00:52:03.995Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
-  "totalResults": 1178,
+  "totalResults": 1179,
   "articles": [
+    {
+      "id": "08b651f2ae4a",
+      "title": "Secret Alien - Human Hybrid Breeding Program Exists ? Matt Gaetz Claims US Army Briefed Him of the Project",
+      "url": "https://www.ibtimes.co.uk/secret-alien-human-hybrid-breeding-program-exists-matt-gaetz-claims-us-army-briefed-him-project-1789617",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-03-31T22:30:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1799992/alien-human-hybrid-program.jpg",
+      "tone": 0
+    },
     {
       "id": "aa2079c6a975",
       "title": "The Sermon on the Balcony at Bùi Viện",
@@ -3495,7 +3507,7 @@
       "sourceName": "northcountrypublicradio.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg?s=1000",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a9861d954f8b",
@@ -3507,7 +3519,7 @@
       "sourceName": "wdiy.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f3f6cd286f01",
@@ -7635,7 +7647,7 @@
       "sourceName": "sunjournal.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "6b62937dde9c",
@@ -7647,7 +7659,7 @@
       "sourceName": "centralmaine.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "a8fb74564e6a",
@@ -7659,7 +7671,7 @@
       "sourceName": "pressherald.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "d4f892175f9b",
@@ -7767,7 +7779,7 @@
       "sourceName": "finance.yahoo.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/ny/api/res/1.2/EKQ4z0o.Y8ePw.Bti9NHjQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://media.zenfs.com/en/futurism_981/735595c4eb6e8d417cc20748b1a5fc1a",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "c4643c742718",
@@ -7803,7 +7815,7 @@
       "sourceName": "kool1017.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "051026d5fc1f",
