@@ -12,12 +12,14 @@ import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
 import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
-import { RESEARCH } from '@/data/strings'
+import { Section } from '@/components/layout'
+import { Alert } from '@/components/alert'
+import { DataSources } from '@/components/data-sources'
+import { RESEARCH, SECTION } from '@/data/strings'
 import { Tag } from '@/components/tags'
-import { TagVariant, TagSize } from '@/enums'
+import { TagVariant, TagSize, AlertVariant } from '@/enums'
 import { fetchJson, dataUrl } from '@/composables/use-fetch'
 import { HypothesisModal } from '@/components/hypothesis-modal'
-import { DataSources } from '@/components/data-sources'
 import { useAppStore } from '@/composables'
 import type { HypothesisEntry } from '@/components/hypothesis-modal'
 
@@ -130,13 +132,27 @@ export class ResearchView extends Component {
       )
     )
 
-    // Data sources — reuse existing DataSources component
+    // Data sources — same Section + Alert + DataSources as MonitorView
     const sources = useAppStore().sources.get()
     if (sources.length > 0) {
+      const sourcesBody = h('div', {
+        style: { display: 'flex', flexDirection: 'column', gap: '10px' }
+      })
+      sourcesBody.appendChild(
+        new Alert({
+          variant: AlertVariant.INFO,
+          title: SECTION.INTEL_TITLE,
+          content: SECTION.INTEL_CONTENT,
+          dismissible: true
+        }).el
+      )
+      sourcesBody.appendChild(new DataSources({ sources }).el)
       this.contentEl.appendChild(
-        h('div', { className: cx.attribution },
-          new DataSources({ sources }).el
-        )
+        new Section({
+          title: SECTION.DATA_SOURCES,
+          tooltip: SECTION.DATA_SOURCES_TOOLTIP,
+          content: sourcesBody
+        }).el
       )
     }
   }
@@ -196,7 +212,6 @@ export class ResearchView extends Component {
     const card = h('div', {
       className: cardCls,
       role: 'button',
-      tabindex: '0',
       'aria-label': result.name,
       onClick: () => HypothesisModal.open(entry, card)
     },
@@ -207,6 +222,7 @@ export class ResearchView extends Component {
       h('div', { className: cx.cardMeta }, ...metaItems)
     )
 
+    card.tabIndex = 0
     card.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()

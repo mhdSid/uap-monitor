@@ -35,7 +35,8 @@ export class HypothesisModal {
     Modal.open({
       header: () => HypothesisModal.buildHeader(entry),
       content: () => HypothesisModal.buildContent(entry),
-      footer: () => HypothesisModal.buildFooter(entry)
+      footer: () => HypothesisModal.buildFooter(entry),
+      onClose: () => requestAnimationFrame(() => trigger?.focus())
     }, trigger)
   }
 
