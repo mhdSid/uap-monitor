@@ -13,6 +13,8 @@ import { Component } from '@/core'
 import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
 import { RESEARCH } from '@/data/strings'
+import { Tag } from '@/components/tags'
+import { TagVariant, TagSize } from '@/enums'
 import { fetchJson, dataUrl } from '@/composables/use-fetch'
 import { HypothesisModal } from '@/components/hypothesis-modal'
 import type { HypothesisEntry } from '@/components/hypothesis-modal'
@@ -143,26 +145,32 @@ export class ResearchView extends Component {
   private static buildCard (result: HypothesisResult): HTMLElement {
     const isSupported = result.supported
     const cardCls = `${cx.card} ${cx.cardClickable} ${isSupported ? cx.cardSupported : cx.cardRefuted}`
-    const badgeCls = `${cx.badge} ${isSupported ? cx.badgeSupported : cx.badgeRefuted}`
-    const badgeText = isSupported ? RESEARCH.CARD_SUPPORTED : RESEARCH.CARD_NOT_SUPPORTED
 
-    const metaItems: HTMLElement[] = []
+    const statusTag = new Tag({
+      variant: isSupported ? TagVariant.STATUS_VERIFIED : TagVariant.DISABLED,
+      label: isSupported ? RESEARCH.CARD_SUPPORTED : RESEARCH.CARD_NOT_SUPPORTED,
+      size: TagSize.XS
+    })
+
+    const metaItems: HTMLElement[] = [statusTag.el]
 
     if (result.effectSize != null) {
-      const item = h('span', { className: cx.cardMetaItem },
-        RESEARCH.CARD_EFFECT,
-        h('span', {}, result.effectSize.toFixed(3))
+      metaItems.push(
+        h('span', { className: cx.cardMetaItem },
+          RESEARCH.CARD_EFFECT,
+          h('span', {}, result.effectSize.toFixed(3))
+        )
       )
-      metaItems.push(item)
     }
 
     if (result.chiSquared != null) {
       const df = result.degreesOfFreedom != null ? `(${result.degreesOfFreedom})` : ''
-      const item = h('span', { className: cx.cardMetaItem },
-        `${RESEARCH.CARD_CHI}${df}`,
-        h('span', {}, result.chiSquared.toFixed(1))
+      metaItems.push(
+        h('span', { className: cx.cardMetaItem },
+          `${RESEARCH.CARD_CHI}${df}`,
+          h('span', {}, result.chiSquared.toFixed(1))
+        )
       )
-      metaItems.push(item)
     }
 
     const entry: HypothesisEntry = {
@@ -186,14 +194,10 @@ export class ResearchView extends Component {
       onClick: (e: MouseEvent) => HypothesisModal.open(entry, e.currentTarget as HTMLElement)
     },
       h('div', { className: cx.cardHeader },
-        h('span', { className: cx.cardName }, result.name),
-        h('span', { className: badgeCls }, badgeText)
+        h('span', { className: cx.cardName }, result.name)
       ),
       h('p', { className: cx.cardSummary }, result.summary),
-      ...(metaItems.length > 0
-        ? [h('div', { className: cx.cardMeta }, ...metaItems)]
-        : []
-      )
+      h('div', { className: cx.cardMeta }, ...metaItems)
     )
 
     card.addEventListener('keydown', (e: KeyboardEvent) => {

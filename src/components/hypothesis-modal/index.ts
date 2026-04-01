@@ -9,6 +9,8 @@ import { cx } from './cx'
 
 import { h } from '@/core/dom'
 import { Modal } from '@/components/modal'
+import { Tag } from '@/components/tags'
+import { TagVariant, TagSize } from '@/enums'
 import { HYPOTHESIS_MODAL, RESEARCH } from '@/data/strings'
 
 // ─── Type (mirrors HypothesisResult in research-view + new fields) ──
@@ -40,17 +42,19 @@ export class HypothesisModal {
   // ─── Slots ────────────────────────────────────────────────────────
 
   private static buildHeader (e: HypothesisEntry): HTMLElement {
-    const badgeCls = `${cx.badge} ${e.supported ? cx.badgeSupported : cx.badgeRefuted}`
-    const badgeText = e.supported ? RESEARCH.CARD_SUPPORTED : RESEARCH.CARD_NOT_SUPPORTED
-
     return h('div', { className: cx.header },
-      h('span', { className: cx.title }, e.name),
-      h('span', { className: badgeCls }, badgeText)
+      h('span', { className: cx.title }, e.name)
     )
   }
 
   private static buildContent (e: HypothesisEntry): HTMLElement {
-    const sections: HTMLElement[] = []
+    const statusTag = new Tag({
+      variant: e.supported ? TagVariant.STATUS_VERIFIED : TagVariant.DISABLED,
+      label: e.supported ? RESEARCH.CARD_SUPPORTED : RESEARCH.CARD_NOT_SUPPORTED,
+      size: TagSize.XS
+    })
+
+    const sections: HTMLElement[] = [statusTag.el]
 
     // ── Description ────────────────────────────────────────────────
     sections.push(
@@ -67,7 +71,7 @@ export class HypothesisModal {
           h('div', { className: cx.sectionTitle }, HYPOTHESIS_MODAL.SECTION_DATASETS),
           h('div', { className: cx.datasetRow },
             ...e.datasets.map(d =>
-              h('span', { className: cx.datasetChip }, d)
+              new Tag({ variant: TagVariant.COUNT, label: d, size: TagSize.XS }).el
             )
           )
         )

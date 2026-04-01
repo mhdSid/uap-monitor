@@ -112,29 +112,6 @@
   flex: 1;
 }
 
-.research-view__badge {
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-sm);
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.research-view__badge--supported {
-  background: var(--c-green-500-12);
-  color: var(--color-green);
-  border: 1px solid var(--c-green-500-30);
-}
-
-.research-view__badge--refuted {
-  background: var(--c-neutral-400-08);
-  color: var(--color-muted);
-  border: 1px solid var(--c-neutral-400-15);
-}
-
 .research-view__card-summary {
   font-size: var(--fs-xs);
   color: var(--color-text);

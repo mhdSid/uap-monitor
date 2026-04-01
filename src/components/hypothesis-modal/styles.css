@@ -18,30 +18,6 @@
   min-width: 0;
 }
 
-.modal-hypothesis__badge {
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-sm);
-  flex-shrink: 0;
-  white-space: nowrap;
-  align-self: flex-start;
-}
-
-.modal-hypothesis__badge--supported {
-  background: var(--c-green-500-12);
-  color: var(--color-green);
-  border: 1px solid var(--c-green-500-30);
-}
-
-.modal-hypothesis__badge--refuted {
-  background: var(--c-neutral-400-08);
-  color: var(--color-muted);
-  border: 1px solid var(--c-neutral-400-15);
-}
-
 /* ── Content ────────────────────────────────────────────────────── */
 
 .modal-hypothesis__content {
@@ -81,16 +57,7 @@
   gap: var(--space-2);
 }
 
-.modal-hypothesis__dataset-chip {
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  letter-spacing: 0.8px;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-sm);
-  background: var(--c-cyan-400-12);
-  color: var(--color-cyan);
-  border: 1px solid var(--c-cyan-400-20);
-}
+
 
 /* ── Result row ─────────────────────────────────────────────────── */
 
