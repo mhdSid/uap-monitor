@@ -12,6 +12,7 @@ import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
 import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
+import { Footer } from '@/components/footer'
 import { Section } from '@/components/layout'
 import { Alert } from '@/components/alert'
 import { DataSources } from '@/components/data-sources'
@@ -155,6 +156,8 @@ export class ResearchView extends Component {
         }).el
       )
     }
+
+    this.contentEl.appendChild(new Footer({}).el)
   }
 
   private buildError (): void {

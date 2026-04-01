@@ -24,6 +24,7 @@ import { Slider } from '@/components/slider'
 import { ChipSelect } from '@/components/chip'
 import { ButtonSize, ComponentSize } from '@/enums'
 import { iconRadarSignalFilled } from '@/components/icons'
+import { Footer } from '@/components/footer'
 
 // ─── Types ──────────────────────────────────────────────────────────
 
@@ -218,12 +219,17 @@ export class SpiritualView extends Component {
       h('div', { className: cx.subtitle }, SPIRITUAL.ENTER_SUB)
     )
 
+    const footerEl = h('div', { className: cx.footer },
+      new Footer({}).el
+    )
+
     return h('div', { className: cx.root },
       this.canvas,
       hud,
       this.fab.el,
       this.drawer.el,
-      enterPrompt
+      enterPrompt,
+      footerEl
     )
   }
 

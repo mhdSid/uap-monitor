@@ -22,3 +22,7 @@
   flex: 1;
   max-height: none;
 }
+
+.intel-view .app-footer {
+  flex-shrink: 0;
+}

@@ -17,6 +17,7 @@ import { h, el, hide, show, setText, setStyles } from '@/core/dom'
 import { palette } from '@/styles/palette'
 import { useSeismic, useAppStore, useTheme } from '@/composables'
 import { Loader } from '@/components/loader'
+import { Footer } from '@/components/footer'
 import { YearSelector } from '@/components/year-selector'
 import { StatCard, createStatValue, StatCardGrid } from '@/components/stat-card'
 import { SEISMIC } from '@/data/strings'
@@ -364,6 +365,7 @@ export class SeismicView extends Component {
     this.contentEl.appendChild(statsBar)
     this.contentEl.appendChild(scatterSection)
     this.contentEl.appendChild(tableSection)
+    this.contentEl.appendChild(new Footer({}).el)
   }
 
   // ─── Stats update ───────────────────────────────────────────────

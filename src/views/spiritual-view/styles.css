@@ -242,3 +242,21 @@
     letter-spacing: 4px;
   }
 }
+
+/* ── Footer — visible pre-immersion, fades on enter ────────────────── */
+
+.spirit-view__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.spirit-view--active .spirit-view__footer {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

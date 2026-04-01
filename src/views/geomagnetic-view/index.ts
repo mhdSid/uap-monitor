@@ -18,6 +18,7 @@ import { h, el, hide, show, setText, setStyles } from '@/core/dom'
 import { palette } from '@/styles/palette'
 import { useGeomagnetic, useAppStore, useTheme, yieldThread } from '@/composables'
 import { Loader } from '@/components/loader'
+import { Footer } from '@/components/footer'
 import { YearSelector } from '@/components/year-selector'
 import { StatCard, createStatValue, createStatSub, StatCardGrid } from '@/components/stat-card'
 import { GEOMAGNETIC } from '@/data/strings'
@@ -338,6 +339,7 @@ export class GeomagneticView extends Component {
     this.contentEl.appendChild(statsBar)
     this.contentEl.appendChild(timelineSection)
     this.contentEl.appendChild(distSection)
+    this.contentEl.appendChild(new Footer({}).el)
   }
 
   // ─── Stats update ───────────────────────────────────────────────

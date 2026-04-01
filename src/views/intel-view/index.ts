@@ -12,6 +12,7 @@ import { Component } from '@/core'
 import { h, hide, show } from '@/core/dom'
 import { Loader } from '@/components/loader'
 import { NewsFeed } from '@/components/news-feed'
+import { Footer } from '@/components/footer'
 
 // ─── Component ──────────────────────────────────────────────────────
 
@@ -27,9 +28,12 @@ export class IntelView extends Component {
     this.contentEl = h('div', { className: appCx.appViewContent })
     hide(this.contentEl)
 
+    // Footer sits as a flex sibling to contentEl — outside the feed's flex chain
+    // so it doesn't collapse the grid height. contentEl (flex: 1) absorbs remaining space.
     return h('div', { className: [cx.root, appCx.appView].join(' ') },
       this.loaderEl,
-      this.contentEl
+      this.contentEl,
+      new Footer({}).el
     )
   }
 

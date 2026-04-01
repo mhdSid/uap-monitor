@@ -16,5 +16,6 @@ export const cx = {
   controlLabel: 'spirit-view__control-label',
   exitBtn: 'spirit-view__exit',
   active: 'spirit-view--active',
-  entering: 'spirit-view--entering'
+  entering: 'spirit-view--entering',
+  footer: 'spirit-view__footer'
 } as const
