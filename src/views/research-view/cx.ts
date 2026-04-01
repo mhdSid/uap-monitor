@@ -3,22 +3,8 @@ export const cx = {
   header: 'research-view__header',
   title: 'research-view__title',
   subtitle: 'research-view__subtitle',
-  summaryGrid: 'research-view__summary',
-  summaryItem: 'research-view__summary-item',
-  summaryValue: 'research-view__summary-value',
-  summaryLabel: 'research-view__summary-label',
   listTitle: 'research-view__list-title',
-  card: 'research-view__card',
-  cardSupported: 'research-view__card--supported',
-  cardRefuted: 'research-view__card--refuted',
-  cardHeader: 'research-view__card-header',
-  cardName: 'research-view__card-name',
-  cardSummary: 'research-view__card-summary',
-  cardMeta: 'research-view__card-meta',
-  cardMetaItem: 'research-view__card-meta-item',
   methodology: 'research-view__methodology',
   methodologyTitle: 'research-view__methodology-title',
-  methodologyBody: 'research-view__methodology-body',
-  attribution: 'research-view__attribution',
-  cardClickable: 'research-view__card--clickable'
+  methodologyBody: 'research-view__methodology-body'
 } as const

@@ -19,6 +19,7 @@ export class Card extends Component<CardProps> {
     }, ...this.props.children)
 
     if (interactive) {
+      root.tabIndex = 0
       root.addEventListener('click', (e: MouseEvent) => {
         this.props.onClick!(e)
       })

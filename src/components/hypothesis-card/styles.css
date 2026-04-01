@@ -1,0 +1,57 @@
+.hypothesis-card {
+  padding: var(--space-6);
+  gap: var(--space-4);
+}
+
+.hypothesis-card + .hypothesis-card {
+  margin-top: var(--space-4);
+}
+
+.hypothesis-card--supported {
+  border-left-width: 3px;
+  border-left-color: var(--color-green);
+}
+
+.hypothesis-card--refuted {
+  border-left-width: 3px;
+  border-left-color: var(--c-neutral-600);
+}
+
+.hypothesis-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hypothesis-card__name {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-strong);
+  line-height: 1.4;
+}
+
+.hypothesis-card__summary {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.hypothesis-card__meta {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--c-neutral-900);
+  align-items: center;
+}
+
+.hypothesis-card__meta-item {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-dim);
+}
+
+.hypothesis-card__meta-value {
+  color: var(--color-amber);
+  margin-left: var(--space-2);
+}

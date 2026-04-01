@@ -4,27 +4,28 @@ import { cx as appCx } from '../app/cx'
 /* ------------------------------------------------------------------ *
  *  ResearchView — statistical hypothesis results + methodology        *
  *                                                                     *
- *  Fetches public/data/hypotheses.json and renders each result as     *
- *  a card with status badge, summary, and effect size.                *
- *  No reactive store dependency — pure static data display.           *
+ *  Fetches public/data/hypotheses.json and renders each result.       *
+ *  Composes existing components — no inline molecule construction.    *
  * ------------------------------------------------------------------ */
 
 import { Component } from '@/core'
-import { h, hide, show } from '@/core/dom'
+import { h, hide, show, setText } from '@/core/dom'
 import { Loader } from '@/components/loader'
 import { Footer } from '@/components/footer'
 import { Section } from '@/components/layout'
 import { Alert } from '@/components/alert'
+import { Card } from '@/components/card'
 import { DataSources } from '@/components/data-sources'
-import { RESEARCH, SECTION } from '@/data/strings'
-import { Tag } from '@/components/tags'
-import { TagVariant, TagSize, AlertVariant } from '@/enums'
-import { fetchJson, dataUrl } from '@/composables/use-fetch'
+import { StatCard, StatCardGrid, createStatValue } from '@/components/stat-card'
+import { HypothesisCard } from '@/components/hypothesis-card'
 import { HypothesisModal } from '@/components/hypothesis-modal'
+import { RESEARCH, SECTION } from '@/data/strings'
+import { AlertVariant } from '@/enums'
+import { fetchJson, dataUrl } from '@/composables/use-fetch'
 import { useAppStore } from '@/composables'
 import type { HypothesisEntry } from '@/components/hypothesis-modal'
 
-// ─── Local types (not in global types — research-view only) ─────────
+// ─── Local types ─────────────────────────────────────────────────────
 
 interface HypothesisResult {
   id: string
@@ -89,7 +90,7 @@ export class ResearchView extends Component {
   private buildContent (report: HypothesesReport): void {
     const datasets = Object.values(report.datasetsLoaded).filter(Boolean).length
 
-    // Header
+    // ── Header ────────────────────────────────────────────────────
     this.contentEl.appendChild(
       h('div', { className: cx.header },
         h('h1', { className: cx.title }, RESEARCH.TITLE),
@@ -97,43 +98,62 @@ export class ResearchView extends Component {
       )
     )
 
-    // Summary stats
-    const stats: [string, string][] = [
-      [String(report.totalHypotheses), RESEARCH.STAT_TOTAL],
-      [String(report.supported), RESEARCH.STAT_SUPPORTED],
-      [String(datasets), RESEARCH.STAT_DATASETS]
-    ]
+    // ── Summary stats — StatCard + StatCardGrid ───────────────────
+    const totalVal = createStatValue()
+    const supportedVal = createStatValue()
+    const datasetsVal = createStatValue()
+    setText(totalVal, String(report.totalHypotheses))
+    setText(supportedVal, String(report.supported))
+    setText(datasetsVal, String(datasets))
 
     this.contentEl.appendChild(
-      h('div', { className: cx.summaryGrid },
-        ...stats.map(([value, label]) =>
-          h('div', { className: cx.summaryItem },
-            h('span', { className: cx.summaryValue }, value),
-            h('span', { className: cx.summaryLabel }, label)
-          )
-        )
+      StatCardGrid(
+        new StatCard({ label: RESEARCH.STAT_TOTAL, valueEl: totalVal, sub: '' }).el,
+        new StatCard({ label: RESEARCH.STAT_SUPPORTED, valueEl: supportedVal, sub: '' }).el,
+        new StatCard({ label: RESEARCH.STAT_DATASETS, valueEl: datasetsVal, sub: '' }).el
       )
     )
 
-    // Hypothesis cards
+    // ── Hypothesis cards ──────────────────────────────────────────
     const listContainer = h('div', {})
     listContainer.appendChild(h('p', { className: cx.listTitle }, `HYPOTHESES — ${report.completed} TESTED`))
 
     for (const result of report.results) {
-      listContainer.appendChild(ResearchView.buildCard(result))
+      const entry: HypothesisEntry = {
+        id: result.id,
+        name: result.name,
+        description: result.description,
+        datasets: result.datasets ?? [],
+        testSource: result.testSource,
+        supported: result.supported,
+        effectSize: result.effectSize,
+        chiSquared: result.chiSquared,
+        degreesOfFreedom: result.degreesOfFreedom,
+        summary: result.summary
+      }
+      listContainer.appendChild(
+        new HypothesisCard({
+          entry,
+          onOpen: (e, trigger) => HypothesisModal.open(e, trigger)
+        }).el
+      )
     }
 
     this.contentEl.appendChild(listContainer)
 
-    // Methodology block
+    // ── Methodology — Card ────────────────────────────────────────
     this.contentEl.appendChild(
-      h('div', { className: cx.methodology },
-        h('p', { className: cx.methodologyTitle }, RESEARCH.METHODOLOGY_TITLE),
-        h('p', { className: cx.methodologyBody }, RESEARCH.METHODOLOGY_BODY)
-      )
+      new Card({
+        children: [
+          h('div', { className: cx.methodology },
+            h('p', { className: cx.methodologyTitle }, RESEARCH.METHODOLOGY_TITLE),
+            h('p', { className: cx.methodologyBody }, RESEARCH.METHODOLOGY_BODY)
+          )
+        ]
+      }).el
     )
 
-    // Data sources — same Section + Alert + DataSources as MonitorView
+    // ── Data sources — Section + Alert + DataSources ──────────────
     const sources = useAppStore().sources.get()
     if (sources.length > 0) {
       const sourcesBody = h('div', {
@@ -164,75 +184,5 @@ export class ResearchView extends Component {
     this.contentEl.appendChild(
       h('p', { className: cx.subtitle }, RESEARCH.ERROR)
     )
-  }
-
-  // ─── Card builder ───────────────────────────────────────────────
-
-  private static buildCard (result: HypothesisResult): HTMLElement {
-    const isSupported = result.supported
-    const cardCls = `${cx.card} ${cx.cardClickable} ${isSupported ? cx.cardSupported : cx.cardRefuted}`
-
-    const statusTag = new Tag({
-      variant: isSupported ? TagVariant.STATUS_VERIFIED : TagVariant.DISABLED,
-      label: isSupported ? RESEARCH.CARD_SUPPORTED : RESEARCH.CARD_NOT_SUPPORTED,
-      size: TagSize.XS
-    })
-
-    const metaItems: HTMLElement[] = [statusTag.el]
-
-    if (result.effectSize != null) {
-      metaItems.push(
-        h('span', { className: cx.cardMetaItem },
-          RESEARCH.CARD_EFFECT,
-          h('span', {}, result.effectSize.toFixed(3))
-        )
-      )
-    }
-
-    if (result.chiSquared != null) {
-      const df = result.degreesOfFreedom != null ? `(${result.degreesOfFreedom})` : ''
-      metaItems.push(
-        h('span', { className: cx.cardMetaItem },
-          `${RESEARCH.CARD_CHI}${df}`,
-          h('span', {}, result.chiSquared.toFixed(1))
-        )
-      )
-    }
-
-    const entry: HypothesisEntry = {
-      id: result.id,
-      name: result.name,
-      description: result.description,
-      datasets: result.datasets ?? [],
-      testSource: result.testSource,
-      supported: result.supported,
-      effectSize: result.effectSize,
-      chiSquared: result.chiSquared,
-      degreesOfFreedom: result.degreesOfFreedom,
-      summary: result.summary
-    }
-
-    const card = h('div', {
-      className: cardCls,
-      role: 'button',
-      'aria-label': result.name,
-      onClick: () => HypothesisModal.open(entry, card)
-    },
-      h('div', { className: cx.cardHeader },
-        h('span', { className: cx.cardName }, result.name)
-      ),
-      h('p', { className: cx.cardSummary }, result.summary),
-      h('div', { className: cx.cardMeta }, ...metaItems)
-    )
-
-    card.tabIndex = 0
-    card.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-        HypothesisModal.open(entry, card)
-      }
-    })
-
-    return card
   }
 }
