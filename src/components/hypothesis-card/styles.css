@@ -4,7 +4,7 @@
 }
 
 .hypothesis-card + .hypothesis-card {
-  margin-top: var(--space-4);
+  margin-top: var(--space-8);
 }
 
 .hypothesis-card--supported {

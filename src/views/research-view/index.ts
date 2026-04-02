@@ -90,15 +90,7 @@ export class ResearchView extends Component {
   private buildContent (report: HypothesesReport): void {
     const datasets = Object.values(report.datasetsLoaded).filter(Boolean).length
 
-    // ── Header ────────────────────────────────────────────────────
-    this.contentEl.appendChild(
-      h('div', { className: cx.header },
-        h('h1', { className: cx.title }, RESEARCH.TITLE),
-        h('p', { className: cx.subtitle }, RESEARCH.SUBTITLE)
-      )
-    )
-
-    // ── Summary stats — StatCard + StatCardGrid ───────────────────
+    // ── Summary stat values ───────────────────────────────────────
     const totalVal = createStatValue()
     const supportedVal = createStatValue()
     const datasetsVal = createStatValue()
@@ -106,19 +98,8 @@ export class ResearchView extends Component {
     setText(supportedVal, String(report.supported))
     setText(datasetsVal, String(datasets))
 
-    this.contentEl.appendChild(
-      StatCardGrid(
-        new StatCard({ label: RESEARCH.STAT_TOTAL, valueEl: totalVal, sub: '' }).el,
-        new StatCard({ label: RESEARCH.STAT_SUPPORTED, valueEl: supportedVal, sub: '' }).el,
-        new StatCard({ label: RESEARCH.STAT_DATASETS, valueEl: datasetsVal, sub: '' }).el
-      )
-    )
-
     // ── Hypothesis cards ──────────────────────────────────────────
-    const listContainer = h('div', {})
-    listContainer.appendChild(h('p', { className: cx.listTitle }, `HYPOTHESES — ${report.completed} TESTED`))
-
-    for (const result of report.results) {
+    const cards = report.results.map(result => {
       const entry: HypothesisEntry = {
         id: result.id,
         name: result.name,
@@ -131,53 +112,60 @@ export class ResearchView extends Component {
         degreesOfFreedom: result.degreesOfFreedom,
         summary: result.summary
       }
-      listContainer.appendChild(
-        new HypothesisCard({
-          entry,
-          onOpen: (e, trigger) => HypothesisModal.open(e, trigger)
-        }).el
-      )
-    }
+      return this.ownChild(new HypothesisCard({
+        entry,
+        onOpen: (e, trigger) => HypothesisModal.open(e, trigger)
+      })).el
+    })
 
-    this.contentEl.appendChild(listContainer)
-
-    // ── Methodology — Card ────────────────────────────────────────
-    this.contentEl.appendChild(
-      new Card({
-        children: [
-          h('div', { className: cx.methodology },
-            h('p', { className: cx.methodologyTitle }, RESEARCH.METHODOLOGY_TITLE),
-            h('p', { className: cx.methodologyBody }, RESEARCH.METHODOLOGY_BODY)
-          )
-        ]
-      }).el
-    )
-
-    // ── Data sources — Section + Alert + DataSources ──────────────
+    // ── Data sources ──────────────────────────────────────────────
     const sources = useAppStore().sources.get()
-    if (sources.length > 0) {
-      const sourcesBody = h('div', {
-        style: { display: 'flex', flexDirection: 'column', gap: '10px' }
-      })
-      sourcesBody.appendChild(
-        new Alert({
-          variant: AlertVariant.INFO,
-          title: SECTION.INTEL_TITLE,
-          content: SECTION.INTEL_CONTENT,
-          dismissible: true
-        }).el
-      )
-      sourcesBody.appendChild(new DataSources({ sources }).el)
-      this.contentEl.appendChild(
-        new Section({
+    const sourcesSection = sources.length > 0
+      ? this.ownChild(new Section({
           title: SECTION.DATA_SOURCES,
           tooltip: SECTION.DATA_SOURCES_TOOLTIP,
-          content: sourcesBody
-        }).el
-      )
-    }
+          content: h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } },
+            this.ownChild(new Alert({
+              variant: AlertVariant.INFO,
+              title: SECTION.INTEL_TITLE,
+              content: SECTION.INTEL_CONTENT,
+              dismissible: true
+            })).el,
+            new DataSources({ sources }).el
+          )
+        })).el
+      : null
 
-    this.contentEl.appendChild(new Footer({}).el)
+    // ── Single append — full content tree built with h() ─────────
+    this.contentEl.appendChild(
+      h('div', {
+        className: cx.root
+      },
+        h('div', { className: cx.header },
+          h('h1', { className: cx.title }, RESEARCH.TITLE),
+          h('p', { className: cx.subtitle }, RESEARCH.SUBTITLE)
+        ),
+        StatCardGrid(
+          new StatCard({ label: RESEARCH.STAT_TOTAL, valueEl: totalVal, sub: '' }).el,
+          new StatCard({ label: RESEARCH.STAT_SUPPORTED, valueEl: supportedVal, sub: '' }).el,
+          new StatCard({ label: RESEARCH.STAT_DATASETS, valueEl: datasetsVal, sub: '' }).el
+        ),
+        h('div', {},
+          h('p', { className: cx.listTitle }, `HYPOTHESES — ${report.completed} TESTED`),
+          ...cards
+        ),
+        new Card({
+          children: [
+            h('div', { className: cx.methodology },
+              h('p', { className: cx.methodologyTitle }, RESEARCH.METHODOLOGY_TITLE),
+              h('p', { className: cx.methodologyBody }, RESEARCH.METHODOLOGY_BODY)
+            )
+          ]
+        }).el,
+        ...(sourcesSection ? [sourcesSection] : []),
+        new Footer({}).el
+      )
+    )
   }
 
   private buildError (): void {

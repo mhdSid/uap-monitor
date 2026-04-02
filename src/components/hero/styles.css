@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-5);
+  gap: var(--space-8);
   padding: var(--space-lg) var(--space-md);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -12,7 +12,7 @@
 
 .hero__tagline {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-md);
   color: var(--color-muted);
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -33,7 +33,7 @@
 
 .hero__stat-value {
   font-family: var(--font-mono);
-  font-size: var(--fs-xl);
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--color-green);
   letter-spacing: 1px;
@@ -67,18 +67,14 @@
 .hero__stat--research:hover .hero__stat-label {
   color: var(--color-text);
 }
-  .hero__stats {
-    gap: var(--space-md);
+
+@media (min-width: 768px) {
+  .hero {
+    gap: var(--space-10);
   }
 
-  .hero__stat-value {
+  .hero__tagline {
     font-size: var(--fs-lg);
-  }
-}
-
-@media (max-width: 480px) {
-  .hero__stats {
-    gap: var(--space-md);
   }
 
   .hero__stat-value {

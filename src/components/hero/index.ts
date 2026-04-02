@@ -37,12 +37,12 @@ export class Hero extends Component<HeroProps> {
       label: HERO.CTA,
       variant: 'filled',
       color: 'primary',
-      size: ButtonSize.SM,
+      size: ButtonSize.MD,
       onClick: () => this.props.onExplore?.()
     })
 
     return h('section', { className: cx.root },
-      h('p', { className: cx.tagline }, HERO.TAGLINE),
+      h('h1', { className: cx.tagline }, HERO.TAGLINE),
       h('div', { className: cx.stats },
         h('div', { className: cx.stat },
           sightingsValue,
