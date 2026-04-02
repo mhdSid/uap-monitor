@@ -1,10 +1,70 @@
 {
-  "generatedAt": "2026-04-01T00:52:03.995Z",
+  "generatedAt": "2026-04-02T01:59:42.866Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
-  "totalResults": 1179,
+  "totalResults": 1184,
   "articles": [
+    {
+      "id": "870bad6ac208",
+      "title": "UFOs or drones ? CT lawmakers push for answers on mysterious lights",
+      "url": "https://www.middletownpress.com/politics/article/connecticut-ufos-legislation-investigate-drones-22183518.php",
+      "domain": "middletownpress.com",
+      "publishedAt": "2026-04-02T01:00:00Z",
+      "language": "English",
+      "sourceName": "middletownpress.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/36/57/30796785/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "e805ab718b59",
+      "title": "Australian Story : Apr 6 | TV Tonight",
+      "url": "https://tvtonight.com.au/2026/04/australian-story-apr-6-2.html",
+      "domain": "tvtonight.com.au",
+      "publishedAt": "2026-04-01T21:15:00Z",
+      "language": "English",
+      "sourceName": "tvtonight.com.au (Australia)",
+      "country": "Australia",
+      "imageUrl": "https://i0.wp.com/tvtonight.com.au/wp-content/uploads/Australian-Story-Westall-UFO-Mystery-2-2.jpg?fit=1040%2C700&ssl=1",
+      "tone": 0
+    },
+    {
+      "id": "7ad3f80cc4b1",
+      "title": "Matt Gaetz Claims US Army Using  Migrant Caravan for Alien Hybrid Breeding , as Australian Senator Stirs Viral Firestorm",
+      "url": "https://www.ibtimes.com/matt-gaetz-claims-us-army-using-migrant-caravans-alien-hybrid-breeding-australian-senator-3800685",
+      "domain": "ibtimes.com",
+      "publishedAt": "2026-04-01T12:00:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://d.ibtimes.com/en/full/4646935/matt-gaetz.png",
+      "tone": 0
+    },
+    {
+      "id": "cf4e89eace8b",
+      "title": "Matt Gaetz Claims US Army Using  Migrant Caravan for Alien Hybrid Breeding , as Australian Senator Stirs Viral Firestorm",
+      "url": "https://www.ibtimes.co.uk/matt-gaetz-alien-human-hybrid-breeding-programs-1789659",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-04-01T10:30:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1800039/matt-gaetz.png",
+      "tone": 0
+    },
+    {
+      "id": "29f012cbf522",
+      "title": "Ex - Congressman Reveals Details of What He Saw in Classified UFO Briefings",
+      "url": "https://www.newsweek.com/ex-congressman-reveals-details-of-what-he-saw-in-classified-ufo-briefings-11765485",
+      "domain": "newsweek.com",
+      "publishedAt": "2026-04-01T01:15:00Z",
+      "language": "English",
+      "sourceName": "newsweek.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/03/AP26072641458528.jpg?crop=1",
+      "tone": 0
+    },
     {
       "id": "08b651f2ae4a",
       "title": "Secret Alien - Human Hybrid Breeding Program Exists ? Matt Gaetz Claims US Army Briefed Him of the Project",
@@ -3363,7 +3423,7 @@
       "sourceName": "kazu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "cb81ad540ff7",
@@ -3375,7 +3435,7 @@
       "sourceName": "wypr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "931505083f2e",
@@ -3387,7 +3447,7 @@
       "sourceName": "kunm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d050e0045244",
@@ -3399,7 +3459,7 @@
       "sourceName": "upi.com (United States)",
       "country": "United States",
       "imageUrl": "https://cdnph.upi.com/sv/ph/og/upi/3651771560721/2026/1/01c4d22957e82aad7a89c44659f3827c/v1.5/Trump-orders-release-of-files-on-alien-and-extraterrestrial-life.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "6803579d1245",
@@ -3411,7 +3471,7 @@
       "sourceName": "bloomberg.com (United States)",
       "country": "United States",
       "imageUrl": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/igSBiUuEnijs/v1/1200x800.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b3afaa24b1c1",
@@ -3423,7 +3483,7 @@
       "sourceName": "capeandislands.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1efcc3bafb11",
@@ -3435,7 +3495,7 @@
       "sourceName": "ualrpublicradio.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0e09b4191acd",
@@ -3447,7 +3507,7 @@
       "sourceName": "kvpr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "6b46653a00ec",
@@ -3459,7 +3519,7 @@
       "sourceName": "wxpr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8135c34e0a19",
@@ -3471,7 +3531,7 @@
       "sourceName": "theage.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://static.ffx.io/images/$zoom_0.5314399187217143%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_367%2C$y_110/t_crop_custom/q_86%2Cf_auto/5b81bf1a4aa1bb96f1924363f6d3cab17e913a00",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e70013eb0e7f",
@@ -3483,7 +3543,7 @@
       "sourceName": "4ro.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://www.4ro.com.au/wp-content/uploads/sites/26/2026/02/feature.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2ebb5d905eaa",
@@ -3495,7 +3555,7 @@
       "sourceName": "wkyufm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "779c1d4cc635",
@@ -7635,7 +7695,7 @@
       "sourceName": "tvguide.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://tv.assets.pressassociation.io/672cfd5c-ab21-5982-9f7c-af639d083fdc.jpg",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "1d8812cee044",
@@ -7755,7 +7815,7 @@
       "sourceName": "reviewjournal.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.reviewjournal.com/wp-content/uploads/2026/03/21421009_web1_Congress-UFO-4-.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "904790989ef3",
@@ -7767,7 +7827,7 @@
       "sourceName": "reviewjournal.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.reviewjournal.com/wp-content/uploads/2026/03/21421009_web1_Congress-UFO-4-.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "bcc9f5dd40a6",
@@ -7791,7 +7851,7 @@
       "sourceName": "artasiapacific.com (China)",
       "country": "China",
       "imageUrl": "https://www.artasiapacific.com/content/images/size/w1200/2026/03/image--5-.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "18a8da2a3334",
@@ -7803,7 +7863,7 @@
       "sourceName": "radaronline.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.radaronline.com/brand-img/El9mAKAZj/1200x628/trump-et-mainpic-2-1772562545875.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b41c4f145d07",
