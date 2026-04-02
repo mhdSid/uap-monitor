@@ -103,20 +103,19 @@ export class Modal {
       Modal.onKeydown = null
     }
 
-    const ref = Modal.overlay
-    const returnTarget = Modal.trigger
-    const closeCallback = Modal.onCloseCallback
-
-    Modal.overlay = null
-    Modal.dialog = null
-    Modal.trigger = null
-    Modal.onCloseCallback = null
-
-    if (closeCallback) closeCallback()
+    if (Modal.onCloseCallback) Modal.onCloseCallback()
 
     setTimeout(() => {
-      ref.remove()
-      if (returnTarget?.isConnected) returnTarget.focus()
+      Modal.overlay?.remove()
+
+      if (Modal.trigger?.isConnected) {
+        Modal.trigger.focus()
+      }
+
+      Modal.overlay = null
+      Modal.dialog = null
+      Modal.trigger = null
+      Modal.onCloseCallback = null
     }, TRANSITION_MS)
   }
 
