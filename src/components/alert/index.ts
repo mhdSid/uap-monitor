@@ -1,9 +1,11 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { AlertVariant } from '@/enums'
+import { AlertVariant, ButtonSize } from '@/enums'
 import { ARIA } from '@/data/strings'
-import { h, setStyles, setText } from '@/core/dom'
+import { h, setText } from '@/core/dom'
+import { Button } from '@/components/button'
+import { iconClose } from '@/components/icons'
 
 export interface AlertProps {
   variant: AlertVariant
@@ -60,16 +62,20 @@ export class Alert extends Component<AlertProps> {
     alert.appendChild(body)
 
     if (this.props.dismissible) {
-      alert.appendChild(
-        h('button', {
-          className: cx.close,
-          'aria-label': ARIA.DISMISS_ALERT,
-          onClick: () => {
-            setStyles(alert, { opacity: '0' })
-            setTimeout(() => alert.remove(), 200)
-          }
-        }, '×')
-      )
+      const dismissBtn = new Button({
+        label: ARIA.DISMISS_ALERT,
+        variant: 'ghost',
+        color: 'neutral',
+        size: ButtonSize.SM,
+        round: true,
+        ariaLabel: ARIA.DISMISS_ALERT,
+        icon: () => iconClose(12),
+        onClick: () => {
+          alert.style.opacity = '0'
+          setTimeout(() => alert.remove(), 200)
+        }
+      })
+      alert.appendChild(dismissBtn.el)
     }
 
     return alert

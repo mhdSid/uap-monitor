@@ -1,8 +1,30 @@
 {
-  "generatedAt": "2026-04-02T02:00:38.894Z",
+  "generatedAt": "2026-04-03T14:04:00.115Z",
   "queries": 8,
-  "totalResults": 68,
+  "totalResults": 70,
   "articles": [
+    {
+      "id": "c1e452e8dc85",
+      "title": "Lying on the floor on a warm day",
+      "description": "Cool tiled floors offer immediate relief on hot days. The body finds solace in the stone's stored coolness. This simple act provides a profound tactile pleasure. It's a close encounter with matter that brings a unique sense of bliss. The floor becomes a map of relief, a reminder of accessible comfort. Minutes dissolve into a suspended clarity, a monastic peace.",
+      "content": "Synopsis\nCool tiled floors offer immediate relief on hot days. The body finds solace in the stone's stored coolness. This simple act provides a profound tactile pleasure. It's a close encounter with matter that brings a unique sense of bliss. The flo... [1248 chars]",
+      "url": "https://economictimes.indiatimes.com/opinion/bliss-of-everyday-life/lying-on-the-floor-on-a-warm-day/articleshow/129987100.cms",
+      "imageUrl": "https://img.etimg.com/thumb/width-1200,height-900,imgsize-55080,resizemode-75,msid-129987100/opinion/bliss-of-everyday-life/lying-on-the-floor-on-a-warm-day.jpg",
+      "publishedAt": "2026-04-02T18:21:10Z",
+      "sourceName": "The Economic Times",
+      "sourceUrl": "https://economictimes.indiatimes.com"
+    },
+    {
+      "id": "2876c546e734",
+      "title": "Comet C/2026 A1 (MAPS)",
+      "description": "If C/2026 A1 (MAPS) survives its close encounter with the sun, it could blaze brightly enough to be seen from Earth.",
+      "content": "A newly discovered comet is giving astronomers a rare early look at a high-risk journey toward the sun. First detected on January 13 by French researchers at the AMACS1 observatory in San Pedro de Atacama, Chile, C/2026 A1 (MAPS) is a Kreutz sungraze... [3374 chars]",
+      "url": "https://www.nationalgeographic.com/science/article/sungrazing-comet-2026-a1-maps-when-to-see",
+      "imageUrl": "https://i.natgeofe.com/n/95f1a66f-da77-4356-aaca-b59b0f6ff106/2026a1_14_03_26_16x9.jpg?w=1200",
+      "publishedAt": "2026-04-02T11:00:00Z",
+      "sourceName": "National Geographic",
+      "sourceUrl": "https://www.nationalgeographic.com"
+    },
     {
       "id": "c16ec0c0089b",
       "title": "Alien Intelligence vs. Artificial Intelligence Who Would Win The Ultimate Unknown Battle",

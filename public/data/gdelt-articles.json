@@ -1,10 +1,94 @@
 {
-  "generatedAt": "2026-04-02T01:59:42.866Z",
+  "generatedAt": "2026-04-03T14:03:35.468Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
-  "totalResults": 1184,
+  "totalResults": 1191,
   "articles": [
+    {
+      "id": "ca984380b002",
+      "title": "MAGA congressman says Americans would become  unglued  over alien briefings :  Youd be up at night worrying",
+      "url": "https://www.dailymail.co.uk/news/article-15702199/congressman-alien-worries-america-briefing.html",
+      "domain": "dailymail.co.uk",
+      "publishedAt": "2026-04-03T06:45:00Z",
+      "language": "English",
+      "sourceName": "dailymail.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://i.dailymail.co.uk/1s/2026/04/03/06/107629647-0-image-m-110_1775193940949.jpg",
+      "tone": 0
+    },
+    {
+      "id": "d707f1f78379",
+      "title": "Alien data would keep public awake at night , says MAGA congressman who has received classified briefings on ETs",
+      "url": "https://www.independent.ie/world-news/north-america/alien-data-would-keep-public-awake-at-night-says-maga-congressman-who-has-received-classified-briefings-on-ets/a1143985999.html",
+      "domain": "independent.ie",
+      "publishedAt": "2026-04-03T06:15:00Z",
+      "language": "English",
+      "sourceName": "independent.ie (Ireland)",
+      "country": "Ireland",
+      "imageUrl": "https://focus.independent.ie/thumbor/wQjrY0DmF_19vrHVGbw4NvZJgoA=/0x0:1024x682/629x0/prod-mh-ireland/40471ba1-0cc2-4ef6-9bab-9f557312a4bc/5c064031-1af6-4cfb-b93c-df569b158b94/40471ba1-0cc2-4ef6-9bab-9f557312a4bc.jpg",
+      "tone": 0
+    },
+    {
+      "id": "c90787fc45ee",
+      "title": "Mysterious Lights Seen by Missouri Officer What Happened ?",
+      "url": "https://101theeagle.com/mt-vernon-missouri-ufos/",
+      "domain": "101theeagle.com",
+      "publishedAt": "2026-04-03T05:00:00Z",
+      "language": "English",
+      "sourceName": "101theeagle.com",
+      "country": "",
+      "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "20d340814a12",
+      "title": "Mysterious Lights Seen by Missouri Officer What Happened ?",
+      "url": "https://kickam1530.com/ixp/463/p/mt-vernon-missouri-ufos/",
+      "domain": "kickam1530.com",
+      "publishedAt": "2026-04-03T03:45:00Z",
+      "language": "English",
+      "sourceName": "kickam1530.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "8d37591fa7e6",
+      "title": "Mysterious Lights Seen by Missouri Officer What Happened ?",
+      "url": "https://979kickfm.com/ixp/463/p/mt-vernon-missouri-ufos/",
+      "domain": "979kickfm.com",
+      "publishedAt": "2026-04-03T02:15:00Z",
+      "language": "English",
+      "sourceName": "979kickfm.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "86aebfb643f4",
+      "title": "UFO Showdown : Pentagon Ordered to Surrender Secret  Tic Tac  Files in Days",
+      "url": "https://www.ibtimes.co.uk/ufo-showdown-pentagon-ordered-surrender-secret-tic-tac-files-days-1790042",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-04-03T00:30:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788980/rep-anna-paulina-luna.jpg",
+      "tone": 0
+    },
+    {
+      "id": "c6ffa6a03378",
+      "title": "UFO Sightings Daily",
+      "url": "https://www.ufosightingsdaily.com/search?updated-max=2026-03-24T06:30:00-06:00&max-results=10",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-02T05:30:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
     {
       "id": "870bad6ac208",
       "title": "UFOs or drones ? CT lawmakers push for answers on mysterious lights",
@@ -3303,7 +3387,7 @@
       "sourceName": "indianexpress.com (India)",
       "country": "India",
       "imageUrl": "https://images.indianexpress.com/2026/02/Area-51-.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5ee308d12f8d",
@@ -3315,7 +3399,7 @@
       "sourceName": "ktep.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "51073006f0fd",
@@ -3327,7 +3411,7 @@
       "sourceName": "geo.tv (Pakistan)",
       "country": "Pakistan",
       "imageUrl": "https://www.geo.tv/assets/uploads/updates/2026-02-20/l_651897_104233_updates.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a705b95728bd",
@@ -3339,7 +3423,7 @@
       "sourceName": "5au.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://www.5au.com.au/wp-content/uploads/sites/35/2026/02/feature.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "44e83924bc14",
@@ -3351,7 +3435,7 @@
       "sourceName": "wutc.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "858cff3e3ae8",
@@ -3363,7 +3447,7 @@
       "sourceName": "brisbanetimes.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://static.ffx.io/images/$zoom_0.5314399187217143%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_367%2C$y_110/t_crop_custom/q_86%2Cf_auto/5b81bf1a4aa1bb96f1924363f6d3cab17e913a00",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fa16d678085f",
@@ -3375,7 +3459,7 @@
       "sourceName": "aol.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/os/en/reuters.com/4ceaaff679d5c1fae679af312cb8fda1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "db62714aafef",
@@ -3387,7 +3471,7 @@
       "sourceName": "mirror.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i2-prod.mirror.co.uk/incoming/article36752889.ece/ALTERNATES/s1200/1_US-POLITICS-ECONOMY-TRUMP.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "12ad7f04636d",
@@ -3399,7 +3483,7 @@
       "sourceName": "ksut.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8b5d2dfeafd3",
@@ -3411,7 +3495,7 @@
       "sourceName": "saharareporters.com (Nigeria)",
       "country": "Nigeria",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "97902ced681e",
@@ -7683,7 +7767,7 @@
       "sourceName": "960weli.iheart.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.iheart.com/v3/re/assets.getty/69a0f430c8f35fea66c8d9f0?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "a5e3bdd10a20",
@@ -7743,7 +7827,7 @@
       "sourceName": "power96radio.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "79b61f6ca4a4",
@@ -7755,7 +7839,7 @@
       "sourceName": "krforadio.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "5b981c5770b4",
@@ -7767,7 +7851,7 @@
       "sourceName": "mix108.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "f06449a87370",
@@ -7779,7 +7863,7 @@
       "sourceName": "1520theticket.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "309fee1be002",
@@ -7791,7 +7875,7 @@
       "sourceName": "kdhlradio.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "fdf8e3eb47bd",
@@ -7803,7 +7887,7 @@
       "sourceName": "vice.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.vice.com/wp-content/uploads/sites/2/2025/10/unnamed-5-e1759511178996.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "da0883be1f2a",
@@ -7851,7 +7935,7 @@
       "sourceName": "artasiapacific.com (China)",
       "country": "China",
       "imageUrl": "https://www.artasiapacific.com/content/images/size/w1200/2026/03/image--5-.png",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "18a8da2a3334",
@@ -7863,7 +7947,7 @@
       "sourceName": "radaronline.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.radaronline.com/brand-img/El9mAKAZj/1200x628/trump-et-mainpic-2-1772562545875.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "b41c4f145d07",
@@ -7875,7 +7959,7 @@
       "sourceName": "kool1017.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/03/attachment-gacw_pr_image_2___resized.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "051026d5fc1f",
@@ -8331,7 +8415,7 @@
       "sourceName": "i95rock.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/677/files/2026/03/attachment-photo-1588281345136-9893252095bd.jpeg?&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d5607b2a3549",
@@ -12726,6 +12810,54 @@
       "tone": 0
     },
     {
+      "id": "4fe4a63f7718",
+      "title": "Submariner claims US tracked  terrifying  high - speed UFOs | Weird | News",
+      "url": "https://www.express.co.uk/news/weird/2164771/former-submariner-claims-us-navy-tracked-terrifying-fast-moving-ufos-secret-logbooks",
+      "domain": "express.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "express.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/80/1200x630/6710467.jpg",
+      "tone": 0
+    },
+    {
+      "id": "b0a98c0e505f",
+      "title": "I know about Navy horrifying UFO log books and terrifying things moving across our seas",
+      "url": "https://www.dailystar.co.uk/news/weird-news/i-know-navys-horrifying-ufo-36641828",
+      "domain": "dailystar.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "dailystar.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://i2-prod.dailystar.co.uk/article36642141.ece/ALTERNATES/s1200/3_VIDEO-Mysterious-glowing-spiral-appears-in-sky-near-where-possible-UFO-was-spotted-in-2024-an.jpg",
+      "tone": 0
+    },
+    {
+      "id": "c0c06ee1d0cc",
+      "title": "Submarine worker chilling claim about Navy UFO logbooks tracking  fast mover in ocean",
+      "url": "https://www.mirror.co.uk/news/weird-news/submarine-workers-chilling-claim-navy-36643708",
+      "domain": "mirror.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "mirror.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://i2-prod.mirror.co.uk/article36642142.ece/ALTERNATES/s1200/0_Screenshot-2025-09-10-at-095135.jpg",
+      "tone": 0
+    },
+    {
+      "id": "7ecd31fd0563",
+      "title": "When the Land Runs Out",
+      "url": "https://thebulletin.org/premium/2026-01/when-the-land-runs-out/",
+      "domain": "thebulletin.org",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "thebulletin.org (United States)",
+      "country": "United States",
+      "imageUrl": "https://thebulletin.org/wp-content/uploads/2026/01/L_House_by_the_Railroad-1024x848.jpg.optimal.jpg",
+      "tone": 0
+    },
+    {
       "id": "4f676ec2bfac",
       "title": "Obama Alien Admission : Why a Former President UFO Comments Are Rattling the National Security Establishment",
       "url": "https://www.webpronews.com/obamas-alien-admission-why-a-former-presidents-ufo-comments-are-rattling-the-national-security-establishment/",
@@ -13515,54 +13647,6 @@
       "sourceName": "maritime-executive.com (United States)",
       "country": "United States",
       "imageUrl": "https://maritime-executive.com/media/images/article/Photos/Wreckage_Salvage/Razouk-aground-Turkey.jpg",
-      "tone": 0
-    },
-    {
-      "id": "4fe4a63f7718",
-      "title": "Submariner claims US tracked  terrifying  high - speed UFOs | Weird | News",
-      "url": "https://www.express.co.uk/news/weird/2164771/former-submariner-claims-us-navy-tracked-terrifying-fast-moving-ufos-secret-logbooks",
-      "domain": "express.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "express.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/80/1200x630/6710467.jpg",
-      "tone": 0
-    },
-    {
-      "id": "b0a98c0e505f",
-      "title": "I know about Navy horrifying UFO log books and terrifying things moving across our seas",
-      "url": "https://www.dailystar.co.uk/news/weird-news/i-know-navys-horrifying-ufo-36641828",
-      "domain": "dailystar.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "dailystar.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.dailystar.co.uk/article36642141.ece/ALTERNATES/s1200/3_VIDEO-Mysterious-glowing-spiral-appears-in-sky-near-where-possible-UFO-was-spotted-in-2024-an.jpg",
-      "tone": 0
-    },
-    {
-      "id": "c0c06ee1d0cc",
-      "title": "Submarine worker chilling claim about Navy UFO logbooks tracking  fast mover in ocean",
-      "url": "https://www.mirror.co.uk/news/weird-news/submarine-workers-chilling-claim-navy-36643708",
-      "domain": "mirror.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "mirror.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.mirror.co.uk/article36642142.ece/ALTERNATES/s1200/0_Screenshot-2025-09-10-at-095135.jpg",
-      "tone": 0
-    },
-    {
-      "id": "7ecd31fd0563",
-      "title": "When the Land Runs Out",
-      "url": "https://thebulletin.org/premium/2026-01/when-the-land-runs-out/",
-      "domain": "thebulletin.org",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "thebulletin.org (United States)",
-      "country": "United States",
-      "imageUrl": "https://thebulletin.org/wp-content/uploads/2026/01/L_House_by_the_Railroad-1024x848.jpg.optimal.jpg",
       "tone": 0
     },
     {

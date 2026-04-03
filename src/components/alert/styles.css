@@ -35,17 +35,3 @@
   letter-spacing: 0.3px;
 }
 
-.alert__close {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  color: var(--color-muted);
-  cursor: pointer;
-  font-size: var(--fs-title);
-  padding: 0 var(--space-1);
-  line-height: 1;
-}
-
-.alert__close:hover {
-  color: var(--color-text-strong);
-}

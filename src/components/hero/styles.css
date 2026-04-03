@@ -12,7 +12,7 @@
 
 .hero__tagline {
   font-family: var(--font-mono);
-  font-size: var(--fs-md);
+  font-size: var(--fs-xs);
   color: var(--color-muted);
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -74,7 +74,7 @@
   }
 
   .hero__tagline {
-    font-size: var(--fs-lg);
+    font-size: var(--fs-md);
   }
 
   .hero__stat-value {

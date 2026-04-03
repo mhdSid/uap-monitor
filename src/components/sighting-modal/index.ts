@@ -14,7 +14,7 @@ import { StatusTag, Tag } from '@/components/tags'
 import { BookmarkButton } from '@/components/bookmark-button'
 import { ShareButton } from '@/components/share-button'
 import { Modal } from '@/components/modal'
-import { ACTIVE_SOURCES, ENV_CONTEXT, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
+import { ENV_CONTEXT, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
 import { useAnalytics, getSourceUrl, useFireball, useGeomagnetic, useNuclear, useSeismic, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
 import type { NearbyFacility } from '@/composables/use-nuclear'
@@ -43,8 +43,8 @@ export class SightingModal {
 
   private static buildHeader (s: Sighting): HTMLElement {
     const actions = h('span', { className: cx.actions },
-      new BookmarkButton({ sightingId: s.id }).el,
-      new ShareButton({ sightingId: s.id, year: s.occurredAt ? parseInt(s.occurredAt, 10) : undefined, title: s.summary?.slice(0, 60) }).el
+      new BookmarkButton({ sightingId: s.id, size: 16 }).el,
+      new ShareButton({ size: 16, sightingId: s.id, year: s.occurredAt ? parseInt(s.occurredAt, 10) : undefined, title: s.summary?.slice(0, 60) }).el
     )
 
     return h('div', { className: cx.header },

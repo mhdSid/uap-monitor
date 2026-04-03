@@ -15,6 +15,8 @@ import type { ModalSlots } from '@/types'
 import { h, addClass, removeClass, setAttrs, qs } from '@/core/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
+import { ButtonSize } from '@/enums'
+import { Button } from '../button'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 const TRANSITION_MS = 200
@@ -34,11 +36,17 @@ export class Modal {
 
     Modal.trigger = trigger ?? (document.activeElement as HTMLElement | null)
 
-    const closeBtn = h('button', {
-      className: cx.close,
-      'aria-label': ARIA.CLOSE_MODAL,
+    const closeBtnComp = new Button({
+      label: ARIA.CLOSE_MODAL,
+      variant: 'ghost',
+      color: 'neutral',
+      size: ButtonSize.MD,
+      round: true,
+      ariaLabel: ARIA.CLOSE_MODAL,
+      icon: () => iconClose(16),
       onClick: () => Modal.close()
-    }, iconClose(14))
+    })
+    const closeBtn = closeBtnComp.el
 
     const headerBar = h('div', { className: cx.header })
     if (slots.header) headerBar.appendChild(slots.header())

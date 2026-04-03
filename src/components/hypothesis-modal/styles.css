@@ -97,7 +97,7 @@
 
 .modal-hypothesis__code {
   font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
+  font-size: var(--fs-xs);
   line-height: 1.65;
   color: var(--color-text);
   background: var(--c-neutral-960);
