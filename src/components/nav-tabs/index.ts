@@ -73,5 +73,16 @@ export class NavTabs extends Component<NavTabsProps> {
         btn.setAttribute('aria-selected', 'false')
       }
     }
+    this.scrollToActive(route)
+  }
+
+  private scrollToActive (route: RouteName): void {
+    const idx = TABS.findIndex(t => t.route === route)
+    if (idx < 0 || !this.buttons[idx].isConnected) return
+    this.buttons[idx].scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    })
   }
 }
