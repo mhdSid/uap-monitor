@@ -57,7 +57,19 @@ export class NavTabs extends Component<NavTabsProps> {
       nav.appendChild(btn)
     }
 
+    requestAnimationFrame(() => this.scrollToActive(this.props.active))
+
     return nav
+  }
+
+  private scrollToActive (route: RouteName): void {
+    const idx = TABS.findIndex(t => t.route === route)
+    if (idx < 0) return
+    this.buttons[idx].scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    })
   }
 
   /** Update active tab visuals (called by app on route change) */
@@ -73,5 +85,6 @@ export class NavTabs extends Component<NavTabsProps> {
         btn.setAttribute('aria-selected', 'false')
       }
     }
+    this.scrollToActive(route)
   }
 }
