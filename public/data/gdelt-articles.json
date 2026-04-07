@@ -1,10 +1,1114 @@
 {
-  "generatedAt": "2026-04-03T14:03:35.468Z",
+  "generatedAt": "2026-04-07T04:21:16.353Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
-  "totalResults": 1191,
+  "totalResults": 1250,
   "articles": [
+    {
+      "id": "1fa3d21c348f",
+      "title": "If aliens exist , what would they think of us ? | News , Sports , Jobs",
+      "url": "https://www.ironmountaindailynews.com/extra-extra/2026/04/if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "ironmountaindailynews.com",
+      "publishedAt": "2026-04-06T23:45:00Z",
+      "language": "English",
+      "sourceName": "ironmountaindailynews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://ogden_images.s3.amazonaws.com/www.ironmountaindailynews.com/images/2026/04/06150647/AP26091636479814-679x500.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "406c1badeacb",
+      "title": "Watch live : NASA Artemis II crew flying around the moon today : NPR",
+      "url": "https://www.npr.org/transcripts/nx-s1-5773187",
+      "domain": "npr.org",
+      "publishedAt": "2026-04-06T20:30:00Z",
+      "language": "English",
+      "sourceName": "npr.org (United States)",
+      "country": "United States",
+      "imageUrl": "http://npr-brightspot.s3.amazonaws.com/36/a9/d74ba34948998c18f50932919def/gettyimages-2269359565.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "c42fef24319d",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "http://www.timesfreepress.com/news/2026/apr/06/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/",
+      "domain": "timesfreepress.com",
+      "publishedAt": "2026-04-06T17:30:00Z",
+      "language": "English",
+      "sourceName": "timesfreepress.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://wehco.media.clients.ellingtoncms.com/img/photos/2026/04/05/AP26091636488898_t1200.jpg?57a0c2296240c280e9492005c3cad63e7cbe80f4",
+      "tone": 0
+    },
+    {
+      "id": "381b319a9c2f",
+      "title": "UFO Sightings Daily : UFO fleet Winterhaven , California united states April 3 , 2026 UAP Alien Paranormal Breaking News 📰 Video !!!",
+      "url": "https://www.ufosightingsdaily.com/2026/04/ufo-fleet-winterhaven-california-usa.html",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-06T15:45:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "43e95b94d1aa",
+      "title": "Aliens will be  disappointed  by humans and our lust for war if they visit Earth",
+      "url": "https://www.dailystar.co.uk/news/latest-news/aliens-disappointed-humans-lust-war-36973538",
+      "domain": "dailystar.co.uk",
+      "publishedAt": "2026-04-06T11:00:00Z",
+      "language": "English",
+      "sourceName": "dailystar.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://i2-prod.dailystar.co.uk/article36973544.ece/ALTERNATES/s1200d/0_Screenshot-2026-04-06-at-084534.jpg",
+      "tone": 0
+    },
+    {
+      "id": "644523217639",
+      "title": "Neil McCasland Silver Alert Is Freaking Out UFO Theorists : Who Is He And Why ?",
+      "url": "https://www.ibtimes.co.uk/mystery-disappearance-retired-air-force-general-ufo-1790262",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-04-06T07:30:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1800543/neil-mccasland-once-led-air-force-research-laboratory.png",
+      "tone": 0
+    },
+    {
+      "id": "1b39b86b7cb9",
+      "title": "From volcanic wilds to world - class art : 10 fun and fabulous reasons to visit France in 2026",
+      "url": "https://www.aol.co.uk/articles/volcanic-wilds-world-class-art-054511463.html",
+      "domain": "aol.co.uk",
+      "publishedAt": "2026-04-06T06:15:00Z",
+      "language": "English",
+      "sourceName": "aol.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://s.yimg.com/os/en/aol_the_guardian_uk_429/b1cbd63a71c127d4134adca4243314d3",
+      "tone": 2.5
+    },
+    {
+      "id": "61f2a0d2bb9b",
+      "title": "After 60 years , witnesses to Australia biggest UFO sighting want answers",
+      "url": "https://www.rnz.co.nz/news/world/591603/after-60-years-witnesses-to-australia-s-biggest-ufo-sighting-want-answers",
+      "domain": "rnz.co.nz",
+      "publishedAt": "2026-04-06T05:00:00Z",
+      "language": "English",
+      "sourceName": "rnz.co.nz",
+      "country": "",
+      "imageUrl": "https://media.rnztools.nz/rnz/image/upload/s--9MtgWL5---/t_tohu-badge-facebook/v1775424913/4JQLQPB_4f98a613cec5f7192c66267dac72334e_png?_a=BACCd2AD",
+      "tone": 0
+    },
+    {
+      "id": "ce6cf28eee0e",
+      "title": "NASA Chief Says Odds Are  Pretty High  Aliens Exist",
+      "url": "https://www.newsweek.com/nasa-chief-says-odds-are-pretty-high-aliens-exist-11785714",
+      "domain": "newsweek.com",
+      "publishedAt": "2026-04-05T23:30:00Z",
+      "language": "English",
+      "sourceName": "newsweek.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/04/AP25309041619050.jpg?crop=1",
+      "tone": 0
+    },
+    {
+      "id": "2049182d6490",
+      "title": "After 60 years , witnesses to Australia biggest UFO sighting at Westall High School say it time for answers",
+      "url": "https://www.abc.net.au/news/2026-04-06/westall-ufo-mystery-witnesses-want-answers/106126614",
+      "domain": "abc.net.au",
+      "publishedAt": "2026-04-05T19:15:00Z",
+      "language": "English",
+      "sourceName": "abc.net.au (Australia)",
+      "country": "Australia",
+      "imageUrl": "https://live-production.wcms.abc-cdn.net.au/eb3f64cfc7f242572d1bf19244cbdcf7?impolicy=wcms_watermark_news&cropH=2025&cropW=3600&xPos=0&yPos=0&imformat=generic",
+      "tone": 0
+    },
+    {
+      "id": "1c88fdd6215e",
+      "title": "What would aliens think of us ? | The Shillong Times",
+      "url": "https://theshillongtimes.com/2026/04/05/what-would-aliens-think-of-us/",
+      "domain": "theshillongtimes.com",
+      "publishedAt": "2026-04-05T15:00:00Z",
+      "language": "English",
+      "sourceName": "theshillongtimes.com (India)",
+      "country": "India",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "223ba7645ec1",
+      "title": "Between the Archive and the Abyss : What UFO Disclosure Really Asks of Us",
+      "url": "https://spacedaily.com/sd-n-between-the-archive-and-the-abyss-what-ufo-disclosure-really-asks-of-us/",
+      "domain": "spacedaily.com",
+      "publishedAt": "2026-04-05T09:15:00Z",
+      "language": "English",
+      "sourceName": "spacedaily.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://spacedaily.com/wp-content/uploads/2026/04/between-the-archive-and-the-abyss-what-u.jpg",
+      "tone": 0
+    },
+    {
+      "id": "57aa16fe0d64",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.asiaone.com:443/world/trump-orders-ufo-data-released-question-hangs-if-aliens-exist-what-would-they-think-us",
+      "domain": "asiaone.com",
+      "publishedAt": "2026-04-05T08:30:00Z",
+      "language": "English",
+      "sourceName": "asiaone.com (Singapore)",
+      "country": "Singapore",
+      "imageUrl": "https://www.asiaone.com/sites/default/files/styles/article_top_image/public/original_images/Apr2026/5426_us_ap%20%281%29.jpg?itok=hNBDeTh2",
+      "tone": 2.5
+    },
+    {
+      "id": "d0a36f2ce832",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.asiaone.com/world/trump-orders-ufo-data-released-question-hangs-if-aliens-exist-what-would-they-think-us",
+      "domain": "asiaone.com",
+      "publishedAt": "2026-04-05T07:00:00Z",
+      "language": "English",
+      "sourceName": "asiaone.com (Singapore)",
+      "country": "Singapore",
+      "imageUrl": "https://www.asiaone.com/sites/default/files/styles/article_top_image/public/original_images/Apr2026/5426_us_ap%20%281%29.jpg?itok=hNBDeTh2",
+      "tone": 2.5
+    },
+    {
+      "id": "850a1a35d6f0",
+      "title": "UFO Sightings Daily : 100 mile long UFO rises off moon as Artimus approaches , UAP Paranormal Alien Sighting News .",
+      "url": "https://www.ufosightingsdaily.com/2026/04/100-mile-long-ufo-rises-off-moon-as.html",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-05T06:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 2.5
+    },
+    {
+      "id": "6dced34445b8",
+      "title": "UFO Sightings Daily : White Disk Over Arnold , Missouri united states March 31 , 2026 , UFO Sightings Daily",
+      "url": "https://www.ufosightingsdaily.com/2026/04/white-disk-over-arnold-missouri-usa.html",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-05T06:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "bf2524e01b37",
+      "title": "UFO Sightings Daily : mystery",
+      "url": "https://www.ufosightingsdaily.com/search/label/mystery",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-05T06:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "81420bb3855a",
+      "title": "UFO Sightings Daily : odd",
+      "url": "https://www.ufosightingsdaily.com/search/label/odd",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-05T06:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "d71a76a3c66e",
+      "title": "UFO Sightings Daily : unknown",
+      "url": "https://www.ufosightingsdaily.com/search/label/unknown",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-05T06:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "d81d135a7e1e",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.adn.com/nation-world/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "adn.com",
+      "publishedAt": "2026-04-04T22:00:00Z",
+      "language": "English",
+      "sourceName": "adn.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.adn.com/resizer/v2/2V42PNP6MNALYBONZ65PYBVRCM.jpg?smart=true&auth=7a2d43362c227e448b5f0579f98a20e17b9418323b452b827a6f90fa9449c554",
+      "tone": 2.5
+    },
+    {
+      "id": "791e16590059",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.king5.com/article/news/nation-world/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/616-06335e4f-a6c3-4504-932c-6b498e4d5d1b",
+      "domain": "king5.com",
+      "publishedAt": "2026-04-04T21:30:00Z",
+      "language": "English",
+      "sourceName": "king5.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.king5.com/assets/AssociatedPress/images/5e24eaa8-a20d-47ec-aa4b-20e84d294dcd/20260404T041007/5e24eaa8-a20d-47ec-aa4b-20e84d294dcd_1140x641.jpg",
+      "tone": 0
+    },
+    {
+      "id": "06a052510cf7",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.capitalgazette.com/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "capitalgazette.com",
+      "publishedAt": "2026-04-04T19:00:00Z",
+      "language": "English",
+      "sourceName": "capitalgazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.capitalgazette.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "a568d538d446",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.rockymounttelegram.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_3f3bb5d5-30db-5eb7-bcc3-ae25ac1088c3.html",
+      "domain": "rockymounttelegram.com",
+      "publishedAt": "2026-04-04T17:15:00Z",
+      "language": "English",
+      "sourceName": "rockymounttelegram.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/rockymounttelegram.com/content/tncms/assets/v3/editorial/0/8a/08a8a9b4-0608-5934-a69a-c53d33648a8d/69d0cce7193ab.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "9c25ce73a764",
+      "title": "Trump orders UFO data release due to spiked interest – NBC Los Angeles",
+      "url": "https://www.nbclosangeles.com/news/national-international/trump-orders-ufo-data-released-what-would-aliens-think-of-us/3871309/",
+      "domain": "nbclosangeles.com",
+      "publishedAt": "2026-04-04T16:00:00Z",
+      "language": "English",
+      "sourceName": "nbclosangeles.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.nbclosangeles.com/2026/04/AP26091616012627.jpg?quality=85&strip=all",
+      "tone": 2.5
+    },
+    {
+      "id": "9a430d919097",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.boston.com/news/politics/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "boston.com",
+      "publishedAt": "2026-04-04T16:00:00Z",
+      "language": "English",
+      "sourceName": "boston.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bdc2020.o0bc.com/wp-content/uploads/2026/04/What_on_Earth_79814-69d090739b584-768x432.jpg",
+      "tone": 0
+    },
+    {
+      "id": "9490b58690b1",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ? - Boston News , Weather , Sports",
+      "url": "https://whdh.com/news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "whdh.com",
+      "publishedAt": "2026-04-04T15:00:00Z",
+      "language": "English",
+      "sourceName": "whdh.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 2.5
+    },
+    {
+      "id": "769c2c250395",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.news-gazette.com/news/nation-world/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_56bba691-da67-550e-a0c4-dec8dddd421e.html",
+      "domain": "news-gazette.com",
+      "publishedAt": "2026-04-04T15:00:00Z",
+      "language": "English",
+      "sourceName": "news-gazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/news-gazette.com/content/tncms/custom/image/3d3bfbd4-3cf5-11ec-9461-574a9d514a20.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "472ec5e5ac7a",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.reflector.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_82eb6a5a-bb23-53f5-8c66-07dc17c5a641.html",
+      "domain": "reflector.com",
+      "publishedAt": "2026-04-04T15:00:00Z",
+      "language": "English",
+      "sourceName": "reflector.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/reflector.com/content/tncms/assets/v3/editorial/2/36/236ef3f7-db56-56d4-84d5-7f53f0a36cc5/69d0cbbf44412.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "7dd57d851ebd",
+      "title": "If aliens exist , what would they think of us ? – NBC Bay Area",
+      "url": "https://www.nbcbayarea.com/news/national-international/trump-orders-ufo-data-released-what-would-aliens-think-of-us/4063489/",
+      "domain": "nbcbayarea.com",
+      "publishedAt": "2026-04-04T14:45:00Z",
+      "language": "English",
+      "sourceName": "nbcbayarea.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.nbcbayarea.com/2026/04/AP26091616012627.jpg?quality=85&strip=all",
+      "tone": 2.5
+    },
+    {
+      "id": "3c9ad4aa79e6",
+      "title": "Trump orders UFO data release , but what would aliens think of us ?",
+      "url": "https://banglamirrornews.com/2026/04/04/trump-orders-ufo-data-release-but-what-would-aliens-think-of-us/",
+      "domain": "banglamirrornews.com",
+      "publishedAt": "2026-04-04T14:45:00Z",
+      "language": "English",
+      "sourceName": "banglamirrornews.com (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://banglamirrornews.com/files/uploads/2026/04/fcgtryrty.jpg",
+      "tone": 0
+    },
+    {
+      "id": "006c64dc8b10",
+      "title": "Im not suicidal : US congressman says UFO secrets he knows could keep Americans  up at night  and  the country unglued  | World News",
+      "url": "https://timesofindia.indiatimes.com/world/us/im-not-suicidal-us-congressman-says-ufo-secrets-he-knows-could-keep-americans-up-at-night-and-the-country-unglued/articleshow/130020006.cms",
+      "domain": "timesofindia.indiatimes.com",
+      "publishedAt": "2026-04-04T14:45:00Z",
+      "language": "English",
+      "sourceName": "timesofindia.indiatimes.com (India)",
+      "country": "India",
+      "imageUrl": "https://static.toiimg.com/thumb/msid-130020949,width-1280,height-720,imgsize-1116194,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+      "tone": 0
+    },
+    {
+      "id": "934f1a8c2dbe",
+      "title": "4 April 2026 – In Saner Thought",
+      "url": "https://lobotero.com/2026/04/04/",
+      "domain": "lobotero.com",
+      "publishedAt": "2026-04-04T14:30:00Z",
+      "language": "English",
+      "sourceName": "lobotero.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvczAud3AuY29tXC9pXC9ibGFuay5qcGciLCJ0eHQiOiJJbiAgU2FuZXIgIFRob3VnaHQiLCJ0ZW1wbGF0ZSI6ImhpZ2h3YXkiLCJmb250IjoiIiwiYmxvZ19pZCI6Mjk0NDA4M30.0-Aooe_aywDCU-7meBJYiOcLkNWHhTBXxqiWMYXX0FgMQ",
+      "tone": 0
+    },
+    {
+      "id": "ad387c6b3eb6",
+      "title": "What would aliens make of us ? Why UFO fascination is rising again in America",
+      "url": "https://timesofindia.indiatimes.com/science/what-would-aliens-make-of-us-why-ufo-fascination-is-rising-again-in-america/articleshow/130020275.cms",
+      "domain": "timesofindia.indiatimes.com",
+      "publishedAt": "2026-04-04T14:30:00Z",
+      "language": "English",
+      "sourceName": "timesofindia.indiatimes.com (India)",
+      "country": "India",
+      "imageUrl": "https://static.toiimg.com/thumb/msid-130020440,width-1280,height-720,imgsize-59882,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+      "tone": 0
+    },
+    {
+      "id": "cddb646dab91",
+      "title": "IST Saturday News Dump – 04Apr26",
+      "url": "https://lobotero.com/2026/04/04/ist-saturday-news-dump-04apr26/",
+      "domain": "lobotero.com",
+      "publishedAt": "2026-04-04T14:30:00Z",
+      "language": "English",
+      "sourceName": "lobotero.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvczAud3AuY29tXC9pXC9ibGFuay5qcGciLCJ0eHQiOiJJbiAgU2FuZXIgIFRob3VnaHQiLCJ0ZW1wbGF0ZSI6ImhpZ2h3YXkiLCJmb250IjoiIiwiYmxvZ19pZCI6Mjk0NDA4M30.0-Aooe_aywDCU-7meBJYiOcLkNWHhTBXxqiWMYXX0FgMQ",
+      "tone": 0
+    },
+    {
+      "id": "3d1fa49af3c7",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.cadillacnews.com/ap/lifestyles/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_8d4658c8-48c7-5df2-b04a-21c51ecf834d.html",
+      "domain": "cadillacnews.com",
+      "publishedAt": "2026-04-04T14:00:00Z",
+      "language": "English",
+      "sourceName": "cadillacnews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/cadillacnews.com/content/tncms/custom/image/2f32a658-47ab-11e7-abb1-ef25bc001cf2.png",
+      "tone": 2.5
+    },
+    {
+      "id": "1bb441d1cab0",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.wfmj.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_11da4a3b-4a8a-5ccd-a1d6-cd252776bbf7.html",
+      "domain": "wfmj.com",
+      "publishedAt": "2026-04-04T14:00:00Z",
+      "language": "English",
+      "sourceName": "wfmj.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/wfmj.com/content/tncms/assets/v3/editorial/9/b3/9b3979c6-3d2f-5ba7-bb2d-1a724d0b1c90/69d0f632f3617.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "e915eb615b23",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.yumasun.com/news/national_news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_b604317b-24d8-5cc5-bac0-4441dcc83042.html",
+      "domain": "yumasun.com",
+      "publishedAt": "2026-04-04T13:45:00Z",
+      "language": "English",
+      "sourceName": "yumasun.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/yumasun.com/content/tncms/assets/v3/editorial/a/4c/a4c1101a-dbcd-5cb4-a311-c5e154b71535/69d092e77e533.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "8c842e0bf8c4",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.mdjonline.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_ed2ecb63-2bdf-571a-912a-8f494c476e67.html",
+      "domain": "mdjonline.com",
+      "publishedAt": "2026-04-04T13:15:00Z",
+      "language": "English",
+      "sourceName": "mdjonline.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/mdjonline.com/content/tncms/assets/v3/editorial/f/da/fda18e0c-b923-520b-a329-23ce6cb91c41/69d08ebd7eac4.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "e0cc42d61d12",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.ksat.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "ksat.com",
+      "publishedAt": "2026-04-04T10:30:00Z",
+      "language": "English",
+      "sourceName": "ksat.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
+      "tone": 2.5
+    },
+    {
+      "id": "88a665181528",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://mymotherlode.com/news/national/10704775/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us.html",
+      "domain": "mymotherlode.com",
+      "publishedAt": "2026-04-04T10:00:00Z",
+      "language": "English",
+      "sourceName": "mymotherlode.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mymotherlode.com/wp-content/uploads/2026/04/AP_5a380b927b404ae89c2781700fa3897a_9782fc7f4c.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "fd2875ffa73f",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://mymotherlode.com/news/national/10704789/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction.html",
+      "domain": "mymotherlode.com",
+      "publishedAt": "2026-04-04T10:00:00Z",
+      "language": "English",
+      "sourceName": "mymotherlode.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mymotherlode.com/wp-content/uploads/2026/04/AP_7dd3f518a1f04b44b9230d3cfb741375_724620e9a2.jpg",
+      "tone": 0
+    },
+    {
+      "id": "0d57de7dd31a",
+      "title": "AP Entertainment SummaryBrief at 4 : 10 a . m . EDT",
+      "url": "https://www.smdailyjournal.com/arts_and_entertainment/ap-entertainment-summarybrief-at-4-10-a-m-edt/article_0c2953f5-e84b-5ae0-868e-b3fdfcf7d181.html",
+      "domain": "smdailyjournal.com",
+      "publishedAt": "2026-04-04T09:45:00Z",
+      "language": "English",
+      "sourceName": "smdailyjournal.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/smdailyjournal.com/content/tncms/custom/image/0b0b7a5a-a1d1-11e6-9041-cbc40d61c8f5.jpg",
+      "tone": 0
+    },
+    {
+      "id": "9b0e3d8bd761",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://ktar.com/national-news/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/5843730/",
+      "domain": "ktar.com",
+      "publishedAt": "2026-04-04T09:30:00Z",
+      "language": "English",
+      "sourceName": "ktar.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": 0
+    },
+    {
+      "id": "f2555bfc4c0d",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "http://www.sitkasentinel.com/stories/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction,130770",
+      "domain": "sitkasentinel.com",
+      "publishedAt": "2026-04-04T09:00:00Z",
+      "language": "English",
+      "sourceName": "sitkasentinel.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mapi.associatedpress.com/v2/items/7dd3f518a1f04b44b9230d3cfb741375.1/preview/preview.jpg?nfe=true&s=512&wm=false&app=MPK&tag=iid~7dd3f518a1f04b44b9230d3cfb741375!rsn~1!cid~08479f91a64b4ceeaac8efecea979aa9!orgId~48830!qt~qKR5S-6geAeI!orgNm~DAILY%20SITKA%20SENTINEL!role~Preview!mt~photo!fmt~JPEG%20Baseline",
+      "tone": 0
+    },
+    {
+      "id": "63dfa2195e76",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.kelownadailycourier.ca/entertainment/national_entertainment/article_bd049e20-0aca-559c-8bc8-c6377d311d55.html",
+      "domain": "kelownadailycourier.ca",
+      "publishedAt": "2026-04-04T09:00:00Z",
+      "language": "English",
+      "sourceName": "kelownadailycourier.ca (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/kelownadailycourier.ca/content/tncms/assets/v3/editorial/2/b2/2b21d701-6a79-53a7-bc80-a9b45ec67cd1/69d09aee28b31.image.jpg?crop=640%2C336%2C0%2C22",
+      "tone": 0
+    },
+    {
+      "id": "4c02cc937c43",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "http://www.sitkasentinel.com/stories/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades,130771",
+      "domain": "sitkasentinel.com",
+      "publishedAt": "2026-04-04T09:00:00Z",
+      "language": "English",
+      "sourceName": "sitkasentinel.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mapi.associatedpress.com/v2/items/5a380b927b404ae89c2781700fa3897a.1/preview/preview.jpg?nfe=true&s=512&wm=false&app=MPK&tag=iid~5a380b927b404ae89c2781700fa3897a!rsn~1!cid~d55d2570d3c24f40ad538a16973a032a!orgId~48830!qt~cKyLrMSrwKeI!orgNm~DAILY%20SITKA%20SENTINEL!role~Preview!mt~photo!fmt~JPEG%20Baseline",
+      "tone": 0
+    },
+    {
+      "id": "af970d1831fc",
+      "title": "We wonder about aliens in UFOs . Do they wonder about us ?",
+      "url": "https://www.wdbo.com/news/national/trump-orders-ufo/H3L37PKQ4I2AXK7TEFQDMQDW2I/",
+      "domain": "wdbo.com",
+      "publishedAt": "2026-04-04T08:45:00Z",
+      "language": "English",
+      "sourceName": "wdbo.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20082-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
+      "tone": 2.5
+    },
+    {
+      "id": "c06063887ed9",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.mdjonline.com/news/national/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/article_12422709-c071-5fbe-86f0-49d9b9f63b02.html",
+      "domain": "mdjonline.com",
+      "publishedAt": "2026-04-04T08:45:00Z",
+      "language": "English",
+      "sourceName": "mdjonline.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/mdjonline.com/content/tncms/assets/v3/editorial/5/5d/55dbe305-2c8f-54b5-882c-0a901387aa6c/69d08ebdd3314.image.jpg?crop=1867%2C980%2C0%2C64",
+      "tone": 0
+    },
+    {
+      "id": "c15590655506",
+      "title": "Hollywood crafts narrative on visitors from space",
+      "url": "https://www.wgauradio.com/entertainment/hollywoods-narrative/32K2YHMN5E6ZPIDUD4OID5ZVZM/",
+      "domain": "wgauradio.com",
+      "publishedAt": "2026-04-04T08:45:00Z",
+      "language": "English",
+      "sourceName": "wgauradio.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F3MUGMPRRAM2E5EQDHDSBQ4Z43Y.jpg?auth=9ee3dbeb0e0f16b8201c783a1f991943eef48a85be6fcb493b77c4edc67f7370&smart=true",
+      "tone": 0
+    },
+    {
+      "id": "230d32532744",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.union-bulletin.com/news/national/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/article_9f4ec1c7-2f49-5ca7-82dc-a8854d80a11c.html",
+      "domain": "union-bulletin.com",
+      "publishedAt": "2026-04-04T08:30:00Z",
+      "language": "English",
+      "sourceName": "union-bulletin.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/union-bulletin.com/content/tncms/assets/v3/editorial/9/41/941e9b22-a67d-5980-86de-c5b57f81956f/69d08f362123b.image.jpg?crop=1867%2C980%2C0%2C64",
+      "tone": 0
+    },
+    {
+      "id": "89f03e0b1a2b",
+      "title": "SRN - US News - Taylorville Daily News",
+      "url": "https://taylorvilledailynews.com/local-news/srn-us-news/4479772f2c320925064cd295892ce235",
+      "domain": "taylorvilledailynews.com",
+      "publishedAt": "2026-04-04T08:30:00Z",
+      "language": "English",
+      "sourceName": "taylorvilledailynews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.srnnews.com/media/2026/04/1775276299561224Cp2eGNUQNb-apn.jpg?x92997",
+      "tone": 0
+    },
+    {
+      "id": "90f68a02eb21",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.union-bulletin.com/news/national/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/article_686af76f-9593-557e-8230-7c6016856170.html",
+      "domain": "union-bulletin.com",
+      "publishedAt": "2026-04-04T08:30:00Z",
+      "language": "English",
+      "sourceName": "union-bulletin.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/union-bulletin.com/content/tncms/assets/v3/editorial/d/ba/dba00abb-75d9-5d61-93cc-816e20b5173c/69d092c29e898.image.jpg?crop=1619%2C850%2C0%2C215",
+      "tone": 0
+    },
+    {
+      "id": "85b67022ff47",
+      "title": "SRN - US News - Taylorville Daily News",
+      "url": "https://taylorvilledailynews.com/local-news/srn-us-news/443c741768d39919a8bdda3914ce7cd3",
+      "domain": "taylorvilledailynews.com",
+      "publishedAt": "2026-04-04T08:30:00Z",
+      "language": "English",
+      "sourceName": "taylorvilledailynews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.srnnews.com/media/2026/04/1775276302396535OUn5NsTqic-apn.jpg?x92997",
+      "tone": 0
+    },
+    {
+      "id": "c7b1783c97e2",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.wsls.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "wsls.com",
+      "publishedAt": "2026-04-04T08:15:00Z",
+      "language": "English",
+      "sourceName": "wsls.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
+      "tone": 2.5
+    },
+    {
+      "id": "610e87826822",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.pentictonherald.ca/entertainment/national_entertainment/article_78680ef5-8cc2-59cb-8545-560964518bd7.html",
+      "domain": "pentictonherald.ca",
+      "publishedAt": "2026-04-04T08:15:00Z",
+      "language": "English",
+      "sourceName": "pentictonherald.ca (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/pentictonherald.ca/content/tncms/assets/v3/editorial/0/45/045d98c9-eb65-5a62-b63d-4eeadc6204c5/69d09adea9809.image.jpg?crop=640%2C336%2C0%2C22",
+      "tone": 0
+    },
+    {
+      "id": "85ff9624e704",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.wsls.com/entertainment/2026/04/04/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/",
+      "domain": "wsls.com",
+      "publishedAt": "2026-04-04T08:15:00Z",
+      "language": "English",
+      "sourceName": "wsls.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
+      "tone": 0
+    },
+    {
+      "id": "8ae110128821",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.wfmz.com/news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_d6d40041-3797-57ce-8e9d-6bb01a742930.html",
+      "domain": "wfmz.com",
+      "publishedAt": "2026-04-04T07:45:00Z",
+      "language": "English",
+      "sourceName": "wfmz.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wfmz.com/content/tncms/assets/v3/editorial/8/8b/88bef3ce-f613-51f9-ba87-23b42b03d78f/69d08e54f1b2d.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "2fb86483c0a2",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://lethbridgeherald.com/entertainment/entertainment-news/2026/04/03/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/",
+      "domain": "lethbridgeherald.com",
+      "publishedAt": "2026-04-04T07:45:00Z",
+      "language": "English",
+      "sourceName": "lethbridgeherald.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "f3ea9db31db2",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://lethbridgeherald.com/entertainment/entertainment-news/2026/04/03/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/",
+      "domain": "lethbridgeherald.com",
+      "publishedAt": "2026-04-04T07:45:00Z",
+      "language": "English",
+      "sourceName": "lethbridgeherald.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "8e81fdbd152d",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.wfmz.com/news/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/article_e5e437c6-62e2-561d-8c94-db7db033f2b2.html",
+      "domain": "wfmz.com",
+      "publishedAt": "2026-04-04T07:45:00Z",
+      "language": "English",
+      "sourceName": "wfmz.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wfmz.com/content/tncms/assets/v3/editorial/a/0a/a0a26087-5a9b-5d60-a211-6a190e163fa7/69d08e554e16e.image.jpg?crop=1867%2C980%2C0%2C64",
+      "tone": 0
+    },
+    {
+      "id": "67dc119bdeb6",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.therecord.com/life/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/article_aff4e8e3-fbe4-55f6-b7f4-6ab31c3d7d48.html",
+      "domain": "therecord.com",
+      "publishedAt": "2026-04-04T07:15:00Z",
+      "language": "English",
+      "sourceName": "therecord.com (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/therecord.com/content/tncms/assets/v3/editorial/9/14/914a4716-1de8-59a8-952d-a9afefd3b498/69d09442d423f.image.jpg?crop=1367%2C718%2C0%2C181",
+      "tone": 0
+    },
+    {
+      "id": "ef0ecd0044e4",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.dailygazette.com/hv360/ap/lifestyles/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_fb5fca4d-7830-50e2-a73a-0ebd8a5988e7.html",
+      "domain": "dailygazette.com",
+      "publishedAt": "2026-04-04T07:00:00Z",
+      "language": "English",
+      "sourceName": "dailygazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/dailygazette.com/content/tncms/assets/v3/editorial/1/77/1772482f-f88d-5fb8-a6c2-8184e1b2b274/69d090f889f9d.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "a4f4188abc74",
+      "title": "AP Entertainment SummaryBrief at 12 : 07 a . m . EDT",
+      "url": "https://www.smdailyjournal.com/arts_and_entertainment/ap-entertainment-summarybrief-at-12-07-a-m-edt/article_0c2953f5-e84b-5ae0-868e-b3fdfcf7d181.html",
+      "domain": "smdailyjournal.com",
+      "publishedAt": "2026-04-04T07:00:00Z",
+      "language": "English",
+      "sourceName": "smdailyjournal.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/smdailyjournal.com/content/tncms/custom/image/0b0b7a5a-a1d1-11e6-9041-cbc40d61c8f5.jpg",
+      "tone": 0
+    },
+    {
+      "id": "df5d96c81137",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.middletownpress.com/living/article/as-trump-orders-ufo-data-released-a-question-22188665.php",
+      "domain": "middletownpress.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "middletownpress.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897149/3/rawImage.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "75d1cbc70cf3",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.nhregister.com/living/article/as-trump-orders-ufo-data-released-a-question-22188665.php",
+      "domain": "nhregister.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "nhregister.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897149/3/rawImage.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "41305ba06b00",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://mynorthwest.com/lifestyle/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/4224740",
+      "domain": "mynorthwest.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "mynorthwest.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mynorthwest.com/wp-content/uploads/2026/04/What_on_Earth_79814.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "1393ed0d2a92",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.news4jax.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "news4jax.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "news4jax.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
+      "tone": 2.5
+    },
+    {
+      "id": "f9e8d7822e19",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.wboc.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_23e04d8d-38e4-53f1-9d3e-a4bb453b8a5a.html",
+      "domain": "wboc.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "wboc.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wboc.com/content/tncms/assets/v3/editorial/a/0f/a0ff4b3c-85de-5e26-b432-acc9c064f7d5/69d08ef2e600d.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "7b44c3184def",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.yahoo.com/news/articles/trump-orders-ufo-data-released-040248905.html",
+      "domain": "yahoo.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "yahoo.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/34q7cdyJzOC8fEPp_4QA2A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04ODQ7Y2Y9d2VicA--/https://media.zenfs.com/en/ap.org/c71f9387a86a0d8005d7a5202275b3e2",
+      "tone": 2.5
+    },
+    {
+      "id": "151a4cc3d739",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.news4jax.com/entertainment/2026/04/04/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/",
+      "domain": "news4jax.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "news4jax.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
+      "tone": 0
+    },
+    {
+      "id": "e041bc92d212",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://mynorthwest.com/lifestyle/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/4224746",
+      "domain": "mynorthwest.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "mynorthwest.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mynorthwest.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": 0
+    },
+    {
+      "id": "36dc73f60d59",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.nhregister.com/entertainment/article/hollywood-s-narrative-on-ufos-and-ets-reaches-22188668.php",
+      "domain": "nhregister.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "nhregister.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897151/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "d87b5b6187e2",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.middletownpress.com/entertainment/article/nearly-a-century-of-wondering-the-american-ufo-22188670.php",
+      "domain": "middletownpress.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "middletownpress.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/67/20/30897182/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "4c00e1a9bc1c",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://accesswdun.com/ap_article/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us",
+      "domain": "accesswdun.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "accesswdun.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://accesswdun.com/wp-content/uploads/2025/08/cropped-AccessStack-512.png",
+      "tone": 0
+    },
+    {
+      "id": "c6b935a0b2af",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://accesswdun.com/ap_article/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades",
+      "domain": "accesswdun.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "accesswdun.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://accesswdun.com/wp-content/uploads/2025/08/cropped-AccessStack-512.png",
+      "tone": 0
+    },
+    {
+      "id": "48ac4a72c38e",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.nhregister.com/entertainment/article/nearly-a-century-of-wondering-the-american-ufo-22188670.php",
+      "domain": "nhregister.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "nhregister.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/67/20/30897182/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "070752ea3d32",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://mynorthwest.com/lifestyle/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/4224744",
+      "domain": "mynorthwest.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "mynorthwest.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mynorthwest.com/wp-content/uploads/2026/04/What_on_Earth_97189.jpg",
+      "tone": 0
+    },
+    {
+      "id": "56647916c897",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.middletownpress.com/entertainment/article/hollywood-s-narrative-on-ufos-and-ets-reaches-22188668.php",
+      "domain": "middletownpress.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "middletownpress.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897151/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "26dd60b42fc0",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.bozemandailychronicle.com/ap_news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_d8a6046f-6d7e-5ec2-aecd-65fbcf7c8c78.html",
+      "domain": "bozemandailychronicle.com",
+      "publishedAt": "2026-04-04T05:30:00Z",
+      "language": "English",
+      "sourceName": "bozemandailychronicle.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/bozemandailychronicle.com/content/tncms/assets/v3/editorial/0/19/0193d20a-d4a0-5635-9560-9a13f9912b20/69d08fb34c135.image.jpg?crop=1678%2C881%2C0%2C177",
+      "tone": 2.5
+    },
+    {
+      "id": "edef980cdce5",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.dailygazette.com/leader_herald/ap/lifestyles/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/article_f70becb0-c110-57c0-a515-342d2363d065.html",
+      "domain": "dailygazette.com",
+      "publishedAt": "2026-04-04T05:30:00Z",
+      "language": "English",
+      "sourceName": "dailygazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/dailygazette.com/content/tncms/assets/v3/editorial/1/ee/1eea81bb-63ff-58fe-ba73-3ba9ae9a1049/69d090f9136dd.image.jpg?crop=1867%2C980%2C0%2C64",
+      "tone": 0
+    },
+    {
+      "id": "3a8e6ee97ea2",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades – Winnipeg Free Press",
+      "url": "https://www.winnipegfreepress.com/arts-and-life/entertainment/celebrities/2026/04/03/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades",
+      "domain": "winnipegfreepress.com",
+      "publishedAt": "2026-04-04T05:00:00Z",
+      "language": "English",
+      "sourceName": "winnipegfreepress.com (Canada)",
+      "country": "Canada",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "674bf560ffec",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction – Winnipeg Free Press",
+      "url": "https://www.winnipegfreepress.com/arts-and-life/entertainment/celebrities/2026/04/03/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction",
+      "domain": "winnipegfreepress.com",
+      "publishedAt": "2026-04-04T05:00:00Z",
+      "language": "English",
+      "sourceName": "winnipegfreepress.com (Canada)",
+      "country": "Canada",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "346b5c9c8b1d",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.clickorlando.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "clickorlando.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "clickorlando.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
+      "tone": 2.5
+    },
+    {
+      "id": "9a0a1f0beff8",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://ktar.com/national-news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/5843720/",
+      "domain": "ktar.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "ktar.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_79814.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "25c1e01bdd80",
+      "title": "We wonder about aliens in UFOs . Do they wonder about us ?",
+      "url": "https://www.wsbradio.com/news/national/trump-orders-ufo/H3L37PKQ4I2AXK7TEFQDMQDW2I/",
+      "domain": "wsbradio.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "wsbradio.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20021-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
+      "tone": 2.5
+    },
+    {
+      "id": "0d78c872a424",
+      "title": "We wonder about aliens in UFOs . Do they wonder about us ?",
+      "url": "https://www.wgauradio.com/news/national/trump-orders-ufo/H3L37PKQ4I2AXK7TEFQDMQDW2I/",
+      "domain": "wgauradio.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "wgauradio.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
+      "tone": 2.5
+    },
+    {
+      "id": "e156649fca3d",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://ktar.com/national-news/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/5843725/",
+      "domain": "ktar.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "ktar.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_97189.jpg",
+      "tone": 0
+    },
+    {
+      "id": "26e645333ce9",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.clickorlando.com/entertainment/2026/04/04/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/",
+      "domain": "clickorlando.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "clickorlando.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
+      "tone": 0
+    },
+    {
+      "id": "1f782ac2d3bb",
+      "title": "Is This Evidence Of Aliens Abducting A Utah Civilization ?!",
+      "url": "https://kool965.com/ixp/1123/p/ancient-art-utah-mysteries/",
+      "domain": "kool965.com",
+      "publishedAt": "2026-04-03T22:45:00Z",
+      "language": "English",
+      "sourceName": "kool965.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/1123/files/2026/04/attachment-utah-aliens.jpg?&q=75&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "a4490becb674",
+      "title": "Americans Would Be  Up All Night Worrying  if They Knew Truth About Aliens",
+      "url": "https://radaronline.com/p/maga-congressman-americans-would-be-up-all-night-worrying-about-aliens/",
+      "domain": "radaronline.com",
+      "publishedAt": "2026-04-03T19:15:00Z",
+      "language": "English",
+      "sourceName": "radaronline.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.radaronline.com/brand-img/O7sdJhXyZ/1200x628/aleins-mega-stock-photo-1775221412703.jpg",
+      "tone": 0
+    },
+    {
+      "id": "54abc82b220d",
+      "title": "What Tim Burchett Said He Was Told About Alien Life and How Info Is Being Handled Is Very Troubling",
+      "url": "https://redstate.com/nick-arama/2026/04/03/tim-burchett-remarks-about-alien-life-n2200922",
+      "domain": "redstate.com",
+      "publishedAt": "2026-04-03T17:30:00Z",
+      "language": "English",
+      "sourceName": "redstate.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.townhall.com/cdn/hodl/2024/164/e7bce51f-bdfc-4f1d-a8a7-b6edfe2b6023.jpg",
+      "tone": 0
+    },
+    {
+      "id": "b9271329813c",
+      "title": "Mysterious Lights Seen by Missouri Officer What Happened ?",
+      "url": "https://kxkx.com/ixp/463/p/mt-vernon-missouri-ufos/",
+      "domain": "kxkx.com",
+      "publishedAt": "2026-04-03T17:15:00Z",
+      "language": "English",
+      "sourceName": "kxkx.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
+      "tone": 0
+    },
     {
       "id": "ca984380b002",
       "title": "MAGA congressman says Americans would become  unglued  over alien briefings :  Youd be up at night worrying",
@@ -2943,7 +4047,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1788462/pilot.jpg",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "686b92bb85f5",
@@ -3267,7 +4371,7 @@
       "sourceName": "wwno.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "bb7dfb24e27b",
@@ -3279,7 +4383,7 @@
       "sourceName": "river949.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://www.river949.com.au/wp-content/uploads/sites/20/2026/02/feature.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "390b6aed6238",
@@ -3291,7 +4395,7 @@
       "sourceName": "express.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/78/1200x630/6754490.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "be0e9435a5b5",
@@ -3303,7 +4407,7 @@
       "sourceName": "tribune.com.pk (Pakistan)",
       "country": "Pakistan",
       "imageUrl": "https://i.tribune.com.pk/media/images/trump-afp1770043157-0/trump-afp1770043157-0-640x480.webp",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "14eecc3dcb9d",
@@ -3315,7 +4419,7 @@
       "sourceName": "wmra.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "653f89347623",
@@ -3327,7 +4431,7 @@
       "sourceName": "wrvo.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "27e1233c1276",
@@ -3339,7 +4443,7 @@
       "sourceName": "khaama.com (Afghanistan)",
       "country": "Afghanistan",
       "imageUrl": "https://www.khaama.com/wp-content/uploads/2026/02/Aliens-and-space-existence-and.webp",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d2b3ee4e34b0",
@@ -3351,7 +4455,7 @@
       "sourceName": "wyomingpublicmedia.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "95a16a1661df",
@@ -3363,7 +4467,7 @@
       "sourceName": "kyuk.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a1ea52cd0c42",
@@ -3375,7 +4479,7 @@
       "sourceName": "abcnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.abcnewsfe.com/a/ee9f7291-6795-4192-b098-d1d8419ce3f5/wirestory_bafe648c8e8dfc7de1a1e90db8a1dfd0_16x9.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "07b03f9ca549",
@@ -4275,7 +5379,7 @@
       "sourceName": "military.com (United States)",
       "country": "United States",
       "imageUrl": "https://images05.military.com/sites/default/files/styles/full/public/2026-02/ApNewsroom_Trump_47017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "79a2ba15b66f",
@@ -4287,7 +5391,7 @@
       "sourceName": "today.az (Azerbaijan)",
       "country": "Azerbaijan",
       "imageUrl": "http://www.today.az/pictures/pic265788.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b1abf8fd021f",
@@ -4299,7 +5403,7 @@
       "sourceName": "alltoc.com",
       "country": "",
       "imageUrl": "https://alltoc.com/cdn/1045/ogs.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e7424f0a0939",
@@ -4311,7 +5415,7 @@
       "sourceName": "abc.net.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://live-production.wcms.abc-cdn.net.au/6a51c1a9498d40bd2be82be5e3ca0505?impolicy=wcms_watermark_news&cropH=1548&cropW=2752&xPos=0&yPos=146&imformat=generic",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9e1dba8933d1",
@@ -4323,7 +5427,7 @@
       "sourceName": "ksfr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "172a8c44a777",
@@ -4335,7 +5439,7 @@
       "sourceName": "dailystar.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i2-prod.irishstar.com/sport/other-sports/article36752453.ece/ALTERNATES/s1200/1_GettyImages-2261494579.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "35612f01777a",
@@ -4347,7 +5451,7 @@
       "sourceName": "tribune.com.pk (Pakistan)",
       "country": "Pakistan",
       "imageUrl": "https://i.tribune.com.pk/media/images/untitled-design-441771579766-0/untitled-design-441771579766-0-640x480.webp",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "73a3007beb65",
@@ -4359,7 +5463,7 @@
       "sourceName": "cleveland19.com (United States)",
       "country": "United States",
       "imageUrl": "https://gray-woio-prod.gtv-cdn.com/resizer/v2/DSYDOH64WRCFJHXKJ2EK7UYSOY.jpg?auth=90be0add081d3e2dd79f4e82e1dd5812c2f0f7850aa17e167b9997b0f87f48b1&smart=true",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1f188a4e9929",
@@ -4371,7 +5475,7 @@
       "sourceName": "delawarepublic.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "de09814aa269",
@@ -4383,7 +5487,7 @@
       "sourceName": "wcbm.com (United States)",
       "country": "United States",
       "imageUrl": "https://wcbm.com/wp-content/uploads/2026/02/f3d02115-cf51-4f0d-bf23-2d5862854732-GettyImages2262534810.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a8ae4925a0c3",
@@ -4395,7 +5499,7 @@
       "sourceName": "kbia.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "aa48e97e96d8",
@@ -4407,7 +5511,7 @@
       "sourceName": "kawc.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1af014a7b293",
@@ -7971,7 +9075,7 @@
       "sourceName": "military.com (United States)",
       "country": "United States",
       "imageUrl": "https://images01.military.com/sites/default/files/styles/full/public/2026-03/530440.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "759445fac056",
@@ -7983,7 +9087,7 @@
       "sourceName": "ktvz.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktvz.b-cdn.net/2025/02/KTVZ-Default-image-860x484.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "eedc407dcee7",
@@ -7995,7 +9099,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4645204/donald-trump.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "cd6042599b69",
@@ -8007,7 +9111,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4645273/berlin-airport-4.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "153c98b8f84a",
@@ -8019,7 +9123,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1796282/donald-trump.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "486f9bf1367b",
@@ -8031,7 +9135,7 @@
       "sourceName": "express.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/78/1200x630/6801281.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "6a621500800e",
@@ -8043,7 +9147,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-129578252,width-1280,height-720,imgsize-44386,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "dc57f213789d",
@@ -8055,7 +9159,7 @@
       "sourceName": "naturalnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.naturalnews.com/wp-content/uploads/sites/91/2026/03/Vanished-in-the-Void.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "90efe43a528e",
@@ -8067,7 +9171,7 @@
       "sourceName": "thedailybeast.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.thedailybeast.com/resizer/v2/AVSAO63KLVDALM6UBMKYPPLPG4.jpg?smart=true&auth=1f55dc5a873ec8984c712696844e41027ffd6c51ca7c5bfd9fa830f48256dfd5",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f556e2942130",
@@ -8079,7 +9183,7 @@
       "sourceName": "rivergrandrapids.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/43/files/2026/02/attachment-1966-ufo-sighting.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2f1af00ac78d",
@@ -8091,7 +9195,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1796474/ufo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c4b2feffd5a1",
@@ -8103,7 +9207,7 @@
       "sourceName": "globemagazine.com (United States)",
       "country": "United States",
       "imageUrl": "https://globemagazine.com/wp-content/uploads/2026/03/MEGA1415937_004-1536x1024-1-1000x600.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "738789b73f01",
@@ -8115,7 +9219,7 @@
       "sourceName": "theconversation.com (Australia)",
       "country": "Australia",
       "imageUrl": "https://images.theconversation.com/files/722607/original/file-20260306-57-v6lipj.jpg?ixlib=rb-4.1.0&rect=502%2C307%2C1325%2C662&q=45&auto=format&fit=crop",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c68b4ea131ce",
@@ -8127,7 +9231,7 @@
       "sourceName": "yahoo.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/os/en/the_conversation_us_articles_815/55a62b858a0781efaac825378cfbb0be",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "be6e17908f29",
@@ -8139,7 +9243,7 @@
       "sourceName": "dailymail.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/12/18/107088175-0-image-m-44_1773340402027.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "bfb7acf03293",
@@ -8151,7 +9255,7 @@
       "sourceName": "shtfplan.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.shtfplan.com/wp-content/uploads/2023/02/ufo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ac8c7cd06069",
@@ -8163,7 +9267,7 @@
       "sourceName": "futurism.com (United States)",
       "country": "United States",
       "imageUrl": "https://futurism.com/wp-content/uploads/2026/03/air-force-major-general-ufo-connection-disappears.jpg?quality=85",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0e058bbf78ea",
@@ -8175,7 +9279,7 @@
       "sourceName": "nypost.com (United States)",
       "country": "United States",
       "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/03/William-McCasland.jpg?quality=75&strip=all",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "dcbbd151edd2",
@@ -8187,7 +9291,7 @@
       "sourceName": "astanatimes.com (Kazakhstan)",
       "country": "Kazakhstan",
       "imageUrl": "https://astanatimes.com/wp-content/uploads/2026/03/image-101.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f1b23d7b1521",
@@ -8199,7 +9303,7 @@
       "sourceName": "designboom.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.designboom.com/twitterimages/uploads/2026/03/ufo-winery-314-architecture-studio-half-buried-greek-vineyards-designboom-1200.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "21be090c63f3",
@@ -8211,7 +9315,7 @@
       "sourceName": "cp24.com (Canada)",
       "country": "Canada",
       "imageUrl": "https://www.cp24.com/resizer/v2/SGCE2NQRUGWV2MS74VHM4N6ECQ.jpg?smart=true&auth=dcc7e9ab553137e6a16d562f76f1d16a15e1edaaf6176a8c47a005a37c27cade",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a3ca58d79ccd",
@@ -8223,7 +9327,7 @@
       "sourceName": "whatweekly.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c2da8d1d06cf",
@@ -8235,7 +9339,7 @@
       "sourceName": "openminds.tv (United States)",
       "country": "United States",
       "imageUrl": "https://openminds.tv/wp-content/uploads/1-Frank-Press-Jimmy-Carter-ftr.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5c6d237ba1fa",
@@ -8247,7 +9351,7 @@
       "sourceName": "openminds.tv (United States)",
       "country": "United States",
       "imageUrl": "https://openminds.tv/wp-content/uploads/YT-BNL-1.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "916a2708e158",
@@ -8259,7 +9363,7 @@
       "sourceName": "openminds.tv (United States)",
       "country": "United States",
       "imageUrl": "https://openminds.tv/wp-content/uploads/Screenshot-2025-05-22-at-11.38.44%E2%80%AFAM.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4a4bc4fb7d6a",
@@ -8271,7 +9375,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1773237/ufo-shockwave-top-advisor-claims-us-has-recovered-real-alien.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "ee376ba29fb5",
@@ -8283,7 +9387,7 @@
       "sourceName": "wired.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.wired.com/photos/699c832687b4ddbea4d1c67a/191:100/w_1280,c_limit/022326_Science-UFO-Files-Dissapointment.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8330d1cc6363",
@@ -8295,7 +9399,7 @@
       "sourceName": "slashfilm.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.slashfilm.com/img/gallery/15-best-sci-fi-movies-of-the-2020s-so-far-ranked/l-intro-1772489698.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2a213074da99",
@@ -8415,7 +9519,7 @@
       "sourceName": "i95rock.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/677/files/2026/03/attachment-photo-1588281345136-9893252095bd.jpeg?&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "d5607b2a3549",
@@ -9003,7 +10107,7 @@
       "sourceName": "abc7.com (United States)",
       "country": "United States",
       "imageUrl": "https://cdn.abcotvs.com/dip/images/18707820_031226-wls-cnnw-missing-air-force-general-img.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f613bcc2c490",
@@ -9015,7 +10119,7 @@
       "sourceName": "abc7chicago.com (United States)",
       "country": "United States",
       "imageUrl": "https://cdn.abcotvs.com/dip/images/18707820_031226-wls-cnnw-missing-air-force-general-img.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a1d7ff3c05b5",
@@ -9027,7 +10131,7 @@
       "sourceName": "dailymail.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/16/21/82120321-0-image-m-27_1773697103296.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "db5dfd5dc55a",
@@ -9039,7 +10143,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-129609924,width-1280,height-720,imgsize-10254,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a576b1921ed7",
@@ -9051,7 +10155,7 @@
       "sourceName": "skeptic.org.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://www.skeptic.org.uk/wp-content/uploads/2024/09/ufo-2413965_1920.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "006f8dc6d555",
@@ -12810,6 +13914,126 @@
       "tone": 0
     },
     {
+      "id": "a4e834ab19c7",
+      "title": "Why Scientists Worry About Breaking News About Life in Space",
+      "url": "https://www.yahoo.com/news/articles/why-scientists-worry-breaking-news-182139282.html",
+      "domain": "yahoo.com",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "yahoo.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/SvOb8v1Z5kFsTx.AvEHT8w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/time_72/b8db601d5e92037a3021d0526f00ebf5",
+      "tone": 0
+    },
+    {
+      "id": "0b625f78f85e",
+      "title": "US Rep Anna Paulina Luna Hints Confirmation of Alien Forms Citing Witness Testimonies , Closed Investigations",
+      "url": "https://www.ibtimes.co.uk/us-rep-anna-paulina-luna-hints-confirmation-alien-forms-citing-witness-testimonies-closed-1777048",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788980/rep-anna-paulina-luna.jpg",
+      "tone": 0
+    },
+    {
+      "id": "f6a73e91a0b8",
+      "title": "Ancient Aliens",
+      "url": "https://www.tvguide.co.uk/schedule/705b81eb-5371-5489-a9aa-c4b5c42c4e09/ancient-aliens",
+      "domain": "tvguide.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "tvguide.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://tv.assets.pressassociation.io/4853606c-a1a6-55cb-9201-d017a1a243e3.jpg",
+      "tone": 0
+    },
+    {
+      "id": "931d0433700f",
+      "title": "Trump green lights UFO disclosure of secret bases hiding crashed ships",
+      "url": "https://www.dailymail.co.uk/sciencetech/article-15533031/Trump-green-lights-UFO-disclosure-secret-bases.html",
+      "domain": "dailymail.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "dailymail.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://i.dailymail.co.uk/1s/2026/02/05/23/105177983-0-image-m-30_1770332518351.jpg",
+      "tone": 0
+    },
+    {
+      "id": "85c43bc47044",
+      "title": "Shotgun Joe – Love & Monsters is Available for iOS and Android",
+      "url": "https://www.itnewsonline.com/PR.com/Shotgun-Joe--Love--Monsters-is-Available-for-iOS-and-Android/29866",
+      "domain": "itnewsonline.com",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "itnewsonline.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "9350239eae65",
+      "title": "Trump Pushes Pentagon to Open UFO Sites as Lawmaker Hints at  Craft and Bodies",
+      "url": "https://www.ibtimes.co.uk/trump-pushes-pentagon-open-ufo-sites-lawmaker-hints-craft-bodies-1776260",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788359/donald-trump.jpg",
+      "tone": 0
+    },
+    {
+      "id": "9dd136a8fe90",
+      "title": "Eric Burlison Reveals UFO Too Big To Move Could South Korea Hold Humanity Secret ?",
+      "url": "https://www.ibtimes.co.uk/eric-burlison-reveals-ufo-too-big-movecould-south-korea-hold-humanitys-secret-1776129",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788246/eric-burlison.jpg",
+      "tone": 0
+    },
+    {
+      "id": "78ec5e36c0a2",
+      "title": "Former Marine Claims US Navy Secretly Recorded UFOs Moving at Breakneck Speeds",
+      "url": "https://www.gazetaexpress.com/en/Former-Marine-Claims-the-US-Navy-Secretly-Recorded-UFOs-Moving-at-Breakneck-Speeds/",
+      "domain": "gazetaexpress.com",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "gazetaexpress.com (Kosovo)",
+      "country": "Kosovo",
+      "imageUrl": "https://www.gazetaexpress.com/wp-content/uploads/2026/02/ufo.jpg",
+      "tone": 0
+    },
+    {
+      "id": "e641f3723e01",
+      "title": "A Creature Stalks Berkshire County Coca - Cola Ledge ?",
+      "url": "https://fun107.com/ixp/918/p/a-creature-stalks-berkshire-countys-coca-cola-ledge/",
+      "domain": "fun107.com",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "fun107.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/918/files/2021/09/attachment-Coca-Cola-Ledge.jpg?&q=75&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "bebddf0afe9e",
+      "title": "Turkey Responds as Ship Damaged in Black Sea Attack is Now Aground",
+      "url": "https://maritime-executive.com/article/turkey-responds-as-ship-damaged-in-black-sea-attack-is-now-aground",
+      "domain": "maritime-executive.com",
+      "publishedAt": "2026-03-20T13:36:10.312Z",
+      "language": "English",
+      "sourceName": "maritime-executive.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://maritime-executive.com/media/images/article/Photos/Wreckage_Salvage/Razouk-aground-Turkey.jpg",
+      "tone": 0
+    },
+    {
       "id": "4fe4a63f7718",
       "title": "Submariner claims US tracked  terrifying  high - speed UFOs | Weird | News",
       "url": "https://www.express.co.uk/news/weird/2164771/former-submariner-claims-us-navy-tracked-terrifying-fast-moving-ufos-secret-logbooks",
@@ -13530,126 +14754,6 @@
       "tone": 0
     },
     {
-      "id": "a4e834ab19c7",
-      "title": "Why Scientists Worry About Breaking News About Life in Space",
-      "url": "https://www.yahoo.com/news/articles/why-scientists-worry-breaking-news-182139282.html",
-      "domain": "yahoo.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "yahoo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/SvOb8v1Z5kFsTx.AvEHT8w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/time_72/b8db601d5e92037a3021d0526f00ebf5",
-      "tone": 0
-    },
-    {
-      "id": "0b625f78f85e",
-      "title": "US Rep Anna Paulina Luna Hints Confirmation of Alien Forms Citing Witness Testimonies , Closed Investigations",
-      "url": "https://www.ibtimes.co.uk/us-rep-anna-paulina-luna-hints-confirmation-alien-forms-citing-witness-testimonies-closed-1777048",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788980/rep-anna-paulina-luna.jpg",
-      "tone": 0
-    },
-    {
-      "id": "f6a73e91a0b8",
-      "title": "Ancient Aliens",
-      "url": "https://www.tvguide.co.uk/schedule/705b81eb-5371-5489-a9aa-c4b5c42c4e09/ancient-aliens",
-      "domain": "tvguide.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "tvguide.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://tv.assets.pressassociation.io/4853606c-a1a6-55cb-9201-d017a1a243e3.jpg",
-      "tone": 0
-    },
-    {
-      "id": "931d0433700f",
-      "title": "Trump green lights UFO disclosure of secret bases hiding crashed ships",
-      "url": "https://www.dailymail.co.uk/sciencetech/article-15533031/Trump-green-lights-UFO-disclosure-secret-bases.html",
-      "domain": "dailymail.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "dailymail.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i.dailymail.co.uk/1s/2026/02/05/23/105177983-0-image-m-30_1770332518351.jpg",
-      "tone": 0
-    },
-    {
-      "id": "85c43bc47044",
-      "title": "Shotgun Joe – Love & Monsters is Available for iOS and Android",
-      "url": "https://www.itnewsonline.com/PR.com/Shotgun-Joe--Love--Monsters-is-Available-for-iOS-and-Android/29866",
-      "domain": "itnewsonline.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "itnewsonline.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 0
-    },
-    {
-      "id": "9350239eae65",
-      "title": "Trump Pushes Pentagon to Open UFO Sites as Lawmaker Hints at  Craft and Bodies",
-      "url": "https://www.ibtimes.co.uk/trump-pushes-pentagon-open-ufo-sites-lawmaker-hints-craft-bodies-1776260",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788359/donald-trump.jpg",
-      "tone": 0
-    },
-    {
-      "id": "9dd136a8fe90",
-      "title": "Eric Burlison Reveals UFO Too Big To Move Could South Korea Hold Humanity Secret ?",
-      "url": "https://www.ibtimes.co.uk/eric-burlison-reveals-ufo-too-big-movecould-south-korea-hold-humanitys-secret-1776129",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788246/eric-burlison.jpg",
-      "tone": 0
-    },
-    {
-      "id": "78ec5e36c0a2",
-      "title": "Former Marine Claims US Navy Secretly Recorded UFOs Moving at Breakneck Speeds",
-      "url": "https://www.gazetaexpress.com/en/Former-Marine-Claims-the-US-Navy-Secretly-Recorded-UFOs-Moving-at-Breakneck-Speeds/",
-      "domain": "gazetaexpress.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "gazetaexpress.com (Kosovo)",
-      "country": "Kosovo",
-      "imageUrl": "https://www.gazetaexpress.com/wp-content/uploads/2026/02/ufo.jpg",
-      "tone": 0
-    },
-    {
-      "id": "e641f3723e01",
-      "title": "A Creature Stalks Berkshire County Coca - Cola Ledge ?",
-      "url": "https://fun107.com/ixp/918/p/a-creature-stalks-berkshire-countys-coca-cola-ledge/",
-      "domain": "fun107.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "fun107.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/918/files/2021/09/attachment-Coca-Cola-Ledge.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "bebddf0afe9e",
-      "title": "Turkey Responds as Ship Damaged in Black Sea Attack is Now Aground",
-      "url": "https://maritime-executive.com/article/turkey-responds-as-ship-damaged-in-black-sea-attack-is-now-aground",
-      "domain": "maritime-executive.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "maritime-executive.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://maritime-executive.com/media/images/article/Photos/Wreckage_Salvage/Razouk-aground-Turkey.jpg",
-      "tone": 0
-    },
-    {
       "id": "166b7dfacc3b",
       "title": "Trump Rumoured July 8 UFO Disclosure Speech Back in Spotlight After Lara Claims of Extraterrestrial Address",
       "url": "https://www.ibtimes.co.uk/lara-trump-hints-ufo-disclosure-1780152",
@@ -13899,402 +15003,6 @@
       "sourceName": "brisbanetimes.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://static.ffx.io/images/$zoom_0.8716049382716049%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_23/t_crop_custom/q_86%2Cf_auto/ca68a8864613f33d4a5cb163829b3a33a10bd4aa",
-      "tone": 2.5
-    },
-    {
-      "id": "e74f9bc9235d",
-      "title": "Beyond the Crash : Roswell , the Nuclear Triangle , and UFO Questions That Remain Unanswered",
-      "url": "https://sofmag.com/roswell-nuclear-triangle-ufo/",
-      "domain": "sofmag.com",
-      "publishedAt": "2026-03-16T09:23:09.561Z",
-      "language": "English",
-      "sourceName": "sofmag.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://sofmag.com/wp-content/uploads/2025/12/UFO-CrashRecrete.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "d638943991ab",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://awesome98.com/ixp/175/p/texas-sky-ufo-spacex-falcon9/",
-      "domain": "awesome98.com",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "awesome98.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": -2.5
-    },
-    {
-      "id": "ebc3d0789770",
-      "title": "Idaho Witness Reports UFO Split Into Small Orange Orbs Over River",
-      "url": "https://liteonline.com/ixp/97/p/ufo-sightings-southern-idaho-boise-uap/",
-      "domain": "liteonline.com",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "liteonline.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2025/12/attachment-untitled-design-2025-12-15t100932-261-2.jpg?&q=75&format=natural",
-      "tone": -2.5
-    },
-    {
-      "id": "d43ca7fd7754",
-      "title": "Idaho Witness Reports UFO Split Into Small Orange Orbs Over River",
-      "url": "https://mix106radio.com/ixp/97/p/ufo-sightings-southern-idaho-boise-uap/",
-      "domain": "mix106radio.com",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "mix106radio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2025/12/attachment-untitled-design-2025-12-15t100932-261-2.jpg?&q=75&format=natural",
-      "tone": -2.5
-    },
-    {
-      "id": "eecabc02c189",
-      "title": "Idaho Witness Reports UFO Split Into Small Orange Orbs Over River",
-      "url": "https://983thesnake.com/ufo-sightings-southern-idaho-boise-uap/",
-      "domain": "983thesnake.com",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "983thesnake.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2025/12/attachment-untitled-design-2025-12-15t100932-261-2.jpg?&q=75&format=natural",
-      "tone": -2.5
-    },
-    {
-      "id": "4706da9d64b5",
-      "title": "Idaho Witness Reports UFO Split Into Small Orange Orbs Over River",
-      "url": "https://newsradio1310.com/ixp/97/p/ufo-sightings-southern-idaho-boise-uap/",
-      "domain": "newsradio1310.com",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "newsradio1310.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2025/12/attachment-untitled-design-2025-12-15t100932-261-2.jpg?&q=75&format=natural",
-      "tone": -2.5
-    },
-    {
-      "id": "a377840bac5d",
-      "title": "Craig Charles : UFO Conspiracies",
-      "url": "https://www.tvguide.co.uk/schedule/c6d0b3e7-bb71-5f5c-8a85-959de34e0741/craig-charles-ufo-conspiracies",
-      "domain": "tvguide.co.uk",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "tvguide.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://tv.assets.pressassociation.io/bbafc3dd-8c02-5ae4-a4ba-1e5f799b3005.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "7b2aebd2d35e",
-      "title": "Idaho Witness Reports UFO Split Into Small Orange Orbs Over River",
-      "url": "https://kool965.com/ixp/97/p/ufo-sightings-southern-idaho-boise-uap/",
-      "domain": "kool965.com",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "kool965.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2025/12/attachment-untitled-design-2025-12-15t100932-261-2.jpg?&q=75&format=natural",
-      "tone": -2.5
-    },
-    {
-      "id": "e13b2010a8a1",
-      "title": "Could the Great Pyramids hold the secret to the mythical Atlantis Hall of Records ?",
-      "url": "http://www.femalefirst.co.uk/bizarre/great-pyramids-hold-secret-mythical-atlantis-hall-records-1434630.html",
-      "domain": "femalefirst.co.uk",
-      "publishedAt": "2026-03-15T05:06:09.909Z",
-      "language": "English",
-      "sourceName": "femalefirst.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://www.femalefirst.co.uk/image-library/partners/bang/land/500/a/a-new-documentary-from-director-mark-christopher-lee-will-ex.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "856b333af2d6",
-      "title": "The Abduction of Calvin Parker",
-      "url": "https://www.tvguide.co.uk/schedule/5e94daf1-a228-5687-b880-6c8241b746be/the-abduction-of-calvin-parker",
-      "domain": "tvguide.co.uk",
-      "publishedAt": "2026-03-15T05:05:54.136Z",
-      "language": "English",
-      "sourceName": "tvguide.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://tv.assets.pressassociation.io/7d3375c3-9cc6-5cc8-b919-45e09a4d3943.jpg",
-      "tone": 0
-    },
-    {
-      "id": "277e3b2ef8b5",
-      "title": "Anti - tail of  spaceship  3I / ATLAS takes new direction as Earth approach nears",
-      "url": "https://www.dailystar.co.uk/news/latest-news/anti-tail-spaceship-3iatlas-takes-36400672",
-      "domain": "dailystar.co.uk",
-      "publishedAt": "2026-03-13T00:51:19.936Z",
-      "language": "English",
-      "sourceName": "dailystar.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.dailystar.co.uk/article36394796.ece/ALTERNATES/s1200/1_Alien-spaceship-3IATLAS-has-two-jets-unlike-most-comets-and-needs-explaining.jpg",
-      "tone": 0
-    },
-    {
-      "id": "9cf2d1a47e4b",
-      "title": "Best of Weatherman Walking",
-      "url": "https://www.tvguide.co.uk/schedule/4d2ee952-cc86-5386-af66-9f988e05033d/best-of-weatherman-walking",
-      "domain": "tvguide.co.uk",
-      "publishedAt": "2026-03-13T00:51:00.460Z",
-      "language": "English",
-      "sourceName": "tvguide.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://tv.assets.pressassociation.io/6ad7e483-8e36-5962-b387-b25fa736f8e9.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "58d264c92bc8",
-      "title": "Baba Vanga  predicts aliens could invade Ally Pally during World Darts Championship",
-      "url": "https://www.dailystar.co.uk/news/weird-news/baba-vanga-predicts-aliens-could-36394752",
-      "domain": "dailystar.co.uk",
-      "publishedAt": "2026-03-12T23:43:46.358Z",
-      "language": "English",
-      "sourceName": "dailystar.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.dailystar.co.uk/article36394795.ece/ALTERNATES/s1200/0_The-life-of-blind-mystic-Baba-Vanga-from-troubled-childhood-to-tragic-husband.jpg",
-      "tone": 0
-    },
-    {
-      "id": "572955e17b8a",
-      "title": "15 Seemingly Credible UFO Sightings In 2025",
-      "url": "https://trivia.cracked.com/article_49427_15-seemingly-credible-ufo-sightings-in-2025.html",
-      "domain": "trivia.cracked.com",
-      "publishedAt": "2026-03-11T14:00:07.024Z",
-      "language": "English",
-      "sourceName": "trivia.cracked.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s3.crackedcdn.com/phpimages/article/5/1/8/1422518.jpg",
-      "tone": 0
-    },
-    {
-      "id": "1ecce1027b17",
-      "title": "Arizona  Fire in the Sky  UFO event still shapes town after 50 years",
-      "url": "https://www.phoenixnewtimes.com/arts-culture/arizona-fire-in-the-sky-ufo-event-still-shapes-town-after-50-years-40627511/",
-      "domain": "phoenixnewtimes.com",
-      "publishedAt": "2026-03-11T14:00:07.024Z",
-      "language": "English",
-      "sourceName": "phoenixnewtimes.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.phoenixnewtimes.com/wp-content/uploads/sites/6/2025/12/HOLDING-SPACE-1200x800-1.jpg",
-      "tone": 0
-    },
-    {
-      "id": "7b25274ef000",
-      "title": "Musk Claims UFOs Are Not Aliens : They Could Be A  New Weapons Program",
-      "url": "https://www.ibtimes.co.uk/musk-claims-ufos-are-not-aliens-they-could-new-weapons-program-1762436",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-11T14:00:07.024Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1770016/elon-musk-worlds-richest-person.jpg",
-      "tone": 0
-    },
-    {
-      "id": "e55196c32a14",
-      "title": "The Age Of Disclosure",
-      "url": "https://www.patheos.com/blogs/publictheology/2025/12/the-age-of-disclosure/",
-      "domain": "patheos.com",
-      "publishedAt": "2026-03-11T14:00:07.024Z",
-      "language": "English",
-      "sourceName": "patheos.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://wp-media.patheos.com/blogs/sites/1442/2025/12/Age-of-Disclosure-2025.jpg",
-      "tone": 0
-    },
-    {
-      "id": "437dfe3053a3",
-      "title": "37 photos of the most unusual McDonald restaurants in the world",
-      "url": "https://www.yahoo.com/lifestyle/articles/37-photos-most-unusual-mcdonalds-135001861.html",
-      "domain": "yahoo.com",
-      "publishedAt": "2026-03-11T13:59:45.974Z",
-      "language": "English",
-      "sourceName": "yahoo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.zenfs.com/en/insider_articles_922/500a8bd11106716435d6b1d84e02acb2",
-      "tone": 2.5
-    },
-    {
-      "id": "f733d5cb54cf",
-      "title": "Trump  Fully Briefed  On Aliens : Why Critics Claim He Would Have  Blabbed By Now",
-      "url": "https://www.ibtimes.com/trump-fully-briefed-aliens-why-critics-claim-he-would-have-blabbed-now-3792339",
-      "domain": "ibtimes.com",
-      "publishedAt": "2026-03-10T23:59:20.376Z",
-      "language": "English",
-      "sourceName": "ibtimes.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://d.ibtimes.com/en/full/4636620/donald-trump.jpg",
-      "tone": 0
-    },
-    {
-      "id": "036bb8483c79",
-      "title": "Trump  Fully Briefed  On Aliens : Why Critics Claim He Would Have  Blabbed By Now",
-      "url": "https://www.ibtimes.co.uk/trump-fully-briefed-aliens-why-critics-claim-he-would-have-blabbed-now-1762222",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-10T23:59:20.376Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1774932/donald-trump.jpg",
-      "tone": 0
-    },
-    {
-      "id": "f1273c30f7ae",
-      "title": "Bigfoot Sightings Inspire New Off - Broadway Musical",
-      "url": "https://wkdq.com/ixp/76/p/bigfoot-musical/",
-      "domain": "wkdq.com",
-      "publishedAt": "2026-03-10T23:59:09.391Z",
-      "language": "English",
-      "sourceName": "wkdq.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/76/files/2025/11/attachment-untitled-design-236-1.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "4eb30becf62b",
-      "title": "UFOs Are  Switching Our Nuclear Weapons On And Off , Source Claims",
-      "url": "https://www.ibtimes.co.uk/ufos-are-switching-our-nuclear-weapons-off-source-claims-1762011",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1770766/marco-rubio.jpg",
-      "tone": 0
-    },
-    {
-      "id": "7e5579b445a2",
-      "title": "Are aliens real ? Elon Musk reveals truth amid SpaceX push",
-      "url": "https://www.thenews.com.pk/latest/1384276-are-aliens-real-elon-musk-reveals-truth-amid-spacex-push",
-      "domain": "thenews.com.pk",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "thenews.com.pk (Pakistan)",
-      "country": "Pakistan",
-      "imageUrl": "https://www.thenews.com.pk/assets/uploads/updates/2025-12-10/1384276_125612_updates.jpg",
-      "tone": 0
-    },
-    {
-      "id": "8e241322143e",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://975kgkl.com/ixp/175/p/texas-sky-ufo-spacex-falcon9/",
-      "domain": "975kgkl.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "975kgkl.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "9958380c2e9e",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://1063thebuzz.com/texas-sky-ufo-spacex-falcon9/",
-      "domain": "1063thebuzz.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "1063thebuzz.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "5ef0e7f570c0",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://q1077.com/ixp/175/p/texas-sky-ufo-spacex-falcon9/",
-      "domain": "q1077.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "q1077.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "698329ae871a",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://kfox95.com/ixp/175/p/texas-sky-ufo-spacex-falcon9/",
-      "domain": "kfox95.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "kfox95.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "c0012ab67cc6",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://newstalk1290.com/ixp/175/p/texas-sky-ufo-spacex-falcon9/",
-      "domain": "newstalk1290.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "newstalk1290.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "d7c2972a5fa0",
-      "title": "Mysterious Object Over Texas Sky Sparks UFO Panic",
-      "url": "https://103kkcn.com/ixp/175/p/texas-sky-ufo-spacex-falcon9/",
-      "domain": "103kkcn.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "103kkcn.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/175/files/2025/12/attachment-falcon-9.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "eb565ad33910",
-      "title": "She balled the rice in my plate / I gripped the rosary : These poems are a gastronomical journey",
-      "url": "https://scroll.in/article/1088912/she-balled-the-rice-in-my-plate-i-gripped-the-rosary-these-poems-are-a-gastronomical-journey",
-      "domain": "scroll.in",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "scroll.in (India)",
-      "country": "India",
-      "imageUrl": "https://sc0.blr1.cdn.digitaloceanspaces.com/book/210717-plokmylyup-1764581271.jpg",
-      "tone": 0
-    },
-    {
-      "id": "a76da3ae608c",
-      "title": "Top 10 Strange and Unique Forests",
-      "url": "https://listverse.com/2012/02/28/top-10-strange-and-unique-forests/",
-      "domain": "listverse.com",
-      "publishedAt": "2026-03-08T16:20:07.061Z",
-      "language": "English",
-      "sourceName": "listverse.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://listverse.com/wp-content/uploads/2012/02/url-11.jpg",
-      "tone": 0
-    },
-    {
-      "id": "7432d5bfc7f9",
-      "title": "Time Magazine Person of the Year : Could Time crown AI ? Polymarket bets point to a non - human Person of the Year for the first time since 1982",
-      "url": "https://economictimes.indiatimes.com/news/international/us/could-time-crown-ai-polymarket-bets-point-to-a-non-human-person-of-the-year-for-the-first-time-since-1982/articleshow/125876816.cms",
-      "domain": "economictimes.indiatimes.com",
-      "publishedAt": "2026-03-08T16:19:50.722Z",
-      "language": "English",
-      "sourceName": "economictimes.indiatimes.com (India)",
-      "country": "India",
-      "imageUrl": "https://img.etimg.com/thumb/msid-125877029,width-1200,height-630,imgsize-842558,overlay-economictimes/articleshow.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "48fc373bdbb3",
-      "title": "aditya mandlik on how decomposition becomes design method",
-      "url": "https://www.designboom.com/architecture/aditya-mandlik-decomposition-design-method-worm-driven-architecture-interview-12-09-2025/",
-      "domain": "designboom.com",
-      "publishedAt": "2026-03-08T16:19:50.722Z",
-      "language": "English",
-      "sourceName": "designboom.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.designboom.com/twitterimages/uploads/2025/12/aditya-mandlik-decomposition-design-method-worm-driven-architecture-interview-designboom-1200.jpg",
       "tone": 2.5
     }
   ]

@@ -1,8 +1,107 @@
 {
-  "generatedAt": "2026-04-03T14:04:00.115Z",
+  "generatedAt": "2026-04-07T04:21:38.388Z",
   "queries": 8,
-  "totalResults": 70,
+  "totalResults": 79,
   "articles": [
+    {
+      "id": "b2fb2f5f0eb7",
+      "title": "NASA’s Artemis II mission is about to pass behind the moon",
+      "description": "The fifth day in space for Artemis II saw space suit tests, an Easter egg hunt and final preparations for an imminent close encounter with the moon",
+      "content": "As Easter Sunday unfolded on Earth, the four crewmembers of NASA’s Artemis II mission woke up to Day Five of their sojourn in space with a snippet from CeeLo Green’s “Working Class Heroes (Work).” They also received a recorded message from Apollo 16 ... [5234 chars]",
+      "url": "https://www.scientificamerican.com/article/nasas-artemis-ii-mission-is-about-to-pass-behind-the-moon/",
+      "imageUrl": "https://static.scientificamerican.com/dam/asset/d4b46ba7-8c29-4a04-bcf9-f119fe4483a9/55189767696_27cf3376e4_o-WEB.jpg?m=1775425957.113&w=1200",
+      "publishedAt": "2026-04-06T13:55:00Z",
+      "sourceName": "Scientific American",
+      "sourceUrl": "https://www.scientificamerican.com"
+    },
+    {
+      "id": "c8c403229029",
+      "title": "Steve Backshall has close encounter with celebrity orcas off Cornwall",
+      "description": "The TV star headed out when he heard that John Coe and Aquarius were in the area - and he certainly found them",
+      "content": "The TV star headed out when he heard that John Coe and Aquarius were in the area - and he certainly found them\nTV environmentalist Steve Backshall had a close encounter with two famous whales off the coast of Cornwall.\nThe presenter, who is married t... [1467 chars]",
+      "url": "https://www.cornwalllive.com/news/cornwall-news/steve-backshall-close-encounter-celebrity-10903187",
+      "imageUrl": "https://i2-prod.cornwalllive.com/article10903255.ece/ALTERNATES/s1200d/0_imagemaker-34.jpg",
+      "publishedAt": "2026-04-06T10:14:35Z",
+      "sourceName": "Cornwall Live",
+      "sourceUrl": "https://www.cornwalllive.com"
+    },
+    {
+      "id": "1cd32bda6012",
+      "title": "It's time for Artemis II to break Apollo 13's distance record. What to know about the moon flyby",
+      "description": "Artemis II astronauts are setting a new distance record from Earth, surpassing Apollo 13's maximum range during their lunar flyby. The mission aims to map the moon's far side and will witness a total solar eclipse. Following their close encounter with the moon, the crew will return to Earth for a splashdown on April 10.",
+      "content": "Synopsis\nArtemis II astronauts are setting a new distance record from Earth, surpassing Apollo 13's maximum range during their lunar flyby. The mission aims to map the moon's far side and will witness a total solar eclipse. Following their close enco... [6202 chars]",
+      "url": "https://economictimes.indiatimes.com/news/science/its-time-for-artemis-ii-to-break-apollo-13s-distance-record-what-to-know-about-the-moon-flyby/articleshow/130048904.cms",
+      "imageUrl": "https://img.etimg.com/thumb/msid-130048912,width-1200,height-630,imgsize-20790,overlay-economictimes/articleshow.jpg",
+      "publishedAt": "2026-04-06T01:42:00Z",
+      "sourceName": "The Economic Times",
+      "sourceUrl": "https://economictimes.indiatimes.com"
+    },
+    {
+      "id": "2049182d6490",
+      "title": "After 60 years, witnesses to Australia's biggest UFO sighting at Westall High School say it's time for answers",
+      "description": "Flying saucers, balloons or mass hysteria? It's 60 years today since Australia's biggest UFO sighting took place at a Melbourne school. Witnesses are still demanding answers about what happened that day.",
+      "content": "Tania Vassie was playing on the school oval when she looked up into the clear autumn sky to see a \"strange, rounded, two-storey disc floating up above\".\nThe 13-year-old watched, transfixed, as the object moved through the sky erratically, dashing at ... [14522 chars]",
+      "url": "https://www.abc.net.au/news/2026-04-06/westall-ufo-mystery-witnesses-want-answers/106126614",
+      "imageUrl": "https://live-production.wcms.abc-cdn.net.au/eb3f64cfc7f242572d1bf19244cbdcf7?impolicy=wcms_watermark_news&cropH=2025&cropW=3600&xPos=0&yPos=0&width=862&height=485&imformat=generic",
+      "publishedAt": "2026-04-05T18:34:43Z",
+      "sourceName": "ABC (Australian Broadcasting Corporation)",
+      "sourceUrl": "https://www.abc.net.au"
+    },
+    {
+      "id": "b6e083f0ddcb",
+      "title": "Nearly a century of wondering: The American UFO saga, in reality and in fiction",
+      "description": "By COREY WILLIAMS UFOs, or the notion of them, have been around a long time. Here’s a look at how the various iterations of the subject — from government investigations to sightings to movies and TV — have unfolded since World War II: ___ 1947: First widely reported UFO sighting in US On June 24, […]",
+      "content": "By COREY WILLIAMS\nUFOs, or the notion of them, have been around a long time. Here’s a look at how the various iterations of the subject — from government investigations to sightings to movies and TV — have unfolded since World War II:\n___\n1947: First... [6057 chars]",
+      "url": "https://www.courant.com/2026/04/05/nearly-a-century-of-wondering-the-american-ufo-saga-in-reality-and-in-fiction/",
+      "imageUrl": "https://www.courant.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg?w=1024&h=809",
+      "publishedAt": "2026-04-05T12:00:53Z",
+      "sourceName": "Hartford Courant",
+      "sourceUrl": "https://www.courant.com"
+    },
+    {
+      "id": "5a5199a370ed",
+      "title": "While the U.S. government is investigating unidentified anomalous phenomena, academic researchers studying them face stigma",
+      "description": "A famous UAP video shows an unexplained object as it soars high along the clouds, traveling against the wind. Department of Defense via AP",
+      "content": "President Donald Trump directed the Pentagon and other federal agencies to begin releasing government files related to UFOs and unidentified anomalous phenomena — called UAP — in February 2026, following years of pressure from Congress, military whis... [7736 chars]",
+      "url": "https://cdapress.com/news/2026/apr/04/while-the-us-government-is-investigating-unidentified-anomalous-phenomena-academic-researchers-studying-them-face-stigma/",
+      "imageUrl": "https://hagadone.media.clients.ellingtoncms.com/img/photos/2026/04/01/UAP_the_conversation_1_t1200x630.png?b488907419a4f4bb2699a58f7dac3d0615975bd7",
+      "publishedAt": "2026-04-04T08:00:00Z",
+      "sourceName": "Coeur d'Alene Press",
+      "sourceUrl": "https://cdapress.com"
+    },
+    {
+      "id": "63508aa216cf",
+      "title": "Rep. Tim Burchett Warns Classified UAP Briefing Contains Explosive Information That Could ‘Set the Earth on Fire’",
+      "description": "WASHINGTON — Rep. Tim Burchett (R-Tenn.), a vocal advocate for UAP transparency and member of the House Task Force on the Declassification of Federal Secrets, issued a stark warning this week about classified briefings on unidentified anomalous phenomena (UAP), suggesting the revelations are so profound they would shock the American public and leave people \"up Rep. Tim Burchett reveals classified UAP briefings contain explosive information that could shock the public and \"set the Earth on fire.\" He urges President Trump to release everything amid claims of cover-ups, alien-human hybrids from ex-Rep. Matt Gaetz, and the mysterious disappearance of retired Gen. William Neil McCasland.",
+      "content": "WASHINGTON — Rep. Tim Burchett (R-Tenn.), a vocal advocate for UAP transparency and member of the House Task Force on the Declassification of Federal Secrets, issued a stark warning this week about classified briefings on unidentified anomalous pheno... [5064 chars]",
+      "url": "https://usaherald.com/rep-tim-burchett-warns-classified-uap-briefing-contains-explosive-information-that-could-set-the-earth-on-fire/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-04-03T22:06:22Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
+    },
+    {
+      "id": "982d0e84c416",
+      "title": "'It Would've Set The Earth On Fire': GOP Rep Says Secret UFO Files He Saw Could Have 'Unglued' America If",
+      "description": "Rep. Tim Burchett is demanding full UFO disclosure, saying classified briefings he received would have shocked the American public if released.",
+      "content": "Rep. Tim Burchett (R-Tenn.) is pushing for complete government transparency on UFOs, telling Newsmax Wednesday that classified information he has personally reviewed would have shocked the American public if released.\n“It would have set the earth on ... [1368 chars]",
+      "url": "https://www.benzinga.com/news/space/26/04/51644609/it-wouldve-set-the-earth-on-fire-gop-rep-says-secret-ufo-files-he-saw-could-have-unglued-america-if-released",
+      "imageUrl": "https://cdn.benzinga.com/files/images/story/2026/04/03/Trump-Move-Ignites-Fresh-UFO-Storm.jpeg?width=1200&height=800&fit=crop",
+      "publishedAt": "2026-04-03T11:16:10Z",
+      "sourceName": "Benzinga",
+      "sourceUrl": "https://www.benzinga.com"
+    },
+    {
+      "id": "61c3947979fb",
+      "title": "Sungrazer comet C/2026 A1 (MAPS) could shine brighter than ever on Saturday",
+      "description": "Comet C/2026 A1 (MAPS) could shine brightly in the evenings after April 4, but only if it survives a very close encounter with the sun.",
+      "content": "A rare \"sungrazer\" comet is about to pass very close to our star and could become visible in daylight — or it could completely disintegrate before our eyes. Either way, there could be something special to see in the night sky, with a large tail poten... [1665 chars]",
+      "url": "https://www.livescience.com/space/comets/rare-sungrazer-comet-maps-will-appear-brighter-than-ever-on-saturday-if-it-survives-a-dangerous-encounter-with-our-star",
+      "imageUrl": "https://cdn.mos.cms.futurecdn.net/AGcem5z85jQ69uvqudffY5-1920-80.jpg",
+      "publishedAt": "2026-04-03T11:00:00Z",
+      "sourceName": "Livescience.com",
+      "sourceUrl": "https://www.livescience.com"
+    },
     {
       "id": "c1e452e8dc85",
       "title": "Lying on the floor on a warm day",
@@ -16,7 +115,7 @@
     },
     {
       "id": "2876c546e734",
-      "title": "Comet C/2026 A1 (MAPS)",
+      "title": "A rare sungrazing comet is about to make an extreme flyby in April",
       "description": "If C/2026 A1 (MAPS) survives its close encounter with the sun, it could blaze brightly enough to be seen from Earth.",
       "content": "A newly discovered comet is giving astronomers a rare early look at a high-risk journey toward the sun. First detected on January 13 by French researchers at the AMACS1 observatory in San Pedro de Atacama, Chile, C/2026 A1 (MAPS) is a Kreutz sungraze... [3374 chars]",
       "url": "https://www.nationalgeographic.com/science/article/sungrazing-comet-2026-a1-maps-when-to-see",
@@ -304,7 +403,7 @@
       "id": "738789b73f01",
       "title": "While the US government is investigating unidentified anomalous phenomena, academic researchers studying them face stigma",
       "description": "Surveys have found that researchers studying UAPs can face pushback from mentors and colleagues, even from people who think it’s an important line of research.",
-      "content": "President Donald Trump directed the Pentagon and other federal agencies to begin releasing government files related to UFOs and unidentified anomalous phenomena – called UAP – in February 2026, following years of pressure from Congress, military whis... [7638 chars]",
+      "content": "President Donald Trump directed the Pentagon and other federal agencies to begin releasing government files related to UFOs and unidentified anomalous phenomena – called UAP – in February 2026, following years of pressure from Congress, military whis... [7634 chars]",
       "url": "https://theconversation.com/while-the-us-government-is-investigating-unidentified-anomalous-phenomena-academic-researchers-studying-them-face-stigma-277722",
       "imageUrl": "https://images.theconversation.com/files/722607/original/file-20260306-57-v6lipj.jpg?ixlib=rb-4.1.0&rect=502%2C307%2C1325%2C662&q=45&auto=format&w=1356&h=668&fit=crop",
       "publishedAt": "2026-03-13T00:00:00Z",
