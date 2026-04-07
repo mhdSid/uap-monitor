@@ -594,8 +594,8 @@ export const SEISMIC = {
   STAT_AVG_DIST_SUB: 'sighting to epicenter',
   STAT_AVG_MAG: 'AVG MAGNITUDE',
   STAT_AVG_MAG_SUB: 'correlated quakes',
-  SCATTER_TITLE: 'PROXIMITY-TIME SCATTER',
-  SCATTER_SUBTITLE: 'Each dot is a sighting–earthquake pair',
+  SCATTER_TITLE: 'PROXIMITY-TIME HEATMAP',
+  SCATTER_SUBTITLE: 'Sighting density by time relative to quake and epicenter distance',
   SCATTER_X: 'HOURS RELATIVE TO QUAKE',
   SCATTER_Y: 'DISTANCE (km)',
   TABLE_TITLE: 'STRONGEST CORRELATIONS',
@@ -617,7 +617,16 @@ export const SEISMIC = {
   NO_DATA: 'No seismic data available',
   NO_PAIRS: 'No sighting–earthquake correlations for this year range',
   LOADING: 'Loading seismic data...',
-  POSSIBLE_EQL: 'POSSIBLE EQL'
+  POSSIBLE_EQL: 'POSSIBLE EQL',
+  LEGEND_DENSITY: 'SIGHTING DENSITY',
+  NOTE_HEAT_LABEL: 'Cell intensity:',
+  NOTE_HEAT_DESC: 'reflects sighting count in that zone — cyan is sparse, red is dense.',
+  NOTE_EQL_LINE_LABEL: 'Dashed line:',
+  NOTE_EQL_LINE_DESC: '120 km EQL candidate threshold.',
+  HEAT_TOOLTIP_SIGHTINGS: 'sightings',
+  HEAT_TOOLTIP_EQL_SUFFIX: 'EQL candidates',
+  ALERT_TITLE: 'WHAT IS THIS VIEW?',
+  ALERT_CONTENT: 'This view cross-references UAP sighting reports against USGS earthquake data. The heatmap shows how many sightings occurred within each time window and distance of a nearby quake — brighter cells mean more sightings clustered there. Earthquake Lights (EQL) are rare luminous phenomena sometimes observed near fault lines before or after significant seismic events. The dashed horizontal line marks the 120 km EQL candidate threshold.'
 } as const
 
 // ─── Sighting modal — environmental context ─────────────────────────

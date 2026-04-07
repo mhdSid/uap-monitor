@@ -1,9 +1,9 @@
 /* ------------------------------------------------------------------ *
  *  SeismicView — Earthquake proximity vs sighting visualizer          *
  *                                                                     *
- *  Canvas scatter plot: distance (km) vs time delta (hours)           *
- *  Each dot = one sighting–earthquake pair, sized by magnitude.       *
- *  EQL candidates highlighted in amber.                               *
+ *  Canvas heatmap: distance (km) vs time delta (hours)               *
+ *  Each cell coloured by sighting-pair density (cyan → amber → red). *
+ *  EQL threshold and zero-time reference lines retained.             *
  *                                                                     *
  *  Theme-aware canvas (same pattern as Timeline).                     *
  *  Canvas wrapped in scroll container for narrow viewports.           *
@@ -22,6 +22,8 @@ import { YearSelector } from '@/components/year-selector'
 import { StatCard, createStatValue, StatCardGrid } from '@/components/stat-card'
 import { SEISMIC } from '@/data/strings'
 import type { Sighting, NearbyEarthquake } from '@/types'
+import { Alert } from '@/components/alert'
+import { AlertVariant } from '@/enums'
 
 // ─── Canvas constants ───────────────────────────────────────────────
 
@@ -30,20 +32,19 @@ const PAD_Y = 20
 const PAD_BOTTOM = 42
 const MAX_HOURS = 72
 const MAX_DIST_KM = 300
-const DOT_MIN_R = 3
 const EQL_DIST_LINE = 120
 const MIN_SCATTER_W = 420
+
+/** Number of horizontal time bins (144h / 24 = 6h per bin) */
+const BINS_X = 24
+/** Number of vertical distance bins (300km / 16 ≈ 18.75km per bin) */
+const BINS_Y = 16
 
 // ─── Responsive helpers ─────────────────────────────────────────────
 
 /** Y-axis label gutter — narrower on small screens */
 function getPadX (canvasW: number): number {
   return canvasW < 300 ? 32 : 52
-}
-
-/** Max dot radius — smaller on narrow viewports to reduce overlap */
-function getDotMaxR (canvasW: number): number {
-  return canvasW < 300 ? 8 : 12
 }
 
 /** X-axis hour labels — drop ±72 on very small screens */
@@ -54,13 +55,47 @@ function getHourSteps (canvasW: number): number[] {
   return canvasW < 300 ? HOUR_STEPS_COMPACT : HOUR_STEPS_FULL
 }
 
+// ─── Heatmap color helpers ──────────────────────────────────────────
+
+function lerp3 (
+  a: [number, number, number],
+  b: [number, number, number],
+  t: number
+): [number, number, number] {
+  return [
+    Math.round(a[0] + (b[0] - a[0]) * t),
+    Math.round(a[1] + (b[1] - a[1]) * t),
+    Math.round(a[2] + (b[2] - a[2]) * t)
+  ]
+}
+
+/**
+ * Maps a normalised density value (0–1) to an rgba string.
+ * Ramp: cyan (sparse) → amber (moderate) → red (dense).
+ * Light and dark themes use slightly different base shades.
+ */
+function heatColor (t: number, isLight: boolean): string {
+  const stops: [
+    [number, number, number],
+    [number, number, number],
+    [number, number, number]
+  ] = isLight
+    ? [[8, 145, 178], [217, 119, 6], [220, 38, 38]]   // cyan-600 / amber-600 / red-600
+    : [[34, 211, 238], [245, 158, 11], [239, 68, 68]]  // cyan-500 / amber-500 / red-500
+
+  const [r, g, b] = t <= 0.5
+    ? lerp3(stops[0], stops[1], t * 2)
+    : lerp3(stops[1], stops[2], (t - 0.5) * 2)
+
+  const alpha = 0.12 + t * 0.78
+  return `rgba(${r},${g},${b},${alpha})`
+}
+
 // ─── Theme-aware canvas colors ──────────────────────────────────────
 
 interface CanvasColors {
   text: string
   grid: string
-  dot: string
-  dotEql: string
   refLine: string
   refLineEql: string
   magLow: string
@@ -76,8 +111,6 @@ function getCanvasColors (): CanvasColors {
     ? {
       text: palette.black500_30,
       grid: palette.black_08,
-      dot: palette.cyan600_35,
-      dotEql: palette.amber600_70,
       refLine: palette.amber600_20,
       refLineEql: palette.red600_30,
       magLow: palette.cyan600,
@@ -87,8 +120,6 @@ function getCanvasColors (): CanvasColors {
     : {
       text: palette.white50,
       grid: palette.white08,
-      dot: palette.cyan500_35,
-      dotEql: palette.amber500_70,
       refLine: palette.amber500_20,
       refLineEql: palette.red500_30,
       magLow: palette.cyan500,
@@ -121,9 +152,9 @@ export class SeismicView extends Component {
   private contentEl!: HTMLElement
   private built = false
 
-  private scatterCanvas!: HTMLCanvasElement
-  private scatterScrollWrapper!: HTMLElement
-  private scatterTooltip!: HTMLElement
+  private heatCanvas!: HTMLCanvasElement
+  private heatScrollWrapper!: HTMLElement
+  private heatTooltip!: HTMLElement
   private tableBody!: HTMLElement
 
   // Stat value elements
@@ -140,9 +171,11 @@ export class SeismicView extends Component {
   private avgMag = 0
   private loaded = false
 
-  // Resize observer for responsive canvas redraw
-  private resizeObserver: ResizeObserver | null = null
+  // Populated by drawHeatmap(), read by bindHeatmapHover()
+  private heatGrid: number[][] = []
+  private heatEqlGrid: number[][] = []
 
+  private resizeObserver: ResizeObserver | null = null
   private yearSelectorEl!: HTMLElement
 
   protected create (): HTMLElement {
@@ -171,13 +204,13 @@ export class SeismicView extends Component {
     const { from, to } = store.yearRange.get()
 
     await seismic.ensureYears(from, to)
-
     await this.computeData(sightings)
 
     if (!this.built) {
       this.buildContent()
       this.built = true
     }
+
     this.updateStats()
     this.updateTable()
 
@@ -185,10 +218,7 @@ export class SeismicView extends Component {
     hide(this.loaderEl)
     show(this.contentEl)
 
-    requestAnimationFrame(() => {
-      this.drawScatter()
-    })
-
+    requestAnimationFrame(() => { this.drawHeatmap() })
     this.bindResizeObserver()
 
     // Re-compute when sightings change (year range or filter)
@@ -199,7 +229,7 @@ export class SeismicView extends Component {
       await this.computeData(newSightings)
       this.updateStats()
       this.updateTable()
-      requestAnimationFrame(() => this.drawScatter())
+      requestAnimationFrame(() => this.drawHeatmap())
     }))
 
     // Show/hide loader during year-range refetches
@@ -218,7 +248,7 @@ export class SeismicView extends Component {
     const { theme } = useTheme()
     this.own(theme.subscribe(() => {
       if (!this.loaded) return
-      requestAnimationFrame(() => this.drawScatter())
+      requestAnimationFrame(() => this.drawHeatmap())
     }))
   }
 
@@ -303,31 +333,35 @@ export class SeismicView extends Component {
       new StatCard({ label: SEISMIC.STAT_AVG_MAG, valueEl: this.statMagVal, sub: SEISMIC.STAT_AVG_MAG_SUB }).el
     )
 
-    // Scatter
-    this.scatterCanvas = el('canvas', { className: appCx.viewCanvas })
-    this.scatterCanvas.height = SCATTER_H
-    this.scatterTooltip = h('div', { className: appCx.viewTooltip })
-    hide(this.scatterTooltip)
+    // Heatmap canvas
+    this.heatCanvas = el('canvas', { className: appCx.viewCanvas })
+    this.heatCanvas.height = SCATTER_H
+    this.heatTooltip = h('div', { className: appCx.viewTooltip })
+    hide(this.heatTooltip)
 
-    this.scatterScrollWrapper = h('div', { className: appCx.viewScrollWrapper },
-      this.scatterCanvas
+    this.heatScrollWrapper = h('div', { className: appCx.viewScrollWrapper },
+      this.heatCanvas
     )
 
-    const scatterPanel = h('div', { className: appCx.viewPanel },
-      this.scatterScrollWrapper,
-      this.scatterTooltip,
+    const heatPanel = h('div', { className: appCx.viewPanel },
+      this.heatScrollWrapper,
+      this.heatTooltip,
       this.buildLegend([
-        { label: SEISMIC.LEGEND_PAIR, color: 'var(--color-cyan)' },
+        {
+          label: SEISMIC.LEGEND_DENSITY,
+          color: 'linear-gradient(90deg, var(--color-cyan), var(--color-amber))'
+        },
         { label: SEISMIC.LEGEND_EQL, color: 'var(--color-amber)' }
       ]),
-      this.buildScatterNote()
+      this.buildHeatNote()
     )
-    this.bindScatterHover()
 
-    const scatterSection = h('div', { className: appCx.viewSection },
+    this.bindHeatmapHover()
+
+    const heatSection = h('div', { className: appCx.viewSection },
       el('h2', { className: appCx.viewSectionTitle }, [SEISMIC.SCATTER_TITLE]),
       h('div', { className: appCx.viewSectionSub }, SEISMIC.SCATTER_SUBTITLE),
-      scatterPanel
+      heatPanel
     )
 
     // Table
@@ -363,7 +397,17 @@ export class SeismicView extends Component {
     )
 
     this.contentEl.appendChild(statsBar)
-    this.contentEl.appendChild(scatterSection)
+
+    this.contentEl.appendChild(
+      new Alert({
+        variant: AlertVariant.INFO,
+        title: SEISMIC.ALERT_TITLE,
+        content: SEISMIC.ALERT_CONTENT,
+        dismissible: true
+      }).el
+    )
+
+    this.contentEl.appendChild(heatSection)
     this.contentEl.appendChild(tableSection)
     this.contentEl.appendChild(new Footer({}).el)
   }
@@ -443,13 +487,12 @@ export class SeismicView extends Component {
     return legend
   }
 
-  // ─── Scatter note (colored bullet list) ─────────────────────────
+  // ─── Heatmap note ───────────────────────────────────────────────
 
-  private buildScatterNote (): HTMLElement {
+  private buildHeatNote (): HTMLElement {
     const items: Array<{ label: string; desc: string; color: string }> = [
-      { label: SEISMIC.NOTE_BLUE_LABEL, desc: SEISMIC.NOTE_BLUE_DESC, color: 'var(--color-cyan)' },
-      { label: SEISMIC.NOTE_ORANGE_LABEL, desc: SEISMIC.NOTE_ORANGE_DESC, color: 'var(--color-amber)' },
-      { label: SEISMIC.NOTE_SIZE_LABEL, desc: SEISMIC.NOTE_SIZE_DESC, color: 'var(--color-muted)' }
+      { label: SEISMIC.NOTE_HEAT_LABEL, desc: SEISMIC.NOTE_HEAT_DESC, color: 'var(--color-cyan)' },
+      { label: SEISMIC.NOTE_EQL_LINE_LABEL, desc: SEISMIC.NOTE_EQL_LINE_DESC, color: 'var(--color-amber)' }
     ]
 
     const list = h('ul', { className: cx.noteList })
@@ -457,7 +500,6 @@ export class SeismicView extends Component {
     for (const item of items) {
       const labelSpan = h('span', { className: cx.noteLabel }, item.label)
       setStyles(labelSpan, { color: item.color })
-
       list.appendChild(
         h('li', { className: cx.noteItem }, labelSpan, ` ${item.desc}`)
       )
@@ -472,9 +514,7 @@ export class SeismicView extends Component {
     let rafId = 0
     this.resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => {
-        this.drawScatter()
-      })
+      rafId = requestAnimationFrame(() => { this.drawHeatmap() })
     })
     this.resizeObserver.observe(this.contentEl)
     this.own(() => {
@@ -483,29 +523,30 @@ export class SeismicView extends Component {
     })
   }
 
-  // ─── Scatter canvas ─────────────────────────────────────────────
+  // ─── Heatmap canvas ─────────────────────────────────────────────
 
-  private drawScatter (): void {
-    const canvas = this.scatterCanvas
-    const wrapper = this.scatterScrollWrapper
+  private drawHeatmap (): void {
+    const canvas = this.heatCanvas
+    const wrapper = this.heatScrollWrapper
     const viewportW = wrapper.getBoundingClientRect().width
     if (viewportW <= 0) return
 
     const contentW = Math.max(viewportW, MIN_SCATTER_W)
     const padX = getPadX(contentW)
-    const dotMaxR = getDotMaxR(contentW)
     const hourSteps = getHourSteps(contentW)
 
     const dpr = window.devicePixelRatio || 1
     canvas.width = contentW * dpr
     canvas.height = SCATTER_H * dpr
-    setStyles(canvas, { width: contentW + 'px', height: SCATTER_H + 'px' })
+    setStyles(canvas, { width: `${contentW}px`, height: `${SCATTER_H}px` })
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
     const c = getCanvasColors()
+    const { isLightTheme } = useTheme()
+    const isLight = isLightTheme()
     const w = contentW
     const plotW = w - padX - 16
     const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
@@ -519,14 +560,52 @@ export class SeismicView extends Component {
       return
     }
 
-    // Grid
-    ctx.strokeStyle = c.grid
-    ctx.lineWidth = 1
+    // ── Build density grid ────────────────────────────────────────
 
-    // X-axis grid + labels (hours)
+    const grid: number[][] = Array.from({ length: BINS_Y }, () => new Array(BINS_X).fill(0))
+    const eqlGrid: number[][] = Array.from({ length: BINS_Y }, () => new Array(BINS_X).fill(0))
+
+    for (const d of this.scatterData) {
+      const bx = Math.min(
+        Math.max(Math.floor(((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * BINS_X), 0),
+        BINS_X - 1
+      )
+      const by = Math.min(
+        Math.max(Math.floor((d.distKm / MAX_DIST_KM) * BINS_Y), 0),
+        BINS_Y - 1
+      )
+      grid[by][bx]++
+      if (d.isEQL) eqlGrid[by][bx]++
+    }
+
+    // Store for hover reads
+    this.heatGrid = grid
+    this.heatEqlGrid = eqlGrid
+
+    const maxCount = Math.max(...grid.flat(), 1)
+    const cellW = plotW / BINS_X
+    const cellH = plotH / BINS_Y
+
+    // ── Draw cells ────────────────────────────────────────────────
+
+    for (let row = 0; row < BINS_Y; row++) {
+      for (let col = 0; col < BINS_X; col++) {
+        const count = grid[row][col]
+        if (count === 0) continue
+        ctx.fillStyle = heatColor(count / maxCount, isLight)
+        ctx.fillRect(
+          padX + col * cellW + 0.5,
+          PAD_Y + row * cellH + 0.5,
+          cellW - 1,
+          cellH - 1
+        )
+      }
+    }
+
+    // ── Grid lines + axis labels ──────────────────────────────────
+
+    ctx.lineWidth = 1
     ctx.font = 'bold 8px monospace'
-    ctx.fillStyle = c.text
-    ctx.textAlign = 'center'
 
     for (const hrs of hourSteps) {
       const x = padX + ((hrs + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
@@ -536,11 +615,10 @@ export class SeismicView extends Component {
       ctx.lineTo(x, PAD_Y + plotH)
       ctx.stroke()
       ctx.fillStyle = c.text
+      ctx.textAlign = 'center'
       ctx.fillText(`${hrs}h`, x, SCATTER_H - 20)
     }
 
-    // Y-axis grid + labels (distance)
-    ctx.textAlign = 'right'
     const distSteps = [0, 100, 200, 300]
     for (const km of distSteps) {
       const y = PAD_Y + (km / MAX_DIST_KM) * plotH
@@ -550,11 +628,14 @@ export class SeismicView extends Component {
       ctx.lineTo(w - 16, y)
       ctx.stroke()
       ctx.fillStyle = c.text
+      ctx.textAlign = 'right'
       ctx.fillText(`${km}`, padX - 6, y + 3)
     }
 
-    // Reference lines
+    // ── Reference lines ───────────────────────────────────────────
+
     ctx.setLineDash([4, 4])
+    ctx.lineWidth = 1.5
 
     const zeroX = padX + (MAX_HOURS / (MAX_HOURS * 2)) * plotW
     ctx.strokeStyle = c.refLine
@@ -569,9 +650,12 @@ export class SeismicView extends Component {
     ctx.moveTo(padX, eqlY)
     ctx.lineTo(w - 16, eqlY)
     ctx.stroke()
-    ctx.setLineDash([])
 
-    // Axis labels
+    ctx.setLineDash([])
+    ctx.lineWidth = 1
+
+    // ── Axis labels ───────────────────────────────────────────────
+
     ctx.fillStyle = c.text
     ctx.font = 'bold 8px monospace'
     ctx.textAlign = 'center'
@@ -582,38 +666,14 @@ export class SeismicView extends Component {
     ctx.rotate(-Math.PI / 2)
     ctx.fillText(SEISMIC.SCATTER_Y, 0, 0)
     ctx.restore()
-
-    // Sort: non-EQL first, EQL on top
-    const sorted = [...this.scatterData].sort((a, b) => {
-      if (a.isEQL === b.isEQL) return 0
-      return a.isEQL ? 1 : -1
-    })
-
-    for (const d of sorted) {
-      const x = padX + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
-      const y = PAD_Y + (d.distKm / MAX_DIST_KM) * plotH
-
-      if (x < padX || x > padX + plotW) continue
-      if (y < PAD_Y || y > PAD_Y + plotH) continue
-
-      const magNorm = (d.magnitude - 4) / 4
-      const r = DOT_MIN_R + magNorm * (dotMaxR - DOT_MIN_R)
-
-      ctx.globalAlpha = d.isEQL ? 0.85 : 0.35
-      ctx.fillStyle = d.isEQL ? c.dotEql : c.dot
-      ctx.beginPath()
-      ctx.arc(x, y, r, 0, Math.PI * 2)
-      ctx.fill()
-    }
-    ctx.globalAlpha = 1
   }
 
-  // ─── Scatter hover ──────────────────────────────────────────────
+  // ─── Heatmap hover ──────────────────────────────────────────────
 
-  private bindScatterHover (): void {
-    const canvas = this.scatterCanvas
+  private bindHeatmapHover (): void {
+    const canvas = this.heatCanvas
 
-    const handleHover = (clientX: number, clientY: number) => {
+    const handleHover = (clientX: number, clientY: number): void => {
       const rect = canvas.getBoundingClientRect()
       const mx = clientX - rect.left
       const my = clientY - rect.top
@@ -622,39 +682,45 @@ export class SeismicView extends Component {
       const plotW = canvas.clientWidth - padX - 16
       const plotH = SCATTER_H - PAD_Y - PAD_BOTTOM
 
-      let nearest: ScatterPoint | null = null
-      let minDist = Infinity
-
-      for (const d of this.scatterData) {
-        const x = padX + ((d.hoursDelta + MAX_HOURS) / (MAX_HOURS * 2)) * plotW
-        const y = PAD_Y + (d.distKm / MAX_DIST_KM) * plotH
-        const dist = Math.hypot(mx - x, my - y)
-        if (dist < 20 && dist < minDist) {
-          minDist = dist
-          nearest = d
-        }
+      if (mx < padX || mx > padX + plotW || my < PAD_Y || my > PAD_Y + plotH) {
+        hide(this.heatTooltip)
+        return
       }
 
-      if (!nearest) { hide(this.scatterTooltip); return }
+      const col = Math.min(Math.floor(((mx - padX) / plotW) * BINS_X), BINS_X - 1)
+      const row = Math.min(Math.floor(((my - PAD_Y) / plotH) * BINS_Y), BINS_Y - 1)
 
-      const deltaLabel = nearest.hoursDelta > 0
-        ? `${nearest.hoursDelta}h after quake`
-        : `${Math.abs(nearest.hoursDelta)}h before quake`
-      const eqlLabel = nearest.isEQL ? ` — ${SEISMIC.POSSIBLE_EQL}` : ''
-      setText(this.scatterTooltip, `M${nearest.magnitude} — ${nearest.distKm} km — ${deltaLabel}${eqlLabel}`)
-      show(this.scatterTooltip)
+      const count = this.heatGrid[row]?.[col] ?? 0
+      if (count === 0) { hide(this.heatTooltip); return }
+
+      const eqlCount = this.heatEqlGrid[row]?.[col] ?? 0
+      const hPerBin = (MAX_HOURS * 2) / BINS_X
+      const h0 = Math.round(-MAX_HOURS + col * hPerBin)
+      const h1 = Math.round(h0 + hPerBin)
+      const kmPerBin = MAX_DIST_KM / BINS_Y
+      const d0 = Math.round(row * kmPerBin)
+      const d1 = Math.round(d0 + kmPerBin)
+
+      const eqlSuffix = eqlCount > 0
+        ? ` — ${eqlCount} ${SEISMIC.HEAT_TOOLTIP_EQL_SUFFIX}`
+        : ''
+
+      setText(
+        this.heatTooltip,
+        `${count} ${SEISMIC.HEAT_TOOLTIP_SIGHTINGS} — ${h0}h to ${h1}h — ${d0}–${d1} km${eqlSuffix}`
+      )
+      show(this.heatTooltip)
     }
 
     canvas.addEventListener('mousemove', (e: MouseEvent) => handleHover(e.clientX, e.clientY))
-    canvas.addEventListener('mouseleave', () => { hide(this.scatterTooltip) })
+    canvas.addEventListener('mouseleave', () => { hide(this.heatTooltip) })
 
-    // Touch support
     canvas.addEventListener('touchstart', (e: TouchEvent) => {
       if (e.touches.length === 1) {
         handleHover(e.touches[0].clientX, e.touches[0].clientY)
       }
     }, { passive: true })
-    canvas.addEventListener('touchend', () => { hide(this.scatterTooltip) }, { passive: true })
+    canvas.addEventListener('touchend', () => { hide(this.heatTooltip) }, { passive: true })
   }
 
   // ─── Cleanup ────────────────────────────────────────────────────
