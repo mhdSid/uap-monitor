@@ -722,5 +722,7 @@ export const RESEARCH = {
   ERROR: 'Could not load hypothesis results.',
   METHODOLOGY_TITLE: 'METHODOLOGY NOTES',
   METHODOLOGY_BODY: 'Population density controls applied via 20 sets of random geographic control points. Time-shifted baselines (±90 days) used for temporal hypotheses to isolate signal from geographic co-location. All p-values are two-tailed. Effect sizes: Cohen\'s d for continuous, odds ratio for proportions.',
-  ATTRIBUTION: 'Data sources: NUFORC, Hatch UDB, Researcher Chronologies, NASA CNEOS, USGS Earthquakes, GFZ Potsdam Kp Index, IAEA Nuclear Facilities.'
+  ATTRIBUTION: 'Data sources: NUFORC, Hatch UDB, Researcher Chronologies, NASA CNEOS, USGS Earthquakes, GFZ Potsdam Kp Index, IAEA Nuclear Facilities.',
+  ALERT_TITLE: 'WHAT IS THIS VIEW?',
+  ALERT_CONTENT: 'This view tests whether UAP sightings increase during geomagnetic storms. The Kp index (0–9) measures Earth\'s magnetic field disturbance — Kp ≥ 5 is classified as a storm. The timeline chart overlays monthly Kp levels against sighting counts. The distribution chart compares actual sighting rates per Kp level against what you\'d expect from pure chance. Bars extending beyond the expected baseline suggest a real correlation, not random noise.'
 } as const

@@ -145,6 +145,12 @@ export class ResearchView extends Component {
           h('h1', { className: cx.title }, RESEARCH.TITLE),
           h('p', { className: cx.subtitle }, RESEARCH.SUBTITLE)
         ),
+        new Alert({
+          variant: AlertVariant.INFO,
+          title: RESEARCH.ALERT_TITLE,
+          content: RESEARCH.ALERT_CONTENT,
+          dismissible: true
+        }).el,
         StatCardGrid(
           new StatCard({ label: RESEARCH.STAT_TOTAL, valueEl: totalVal, sub: '' }).el,
           new StatCard({ label: RESEARCH.STAT_SUPPORTED, valueEl: supportedVal, sub: '' }).el,

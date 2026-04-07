@@ -332,14 +332,6 @@ export class GeomagneticView extends Component {
     )
     this.bindDistHover()
 
-    const distSection = h('div', { className: appCx.viewSection },
-      el('h2', { className: appCx.viewSectionTitle }, [GEOMAGNETIC.DIST_TITLE]),
-      h('div', { className: appCx.viewSectionSub }, GEOMAGNETIC.DIST_SUBTITLE),
-      distPanel
-    )
-
-    this.contentEl.appendChild(statsBar)
-
     this.contentEl.appendChild(
       new Alert({
         variant: AlertVariant.INFO,
@@ -348,6 +340,14 @@ export class GeomagneticView extends Component {
         dismissible: true
       }).el
     )
+
+    const distSection = h('div', { className: appCx.viewSection },
+      el('h2', { className: appCx.viewSectionTitle }, [GEOMAGNETIC.DIST_TITLE]),
+      h('div', { className: appCx.viewSectionSub }, GEOMAGNETIC.DIST_SUBTITLE),
+      distPanel
+    )
+
+    this.contentEl.appendChild(statsBar)
 
     this.contentEl.appendChild(timelineSection)
     this.contentEl.appendChild(distSection)
