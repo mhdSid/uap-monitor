@@ -577,7 +577,9 @@ export const GEOMAGNETIC = {
   LABEL_OBSERVED: 'OBSERVED',
   LABEL_EXPECTED: 'EXPECTED',
   NO_DATA: 'No geomagnetic data available',
-  LOADING: 'Loading geomagnetic data...'
+  LOADING: 'Loading geomagnetic data...',
+  ALERT_TITLE: 'WHAT IS THIS VIEW?',
+  ALERT_CONTENT: 'This view tests whether UAP sightings increase during geomagnetic storms. The Kp index (0–9) measures Earth\'s magnetic field disturbance — Kp ≥ 5 is classified as a storm. The timeline chart overlays monthly Kp levels against sighting counts. The distribution chart compares actual sighting rates per Kp level against what you\'d expect from pure chance. Bars extending beyond the expected baseline suggest a real correlation, not random noise.'
 } as const
 
 // ─── Seismic visualizer ─────────────────────────────────────────────

@@ -21,6 +21,8 @@ import { Loader } from '@/components/loader'
 import { Footer } from '@/components/footer'
 import { YearSelector } from '@/components/year-selector'
 import { StatCard, createStatValue, createStatSub, StatCardGrid } from '@/components/stat-card'
+import { Alert } from '@/components/alert'
+import { AlertVariant } from '@/enums'
 import { GEOMAGNETIC } from '@/data/strings'
 import type { Sighting } from '@/types'
 
@@ -337,6 +339,16 @@ export class GeomagneticView extends Component {
     )
 
     this.contentEl.appendChild(statsBar)
+
+    this.contentEl.appendChild(
+      new Alert({
+        variant: AlertVariant.INFO,
+        title: GEOMAGNETIC.ALERT_TITLE,
+        content: GEOMAGNETIC.ALERT_CONTENT,
+        dismissible: true
+      }).el
+    )
+
     this.contentEl.appendChild(timelineSection)
     this.contentEl.appendChild(distSection)
     this.contentEl.appendChild(new Footer({}).el)
