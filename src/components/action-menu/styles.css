@@ -4,8 +4,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--space-lg);
-  height: var(--space-lg);
+  width: var(--space-xl);
+  height: var(--space-xl);
   padding: 0;
   background: none;
   border: none;

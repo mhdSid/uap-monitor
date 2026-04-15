@@ -26,6 +26,7 @@
 import { Command } from "commander"
 import * as cheerio from "cheerio"
 import fs from "fs/promises"
+import { createWriteStream } from "fs"
 import path from "path"
 import nodeFetch from "node-fetch"
 
@@ -45,7 +46,7 @@ const BASE_URL = "https://nuforc.org"
 const DETAIL_URL = (id) => `${BASE_URL}/sighting/?id=${id}`
 const RAW_CACHE_FILE = "nuforc_raw_cache.json"
 const DEFAULT_OUTPUT = "nuforc_output.json"
-const DEFAULT_DELAY_MS = 500
+const DEFAULT_DELAY_MS = 1000
 const CONSECUTIVE_MISS_LIMIT = 100
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
@@ -106,6 +107,29 @@ function matchesYearFilter (record, yearRange) {
   const year = yearFromOccurred(record.occurred)
   if (!year) return true
   return year >= yearRange.from && year <= yearRange.to
+}
+
+// ─── Streaming JSON array writer ─────────────────────────────────────────────
+//
+// JSON.stringify() on arrays of 100K+ records with long text fields can exceed
+// V8's max string length (~512 MB), crashing with "Invalid string length".
+// Streaming writes each record individually, never holding the full string in
+// memory. Output is compact JSON (no pretty-print) — machine-read files don't
+// need indentation, and removing it meaningfully reduces file size.
+
+async function writeJsonArrayStream (filePath, records) {
+  return new Promise((resolve, reject) => {
+    const stream = createWriteStream(filePath, { encoding: "utf-8" })
+    stream.on("error", reject)
+    stream.on("finish", resolve)
+    stream.write("[\n")
+    for (let i = 0; i < records.length; i++) {
+      stream.write(JSON.stringify(records[i]))
+      if (i < records.length - 1) stream.write(",\n")
+    }
+    stream.write("\n]\n")
+    stream.end()
+  })
 }
 
 // ─── HTTP Layer ──────────────────────────────────────────────────────────────
@@ -1024,7 +1048,7 @@ async function runCacheMode () {
   }
 
   // Write --output (always: just the transformed data from this run)
-  await fs.writeFile(opts.output, JSON.stringify(outputRecords, null, 2), "utf-8")
+  await writeJsonArrayStream(opts.output, outputRecords)
   log(`✓ Saved ${outputRecords.length} transformed records to ${opts.output}`)
 
   // ── Merge ──────────────────────────────────────────────────────────────
@@ -1037,9 +1061,8 @@ async function runCacheMode () {
     if (existingRecords === null) {
       // Merge target doesn't exist yet — just write the output directly
       log(`Merge target does not exist — creating ${opts.merge}`)
-      // Ensure directory exists
       await fs.mkdir(path.dirname(opts.merge), { recursive: true })
-      await fs.writeFile(opts.merge, JSON.stringify(outputRecords, null, 2), "utf-8")
+      await writeJsonArrayStream(opts.merge, outputRecords)
       log(`✓ Wrote ${outputRecords.length} records to ${opts.merge}`)
     } else {
       // Backup the original before touching it
@@ -1063,7 +1086,7 @@ async function runCacheMode () {
         opts.mergeStrategy
       )
 
-      await fs.writeFile(opts.merge, JSON.stringify(merged, null, 2), "utf-8")
+      await writeJsonArrayStream(opts.merge, merged)
 
       log(`✓ Merged into ${opts.merge}`)
       log(`  Previously: ${stats.kept} records`)

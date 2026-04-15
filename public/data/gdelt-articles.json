@@ -1,10 +1,910 @@
 {
-  "generatedAt": "2026-04-07T04:21:16.353Z",
+  "generatedAt": "2026-04-15T02:47:18.689Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
   "totalResults": 1250,
   "articles": [
+    {
+      "id": "08aac96d29a8",
+      "title": "Rare Comet , Meteor Shower Visible in Montana Skies",
+      "url": "https://newstalkkgvo.com/ixp/1116/p/montana-comet-meteor-shower-april/",
+      "domain": "newstalkkgvo.com",
+      "publishedAt": "2026-04-14T22:00:00Z",
+      "language": "English",
+      "sourceName": "newstalkkgvo.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/1116/files/2026/04/attachment-2569_9117fcc0b233fff.jpg?&q=75&format=natural",
+      "tone": 2.5
+    },
+    {
+      "id": "0c4dedbe232d",
+      "title": "UFO government disclosure ? We talk with an investigator from MUFON Florida",
+      "url": "https://www.wgcu.org/podcast/gulf-coast-life/2026-04-14/ufo-government-disclosure-we-talk-with-an-investigator-from-mufon-florida",
+      "domain": "wgcu.org",
+      "publishedAt": "2026-04-14T18:45:00Z",
+      "language": "English",
+      "sourceName": "wgcu.org (United States)",
+      "country": "United States",
+      "imageUrl": "http://npr-brightspot.s3.amazonaws.com/bb/cb/4092508e429eb54f4b1ee83e12fc/congress-oversight-npr.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "380ac69372de",
+      "title": "Matt Gaetz Claims US Army Officer Briefed Him on Alien - Human Hybrid Breeding Programme",
+      "url": "https://www.foreignpolicyjournal.com/2026/04/14/matt-gaetz-claims-us-army-officer-briefed-him-on-alien-human-hybrid-breeding-programme/",
+      "domain": "foreignpolicyjournal.com",
+      "publishedAt": "2026-04-14T18:45:00Z",
+      "language": "English",
+      "sourceName": "foreignpolicyjournal.com (Israel)",
+      "country": "Israel",
+      "imageUrl": "https://www.foreignpolicyjournal.com/wp-content/uploads/2026/04/matt-gaetz.webp",
+      "tone": -2.5
+    },
+    {
+      "id": "177d3d76c868",
+      "title": "Mysterious Lights Spotted Over California Highway",
+      "url": "https://kw3.com/ixp/137/p/california-orbs-spotted/",
+      "domain": "kw3.com",
+      "publishedAt": "2026-04-14T02:00:00Z",
+      "language": "English",
+      "sourceName": "kw3.com",
+      "country": "",
+      "imageUrl": "https://townsquare.media/site/137/files/2026/04/attachment-fatemeh-rz-bqfm2d2yrrc-unsplash.jpg?&q=75&format=natural",
+      "tone": -2.5
+    },
+    {
+      "id": "37ff88b1ee3f",
+      "title": "Mysterious Lights Spotted Over California Highway",
+      "url": "https://kpq.com/ixp/137/p/california-orbs-spotted/",
+      "domain": "kpq.com",
+      "publishedAt": "2026-04-13T18:15:00Z",
+      "language": "English",
+      "sourceName": "kpq.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/137/files/2026/04/attachment-fatemeh-rz-bqfm2d2yrrc-unsplash.jpg?&q=75&format=natural",
+      "tone": -2.5
+    },
+    {
+      "id": "e1aff0084ae2",
+      "title": "Westall 1966 : Official files remain secret",
+      "url": "https://dandenong.starcommunity.com.au/news/2026-04-13/westall-1966-official-files-remain-secret/",
+      "domain": "dandenong.starcommunity.com.au",
+      "publishedAt": "2026-04-13T01:00:00Z",
+      "language": "English",
+      "sourceName": "dandenong.starcommunity.com.au (Australia)",
+      "country": "Australia",
+      "imageUrl": "https://dandenong.starcommunity.com.au/files/2026/04/ufo_546193_02-1.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "77593c8aab24",
+      "title": "Trump could help these  obsessed  believers and they dont understand why he wont",
+      "url": "https://www.alternet.org/trump-ufo-researchers/",
+      "domain": "alternet.org",
+      "publishedAt": "2026-04-12T22:00:00Z",
+      "language": "English",
+      "sourceName": "alternet.org (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.alternet.org/media-library/image.jpg?id=65511099&coordinates=0%2C14%2C0%2C15",
+      "tone": -2.5
+    },
+    {
+      "id": "922ddddb7714",
+      "title": "J . Allen Hynek & Project Blue Book : UFO Secrets Revealed",
+      "url": "https://www.popularmechanics.com/military/a70995826/j-allen-hynek-project-blue-book-ufo-investigation-truth/",
+      "domain": "popularmechanics.com",
+      "publishedAt": "2026-04-12T19:45:00Z",
+      "language": "English",
+      "sourceName": "popularmechanics.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/j-allen-hynek-ufos-660b09e8ef620.jpg?crop=0.967xw:0.573xh;0.0147xw,0.118xh",
+      "tone": -2.5
+    },
+    {
+      "id": "0c2ed3ec2301",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.republicanherald.com/2026/04/12/what-on-earth/",
+      "domain": "republicanherald.com",
+      "publishedAt": "2026-04-12T19:15:00Z",
+      "language": "English",
+      "sourceName": "republicanherald.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.republicanherald.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "5fd04d89e543",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.republicanherald.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "republicanherald.com",
+      "publishedAt": "2026-04-12T19:15:00Z",
+      "language": "English",
+      "sourceName": "republicanherald.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.republicanherald.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "4ed9293c033f",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.republicanherald.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "republicanherald.com",
+      "publishedAt": "2026-04-12T19:15:00Z",
+      "language": "English",
+      "sourceName": "republicanherald.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.republicanherald.com/wp-content/uploads/2026/04/What_on_Earth_97189_10e21e.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "0998fb65646e",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.sun-sentinel.com/2026/04/12/what-on-earth/",
+      "domain": "sun-sentinel.com",
+      "publishedAt": "2026-04-12T19:00:00Z",
+      "language": "English",
+      "sourceName": "sun-sentinel.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.sun-sentinel.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "ac457118a98c",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.dailylocal.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "dailylocal.com",
+      "publishedAt": "2026-04-12T19:00:00Z",
+      "language": "English",
+      "sourceName": "dailylocal.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.dailylocal.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "aa68cd511407",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.dailylocal.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "dailylocal.com",
+      "publishedAt": "2026-04-12T19:00:00Z",
+      "language": "English",
+      "sourceName": "dailylocal.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.dailylocal.com/wp-content/uploads/2026/04/What_on_Earth_97189_10e21e.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "27d0a3509273",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.sun-sentinel.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "sun-sentinel.com",
+      "publishedAt": "2026-04-12T19:00:00Z",
+      "language": "English",
+      "sourceName": "sun-sentinel.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.sun-sentinel.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "fd34741be6fc",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.pressdemocrat.com/2026/04/12/what-on-earth/",
+      "domain": "pressdemocrat.com",
+      "publishedAt": "2026-04-12T18:15:00Z",
+      "language": "English",
+      "sourceName": "pressdemocrat.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.pressdemocrat.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "7d16f5f5514b",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.capitalgazette.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "capitalgazette.com",
+      "publishedAt": "2026-04-12T18:15:00Z",
+      "language": "English",
+      "sourceName": "capitalgazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.capitalgazette.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "baa061144fbe",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.pressdemocrat.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "pressdemocrat.com",
+      "publishedAt": "2026-04-12T18:15:00Z",
+      "language": "English",
+      "sourceName": "pressdemocrat.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.pressdemocrat.com/wp-content/uploads/2026/04/What_on_Earth_97189_10e21e.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "5e6cdd80e75b",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.pressdemocrat.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "pressdemocrat.com",
+      "publishedAt": "2026-04-12T18:15:00Z",
+      "language": "English",
+      "sourceName": "pressdemocrat.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.pressdemocrat.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "dba8a2e0cf5c",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.capitalgazette.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "capitalgazette.com",
+      "publishedAt": "2026-04-12T18:15:00Z",
+      "language": "English",
+      "sourceName": "capitalgazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.capitalgazette.com/wp-content/uploads/2026/04/What_on_Earth_97189_10e21e.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "859b1a4e836a",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.mendocinobeacon.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "mendocinobeacon.com",
+      "publishedAt": "2026-04-12T18:00:00Z",
+      "language": "English",
+      "sourceName": "mendocinobeacon.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "e8255d22d51d",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.mendocinobeacon.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "mendocinobeacon.com",
+      "publishedAt": "2026-04-12T18:00:00Z",
+      "language": "English",
+      "sourceName": "mendocinobeacon.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "6cbf909c6b1f",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.baltimoresun.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "baltimoresun.com",
+      "publishedAt": "2026-04-12T17:45:00Z",
+      "language": "English",
+      "sourceName": "baltimoresun.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.baltimoresun.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "fad4cb593abc",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.timesherald.com/2026/04/12/what-on-earth/",
+      "domain": "timesherald.com",
+      "publishedAt": "2026-04-12T17:15:00Z",
+      "language": "English",
+      "sourceName": "timesherald.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.timesherald.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "6afcf6f9bf2d",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.standardspeaker.com/2026/04/12/what-on-earth/",
+      "domain": "standardspeaker.com",
+      "publishedAt": "2026-04-12T17:15:00Z",
+      "language": "English",
+      "sourceName": "standardspeaker.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.standardspeaker.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "11aa67d76d80",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.orlandosentinel.com/2026/04/12/what-on-earth/",
+      "domain": "orlandosentinel.com",
+      "publishedAt": "2026-04-12T17:00:00Z",
+      "language": "English",
+      "sourceName": "orlandosentinel.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.orlandosentinel.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "e72a739f91c7",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.journal-advocate.com/2026/04/12/what-on-earth/",
+      "domain": "journal-advocate.com",
+      "publishedAt": "2026-04-12T17:00:00Z",
+      "language": "English",
+      "sourceName": "journal-advocate.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.journal-advocate.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "7a50e00a9358",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.orlandosentinel.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "orlandosentinel.com",
+      "publishedAt": "2026-04-12T17:00:00Z",
+      "language": "English",
+      "sourceName": "orlandosentinel.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.orlandosentinel.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "54ee8597467c",
+      "title": "Kacey Musgraves has hilarious response to  UFO analyst  debunking her space sighting",
+      "url": "https://www.the-independent.com/arts-entertainment/music/news/kacey-musgraves-ufo-sighting-response-b2956099.html",
+      "domain": "the-independent.com",
+      "publishedAt": "2026-04-12T17:00:00Z",
+      "language": "English",
+      "sourceName": "the-independent.com",
+      "country": "",
+      "imageUrl": "https://static.the-independent.com/2025/06/20/19/43/Kacey-Musgraves.jpeg?trim=64,0,64,0&crop=1200:800",
+      "tone": -2.5
+    },
+    {
+      "id": "1d677329cad1",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.journal-advocate.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "journal-advocate.com",
+      "publishedAt": "2026-04-12T17:00:00Z",
+      "language": "English",
+      "sourceName": "journal-advocate.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.journal-advocate.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "29e3adbb5bb5",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.thetimes-tribune.com/2026/04/12/what-on-earth/",
+      "domain": "thetimes-tribune.com",
+      "publishedAt": "2026-04-12T16:30:00Z",
+      "language": "English",
+      "sourceName": "thetimes-tribune.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.thetimes-tribune.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "8966c2d373ad",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.thetimes-tribune.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "thetimes-tribune.com",
+      "publishedAt": "2026-04-12T16:30:00Z",
+      "language": "English",
+      "sourceName": "thetimes-tribune.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.thetimes-tribune.com/wp-content/uploads/2026/04/What_on_Earth_97189_10e21e.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "6edbebe52a22",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.thetimes-tribune.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "thetimes-tribune.com",
+      "publishedAt": "2026-04-12T16:30:00Z",
+      "language": "English",
+      "sourceName": "thetimes-tribune.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.thetimes-tribune.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "73d6e8336eba",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.sandiegouniontribune.com/2026/04/12/what-on-earth/",
+      "domain": "sandiegouniontribune.com",
+      "publishedAt": "2026-04-12T16:00:00Z",
+      "language": "English",
+      "sourceName": "sandiegouniontribune.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.sandiegouniontribune.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "60192787e98c",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.mainlinemedianews.com/2026/04/12/what-on-earth/",
+      "domain": "mainlinemedianews.com",
+      "publishedAt": "2026-04-12T16:00:00Z",
+      "language": "English",
+      "sourceName": "mainlinemedianews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.mainlinemedianews.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "54d70f49cdba",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.fortmorgantimes.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "fortmorgantimes.com",
+      "publishedAt": "2026-04-12T15:00:00Z",
+      "language": "English",
+      "sourceName": "fortmorgantimes.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.fortmorgantimes.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "d3fd32fd8a1c",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.advocate-news.com/2026/04/12/what-on-earth/",
+      "domain": "advocate-news.com",
+      "publishedAt": "2026-04-12T14:45:00Z",
+      "language": "English",
+      "sourceName": "advocate-news.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.advocate-news.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "c002e90c4451",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.chicoer.com/2026/04/12/what-on-earth/",
+      "domain": "chicoer.com",
+      "publishedAt": "2026-04-12T14:45:00Z",
+      "language": "English",
+      "sourceName": "chicoer.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.chicoer.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "80beeb5e3190",
+      "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
+      "url": "https://www.chicoer.com/2026/04/12/what-on-earth-hollywood/",
+      "domain": "chicoer.com",
+      "publishedAt": "2026-04-12T14:45:00Z",
+      "language": "English",
+      "sourceName": "chicoer.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.chicoer.com/wp-content/uploads/2026/04/What_on_Earth_97189_10e21e.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "ff9203f41fa4",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.advocate-news.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "advocate-news.com",
+      "publishedAt": "2026-04-12T14:45:00Z",
+      "language": "English",
+      "sourceName": "advocate-news.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.advocate-news.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "e55cc4ef062f",
+      "title": "Nearly a century of wondering : The American UFO saga , in reality and in fiction",
+      "url": "https://www.chicoer.com/2026/04/12/what-on-earth-chronology/",
+      "domain": "chicoer.com",
+      "publishedAt": "2026-04-12T14:45:00Z",
+      "language": "English",
+      "sourceName": "chicoer.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.chicoer.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "2d835089eb00",
+      "title": "UFO Sightings Daily",
+      "url": "https://www.ufosightingsdaily.com/search?updated-max=2026-04-05T14:00:00-06:00&max-results=10",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-12T10:30:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "34a971c923b8",
+      "title": "UFO Conference comes to Fredericton",
+      "url": "https://www.cp24.com/news/canada/2026/04/11/ufo-conference-comes-to-fredericton/",
+      "domain": "cp24.com",
+      "publishedAt": "2026-04-11T22:00:00Z",
+      "language": "English",
+      "sourceName": "cp24.com (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://www.cp24.com/resizer/v2/O23I3BS2NJCAND6T7XMVN7WH4A.jpeg?smart=true&auth=00eefed93e817fd1895597ecd093969848efb6027d65fc04cbd05f4b6accaed9",
+      "tone": 2.5
+    },
+    {
+      "id": "73385566025d",
+      "title": "UFO Sightings Daily : Two UFOs Over Ninole , Hawaii , April 7 , 2026 5 : 43am UFO UAP Paranormal Breaking Sighting News",
+      "url": "https://www.ufosightingsdaily.com/2026/04/two-ufos-over-ninole-hawaii-april-7.html",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-11T20:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "8764bba402f7",
+      "title": "UFO Sightings Daily : what is it",
+      "url": "https://www.ufosightingsdaily.com/search/label/what%20is%20it",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-11T20:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "cff29e16aee3",
+      "title": "UFO Sightings Daily : technology",
+      "url": "https://www.ufosightingsdaily.com/search/label/technology",
+      "domain": "ufosightingsdaily.com",
+      "publishedAt": "2026-04-11T20:15:00Z",
+      "language": "English",
+      "sourceName": "ufosightingsdaily.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "a5185ed15a79",
+      "title": "UFOs :  Most are reported by people out for an evening smoke",
+      "url": "https://www.dw.com/en/ufos-most-are-reported-by-people-out-for-an-evening-smoke/a-76711858",
+      "domain": "dw.com",
+      "publishedAt": "2026-04-11T20:00:00Z",
+      "language": "English",
+      "sourceName": "dw.com (Germany)",
+      "country": "Germany",
+      "imageUrl": "https://static.dw.com/image/76271754_6.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "190e3aa6b4c1",
+      "title": "7 Niagara spots to celebrate National Poutine Day",
+      "url": "https://www.niagarafallsreview.ca/life/food-and-drink/niagara-poutine-day-food-locations/article_97a7361c-f396-5613-9835-b9ad444d84ec.html",
+      "domain": "niagarafallsreview.ca",
+      "publishedAt": "2026-04-11T11:45:00Z",
+      "language": "English",
+      "sourceName": "niagarafallsreview.ca (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/niagarafallsreview.ca/content/tncms/assets/v3/editorial/a/23/a233af7c-5c34-53fe-b01f-684ef562d6c7/69d91f341055d.image.jpg?crop=1719%2C902%2C0%2C151",
+      "tone": 2.5
+    },
+    {
+      "id": "cf2d806bf254",
+      "title": "7 Niagara spots to celebrate National Poutine Day",
+      "url": "https://www.stcatharinesstandard.ca/life/food-and-drink/niagara-poutine-day-food-locations/article_1d1aeb27-24ad-5dad-b6eb-ad292821cee8.html",
+      "domain": "stcatharinesstandard.ca",
+      "publishedAt": "2026-04-11T11:15:00Z",
+      "language": "English",
+      "sourceName": "stcatharinesstandard.ca (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/stcatharinesstandard.ca/content/tncms/assets/v3/editorial/4/60/460a713f-fb64-5690-a5ae-7eb7b8618576/69d91f341088e.image.jpg?crop=1719%2C902%2C0%2C151",
+      "tone": 2.5
+    },
+    {
+      "id": "627b9c53ed2f",
+      "title": "Watch : Rogan Encapsulates Why Missing Scientists Are No Conspiracy Theory ...",
+      "url": "https://www.zerohedge.com/technology/watch-rogan-encapsulates-why-missing-scientists-are-no-conspiracy-theory",
+      "domain": "zerohedge.com",
+      "publishedAt": "2026-04-11T00:45:00Z",
+      "language": "English",
+      "sourceName": "zerohedge.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://assets.zerohedge.com/s3fs-public/styles/16_9_max_700/public/2026-04/Roganmod.jpg?&itok=OqCwajLl",
+      "tone": -7
+    },
+    {
+      "id": "155852c8f9a1",
+      "title": "Congress UAP Briefing Sparks Mystery Over Missing Scientists",
+      "url": "https://lamag.com/news-and-politics/what-happened-inside-congress-classified-uap-briefing/",
+      "domain": "lamag.com",
+      "publishedAt": "2026-04-11T00:30:00Z",
+      "language": "English",
+      "sourceName": "lamag.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://lamag.com/wp-content/uploads/2026/03/McCasland.webp",
+      "tone": -2.5
+    },
+    {
+      "id": "3b7bcc6018f3",
+      "title": "Kacey Musgraves details  craziest f --- ing  UFO experience",
+      "url": "https://calgarysun.com/entertainment/music/kacey-musgraves-crazy-ufo-experience",
+      "domain": "calgarysun.com",
+      "publishedAt": "2026-04-11T00:00:00Z",
+      "language": "English",
+      "sourceName": "calgarysun.com (Canada)",
+      "country": "Canada",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "098ebe303600",
+      "title": "Kacey Musgraves details  craziest f --- ing  UFO experience",
+      "url": "https://torontosun.com/entertainment/music/kacey-musgraves-crazy-ufo-experience",
+      "domain": "torontosun.com",
+      "publishedAt": "2026-04-10T22:45:00Z",
+      "language": "English",
+      "sourceName": "torontosun.com (Canada)",
+      "country": "Canada",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "72e3eb81c5e5",
+      "title": "How a Hopi Potter Named Nampeyo Became a 19th - Century Art Star",
+      "url": "https://news.artnet.com/art-world/nampeyo-hopi-pottery-2747929",
+      "domain": "news.artnet.com",
+      "publishedAt": "2026-04-10T20:15:00Z",
+      "language": "English",
+      "sourceName": "news.artnet.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://p-news-upload.storage.googleapis.com/2026/02/GettyImages-615308748-scaled.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "db35de6a11cd",
+      "title": "The united kingdom top UFO expert Nick Pope has died at the age of 60 - 10 - Apr - 2026",
+      "url": "https://home.nzcity.co.nz/news/article.aspx?id=443474&fm=psp,tst",
+      "domain": "home.nzcity.co.nz",
+      "publishedAt": "2026-04-10T01:45:00Z",
+      "language": "English",
+      "sourceName": "home.nzcity.co.nz (New Zealand)",
+      "country": "New Zealand",
+      "imageUrl": null,
+      "tone": 2.5
+    },
+    {
+      "id": "a60e66ce1074",
+      "title": "Yankees one - hit by Springs , A in rubber - match loss :  We got shut down",
+      "url": "https://www.oleantimesherald.com/2026/04/09/yankees-one-hit-springs-rubber-match-loss-got-shut/",
+      "domain": "oleantimesherald.com",
+      "publishedAt": "2026-04-09T23:15:00Z",
+      "language": "English",
+      "sourceName": "oleantimesherald.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.oleantimesherald.com/oleantimesherald/news/wp-content/uploads/sites/4/2026/04/SPORTS-BBA-ATHLETICS-YANKEES-GET-scaled.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "6d67c94cb1d5",
+      "title": "Callery , Mars agree to share emergency management coordinators",
+      "url": "https://www.butlereagle.com/20260409/callery-mars-agree-to-share-emergency-management-coordinators/",
+      "domain": "butlereagle.com",
+      "publishedAt": "2026-04-09T14:45:00Z",
+      "language": "English",
+      "sourceName": "butlereagle.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://imengine.public.prod.bte.navigacloud.com/?uuid=126250ed-c649-5083-a674-121bbd3cdb8b&function=cover&type=preview&source=false",
+      "tone": -2.5
+    },
+    {
+      "id": "7edfd18c9ba4",
+      "title": "Mysterious Lights Spotted Over California Highway",
+      "url": "https://newstalkkit.com/ixp/137/p/california-orbs-spotted/",
+      "domain": "newstalkkit.com",
+      "publishedAt": "2026-04-09T02:15:00Z",
+      "language": "English",
+      "sourceName": "newstalkkit.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/137/files/2026/04/attachment-fatemeh-rz-bqfm2d2yrrc-unsplash.jpg?&q=75&format=natural",
+      "tone": -2.5
+    },
+    {
+      "id": "64499e4cc3a1",
+      "title": "Mysterious Lights Spotted Over California Highway",
+      "url": "https://929thebull.com/ixp/137/p/california-orbs-spotted/",
+      "domain": "929thebull.com",
+      "publishedAt": "2026-04-09T00:30:00Z",
+      "language": "English",
+      "sourceName": "929thebull.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/137/files/2026/04/attachment-fatemeh-rz-bqfm2d2yrrc-unsplash.jpg?&q=75&format=natural",
+      "tone": -2.5
+    },
+    {
+      "id": "b401bba2f561",
+      "title": "Mysterious Lights Spotted Over California Highway",
+      "url": "https://katsfm.com/california-orbs-spotted/",
+      "domain": "katsfm.com",
+      "publishedAt": "2026-04-09T00:15:00Z",
+      "language": "English",
+      "sourceName": "katsfm.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/137/files/2026/04/attachment-fatemeh-rz-bqfm2d2yrrc-unsplash.jpg?&q=75&format=natural",
+      "tone": -2.5
+    },
+    {
+      "id": "af3dfd3899e4",
+      "title": "Factory Town bent time during Miami Music Week and that was the point",
+      "url": "https://themiamihurricane.com/2026/04/08/factory-town-bent-time-during-miami-music-week-and-that-was-the-point/",
+      "domain": "themiamihurricane.com",
+      "publishedAt": "2026-04-08T23:30:00Z",
+      "language": "English",
+      "sourceName": "themiamihurricane.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 2.5
+    },
+    {
+      "id": "78b397adf188",
+      "title": "Pentagon UFO Office to Be Eliminated Under New Tim Burchett Bill",
+      "url": "https://www.newsweek.com/pentagon-ufo-office-elimination-bill-burchett-uap-11801961",
+      "domain": "newsweek.com",
+      "publishedAt": "2026-04-08T21:00:00Z",
+      "language": "English",
+      "sourceName": "newsweek.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/04/AP26098493161453.jpg?crop=1",
+      "tone": -2.5
+    },
+    {
+      "id": "4e6d27e455b3",
+      "title": "History Channel  Ancient Alien UFO Expert Nick Pope Dies at 60 | Entertainment",
+      "url": "https://www.elpasoinc.com/lifestyle/entertainment/history-channel-ancient-aliens-ufo-expert-nick-pope-dies-at-60/article_1ba8b0d1-4b48-5c3c-b5c1-af31eb52a1bd.html",
+      "domain": "elpasoinc.com",
+      "publishedAt": "2026-04-08T14:15:00Z",
+      "language": "English",
+      "sourceName": "elpasoinc.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/elpasoinc.com/content/tncms/custom/image/d1748eca-2ab1-11e7-b238-e3e4ea30cc77.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "3de41bd6fc59",
+      "title": "Why aliens look like demons to US Vice President JD Vance",
+      "url": "https://www.skeptic.org.uk/2026/04/why-aliens-look-like-demons-to-us-vice-president-jd-vance/",
+      "domain": "skeptic.org.uk",
+      "publishedAt": "2026-04-08T11:15:00Z",
+      "language": "English",
+      "sourceName": "skeptic.org.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://www.skeptic.org.uk/wp-content/uploads/2024/09/ufo-2413965_1920.jpg",
+      "tone": -7
+    },
+    {
+      "id": "a007da0937c2",
+      "title": "Nick Pope - the UFO expert , known as the  real Fox Mulder  - has died at the age of 60",
+      "url": "https://www.perthnow.com.au/entertainment/celebrity-gossip/nick-pope-the-ufo-expert-known-as-the-real-fox-mulder---has-died-at-the-age-of-60-c-22107263",
+      "domain": "perthnow.com.au",
+      "publishedAt": "2026-04-08T06:45:00Z",
+      "language": "English",
+      "sourceName": "perthnow.com.au (Australia)",
+      "country": "Australia",
+      "imageUrl": "https://images.perthnow.com.au/publication/C-22107263/7f681166b76a093e701c241030b032da00d5c5d5-16x9-x0y192w2048h1152.jpg?imwidth=1200",
+      "tone": 2.5
+    },
+    {
+      "id": "ba6fe367769c",
+      "title": "Humans already in contact with aliens",
+      "url": "http://www.memphissun.com/news/278969795/humans-already-in-contact-with-aliens-us-lawmaker",
+      "domain": "memphissun.com",
+      "publishedAt": "2026-04-07T21:30:00Z",
+      "language": "English",
+      "sourceName": "memphissun.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://image.chitra.live/api/v1/wps/8127ac7/ae744192-d44a-4a9b-a954-99cf77dc152b/0/ZjcxNTlkMzEtNjI-600x315.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "0feb35123b1c",
+      "title": "Humans already in contact with aliens US lawmaker",
+      "url": "http://www.memphissun.com/news/278969787/humans-already-in-contact-with-aliens-us-lawmaker",
+      "domain": "memphissun.com",
+      "publishedAt": "2026-04-07T21:30:00Z",
+      "language": "English",
+      "sourceName": "memphissun.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://image.chitra.live/api/v1/wps/3b91e92/26f2ab6b-f7a8-491f-9988-4f773d29f6dc/0/NTQyY2NjY2QtZTQ-600x315.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "1b262f5b7588",
+      "title": "Humans already in contact with aliens US lawmaker",
+      "url": "http://www.nashvilleherald.com/news/278969787/humans-already-in-contact-with-aliens-us-lawmaker",
+      "domain": "nashvilleherald.com",
+      "publishedAt": "2026-04-07T19:30:00Z",
+      "language": "English",
+      "sourceName": "nashvilleherald.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://image.chitra.live/api/v1/wps/3b91e92/26f2ab6b-f7a8-491f-9988-4f773d29f6dc/0/NTQyY2NjY2QtZTQ-600x315.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "53db2dde2827",
+      "title": "Real - life  X - File investigator who ran UFO program dies at 60 after cancer battle",
+      "url": "https://www.dailymail.co.uk/sciencetech/article-15713441/nick-pope-ufo-investigator-dies-arizona.html",
+      "domain": "dailymail.co.uk",
+      "publishedAt": "2026-04-07T19:15:00Z",
+      "language": "English",
+      "sourceName": "dailymail.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": null,
+      "tone": -2.5
+    },
+    {
+      "id": "0c5af963ef75",
+      "title": "Humans already in contact with aliens US lawmaker",
+      "url": "http://www.philippinetimes.com/news/278969787/humans-already-in-contact-with-aliens-us-lawmaker",
+      "domain": "philippinetimes.com",
+      "publishedAt": "2026-04-07T18:45:00Z",
+      "language": "English",
+      "sourceName": "philippinetimes.com (Philippines)",
+      "country": "Philippines",
+      "imageUrl": "https://image.chitra.live/api/v1/wps/3b91e92/26f2ab6b-f7a8-491f-9988-4f773d29f6dc/0/NTQyY2NjY2QtZTQ-600x315.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "48d2bc5491e0",
+      "title": "Humans already in contact with aliens US lawmaker",
+      "url": "http://www.kenyastar.com/news/278969787/humans-already-in-contact-with-aliens-us-lawmaker",
+      "domain": "kenyastar.com",
+      "publishedAt": "2026-04-07T18:30:00Z",
+      "language": "English",
+      "sourceName": "kenyastar.com (Kenya)",
+      "country": "Kenya",
+      "imageUrl": "https://image.chitra.live/api/v1/wps/3b91e92/26f2ab6b-f7a8-491f-9988-4f773d29f6dc/0/NTQyY2NjY2QtZTQ-600x315.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "3d4f8181b19b",
+      "title": "Rep . Luna continues transparency investigation into UAPs | The Highland County Press",
+      "url": "https://highlandcountypress.com/headlines/rep-luna-continues-transparency-investigation-uaps",
+      "domain": "highlandcountypress.com",
+      "publishedAt": "2026-04-07T17:45:00Z",
+      "language": "English",
+      "sourceName": "highlandcountypress.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": -7
+    },
+    {
+      "id": "78ca615e7cdd",
+      "title": "Humans already in contact with aliens US lawmaker",
+      "url": "http://www.bignewsnetwork.com/news/278969787/humans-already-in-contact-with-aliens-us-lawmaker",
+      "domain": "bignewsnetwork.com",
+      "publishedAt": "2026-04-07T17:00:00Z",
+      "language": "English",
+      "sourceName": "bignewsnetwork.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://image.chitra.live/api/v1/wps/3b91e92/26f2ab6b-f7a8-491f-9988-4f773d29f6dc/0/NTQyY2NjY2QtZTQ-600x315.jpg",
+      "tone": -2.5
+    },
+    {
+      "id": "5be8f9ef8934",
+      "title": "US Congressman Says Government Confirmed  Alien Life  Exists Hours Before UFO Advocate Nick Pope Death",
+      "url": "https://www.ibtimes.co.uk/us-congressman-confirms-alien-contact-nick-pope-death-1790515",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-04-07T16:00:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1800689/nick-pope.png",
+      "tone": -2.5
+    },
+    {
+      "id": "cf27c4c09c90",
+      "title": "Tourism sector experiences mixed results over Easter period , amid fuel price surge",
+      "url": "https://www.abc.net.au/news/2026-04-07/easter-tourism-fuel-impact/106537452",
+      "domain": "abc.net.au",
+      "publishedAt": "2026-04-07T06:00:00Z",
+      "language": "English",
+      "sourceName": "abc.net.au (Australia)",
+      "country": "Australia",
+      "imageUrl": "https://live-production.wcms.abc-cdn.net.au/db2eba5310da1c4d4d82b4360d9e81b5?impolicy=wcms_watermark_news&cropH=2069&cropW=3678&xPos=322&yPos=577&imformat=generic",
+      "tone": -2.5
+    },
     {
       "id": "1fa3d21c348f",
       "title": "If aliens exist , what would they think of us ? | News , Sports , Jobs",
@@ -39,7 +939,7 @@
       "sourceName": "timesfreepress.com (United States)",
       "country": "United States",
       "imageUrl": "https://wehco.media.clients.ellingtoncms.com/img/photos/2026/04/05/AP26091636488898_t1200.jpg?57a0c2296240c280e9492005c3cad63e7cbe80f4",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "381b319a9c2f",
@@ -51,7 +951,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "43e95b94d1aa",
@@ -63,7 +963,7 @@
       "sourceName": "dailystar.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i2-prod.dailystar.co.uk/article36973544.ece/ALTERNATES/s1200d/0_Screenshot-2026-04-06-at-084534.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "644523217639",
@@ -75,7 +975,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1800543/neil-mccasland-once-led-air-force-research-laboratory.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1b39b86b7cb9",
@@ -99,7 +999,7 @@
       "sourceName": "rnz.co.nz",
       "country": "",
       "imageUrl": "https://media.rnztools.nz/rnz/image/upload/s--9MtgWL5---/t_tohu-badge-facebook/v1775424913/4JQLQPB_4f98a613cec5f7192c66267dac72334e_png?_a=BACCd2AD",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ce6cf28eee0e",
@@ -111,7 +1011,7 @@
       "sourceName": "newsweek.com (United States)",
       "country": "United States",
       "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/04/AP25309041619050.jpg?crop=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2049182d6490",
@@ -123,7 +1023,7 @@
       "sourceName": "abc.net.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://live-production.wcms.abc-cdn.net.au/eb3f64cfc7f242572d1bf19244cbdcf7?impolicy=wcms_watermark_news&cropH=2025&cropW=3600&xPos=0&yPos=0&imformat=generic",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1c88fdd6215e",
@@ -135,7 +1035,7 @@
       "sourceName": "theshillongtimes.com (India)",
       "country": "India",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "223ba7645ec1",
@@ -147,7 +1047,7 @@
       "sourceName": "spacedaily.com (United States)",
       "country": "United States",
       "imageUrl": "https://spacedaily.com/wp-content/uploads/2026/04/between-the-archive-and-the-abyss-what-u.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "57aa16fe0d64",
@@ -195,7 +1095,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "bf2524e01b37",
@@ -207,7 +1107,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "81420bb3855a",
@@ -219,7 +1119,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d71a76a3c66e",
@@ -231,7 +1131,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d81d135a7e1e",
@@ -255,7 +1155,7 @@
       "sourceName": "king5.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.king5.com/assets/AssociatedPress/images/5e24eaa8-a20d-47ec-aa4b-20e84d294dcd/20260404T041007/5e24eaa8-a20d-47ec-aa4b-20e84d294dcd_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "06a052510cf7",
@@ -303,7 +1203,7 @@
       "sourceName": "boston.com (United States)",
       "country": "United States",
       "imageUrl": "https://bdc2020.o0bc.com/wp-content/uploads/2026/04/What_on_Earth_79814-69d090739b584-768x432.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9490b58690b1",
@@ -363,7 +1263,7 @@
       "sourceName": "banglamirrornews.com (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://banglamirrornews.com/files/uploads/2026/04/fcgtryrty.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "006c64dc8b10",
@@ -375,7 +1275,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-130020949,width-1280,height-720,imgsize-1116194,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "934f1a8c2dbe",
@@ -387,7 +1287,7 @@
       "sourceName": "lobotero.com (United States)",
       "country": "United States",
       "imageUrl": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvczAud3AuY29tXC9pXC9ibGFuay5qcGciLCJ0eHQiOiJJbiAgU2FuZXIgIFRob3VnaHQiLCJ0ZW1wbGF0ZSI6ImhpZ2h3YXkiLCJmb250IjoiIiwiYmxvZ19pZCI6Mjk0NDA4M30.0-Aooe_aywDCU-7meBJYiOcLkNWHhTBXxqiWMYXX0FgMQ",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ad387c6b3eb6",
@@ -399,7 +1299,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-130020440,width-1280,height-720,imgsize-59882,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "cddb646dab91",
@@ -411,7 +1311,7 @@
       "sourceName": "lobotero.com (United States)",
       "country": "United States",
       "imageUrl": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvczAud3AuY29tXC9pXC9ibGFuay5qcGciLCJ0eHQiOiJJbiAgU2FuZXIgIFRob3VnaHQiLCJ0ZW1wbGF0ZSI6ImhpZ2h3YXkiLCJmb250IjoiIiwiYmxvZ19pZCI6Mjk0NDA4M30.0-Aooe_aywDCU-7meBJYiOcLkNWHhTBXxqiWMYXX0FgMQ",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "3d1fa49af3c7",
@@ -495,7 +1395,7 @@
       "sourceName": "mymotherlode.com (United States)",
       "country": "United States",
       "imageUrl": "https://mymotherlode.com/wp-content/uploads/2026/04/AP_7dd3f518a1f04b44b9230d3cfb741375_724620e9a2.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0d57de7dd31a",
@@ -507,7 +1407,7 @@
       "sourceName": "smdailyjournal.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/smdailyjournal.com/content/tncms/custom/image/0b0b7a5a-a1d1-11e6-9041-cbc40d61c8f5.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9b0e3d8bd761",
@@ -519,7 +1419,7 @@
       "sourceName": "ktar.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f2555bfc4c0d",
@@ -531,7 +1431,7 @@
       "sourceName": "sitkasentinel.com (United States)",
       "country": "United States",
       "imageUrl": "https://mapi.associatedpress.com/v2/items/7dd3f518a1f04b44b9230d3cfb741375.1/preview/preview.jpg?nfe=true&s=512&wm=false&app=MPK&tag=iid~7dd3f518a1f04b44b9230d3cfb741375!rsn~1!cid~08479f91a64b4ceeaac8efecea979aa9!orgId~48830!qt~qKR5S-6geAeI!orgNm~DAILY%20SITKA%20SENTINEL!role~Preview!mt~photo!fmt~JPEG%20Baseline",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "63dfa2195e76",
@@ -543,7 +1443,7 @@
       "sourceName": "kelownadailycourier.ca (Canada)",
       "country": "Canada",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/kelownadailycourier.ca/content/tncms/assets/v3/editorial/2/b2/2b21d701-6a79-53a7-bc80-a9b45ec67cd1/69d09aee28b31.image.jpg?crop=640%2C336%2C0%2C22",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4c02cc937c43",
@@ -555,7 +1455,7 @@
       "sourceName": "sitkasentinel.com (United States)",
       "country": "United States",
       "imageUrl": "https://mapi.associatedpress.com/v2/items/5a380b927b404ae89c2781700fa3897a.1/preview/preview.jpg?nfe=true&s=512&wm=false&app=MPK&tag=iid~5a380b927b404ae89c2781700fa3897a!rsn~1!cid~d55d2570d3c24f40ad538a16973a032a!orgId~48830!qt~cKyLrMSrwKeI!orgNm~DAILY%20SITKA%20SENTINEL!role~Preview!mt~photo!fmt~JPEG%20Baseline",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "af970d1831fc",
@@ -579,7 +1479,7 @@
       "sourceName": "mdjonline.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/mdjonline.com/content/tncms/assets/v3/editorial/5/5d/55dbe305-2c8f-54b5-882c-0a901387aa6c/69d08ebdd3314.image.jpg?crop=1867%2C980%2C0%2C64",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c15590655506",
@@ -591,7 +1491,7 @@
       "sourceName": "wgauradio.com (United States)",
       "country": "United States",
       "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F3MUGMPRRAM2E5EQDHDSBQ4Z43Y.jpg?auth=9ee3dbeb0e0f16b8201c783a1f991943eef48a85be6fcb493b77c4edc67f7370&smart=true",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "230d32532744",
@@ -603,7 +1503,7 @@
       "sourceName": "union-bulletin.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/union-bulletin.com/content/tncms/assets/v3/editorial/9/41/941e9b22-a67d-5980-86de-c5b57f81956f/69d08f362123b.image.jpg?crop=1867%2C980%2C0%2C64",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "89f03e0b1a2b",
@@ -615,7 +1515,7 @@
       "sourceName": "taylorvilledailynews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.srnnews.com/media/2026/04/1775276299561224Cp2eGNUQNb-apn.jpg?x92997",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "90f68a02eb21",
@@ -627,7 +1527,7 @@
       "sourceName": "union-bulletin.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/union-bulletin.com/content/tncms/assets/v3/editorial/d/ba/dba00abb-75d9-5d61-93cc-816e20b5173c/69d092c29e898.image.jpg?crop=1619%2C850%2C0%2C215",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "85b67022ff47",
@@ -639,7 +1539,7 @@
       "sourceName": "taylorvilledailynews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.srnnews.com/media/2026/04/1775276302396535OUn5NsTqic-apn.jpg?x92997",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c7b1783c97e2",
@@ -663,7 +1563,7 @@
       "sourceName": "pentictonherald.ca (Canada)",
       "country": "Canada",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/pentictonherald.ca/content/tncms/assets/v3/editorial/0/45/045d98c9-eb65-5a62-b63d-4eeadc6204c5/69d09adea9809.image.jpg?crop=640%2C336%2C0%2C22",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "85ff9624e704",
@@ -675,7 +1575,7 @@
       "sourceName": "wsls.com (United States)",
       "country": "United States",
       "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8ae110128821",
@@ -699,7 +1599,7 @@
       "sourceName": "lethbridgeherald.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f3ea9db31db2",
@@ -711,7 +1611,7 @@
       "sourceName": "lethbridgeherald.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8e81fdbd152d",
@@ -723,7 +1623,7 @@
       "sourceName": "wfmz.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wfmz.com/content/tncms/assets/v3/editorial/a/0a/a0a26087-5a9b-5d60-a211-6a190e163fa7/69d08e554e16e.image.jpg?crop=1867%2C980%2C0%2C64",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "67dc119bdeb6",
@@ -735,7 +1635,7 @@
       "sourceName": "therecord.com (Canada)",
       "country": "Canada",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/therecord.com/content/tncms/assets/v3/editorial/9/14/914a4716-1de8-59a8-952d-a9afefd3b498/69d09442d423f.image.jpg?crop=1367%2C718%2C0%2C181",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ef0ecd0044e4",
@@ -759,7 +1659,7 @@
       "sourceName": "smdailyjournal.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/smdailyjournal.com/content/tncms/custom/image/0b0b7a5a-a1d1-11e6-9041-cbc40d61c8f5.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "df5d96c81137",
@@ -843,7 +1743,7 @@
       "sourceName": "news4jax.com (United States)",
       "country": "United States",
       "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e041bc92d212",
@@ -855,7 +1755,7 @@
       "sourceName": "mynorthwest.com (United States)",
       "country": "United States",
       "imageUrl": "https://mynorthwest.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "36dc73f60d59",
@@ -867,7 +1767,7 @@
       "sourceName": "nhregister.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897151/3/rawImage.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d87b5b6187e2",
@@ -879,7 +1779,7 @@
       "sourceName": "middletownpress.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/20/30897182/3/rawImage.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4c00e1a9bc1c",
@@ -891,7 +1791,7 @@
       "sourceName": "accesswdun.com (United States)",
       "country": "United States",
       "imageUrl": "https://accesswdun.com/wp-content/uploads/2025/08/cropped-AccessStack-512.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c6b935a0b2af",
@@ -903,7 +1803,7 @@
       "sourceName": "accesswdun.com (United States)",
       "country": "United States",
       "imageUrl": "https://accesswdun.com/wp-content/uploads/2025/08/cropped-AccessStack-512.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "48ac4a72c38e",
@@ -915,7 +1815,7 @@
       "sourceName": "nhregister.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/20/30897182/3/rawImage.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "070752ea3d32",
@@ -927,7 +1827,7 @@
       "sourceName": "mynorthwest.com (United States)",
       "country": "United States",
       "imageUrl": "https://mynorthwest.com/wp-content/uploads/2026/04/What_on_Earth_97189.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "56647916c897",
@@ -939,7 +1839,7 @@
       "sourceName": "middletownpress.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897151/3/rawImage.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "26dd60b42fc0",
@@ -963,7 +1863,7 @@
       "sourceName": "dailygazette.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/dailygazette.com/content/tncms/assets/v3/editorial/1/ee/1eea81bb-63ff-58fe-ba73-3ba9ae9a1049/69d090f9136dd.image.jpg?crop=1867%2C980%2C0%2C64",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "3a8e6ee97ea2",
@@ -975,7 +1875,7 @@
       "sourceName": "winnipegfreepress.com (Canada)",
       "country": "Canada",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "674bf560ffec",
@@ -987,7 +1887,7 @@
       "sourceName": "winnipegfreepress.com (Canada)",
       "country": "Canada",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "346b5c9c8b1d",
@@ -1047,7 +1947,7 @@
       "sourceName": "ktar.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_97189.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "26e645333ce9",
@@ -1059,7 +1959,7 @@
       "sourceName": "clickorlando.com (United States)",
       "country": "United States",
       "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1f782ac2d3bb",
@@ -1071,7 +1971,7 @@
       "sourceName": "kool965.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/1123/files/2026/04/attachment-utah-aliens.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a4490becb674",
@@ -1083,7 +1983,7 @@
       "sourceName": "radaronline.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.radaronline.com/brand-img/O7sdJhXyZ/1200x628/aleins-mega-stock-photo-1775221412703.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "54abc82b220d",
@@ -1095,7 +1995,7 @@
       "sourceName": "redstate.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.townhall.com/cdn/hodl/2024/164/e7bce51f-bdfc-4f1d-a8a7-b6edfe2b6023.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b9271329813c",
@@ -1107,7 +2007,7 @@
       "sourceName": "kxkx.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ca984380b002",
@@ -1119,7 +2019,7 @@
       "sourceName": "dailymail.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i.dailymail.co.uk/1s/2026/04/03/06/107629647-0-image-m-110_1775193940949.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d707f1f78379",
@@ -1131,7 +2031,7 @@
       "sourceName": "independent.ie (Ireland)",
       "country": "Ireland",
       "imageUrl": "https://focus.independent.ie/thumbor/wQjrY0DmF_19vrHVGbw4NvZJgoA=/0x0:1024x682/629x0/prod-mh-ireland/40471ba1-0cc2-4ef6-9bab-9f557312a4bc/5c064031-1af6-4cfb-b93c-df569b158b94/40471ba1-0cc2-4ef6-9bab-9f557312a4bc.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c90787fc45ee",
@@ -1143,7 +2043,7 @@
       "sourceName": "101theeagle.com",
       "country": "",
       "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "20d340814a12",
@@ -1155,7 +2055,7 @@
       "sourceName": "kickam1530.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8d37591fa7e6",
@@ -1167,7 +2067,7 @@
       "sourceName": "979kickfm.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/463/files/2026/04/attachment-lezian-ilir-aipue2gzkqo-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "86aebfb643f4",
@@ -1179,7 +2079,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1788980/rep-anna-paulina-luna.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c6ffa6a03378",
@@ -1191,7 +2091,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "870bad6ac208",
@@ -1203,7 +2103,7 @@
       "sourceName": "middletownpress.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/36/57/30796785/3/rawImage.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e805ab718b59",
@@ -1215,7 +2115,7 @@
       "sourceName": "tvtonight.com.au (Australia)",
       "country": "Australia",
       "imageUrl": "https://i0.wp.com/tvtonight.com.au/wp-content/uploads/Australian-Story-Westall-UFO-Mystery-2-2.jpg?fit=1040%2C700&ssl=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "7ad3f80cc4b1",
@@ -1227,7 +2127,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4646935/matt-gaetz.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "cf4e89eace8b",
@@ -1239,7 +2139,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1800039/matt-gaetz.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "29f012cbf522",
@@ -1251,7 +2151,7 @@
       "sourceName": "newsweek.com (United States)",
       "country": "United States",
       "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/03/AP26072641458528.jpg?crop=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "08b651f2ae4a",
@@ -1263,7 +2163,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1799992/alien-human-hybrid-program.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "aa2079c6a975",
@@ -4026,18 +4926,6 @@
       "tone": 7
     },
     {
-      "id": "9b4aab841933",
-      "title": "Trump orders agencies to identify and release government files on aliens",
-      "url": "https://www.marketscreener.com/news/trump-orders-agencies-to-identify-and-release-government-files-on-aliens-ce7e5ddcd08df527",
-      "domain": "marketscreener.com",
-      "publishedAt": "2026-03-31T13:10:39.990Z",
-      "language": "English",
-      "sourceName": "marketscreener.com",
-      "country": "",
-      "imageUrl": "https://cdn.zonebourse.com/static/resize/0/0/images/reuters/2026-02/2026-02-19T215605Z_1_LYNXMPEM1I1CM_RTROPTP_4_USA-TRUMP-ECONOMY.JPG",
-      "tone": -7
-    },
-    {
       "id": "851a7a437496",
       "title": "American Airlines Pilot Confirms  Disturbing  UFO Sightings and Drones Threatening Planes in Viral Cockpit Confession",
       "url": "https://www.ibtimes.co.uk/american-airlines-pilot-confirms-disturbing-ufo-sightings-drones-threatening-planes-viral-1776441",
@@ -4048,6 +4936,18 @@
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1788462/pilot.jpg",
       "tone": 0
+    },
+    {
+      "id": "9b4aab841933",
+      "title": "Trump orders agencies to identify and release government files on aliens",
+      "url": "https://www.marketscreener.com/news/trump-orders-agencies-to-identify-and-release-government-files-on-aliens-ce7e5ddcd08df527",
+      "domain": "marketscreener.com",
+      "publishedAt": "2026-03-31T13:10:39.990Z",
+      "language": "English",
+      "sourceName": "marketscreener.com",
+      "country": "",
+      "imageUrl": "https://cdn.zonebourse.com/static/resize/0/0/images/reuters/2026-02/2026-02-19T215605Z_1_LYNXMPEM1I1CM_RTROPTP_4_USA-TRUMP-ECONOMY.JPG",
+      "tone": -7
     },
     {
       "id": "686b92bb85f5",
@@ -4779,7 +5679,7 @@
       "sourceName": "yahoo.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/ny/api/res/1.2/qVbgs4iBk3dxU2I.LYS2lQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02MzA7Y2Y9d2VicA--/https://media.zenfs.com/en/futurism_981/d2442eaccbaf62a42d887027c9d35fcc",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f5155bbb65fb",
@@ -4791,7 +5691,7 @@
       "sourceName": "krdo.com (United States)",
       "country": "United States",
       "imageUrl": "https://krdo.b-cdn.net/2026/02/Untitled-design-2026-02-20T074509.517.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "835ed97329a5",
@@ -4803,7 +5703,7 @@
       "sourceName": "orlandosentinel.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.orlandosentinel.com/wp-content/uploads/2026/02/Trump_47017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f7ec89863bbc",
@@ -4815,7 +5715,7 @@
       "sourceName": "irishdentist.ie (Ireland)",
       "country": "Ireland",
       "imageUrl": "https://www.irishdentist.ie/wp-content/uploads/2026/02/We-will-disclose-all-information-about-UFOs-and-aliens-scaled.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "92193151d71c",
@@ -4827,7 +5727,7 @@
       "sourceName": "power96radio.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-gettyimages-2157560854-1.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "505cb08bbb56",
@@ -4839,7 +5739,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-128617061,width-1280,height-720,imgsize-976858,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f615e16748a4",
@@ -4851,7 +5751,7 @@
       "sourceName": "5newsonline.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.tegna-media.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "3ae08e81d45a",
@@ -4863,7 +5763,7 @@
       "sourceName": "fox9.com (United States)",
       "country": "United States",
       "imageUrl": "https://images.foxtv.com/static.livenowfox.com/www.livenowfox.com/content/uploads/2026/02/1280/720/trump-event.jpg?ve=1&tl=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a8fc122568aa",
@@ -4875,7 +5775,7 @@
       "sourceName": "fox2detroit.com (United States)",
       "country": "United States",
       "imageUrl": "https://images.foxtv.com/static.livenowfox.com/www.livenowfox.com/content/uploads/2026/02/1280/720/trump-event.jpg?ve=1&tl=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5b656c87bbf8",
@@ -4887,7 +5787,7 @@
       "sourceName": "tmz.com (United States)",
       "country": "United States",
       "imageUrl": "https://imagez.tmz.com/image/b1/16by9/2026/02/20/b1820f1a9c1a4c098118739d1b12d427_xl.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b8750489427a",
@@ -4899,7 +5799,7 @@
       "sourceName": "fox13news.com (United States)",
       "country": "United States",
       "imageUrl": "https://images.foxtv.com/static.livenowfox.com/www.livenowfox.com/content/uploads/2026/02/1280/720/trump-event.jpg?ve=1&tl=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9e344592fb24",
@@ -4911,7 +5811,7 @@
       "sourceName": "kare11.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.kare11.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1f25648eaf95",
@@ -4923,7 +5823,7 @@
       "sourceName": "whas11.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.whas11.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "47f0f27bfb31",
@@ -4935,7 +5835,7 @@
       "sourceName": "king5.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.king5.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "71ed59fa2980",
@@ -4947,7 +5847,7 @@
       "sourceName": "republicanherald.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.republicanherald.com/wp-content/uploads/2026/02/Trump_47017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "76926bcb78fd",
@@ -4959,7 +5859,7 @@
       "sourceName": "oregonlive.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.oregonlive.com/resizer/v2/GT5UY6CWTVG2NLIL4R7EBGUWPY.jpg?auth=e0827942c38dbb88cc6918a89660735a5d83f0fbbc02da24205ac42dad188034&smart=true&quality=90",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4898c5e9c9fd",
@@ -4971,7 +5871,7 @@
       "sourceName": "10news.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5d2810d02aec",
@@ -4983,7 +5883,7 @@
       "sourceName": "komonews.com (United States)",
       "country": "United States",
       "imageUrl": "https://komonews.com/resources/media2/16x9/8192/1320/0x428/90/f3d02115-cf51-4f0d-bf23-2d5862854732-GettyImages2262534810.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1e558915302c",
@@ -4995,7 +5895,7 @@
       "sourceName": "firstcoastnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.firstcoastnews.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a1b9a27de81e",
@@ -5007,7 +5907,7 @@
       "sourceName": "troyrecord.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.troyrecord.com/wp-content/uploads/2026/02/Trump_47017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ff47fc10b29f",
@@ -5019,7 +5919,7 @@
       "sourceName": "kwtx.com (United States)",
       "country": "United States",
       "imageUrl": "https://gray-kwtx-prod.gtv-cdn.com/resizer/v2/DSYDOH64WRCFJHXKJ2EK7UYSOY.jpg?auth=90be0add081d3e2dd79f4e82e1dd5812c2f0f7850aa17e167b9997b0f87f48b1&smart=true",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b4f4fe7220c9",
@@ -5031,7 +5931,7 @@
       "sourceName": "twincities.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.twincities.com/wp-content/uploads/2026/02/Trump_47017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "17ca04f66e61",
@@ -5043,7 +5943,7 @@
       "sourceName": "ocregister.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.ocregister.com/wp-content/uploads/2026/02/Trump_47017.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "08ceeffec7a6",
@@ -5055,7 +5955,7 @@
       "sourceName": "cbs8.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.cbs8.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f963608db2c8",
@@ -5067,7 +5967,7 @@
       "sourceName": "wcnc.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.wcnc.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ceb2a5d4410b",
@@ -5079,7 +5979,7 @@
       "sourceName": "kxlf.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "54963c4ad417",
@@ -5091,7 +5991,7 @@
       "sourceName": "kristv.com (United States)",
       "country": "United States",
       "imageUrl": "http://ewscripps-brightspot.s3.amazonaws.com/80/a0/485cb26e47c2a99067a5496a890f/untitled-design-11.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2d0dfc9e0d34",
@@ -5103,7 +6003,7 @@
       "sourceName": "turnto23.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4ad9b6cf6187",
@@ -5115,7 +6015,7 @@
       "sourceName": "tnledger.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "764b7f97cbcf",
@@ -5127,7 +6027,7 @@
       "sourceName": "kiiitv.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.kiiitv.com/assets/CCT/images/a085b3be-44ad-4c9a-9305-d5139d2dd342/20260220T114023/a085b3be-44ad-4c9a-9305-d5139d2dd342_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d42849cb9e6f",
@@ -5139,7 +6039,7 @@
       "sourceName": "koaa.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1c814b52ef9b",
@@ -5151,7 +6051,7 @@
       "sourceName": "westhawaiitoday.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.westhawaiitoday.com/wp-content/uploads/2026/02/web1_2026-02-19T214310Z_702108113_RC28PJAN4PPD_RTRMADP_3_USA-TRUMP-ALIENS.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "3a83a96e0ea8",
@@ -5163,7 +6063,7 @@
       "sourceName": "kztv10.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "da153b87b09b",
@@ -5175,7 +6075,7 @@
       "sourceName": "hayspost.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.eaglewebservices.com/public/2026/2/1771554285454.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "103c599c78b0",
@@ -5187,7 +6087,7 @@
       "sourceName": "kbzk.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "98c6a9e16727",
@@ -5199,7 +6099,7 @@
       "sourceName": "diplomat.so (Somalia)",
       "country": "Somalia",
       "imageUrl": "https://diplomat.so/uploads/article/photo/IMG_AF18FD-534A04-586CB4-A8AE51-D0B7B9-1C9375.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "62a77fe6f1e2",
@@ -5211,7 +6111,7 @@
       "sourceName": "yahoo.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/ny/api/res/1.2/fYSwRwTw7QCXBrCqQgQMmw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://media.zenfs.com/en/cbs_news_897/11b9ec89010450d3f3b86aaaa13f8262",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ca54ad31b5a6",
@@ -5223,7 +6123,7 @@
       "sourceName": "washingtonexaminer.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.washingtonexaminer.com/wp-content/uploads/2025/08/Screenshot-2025-08-18-at-7.32.03-AM.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0c214d1a4707",
@@ -5235,7 +6135,7 @@
       "sourceName": "riotimesonline.com (Brazil)",
       "country": "Brazil",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9c60937aeabf",
@@ -5247,7 +6147,7 @@
       "sourceName": "fox19.com (United States)",
       "country": "United States",
       "imageUrl": "https://gray-wxix-prod.gtv-cdn.com/resizer/v2/DSYDOH64WRCFJHXKJ2EK7UYSOY.jpg?auth=90be0add081d3e2dd79f4e82e1dd5812c2f0f7850aa17e167b9997b0f87f48b1&smart=true",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b7c0aacbb4b5",
@@ -5259,7 +6159,7 @@
       "sourceName": "wusa9.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.wusa9.com/assets/AssociatedPress/images/ff4de167-8a89-4f6d-8bb9-89f24a9e851a/20260220T021005/ff4de167-8a89-4f6d-8bb9-89f24a9e851a_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "375f04b4687a",
@@ -5271,7 +6171,7 @@
       "sourceName": "wtkr.com (United States)",
       "country": "United States",
       "imageUrl": "https://ewscripps.brightspotcdn.com/28/3f/0df78e8440899e061b13d5b78fdc/ap26022429198890.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a3a3ddb605b1",
@@ -5283,7 +6183,7 @@
       "sourceName": "nbcnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-02/260219-trump-ch-1055-69415f.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5f181c81be03",
@@ -5295,7 +6195,7 @@
       "sourceName": "thedailybeast.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.thedailybeast.com/resizer/v2/I76XBA2F6NF3XC26RKZHE5IQSE.jpg?smart=true&auth=f455d8f3696217901c122214b024ac667c2b44f1b4ec00cbab2603929e3c0262",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fd18b013cb48",
@@ -5307,7 +6207,7 @@
       "sourceName": "channelstv.com (Nigeria)",
       "country": "Nigeria",
       "imageUrl": "https://www.channelstv.com/wp-content/uploads/2026/02/Donald-Trump.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "462fd337071e",
@@ -5319,19 +6219,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-128608367,width-1280,height-720,imgsize-23564,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
-    },
-    {
-      "id": "46c62712c145",
-      "title": "Are Alien Files Being Released to Distract From the Epstein Scandal Exploding Online ?",
-      "url": "https://www.ibtimes.co.uk/trump-accuses-obama-alien-file-leak-1780431",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-31T13:10:07.440Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1786335/alien.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d28a8e44fca9",
@@ -5343,7 +6231,7 @@
       "sourceName": "euronews.com (United States)",
       "country": "United States",
       "imageUrl": "https://images.euronews.com/articles/stories/09/65/86/36/1200x675_cmsv2_314a97d2-4aa3-57ae-be9a-62cff2b8936d-9658636.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d67133c9d0f6",
@@ -5355,7 +6243,7 @@
       "sourceName": "standardmedia.co.ke (Kenya)",
       "country": "Kenya",
       "imageUrl": "https://cdn.standardmedia.co.ke/images/articles/thumbnails/liwgUBMNYkL0IXL90oMw3NQNBj4OkB6DRHvtqWQt.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "7e3c1c81dd33",
@@ -5367,7 +6255,7 @@
       "sourceName": "jcpost.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.eaglewebservices.com/public/2026/2/1771554285454.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0e385c1a16d9",
@@ -5442,18 +6330,6 @@
       "tone": -2.5
     },
     {
-      "id": "35612f01777a",
-      "title": "Trump accuses Obama of revealing  classified  alien information , orders release of UFO files",
-      "url": "https://tribune.com.pk/story/2593624/trump-accuses-obama-of-revealing-classified-alien-information-orders-release-of-ufo-files",
-      "domain": "tribune.com.pk",
-      "publishedAt": "2026-03-31T13:10:07.440Z",
-      "language": "English",
-      "sourceName": "tribune.com.pk (Pakistan)",
-      "country": "Pakistan",
-      "imageUrl": "https://i.tribune.com.pk/media/images/untitled-design-441771579766-0/untitled-design-441771579766-0-640x480.webp",
-      "tone": -7
-    },
-    {
       "id": "73a3007beb65",
       "title": "Trump says he doesnt know if aliens are real but directs government to release files on UFOs , more",
       "url": "https://www.cleveland19.com/2026/02/20/trump-says-he-doesnt-know-if-aliens-are-real-directs-government-release-files-ufos-more/",
@@ -5512,6 +6388,30 @@
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/62/94/616a43474e78a54dee7ea1cf7c64/ap26051036747017.jpg",
       "tone": -2.5
+    },
+    {
+      "id": "46c62712c145",
+      "title": "Are Alien Files Being Released to Distract From the Epstein Scandal Exploding Online ?",
+      "url": "https://www.ibtimes.co.uk/trump-accuses-obama-alien-file-leak-1780431",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-03-31T13:10:07.440Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1786335/alien.png",
+      "tone": 0
+    },
+    {
+      "id": "35612f01777a",
+      "title": "Trump accuses Obama of revealing  classified  alien information , orders release of UFO files",
+      "url": "https://tribune.com.pk/story/2593624/trump-accuses-obama-of-revealing-classified-alien-information-orders-release-of-ufo-files",
+      "domain": "tribune.com.pk",
+      "publishedAt": "2026-03-31T13:10:07.440Z",
+      "language": "English",
+      "sourceName": "tribune.com.pk (Pakistan)",
+      "country": "Pakistan",
+      "imageUrl": "https://i.tribune.com.pk/media/images/untitled-design-441771579766-0/untitled-design-441771579766-0-640x480.webp",
+      "tone": -7
     },
     {
       "id": "1af014a7b293",
@@ -6135,7 +7035,7 @@
       "sourceName": "foxbaltimore.com (United States)",
       "country": "United States",
       "imageUrl": "https://foxbaltimore.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e77095ad83bb",
@@ -6147,7 +7047,7 @@
       "sourceName": "katu.com (United States)",
       "country": "United States",
       "imageUrl": "https://katu.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "116def7a8358",
@@ -6159,7 +7059,7 @@
       "sourceName": "midmichigannow.com",
       "country": "",
       "imageUrl": "https://midmichigannow.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "83833805a8d7",
@@ -6171,7 +7071,7 @@
       "sourceName": "cbs4local.com (United States)",
       "country": "United States",
       "imageUrl": "https://cbs4local.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a80213520939",
@@ -6183,7 +7083,7 @@
       "sourceName": "fox7austin.com (United States)",
       "country": "United States",
       "imageUrl": "https://images.foxtv.com/static.livenowfox.com/www.livenowfox.com/content/uploads/2026/02/1280/720/trump-event.jpg?ve=1&tl=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "08cd3dc8382a",
@@ -6195,7 +7095,7 @@
       "sourceName": "thenewamerican.com (United States)",
       "country": "United States",
       "imageUrl": "https://thenewamerican.com/assets/sites/2/2026/UFO-over-city-02.20.26-Getty-1498106333.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2a3ab0e17838",
@@ -6207,7 +7107,7 @@
       "sourceName": "fox11online.com (United States)",
       "country": "United States",
       "imageUrl": "https://fox11online.com/resources/media2/16x9/6000/1320/0x174/90/3bb05ea5-b82e-44ee-b2ce-91d2525a2671-GettyImages22609281391.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9068d9666576",
@@ -6219,7 +7119,7 @@
       "sourceName": "wjactv.com (United States)",
       "country": "United States",
       "imageUrl": "https://wjactv.com/resources/media2/16x9/6000/1320/0x174/90/3bb05ea5-b82e-44ee-b2ce-91d2525a2671-GettyImages22609281391.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "978d1dcdbf11",
@@ -6231,7 +7131,7 @@
       "sourceName": "wwmt.com (United States)",
       "country": "United States",
       "imageUrl": "https://wwmt.com/resources/media2/16x9/6000/1320/0x174/90/3bb05ea5-b82e-44ee-b2ce-91d2525a2671-GettyImages22609281391.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "04076b0169fa",
@@ -6243,7 +7143,7 @@
       "sourceName": "ktxs.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktxs.com/resources/media2/16x9/6000/1320/0x174/90/3bb05ea5-b82e-44ee-b2ce-91d2525a2671-GettyImages22609281391.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "674b392d2807",
@@ -6255,7 +7155,7 @@
       "sourceName": "nj.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.nj.com/resizer/v2/C2QPBP63CNB57GLUGOOXKKUO44.jpg?auth=0640f47dd5da5edf82440cb4ec9a0b180e3dabbbdf7378ad723f0a8d4a9d9d2e&smart=true&quality=90",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d0e810b534c3",
@@ -6267,7 +7167,7 @@
       "sourceName": "theblaze.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.theblaze.com/media-library/trump-makes-major-move-toward-extraterrestrial-disclosure-after-obama-s-slip-of-the-tongue.jpg?id=64967195&coordinates=0%2C85%2C0%2C86",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9a0aa754c113",
@@ -6279,7 +7179,7 @@
       "sourceName": "theguardian.com (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i.guim.co.uk/img/media/10f36b7d7b6fed52200b8f79810394b0964097a8/304_0_3036_2429/master/3036.jpg?&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=a9d7124e1d0d33f334cef91a1537309e",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "74ebb6354c80",
@@ -9087,7 +9987,7 @@
       "sourceName": "ktvz.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktvz.b-cdn.net/2025/02/KTVZ-Default-image-860x484.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "eedc407dcee7",
@@ -9099,7 +9999,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4645204/donald-trump.png",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "cd6042599b69",
@@ -9111,7 +10011,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4645273/berlin-airport-4.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "153c98b8f84a",
@@ -9123,7 +10023,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1796282/donald-trump.png",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "486f9bf1367b",
@@ -9135,7 +10035,7 @@
       "sourceName": "express.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/78/1200x630/6801281.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "6a621500800e",
@@ -9147,7 +10047,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-129578252,width-1280,height-720,imgsize-44386,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "dc57f213789d",
@@ -9159,7 +10059,7 @@
       "sourceName": "naturalnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.naturalnews.com/wp-content/uploads/sites/91/2026/03/Vanished-in-the-Void.jpg",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "90efe43a528e",
@@ -9171,7 +10071,7 @@
       "sourceName": "thedailybeast.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.thedailybeast.com/resizer/v2/AVSAO63KLVDALM6UBMKYPPLPG4.jpg?smart=true&auth=1f55dc5a873ec8984c712696844e41027ffd6c51ca7c5bfd9fa830f48256dfd5",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "f556e2942130",
@@ -9183,7 +10083,7 @@
       "sourceName": "rivergrandrapids.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/43/files/2026/02/attachment-1966-ufo-sighting.jpg?&q=75&format=natural",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "2f1af00ac78d",
@@ -9195,7 +10095,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1796474/ufo.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "c4b2feffd5a1",
@@ -9207,7 +10107,7 @@
       "sourceName": "globemagazine.com (United States)",
       "country": "United States",
       "imageUrl": "https://globemagazine.com/wp-content/uploads/2026/03/MEGA1415937_004-1536x1024-1-1000x600.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "738789b73f01",
@@ -9219,7 +10119,7 @@
       "sourceName": "theconversation.com (Australia)",
       "country": "Australia",
       "imageUrl": "https://images.theconversation.com/files/722607/original/file-20260306-57-v6lipj.jpg?ixlib=rb-4.1.0&rect=502%2C307%2C1325%2C662&q=45&auto=format&fit=crop",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "c68b4ea131ce",
@@ -9231,7 +10131,7 @@
       "sourceName": "yahoo.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/os/en/the_conversation_us_articles_815/55a62b858a0781efaac825378cfbb0be",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "be6e17908f29",
@@ -9243,7 +10143,7 @@
       "sourceName": "dailymail.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/12/18/107088175-0-image-m-44_1773340402027.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "bfb7acf03293",
@@ -9255,7 +10155,7 @@
       "sourceName": "shtfplan.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.shtfplan.com/wp-content/uploads/2023/02/ufo.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "ac8c7cd06069",
@@ -9267,7 +10167,7 @@
       "sourceName": "futurism.com (United States)",
       "country": "United States",
       "imageUrl": "https://futurism.com/wp-content/uploads/2026/03/air-force-major-general-ufo-connection-disappears.jpg?quality=85",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "0e058bbf78ea",
@@ -9279,7 +10179,7 @@
       "sourceName": "nypost.com (United States)",
       "country": "United States",
       "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/03/William-McCasland.jpg?quality=75&strip=all",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "dcbbd151edd2",
@@ -9291,7 +10191,7 @@
       "sourceName": "astanatimes.com (Kazakhstan)",
       "country": "Kazakhstan",
       "imageUrl": "https://astanatimes.com/wp-content/uploads/2026/03/image-101.png",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "f1b23d7b1521",
@@ -9303,7 +10203,7 @@
       "sourceName": "designboom.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.designboom.com/twitterimages/uploads/2026/03/ufo-winery-314-architecture-studio-half-buried-greek-vineyards-designboom-1200.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "21be090c63f3",
@@ -9315,7 +10215,7 @@
       "sourceName": "cp24.com (Canada)",
       "country": "Canada",
       "imageUrl": "https://www.cp24.com/resizer/v2/SGCE2NQRUGWV2MS74VHM4N6ECQ.jpg?smart=true&auth=dcc7e9ab553137e6a16d562f76f1d16a15e1edaaf6176a8c47a005a37c27cade",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "a3ca58d79ccd",
@@ -9327,7 +10227,7 @@
       "sourceName": "whatweekly.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "c2da8d1d06cf",
@@ -9339,7 +10239,7 @@
       "sourceName": "openminds.tv (United States)",
       "country": "United States",
       "imageUrl": "https://openminds.tv/wp-content/uploads/1-Frank-Press-Jimmy-Carter-ftr.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "5c6d237ba1fa",
@@ -9351,7 +10251,7 @@
       "sourceName": "openminds.tv (United States)",
       "country": "United States",
       "imageUrl": "https://openminds.tv/wp-content/uploads/YT-BNL-1.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "916a2708e158",
@@ -9363,7 +10263,7 @@
       "sourceName": "openminds.tv (United States)",
       "country": "United States",
       "imageUrl": "https://openminds.tv/wp-content/uploads/Screenshot-2025-05-22-at-11.38.44%E2%80%AFAM.png",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "4a4bc4fb7d6a",
@@ -9375,7 +10275,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1773237/ufo-shockwave-top-advisor-claims-us-has-recovered-real-alien.png",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "ee376ba29fb5",
@@ -9387,7 +10287,7 @@
       "sourceName": "wired.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.wired.com/photos/699c832687b4ddbea4d1c67a/191:100/w_1280,c_limit/022326_Science-UFO-Files-Dissapointment.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "8330d1cc6363",
@@ -9399,7 +10299,7 @@
       "sourceName": "slashfilm.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.slashfilm.com/img/gallery/15-best-sci-fi-movies-of-the-2020s-so-far-ranked/l-intro-1772489698.jpg",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "2a213074da99",
@@ -9531,7 +10431,7 @@
       "sourceName": "kvnf.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "e2681cd2bb54",
@@ -9543,7 +10443,7 @@
       "sourceName": "ksmu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "b8a41b6fcd62",
@@ -9555,7 +10455,7 @@
       "sourceName": "kedm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "f6bbb6f2f63b",
@@ -9567,7 +10467,7 @@
       "sourceName": "wuwf.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "9fa4c63ad71c",
@@ -9579,7 +10479,7 @@
       "sourceName": "wwno.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "00fed36df423",
@@ -9591,7 +10491,7 @@
       "sourceName": "kunc.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "5125c28a6631",
@@ -9603,7 +10503,7 @@
       "sourceName": "tspr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "a08ea30167f6",
@@ -9615,7 +10515,7 @@
       "sourceName": "wfae.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "a3ed51998b09",
@@ -9627,7 +10527,7 @@
       "sourceName": "naturalnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.naturalnews.com/wp-content/uploads/sites/91/2026/03/ufo-navy.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "aa2be744e09e",
@@ -9639,7 +10539,7 @@
       "sourceName": "homenewshere.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/homenewshere.com/content/tncms/assets/v3/editorial/0/36/0360ecfc-4c9c-5288-8018-86c973c06a8d/69bc4efd3de8d.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "52c5912bae94",
@@ -9651,7 +10551,7 @@
       "sourceName": "voiceofalexandria.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/voiceofalexandria.com/content/tncms/assets/v3/editorial/a/ce/aceb757b-f1db-553b-a1ff-a232d1985189/69bc4f31dbdb6.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "3ac138fa36d5",
@@ -9663,7 +10563,7 @@
       "sourceName": "guampdn.com (Guam)",
       "country": "Guam",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/guampdn.com/content/tncms/assets/v3/editorial/b/3d/b3d50eca-ac04-5dda-b3f8-0cd6d7f21548/69bc4ec96f186.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1a418f5ddf95",
@@ -9675,7 +10575,7 @@
       "sourceName": "myleaderpaper.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/myleaderpaper.com/content/tncms/assets/v3/editorial/4/6d/46d903f5-d343-55c6-a537-96c45baa6c8a/69bc4f2523b31.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9060ff87904c",
@@ -9687,7 +10587,7 @@
       "sourceName": "960weli.iheart.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.iheart.com/v3/re/new_assets/69bc4b8cdc977f97ff730fa9?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "83fb71c18e1e",
@@ -9699,7 +10599,7 @@
       "sourceName": "mykxlg.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/mykxlg.com/content/tncms/assets/v3/editorial/9/31/931dcf1c-fad3-524b-8e79-da4f02b854bf/69bc4f0551070.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9e076915b1fe",
@@ -9711,7 +10611,7 @@
       "sourceName": "hometownregister.com",
       "country": "",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/hometownregister.com/content/tncms/assets/v3/editorial/2/84/284d074c-3bfd-527d-b75d-4b78a94240b0/69bc4ee33b2b4.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c68ad41fd3c0",
@@ -9723,7 +10623,7 @@
       "sourceName": "wyomingnewsnow.tv",
       "country": "",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/wyomingnewsnow.tv/content/tncms/assets/v3/editorial/c/75/c752fd2a-d38f-568f-aec2-2827416d6a95/69bc4f37458b7.image.jpg?crop=1431%2C751%2C0%2C348",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "26ea9549d9d8",
@@ -9735,7 +10635,7 @@
       "sourceName": "kcra.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f08f7caa295a",
@@ -9747,7 +10647,7 @@
       "sourceName": "csmonitor.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "96e4dd60bda2",
@@ -9759,7 +10659,7 @@
       "sourceName": "wdsu.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a4a850726056",
@@ -9771,7 +10671,7 @@
       "sourceName": "wmtw.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "99ec6aca6a5d",
@@ -9783,7 +10683,7 @@
       "sourceName": "wapt.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1db1ef77f3a5",
@@ -9795,7 +10695,7 @@
       "sourceName": "wlwt.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "aa85f0e53371",
@@ -9807,7 +10707,7 @@
       "sourceName": "wvtm13.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c99c65937da3",
@@ -9819,7 +10719,7 @@
       "sourceName": "gulfcoastnewsnow.com",
       "country": "",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e7b26b658b93",
@@ -9831,7 +10731,7 @@
       "sourceName": "wgal.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fc438ba940e9",
@@ -9843,7 +10743,7 @@
       "sourceName": "metro.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0ebad016c50a",
@@ -9855,7 +10755,7 @@
       "sourceName": "naturalnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.naturalnews.com/wp-content/uploads/sites/91/2026/03/The-Mirror-of-Consciousness.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a508be8f3e00",
@@ -9867,7 +10767,7 @@
       "sourceName": "newsweek.com (United States)",
       "country": "United States",
       "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/03/AP26077761061479.jpg?crop=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e1748a3b3253",
@@ -9879,7 +10779,7 @@
       "sourceName": "vice.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.vice.com/wp-content/uploads/sites/2/2026/03/is-the-u-s-government-about-to-drop-their-ufo-files.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "cc41a82732b8",
@@ -9891,7 +10791,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1770315/donald-trump.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "780c02d05134",
@@ -9903,7 +10803,7 @@
       "sourceName": "wmur.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1e5ba836d59a",
@@ -9915,7 +10815,7 @@
       "sourceName": "wyff4.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "246ac99ab322",
@@ -9927,7 +10827,7 @@
       "sourceName": "wtae.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9fbc6790d433",
@@ -9939,7 +10839,7 @@
       "sourceName": "kcci.com (United States)",
       "country": "United States",
       "imageUrl": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/mccasafbasecomp-69baf6b097eda.png?crop=1.00xw:0.789xh;0,0.0785xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "dee74a460c89",
@@ -9951,7 +10851,7 @@
       "sourceName": "103kkcn.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d911a39681f8",
@@ -9963,7 +10863,7 @@
       "sourceName": "kfox95.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c2c21752899c",
@@ -9975,7 +10875,7 @@
       "sourceName": "newstalk1290.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f8e9da4911ad",
@@ -9987,7 +10887,7 @@
       "sourceName": "kygl.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4e4ab0f22785",
@@ -9999,7 +10899,7 @@
       "sourceName": "kbat.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fafc35f77e1b",
@@ -10011,7 +10911,7 @@
       "sourceName": "965therock.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "df6d10fad333",
@@ -10023,7 +10923,7 @@
       "sourceName": "ksfa860.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5c2171a2fa63",
@@ -10035,7 +10935,7 @@
       "sourceName": "1063thebuzz.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/175/files/2026/03/attachment-red-oak-fireball.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fd3a66ebd744",
@@ -10047,7 +10947,7 @@
       "sourceName": "97rockonline.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/133/files/2026/03/attachment-add-a-heading-1-24.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5c5ec0436b87",
@@ -10059,7 +10959,7 @@
       "sourceName": "abc11.com (United States)",
       "country": "United States",
       "imageUrl": "https://cdn.abcotvs.com/dip/images/18707820_031226-wls-cnnw-missing-air-force-general-img.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d0f9bef93bfb",
@@ -10071,7 +10971,7 @@
       "sourceName": "keyw.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/133/files/2026/03/attachment-add-a-heading-1-24.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "660d8e3061dd",
@@ -10083,7 +10983,7 @@
       "sourceName": "newstalk870.am (Armenia)",
       "country": "Armenia",
       "imageUrl": "https://townsquare.media/site/133/files/2026/03/attachment-add-a-heading-1-24.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5fa2d01a915b",
@@ -10095,7 +10995,7 @@
       "sourceName": "insidepulse.com (United States)",
       "country": "United States",
       "imageUrl": "https://insidepulse.com/wp-content/uploads/2026/03/MasterofKungFu.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c8df090d320f",
@@ -10167,7 +11067,7 @@
       "sourceName": "hngn.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.hngn.com/en/full/301973/ufo-hearing.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "04dec1ca6a33",
@@ -10179,7 +11079,7 @@
       "sourceName": "wgna.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/40/files/2026/03/attachment-danie-franco-of2jr51vxii-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0e6c48a36783",
@@ -10191,7 +11091,7 @@
       "sourceName": "radaronline.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.radaronline.com/brand-img/OeWcCfWd2/1200x628/donald-trumps-alien-mandate-prez-claims-proof-aliens-here-1773825583376.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "feafe1f79ab7",
@@ -10203,7 +11103,7 @@
       "sourceName": "dailymail.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://i.dailymail.co.uk/1s/2026/03/24/10/107372449-0-image-m-22_1774347967216.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "caeb99a25ca5",
@@ -10215,7 +11115,7 @@
       "sourceName": "citizen.co.za (South Africa)",
       "country": "South Africa",
       "imageUrl": "https://images.caxton.co.za/wp-content/uploads/sites/85/2024/04/stock-44.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "7116a159069e",
@@ -10227,7 +11127,7 @@
       "sourceName": "101theeagle.com",
       "country": "",
       "imageUrl": "https://townsquare.media/site/463/files/2026/03/attachment-ashim-ayed-nr2nkxwt2yg-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0a0f10e77500",
@@ -10239,7 +11139,7 @@
       "sourceName": "kickam1530.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/463/files/2026/03/attachment-ashim-ayed-nr2nkxwt2yg-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "1a5cd4dcfd8e",
@@ -10251,7 +11151,7 @@
       "sourceName": "979kickfm.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/463/files/2026/03/attachment-ashim-ayed-nr2nkxwt2yg-unsplash.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fe3e7c76954d",
@@ -10263,7 +11163,7 @@
       "sourceName": "popularmechanics.com (United States)",
       "country": "United States",
       "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/aerial-view-of-ufo-crash-site-royalty-free-illustration-1766418569.pjpeg?crop=0.982xw:0.787xh;0,0.0410xh",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "756f84b7a507",
@@ -10275,7 +11175,7 @@
       "sourceName": "npr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/8f/d5/f83ecebc469ea182801825e92b16/ap26009529130884.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d587f7231d5f",
@@ -10287,7 +11187,7 @@
       "sourceName": "wlrn.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "0b967b128eab",
@@ -10299,7 +11199,7 @@
       "sourceName": "klcc.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "09841616718a",
@@ -10311,7 +11211,7 @@
       "sourceName": "krwg.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "49fcb110c3cc",
@@ -10323,7 +11223,7 @@
       "sourceName": "kawc.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "687cabe621af",
@@ -10335,7 +11235,7 @@
       "sourceName": "wrvo.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "8141489fa02a",
@@ -10347,7 +11247,7 @@
       "sourceName": "kmuw.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "d27b515d5039",
@@ -10359,7 +11259,7 @@
       "sourceName": "wcsufm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "f4886f230594",
@@ -10371,7 +11271,7 @@
       "sourceName": "wkyufm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "d043d45f1ebb",
@@ -10383,7 +11283,7 @@
       "sourceName": "wypr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "bf3141ece479",
@@ -10395,7 +11295,7 @@
       "sourceName": "wamc.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "3a373826fefb",
@@ -10407,7 +11307,7 @@
       "sourceName": "wclk.com (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "d36287302f1b",
@@ -10419,7 +11319,7 @@
       "sourceName": "kacu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "4edc2579363e",
@@ -10431,7 +11331,7 @@
       "sourceName": "wmra.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "56ab8d3911f8",
@@ -10443,7 +11343,7 @@
       "sourceName": "wlrn.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "fe0ac1f6e9e0",
@@ -10455,7 +11355,7 @@
       "sourceName": "seekingalpha.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1289973223/image_1289973223.jpg?io=getty-c-w1536",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0a810d63ecd5",
@@ -10467,7 +11367,7 @@
       "sourceName": "news.prairiepublic.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "d922f12c79fd",
@@ -10479,7 +11379,7 @@
       "sourceName": "wvtf.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "92e7b53803aa",
@@ -10491,7 +11391,7 @@
       "sourceName": "wknofm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "488303786216",
@@ -10503,7 +11403,7 @@
       "sourceName": "ypradio.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "2f2381b6b9e4",
@@ -10515,7 +11415,7 @@
       "sourceName": "aspenpublicradio.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "cfc5c43bd0c4",
@@ -10527,7 +11427,7 @@
       "sourceName": "ksmu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "3eb5952598ba",
@@ -10539,7 +11439,7 @@
       "sourceName": "wfdd.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "1ed722981aa2",
@@ -10551,7 +11451,7 @@
       "sourceName": "tspr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "fbbab8b23c5f",
@@ -10563,7 +11463,7 @@
       "sourceName": "ualrpublicradio.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "9d64a984ed8a",
@@ -10575,7 +11475,7 @@
       "sourceName": "wncw.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "2d15fbfb34a6",
@@ -10587,7 +11487,7 @@
       "sourceName": "kazu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "fab24a29f8f9",
@@ -10599,7 +11499,7 @@
       "sourceName": "ijpr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "fff3dc21547e",
@@ -10611,7 +11511,7 @@
       "sourceName": "apr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "cb3d9fa5c9fe",
@@ -10623,7 +11523,7 @@
       "sourceName": "wvik.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "5f908f947547",
@@ -10635,7 +11535,7 @@
       "sourceName": "northcountrypublicradio.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg?s=1000",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "e8f3dc7d52e6",
@@ -10647,7 +11547,7 @@
       "sourceName": "wrkf.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "eabea0415c98",
@@ -10659,7 +11559,7 @@
       "sourceName": "wuky.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "105abfc9a4ca",
@@ -10671,7 +11571,7 @@
       "sourceName": "kalw.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "092546ff7c95",
@@ -10683,7 +11583,7 @@
       "sourceName": "kasu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c025c0c94c67",
@@ -10695,7 +11595,7 @@
       "sourceName": "ketr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "b3607ec70734",
@@ -10707,7 +11607,7 @@
       "sourceName": "radio.wpsu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "f9ebeedf8d14",
@@ -10719,7 +11619,7 @@
       "sourceName": "wyomingpublicmedia.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "910d7e5a0320",
@@ -10731,7 +11631,7 @@
       "sourceName": "wyso.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "2ba1f8a55bbd",
@@ -10743,7 +11643,7 @@
       "sourceName": "wbaa.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "1eab85e567b2",
@@ -10755,7 +11655,7 @@
       "sourceName": "ksfr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "99095d93a738",
@@ -10767,7 +11667,7 @@
       "sourceName": "wkms.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "24b7f576e07e",
@@ -10779,7 +11679,7 @@
       "sourceName": "kenw.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "01f425198867",
@@ -10791,7 +11691,7 @@
       "sourceName": "krwg.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "46612a46f4e2",
@@ -10803,7 +11703,7 @@
       "sourceName": "wuft.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c6f4dd71af6f",
@@ -10815,7 +11715,7 @@
       "sourceName": "wysu.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "edd714018993",
@@ -10827,7 +11727,7 @@
       "sourceName": "wkyufm.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "3bd5e7385e7e",
@@ -10839,7 +11739,7 @@
       "sourceName": "kmuw.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "70369abdea22",
@@ -10851,7 +11751,7 @@
       "sourceName": "delawarepublic.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "a591853de0a3",
@@ -10863,7 +11763,7 @@
       "sourceName": "wclk.com (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/60/be/1ff22bfc4b3dbfe11628726331cb/ap22263516891176.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "290cf815d987",
@@ -10875,7 +11775,7 @@
       "sourceName": "independent.ie (Ireland)",
       "country": "Ireland",
       "imageUrl": "https://focus.independent.ie/thumbor/yOwF8wMc6qRsm3rTZ6TaDYPIGHo=/0x0:3237x2158/629x0/prod-mh-ireland/69aaa34f-b8d8-43dc-86ad-b0fa7417a313/823b6813-1eb4-4139-94ac-9da5bf5e5d13/LENSKIY-JORDAN.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "16ea19b73614",
@@ -10887,7 +11787,7 @@
       "sourceName": "aol.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://s.yimg.com/ny/api/res/1.2/DjiUKmQFbomQhqZIuCNbQA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03NTI-/https://media.zenfs.com/en/aol_the_telegraph_624/41b6756d4943382e53001ea17e2cb640",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "422e2cb4ff00",
@@ -10899,7 +11799,7 @@
       "sourceName": "baylorlariat.com (United States)",
       "country": "United States",
       "imageUrl": "https://baylorlariat.com/wp-content/uploads/2026/03/Alien_cartoon.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "bd57dc554ae1",
@@ -10911,7 +11811,7 @@
       "sourceName": "lbc.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://images.globalplayer.com/images/803162?crop=16_9&signature=EvJcdsLUYCMHOKQc3pUsGY0GZg4=",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "75a1eed70c02",
@@ -10923,7 +11823,7 @@
       "sourceName": "latinpost.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.latinpost.com/en/full/1727462/jd-vance-benny-johnson-ufos-demons.png",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "30cc994e7ce4",
@@ -10935,7 +11835,7 @@
       "sourceName": "kikn.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/486/files/2025/07/attachment-police-car.jpg?&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5cd5c755f4d1",
@@ -10947,7 +11847,7 @@
       "sourceName": "huffingtonpost.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://img.huffingtonpost.com/asset/69c95288170000ecaa76e766.jpeg?cache=UcJbvmrEUq&ops=1200_630",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8dd939d5f246",
@@ -10959,7 +11859,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "b43ab54f5a7a",
@@ -10971,7 +11871,7 @@
       "sourceName": "b1027.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/481/files/2026/03/attachment-afsp-2026-03-29t164104-354.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "a938b4152307",
@@ -10983,7 +11883,7 @@
       "sourceName": "kikn.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/481/files/2026/03/attachment-afsp-2026-03-29t164104-354.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "d6157ff008da",
@@ -10995,7 +11895,7 @@
       "sourceName": "hot1047.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/481/files/2026/03/attachment-afsp-2026-03-29t164104-354.jpg?&q=75&format=natural",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2f571223ec81",
@@ -11007,7 +11907,7 @@
       "sourceName": "aol.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://s.yimg.com/ny/api/res/1.2/_Y.KnBGF7dHRlwHzlscM6A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03NTA-/https://media.zenfs.com/en/aol_the_telegraph_624/d0de70dce5b575de215193b744f33881",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "dd14791ff872",
@@ -11019,7 +11919,7 @@
       "sourceName": "nypost.com (United States)",
       "country": "United States",
       "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/03/vice-president-jd-vance-chair-124674434.jpg?quality=75&strip=all",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "6bd29a0a05b2",
@@ -11031,7 +11931,7 @@
       "sourceName": "yahoo.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.yimg.com/ny/api/res/1.2/AsDC6voThiBzV4w5q4DuvQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03NTA7Y2Y9d2VicA--/https://media.zenfs.com/en/the_telegraph_258/fd1777e7f95344e67e5b81f29d103082",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ebaa6c985837",
@@ -11043,7 +11943,7 @@
       "sourceName": "theverge.com (United States)",
       "country": "United States",
       "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/22681993/Screen_Shot_2021_06_25_at_3.01.18_PM.png?quality=90&strip=all&crop=0%2C18.159524701414%2C100%2C63.680950597172",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "31054538e8c1",
@@ -11055,7 +11955,7 @@
       "sourceName": "theverge.com (United States)",
       "country": "United States",
       "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23617259/1241157707.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8ea9b1b176c0",
@@ -11067,7 +11967,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-129867299,width-1280,height-720,imgsize-875133,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "e76451b734d1",
@@ -11079,7 +11979,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-129867465,width-1280,height-720,imgsize-788814,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "5a24f5e9ab39",
@@ -11091,7 +11991,7 @@
       "sourceName": "geo.tv (Pakistan)",
       "country": "Pakistan",
       "imageUrl": "https://www.geo.tv/assets/uploads/2026-03-28/657507_091825_updates.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "2e4e487cd3aa",
@@ -11103,7 +12003,7 @@
       "sourceName": "livemint.com (India)",
       "country": "India",
       "imageUrl": "https://www.livemint.com/lm-img/img/2026/03/28/600x338/Vance-Fraud-7_1774663379794_1774663399584.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9615672fd48a",
@@ -11115,7 +12015,7 @@
       "sourceName": "newsweek.com (United States)",
       "country": "United States",
       "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/03/GettyImages-2268060366.jpg?crop=1",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "75f8118a2175",
@@ -11127,7 +12027,7 @@
       "sourceName": "960weli.iheart.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.iheart.com/v3/re/new_assets/69c6e1c853ee1359780535b7?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c34ad8553347",
@@ -11139,7 +12039,7 @@
       "sourceName": "religionnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://religionnews.com/wp-content/uploads/2026/03/webRNS-Starseeds-Space1.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "47d1900d664f",
@@ -11151,7 +12051,7 @@
       "sourceName": "latinpost.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.latinpost.com/en/full/1727407/donald-trump.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "b96fd7f41806",
@@ -11163,7 +12063,7 @@
       "sourceName": "dw.com (Germany)",
       "country": "Germany",
       "imageUrl": "https://static.dw.com/image/76085028_6.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "accfdd07c284",
@@ -13914,606 +14814,6 @@
       "tone": 0
     },
     {
-      "id": "a4e834ab19c7",
-      "title": "Why Scientists Worry About Breaking News About Life in Space",
-      "url": "https://www.yahoo.com/news/articles/why-scientists-worry-breaking-news-182139282.html",
-      "domain": "yahoo.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "yahoo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/SvOb8v1Z5kFsTx.AvEHT8w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/time_72/b8db601d5e92037a3021d0526f00ebf5",
-      "tone": 0
-    },
-    {
-      "id": "0b625f78f85e",
-      "title": "US Rep Anna Paulina Luna Hints Confirmation of Alien Forms Citing Witness Testimonies , Closed Investigations",
-      "url": "https://www.ibtimes.co.uk/us-rep-anna-paulina-luna-hints-confirmation-alien-forms-citing-witness-testimonies-closed-1777048",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788980/rep-anna-paulina-luna.jpg",
-      "tone": 0
-    },
-    {
-      "id": "f6a73e91a0b8",
-      "title": "Ancient Aliens",
-      "url": "https://www.tvguide.co.uk/schedule/705b81eb-5371-5489-a9aa-c4b5c42c4e09/ancient-aliens",
-      "domain": "tvguide.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "tvguide.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://tv.assets.pressassociation.io/4853606c-a1a6-55cb-9201-d017a1a243e3.jpg",
-      "tone": 0
-    },
-    {
-      "id": "931d0433700f",
-      "title": "Trump green lights UFO disclosure of secret bases hiding crashed ships",
-      "url": "https://www.dailymail.co.uk/sciencetech/article-15533031/Trump-green-lights-UFO-disclosure-secret-bases.html",
-      "domain": "dailymail.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "dailymail.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i.dailymail.co.uk/1s/2026/02/05/23/105177983-0-image-m-30_1770332518351.jpg",
-      "tone": 0
-    },
-    {
-      "id": "85c43bc47044",
-      "title": "Shotgun Joe – Love & Monsters is Available for iOS and Android",
-      "url": "https://www.itnewsonline.com/PR.com/Shotgun-Joe--Love--Monsters-is-Available-for-iOS-and-Android/29866",
-      "domain": "itnewsonline.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "itnewsonline.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 0
-    },
-    {
-      "id": "9350239eae65",
-      "title": "Trump Pushes Pentagon to Open UFO Sites as Lawmaker Hints at  Craft and Bodies",
-      "url": "https://www.ibtimes.co.uk/trump-pushes-pentagon-open-ufo-sites-lawmaker-hints-craft-bodies-1776260",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788359/donald-trump.jpg",
-      "tone": 0
-    },
-    {
-      "id": "9dd136a8fe90",
-      "title": "Eric Burlison Reveals UFO Too Big To Move Could South Korea Hold Humanity Secret ?",
-      "url": "https://www.ibtimes.co.uk/eric-burlison-reveals-ufo-too-big-movecould-south-korea-hold-humanitys-secret-1776129",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1788246/eric-burlison.jpg",
-      "tone": 0
-    },
-    {
-      "id": "78ec5e36c0a2",
-      "title": "Former Marine Claims US Navy Secretly Recorded UFOs Moving at Breakneck Speeds",
-      "url": "https://www.gazetaexpress.com/en/Former-Marine-Claims-the-US-Navy-Secretly-Recorded-UFOs-Moving-at-Breakneck-Speeds/",
-      "domain": "gazetaexpress.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "gazetaexpress.com (Kosovo)",
-      "country": "Kosovo",
-      "imageUrl": "https://www.gazetaexpress.com/wp-content/uploads/2026/02/ufo.jpg",
-      "tone": 0
-    },
-    {
-      "id": "e641f3723e01",
-      "title": "A Creature Stalks Berkshire County Coca - Cola Ledge ?",
-      "url": "https://fun107.com/ixp/918/p/a-creature-stalks-berkshire-countys-coca-cola-ledge/",
-      "domain": "fun107.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "fun107.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/918/files/2021/09/attachment-Coca-Cola-Ledge.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "bebddf0afe9e",
-      "title": "Turkey Responds as Ship Damaged in Black Sea Attack is Now Aground",
-      "url": "https://maritime-executive.com/article/turkey-responds-as-ship-damaged-in-black-sea-attack-is-now-aground",
-      "domain": "maritime-executive.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "maritime-executive.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://maritime-executive.com/media/images/article/Photos/Wreckage_Salvage/Razouk-aground-Turkey.jpg",
-      "tone": 0
-    },
-    {
-      "id": "4fe4a63f7718",
-      "title": "Submariner claims US tracked  terrifying  high - speed UFOs | Weird | News",
-      "url": "https://www.express.co.uk/news/weird/2164771/former-submariner-claims-us-navy-tracked-terrifying-fast-moving-ufos-secret-logbooks",
-      "domain": "express.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "express.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://cdn.images.express.co.uk/img/dynamic/80/1200x630/6710467.jpg",
-      "tone": 0
-    },
-    {
-      "id": "b0a98c0e505f",
-      "title": "I know about Navy horrifying UFO log books and terrifying things moving across our seas",
-      "url": "https://www.dailystar.co.uk/news/weird-news/i-know-navys-horrifying-ufo-36641828",
-      "domain": "dailystar.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "dailystar.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.dailystar.co.uk/article36642141.ece/ALTERNATES/s1200/3_VIDEO-Mysterious-glowing-spiral-appears-in-sky-near-where-possible-UFO-was-spotted-in-2024-an.jpg",
-      "tone": 0
-    },
-    {
-      "id": "c0c06ee1d0cc",
-      "title": "Submarine worker chilling claim about Navy UFO logbooks tracking  fast mover in ocean",
-      "url": "https://www.mirror.co.uk/news/weird-news/submarine-workers-chilling-claim-navy-36643708",
-      "domain": "mirror.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "mirror.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.mirror.co.uk/article36642142.ece/ALTERNATES/s1200/0_Screenshot-2025-09-10-at-095135.jpg",
-      "tone": 0
-    },
-    {
-      "id": "7ecd31fd0563",
-      "title": "When the Land Runs Out",
-      "url": "https://thebulletin.org/premium/2026-01/when-the-land-runs-out/",
-      "domain": "thebulletin.org",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "thebulletin.org (United States)",
-      "country": "United States",
-      "imageUrl": "https://thebulletin.org/wp-content/uploads/2026/01/L_House_by_the_Railroad-1024x848.jpg.optimal.jpg",
-      "tone": 0
-    },
-    {
-      "id": "4f676ec2bfac",
-      "title": "Obama Alien Admission : Why a Former President UFO Comments Are Rattling the National Security Establishment",
-      "url": "https://www.webpronews.com/obamas-alien-admission-why-a-former-presidents-ufo-comments-are-rattling-the-national-security-establishment/",
-      "domain": "webpronews.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "webpronews.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.webpronews.com/wp-content/uploads/2026/02/article-10353-1771261751.jpeg",
-      "tone": 0
-    },
-    {
-      "id": "a12a6bad1e9c",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://kvia.com/news/us-world/cnn-world/2026/02/16/obama-clarifies-alien-comments-after-telling-podcast-theyre-real-2/",
-      "domain": "kvia.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "kvia.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://kvia.com/wp-content/uploads/2026/02/cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8-scaled.jpg",
-      "tone": 0
-    },
-    {
-      "id": "70124d439ffe",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://kesq.com/news/national-world/cnn-world/2026/02/16/obama-clarifies-alien-comments-after-telling-podcast-theyre-real-2/",
-      "domain": "kesq.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "kesq.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://kesq.b-cdn.net/2026/02/cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8-860x573.jpg",
-      "tone": 0
-    },
-    {
-      "id": "740dcfd516b2",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://www.rnz.co.nz/news/world/587034/obama-clarifies-alien-comments-after-telling-podcast-they-re-real",
-      "domain": "rnz.co.nz",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "rnz.co.nz",
-      "country": "",
-      "imageUrl": "https://media.rnztools.nz/rnz/image/upload/s--Yuo2_eUO--/t_tohu-badge-facebook/v1771262294/4JT2YLR_AFP__20250513__NS_5TRDHG3SDYG__v1__HighRes__AConversationWithBarackObama_jpg?_a=BACCd2AD",
-      "tone": 0
-    },
-    {
-      "id": "28724cec31f4",
-      "title": "Aliens are  real , Obama says , as Washington shrugs",
-      "url": "https://www.brisbanetimes.com.au/world/north-america/aliens-are-real-obama-says-as-washington-shrugs-20260217-p5o2u9.html",
-      "domain": "brisbanetimes.com.au",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "brisbanetimes.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://static.ffx.io/images/$zoom_0.5295%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_12/t_crop_custom/q_86%2Cf_auto/32c3e805fc165c796b8ccf6ea93ae1199b44518d",
-      "tone": 0
-    },
-    {
-      "id": "d6cbe1856a8b",
-      "title": "Aliens are  real , Obama says , as Washington shrugs",
-      "url": "https://www.watoday.com.au/world/north-america/aliens-are-real-obama-says-as-washington-shrugs-20260217-p5o2u9.html",
-      "domain": "watoday.com.au",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "watoday.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://static.ffx.io/images/$zoom_0.5295%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_12/t_crop_custom/q_86%2Cf_auto/32c3e805fc165c796b8ccf6ea93ae1199b44518d",
-      "tone": 0
-    },
-    {
-      "id": "dbab6727d728",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real  | News",
-      "url": "https://www.wthitv.com/news/obama-clarifies-alien-comments-after-telling-podcast-they-re-real/article_25dcf28e-97c6-5afd-a612-4ce56c479f34.html",
-      "domain": "wthitv.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "wthitv.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wthitv.com/content/tncms/assets/v3/editorial/2/26/22622ea7-ea2e-5402-b677-9ac35e895c09/69934764220bd.image.jpg?crop=1763%2C926%2C0%2C124",
-      "tone": 0
-    },
-    {
-      "id": "0c3428fb9ef6",
-      "title": "Aliens are  real , Obama says , as Washington shrugs",
-      "url": "https://www.smh.com.au/world/north-america/aliens-are-real-obama-says-as-washington-shrugs-20260217-p5o2u9.html",
-      "domain": "smh.com.au",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "smh.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://static.ffx.io/images/$zoom_0.5295%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_12/t_crop_custom/q_86%2Cf_auto/32c3e805fc165c796b8ccf6ea93ae1199b44518d",
-      "tone": 0
-    },
-    {
-      "id": "52f8db055ae4",
-      "title": "Obama Backtracks on  Aliens Are Real  Claim Says He Has Seen  No Evidence  of Extraterrestrials",
-      "url": "https://www.ibtimes.co.uk/obama-ufo-clarification-no-alien-evidence-1779429",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1791081/barack-obama-area-51.png",
-      "tone": 0
-    },
-    {
-      "id": "2999ed79cd02",
-      "title": "Aliens are  real , Obama says , as Washington shrugs",
-      "url": "https://www.theage.com.au/world/north-america/aliens-are-real-obama-says-as-washington-shrugs-20260217-p5o2u9.html",
-      "domain": "theage.com.au",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "theage.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://static.ffx.io/images/$zoom_0.5295%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_12/t_crop_custom/q_86%2Cf_auto/32c3e805fc165c796b8ccf6ea93ae1199b44518d",
-      "tone": 0
-    },
-    {
-      "id": "8fb568aac13b",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://abc17news.com/news/national-world/cnn-world/2026/02/16/obama-clarifies-alien-comments-after-telling-podcast-theyre-real/",
-      "domain": "abc17news.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "abc17news.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://abc17news.b-cdn.net/abc17news.com/2026/02/cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8-860x573.jpg",
-      "tone": 0
-    },
-    {
-      "id": "60a35c8ea700",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real  | National",
-      "url": "https://www.abc12.com/news/national/obama-clarifies-alien-comments-after-telling-podcast-they-re-real/article_7d8f4820-c1e7-5afa-92c7-9c43399c129c.html",
-      "domain": "abc12.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "abc12.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/abc12.com/content/tncms/assets/v3/editorial/9/f9/9f9468c3-b3c4-538e-bcda-743f061727e1/69934e95bbcd4.image.jpg?crop=1763%2C926%2C0%2C124",
-      "tone": 0
-    },
-    {
-      "id": "c64cb8e45c60",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://www.cbs58.com/news/obama-clarifies-alien-comments-after-telling-podcast-they-re-real",
-      "domain": "cbs58.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "cbs58.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://newscdn2.weigelbroadcasting.com/MCOiB-1771263003-312747-blog-cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8%3D-300.JPG",
-      "tone": 0
-    },
-    {
-      "id": "0ca2a729e00c",
-      "title": "Barack Obama Admits That Aliens Are Real , But Theyre Not At Area 51",
-      "url": "https://www.theroot.com/president-barack-obama-just-gave-the-answer-to-one-of-t-2000090066",
-      "domain": "theroot.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "theroot.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 0
-    },
-    {
-      "id": "65b596d8c5f8",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real  | News",
-      "url": "https://www.kxly.com/news/obama-clarifies-alien-comments-after-telling-podcast-they-re-real/article_a78bcf3f-4226-5004-8e74-bf47d3755c40.html",
-      "domain": "kxly.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "kxly.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/kxly.com/content/tncms/assets/v3/editorial/4/3f/43f96af8-75c2-54ce-a951-8d8e471fed7d/699337d0533a4.image.jpg?crop=1920%2C1008%2C0%2C35",
-      "tone": 0
-    },
-    {
-      "id": "b6eb5bdb49d2",
-      "title": "Obama  aliens confession  is prepping us for a definitive announcement , UFO expert claim",
-      "url": "https://metro.co.uk/2026/02/16/obamas-aliens-confession-prepping-us-a-definitive-announcement-ufo-expert-claims-26934576/",
-      "domain": "metro.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "metro.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://metro.co.uk/wp-content/uploads/2026/02/SEC_285405294-078f_1771258789.jpg?quality=90&strip=all&crop=1",
-      "tone": 0
-    },
-    {
-      "id": "ae701ce7e352",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://keyt.com/news/national-world/cnn-world/2026/02/16/obama-clarifies-alien-comments-after-telling-podcast-theyre-real-2/",
-      "domain": "keyt.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "keyt.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://keyt.b-cdn.net/2026/02/cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8-860x573.jpg",
-      "tone": 0
-    },
-    {
-      "id": "d128ff8439a9",
-      "title": "Obama says aliens are real , but  Area 51  conspiracy theory is wrong",
-      "url": "https://www.syracuse.com/us-news/2026/02/obama-says-aliens-are-real-but-famous-conspiracy-theory-is-wrong.html",
-      "domain": "syracuse.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "syracuse.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.syracuse.com/resizer/v2/7FSJAVETRBCBPPIWVTGYXBECCQ.jpg?auth=e8355cba964c93589eb1e7f64bdbb285584bb3c9bcd5adbcb6584c9028ba1be0&smart=true&quality=90",
-      "tone": 0
-    },
-    {
-      "id": "58a5dfcc0308",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://keyt.com/news/national-world/cnn-world/2026/02/16/obama-clarifies-alien-comments-after-telling-podcast-theyre-real/",
-      "domain": "keyt.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "keyt.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://keyt.b-cdn.net/2026/02/cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8-860x573.jpg",
-      "tone": 0
-    },
-    {
-      "id": "10957fb7a4de",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://krdo.com/news/national-world/cnn-world/2026/02/16/obama-clarifies-alien-comments-after-telling-podcast-theyre-real-2/",
-      "domain": "krdo.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "krdo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://krdo.b-cdn.net/2026/02/cnn-L19jb21wb25lbnRzL2ltYWdlL2luc3RhbmNlcy9jbWxwMG12NzcwMDA0MzU2cGFta2ZobDh5-L19jb21wb25lbnRzL2FydGljbGUvaW5zdGFuY2VzL2NtbHAwZTZtZjAwNG0yNnFqZWtlazY0bW8-scaled.jpg",
-      "tone": 0
-    },
-    {
-      "id": "9117661c26f7",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://edition.cnn.com/2026/02/16/americas/obama-clarifies-alien-comments-scli-intl",
-      "domain": "edition.cnn.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "edition.cnn.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-2182715087.jpg?c=16x9&q=w_800,c_fill",
-      "tone": 0
-    },
-    {
-      "id": "5b7491c3de6f",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real  | National & World News",
-      "url": "https://www.news8000.com/news/national-world/obama-clarifies-alien-comments-after-telling-podcast-they-re-real/article_76ffb343-6ad2-5958-9940-a33e3b8626c8.html",
-      "domain": "news8000.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "news8000.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/news8000.com/content/tncms/assets/v3/editorial/4/62/462118d5-6139-5fc5-a9b2-cfeabceee746/6993089e485e3.image.jpg?crop=1763%2C926%2C0%2C124",
-      "tone": 0
-    },
-    {
-      "id": "5ad2ca67b93a",
-      "title": "Obama Elaborates on Alien Comments from Podcast :  Theyre Real",
-      "url": "https://www.el-balad.com/6853220",
-      "domain": "el-balad.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "el-balad.com (Egypt)",
-      "country": "Egypt",
-      "imageUrl": "https://www.el-balad.com/uploads/images/202602/image_1200x675_69930a475169c.webp",
-      "tone": 0
-    },
-    {
-      "id": "6e0a84da6a6f",
-      "title": "Ancient Aliens",
-      "url": "https://www.tvguide.co.uk/schedule/f89e48c0-b909-5008-bc1a-1b7844bd8d9d/ancient-aliens",
-      "domain": "tvguide.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "tvguide.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://tv.assets.pressassociation.io/d49559e0-6f42-5699-947d-a99c9c825b49.jpg",
-      "tone": 0
-    },
-    {
-      "id": "ec3db6e3e488",
-      "title": "Obama Comes Clean on What He Knows About Aliens",
-      "url": "https://www.thedailybeast.com/obama-comes-clean-on-what-he-knows-about-aliens/",
-      "domain": "thedailybeast.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "thedailybeast.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.thedailybeast.com/resizer/v2/T7EQNHPMOVAIRHWF7XL3K4YQEE.png?smart=true&auth=c1971cd24dceab78d23e04523bb71cdab455421cdea882a09f51622ac0835004",
-      "tone": 0
-    },
-    {
-      "id": "1b94276482cc",
-      "title": "Obama : Aliens Are  Real , But Arent in Area 51",
-      "url": "https://english.aawsat.com/varieties/5241284-obama-aliens-are-%E2%80%98real%E2%80%99-aren%E2%80%99t-area-51",
-      "domain": "english.aawsat.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "english.aawsat.com (Syria)",
-      "country": "Syria",
-      "imageUrl": "https://static.srpcdigital.com/styles/1200x600/public/2026-02/1393530_0.jpeg.webp",
-      "tone": 0
-    },
-    {
-      "id": "32edda23680b",
-      "title": "Obama says aliens likely exist but dismisses claims of secret US cover - up",
-      "url": "https://www.indiatvnews.com/news/world/obama-says-aliens-likely-exist-but-dismisses-claims-of-secret-us-cover-up-2026-02-16-1030427",
-      "domain": "indiatvnews.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "indiatvnews.com (India)",
-      "country": "India",
-      "imageUrl": "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2026/02/17699225361014533_2026_pre-grammy_gala_-_show_51911.jpg",
-      "tone": 0
-    },
-    {
-      "id": "4fddebf43e98",
-      "title": "Barack Obama says aliens are  real , but I havent seen them  in out - there new interview",
-      "url": "https://www.skynews.com.au/world-news/united-states/barack-obama-says-aliens-are-real-but-i-havent-seen-them-in-recent-podcast-interview/news-story/681dfb8b84df5521349fb9be6eb35bcc?nk=42954bff314b4e95c6a116a14595cd31-1771207315",
-      "domain": "skynews.com.au",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "skynews.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://content.api.news/v3/images/bin/7561a55cda70670a5293a1b350c43097",
-      "tone": 0
-    },
-    {
-      "id": "7933695c6016",
-      "title": "Obama says aliens are  real , but arent in Area 51 in new interview",
-      "url": "https://freerepublic.com/focus/f-news/4366984/posts",
-      "domain": "freerepublic.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "freerepublic.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 0
-    },
-    {
-      "id": "92ae9d12bd87",
-      "title": "Aliens are real , says Barack Obama . Former US President breaks his silence about  Area 51  conspiracy",
-      "url": "https://economictimes.indiatimes.com/magazines/panache/aliens-are-real-says-barack-obama-former-us-president-breaks-his-silence-about-area-51-conspiracy/articleshow/128389842.cms",
-      "domain": "economictimes.indiatimes.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "economictimes.indiatimes.com (India)",
-      "country": "India",
-      "imageUrl": "https://img.etimg.com/thumb/msid-128391348,width-1200,height-630,imgsize-54488,overlay-etpanache/articleshow.jpg",
-      "tone": 0
-    },
-    {
-      "id": "11fee36dad73",
-      "title": "Obama :  Aliens exist",
-      "url": "https://www.israelnationalnews.com/news/422441",
-      "domain": "israelnationalnews.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "israelnationalnews.com (Israel)",
-      "country": "Israel",
-      "imageUrl": "https://2.a7.org/files/pictures/000/1210281.jpg",
-      "tone": 0
-    },
-    {
-      "id": "fee7db9a2bf7",
-      "title": "Aliens are real Obama",
-      "url": "http://www.philippinetimes.com/news/278869519/aliens-are-real-obama",
-      "domain": "philippinetimes.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "philippinetimes.com (Philippines)",
-      "country": "Philippines",
-      "imageUrl": "https://image.chitra.live/api/v1/wps/05d1186/386c0ed2-4bbc-4136-862b-55821780891f/0/ZmY5NTRlMTQtYzJ-600x315.jpg",
-      "tone": 0
-    },
-    {
-      "id": "a480c9c8655a",
-      "title": "Obama says aliens  are real , but I havent seen them  in recent podcast interview",
-      "url": "https://www.wfmd.com/2026/02/15/obama-says-aliens-are-real-but-i-havent-seen-them-in-recent-podcast-interview/",
-      "domain": "wfmd.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "wfmd.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/02/931/523/obama-aliens.jpg?ve=1&tl=1",
-      "tone": 0
-    },
-    {
-      "id": "5115c6ba2f24",
-      "title": "Obama says aliens are  real  but rules out Area 51 cover - up : What the former US president revealed",
-      "url": "https://www.moneycontrol.com/world/obama-says-aliens-are-real-but-rules-out-area-51-cover-up-what-the-former-us-president-revealed-article-13828760.html",
-      "domain": "moneycontrol.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "moneycontrol.com (India)",
-      "country": "India",
-      "imageUrl": "https://images.moneycontrol.com/static-mcnews/2021/07/Barack-Obama_AP.jpg",
-      "tone": 0
-    },
-    {
-      "id": "8a4ce834872d",
-      "title": "Obama says aliens are real but hasnt seen them personally on podcast",
-      "url": "https://www.foxnews.com/media/obama-says-aliens-are-real-i-havent-seen-them-recent-podcast-interview",
-      "domain": "foxnews.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "foxnews.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://static.foxnews.com/foxnews.com/content/uploads/2026/02/obama-aliens.jpg",
-      "tone": 0
-    },
-    {
-      "id": "9ab043454e09",
-      "title": "Barack Obama says aliens are real – but shoots down conspiracy theory about Area 51",
-      "url": "https://www.aol.co.uk/articles/barack-obama-says-aliens-real-034813360.html",
-      "domain": "aol.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "aol.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://s.yimg.com/cv/apiv2/aolfp/images/og-image.png",
-      "tone": 0
-    },
-    {
       "id": "9816e9240b30",
       "title": "Barack Obama Says Aliens Are Real , but Not in Area 51",
       "url": "https://www.newsweek.com/barack-obama-says-aliens-are-real-but-not-in-area-51-11526045",
@@ -14704,306 +15004,6 @@
       "country": "United Kingdom",
       "imageUrl": "https://tv.assets.pressassociation.io/deb895ba-ead3-5c7b-9e0a-bf43f16c602e.jpg",
       "tone": 0
-    },
-    {
-      "id": "c3e8ca7b8422",
-      "title": "Online Searches That Now Land People In Wisconsin On Watchlists",
-      "url": "https://b105country.com/online-searches-to-get-arrested-wisconsin/",
-      "domain": "b105country.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "b105country.com",
-      "country": "",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-mnsearch.jpg?&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "3709306b0de2",
-      "title": "Online Searches That Now Land People In Wisconsin On Watchlists",
-      "url": "https://mix108.com/ixp/150/p/online-searches-to-get-arrested-wisconsin/",
-      "domain": "mix108.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "mix108.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-mnsearch.jpg?&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "438ffe20253a",
-      "title": "Online Searches That Now Land People In Wisconsin On Watchlists",
-      "url": "https://squatchrocks.com/ixp/150/p/online-searches-to-get-arrested-wisconsin/",
-      "domain": "squatchrocks.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "squatchrocks.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-mnsearch.jpg?&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "5f8ffe9b99ea",
-      "title": "Online Searches That Now Land People In Wisconsin On Watchlists",
-      "url": "https://quickcountry.com/ixp/150/p/online-searches-to-get-arrested-wisconsin/",
-      "domain": "quickcountry.com",
-      "publishedAt": "2026-03-20T13:36:10.312Z",
-      "language": "English",
-      "sourceName": "quickcountry.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-mnsearch.jpg?&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "166b7dfacc3b",
-      "title": "Trump Rumoured July 8 UFO Disclosure Speech Back in Spotlight After Lara Claims of Extraterrestrial Address",
-      "url": "https://www.ibtimes.co.uk/lara-trump-hints-ufo-disclosure-1780152",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1790328/donald-trump.jpg",
-      "tone": 0
-    },
-    {
-      "id": "ea442345edae",
-      "title": "White House Tries to Downplay Alien Story as Obama Comment Meets Trump In - Law Hint of Timed Reveal",
-      "url": "https://www.ibtimes.co.uk/white-house-briefing-alien-disclosure-speculation-1780084",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1791801/donald-trump.jpg",
-      "tone": 0
-    },
-    {
-      "id": "a595dccafca9",
-      "title": "Trump poised for historic UFO disclosure as daughter - in - law confirms extraterrestrial speech",
-      "url": "https://www.dailymail.co.uk/sciencetech/article-15571445/Trump-poised-historic-UFO-disclosure-daughter-law-confirms-extraterrestrial-speech.html",
-      "domain": "dailymail.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "dailymail.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i.dailymail.co.uk/1s/2026/02/18/18/106489929-0-image-m-24_1771438832080.jpg",
-      "tone": 0
-    },
-    {
-      "id": "596fc7cbb311",
-      "title": "Giant  hidden in plain sight UFO is being guarded at secret mountain base",
-      "url": "https://www.dailystar.co.uk/news/world-news/giant-hidden-plain-sight-ufo-36744791",
-      "domain": "dailystar.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "dailystar.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://i2-prod.dailystar.co.uk/article36744022.ece/ALTERNATES/s1200/1_Giant-crashed-UFO-being-hidden-in-plain-sight-in-guarded-mountain-base.jpg",
-      "tone": 0
-    },
-    {
-      "id": "3c4adb804368",
-      "title": "Lara Trump reveals president has speech pre - written to announce the discovery of alien life after Obama claim",
-      "url": "https://www.yahoo.com/news/articles/lara-trump-reveals-president-speech-130233632.html",
-      "domain": "yahoo.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "yahoo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s.yimg.com/os/en/the_independent_635/8bf0ba300d9bfbad1692d0131813952b",
-      "tone": 0
-    },
-    {
-      "id": "e4b6ebae0aed",
-      "title": "Pentagon Secret Blows Up As UFO Whistleblower Claims Two Giant Alien Craft Buried In South Korea And Oklahoma",
-      "url": "https://www.ibtimes.co.uk/ufo-researcher-claims-alien-crafts-hidden-south-korea-oklahoma-1779905",
-      "domain": "ibtimes.co.uk",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "ibtimes.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://d.ibtimes.co.uk/en/full/1791709/ufo.jpg",
-      "tone": 0
-    },
-    {
-      "id": "fae8f4ad5af4",
-      "title": "Tragic Lake City Fire Claims Life Of Local Man Richard Arruda",
-      "url": "https://therockofrochester.com/ixp/669/p/richard-arruda-lake-city-house-fire/",
-      "domain": "therockofrochester.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "therockofrochester.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/669/files/2026/02/attachment-apple-valley-high-school-20.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "fcc381aef44a",
-      "title": "Obama walks back extraterrestrial claims after sparking UFO frenzy – NaturalNews . com",
-      "url": "https://www.naturalnews.com/2026-02-17-obama-walks-back-extraterrestrial-claims-after-frenzy.html",
-      "domain": "naturalnews.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "naturalnews.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.naturalnews.com/wp-content/uploads/sites/91/2026/02/Barack-Obama.jpg",
-      "tone": 0
-    },
-    {
-      "id": "0da57eba9ee9",
-      "title": "Tragic Lake City Fire Claims Life Of Local Man Richard Arruda",
-      "url": "https://y105fm.com/ixp/669/p/richard-arruda-lake-city-house-fire/",
-      "domain": "y105fm.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "y105fm.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/669/files/2026/02/attachment-apple-valley-high-school-20.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
-      "id": "cb3f2136eefb",
-      "title": "Conspiracy Theorists Think Obama Is Sending Secret Messages With Talk About Aliens",
-      "url": "https://gizmodo.com/conspiracy-theorists-think-obama-is-sending-secret-messages-with-talk-about-aliens-2000722895",
-      "domain": "gizmodo.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "gizmodo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://gizmodo.com/app/uploads/2026/02/barack-obama-aliens-feb-14-2026-1200x675.jpg",
-      "tone": 0
-    },
-    {
-      "id": "896bbd76fe1f",
-      "title": "Eight of the strangest aviation projects of all time",
-      "url": "https://www.smh.com.au/traveller/reviews-and-advice/eight-of-the-strangest-aviation-projects-of-all-time-20260216-p5o2pr.html",
-      "domain": "smh.com.au",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "smh.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://static.ffx.io/images/$zoom_0.5295%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_52/t_crop_custom/q_86%2Cf_auto/t_metro_traveller_no_label_no_age_social_wm/cbb3856a30a5325caaa68e2d243c1bcc55055e72",
-      "tone": 0
-    },
-    {
-      "id": "bf39e98256df",
-      "title": "Obama clarifies alien comments after telling podcast  theyre real",
-      "url": "https://www.eastidahonews.com/2026/02/obama-clarifies-alien-comments-after-telling-podcast-theyre-real/",
-      "domain": "eastidahonews.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "eastidahonews.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s3.us-west-2.amazonaws.com/assets.eastidahonews.com/wp-content/uploads/2026/02/ObamaAliens.jpg",
-      "tone": 0
-    },
-    {
-      "id": "907dc0a4b1c3",
-      "title": "Aliens are  real , Obama says , as Washington shrugs",
-      "url": "https://www.spokesman.com/stories/2026/feb/16/aliens-are-real-obama-says-as-washington-shrugs/",
-      "domain": "spokesman.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "spokesman.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 0
-    },
-    {
-      "id": "1f5b8d204dc3",
-      "title": "10 Most Rewatchable Episodes Of The Twilight Zone",
-      "url": "https://www.tvline.com/2101962/the-twilight-zone-most-rewatchable-episodes/",
-      "domain": "tvline.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "tvline.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.tvline.com/img/gallery/10-most-rewatchable-episodes-of-the-twilight-zone/l-intro-1771044208.jpg",
-      "tone": 0
-    },
-    {
-      "id": "078f643dabbd",
-      "title": "10 Most Rewatchable Episodes Of The Twilight Zone",
-      "url": "https://www.yahoo.com/entertainment/tv/articles/10-most-rewatchable-episodes-twilight-000200330.html",
-      "domain": "yahoo.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "yahoo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/L9rDVu8m99bbzZUJKp3zRA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://media.zenfs.com/en/tvline.com/dd6ff170044512ba063d44d5ffe31001",
-      "tone": 0
-    },
-    {
-      "id": "83c71e847800",
-      "title": "Barack Obama Insists  Aliens Are Real  But He Hasnt  Seen Them",
-      "url": "https://radaronline.com/p/barack-obama-aliens-real-interview-area-51/",
-      "domain": "radaronline.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "radaronline.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.radaronline.com/brand-img/o1b9peLzF/1200x628/barack-obama-aliens-real-claim-biaarre-interview-1771273903701.jpg",
-      "tone": 0
-    },
-    {
-      "id": "c5764c575b76",
-      "title": "Aliens are  real , Obama says , as Washington shrugs | Nation",
-      "url": "https://www.unionleader.com/news/national/aliens-are-real-obama-says-as-washington-shrugs/article_ab2364e2-0efa-4afc-bb80-6b2149a40497.html",
-      "domain": "unionleader.com",
-      "publishedAt": "2026-03-20T13:36:10.311Z",
-      "language": "English",
-      "sourceName": "unionleader.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/unionleader.com/content/tncms/custom/image/595a0f6c-8b6f-11e8-996b-c70bb6ec20ab.jpg",
-      "tone": 0
-    },
-    {
-      "id": "a64db2c9eb16",
-      "title": "Footage Of Bizarre Aircraft Over California Goes Viral – But It Not A UFO",
-      "url": "https://www.slashgear.com/2052969/california-footage-stratolaunch-aircraft-not-ufo/",
-      "domain": "slashgear.com",
-      "publishedAt": "2026-03-19T09:36:29.899Z",
-      "language": "English",
-      "sourceName": "slashgear.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.slashgear.com/img/gallery/footage-of-bizarre-aircraft-over-california-goes-viral-but-its-not-a-ufo/l-intro-1765839076.jpg",
-      "tone": 0
-    },
-    {
-      "id": "2cdfcd94fe8d",
-      "title": "NASA launches unusual flying saucer - shaped spacecraft",
-      "url": "https://www.bransontrilakesnews.com/news/national/article_0f4bd5cc-e18a-5e48-a3ec-b6194f4f4c97.html",
-      "domain": "bransontrilakesnews.com",
-      "publishedAt": "2026-03-18T12:09:28.867Z",
-      "language": "English",
-      "sourceName": "bransontrilakesnews.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/bransontrilakesnews.com/content/tncms/assets/v3/editorial/9/f9/9f9a528c-2153-51f3-833b-6bbb25cc2bc8/694433b4cac4a.image.png?crop=1920%2C1008%2C0%2C35",
-      "tone": 2.5
-    },
-    {
-      "id": "aa13579dc514",
-      "title": "Wilco 2026 Solid Sound Fest : Breeders , Gang of Four ,  Mermaid Ave .",
-      "url": "https://www.billboard.com/music/concerts/wilco-2026-solid-sound-festival-breeders-mermaid-avenue-lineup-1236141491/",
-      "domain": "billboard.com",
-      "publishedAt": "2026-03-18T12:09:28.867Z",
-      "language": "English",
-      "sourceName": "billboard.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.billboard.com/wp-content/uploads/2025/12/Jeff-Tweedy-of-Wilco-2023-billboard-1800.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "1d0441100755",
-      "title": "On a road trip across America , I knew the truth was out there . The aliens ? Maybe not",
-      "url": "https://www.brisbanetimes.com.au/lifestyle/life-and-relationships/on-a-road-trip-across-america-i-knew-the-truth-was-out-there-the-aliens-maybe-not-20251202-p5nk8j.html",
-      "domain": "brisbanetimes.com.au",
-      "publishedAt": "2026-03-18T12:09:28.867Z",
-      "language": "English",
-      "sourceName": "brisbanetimes.com.au (Australia)",
-      "country": "Australia",
-      "imageUrl": "https://static.ffx.io/images/$zoom_0.8716049382716049%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_23/t_crop_custom/q_86%2Cf_auto/ca68a8864613f33d4a5cb163829b3a33a10bd4aa",
-      "tone": 2.5
     }
   ]
 }
