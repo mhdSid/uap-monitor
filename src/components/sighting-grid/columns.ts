@@ -6,6 +6,7 @@ import { BookmarkButton } from '@/components/bookmark-button'
 import { DataSourceId } from '@/enums'
 import { cx } from './cx'
 import type { Sighting, DataGridColumn } from '@/types'
+import { ShareButton } from '../share-button'
 
 const SOURCE_LABELS: Partial<Record<DataSourceId, string>> = {
   [DataSourceId.NUFORC]: 'NUFORC',
@@ -70,7 +71,8 @@ export function sightingColumns (): DataGridColumn<Sighting>[] {
           h('span', { className: cx.bottom },
             badges,
             inlineCred.el,
-            new BookmarkButton({ sightingId: row.id, size: 12 }).el
+            new BookmarkButton({ sightingId: row.id, size: 14 }).el,
+            new ShareButton({ size: 14, sightingId: row.id, year: row.occurredAt ? parseInt(row.occurredAt, 10) : undefined, title: row.summary?.slice(0, 60) }).el
           )
         )
       }
