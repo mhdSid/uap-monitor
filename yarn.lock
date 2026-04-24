@@ -5215,6 +5215,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stream-chain@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "stream-chain@npm:3.6.1"
+  checksum: 10c0/09e8b10c5dca2266be935a513a0ee4ac7dde3103d2e9d4e170a273022ce6d48e6a1661a61a384db52cfb23147e22be484387b1115f858d6adec25265ec02dfb4
+  languageName: node
+  linkType: hard
+
+"stream-json@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "stream-json@npm:2.1.0"
+  dependencies:
+    stream-chain: "npm:^3.6.1"
+  checksum: 10c0/7ec5f0f7a795d5843c52c2f79383ee1c414d544b69e153b9f60869fee150597143a38e17fcf7ec4a0092732ed062c493559a29763b0f76481e72fde22c847af7
+  languageName: node
+  linkType: hard
+
 "string.prototype.matchall@npm:^4.0.6":
   version: 4.0.12
   resolution: "string.prototype.matchall@npm:4.0.12"
@@ -5545,6 +5561,8 @@ __metadata:
     leaflet.markercluster: "npm:^1.5.3"
     node-fetch: "npm:^3.3.2"
     socks-proxy-agent: "npm:^8.0.5"
+    stream-chain: "npm:^3.6.1"
+    stream-json: "npm:^2.1.0"
     twitter-api-v2: "npm:^1.29.0"
     typescript: "npm:~5.9.3"
     typescript-eslint: "npm:^8.56.1"

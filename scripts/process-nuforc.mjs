@@ -20,9 +20,13 @@
  *   public/data/nuforc-manifest.json   — index of all chunks with counts
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
+import { writeFileSync, mkdirSync, existsSync, statSync, createReadStream } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+
+import { parser } from 'stream-json'
+import { streamArray } from 'stream-json/streamers/stream-array.js'
+import { chain } from 'stream-chain'
 
 import {
   Continent, Status, Shape, VALID_SHAPES,
@@ -247,9 +251,28 @@ function computeCredibility (record) {
 
 // truncate() imported from shared-constants.mjs
 
+// ─── Streaming JSON array reader ────────────────────────────────────
+//
+// `__sources/nuforc.json` exceeds V8's ~512MB single-string cap, so
+// `readFileSync` throws ERR_STRING_TOO_LONG. Stream-parse instead.
+// See note in scripts/nuforc-scrapper/scraper.mjs for the full rationale.
+
+function streamRecordsByYear (filePath, onRecord) {
+  return new Promise((resolve, reject) => {
+    const pipeline = chain([
+      createReadStream(filePath),
+      parser(),
+      streamArray()
+    ])
+    pipeline.on('data', ({ value }) => onRecord(value))
+    pipeline.on('end', resolve)
+    pipeline.on('error', reject)
+  })
+}
+
 // ─── Main ───────────────────────────────────────────────────────────
 
-function main () {
+async function main () {
   const inputPath = process.argv[2] || DEFAULT_INPUT
 
   if (!existsSync(inputPath)) {
@@ -259,31 +282,35 @@ function main () {
     process.exit(1)
   }
 
-  console.log(`\n  Reading ${inputPath}...`)
-  const raw = readFileSync(inputPath, 'utf-8')
+  const inputSizeMB = statSync(inputPath).size / 1024 / 1024
+  console.log(`\n  Reading ${inputPath} (${inputSizeMB.toFixed(0)} MB)...`)
 
-  console.log('  Parsing JSON...')
-  const records = JSON.parse(raw)
-  console.log(`  Found ${records.length.toLocaleString()} records`)
-
+  // Process each record as it streams in — never materialize the full file
+  // as a string, and never hold both raw + processed records simultaneously.
   const byYear = new Map()
   let skipped = 0
   let processed = 0
+  let total = 0
   const shapeCounts = new Map()
   const countryCounts = new Map()
 
-  for (const record of records) {
+  await streamRecordsByYear(inputPath, (record) => {
+    total++
+    if (total % 50000 === 0) {
+      console.log(`  ... streamed ${total.toLocaleString()} records`)
+    }
+
     const occurredAt = parseNuforcDate(record.Occurred)
     if (!occurredAt) {
       skipped++
-      continue
+      return
     }
 
     const year = occurredAt.slice(0, 4)
     const yearNum = parseInt(year, 10)
     if (yearNum < VALID_YEAR_MIN || yearNum > VALID_YEAR_MAX) {
       skipped++
-      continue
+      return
     }
 
     const reportedAt = parseNuforcDate(record.Reported) || occurredAt
@@ -321,7 +348,9 @@ function main () {
     if (!byYear.has(year)) byYear.set(year, [])
     byYear.get(year).push(sighting)
     processed++
-  }
+  })
+
+  console.log(`  Found ${total.toLocaleString()} records`)
 
   // ─ Deduplicate ─
   let dupes = 0
@@ -430,10 +459,14 @@ function main () {
 
   // Size report
   const totalMB = Object.values(manifest.years).reduce((a, y) => a + y.sizeKB, 0) / 1024
-  console.log(`\n  Total output: ${totalMB.toFixed(1)} MB (from ${(Buffer.byteLength(raw) / 1024 / 1024).toFixed(0)} MB input)`)
+  console.log(`\n  Total output: ${totalMB.toFixed(1)} MB (from ${inputSizeMB.toFixed(0)} MB input)`)
   console.log(`  Manifest: ${manifestPath}\n`)
 
   printStats('NUFORC Geocoder')
 }
 
-main()
+main().catch(err => {
+  console.error('Fatal error:', err.message)
+  if (err.stack) console.error(err.stack)
+  process.exit(1)
+})

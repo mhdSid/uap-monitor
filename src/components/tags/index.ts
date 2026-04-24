@@ -97,7 +97,7 @@ export function resolveToneVariant (tone: number): TagVariant {
 
 export function createToneTag (tone: number): HTMLElement {
   const variant = resolveToneVariant(tone)
-  return new Tag({ variant, size: TagSize.RESPONSIVE }).el
+  return new Tag({ variant, size: TagSize.SM }).el
 }
 
 // ─── Source tag helper ──────────────────────────────────────────────

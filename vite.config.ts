@@ -45,7 +45,7 @@ export default defineConfig({
     }
   },
   server: {
-    https: true
+    // https: true
   },
   build: {
     target: 'es2022',
@@ -63,7 +63,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    basicSsl(),
+    // basicSsl(),
     // cssInlinePlugin(),
     VitePWA({
       registerType: 'autoUpdate',

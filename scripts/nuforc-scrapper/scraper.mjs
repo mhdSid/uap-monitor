@@ -26,9 +26,14 @@
 import { Command } from "commander"
 import * as cheerio from "cheerio"
 import fs from "fs/promises"
-import { createWriteStream } from "fs"
+import { createWriteStream, createReadStream } from "fs"
 import path from "path"
 import nodeFetch from "node-fetch"
+import { parser } from "stream-json"
+import { streamArray } from "stream-json/streamers/stream-array.js"
+import { streamValues } from "stream-json/streamers/stream-values.js"
+import { pick } from "stream-json/filters/pick.js"
+import { chain } from "stream-chain"
 
 // Lazy-load Tor agent only when --tor is used
 let torAgent = null
@@ -47,7 +52,7 @@ const DETAIL_URL = (id) => `${BASE_URL}/sighting/?id=${id}`
 const RAW_CACHE_FILE = "nuforc_raw_cache.json"
 const DEFAULT_OUTPUT = "nuforc_output.json"
 const DEFAULT_DELAY_MS = 1000
-const CONSECUTIVE_MISS_LIMIT = 100
+const CONSECUTIVE_MISS_LIMIT = 10
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
 
@@ -109,13 +114,22 @@ function matchesYearFilter (record, yearRange) {
   return year >= yearRange.from && year <= yearRange.to
 }
 
-// ─── Streaming JSON array writer ─────────────────────────────────────────────
+// ─── Streaming JSON I/O ──────────────────────────────────────────────────────
 //
-// JSON.stringify() on arrays of 100K+ records with long text fields can exceed
-// V8's max string length (~512 MB), crashing with "Invalid string length".
-// Streaming writes each record individually, never holding the full string in
-// memory. Output is compact JSON (no pretty-print) — machine-read files don't
-// need indentation, and removing it meaningfully reduces file size.
+// V8 has a hard ~512MB cap on individual string primitives. Any attempt to
+// read or write a JSON file larger than that as a single string will throw
+// "Invalid string length". At 150K+ records with long description text, both
+// the raw cache (`nuforc_raw_cache.json`) and merge targets (`__sources/*.json`)
+// routinely cross this threshold.
+//
+// All readers (`loadRawCache`, `loadJsonArray`) stream-parse with stream-json,
+// emitting one record at a time — no intermediate full-file string.
+// All writers (`writeJsonArrayStream`, `saveRawCache`) write record-by-record
+// directly to a file stream — compact JSON, no pretty-print, no buffering.
+//
+// The in-memory JS array of ~150K parsed objects is fine (V8 hidden classes
+// compress object keys across records). Bump `--max-old-space-size=4096` on
+// the node command line if heap pressure becomes an issue.
 
 async function writeJsonArrayStream (filePath, records) {
   return new Promise((resolve, reject) => {
@@ -606,20 +620,68 @@ function transformAllRecords (records, schema) {
   return records.map((raw) => transformRecord(raw, schema))
 }
 
-// ─── Main Orchestration ─────────────────────────────────────────────────────
+// ─── Raw cache I/O ──────────────────────────────────────────────────────────
+//
+// Format: `{ "metadata": { ... }, "records": [ ... ] }`
+// Both reads and writes stream — see note above `writeJsonArrayStream`.
 
 async function loadRawCache (filePath) {
   try {
-    const content = await fs.readFile(filePath, "utf-8")
-    return JSON.parse(content)
+    await fs.access(filePath)
   } catch (err) {
     if (err.code === "ENOENT") return null
     throw err
   }
+
+  let metadata = {}
+  const records = []
+
+  // Stream metadata — it's small, but streaming it avoids a second full-file
+  // read. `pick` + `streamValues` assembles the metadata object and emits it
+  // as a single data event.
+  await new Promise((resolve, reject) => {
+    const pipeline = chain([
+      createReadStream(filePath),
+      parser(),
+      pick({ filter: "metadata" }),
+      streamValues()
+    ])
+    pipeline.on("data", ({ value }) => { metadata = value })
+    pipeline.on("end", resolve)
+    pipeline.on("error", reject)
+  })
+
+  // Stream records one at a time — this is the large array that would bust
+  // V8's string cap if read via fs.readFile.
+  await new Promise((resolve, reject) => {
+    const pipeline = chain([
+      createReadStream(filePath),
+      parser(),
+      pick({ filter: "records" }),
+      streamArray()
+    ])
+    pipeline.on("data", ({ value }) => records.push(value))
+    pipeline.on("end", resolve)
+    pipeline.on("error", reject)
+  })
+
+  return { metadata, records }
 }
 
 async function saveRawCache (filePath, data) {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8")
+  return new Promise((resolve, reject) => {
+    const stream = createWriteStream(filePath, { encoding: "utf-8" })
+    stream.on("error", reject)
+    stream.on("finish", resolve)
+    // Metadata is small — stringify safely. Records stream one at a time.
+    stream.write(`{"metadata":${JSON.stringify(data.metadata)},"records":[\n`)
+    for (let i = 0; i < data.records.length; i++) {
+      stream.write(JSON.stringify(data.records[i]))
+      if (i < data.records.length - 1) stream.write(",\n")
+    }
+    stream.write("\n]}\n")
+    stream.end()
+  })
 }
 
 // ─── Merge Utilities ────────────────────────────────────────────────────────
@@ -627,10 +689,10 @@ async function saveRawCache (filePath, data) {
 // --merge <file> merges transformed output into an existing JSON array file.
 //
 // Flow:
-//   1. Read existing merge destination → existingRecords[]
+//   1. Read existing merge destination → existingRecords[]  (streamed)
 //   2. Create hidden backup:  dir/.filename.backup.json
 //   3. Deduplicate by --merge-key (default: "id")
-//   4. Write merged result to the merge destination
+//   4. Write merged result to the merge destination              (streamed)
 //
 // The --output file still gets written as-is (just the new transformed data).
 // The --merge file gets the combined set.
@@ -721,21 +783,33 @@ function mergeRecords (existingRecords, newRecords, mergeKey, strategy) {
 }
 
 /**
- * Load a JSON array file, returning [] if it doesn't exist.
+ * Load a JSON array file via stream-parse.
+ *
+ * Returns null if the file doesn't exist, [] if it's empty, otherwise the
+ * array. Non-array root elements throw — previously we wrapped them in a
+ * single-element array, but that masks real data corruption and the merge
+ * targets in this project are always arrays (written by writeJsonArrayStream).
  */
 async function loadJsonArray (filePath) {
   try {
-    const content = await fs.readFile(filePath, "utf-8")
-    const parsed = JSON.parse(content)
-    if (!Array.isArray(parsed)) {
-      log(`⚠ Merge target is not a JSON array — wrapping in array`)
-      return [parsed]
-    }
-    return parsed
+    await fs.access(filePath)
   } catch (err) {
     if (err.code === "ENOENT") return null
     throw err
   }
+
+  const records = []
+  await new Promise((resolve, reject) => {
+    const pipeline = chain([
+      createReadStream(filePath),
+      parser(),
+      streamArray()
+    ])
+    pipeline.on("data", ({ value }) => records.push(value))
+    pipeline.on("end", resolve)
+    pipeline.on("error", reject)
+  })
+  return records
 }
 
 function buildCacheData (records, yearRange, collected, notFound, outOfRange) {

@@ -55,7 +55,7 @@ export function intelFeedColumns (): DataGridColumn<IntelArticle>[] {
       label: 'TONE',
       width: '110px',
       align: 'right',
-      render: (row) => row.tone != null ? createToneTag(row.tone) : new Tag({ variant: TagVariant.DISABLED, label: 'N/A', size: TagSize.RESPONSIVE }).el
+      render: (row) => row.tone != null ? createToneTag(row.tone) : new Tag({ variant: TagVariant.DISABLED, label: 'N/A', size: TagSize.SM }).el
     },
     {
       key: 'publishedAt',
