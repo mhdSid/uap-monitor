@@ -15,7 +15,7 @@ import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
 import { h, clearChildren, addClass, qs } from '@/core/dom'
 import { useAppStore, useFireball, useNuclear, useTheme, useShare, effect, filterSightings } from '@/composables'
-import { AlertVariant, ButtonSize } from '@/enums'
+import { AlertVariant, ButtonSize, ComponentSize } from '@/enums'
 import { Section } from '@/components/layout'
 import { DataSources } from '@/components/data-sources'
 import { Alert } from '@/components/alert'
@@ -108,7 +108,10 @@ export class MonitorView extends Component {
       onSubmit: (e: Event) => e.preventDefault()
     },
       new YearSelector({}).el,
-      new FilterToolbar({}).el
+      new FilterToolbar({
+        inputSize: ComponentSize.MD,
+        selectSize: ComponentSize.MD
+      }).el
     )
 
     // ── SP: drawer-wrapped controls (hidden on desktop via CSS) ──
