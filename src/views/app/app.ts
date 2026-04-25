@@ -211,7 +211,7 @@ export class App extends Component {
 
   private initRouter (): void {
     this.router = createRouter<RouteNames>({
-      base: 'https://uapmonitor.org',
+      base: import.meta.env.VITE_REPO_URL,
       container: this.viewContainer,
       fallback: RouteName.MONITOR,
 
