@@ -227,6 +227,7 @@ export function getChunkKeysForRange (
 
   for (const key of yearKeys) {
     if (simpleYears) {
+      if (key.endsWith('s')) continue
       const y = parseInt(key, 10)
       if (!isNaN(y) && y >= fromYear && y <= toYear) keys.push(key)
       continue

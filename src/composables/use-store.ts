@@ -45,14 +45,14 @@ function subAll (deps: Set<Trackable>, cb: Listener): () => void {
 // ─── Notification (snapshot-safe) ───────────────────────────────────
 
 let batchDepth = 0
-const batchQueue: Listener[] = []
+const batchQueue = new Set<Listener>()
 
 /** Snapshot listeners, then schedule or call them. */
 function emit (listeners: Set<Listener>): void {
   if (listeners.size === 0) return
   const snap = [...listeners]
   if (batchDepth > 0) {
-    batchQueue.push(...snap)
+    for (const fn of snap) batchQueue.add(fn)
   } else {
     for (const fn of snap) fn()
   }
@@ -64,8 +64,9 @@ export function batch (fn: () => void): void {
   batchDepth++
   try { fn() } finally {
     if (--batchDepth === 0) {
-      while (batchQueue.length > 0) {
-        const queued = batchQueue.splice(0)
+      while (batchQueue.size > 0) {
+        const queued = [...batchQueue]
+        batchQueue.clear()
         for (const fn of queued) fn()
       }
     }
