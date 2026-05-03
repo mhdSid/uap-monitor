@@ -12,6 +12,7 @@
  *   node scraper.mjs --start-id 196099 --years 2024-2026  # walk back from known ID
  *   node scraper.mjs --years 2026                       # scrape all 2026 sightings
  *   node scraper.mjs --years 2026 --tor                 # scrape via Tor
+ *   node scraper.mjs --years 2026 --puppeteer           # bypass Cloudflare via headless Chrome
  *   node scraper.mjs --cache --schema schema.json       # transform cached data with schema
  *   node scraper.mjs --cache --schema s.json --merge out.json  # transform + merge into existing file
  *   node scraper.mjs --resume --years 2024-2026         # resume interrupted scrape
@@ -45,6 +46,63 @@ async function getTorAgent () {
   return torAgent
 }
 
+// Lazy-load Puppeteer only when --puppeteer is used
+let puppeteerBrowser = null
+let puppeteerPage = null
+
+async function getPuppeteerPage () {
+  if (puppeteerPage) return puppeteerPage
+
+  let puppeteer
+  try {
+    puppeteer = (await import("puppeteer")).default
+  } catch (err) {
+    throw new Error(
+      "Puppeteer not installed. Run: yarn add -D puppeteer  (or npm i -D puppeteer)"
+    )
+  }
+
+  puppeteerBrowser = await puppeteer.launch({
+    headless: false, //opts.puppeteerHeadless !== false,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-blink-features=AutomationControlled",
+      "--disable-dev-shm-usage"
+    ]
+  })
+  puppeteerPage = await puppeteerBrowser.newPage()
+  await puppeteerPage.setUserAgent(USER_AGENT)
+  await puppeteerPage.setExtraHTTPHeaders({
+    "Accept-Language": "en-US,en;q=0.9",
+    Referer: "https://nuforc.org/subndx/?id=all"
+  })
+
+  // Warm up: hit the index page once so Cloudflare can issue clearance cookies
+  log("Puppeteer: warming up (solving Cloudflare challenge if present)...")
+  try {
+    await puppeteerPage.goto("https://nuforc.org/subndx/?id=all", {
+      waitUntil: "domcontentloaded",
+      timeout: 60000
+    })
+    // Allow time for any JS challenge to complete
+    await new Promise(r => setTimeout(r, 8000))
+    log("Puppeteer: ready")
+  } catch (err) {
+    debug(`Warmup navigation note: ${err.message}`)
+  }
+
+  return puppeteerPage
+}
+
+async function closePuppeteer () {
+  if (puppeteerBrowser) {
+    try { await puppeteerBrowser.close() } catch { /* ignore */ }
+    puppeteerBrowser = null
+    puppeteerPage = null
+  }
+}
+
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const BASE_URL = "https://nuforc.org"
@@ -52,7 +110,15 @@ const DETAIL_URL = (id) => `${BASE_URL}/sighting/?id=${id}`
 const RAW_CACHE_FILE = "nuforc_raw_cache.json"
 const DEFAULT_OUTPUT = "nuforc_output.json"
 const DEFAULT_DELAY_MS = 1000
-const CONSECUTIVE_MISS_LIMIT = 10
+const CONSECUTIVE_MISS_LIMIT = 100
+const RESUME_LOOK_AHEAD = 50
+const PAST_RANGE_LIMIT = 25
+
+// Paste cf_clearance cookie value from your browser (DevTools → Application → Cookies → nuforc.org)
+// Token is bound to USER_AGENT below — both must come from the same browser session.
+// Typically valid ~24h. Used only when --puppeteer is NOT set.
+const CF_CLEARANCE = "PASTE_CF_CLEARANCE_HERE"
+const USER_AGENT = "PASTE_BROWSER_USER_AGENT_HERE"
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
 
@@ -75,7 +141,10 @@ program
   .option("--merge-key <field>", "Field to deduplicate on when merging (dot notation for nested, e.g. 'id' or 'sighting_id')", "id")
   .option("--merge-strategy <s>", "How to handle duplicates: 'keep-existing' or 'keep-new'", "keep-new")
   .option("--tor", "Route requests through Tor (socks5h://127.0.0.1:9050)")
+  .option("--puppeteer", "Use headless Chrome (puppeteer) to bypass Cloudflare bot challenges — requires `puppeteer` package installed")
+  .option("--puppeteer-headless", "Run puppeteer in headless mode (default: true)", true)
   .option("--verbose", "Verbose logging")
+  .option("--past-range-limit <n>", "When --years is set, stop after N consecutive records older than the range", v => parseInt(v, 10), PAST_RANGE_LIMIT)
   .parse()
 
 const opts = program.opts()
@@ -157,59 +226,82 @@ async function writeJsonArrayStream (filePath, records) {
 //
 // node-fetch supports the standard `agent` option which works correctly
 // with SocksProxyAgent, https-proxy-agent, etc.
+//
+// Dispatcher pattern: fetchPage and fetchWithRetry route through one of two
+// backends (HTTP via node-fetch, or headless Chrome via puppeteer) chosen by
+// --puppeteer. Future backends (FlareSolverr, Playwright) plug in here.
 
 async function buildFetchOptions () {
-  const fetchOpts = {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; rv:128.0) Gecko/20100101 Firefox/128.0",
-      Accept: "text/html,application/xhtml+xml",
-      Referer: "https://nuforc.org/subndx/?id=all"
-    }
+  const headers = {
+    "User-Agent": USER_AGENT,
+    Accept: "text/html,application/xhtml+xml",
+    Referer: "https://nuforc.org/subndx/?id=all"
   }
+  if (CF_CLEARANCE && CF_CLEARANCE !== "PASTE_CF_CLEARANCE_HERE") {
+    headers.Cookie = `cf_clearance=${CF_CLEARANCE}`
+  }
+  const fetchOpts = { headers }
   if (opts.tor) {
     fetchOpts.agent = await getTorAgent()
   }
   return fetchOpts
 }
 
-async function fetchPage (url) {
-  const fetchOpts = await buildFetchOptions()
+async function fetchPagePuppeteer (url) {
+  const page = await getPuppeteerPage()
+  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 })
+  const status = response ? response.status() : 0
 
+  // If Cloudflare challenge HTML, wait for real content to appear
+  let html = await page.content()
+  if (html.includes("Just a moment") || html.includes("Performing security verification")) {
+    debug(`Puppeteer: challenge detected on ${url}, waiting for resolution...`)
+    try {
+      await page.waitForFunction(
+        () => !document.title.includes("Just a moment") && !document.body.innerText.includes("Performing security verification"),
+        { timeout: 30000 }
+      )
+      html = await page.content()
+    } catch {
+      throw new Error(`HTTP challenge unresolved for ${url}`)
+    }
+  }
+
+  if (status >= 400) throw new Error(`HTTP ${status} for ${url}`)
+  return html
+}
+
+async function fetchPageHttp (url) {
+  const fetchOpts = await buildFetchOptions()
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
-
   try {
-    const res = await nodeFetch(url, {
-      ...fetchOpts,
-      signal: controller.signal
-    })
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status} for ${url}`)
-    }
-
+    const res = await nodeFetch(url, { ...fetchOpts, signal: controller.signal })
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`)
     return await res.text()
   } finally {
     clearTimeout(timeout)
   }
 }
 
+async function fetchPage (url) {
+  return opts.puppeteer ? fetchPagePuppeteer(url) : fetchPageHttp(url)
+}
+
 async function fetchWithRetry (url, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
+      if (opts.puppeteer) return await fetchPagePuppeteer(url)
+
       const fetchOpts = await buildFetchOptions()
       const res = await nodeFetch(url, fetchOpts)
-
       if (res.status === 429 || res.status === 503) {
         const wait = Math.pow(2, attempt) * 3000
         log(`Rate limited (${res.status}), backing off ${wait}ms...`)
         await sleep(wait)
         continue
       }
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`)
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
       return await res.text()
     } catch (err) {
       if (attempt === retries) throw err
@@ -836,12 +928,12 @@ async function probeId (id) {
   }
 }
 
-async function discoverLatestId () {
-  let lo = 1
-  let hi = 196319
+async function discoverLatestId (cachedMax = 0) {
+  let lo = Math.max(1, cachedMax)
+  let hi = Math.max(cachedMax + 5000, 200000)
   let lastValid = null
 
-  log("Binary search for latest sighting ID...")
+  log(`Binary search for latest sighting ID (range ${lo}–${hi})...`)
 
   while (lo <= hi) {
     const mid = Math.floor((lo + hi) / 2)
@@ -884,6 +976,7 @@ async function runScrapeMode () {
   log(`Request delay: ${delay}ms`)
   log(`Miss limit: ${missLimit} consecutive`)
   log(`Tor: ${opts.tor ? "enabled" : "disabled"}`)
+  log(`Puppeteer: ${opts.puppeteer ? "enabled" : "disabled"}`)
   log(`Raw cache: ${opts.rawFile}`)
   log("")
 
@@ -908,21 +1001,27 @@ async function runScrapeMode () {
   // Resume support
   let existingCache = null
   const existingIds = new Set()
+  let cachedMax = 0
   if (opts.resume) {
     existingCache = await loadRawCache(opts.rawFile)
     if (existingCache) {
       for (const r of existingCache.records) {
         existingIds.add(r._sighting_id)
+        if (r._sighting_id > cachedMax) cachedMax = r._sighting_id
       }
-      log(`Resume: ${existingIds.size} records already cached`)
+      log(`Resume: ${existingIds.size} records already cached (max ID: ${cachedMax})`)
     }
   }
 
-  // Discover start ID
+  // Discover start ID — derive from cache only when not explicitly given
   let startId = opts.startId
+  if (opts.resume && cachedMax > 0 && !startId) {
+    startId = cachedMax + RESUME_LOOK_AHEAD
+    log(`Resume: auto-starting from ${startId} (cachedMax=${cachedMax} + lookAhead=${RESUME_LOOK_AHEAD})`)
+  }
   if (!startId) {
     log("No --start-id given, probing for latest sighting ID...")
-    startId = await discoverLatestId()
+    startId = await discoverLatestId(cachedMax)
     if (!startId) {
       log("Could not discover latest ID. Use --start-id <n> manually.")
       process.exit(1)
@@ -945,6 +1044,14 @@ async function runScrapeMode () {
   let lastCheckpoint = 0
 
   while (currentId > 0 && collected < limit && consecutiveMisses < missLimit) {
+    // Resume safety: stop once walk reaches cached territory.
+    // Must be before batch building — otherwise the boundary batch
+    // gets built then dropped.
+    if (opts.resume && cachedMax > 0 && currentId <= cachedMax) {
+      log(`Reached cached territory (currentId=${currentId} ≤ cachedMax=${cachedMax}) — stopping.`)
+      break
+    }
+
     const batchIds = []
     for (let i = 0; i < concurrency && (currentId - i) > 0; i++) {
       const id = currentId - i
@@ -954,7 +1061,12 @@ async function runScrapeMode () {
     }
     currentId -= concurrency
 
-    if (batchIds.length === 0) continue
+    if (batchIds.length === 0) {
+      // Cached IDs prove the ID space is populated — these aren't misses
+      consecutiveMisses = 0
+      consecutivePastRange = 0
+      continue
+    }
 
     // Stagger requests within batch
     const batchResults = await Promise.all(
@@ -1031,19 +1143,24 @@ async function runScrapeMode () {
       consecutiveMisses += batchIds.length
     }
 
-    // Early stop: if every valid record in this batch is OLDER than our
-    // target year range, we've walked past it — no point continuing.
-    // Only activates AFTER we've collected at least 1 record (so we don't
-    // stop before reaching the target range when resuming with older years).
-    if (yearRange && collected > 0 && batchPastRange > 0 && batchPastRange === batchResults.filter(r => r.status === "ok").length) {
-      consecutivePastRange += batchPastRange
-    } else if (batchResults.length > 0) {
-      // Only reset when we actually processed a batch (don't let skipped
-      // batches from --resume leave the counter stale)
-      consecutivePastRange = 0
+    // Early stop: track records older than our target year range.
+    // Only "ok" records carry signal — not_found/error batches are neutral
+    // (we don't know what year those IDs were).
+    if (yearRange && collected > 0) {
+      const okCount = batchResults.filter(r => r.status === "ok").length
+      if (okCount > 0) {
+        if (batchPastRange === okCount) {
+          // Every successful record in this batch was older than our range
+          consecutivePastRange += batchPastRange
+        } else {
+          // At least one record landed in range — we haven't passed yet
+          consecutivePastRange = 0
+        }
+      }
+      // okCount === 0 → leave counter unchanged (no signal either way)
     }
-    if (consecutivePastRange >= missLimit) {
-      log(`All recent records are before ${yearRange.from} — stopping early.`)
+    if (consecutivePastRange >= opts.pastRangeLimit) {
+      log(`${consecutivePastRange} consecutive records before ${yearRange.from} — stopping early.`)
       break
     }
 
@@ -1184,6 +1301,8 @@ async function main () {
     console.error("Fatal error:", err.message)
     if (opts.verbose) console.error(err.stack)
     process.exit(1)
+  } finally {
+    await closePuppeteer()
   }
 }
 
