@@ -13,7 +13,7 @@ import { cx } from './cx'
 
 import { Modal } from '@/components/modal'
 import { Button } from '@/components/button'
-import { ButtonSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 import { Loader } from '@/components/loader'
 import { h, clearChildren, addClass } from '@/core/dom'
 import { WELCOME } from '@/data/strings'
@@ -84,8 +84,8 @@ export class WelcomeModal {
   private static buildFooter (): HTMLElement {
     const btn = new Button({
       label: WELCOME.CTA,
-      variant: 'solid',
-      color: 'primary',
+      variant: ButtonVariant.SOLID,
+      color: ButtonColor.PRIMARY,
       size: ButtonSize.MD,
       block: true,
       onClick: () => Modal.close()

@@ -6,7 +6,7 @@ import { TextInput } from '@/components/text-input'
 import { TextArea } from '@/components/text-area'
 import { Select } from '@/components/select'
 import { Button } from '@/components/button'
-import { ButtonSize, ComponentSize, SightingShape } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor, ComponentSize, SightingShape } from '@/enums'
 import { SUBMIT_FORM, ARIA } from '@/data/strings'
 import { useToast } from '@/components/toast'
 import type { SelectOption } from '@/components/select'
@@ -118,8 +118,8 @@ export class SubmitForm extends Component {
 
     this.submitBtn = new Button({
       label: SUBMIT_FORM.SUBMIT_LABEL,
-      variant: 'solid',
-      color: 'primary',
+      variant: ButtonVariant.SOLID,
+      color: ButtonColor.PRIMARY,
       size: ButtonSize.MD,
       onClick: async () => {
         if (this.submitting) return

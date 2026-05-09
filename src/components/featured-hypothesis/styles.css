@@ -1,0 +1,121 @@
+/* ─── Featured Hypothesis banner ──────────────────────────────────── */
+
+.featured-hypothesis {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-green);
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-surface),
+      var(--c-neutral-955)
+    );
+  padding: var(--space-12) var(--space-12);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+  text-align: left;
+}
+
+.featured-hypothesis:hover,
+.featured-hypothesis:focus-visible {
+  border-color: var(--color-green);
+  outline: none;
+}
+
+.featured-hypothesis__crosshair {
+  position: absolute;
+  top: -32px;
+  right: -32px;
+  width: 220px;
+  height: 220px;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image:
+    radial-gradient(circle, var(--color-green) 1.5px, transparent 1.5px),
+    linear-gradient(0deg, transparent 49%, var(--color-green) 49%, var(--color-green) 51%, transparent 51%),
+    linear-gradient(90deg, transparent 49%, var(--color-green) 49%, var(--color-green) 51%, transparent 51%);
+  background-size: 14px 14px, 100% 100%, 100% 100%;
+}
+
+.featured-hypothesis__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 720px;
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────────────── */
+
+.featured-hypothesis__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.featured-hypothesis__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 6px var(--c-green-500-50);
+}
+
+.featured-hypothesis__eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--color-green);
+  text-transform: uppercase;
+}
+
+/* ── Headline ────────────────────────────────────────────────────── */
+
+.featured-hypothesis__headline {
+  font-family: var(--font-mono);
+  font-size: var(--fs-title);
+  font-weight: 700;
+  color: var(--color-text-strong);
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* ── Summary ─────────────────────────────────────────────────────── */
+
+.featured-hypothesis__summary {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 0.3px;
+  max-width: 600px;
+}
+
+/* ── CTAs ────────────────────────────────────────────────────────── */
+
+.featured-hypothesis__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* ── Desktop sizing ──────────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+  .featured-hypothesis {
+    padding: var(--space-14) var(--space-14);
+  }
+
+  .featured-hypothesis__headline {
+    font-size: var(--fs-lg);
+  }
+}

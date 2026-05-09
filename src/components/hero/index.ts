@@ -4,7 +4,7 @@ import { Component } from '@/core'
 import { h, setText } from '@/core/dom'
 import { Button } from '@/components/button'
 import { HERO } from '@/data/strings'
-import { ButtonSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 import { useAppStore, effect } from '@/composables'
 
 export interface HeroProps {
@@ -35,8 +35,8 @@ export class Hero extends Component<HeroProps> {
 
     const cta = new Button({
       label: HERO.CTA,
-      variant: 'filled',
-      color: 'primary',
+      variant: ButtonVariant.FILLED,
+      color: ButtonColor.PRIMARY,
       size: ButtonSize.MD,
       onClick: () => this.props.onExplore?.()
     })

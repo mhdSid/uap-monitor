@@ -1,0 +1,48 @@
+/* ─── Advanced Filters — collapsible Tier-2 panel ─────────────────── */
+
+.advanced-filters {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-base);
+}
+
+.advanced-filters--open {
+  grid-template-rows: 1fr;
+}
+
+.advanced-filters__inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.advanced-filters__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.advanced-filters__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.advanced-filters__group-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+/* Year selector lives inline with no border when nested in the panel */
+
+.advanced-filters .year-selector,
+.advanced-filters .filter-toolbar {
+  border: 1px solid var(--color-border);
+}

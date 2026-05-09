@@ -20,7 +20,7 @@ import './app.css'
 import { cx } from './cx'
 import { Component, RouteName, createRouter } from '@/core'
 import type { Sighting } from '@/types'
-import { h, mount, show, hide } from '@/core/dom'
+import { h, mount } from '@/core/dom'
 import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, batch, minDelay } from '@/composables'
 import type { RouterInstance, RouteNames } from '@/core'
 import { Header } from '@/components/header'
@@ -285,13 +285,9 @@ export class App extends Component {
         this.navTabs.setActive(to)
       },
 
-      onAfterSwitch: (route) => {
-        // Show/hide monitor FAB
-        if (this.monView) {
-          const fab = this.monView.getFab()
-          if (route === RouteName.MONITOR) show(fab)
-          else hide(fab)
-        }
+      onAfterSwitch: () => {
+        // FilterDeck (sticky) replaces the previous monitor FAB.
+        // No per-route show/hide is needed.
       }
     })
 

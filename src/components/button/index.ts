@@ -11,12 +11,9 @@ import { cx } from './cx'
 
 import { Component } from '@/core'
 import { h, addClass } from '@/core/dom'
-import { ButtonSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 
 // ─── Types ──────────────────────────────────────────────────────────
-
-export type ButtonVariant = 'solid' | 'filled' | 'outline' | 'soft' | 'ghost'
-export type ButtonColor = 'primary' | 'secondary' | 'neutral' | 'error'
 
 export interface ButtonProps {
   label: string
@@ -39,8 +36,8 @@ export class Button extends Component<ButtonProps> {
   protected create (): HTMLElement {
     const {
       label,
-      variant = 'solid',
-      color = 'primary',
+      variant = ButtonVariant.SOLID,
+      color = ButtonColor.PRIMARY,
       size = ButtonSize.MD,
       block = false,
       round = false,

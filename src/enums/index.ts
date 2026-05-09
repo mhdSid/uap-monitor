@@ -152,3 +152,20 @@ export enum ButtonSize {
   XXL = '2xl',
   XXXL = '3xl'
 }
+
+/** Visual treatment for Button. */
+export enum ButtonVariant {
+  SOLID = 'solid',
+  FILLED = 'filled',
+  OUTLINE = 'outline',
+  SOFT = 'soft',
+  GHOST = 'ghost'
+}
+
+/** Semantic color for Button. */
+export enum ButtonColor {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  NEUTRAL = 'neutral',
+  ERROR = 'error'
+}

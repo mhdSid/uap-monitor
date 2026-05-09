@@ -1,7 +1,7 @@
 import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
-import { AlertVariant, ButtonSize } from '@/enums'
+import { AlertVariant, ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 import { ARIA } from '@/data/strings'
 import { h, setText } from '@/core/dom'
 import { Button } from '@/components/button'
@@ -64,8 +64,8 @@ export class Alert extends Component<AlertProps> {
     if (this.props.dismissible) {
       const dismissBtn = new Button({
         label: ARIA.DISMISS_ALERT,
-        variant: 'ghost',
-        color: 'neutral',
+        variant: ButtonVariant.GHOST,
+        color: ButtonColor.NEUTRAL,
         size: ButtonSize.SM,
         round: true,
         ariaLabel: ARIA.DISMISS_ALERT,

@@ -15,7 +15,7 @@ import type { ModalSlots } from '@/types'
 import { h, addClass, removeClass, setAttrs, qs } from '@/core/dom'
 import { iconClose } from '@/components/icons'
 import { ARIA } from '@/data/strings'
-import { ButtonSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 import { Button } from '../button'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -38,8 +38,8 @@ export class Modal {
 
     const closeBtnComp = new Button({
       label: ARIA.CLOSE_MODAL,
-      variant: 'ghost',
-      color: 'neutral',
+      variant: ButtonVariant.GHOST,
+      color: ButtonColor.NEUTRAL,
       size: ButtonSize.MD,
       round: true,
       ariaLabel: ARIA.CLOSE_MODAL,

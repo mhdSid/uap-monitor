@@ -2,8 +2,8 @@ import './styles.css'
 import { cx } from './cx'
 import { Component } from '@/core'
 import { h } from '@/core/dom'
-import { Continent, SightingShape, DataSourceId } from '@/enums'
-import { CONTINENT_LABELS, FILTER, ARIA } from '@/data/strings'
+import { SightingShape, DataSourceId } from '@/enums'
+import { FILTER, ARIA } from '@/data/strings'
 import { useAppStore, useDebounce } from '@/composables'
 import { TextInput } from '@/components/text-input'
 import { Select } from '@/components/select'
@@ -30,13 +30,6 @@ function shapeOptions (): SelectOption[] {
   ]
 }
 
-function continentOptions (): SelectOption[] {
-  return [
-    { value: '', label: FILTER.ALL_REGIONS },
-    ...Object.entries(CONTINENT_LABELS).map(([value, label]) => ({ value, label }))
-  ]
-}
-
 // ─── Component ──────────────────────────────────────────────────────
 
 export interface FilterToolbarProps {
@@ -48,7 +41,6 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
   private currentFilter!: SightingFilter
   private searchInput!: TextInput
   private shapeSelect!: Select
-  private continentSelect!: Select
   private countrySelect!: Select
   private emitDebounced!: ReturnType<typeof useDebounce>
 
@@ -59,7 +51,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
     const selectSize = this.props.selectSize ?? ComponentSize.LG
 
     const emit = (): void => {
-      store.filter.set({ ...this.currentFilter })
+      store.filter.set({ ...store.filter.get(), ...this.currentFilter })
     }
 
     this.emitDebounced = useDebounce(emit, 300)
@@ -70,14 +62,14 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       name: 'filter-search',
       placeholder: FILTER.SEARCH_PLACEHOLDER,
       ariaLabel: ARIA.SEARCH,
-      autofocus: true,
+      autofocus: false,
       size: inputSize,
       clearable: true,
       onInput: (val) => {
         this.currentFilter.search = val || undefined
         if (!val) {
           this.emitDebounced.flush()
-          store.filter.set({ ...this.currentFilter })
+          store.filter.set({ ...store.filter.get(), search: undefined })
         } else {
           this.emitDebounced()
         }
@@ -85,7 +77,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       onClear: () => {
         this.currentFilter.search = undefined
         this.emitDebounced.flush()
-        store.filter.set({ ...this.currentFilter })
+        store.filter.set({ ...store.filter.get(), search: undefined })
       }
     })
 
@@ -99,23 +91,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       onChange: (val) => {
         this.currentFilter.shape = val ? (val as SightingShape) : undefined
         this.emitDebounced.flush()
-        store.filter.set({ ...this.currentFilter })
-      }
-    })
-
-    // ── Continent ────────────────────────────────────────────────
-    this.continentSelect = new Select({
-      id: 'filter-region',
-      name: 'filter-region',
-      ariaLabel: ARIA.FILTER_REGION,
-      options: continentOptions(),
-      size: selectSize,
-      onChange: (val) => {
-        this.currentFilter.continent = val ? (val as Continent) : undefined
-        this.currentFilter.country = undefined
-        this.countrySelect.value = ''
-        this.emitDebounced.flush()
-        store.filter.set({ ...this.currentFilter })
+        store.filter.set({ ...store.filter.get(), shape: this.currentFilter.shape })
       }
     })
 
@@ -129,11 +105,20 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       onChange: (val) => {
         this.currentFilter.country = val || undefined
         this.emitDebounced.flush()
-        store.filter.set({ ...this.currentFilter })
+        store.filter.set({ ...store.filter.get(), country: this.currentFilter.country })
       }
     })
 
     this.own(store.sightings.subscribe(() => this.updateCountryOptions()))
+
+    // Keep country select in sync when continent is cleared from outside
+    // (e.g. by FilterDeck region chips → drops the country field).
+    this.own(store.filter.subscribe((f) => {
+      if (!f.country && this.countrySelect.value !== '') {
+        this.countrySelect.value = ''
+        this.currentFilter.country = undefined
+      }
+    }))
 
     // ── Source chips ─────────────────────────────────────────────
     const sourceChips = SOURCE_CHIPS.map(src => {
@@ -147,7 +132,7 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
           if (checked) active.add(src.id)
           else active.delete(src.id)
           this.currentFilter.sources = active.size === SOURCE_CHIPS.length ? undefined : new Set(active)
-          store.filter.set({ ...this.currentFilter })
+          store.filter.set({ ...store.filter.get(), sources: this.currentFilter.sources })
         }
       })
     })
@@ -156,7 +141,6 @@ export class FilterToolbar extends Component<FilterToolbarProps> {
       this.searchInput.el,
       h('div', { className: cx.selects },
         this.shapeSelect.el,
-        this.continentSelect.el,
         this.countrySelect.el
       ),
       h('div', { className: cx.sources },

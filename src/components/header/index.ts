@@ -8,7 +8,7 @@ import { Switch } from '@/components/switch'
 import { BookmarksModal } from '@/components/bookmarks-modal'
 import { SubmitModal } from '@/components/submit-modal'
 import { ARIA, HEADER, THEME } from '@/data/strings'
-import { ButtonSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 import { useTheme, useBookmarks } from '@/composables'
 
 export class Header extends Component {
@@ -21,8 +21,8 @@ export class Header extends Component {
     // ── Report sighting CTA ──────────────────────────────────────
     const reportBtn = new Button({
       label: HEADER.SUBMIT_CTA,
-      variant: 'outline',
-      color: 'primary',
+      variant: ButtonVariant.OUTLINE,
+      color: ButtonColor.PRIMARY,
       pill: true,
       size: ButtonSize.SM,
       ariaLabel: ARIA.SUBMIT_SIGHTING,
@@ -44,8 +44,8 @@ export class Header extends Component {
     const bookmarkBtn = new Button({
       label: ARIA.OPEN_BOOKMARKS,
       round: true,
-      variant: 'ghost',
-      color: 'primary',
+      variant: ButtonVariant.GHOST,
+      color: ButtonColor.PRIMARY,
       size: ButtonSize.SM,
       icon: () => iconRadarSignalOutline(18),
       ariaLabel: ARIA.OPEN_BOOKMARKS,

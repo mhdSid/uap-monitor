@@ -130,6 +130,25 @@ export function iconSearch (size = 16): SVGSVGElement {
   return svg
 }
 
+/** Sliders / mixer — refine filters affordance. */
+export function iconSliders (size = 16): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 16 16')
+  svg.setAttribute('width', String(size))
+  svg.setAttribute('height', String(size))
+  svg.setAttribute('fill', 'none')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.innerHTML = `
+    <line x1="2" y1="4" x2="14" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="2" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="10" cy="4"  r="1.6" fill="currentColor"/>
+    <circle cx="6"  cy="8"  r="1.6" fill="currentColor"/>
+    <circle cx="11" cy="12" r="1.6" fill="currentColor"/>
+  `
+  return svg
+}
+
 /** Radar signal — outline variant (bookmark: inactive). */
 export function iconRadarSignalOutline (size = 16): SVGSVGElement {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')

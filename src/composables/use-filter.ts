@@ -1,6 +1,8 @@
 import type { Sighting, SightingFilter } from '@/types'
 import { yieldThread } from './use-timing'
 
+const MS_PER_DAY = 86_400_000
+
 /**
  * Non-blocking filter that processes sightings in chunks,
  * yielding to the main thread between chunks to keep UI responsive.
@@ -9,11 +11,21 @@ export async function filterSightings (
   all: Sighting[],
   filter: SightingFilter
 ): Promise<Sighting[]> {
-  const hasFilter = filter.search || filter.shape || filter.continent || filter.minCredibility || filter.country || filter.sources
+  const hasFilter =
+    filter.search ||
+    filter.shape ||
+    filter.continent ||
+    filter.minCredibility ||
+    filter.country ||
+    filter.sources ||
+    filter.recencyDays
 
   if (!hasFilter) return all
 
   const searchLower = filter.search?.toLowerCase()
+  const recencyCutoff = filter.recencyDays != null
+    ? Date.now() - filter.recencyDays * MS_PER_DAY
+    : null
   const result: Sighting[] = []
 
   const CHUNK = 5000
@@ -38,6 +50,10 @@ export async function filterSightings (
       if (filter.country && s.country !== filter.country) continue
       if (filter.minCredibility && s.credibility < filter.minCredibility) continue
       if (filter.sources && !filter.sources.has(s.source)) continue
+      if (recencyCutoff != null) {
+        const t = Date.parse(s.occurredAt)
+        if (Number.isNaN(t) || t < recencyCutoff) continue
+      }
       result.push(s)
     }
 

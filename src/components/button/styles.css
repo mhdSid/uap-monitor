@@ -98,6 +98,37 @@
   border-color: var(--c-green-500-40);
 }
 
+.btn--outline.btn--secondary {
+  border: 1px solid var(--c-cyan-400-30);
+  color: var(--color-cyan);
+}
+.btn--outline.btn--secondary:hover:not(:disabled),
+.btn--outline.btn--secondary:focus-visible {
+  background: var(--c-cyan-400-12);
+  border-color: var(--c-cyan-400-50);
+}
+
+.btn--outline.btn--neutral {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+.btn--outline.btn--neutral:hover:not(:disabled),
+.btn--outline.btn--neutral:focus-visible {
+  background: var(--c-neutral-400-08);
+  border-color: var(--color-dim);
+  color: var(--color-text-strong);
+}
+
+.btn--outline.btn--error {
+  border: 1px solid var(--color-red);
+  color: var(--color-red);
+}
+.btn--outline.btn--error:hover:not(:disabled),
+.btn--outline.btn--error:focus-visible {
+  background: var(--c-red-500-12, rgba(248, 113, 113, 0.12));
+  opacity: 0.9;
+}
+
 /* Ghost variants */
 .btn--ghost {
   background: transparent;
@@ -121,6 +152,25 @@
 }
 .btn--soft.btn--primary:hover:not(:disabled) {
   background: var(--c-green-500-12);
+}
+
+.btn--soft.btn--secondary {
+  background: var(--c-cyan-400-12);
+  border: 1px solid transparent;
+  color: var(--color-cyan);
+}
+.btn--soft.btn--secondary:hover:not(:disabled) {
+  background: var(--c-cyan-400-20);
+}
+
+.btn--soft.btn--neutral {
+  background: var(--c-neutral-400-08);
+  border: 1px solid transparent;
+  color: var(--color-text);
+}
+.btn--soft.btn--neutral:hover:not(:disabled) {
+  background: var(--c-neutral-400-15);
+  color: var(--color-text-strong);
 }
 
 /* Filled — high-emphasis CTA with opaque background */

@@ -31,6 +31,8 @@ export const ARIA = {
   VISIT_ON_REDDIT: 'View post on Reddit',
   THEME_TOGGLE: 'Toggle light and dark mode',
   FILTER_TOGGLE: 'Toggle search filters',
+  FILTER_DECK: 'Sighting filters',
+  FEATURED_HYPOTHESIS: 'Open featured hypothesis details',
   CLEAR_SEARCH: 'Clear search',
   SEARCH_SIGHTINGS: 'Search sighting reports',
   SEARCH_INTEL: 'Search intelligence articles',
@@ -58,6 +60,20 @@ export const CONTINENT_LABELS: Record<Continent, string> = {
   [Continent.ASIA_PACIFIC]: 'ASIA — PACIFIC',
   [Continent.OCEANIA]: 'OCEANIA',
   [Continent.AFRICA]: 'AFRICA'
+}
+
+/**
+ * Short continent labels for compact chip rows / mobile.
+ * Used by FilterDeck's region chips where horizontal space is tight.
+ */
+export const CONTINENT_SHORT_LABELS: Record<Continent, string> = {
+  [Continent.AMERICAS]: 'AMER',
+  [Continent.EUROPE]: 'EUR',
+  [Continent.EURASIA]: 'EURASIA',
+  [Continent.ASIA_MIDDLE_EAST]: 'ASIA-ME',
+  [Continent.ASIA_PACIFIC]: 'ASIA-PAC',
+  [Continent.OCEANIA]: 'OCEAN',
+  [Continent.AFRICA]: 'AFR'
 }
 
 export const CONTINENT_DISPLAY_NAMES: Record<string, string> = {
@@ -725,4 +741,50 @@ export const RESEARCH = {
   ATTRIBUTION: 'Data sources: NUFORC, Hatch UDB, Researcher Chronologies, NASA CNEOS, USGS Earthquakes, GFZ Potsdam Kp Index, IAEA Nuclear Facilities.',
   ALERT_TITLE: 'WHAT IS THIS VIEW?',
   ALERT_CONTENT: 'This view tests whether UAP sightings increase during geomagnetic storms. The Kp index (0–9) measures Earth\'s magnetic field disturbance — Kp ≥ 5 is classified as a storm. The timeline chart overlays monthly Kp levels against sighting counts. The distribution chart compares actual sighting rates per Kp level against what you\'d expect from pure chance. Bars extending beyond the expected baseline suggest a real correlation, not random noise.'
+} as const
+
+// ─── Featured hypothesis banner ──────────────────────────────────────
+
+export const FEATURED = {
+  LABEL: 'FEATURED FINDING',
+  /** Middle-dot separator between eyebrow segments (e.g. "FEATURED FINDING · MAY 09"). */
+  SEP: '·',
+  READ_METHODOLOGY: 'READ THE METHODOLOGY',
+  VIEW_ALL: 'VIEW ALL HYPOTHESES'
+} as const
+
+// ─── Filter deck — scope, region, status sentence ────────────────────
+
+export const SCOPE = {
+  KEY_24H: '24H',
+  KEY_7D:  '7D',
+  KEY_30D: '30D',
+  KEY_ALL: 'ALL',
+  LABEL_24H: '24H',
+  LABEL_7D:  '7D',
+  LABEL_30D: '30D',
+  LABEL_ALL: 'ALL',
+  SENTENCE_24H: 'LAST 24 HOURS',
+  SENTENCE_7D:  'LAST 7 DAYS',
+  SENTENCE_30D: 'LAST 30 DAYS',
+  SENTENCE_ALL: 'ALL TIME'
+} as const
+
+export const FILTER_DECK = {
+  SCOPE_LABEL: 'SCOPE',
+  REGION_LABEL: 'REGION',
+  REGION_ALL: 'ALL',
+  /** Internal key value for the "all regions" chip — never user-facing. */
+  REGION_ALL_KEY: '__ALL__',
+  GLOBAL: 'GLOBAL',
+  WATCHING: '▶ WATCHING',
+  REPORTS: 'REPORTS',
+  /** Middle-dot separator between status sentence segments. */
+  STATUS_SEP: '·',
+  SEARCH: 'SEARCH',
+  FILTERS: 'FILTERS',
+  CLEAR: 'CLEAR',
+  ADVANCED_TITLE: 'REFINE',
+  ADVANCED_YEAR_LABEL: 'ARCHIVE YEAR RANGE',
+  ADVANCED_SOURCES_LABEL: 'SOURCES'
 } as const

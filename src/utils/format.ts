@@ -2,6 +2,20 @@
  * Pure formatting utilities — no state, no timers, no side-effects.
  */
 
+/** Three-letter uppercase month names — locale-independent. */
+const MONTH_SHORT = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'] as const
+
+/**
+ * Format an ISO date as "MAY 09" — locale-independent, two-digit day.
+ * Returns empty string when input cannot be parsed.
+ */
+export function formatMonthDay (iso: string): string {
+  const d = new Date(iso)
+  if (isNaN(d.getTime())) return ''
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${MONTH_SHORT[d.getMonth()]} ${day}`
+}
+
 /**
  * Format an ISO date string for display.
  *

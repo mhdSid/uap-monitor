@@ -5,7 +5,8 @@
  *  Subscribes to store.sightings, store.loading, store.filter for     *
  *  view-specific rendering of grids, map, timeline, and news feed.    *
  *                                                                     *
- *  Owns: Hero, Highlights, controls, Timeline, SightingMap,           *
+ *  Owns: Hero, Highlights, FeaturedHypothesis, FilterDeck (sticky),   *
+ *        AdvancedFilters (collapsible), Timeline, SightingMap,        *
  *        SightingGrids, DataSources, Footer.                          *
  * ------------------------------------------------------------------ */
 
@@ -13,27 +14,24 @@ import './styles.css'
 import { cx } from './cx'
 import { cx as appCx } from '../app/cx'
 import { Component } from '@/core'
-import { h, clearChildren, addClass, qs } from '@/core/dom'
+import { h, clearChildren } from '@/core/dom'
 import { useAppStore, useFireball, useNuclear, useTheme, useShare, effect, filterSightings } from '@/composables'
-import { AlertVariant, ButtonSize, ComponentSize } from '@/enums'
+import { AlertVariant } from '@/enums'
 import { Section } from '@/components/layout'
 import { DataSources } from '@/components/data-sources'
 import { Alert } from '@/components/alert'
 import { Footer } from '@/components/footer'
-import { YearSelector } from '@/components/year-selector'
-import { FilterToolbar } from '@/components/filter-toolbar'
 import { SightingGrids } from '@/components/sighting-grid'
 import { SightingModal } from '@/components/sighting-modal'
 import { SightingMap } from '@/components/sighting-map'
 import { Timeline } from '@/components/timeline'
 import { Highlights } from '@/components/highlights'
 import { Hero } from '@/components/hero'
-import { Drawer } from '@/components/drawer'
-import { cx as drawerCx } from '@/components/drawer/cx'
-import { Button } from '@/components/button'
+import { FeaturedHypothesis } from '@/components/featured-hypothesis'
+import { FilterDeck } from '@/components/filter-deck'
+import { AdvancedFilters } from '@/components/advanced-filters'
 import { Loader } from '@/components/loader'
-import { iconSearch } from '@/components/icons'
-import { SECTION, ARIA } from '@/data/strings'
+import { SECTION } from '@/data/strings'
 import { MAX_YEAR_SPAN } from '@/data/config'
 
 // ─── Component ──────────────────────────────────────────────────────
@@ -46,9 +44,8 @@ export class MonitorView extends Component {
   private grids!: SightingGrids
   private sightingMap!: SightingMap
   private timeline!: Timeline
-  private desktopControls!: HTMLElement
-  private filterDrawer!: Drawer
-  private fab!: Button
+  private filterDeck!: FilterDeck
+  private advancedFilters!: AdvancedFilters
   private renderVersion = 0
   private loaded = false
 
@@ -93,62 +90,22 @@ export class MonitorView extends Component {
     this.grids.scrollToSighting(id)
   }
 
-  /** Expose FAB for external show/hide by the app shell */
-  getFab (): HTMLElement {
-    return this.fab.el
-  }
-
   // ─── Build content ─────────────────────────────────────────────
 
   private buildContent (): void {
-    // ── Desktop: inline controls (hidden on SP via CSS) ──────────
-    this.desktopControls = h('form', {
-      className: `${cx.controlsForm} ${cx.controlsFormDesktop}`,
-      autocomplete: 'off',
-      onSubmit: (e: Event) => e.preventDefault()
-    },
-      new YearSelector({}).el,
-      new FilterToolbar({
-        inputSize: ComponentSize.MD,
-        selectSize: ComponentSize.MD
-      }).el
-    )
+    // ── Filter deck (sticky) + advanced filter disclosure ────────
+    this.advancedFilters = this.ownChild(new AdvancedFilters({}))
 
-    // ── SP: drawer-wrapped controls (hidden on desktop via CSS) ──
-    const drawerToolbar = new FilterToolbar({})
-    const drawerForm = h('form', {
-      className: cx.controlsForm,
-      autocomplete: 'off',
-      onSubmit: (e: Event) => e.preventDefault()
-    },
-      new YearSelector({}).el,
-      drawerToolbar.el
-    )
-
-    this.filterDrawer = this.ownChild(new Drawer({
-      content: drawerForm,
-      onOpen: () => {
-        const panel = qs(`.${drawerCx.panel}`, this.filterDrawer.el)
-        if (panel) {
-          panel.addEventListener('transitionend', () => {
-            drawerToolbar.focusSearch()
-          }, { once: true })
-        }
+    this.filterDeck = this.ownChild(new FilterDeck({
+      onFiltersToggle: () => {
+        const open = this.advancedFilters.toggle()
+        this.filterDeck.setFiltersOpen(open)
       },
-      onClose: () => this.fab.el.focus()
+      onSearchOpen: () => {
+        this.advancedFilters.focusSearch()
+        this.filterDeck.setFiltersOpen(true)
+      }
     }))
-
-    // ── FAB (mobile only) — opens drawer ────────────────────────
-    this.fab = new Button({
-      label: ARIA.FILTER_TOGGLE,
-      variant: 'filled',
-      color: 'primary',
-      size: ButtonSize.XL,
-      round: true,
-      icon: () => iconSearch(22),
-      onClick: () => this.filterDrawer.toggle()
-    })
-    addClass(this.fab.el, cx.fab)
 
     clearChildren(this.el)
 
@@ -159,11 +116,15 @@ export class MonitorView extends Component {
     this.el.appendChild(hero.el)
 
     this.el.appendChild(new Highlights({}).el)
-    this.el.appendChild(this.desktopControls)
-    this.el.appendChild(this.filterDrawer.el)
+    this.el.appendChild(this.ownChild(new FeaturedHypothesis({})).el)
+
+    // ── Filter deck (sticky on scroll) + collapsible advanced ────
+    this.el.appendChild(this.filterDeck.el)
+    this.el.appendChild(this.advancedFilters.el)
+
+    // ── Timeline + map + grids ───────────────────────────────────
     this.el.appendChild(this.timeline.el)
     this.el.appendChild(this.sightingMap.el)
-
     this.el.appendChild(this.grids.el)
 
     // ── Below-fold: data sources + footer ────────────────────────
@@ -193,9 +154,6 @@ export class MonitorView extends Component {
     )
 
     this.el.appendChild(new Footer({}).el)
-
-    // FAB appended to view root (fixed position, floats above everything)
-    this.el.appendChild(this.fab.el)
   }
 
   // ─── Initial render from store ─────────────────────────────────
@@ -270,6 +228,14 @@ export class MonitorView extends Component {
       this.sightingMap.setTheme(t)
       this.timeline.redraw()
     }))
+
+    // If the filter store already has state from FilterDeck's
+    // geo-seeded continent (or a future URL-shared filter), the
+    // `filter.subscribe` above only catches *changes* — so we apply
+    // the existing state once now to filter the first paint.
+    if (this.store.hasActiveFilter.get()) {
+      this.onFilterChange()
+    }
   }
 
   // ─── Loaders ───────────────────────────────────────────────────

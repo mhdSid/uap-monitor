@@ -14,7 +14,7 @@ import { BookmarkListItem } from './bookmark-list-item'
 import { Button } from '@/components/button'
 import { useBookmarks, useAppStore, useShare } from '@/composables'
 import { useToast } from '@/components/toast'
-import { ButtonSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
 import { BOOKMARKS, TOAST_MESSAGES } from '@/data/strings'
 import { cx as modalCx } from '@/components/modal/cx'
 import type { Sighting } from '@/types'
@@ -109,8 +109,8 @@ export class BookmarksModal {
 
       const clearBtn = new Button({
         label: BOOKMARKS.CLEAR,
-        variant: 'ghost',
-        color: 'neutral',
+        variant: ButtonVariant.GHOST,
+        color: ButtonColor.NEUTRAL,
         size: ButtonSize.SM,
         onClick: () => {
           bookmarks.clear()

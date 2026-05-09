@@ -296,6 +296,12 @@ export interface ChronologyManifest extends SourceManifest {
 /** @deprecated Use SourceManifest — kept for backward compat */
 export type NuforcManifest = SourceManifest
 
+/**
+ * Recency scope keys for the FilterDeck scope chips.
+ * 'ALL' represents no recency filter (full year range).
+ */
+export type Scope = 'ALL' | '24H' | '7D' | '30D'
+
 export interface SightingFilter {
   search?: string
   shape?: SightingShape
@@ -304,6 +310,11 @@ export interface SightingFilter {
   country?: string
   /** Active source IDs — undefined means all sources shown */
   sources?: Set<string>
+  /**
+   * Limit results to sightings within the last N days (counted from now).
+   * undefined means no recency filter.
+   */
+  recencyDays?: number
 }
 
 // ─── UI state ────────────────────────────────────────────────────────

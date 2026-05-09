@@ -22,7 +22,7 @@ import { Drawer } from '@/components/drawer'
 import { Button } from '@/components/button'
 import { Slider } from '@/components/slider'
 import { ChipSelect } from '@/components/chip'
-import { ButtonSize, ComponentSize } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor, ComponentSize } from '@/enums'
 import { iconRadarSignalFilled } from '@/components/icons'
 import { Footer } from '@/components/footer'
 
@@ -196,8 +196,8 @@ export class SpiritualView extends Component {
 
     this.fab = new Button({
       label: SPIRITUAL.FAB_LABEL,
-      variant: 'outline',
-      color: 'primary',
+      variant: ButtonVariant.OUTLINE,
+      color: ButtonColor.PRIMARY,
       size: ButtonSize.XL,
       round: true,
       icon: () => iconRadarSignalFilled(22),
@@ -328,8 +328,8 @@ export class SpiritualView extends Component {
     // ── Exit button ──
     const exitBtn = new Button({
       label: SPIRITUAL.EXIT,
-      variant: 'soft',
-      color: 'primary',
+      variant: ButtonVariant.SOFT,
+      color: ButtonColor.PRIMARY,
       pill: true,
       size: ButtonSize.SM,
       onClick: () => {

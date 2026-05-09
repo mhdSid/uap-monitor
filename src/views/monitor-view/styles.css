@@ -1,43 +1,11 @@
-/* ── Controls form ──────────────────────────────────────────────────── */
+/* MonitorView no longer holds inline filter controls or a floating  *
+ * action button — the FilterDeck (sticky) and AdvancedFilters       *
+ * (collapsible) handle filter access on every viewport.             *
+ *                                                                    *
+ * Styles for those components live in their own SKILL.md-equivalent  *
+ * styles.css. This file is reserved for any monitor-view-only        *
+ * adjustments that need to escape component boundaries.              */
 
-.mon-view__controls-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-/* Desktop controls: hide filter toolbar on SP */
-.mon-view__controls-form--desktop .filter-toolbar {
-  display: none;
-}
-
-/* ── FAB — floating action button (mobile only) ──────────────────── */
-
-.mon-view__fab {
-  position: fixed;
-  bottom: var(--space-lg);
-  right: var(--space-lg);
-  z-index: var(--z-fab);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Space at bottom so FAB doesn't overlap footer content */
-@media (max-width: 767px) {
-  .mon-view {
-    padding-bottom: calc(var(--space-3xl) + var(--space-xl));
-  }
-}
-
-/* ── Desktop: inline controls visible, FAB + drawer hidden ───────── */
-
-@media (min-width: 768px) {
-  .mon-view__controls-form--desktop .filter-toolbar {
-    display: flex;
-  }
-
-  .mon-view__fab { display: none !important; }
-
-  .mon-view .drawer {
-    display: none;
-  }
+.mon-view {
+  /* Reserved hook — currently no view-specific overrides. */
 }
