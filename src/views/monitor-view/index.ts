@@ -73,6 +73,12 @@ export class MonitorView extends Component {
     if (this.loaded) return
 
     this.buildContent()
+
+    // Mark loaded BEFORE binding/applying so the filter.subscribe
+    // callback (and the apply-once at the end of bindViewReactions)
+    // don't early-return on the geo-seeded continent.
+    this.loaded = true
+
     this.renderFromStore()
     this.bindViewReactions()
     this.handleShareUrl()
@@ -81,8 +87,6 @@ export class MonitorView extends Component {
     if (!this.store.dataReady.get()) {
       this.showAllLoaders()
     }
-
-    this.loaded = true
   }
 
   /** Allow external ticker click to scroll into the grid */
@@ -195,7 +199,13 @@ export class MonitorView extends Component {
     this.own(this.store.dataReady.subscribe((ready) => {
       if (!ready || !this.loaded) return
       this.hideAllLoaders()
-      this.renderFromStore()
+      // If a filter is active (e.g. geo-seeded continent), apply it
+      // through onFilterChange — otherwise render the unfiltered set.
+      if (this.store.hasActiveFilter.get()) {
+        this.onFilterChange()
+      } else {
+        this.renderFromStore()
+      }
     }))
 
     // Re-render when sightings change (year range changed by app.ts)
@@ -203,8 +213,14 @@ export class MonitorView extends Component {
       if (!this.loaded || !this.store.dataReady.get()) return
       const { from, to } = this.store.yearRange.get()
 
-      this.grids.render(sightings, true)
-      this.sightingMap.setSightings(sightings)
+      // Year range changes drop in a fresh sighting set — re-apply
+      // the active filter to it instead of rendering raw.
+      if (this.store.hasActiveFilter.get()) {
+        this.onFilterChange()
+      } else {
+        this.grids.render(sightings, true)
+        this.sightingMap.setSightings(sightings)
+      }
       this.timeline.setActiveRange(from, to)
     }))
 
