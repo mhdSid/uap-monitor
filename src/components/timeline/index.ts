@@ -22,6 +22,7 @@ const BAR_RADIUS = 2
 const LABEL_H = 16
 const PAD_X = 8
 const THUMB_MIN_W = 48
+const CANVAS_H = 180
 
 // ─── Component ──────────────────────────────────────────────────────
 
@@ -94,7 +95,7 @@ export class Timeline extends Component<TimelineProps> {
   protected didMount (): void {
     const ro = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
+        if (entry.contentRect.width > 0) {
           this.resize()
         }
       }
@@ -205,21 +206,20 @@ export class Timeline extends Component<TimelineProps> {
   // ─── Layout ───────────────────────────────────────────────────
 
   private resize (): void {
-    // Direct dimension check — no async mounted flag needed.
-    // getBoundingClientRect forces synchronous layout so this works
-    // even when called immediately after DOM insertion.
+    // Width comes from the container (full-width responsive).
+    // Height is fixed by the canvas constant — independent of any
+    // CSS `height` on `.timeline`. The container sizes itself to
+    // canvas + scroll-track via flex.
     const rootRect = this.el.getBoundingClientRect()
-    if (rootRect.width <= 0 || rootRect.height <= 0) return
+    if (rootRect.width <= 0) return
 
     const yearSpan = this.dataTo - this.dataFrom + 1
     if (yearSpan <= 0) return
 
     const totalW = PAD_X * 2 + yearSpan * BAR_STEP
-    const containerH = Math.max(120, Math.floor(rootRect.height))
-    const trackH = this.scrollTrack.getBoundingClientRect().height || 14
-    const canvasH = containerH - trackH
+    const canvasH = CANVAS_H
 
-    if (totalW <= 0 || canvasH <= 0) return
+    if (totalW <= 0) return
 
     this.canvasW = totalW
     this.canvasH = canvasH
