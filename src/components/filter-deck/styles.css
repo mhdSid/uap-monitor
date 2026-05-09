@@ -1,16 +1,21 @@
 /* ─── Filter Deck ──────────────────────────────────────────────────── */
+/*                                                                    */
+/* Mobile-first. The deck pins below the header + nav-tabs stack on   */
+/* every viewport so the controls travel with the user as they scroll */
+/* through grids, map and timeline. Desktop only adjusts the inner    */
+/* layout (chip rows breathe horizontally, actions sit on row 1).     */
 
 .filter-deck {
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: 0;
-  z-index: var(--z-sticky);
   background: var(--c-panel-95);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  position: sticky;
+  top: var(--layout-sticky-offset);
+  z-index: var(--z-sticky);
 }
 
 /* ── Chip rows ───────────────────────────────────────────────────── */
@@ -18,7 +23,7 @@
 .filter-deck__row-chips {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   flex-wrap: wrap;
 }
@@ -33,6 +38,7 @@
   gap: var(--space-sm);
   flex-wrap: wrap;
   min-width: 0;
+  width: 100%;
 }
 
 .filter-deck__group-label {
@@ -45,14 +51,15 @@
 }
 
 .filter-deck__spacer {
-  flex: 1;
-  min-width: var(--space-sm);
+  display: none;
 }
 
 .filter-deck__actions {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  width: 100%;
+  justify-content: flex-end;
 }
 
 /* Filters button visual states (open / advanced active) */
@@ -165,23 +172,28 @@
   display: none;
 }
 
-/* ── Mobile adjustments ─────────────────────────────────────────── */
+/* ── Desktop refinements ────────────────────────────────────────── */
+/*                                                                  */
+/* On wider viewports the chip groups have room to breathe and the  */
+/* actions can share row 1 with SCOPE rather than wrapping below.   */
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .filter-deck__row-chips {
-    gap: var(--space-sm);
+    gap: var(--space-md);
   }
 
   .filter-deck__group {
-    width: 100%;
+    width: auto;
   }
 
   .filter-deck__spacer {
-    display: none;
+    display: block;
+    flex: 1;
+    min-width: var(--space-sm);
   }
 
   .filter-deck__actions {
-    width: 100%;
-    justify-content: flex-end;
+    width: auto;
+    justify-content: flex-start;
   }
 }

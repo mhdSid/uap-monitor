@@ -1,18 +1,16 @@
 /* ─── Advanced Filters — collapsible Tier-2 panel ─────────────────── */
+/*                                                                    */
+/* Closed state uses `display: none` (not just collapsed grid rows)   */
+/* so the parent's `gap` doesn't allocate space for an empty box.     */
+/* Trade-off: no expand/collapse transition — but the page reflow     */
+/* below it would have fought the transition visually anyway.         */
 
 .advanced-filters {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows var(--transition-base);
+  display: none;
 }
 
 .advanced-filters--open {
-  grid-template-rows: 1fr;
-}
-
-.advanced-filters__inner {
-  overflow: hidden;
-  min-height: 0;
+  display: block;
 }
 
 .advanced-filters__body {

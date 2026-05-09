@@ -9,7 +9,7 @@
   scrollbar-width: none;
   justify-content: start;
   position: sticky;
-  top: 49px;
+  top: var(--layout-header-h);
   z-index: var(--z-nav);
 }
 

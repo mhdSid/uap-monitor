@@ -191,6 +191,14 @@
   /* ── Breakpoints (can't use vars in @media — documented here) ───── */
   /* --bp-sm: 768px;  → @media (min-width: 768px)                    */
 
+  /* ── Sticky layout heights ─────────────────────────────────────── */
+  /* These are FALLBACK values used before useStickyOffsets() runs.    */
+  /* At runtime (via composables/use-sticky-offsets.ts), the App         */
+  /* component overwrites these on :root with the live measured        */
+  /* heights of `.app-header` and `.nav-tabs`. Sticky descendants      */
+  /* (FilterDeck) position against `var(--layout-sticky-offset)` and   */
+  /* automatically respond when header / nav layout changes.           */
+
   /* ── Z-index layers ───────────────────────────────────────────────── */
   --z-base: 1;
   --z-sticky: 10;

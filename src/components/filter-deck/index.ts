@@ -69,8 +69,6 @@ const CONTINENT_COLOR_VARS: Record<Continent, string> = {
 // ─── Props ──────────────────────────────────────────────────────────
 
 export interface FilterDeckProps {
-  /** Toggle the AdvancedFilters disclosure. */
-  onFiltersToggle: () => void
   /** Open AdvancedFilters and focus its search input. */
   onSearchOpen: () => void
 }
@@ -84,7 +82,6 @@ export class FilterDeck extends Component<FilterDeckProps> {
   private store!: ReturnType<typeof useAppStore>
   private scopeChips!: ChipSelect
   private regionChips!: ChipSelect
-  private filtersBtn!: Button
   private clearBtn!: Button
 
   // Status sentence parts (mutated reactively)
@@ -146,20 +143,11 @@ export class FilterDeck extends Component<FilterDeckProps> {
       label: FILTER_DECK.SEARCH,
       variant: ButtonVariant.OUTLINE,
       color: ButtonColor.NEUTRAL,
-      size: ButtonSize.SM,
+      size: ButtonSize.MD,
+      round: true,
       icon: () => iconSearch(11),
       ariaLabel: ARIA.SEARCH,
       onClick: () => this.props.onSearchOpen()
-    }))
-
-    this.filtersBtn = this.ownChild(new Button({
-      label: FILTER_DECK.FILTERS,
-      variant: ButtonVariant.OUTLINE,
-      color: ButtonColor.NEUTRAL,
-      size: ButtonSize.SM,
-      icon: () => iconSliders(11),
-      ariaLabel: ARIA.FILTER_TOGGLE,
-      onClick: () => this.props.onFiltersToggle()
     }))
 
     // ── Status sentence parts ─────────────────────────────────────
@@ -192,8 +180,7 @@ export class FilterDeck extends Component<FilterDeckProps> {
         ),
         h('div', { className: cx.spacer }),
         h('div', { className: cx.actions },
-          searchBtn.el,
-          this.filtersBtn.el
+          searchBtn.el
         )
       ),
       // Row 2: REGION chips
@@ -227,8 +214,8 @@ export class FilterDeck extends Component<FilterDeckProps> {
 
   /** Reflect AdvancedFilters open/closed state on the FILTERS button. */
   setFiltersOpen (open: boolean): void {
-    if (open) addClass(this.filtersBtn.el, cx.filtersOpen)
-    else removeClass(this.filtersBtn.el, cx.filtersOpen)
+    // if (open) addClass(this.filtersBtn.el, cx.filtersOpen)
+    // else removeClass(this.filtersBtn.el, cx.filtersOpen)
   }
 
   // ─── Internals ──────────────────────────────────────────────────
@@ -297,11 +284,11 @@ export class FilterDeck extends Component<FilterDeckProps> {
     else addClass(this.clearBtn.el, cx.clearHidden)
 
     // Mirror "advanced active" visual state on the FILTERS button.
-    const advancedActive = !!(
-      f.search || f.shape || f.country || f.minCredibility || f.sources
-    )
-    if (advancedActive) addClass(this.filtersBtn.el, cx.filtersActive)
-    else removeClass(this.filtersBtn.el, cx.filtersActive)
+    // const advancedActive = !!(
+    //   f.search || f.shape || f.country || f.minCredibility || f.sources
+    // )
+    // if (advancedActive) addClass(this.filtersBtn.el, cx.filtersActive)
+    // else removeClass(this.filtersBtn.el, cx.filtersActive)
   }
 
   private static scopeFromDays (days: number | undefined): Scope {

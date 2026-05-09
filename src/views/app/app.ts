@@ -21,7 +21,7 @@ import { cx } from './cx'
 import { Component, RouteName, createRouter } from '@/core'
 import type { Sighting } from '@/types'
 import { h, mount } from '@/core/dom'
-import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, batch, minDelay } from '@/composables'
+import { useDataSource, useTicker, useAppStore, useAnalytics, useFireball, useNuclear, useRussianHistorical, useStickyOffsets, batch, minDelay } from '@/composables'
 import type { RouterInstance, RouteNames } from '@/core'
 import { Header } from '@/components/header'
 import { NavTabs } from '@/components/nav-tabs'
@@ -102,6 +102,8 @@ export class App extends Component {
       analytics.init()
       analytics.pageView()
     }, 2000)
+
+    this.own(useStickyOffsets())
   }
 
   // ─── Phase: Hydrate store ──────────────────────────────────────

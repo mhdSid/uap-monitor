@@ -51,11 +51,9 @@ export class AdvancedFilters extends Component {
       role: 'region',
       'aria-hidden': 'true'
     },
-      h('div', { className: cx.inner },
-        h('div', { className: cx.body },
-          yearGroup,
-          refineGroup
-        )
+      h('div', { className: cx.body },
+        yearGroup,
+        refineGroup
       )
     )
   }
