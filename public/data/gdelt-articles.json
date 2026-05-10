@@ -1,10 +1,718 @@
 {
-  "generatedAt": "2026-05-09T01:12:03.945Z",
+  "generatedAt": "2026-05-10T14:24:23.714Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
   "totalResults": 1250,
   "articles": [
+    {
+      "id": "a439821e9828",
+      "title": "Seoul concludes  external strike  caused explosion on HMM vessel in Hormuz",
+      "url": "https://www.koreaherald.com/article/10734716",
+      "domain": "koreaherald.com",
+      "publishedAt": "2026-05-10T13:30:00Z",
+      "language": "English",
+      "sourceName": "koreaherald.com (South Korea)",
+      "country": "South Korea",
+      "imageUrl": "https://wimg.heraldcorp.com/news/cms/2026/05/10/rcv.YNA.20260508.PYH2026050814140001300_T1.jpg",
+      "tone": 0
+    },
+    {
+      "id": "27c594d2c16c",
+      "title": "Pentagon UFO website shatters records with 340M hits in first 12 hours",
+      "url": "https://www.fox35orlando.com/news/pentagon-ufo-uap-document-files-trump",
+      "domain": "fox35orlando.com",
+      "publishedAt": "2026-05-10T11:45:00Z",
+      "language": "English",
+      "sourceName": "fox35orlando.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://images.foxtv.com/static.foxla.com/www.foxla.com/content/uploads/2026/05/1280/720/pentagon-ufo-files.jpg?ve=1&tl=1",
+      "tone": 0
+    },
+    {
+      "id": "9b8ebf312ff4",
+      "title": "FBI received a tip that the Nazis built a 21 - foot saucer craft in 1944 , and the engineer behind it vanished without a trace once the war ended",
+      "url": "https://attackofthefanboy.com/politics/fbi-received-a-tip-that-the-nazis-built-a-21-foot-saucer-craft-in-1944-and-the-engineer-behind-it-vanished-without-a-trace-once-the-war-ended/",
+      "domain": "attackofthefanboy.com",
+      "publishedAt": "2026-05-10T11:00:00Z",
+      "language": "English",
+      "sourceName": "attackofthefanboy.com (Japan)",
+      "country": "Japan",
+      "imageUrl": "https://attackofthefanboy.com/wp-content/uploads/2026/05/UFOs-hovering-in-the-sky.jpg",
+      "tone": 0
+    },
+    {
+      "id": "8924747ced30",
+      "title": "Alien Life Would Not Refute Religion but It Would Challenge Materialistic Evolution",
+      "url": "https://townhall.com/columnists/casey-luskin/2026/05/10/alien-life-would-not-refute-religionbut-it-would-challenge-materialistic-evolution-n2675780",
+      "domain": "townhall.com",
+      "publishedAt": "2026-05-10T08:30:00Z",
+      "language": "English",
+      "sourceName": "townhall.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.townhall.com/cdn/hodl/2026/128/4649725f-46ec-480d-9574-9b478a5dfbd4-1200x630.png",
+      "tone": 0
+    },
+    {
+      "id": "724f5655da4b",
+      "title": "Worthy News - Christian News Agency",
+      "url": "https://www.worthynews.com/?blackhole=a3181ffe1f",
+      "domain": "worthynews.com",
+      "publishedAt": "2026-05-10T08:00:00Z",
+      "language": "English",
+      "sourceName": "worthynews.com (Israel)",
+      "country": "Israel",
+      "imageUrl": "https://worthynews-1fe3e.kxcdn.com/wordpressimages/2023/11/large-facebook-graph.png",
+      "tone": 2.5
+    },
+    {
+      "id": "5e70b90b2d2f",
+      "title": "Bright Lights And Hot Orbs : UFO Files Shed Light On Sightings But Leave Interpretation To The Public – 710am KURV",
+      "url": "https://www.kurv.com/bright-lights-and-hot-orbs-ufo-files-shed-light-on-sightings-but-leave-interpretation-to-the-public/",
+      "domain": "kurv.com",
+      "publishedAt": "2026-05-10T04:45:00Z",
+      "language": "English",
+      "sourceName": "kurv.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "7982d85353c2",
+      "title": "Pentagon UFO website shatters records with 340M hits in first 12 hours",
+      "url": "https://www.fox4news.com/news/pentagon-ufo-uap-document-files-trump",
+      "domain": "fox4news.com",
+      "publishedAt": "2026-05-10T01:30:00Z",
+      "language": "English",
+      "sourceName": "fox4news.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://images.foxtv.com/static.foxla.com/www.foxla.com/content/uploads/2026/05/1280/720/pentagon-ufo-files.jpg?ve=1&tl=1",
+      "tone": 0
+    },
+    {
+      "id": "0cec0698a0af",
+      "title": "Trump moves fascination with UFOs into the Oval Office",
+      "url": "https://www.wellandtribune.ca/opinion/columnists/donald-trump-moves-fascination-with-ufos-into-the-oval-office/article_35bf8f71-4ab6-5ef6-9164-636cdcf2ffad.html",
+      "domain": "wellandtribune.ca",
+      "publishedAt": "2026-05-10T00:30:00Z",
+      "language": "English",
+      "sourceName": "wellandtribune.ca (Canada)",
+      "country": "Canada",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/wellandtribune.ca/content/tncms/assets/v3/editorial/8/07/80733c8d-1a0c-5242-9de7-58466c588e97/69ffabcc9e47a.image.jpg?crop=1721%2C904%2C0%2C150",
+      "tone": 0
+    },
+    {
+      "id": "8dc88995888e",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.arabnews.com/node/2642966/world",
+      "domain": "arabnews.com",
+      "publishedAt": "2026-05-09T21:30:00Z",
+      "language": "English",
+      "sourceName": "arabnews.com (Saudi Arabia)",
+      "country": "Saudi Arabia",
+      "imageUrl": "https://www.arabnews.com/sites/default/files/styles/660x371_watermarksaudi/public/main-image/2026/05/09/4710734-874342931.jpg?itok=H4bjmOA7",
+      "tone": 0
+    },
+    {
+      "id": "28269eb4179c",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.wjol.com/bright-lights-and-hot-orbs-ufo-files-shed-light-on-sightings-but-leave-interpretation-to-the-public/",
+      "domain": "wjol.com",
+      "publishedAt": "2026-05-09T20:45:00Z",
+      "language": "English",
+      "sourceName": "wjol.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://mapi.associatedpress.com/v2/items/2d1f7e238bc945fa82f81b9c61c52de4.0/preview/preview.jpg?nfe=true&wm=false&app=MPK&tag=tag%3Dact%7E%3Arss%21orgId%7E66880%21iid%7E2d1f7e238bc945fa82f81b9c61c52de4%21qt%7EPfG2IC70lGR&icb=1778358742",
+      "tone": 0
+    },
+    {
+      "id": "884b3927e29f",
+      "title": "Newly released UFO files shed light on sightings but leave interpretation to you",
+      "url": "https://jcpost.com/posts/1fabc175-5e18-41e3-8277-d2d3e65d1a9b",
+      "domain": "jcpost.com",
+      "publishedAt": "2026-05-09T20:15:00Z",
+      "language": "English",
+      "sourceName": "jcpost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.eaglewebservices.com/public/2026/5/1778271842621.png",
+      "tone": 0
+    },
+    {
+      "id": "4d3083e8d4d2",
+      "title": "Unpacking Texas UFO Reports From Newly Released Documents",
+      "url": "https://kfox95.com/ixp/175/p/ufo-files-texas/",
+      "domain": "kfox95.com",
+      "publishedAt": "2026-05-09T20:15:00Z",
+      "language": "English",
+      "sourceName": "kfox95.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/175/files/2026/05/attachment-danie-franco-of2jr51vxii-unsplash.jpg?&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "f38f1ff206e3",
+      "title": "UFO expert says Trump still hiding key info despite bombshell files release :  Something strange …",
+      "url": "https://www.hindustantimes.com/world-news/us-news/ufo-expert-says-trump-still-hiding-key-info-despite-bombshell-files-release-something-strange-101778352017496.html",
+      "domain": "hindustantimes.com",
+      "publishedAt": "2026-05-09T20:00:00Z",
+      "language": "English",
+      "sourceName": "hindustantimes.com (India)",
+      "country": "India",
+      "imageUrl": "https://www.hindustantimes.com/ht-img/img/2026/05/09/550x309/Ufo_5_1778254507818_1778254517043_1778352303909.jpg",
+      "tone": 0
+    },
+    {
+      "id": "83a25997cd10",
+      "title": "Is Donald Trump UFO Disclosure a Distraction ? Joe Rogan Breaks Down the Pentagon Data Drop",
+      "url": "https://www.ibtimes.co.uk/trump-ufo-disclosure-transparency-distraction-1795949",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-05-09T19:45:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1806178/donald-trump.jpg",
+      "tone": 0
+    },
+    {
+      "id": "508130f4ff1b",
+      "title": "Trump UFO Release : Witness Warned of  Mysterious Death After Sightings",
+      "url": "https://www.ibtimes.co.uk/trump-ufo-files-1967-fbi-report-mysterious-deaths-1795940",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-05-09T19:45:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1792005/donald-trump.jpg",
+      "tone": 0
+    },
+    {
+      "id": "4d1fb6bb5d53",
+      "title": "Unpacking Texas UFO Reports From Newly Released Documents",
+      "url": "https://kicks105.com/ixp/175/p/ufo-files-texas/",
+      "domain": "kicks105.com",
+      "publishedAt": "2026-05-09T19:45:00Z",
+      "language": "English",
+      "sourceName": "kicks105.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/175/files/2026/05/attachment-danie-franco-of2jr51vxii-unsplash.jpg?&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "86649ff7594f",
+      "title": "FBI files reveal reports of  four - foot tall  beings emerging from UFOs",
+      "url": "https://www.sott.net/article/506203-FBI-files-reveal-reports-of-four-foot-tall-beings-emerging-from-UFOs",
+      "domain": "sott.net",
+      "publishedAt": "2026-05-09T19:30:00Z",
+      "language": "English",
+      "sourceName": "sott.net (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.sott.net/image/s37/744400/full/1_The_Trump_administration_on_.jpg",
+      "tone": 0
+    },
+    {
+      "id": "678bef3cb086",
+      "title": "We Might Finally Have Proof That UFOs Exist But Everyone Is Too Burnt Out To Care",
+      "url": "https://www.yourtango.com/news/might-have-proof-ufos-exist-everyone-too-burnt-out-care",
+      "domain": "yourtango.com",
+      "publishedAt": "2026-05-09T19:30:00Z",
+      "language": "English",
+      "sourceName": "yourtango.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.yourtango.com/sites/default/files/image_blog/2026-05/might-have-proof-ufos-everyone-too-burnt-out-care.png",
+      "tone": 0
+    },
+    {
+      "id": "0296884a412a",
+      "title": "NY Post : Aliens From  Out Of This World ?",
+      "url": "https://www.newsbusters.org/blogs/nb/jeffrey-lord/2026/05/09/ny-post-aliens-out-world",
+      "domain": "newsbusters.org",
+      "publishedAt": "2026-05-09T19:30:00Z",
+      "language": "English",
+      "sourceName": "newsbusters.org (United States)",
+      "country": "United States",
+      "imageUrl": "https://cdn.newsbusters.org/styles/mobile_thumb_700x400_/s3/2026-05/2026-05-09-Lord%20Column-Aliens.jpg?itok=bXtrZh2r",
+      "tone": 0
+    },
+    {
+      "id": "b2f2ac0c0cad",
+      "title": "New UFO declassification website launched following presidential announcement",
+      "url": "https://www.sott.net/article/506201-New-UFO-declassification-website-launched-following-presidential-announcement",
+      "domain": "sott.net",
+      "publishedAt": "2026-05-09T19:30:00Z",
+      "language": "English",
+      "sourceName": "sott.net (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.sott.net/image/s37/744418/full/00081da7_d70b_4364_b2e0_0cebc8.jpg",
+      "tone": 0
+    },
+    {
+      "id": "1544aa495a7e",
+      "title": "Shocker : Trump Gets Praise From Leading Democrat for Release of UFO Files",
+      "url": "https://www.breitbart.com/national-security/2026/05/09/shocker-trump-gets-praise-from-leading-democrat-for-release-of-ufo-files/",
+      "domain": "breitbart.com",
+      "publishedAt": "2026-05-09T19:00:00Z",
+      "language": "English",
+      "sourceName": "breitbart.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.breitbart.com/media/2026/05/AP26129084652530-640x335.png",
+      "tone": 0
+    },
+    {
+      "id": "585a030c1e1e",
+      "title": "Exclusive | UFO expert says government is still hiding information from us and we couldnt handle the truth anyway",
+      "url": "https://nypost.com/2026/05/09/science/ufo-expert-says-government-is-still-hiding-information-from-us-and-we-couldnt-handle-the-truth-anyway/",
+      "domain": "nypost.com",
+      "publishedAt": "2026-05-09T18:45:00Z",
+      "language": "English",
+      "sourceName": "nypost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/05/UFO-COMP-1.jpg?quality=75&strip=all",
+      "tone": 0
+    },
+    {
+      "id": "10ea67ab5f83",
+      "title": "Worthy News - Christian News Agency",
+      "url": "https://www.worthynews.com/?blackhole=523a33d87c",
+      "domain": "worthynews.com",
+      "publishedAt": "2026-05-09T17:45:00Z",
+      "language": "English",
+      "sourceName": "worthynews.com (Israel)",
+      "country": "Israel",
+      "imageUrl": "https://worthynews-1fe3e.kxcdn.com/wordpressimages/2023/11/large-facebook-graph.png",
+      "tone": 2.5
+    },
+    {
+      "id": "51d6b2041b24",
+      "title": "Newly released UFO files shed light on sightings but leave interpretation to you",
+      "url": "https://greatbendpost.com/posts/1fabc175-5e18-41e3-8277-d2d3e65d1a9b",
+      "domain": "greatbendpost.com",
+      "publishedAt": "2026-05-09T17:30:00Z",
+      "language": "English",
+      "sourceName": "greatbendpost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.eaglewebservices.com/public/2026/5/1778271842621.png",
+      "tone": 0
+    },
+    {
+      "id": "5e5eb926773b",
+      "title": "Unpacking Texas UFO Reports From Newly Released Documents",
+      "url": "https://ksfa860.com/ixp/175/p/ufo-files-texas/",
+      "domain": "ksfa860.com",
+      "publishedAt": "2026-05-09T17:30:00Z",
+      "language": "English",
+      "sourceName": "ksfa860.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/175/files/2026/05/attachment-danie-franco-of2jr51vxii-unsplash.jpg?&format=natural",
+      "tone": 0
+    },
+    {
+      "id": "1dd24bdf89ee",
+      "title": "Newly released UFO files shed light on sightings but leave interpretation to you",
+      "url": "https://hayspost.com/posts/1fabc175-5e18-41e3-8277-d2d3e65d1a9b",
+      "domain": "hayspost.com",
+      "publishedAt": "2026-05-09T17:30:00Z",
+      "language": "English",
+      "sourceName": "hayspost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.eaglewebservices.com/public/2026/5/1778271842621.png",
+      "tone": 0
+    },
+    {
+      "id": "05afa74f6d5a",
+      "title": "Newly released UFO files shed light on sightings but leave interpretation to you",
+      "url": "https://littleapplepost.com/posts/1fabc175-5e18-41e3-8277-d2d3e65d1a9b",
+      "domain": "littleapplepost.com",
+      "publishedAt": "2026-05-09T17:15:00Z",
+      "language": "English",
+      "sourceName": "littleapplepost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.eaglewebservices.com/public/2026/5/1778271842621.png",
+      "tone": 0
+    },
+    {
+      "id": "8aceb83f4c9c",
+      "title": "Just Show Us the Spaceships Already",
+      "url": "https://www.theatlantic.com/science/2026/05/alien-disclosures-real-evidence/687123/",
+      "domain": "theatlantic.com",
+      "publishedAt": "2026-05-09T15:30:00Z",
+      "language": "English",
+      "sourceName": "theatlantic.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cdn.theatlantic.com/thumbor/Lfs1qyHuEcyJwsAB2kURd60KsXQ=/0x85:3994x2165/1200x625/media/img/mt/2026/05/2026_05_08_Aliens/original.jpg",
+      "tone": 0
+    },
+    {
+      "id": "8ef14503298c",
+      "title": "Are 4ft Aliens Real ? FBI Declassified Files Reveal Humanoid Sightings",
+      "url": "https://www.ibtimes.co.uk/are-4ft-aliens-real-fbi-declassified-files-reveal-humanoid-sightings-1795916",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-05-09T14:45:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1802365/us-congressman-declares-aliens-exist.png",
+      "tone": 0
+    },
+    {
+      "id": "165f73eb97e3",
+      "title": "Trumpiana : Memes to go before I sleep ! - The Times of India",
+      "url": "https://timesofindia.indiatimes.com/world/us/trumpiana-memes-to-go-before-i-sleep/articleshow/130977873.cms",
+      "domain": "timesofindia.indiatimes.com",
+      "publishedAt": "2026-05-09T14:15:00Z",
+      "language": "English",
+      "sourceName": "timesofindia.indiatimes.com (India)",
+      "country": "India",
+      "imageUrl": "https://static.toiimg.com/thumb/msid-130977882,width-1280,height-720,imgsize-863270,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+      "tone": 2.5
+    },
+    {
+      "id": "6fc3c4f8f05d",
+      "title": "Critics say Trump UFO files release meant to distract from Iran",
+      "url": "https://www.washingtonexaminer.com/news/white-house/4561491/trump-ufo-files-iran-smoke-and-mirrors/",
+      "domain": "washingtonexaminer.com",
+      "publishedAt": "2026-05-09T13:45:00Z",
+      "language": "English",
+      "sourceName": "washingtonexaminer.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.washingtonexaminer.com/wp-content/uploads/2026/05/AP26128602474059.jpg",
+      "tone": 0
+    },
+    {
+      "id": "ab6e86a61b53",
+      "title": "Two  alien girl from little known US agency investigating UFOs at military bases around country",
+      "url": "https://nypost.com/2026/05/09/us-news/two-alien-girls-from-little-known-us-agency-investigating-ufos-at-military-bases-around-country/",
+      "domain": "nypost.com",
+      "publishedAt": "2026-05-09T12:30:00Z",
+      "language": "English",
+      "sourceName": "nypost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/05/alien-girls-two-investigators-government-127278573.jpg?quality=75&strip=all",
+      "tone": 0
+    },
+    {
+      "id": "2bea9225aa96",
+      "title": "Celestial powers before and after the flood",
+      "url": "https://www.renewamerica.com/columns/kimball/260509",
+      "domain": "renewamerica.com",
+      "publishedAt": "2026-05-09T11:45:00Z",
+      "language": "English",
+      "sourceName": "renewamerica.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "581104507ef2",
+      "title": "The U . S . government released UFO files . Here how you can see them",
+      "url": "https://www.yahoo.com/news/articles/u-government-released-ufo-files-110410034.html",
+      "domain": "yahoo.com",
+      "publishedAt": "2026-05-09T11:45:00Z",
+      "language": "English",
+      "sourceName": "yahoo.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/i3X.HN321pKp4TGBd4qoaA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/lansing-state-journal/3505ae6f54f25449c9c56625de010bab",
+      "tone": 0
+    },
+    {
+      "id": "8856f864615e",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://abcnews.com/Technology/wireStory/bright-lights-hot-orbs-ufo-files-shed-light-132794165",
+      "domain": "abcnews.com",
+      "publishedAt": "2026-05-09T10:30:00Z",
+      "language": "English",
+      "sourceName": "abcnews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://i.abcnewsfe.com/a/beaf87eb-dbd7-427f-b5f8-b9dfecb0b1b8/wirestory_3e658d2cf3742465127c0049c872240a_16x9.jpg",
+      "tone": 0
+    },
+    {
+      "id": "ded36d6781dc",
+      "title": "FBI Files Reveal Chilling Claims Of  Four - Foot - Tall  Beings Emerging From UFOs What The Documents Suggest",
+      "url": "https://www.newsx.com/world/fbi-files-reveal-chilling-claims-of-four-foot-tall-beings-emerging-from-ufos-what-the-documents-suggest-216004/",
+      "domain": "newsx.com",
+      "publishedAt": "2026-05-09T10:15:00Z",
+      "language": "English",
+      "sourceName": "newsx.com (India)",
+      "country": "India",
+      "imageUrl": "https://www.newsx.com/wp-content/uploads/2026/05/ufo-files.jpg",
+      "tone": 0
+    },
+    {
+      "id": "58819b12ffc8",
+      "title": "Did Aliens Stop NASA Missions ? The Apollo 17  Never Return  Theory Explained",
+      "url": "https://www.ibtimes.co.uk/apollo-17-ufo-files-alien-warning-1795910",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-05-09T09:45:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1806280/apollo-17.jpg",
+      "tone": 0
+    },
+    {
+      "id": "afc8a9f6595a",
+      "title": "Trump UFO files : Historic transparency or a strategic distraction amid global conflict ?",
+      "url": "https://www.thenews.com.pk/latest/1401945-trumps-ufo-files-historic-transparency-or-a-strategic-distraction-amid-global-conflict",
+      "domain": "thenews.com.pk",
+      "publishedAt": "2026-05-09T08:30:00Z",
+      "language": "English",
+      "sourceName": "thenews.com.pk (Pakistan)",
+      "country": "Pakistan",
+      "imageUrl": "https://www.thenews.com.pk/assets/uploads/2026-05-09/1401945_121442_updates.jpg",
+      "tone": 0
+    },
+    {
+      "id": "791475c6af23",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "http://www.texarkanagazette.com/news/2026/may/08/bright-lights-and-hot-orbs-ufo-files-shed-light/",
+      "domain": "texarkanagazette.com",
+      "publishedAt": "2026-05-09T07:15:00Z",
+      "language": "English",
+      "sourceName": "texarkanagazette.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://wehco.media.clients.ellingtoncms.com/imports/adg/img/2026/05/09/212820514_AP26121785694753_t1200.jpg?57a0c2296240c280e9492005c3cad63e7cbe80f4",
+      "tone": 0
+    },
+    {
+      "id": "35284a434848",
+      "title": "Trump Declassifies UFO Files : 160 Secret Pentagon Documents , Apollo Mission Sightings Released With  Unprecedented Transparency",
+      "url": "https://openthemagazine.com/world/washington-opens-the-vault-ufo-files-land-with-a-thud",
+      "domain": "openthemagazine.com",
+      "publishedAt": "2026-05-09T06:30:00Z",
+      "language": "English",
+      "sourceName": "openthemagazine.com (India)",
+      "country": "India",
+      "imageUrl": "https://media.openthemagazine.com/openthemagazine/2026-05-09/grj5w81y/ChatGPT-Image-May-9-2026-092209-AM.png?&ar=40:21&auto=format,compress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+      "tone": 2.5
+    },
+    {
+      "id": "c8731788902e",
+      "title": "Washington Videos Capture Bright Green Fireball And More",
+      "url": "https://97rockonline.com/ixp/137/p/washington-green-fireballs/",
+      "domain": "97rockonline.com",
+      "publishedAt": "2026-05-09T06:15:00Z",
+      "language": "English",
+      "sourceName": "97rockonline.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/137/files/2026/05/attachment-fireball-seattle.jpg?&q=75&format=natural",
+      "tone": 2.5
+    },
+    {
+      "id": "dc9144cf52af",
+      "title": "US Declassified Files Reveal Diamond - Shaped UFO Tracked Over the Aegean at 800 km / h",
+      "url": "https://www.iefimerida.gr/english/us-declassified-files-reveal-diamond-shaped-ufo-tracked-over-aegean-800-kmh",
+      "domain": "iefimerida.gr",
+      "publishedAt": "2026-05-09T06:15:00Z",
+      "language": "English",
+      "sourceName": "iefimerida.gr (Greece)",
+      "country": "Greece",
+      "imageUrl": "https://www.iefimerida.gr/sites/default/files/styles/medium_article_image/public/2026-05/ufo-paratirisi.jpg?itok=8VV8vhan",
+      "tone": 0
+    },
+    {
+      "id": "fcb4ba32497c",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.whec.com/ap-top-news/ap-top-news-political/bright-lights-and-hot-orbs-ufo-files-shed-light-on-sightings-but-leave-interpretation-to-the-public/",
+      "domain": "whec.com",
+      "publishedAt": "2026-05-09T05:30:00Z",
+      "language": "English",
+      "sourceName": "whec.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.whec.com/wp-content/uploads/apimg/2026/05/Trump_UFOs__12_8.jpg",
+      "tone": 0
+    },
+    {
+      "id": "f83304f4260f",
+      "title": "UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.actionnewsjax.com/news/politics/pentagon-begins/JMQXD6Y5TUZC5BRBV6T4A2GSRA/",
+      "domain": "actionnewsjax.com",
+      "publishedAt": "2026-05-09T05:30:00Z",
+      "language": "English",
+      "sourceName": "actionnewsjax.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-tv-10050-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FB55NJNQY5I3JNMS2KWBUKPTXWM.jpg?auth=d4d3d0d62ace857d1b3d5f6c4caacd758f370586cbc52bcdada8278244285990&smart=true",
+      "tone": 0
+    },
+    {
+      "id": "fda91b25bca0",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.asiaone.com/world/bright-lights-and-hot-orbs-ufo-files-shed-light-sightings-leave-interpretation-public",
+      "domain": "asiaone.com",
+      "publishedAt": "2026-05-09T04:15:00Z",
+      "language": "English",
+      "sourceName": "asiaone.com (Singapore)",
+      "country": "Singapore",
+      "imageUrl": "https://media.asiaone.com/sites/default/files/styles/article_top_image/public/original_images/May2026/9526_ufo_ap.jpg?itok=T9H4nv9s",
+      "tone": 0
+    },
+    {
+      "id": "7c2c2929e2c8",
+      "title": "Pentagon UFO files include CT scientist 1947 flying saucer theory",
+      "url": "https://www.nhregister.com/living/article/pentagon-ufo-files-connecticut-flying-saucer-22249807.php",
+      "domain": "nhregister.com",
+      "publishedAt": "2026-05-09T03:45:00Z",
+      "language": "English",
+      "sourceName": "nhregister.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.hdnux.com/photos/01/66/15/63/30989519/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "f33f5775db67",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.eastidahonews.com/2026/05/bright-lights-and-hot-orbs-ufo-files-shed-light-on-sightings-but-leave-interpretation-to-the-public/",
+      "domain": "eastidahonews.com",
+      "publishedAt": "2026-05-09T03:30:00Z",
+      "language": "English",
+      "sourceName": "eastidahonews.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s3.us-west-2.amazonaws.com/assets.eastidahonews.com/wp-content/uploads/2026/05/AP26128693173676.jpg",
+      "tone": 0
+    },
+    {
+      "id": "2156b7d4d9c6",
+      "title": "White House releases UFO files , more expected",
+      "url": "https://www.rnz.co.nz/news/world/594725/white-house-releases-ufo-files-more-expected",
+      "domain": "rnz.co.nz",
+      "publishedAt": "2026-05-09T03:15:00Z",
+      "language": "English",
+      "sourceName": "rnz.co.nz",
+      "country": "",
+      "imageUrl": "https://media.rnztools.nz/rnz/image/upload/s--7ondV3Fk--/t_tohu-badge-facebook/v1643774793/4MGR0HR_image_crop_116086?_a=BACCd2AD",
+      "tone": 0
+    },
+    {
+      "id": "4ad712403e1c",
+      "title": "Pentagon Releases Newly Declassified Files on UFOs and UAPs , Unidentified Anomalous Phenomena",
+      "url": "https://theconservativetreehouse.com/blog/2026/05/08/pentagon-releases-newly-declassified-files-on-ufos-and-uaps-unidentified-anomalous-phenomena/comment-page-2/",
+      "domain": "theconservativetreehouse.com",
+      "publishedAt": "2026-05-09T03:00:00Z",
+      "language": "English",
+      "sourceName": "theconservativetreehouse.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://theconservativetreehouse.com/wp-content/uploads/2026/05/Aliens-UFOs-Marco-Rubio.jpg",
+      "tone": 0
+    },
+    {
+      "id": "a11903c72d01",
+      "title": "UFO files shed light on sightings but leave interpretation to public | Nation and World",
+      "url": "https://www.reviewjournal.com/news/nation-and-world/truth-is-out-there-ufo-files-shed-light-on-sightings-but-leave-interpretation-to-public-3821741/",
+      "domain": "reviewjournal.com",
+      "publishedAt": "2026-05-09T02:15:00Z",
+      "language": "English",
+      "sourceName": "reviewjournal.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.reviewjournal.com/wp-content/uploads/2026/05/21663387_web1_pentagonUFO3.jpg",
+      "tone": 0
+    },
+    {
+      "id": "5f97466da3ff",
+      "title": "Leon Panetta : UFOs Are Technology Used by US  Adversaries",
+      "url": "https://www.mediaite.com/media/news/former-cia-director-frightens-cnn-anchor-with-theory-that-ufos-are-really-technology-used-by-us-adversaries/",
+      "domain": "mediaite.com",
+      "publishedAt": "2026-05-09T02:15:00Z",
+      "language": "English",
+      "sourceName": "mediaite.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.mediaite.com/wp-content/uploads/2026/05/panetta.jpeg",
+      "tone": 0
+    },
+    {
+      "id": "d21925a93081",
+      "title": "Trump released the UFO files the government spent decades hiding , but nobody can agree on what they actually prove",
+      "url": "https://attackofthefanboy.com/politics/trump-released-the-ufo-files-the-government-spent-decades-hiding-but-nobody-can-agree-on-what-they-actually-prove/",
+      "domain": "attackofthefanboy.com",
+      "publishedAt": "2026-05-09T02:15:00Z",
+      "language": "English",
+      "sourceName": "attackofthefanboy.com (Japan)",
+      "country": "Japan",
+      "imageUrl": "https://attackofthefanboy.com/wp-content/uploads/2026/05/President-Donald-Trump-Delivers-Remarks-At-A-Meeting-Of-The-_1778234511405.jpg",
+      "tone": 0
+    },
+    {
+      "id": "c4da0a5f6a58",
+      "title": "UFO files : Aliens seen in 1960s ? Bombshell claim from older FBI documents ;  three and a half to four feet tall",
+      "url": "https://www.hindustantimes.com/world-news/us-news/ufo-files-aliens-seen-in-1960s-bombshell-claim-from-older-fbi-documents-three-and-a-half-to-four-feet-tall-101778278547152.html",
+      "domain": "hindustantimes.com",
+      "publishedAt": "2026-05-09T02:00:00Z",
+      "language": "English",
+      "sourceName": "hindustantimes.com (India)",
+      "country": "India",
+      "imageUrl": "https://www.hindustantimes.com/ht-img/img/2026/05/08/550x309/photo-1612512836264-5e58fab88bf0_1778279228101_1778279237288.jpg",
+      "tone": 0
+    },
+    {
+      "id": "32b68318b512",
+      "title": "Pentagon declassifies Apollo UFO photos",
+      "url": "https://www.nzherald.co.nz/world/pentagon-declassifies-apollo-ufo-photos/EVZW5QHDVRENDFIUWZSER3BDMQ/",
+      "domain": "nzherald.co.nz",
+      "publishedAt": "2026-05-09T02:00:00Z",
+      "language": "English",
+      "sourceName": "nzherald.co.nz (New Zealand)",
+      "country": "New Zealand",
+      "imageUrl": "https://www.nzherald.co.nz/resizer/v2/WHN32XFE55C3TGBR4Y7BB4FPFY.PNG?auth=052bbfdb49befec4c0ee3092dc137150171d9e54c24faf962651acab6ef30c7b&quality=70&focal=477%2C239&smart=false",
+      "tone": 0
+    },
+    {
+      "id": "cc8fa674b000",
+      "title": "Pentagon release of unclassified UFO files sparks discussion",
+      "url": "https://www.wmur.com/article/pentagon-unclassified-files-ufos-5826/71256718",
+      "domain": "wmur.com",
+      "publishedAt": "2026-05-09T02:00:00Z",
+      "language": "English",
+      "sourceName": "wmur.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://kubrick.htvapps.com/vidthumb/10bb55b8-c988-4858-9b20-1d421653c95a/0542952a-8d7f-4502-9cfb-38902ec86fa9.jpg?crop=0.814xw:0.812xh;0.114xw,0",
+      "tone": 0
+    },
+    {
+      "id": "8b75236798c5",
+      "title": "Many UFO sightings concentrated near active military sites , newly released files show",
+      "url": "https://kjlhradio.com/many-ufo-sightings-concentrated-near-active-military-sites-newly-released-files-show/",
+      "domain": "kjlhradio.com",
+      "publishedAt": "2026-05-09T01:15:00Z",
+      "language": "English",
+      "sourceName": "kjlhradio.com (United States)",
+      "country": "United States",
+      "imageUrl": null,
+      "tone": 0
+    },
+    {
+      "id": "7df901bb15db",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.whas11.com/article/news/nation-world/ufo-files-released-pentagon-transparency/507-a7fb5775-1714-4a23-a18a-fa81892ddd23",
+      "domain": "whas11.com",
+      "publishedAt": "2026-05-09T01:15:00Z",
+      "language": "English",
+      "sourceName": "whas11.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.whas11.com/assets/CCT/images/fcec50bd-25db-4398-928c-1ea252e1e02c/20260508T221526/fcec50bd-25db-4398-928c-1ea252e1e02c_1080x1920.jpg",
+      "tone": 0
+    },
+    {
+      "id": "b7b3163b69e7",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings , leave interpretation to the public",
+      "url": "https://www.southernminn.com/faribault_daily_news/news/nation/bright-lights-and-hot-orbs-ufo-files-shed-light-on-sightings-leave-interpretation-to-the/article_975f41c3-ccff-4146-b679-d0547bebb2f4.html",
+      "domain": "southernminn.com",
+      "publishedAt": "2026-05-09T01:15:00Z",
+      "language": "English",
+      "sourceName": "southernminn.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/southernminn.com/content/tncms/assets/v3/editorial/c/70/c70417f2-9302-4b1f-aeae-b4326c053ebf/69fe61e56968a.image.jpg?crop=1763%2C926%2C0%2C125",
+      "tone": 0
+    },
+    {
+      "id": "ad496475682e",
+      "title": "Where Texas UFOs have been spotted , according to new Pentagon files",
+      "url": "https://www.fox4news.com/news/texas-ufo-pentagon-files",
+      "domain": "fox4news.com",
+      "publishedAt": "2026-05-09T01:15:00Z",
+      "language": "English",
+      "sourceName": "fox4news.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://images.foxtv.com/static.fox4news.com/www.fox4news.com/content/uploads/2026/05/1280/720/gettyimages-1586596598.jpg?ve=1&tl=1",
+      "tone": 0
+    },
     {
       "id": "43793ba76703",
       "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
@@ -27,6 +735,30 @@
       "sourceName": "airforcetimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.armytimes.com/resizer/v2/7IOMO5AOT5EYTFTNBU6FIMZDIM.JPG?&auth=ce191cc1856e319ca28dc277b45e5f42d0cd5f955da3c639384545ab320d054b",
+      "tone": 0
+    },
+    {
+      "id": "b6615a517945",
+      "title": "Marjorie Taylor Greene Fumes She  Sick  of Trump UFO  Propaganda",
+      "url": "https://radaronline.com/p/marjorie-taylor-greene-sick-trump-ufo-files-propaganda-bitter-feud/",
+      "domain": "radaronline.com",
+      "publishedAt": "2026-05-09T00:30:00Z",
+      "language": "English",
+      "sourceName": "radaronline.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.radaronline.com/brand-img/FaQFa2N3v/1200x628/marjorie-taylor-greene-sick-trump-ufo-files-propaganda-bitter-feudpp-1778274788846.jpg",
+      "tone": 0
+    },
+    {
+      "id": "17d0a8e1b1e9",
+      "title": "UFO files shed light on sightings but leave interpretation to the public – NBC Chicago",
+      "url": "https://www.nbcchicago.com/news/national-international/pentagon-releasing-new-files-ufos/3933449/",
+      "domain": "nbcchicago.com",
+      "publishedAt": "2026-05-09T00:30:00Z",
+      "language": "English",
+      "sourceName": "nbcchicago.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.nbcchicago.com/2026/05/UFO-FILES.jpg?quality=85&strip=all",
       "tone": 0
     },
     {
@@ -90,42 +822,6 @@
       "tone": 0
     },
     {
-      "id": "b6615a517945",
-      "title": "Marjorie Taylor Greene Fumes She  Sick  of Trump UFO  Propaganda",
-      "url": "https://radaronline.com/p/marjorie-taylor-greene-sick-trump-ufo-files-propaganda-bitter-feud/",
-      "domain": "radaronline.com",
-      "publishedAt": "2026-05-09T00:30:00Z",
-      "language": "English",
-      "sourceName": "radaronline.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.radaronline.com/brand-img/FaQFa2N3v/1200x628/marjorie-taylor-greene-sick-trump-ufo-files-propaganda-bitter-feudpp-1778274788846.jpg",
-      "tone": 0
-    },
-    {
-      "id": "17d0a8e1b1e9",
-      "title": "UFO files shed light on sightings but leave interpretation to the public – NBC Chicago",
-      "url": "https://www.nbcchicago.com/news/national-international/pentagon-releasing-new-files-ufos/3933449/",
-      "domain": "nbcchicago.com",
-      "publishedAt": "2026-05-09T00:30:00Z",
-      "language": "English",
-      "sourceName": "nbcchicago.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.nbcchicago.com/2026/05/UFO-FILES.jpg?quality=85&strip=all",
-      "tone": 0
-    },
-    {
-      "id": "e32044027e60",
-      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
-      "url": "https://www.9news.com/article/news/nation-world/ufo-files-released-pentagon-transparency/507-a7fb5775-1714-4a23-a18a-fa81892ddd23",
-      "domain": "9news.com",
-      "publishedAt": "2026-05-09T00:00:00Z",
-      "language": "English",
-      "sourceName": "9news.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.9news.com/assets/CCT/images/fcec50bd-25db-4398-928c-1ea252e1e02c/20260508T221526/fcec50bd-25db-4398-928c-1ea252e1e02c_1140x641.jpg",
-      "tone": 0
-    },
-    {
       "id": "57759e21b386",
       "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
       "url": "https://www.13newsnow.com/article/news/nation-world/ufo-files-released-pentagon-transparency/507-a7fb5775-1714-4a23-a18a-fa81892ddd23",
@@ -183,6 +879,18 @@
       "sourceName": "stcatharinesstandard.ca (Canada)",
       "country": "Canada",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/stcatharinesstandard.ca/content/tncms/assets/v3/editorial/e/c5/ec57fa7f-6925-5851-a9ef-25038aef3c35/69f7309c40eff.image.jpg?crop=1620%2C851%2C0%2C114",
+      "tone": 0
+    },
+    {
+      "id": "e32044027e60",
+      "title": "Bright lights and hot orbs : UFO files shed light on sightings but leave interpretation to the public",
+      "url": "https://www.9news.com/article/news/nation-world/ufo-files-released-pentagon-transparency/507-a7fb5775-1714-4a23-a18a-fa81892ddd23",
+      "domain": "9news.com",
+      "publishedAt": "2026-05-09T00:00:00Z",
+      "language": "English",
+      "sourceName": "9news.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://media.9news.com/assets/CCT/images/fcec50bd-25db-4398-928c-1ea252e1e02c/20260508T221526/fcec50bd-25db-4398-928c-1ea252e1e02c_1140x641.jpg",
       "tone": 0
     },
     {
@@ -990,90 +1698,6 @@
       "tone": 2.5
     },
     {
-      "id": "f291cf76c0c0",
-      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
-      "url": "https://wdsd.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
-      "domain": "wdsd.iheart.com",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "wdsd.iheart.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
-    },
-    {
-      "id": "a034515ce4fa",
-      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
-      "url": "https://khvhradio.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
-      "domain": "khvhradio.iheart.com",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "khvhradio.iheart.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
-    },
-    {
-      "id": "12397c20cc11",
-      "title": "Newly Declassified UFO Documents Reveal Strange Sightings Over Moon and Earth",
-      "url": "https://english.pravda.ru/science/166680-pentagon-ufo-files-release-apollo-uap-documents/",
-      "domain": "english.pravda.ru",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "english.pravda.ru (Russia)",
-      "country": "Russia",
-      "imageUrl": "https://english.pravda.ru/image/preview/article/6/8/0/166680_soc.jpeg",
-      "tone": 0
-    },
-    {
-      "id": "4c0309e161df",
-      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
-      "url": "https://wsrw.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
-      "domain": "wsrw.iheart.com",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "wsrw.iheart.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
-    },
-    {
-      "id": "e560fbc2c992",
-      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
-      "url": "https://big955chicago.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
-      "domain": "big955chicago.iheart.com",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "big955chicago.iheart.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
-    },
-    {
-      "id": "a92ef4cff0bf",
-      "title": "The top 10 UFO encounters revealed throughout the decades as Pentagon declassifies files",
-      "url": "https://nypost.com/2026/05/08/us-news/the-top-10-ufo-encounters-revealed-throughout-the-decades-as-pentagon-declassifies-files/",
-      "domain": "nypost.com",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "nypost.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/05/newspress-collage-3rmqp8l8u-1778265997303.jpg?quality=75&strip=all&1778251653",
-      "tone": 0
-    },
-    {
-      "id": "c4d8ae665cde",
-      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
-      "url": "https://1051thewolf.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
-      "domain": "1051thewolf.iheart.com",
-      "publishedAt": "2026-05-08T19:15:00Z",
-      "language": "English",
-      "sourceName": "1051thewolf.iheart.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
-    },
-    {
       "id": "ee6241f1d9f7",
       "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
       "url": "https://wlap.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
@@ -1237,6 +1861,90 @@
       "publishedAt": "2026-05-08T19:15:00Z",
       "language": "English",
       "sourceName": "kfyi.iheart.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
+      "tone": 0
+    },
+    {
+      "id": "12397c20cc11",
+      "title": "Newly Declassified UFO Documents Reveal Strange Sightings Over Moon and Earth",
+      "url": "https://english.pravda.ru/science/166680-pentagon-ufo-files-release-apollo-uap-documents/",
+      "domain": "english.pravda.ru",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "english.pravda.ru (Russia)",
+      "country": "Russia",
+      "imageUrl": "https://english.pravda.ru/image/preview/article/6/8/0/166680_soc.jpeg",
+      "tone": 0
+    },
+    {
+      "id": "4c0309e161df",
+      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
+      "url": "https://wsrw.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
+      "domain": "wsrw.iheart.com",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "wsrw.iheart.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
+      "tone": 0
+    },
+    {
+      "id": "e560fbc2c992",
+      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
+      "url": "https://big955chicago.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
+      "domain": "big955chicago.iheart.com",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "big955chicago.iheart.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
+      "tone": 0
+    },
+    {
+      "id": "a92ef4cff0bf",
+      "title": "The top 10 UFO encounters revealed throughout the decades as Pentagon declassifies files",
+      "url": "https://nypost.com/2026/05/08/us-news/the-top-10-ufo-encounters-revealed-throughout-the-decades-as-pentagon-declassifies-files/",
+      "domain": "nypost.com",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "nypost.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2026/05/newspress-collage-3rmqp8l8u-1778265997303.jpg?quality=75&strip=all&1778251653",
+      "tone": 0
+    },
+    {
+      "id": "c4d8ae665cde",
+      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
+      "url": "https://1051thewolf.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
+      "domain": "1051thewolf.iheart.com",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "1051thewolf.iheart.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
+      "tone": 0
+    },
+    {
+      "id": "f291cf76c0c0",
+      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
+      "url": "https://wdsd.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
+      "domain": "wdsd.iheart.com",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "wdsd.iheart.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
+      "tone": 0
+    },
+    {
+      "id": "a034515ce4fa",
+      "title": "Pentagon Releases First Batch Of Files On UFOs ,  Extraterrestrial Life",
+      "url": "https://khvhradio.iheart.com/content/2026-05-08-pentagon-releases-first-batch-of-files-on-ufos-extraterrestrial-life/",
+      "domain": "khvhradio.iheart.com",
+      "publishedAt": "2026-05-08T19:15:00Z",
+      "language": "English",
+      "sourceName": "khvhradio.iheart.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
       "tone": 0
@@ -2355,7 +3063,7 @@
       "sourceName": "thebeatgulfcoast.iheart.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0df8375878ee",
@@ -2367,7 +3075,7 @@
       "sourceName": "real923la.iheart.com (United States)",
       "country": "United States",
       "imageUrl": "https://i.iheart.com/v3/re/assets.getty/67ef2e52b2182d9764a1a7fd?ops=gravity(%22north%22),fit(1200,675),quality(65)",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "fdaae0931236",
@@ -6591,7 +7299,7 @@
       "sourceName": "lamag.com (United States)",
       "country": "United States",
       "imageUrl": "https://lamag.com/wp-content/uploads/2026/03/McCasland.webp",
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "3b7bcc6018f3",
@@ -6603,7 +7311,7 @@
       "sourceName": "calgarysun.com (Canada)",
       "country": "Canada",
       "imageUrl": null,
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "098ebe303600",
@@ -6615,7 +7323,7 @@
       "sourceName": "torontosun.com (Canada)",
       "country": "Canada",
       "imageUrl": null,
-      "tone": -2.5
+      "tone": 0
     },
     {
       "id": "72e3eb81c5e5",
@@ -6651,7 +7359,7 @@
       "sourceName": "oleantimesherald.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.oleantimesherald.com/oleantimesherald/news/wp-content/uploads/sites/4/2026/04/SPORTS-BBA-ATHLETICS-YANKEES-GET-scaled.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "6d67c94cb1d5",
@@ -6735,7 +7443,7 @@
       "sourceName": "elpasoinc.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/elpasoinc.com/content/tncms/custom/image/d1748eca-2ab1-11e7-b238-e3e4ea30cc77.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "3de41bd6fc59",
@@ -6891,7 +7599,7 @@
       "sourceName": "ironmountaindailynews.com (United States)",
       "country": "United States",
       "imageUrl": "https://ogden_images.s3.amazonaws.com/www.ironmountaindailynews.com/images/2026/04/06150647/AP26091636479814-679x500.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "406c1badeacb",
@@ -6903,7 +7611,7 @@
       "sourceName": "npr.org (United States)",
       "country": "United States",
       "imageUrl": "http://npr-brightspot.s3.amazonaws.com/36/a9/d74ba34948998c18f50932919def/gettyimages-2269359565.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "c42fef24319d",
@@ -7035,7 +7743,7 @@
       "sourceName": "asiaone.com (Singapore)",
       "country": "Singapore",
       "imageUrl": "https://www.asiaone.com/sites/default/files/styles/article_top_image/public/original_images/Apr2026/5426_us_ap%20%281%29.jpg?itok=hNBDeTh2",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "d0a36f2ce832",
@@ -7047,7 +7755,7 @@
       "sourceName": "asiaone.com (Singapore)",
       "country": "Singapore",
       "imageUrl": "https://www.asiaone.com/sites/default/files/styles/article_top_image/public/original_images/Apr2026/5426_us_ap%20%281%29.jpg?itok=hNBDeTh2",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "850a1a35d6f0",
@@ -7059,7 +7767,7 @@
       "sourceName": "ufosightingsdaily.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "6dced34445b8",
@@ -7119,7 +7827,7 @@
       "sourceName": "adn.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.adn.com/resizer/v2/2V42PNP6MNALYBONZ65PYBVRCM.jpg?smart=true&auth=7a2d43362c227e448b5f0579f98a20e17b9418323b452b827a6f90fa9449c554",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "791e16590059",
@@ -7143,7 +7851,7 @@
       "sourceName": "capitalgazette.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.capitalgazette.com/wp-content/uploads/2026/04/What_on_Earth_79814-1.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "a568d538d446",
@@ -7155,7 +7863,7 @@
       "sourceName": "rockymounttelegram.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/rockymounttelegram.com/content/tncms/assets/v3/editorial/0/8a/08a8a9b4-0608-5934-a69a-c53d33648a8d/69d0cce7193ab.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "9c25ce73a764",
@@ -7167,7 +7875,7 @@
       "sourceName": "nbclosangeles.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.nbclosangeles.com/2026/04/AP26091616012627.jpg?quality=85&strip=all",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "9a430d919097",
@@ -7191,7 +7899,7 @@
       "sourceName": "whdh.com (United States)",
       "country": "United States",
       "imageUrl": null,
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "769c2c250395",
@@ -7203,7 +7911,7 @@
       "sourceName": "news-gazette.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/news-gazette.com/content/tncms/custom/image/3d3bfbd4-3cf5-11ec-9461-574a9d514a20.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "472ec5e5ac7a",
@@ -7215,7 +7923,7 @@
       "sourceName": "reflector.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/reflector.com/content/tncms/assets/v3/editorial/2/36/236ef3f7-db56-56d4-84d5-7f53f0a36cc5/69d0cbbf44412.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "7dd57d851ebd",
@@ -7227,7 +7935,7 @@
       "sourceName": "nbcbayarea.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.nbcbayarea.com/2026/04/AP26091616012627.jpg?quality=85&strip=all",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "3c9ad4aa79e6",
@@ -7299,7 +8007,7 @@
       "sourceName": "cadillacnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/cadillacnews.com/content/tncms/custom/image/2f32a658-47ab-11e7-abb1-ef25bc001cf2.png",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "1bb441d1cab0",
@@ -7311,7 +8019,7 @@
       "sourceName": "wfmj.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/wfmj.com/content/tncms/assets/v3/editorial/9/b3/9b3979c6-3d2f-5ba7-bb2d-1a724d0b1c90/69d0f632f3617.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "e915eb615b23",
@@ -7323,7 +8031,7 @@
       "sourceName": "yumasun.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/yumasun.com/content/tncms/assets/v3/editorial/a/4c/a4c1101a-dbcd-5cb4-a311-c5e154b71535/69d092e77e533.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "8c842e0bf8c4",
@@ -7335,7 +8043,7 @@
       "sourceName": "mdjonline.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/mdjonline.com/content/tncms/assets/v3/editorial/f/da/fda18e0c-b923-520b-a329-23ce6cb91c41/69d08ebd7eac4.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "e0cc42d61d12",
@@ -7347,7 +8055,7 @@
       "sourceName": "ksat.com (United States)",
       "country": "United States",
       "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "88a665181528",
@@ -7359,7 +8067,7 @@
       "sourceName": "mymotherlode.com (United States)",
       "country": "United States",
       "imageUrl": "https://mymotherlode.com/wp-content/uploads/2026/04/AP_5a380b927b404ae89c2781700fa3897a_9782fc7f4c.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "fd2875ffa73f",
@@ -7443,7 +8151,7 @@
       "sourceName": "wdbo.com (United States)",
       "country": "United States",
       "imageUrl": "https://cmg-cmg-rd-20082-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "c06063887ed9",
@@ -7518,18 +8226,6 @@
       "tone": 0
     },
     {
-      "id": "c7b1783c97e2",
-      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
-      "url": "https://www.wsls.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
-      "domain": "wsls.com",
-      "publishedAt": "2026-04-04T08:15:00Z",
-      "language": "English",
-      "sourceName": "wsls.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
-      "tone": 2.5
-    },
-    {
       "id": "610e87826822",
       "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
       "url": "https://www.pentictonherald.ca/entertainment/national_entertainment/article_78680ef5-8cc2-59cb-8545-560964518bd7.html",
@@ -7554,6 +8250,18 @@
       "tone": 0
     },
     {
+      "id": "c7b1783c97e2",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.wsls.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "wsls.com",
+      "publishedAt": "2026-04-04T08:15:00Z",
+      "language": "English",
+      "sourceName": "wsls.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
+      "tone": 0
+    },
+    {
       "id": "8ae110128821",
       "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
       "url": "https://www.wfmz.com/news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_d6d40041-3797-57ce-8e9d-6bb01a742930.html",
@@ -7563,7 +8271,7 @@
       "sourceName": "wfmz.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wfmz.com/content/tncms/assets/v3/editorial/8/8b/88bef3ce-f613-51f9-ba87-23b42b03d78f/69d08e54f1b2d.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "2fb86483c0a2",
@@ -7623,7 +8331,7 @@
       "sourceName": "dailygazette.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/dailygazette.com/content/tncms/assets/v3/editorial/1/77/1772482f-f88d-5fb8-a6c2-8184e1b2b274/69d090f889f9d.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "a4f4188abc74",
@@ -7647,7 +8355,7 @@
       "sourceName": "middletownpress.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897149/3/rawImage.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "75d1cbc70cf3",
@@ -7659,7 +8367,7 @@
       "sourceName": "nhregister.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/17/30897149/3/rawImage.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "41305ba06b00",
@@ -7671,43 +8379,7 @@
       "sourceName": "mynorthwest.com (United States)",
       "country": "United States",
       "imageUrl": "https://mynorthwest.com/wp-content/uploads/2026/04/What_on_Earth_79814.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "1393ed0d2a92",
-      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
-      "url": "https://www.news4jax.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
-      "domain": "news4jax.com",
-      "publishedAt": "2026-04-04T06:00:00Z",
-      "language": "English",
-      "sourceName": "news4jax.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
-      "tone": 2.5
-    },
-    {
-      "id": "f9e8d7822e19",
-      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
-      "url": "https://www.wboc.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_23e04d8d-38e4-53f1-9d3e-a4bb453b8a5a.html",
-      "domain": "wboc.com",
-      "publishedAt": "2026-04-04T06:00:00Z",
-      "language": "English",
-      "sourceName": "wboc.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wboc.com/content/tncms/assets/v3/editorial/a/0f/a0ff4b3c-85de-5e26-b432-acc9c064f7d5/69d08ef2e600d.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
-    },
-    {
-      "id": "7b44c3184def",
-      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
-      "url": "https://www.yahoo.com/news/articles/trump-orders-ufo-data-released-040248905.html",
-      "domain": "yahoo.com",
-      "publishedAt": "2026-04-04T06:00:00Z",
-      "language": "English",
-      "sourceName": "yahoo.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/34q7cdyJzOC8fEPp_4QA2A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04ODQ7Y2Y9d2VicA--/https://media.zenfs.com/en/ap.org/c71f9387a86a0d8005d7a5202275b3e2",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "151a4cc3d739",
@@ -7734,6 +8406,18 @@
       "tone": 0
     },
     {
+      "id": "1393ed0d2a92",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.news4jax.com/news/national/2026/04/04/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they-think-of-us/",
+      "domain": "news4jax.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "news4jax.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
+      "tone": 0
+    },
+    {
       "id": "36dc73f60d59",
       "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
       "url": "https://www.nhregister.com/entertainment/article/hollywood-s-narrative-on-ufos-and-ets-reaches-22188668.php",
@@ -7755,6 +8439,18 @@
       "sourceName": "middletownpress.com (United States)",
       "country": "United States",
       "imageUrl": "https://s.hdnux.com/photos/01/65/67/20/30897182/3/rawImage.jpg",
+      "tone": 0
+    },
+    {
+      "id": "f9e8d7822e19",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.wboc.com/news/national/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_23e04d8d-38e4-53f1-9d3e-a4bb453b8a5a.html",
+      "domain": "wboc.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "wboc.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/wboc.com/content/tncms/assets/v3/editorial/a/0f/a0ff4b3c-85de-5e26-b432-acc9c064f7d5/69d08ef2e600d.image.jpg?crop=1678%2C881%2C0%2C177",
       "tone": 0
     },
     {
@@ -7794,6 +8490,18 @@
       "tone": 0
     },
     {
+      "id": "7b44c3184def",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.yahoo.com/news/articles/trump-orders-ufo-data-released-040248905.html",
+      "domain": "yahoo.com",
+      "publishedAt": "2026-04-04T06:00:00Z",
+      "language": "English",
+      "sourceName": "yahoo.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s.yimg.com/ny/api/res/1.2/34q7cdyJzOC8fEPp_4QA2A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04ODQ7Y2Y9d2VicA--/https://media.zenfs.com/en/ap.org/c71f9387a86a0d8005d7a5202275b3e2",
+      "tone": 0
+    },
+    {
       "id": "070752ea3d32",
       "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
       "url": "https://mynorthwest.com/lifestyle/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/4224744",
@@ -7818,18 +8526,6 @@
       "tone": 0
     },
     {
-      "id": "26dd60b42fc0",
-      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
-      "url": "https://www.bozemandailychronicle.com/ap_news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_d8a6046f-6d7e-5ec2-aecd-65fbcf7c8c78.html",
-      "domain": "bozemandailychronicle.com",
-      "publishedAt": "2026-04-04T05:30:00Z",
-      "language": "English",
-      "sourceName": "bozemandailychronicle.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/bozemandailychronicle.com/content/tncms/assets/v3/editorial/0/19/0193d20a-d4a0-5635-9560-9a13f9912b20/69d08fb34c135.image.jpg?crop=1678%2C881%2C0%2C177",
-      "tone": 2.5
-    },
-    {
       "id": "edef980cdce5",
       "title": "Hollywood narrative on UFOs and ETs reaches back many decades",
       "url": "https://www.dailygazette.com/leader_herald/ap/lifestyles/hollywoods-narrative-on-ufos-and-ets-reaches-back-many-decades/article_f70becb0-c110-57c0-a515-342d2363d065.html",
@@ -7839,6 +8535,18 @@
       "sourceName": "dailygazette.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.chicago2.vip.townnews.com/dailygazette.com/content/tncms/assets/v3/editorial/1/ee/1eea81bb-63ff-58fe-ba73-3ba9ae9a1049/69d090f9136dd.image.jpg?crop=1867%2C980%2C0%2C64",
+      "tone": 0
+    },
+    {
+      "id": "26dd60b42fc0",
+      "title": "As Trump orders UFO data released , a question hangs : If aliens exist , what would they think of us ?",
+      "url": "https://www.bozemandailychronicle.com/ap_news/as-trump-orders-ufo-data-released-a-question-hangs-if-aliens-exist-what-would-they/article_d8a6046f-6d7e-5ec2-aecd-65fbcf7c8c78.html",
+      "domain": "bozemandailychronicle.com",
+      "publishedAt": "2026-04-04T05:30:00Z",
+      "language": "English",
+      "sourceName": "bozemandailychronicle.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://bloximages.chicago2.vip.townnews.com/bozemandailychronicle.com/content/tncms/assets/v3/editorial/0/19/0193d20a-d4a0-5635-9560-9a13f9912b20/69d08fb34c135.image.jpg?crop=1678%2C881%2C0%2C177",
       "tone": 0
     },
     {
@@ -7875,7 +8583,7 @@
       "sourceName": "clickorlando.com (United States)",
       "country": "United States",
       "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/L72ZBAOFIBG65PPBV6HAM6HJHE.jpg?_a=DATAg1fkZAA0",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "9a0a1f0beff8",
@@ -7887,7 +8595,7 @@
       "sourceName": "ktar.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_79814.jpg",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "25c1e01bdd80",
@@ -7899,19 +8607,7 @@
       "sourceName": "wsbradio.com (United States)",
       "country": "United States",
       "imageUrl": "https://cmg-cmg-rd-20021-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
-      "tone": 2.5
-    },
-    {
-      "id": "0d78c872a424",
-      "title": "We wonder about aliens in UFOs . Do they wonder about us ?",
-      "url": "https://www.wgauradio.com/news/national/trump-orders-ufo/H3L37PKQ4I2AXK7TEFQDMQDW2I/",
-      "domain": "wgauradio.com",
-      "publishedAt": "2026-04-04T04:30:00Z",
-      "language": "English",
-      "sourceName": "wgauradio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
-      "tone": 2.5
+      "tone": 0
     },
     {
       "id": "e156649fca3d",
@@ -7923,6 +8619,18 @@
       "sourceName": "ktar.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_97189.jpg",
+      "tone": 0
+    },
+    {
+      "id": "0d78c872a424",
+      "title": "We wonder about aliens in UFOs . Do they wonder about us ?",
+      "url": "https://www.wgauradio.com/news/national/trump-orders-ufo/H3L37PKQ4I2AXK7TEFQDMQDW2I/",
+      "domain": "wgauradio.com",
+      "publishedAt": "2026-04-04T04:30:00Z",
+      "language": "English",
+      "sourceName": "wgauradio.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2FDJ62KQONA4YMXKTOIHS72GWX34.jpg?auth=1b7bcf6a59c199282d8c403a6f9b7edc83bb647eb3e187ae1c91f7d116615180&smart=true",
       "tone": 0
     },
     {
@@ -14295,714 +15003,6 @@
       "sourceName": "kdhlradio.com (United States)",
       "country": "United States",
       "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-twins-t.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "dc97e7596a74",
-      "title": "Minnesota Twins 2026 Promotions Announced",
-      "url": "https://kool1017.com/ixp/164/p/twins-2026-promotions-deals/",
-      "domain": "kool1017.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "kool1017.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-twins-t.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "8a58cd96b416",
-      "title": "UFO Sightings Daily",
-      "url": "https://www.ufosightingsdaily.com/search?updated-max=2025-11-16T21:44:00-07:00&max-results=10",
-      "domain": "ufosightingsdaily.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "ufosightingsdaily.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 2.5
-    },
-    {
-      "id": "92204541ad1b",
-      "title": "The Least Expensive Food Delivery Service Right Now In Wisconsin",
-      "url": "https://quickcountry.com/ixp/150/p/cheapest-food-delivery-service-in-wisconsin/",
-      "domain": "quickcountry.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "quickcountry.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-wisdash.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "023cc6a21969",
-      "title": "The Least Expensive Food Delivery Service Right Now In Wisconsin",
-      "url": "https://power96radio.com/ixp/150/p/cheapest-food-delivery-service-in-wisconsin/",
-      "domain": "power96radio.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "power96radio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-wisdash.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "65031a3c079a",
-      "title": "The Least Expensive Food Delivery Service Right Now In Wisconsin",
-      "url": "https://1520theticket.com/ixp/150/p/cheapest-food-delivery-service-in-wisconsin/",
-      "domain": "1520theticket.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "1520theticket.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-wisdash.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "aa5b5bea3bbb",
-      "title": "Montana Tech Introduces Classes On UFO Studies In Butte",
-      "url": "https://xlcountry.com/ufo-sightings-in-montana/",
-      "domain": "xlcountry.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "xlcountry.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/12/files/2026/02/attachment-untitled-design-2026-02-09t080250-239-2.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "a94c2982cbcf",
-      "title": "Tuttle Capital UFO Disclosure ETF ( UFOD ) Stock Price , Quote , News & History",
-      "url": "https://www.benzinga.com/quote/ufod",
-      "domain": "benzinga.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "benzinga.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 2.5
-    },
-    {
-      "id": "a1565be025df",
-      "title": "Close Encounters Of The Bullish Kind : UFOD ETF Gains Altitude - Tuttle Capital UFO Disclosure ETF ( BATS : UFOD )",
-      "url": "https://www.benzinga.com/etfs/new-etfs/26/02/50492618/the-most-out-of-the-world-etf-yet-tuttles-latest-fund-is-built-around-possible-alien-tech",
-      "domain": "benzinga.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "benzinga.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://cdn.benzinga.com/files/images/story/2026/02/09/A-Mysterious-Scary-Ufo-Above-A-Hooded-Fi_0.jpeg?&fit=crop",
-      "tone": 2.5
-    },
-    {
-      "id": "24d3a0f0de7f",
-      "title": "Super Bowl showcases upcoming Mandalorian and Super Mario films",
-      "url": "https://www.meathchronicle.ie/2026/02/09/super-bowl-showcases-upcoming-mandalorian-and-super-mario-films/",
-      "domain": "meathchronicle.ie",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "meathchronicle.ie (Ireland)",
-      "country": "Ireland",
-      "imageUrl": "https://imengine.public.prod.cmg.infomaker.io/?uuid=b262c47f-7cc4-51a1-81ea-077e3205cb29&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.99852&x=0&y=0",
-      "tone": 2.5
-    },
-    {
-      "id": "2f3e41a8b031",
-      "title": "Super Bowl showcases upcoming Mandalorian and Super Mario films",
-      "url": "https://www.anglocelt.ie/2026/02/09/super-bowl-showcases-upcoming-mandalorian-and-super-mario-films/",
-      "domain": "anglocelt.ie",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "anglocelt.ie (Ireland)",
-      "country": "Ireland",
-      "imageUrl": "https://imengine.public.prod.cmg.infomaker.io/?uuid=b262c47f-7cc4-51a1-81ea-077e3205cb29&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.99852&x=0&y=0",
-      "tone": 2.5
-    },
-    {
-      "id": "854c77464288",
-      "title": "Super Bowl showcases upcoming Mandalorian and Super Mario films",
-      "url": "https://www.breakingnews.ie/entertainment/super-bowl-showcases-upcoming-mandalorian-and-super-mario-films-1863009.html",
-      "domain": "breakingnews.ie",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "breakingnews.ie (Ireland)",
-      "country": "Ireland",
-      "imageUrl": "https://img.resized.co/breaking-news/eyJkYXRhIjoie1widXJsXCI6XCJodHRwczpcXFwvXFxcL2ltYWdlcy5icmVha2luZ25ld3MuaWVcXFwvcHJvZFxcXC91cGxvYWRzXFxcLzIwMjZcXFwvMDJcXFwvMDkxMDQyMjlcXFwvMi43MTA4NzQwMi5qcGdcIixcIndpZHRoXCI6MTIwMCxcImhlaWdodFwiOjYyNyxcImRlZmF1bHRcIjpcImh0dHBzOlxcXC9cXFwvd3d3LmJyZWFraW5nbmV3cy5pZVxcXC9pXFxcL2JuLW5vaW1hZ2UucG5nXCIsXCJvcHRpb25zXCI6W119IiwiaGFzaCI6IjZkZThlNGY1MDYzZjc3NTg0OWNjZDIzMGExODBkYzUzZGYwOTIwNmUifQ==/super-bowl-showcases-upcoming-mandalorian-and-super-mario-films.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "ec639b2fd3d0",
-      "title": "Super Bowl showcases upcoming Mandalorian and Super Mario films",
-      "url": "https://www.offalyindependent.ie/2026/02/09/super-bowl-showcases-upcoming-mandalorian-and-super-mario-films/",
-      "domain": "offalyindependent.ie",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "offalyindependent.ie (Ireland)",
-      "country": "Ireland",
-      "imageUrl": "https://imengine.public.prod.cmg.infomaker.io/?uuid=b262c47f-7cc4-51a1-81ea-077e3205cb29&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.99852&x=0&y=0",
-      "tone": 2.5
-    },
-    {
-      "id": "af616acf3b53",
-      "title": "Super Bowl showcases upcoming Mandalorian and Super Mario films",
-      "url": "https://www.westmeathindependent.ie/2026/02/09/super-bowl-showcases-upcoming-mandalorian-and-super-mario-films/",
-      "domain": "westmeathindependent.ie",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "westmeathindependent.ie (Ireland)",
-      "country": "Ireland",
-      "imageUrl": "https://imengine.public.prod.cmg.infomaker.io/?uuid=b262c47f-7cc4-51a1-81ea-077e3205cb29&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.99852&x=0&y=0",
-      "tone": 2.5
-    },
-    {
-      "id": "401358b71628",
-      "title": "Super Bowl showcases upcoming Mandalorian and Super Mario films",
-      "url": "https://www.aol.co.uk/articles/super-bowl-showcases-upcoming-mandalorian-034555084.html",
-      "domain": "aol.co.uk",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "aol.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://s.yimg.com/cv/apiv2/aolfp/images/og-image.png",
-      "tone": 2.5
-    },
-    {
-      "id": "503890d6401c",
-      "title": "Rio de Janeiro Weekly Outlook February 8 – 14 , 2026",
-      "url": "https://www.riotimesonline.com/rio-de-janeiro-weekly-outlook-february-814-2026/",
-      "domain": "riotimesonline.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "riotimesonline.com (Brazil)",
-      "country": "Brazil",
-      "imageUrl": "https://www.riotimesonline.com/wp-content/uploads/2026/01/t388272.webp_Rio_de_Janeiro_-_6-Stop_Highlights_of_Rio_with_Lunch-nr16-MOBILE_HEADER.webp",
-      "tone": 2.5
-    },
-    {
-      "id": "d8052a6e8c8d",
-      "title": "The 10 best space and sci - fi Super Bowl commercials of all time",
-      "url": "https://www.space.com/entertainment/best-space-and-sci-fi-super-bowl-commercials-of-all-time",
-      "domain": "space.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "space.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://cdn.mos.cms.futurecdn.net/vyWnz6jFNRSX47DG5nLDXQ-1920-80.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "06d9d4beebd0",
-      "title": "Which Counties Have the Most Bigfoot Sightings in Wyoming ?",
-      "url": "https://mooseradio.com/ixp/147/p/wyoming-bigfoot-sightings/",
-      "domain": "mooseradio.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "mooseradio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/147/files/2025/12/attachment-bigfoot-wyoming.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "ad5490e2617e",
-      "title": "Whales are Capable of Complex Communication Could Humans Ever Talk With Them ?",
-      "url": "https://www.discovermagazine.com/whales-are-capable-of-complex-communication-could-humans-ever-talk-with-them-48621",
-      "domain": "discovermagazine.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "discovermagazine.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://cdn.discovermagazine.com/assets/image/58465/beluga-whale-and-scuba-diver-x.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "5f004eeedd9c",
-      "title": "Mars picks new council member",
-      "url": "https://www.butlereagle.com/20260203/mars-picks-new-council-member/",
-      "domain": "butlereagle.com",
-      "publishedAt": "2026-03-31T13:07:41.086Z",
-      "language": "English",
-      "sourceName": "butlereagle.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://imengine.public.prod.bte.navigacloud.com/?uuid=241f2ecd-034d-5621-a7f8-b9c29443ff22&function=cover&type=preview&source=false",
-      "tone": 2.5
-    },
-    {
-      "id": "16112a537dcb",
-      "title": "Sierra Preparing To Open New Duluth Store",
-      "url": "https://power96radio.com/ixp/164/p/sierra-duluth-burning-tree/",
-      "domain": "power96radio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "power96radio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-sierra-store.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "7f99f7d4341f",
-      "title": "Sierra Preparing To Open New Duluth Store",
-      "url": "https://kool1017.com/ixp/164/p/sierra-duluth-burning-tree/",
-      "domain": "kool1017.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kool1017.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-sierra-store.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "897f68f0fe6c",
-      "title": "Sierra Preparing To Open New Duluth Store",
-      "url": "https://kfilradio.com/ixp/164/p/sierra-duluth-burning-tree/",
-      "domain": "kfilradio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kfilradio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-sierra-store.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "8f60724f922f",
-      "title": "Sierra Preparing To Open New Duluth Store",
-      "url": "https://1520theticket.com/ixp/164/p/sierra-duluth-burning-tree/",
-      "domain": "1520theticket.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "1520theticket.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-sierra-store.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "20262c4e499c",
-      "title": "Martha Stewart Visits Kohler Wisconsin Foundry",
-      "url": "https://mix108.com/martha-stewart-kohler-wisconsin-2/",
-      "domain": "mix108.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "mix108.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-kohler_co_douglas_friedman.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "0914f5b032d9",
-      "title": "Spotted a UFO near the mountains ? It was likely a lenticular cloud",
-      "url": "https://fox23maine.com/newsletter-daily/spotted-a-ufo-near-the-mountains-it-was-likely-a-lenticular-cloud",
-      "domain": "fox23maine.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "fox23maine.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://fox23maine.com/resources/media2/16x9/800/1320/0x75/90/c3d61174-2bc4-4e50-a8af-597ff8344463-75df996e639049d896f1ae4c66e4e7b2cloud.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "d6321ed218c1",
-      "title": "Unidentified Aerial Phenomena Reported in NJ",
-      "url": "https://catcountry1073.com/ixp/393/p/new-jersey-ufo-sightings-2026/",
-      "domain": "catcountry1073.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "catcountry1073.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/393/files/2026/02/attachment-mark-de-jong-b3bisfe09y8-unsplash.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "503eece62ae9",
-      "title": "Wisconsin Rapids , WI UFO Sighting Sparks Curiosity For Locals",
-      "url": "https://kool1017.com/ixp/150/p/ufo-sighting-wisconsin-rapids-2026/",
-      "domain": "kool1017.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kool1017.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-social-image-2026-02-26-13-52-35.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "ba2d049f6da6",
-      "title": "Wisconsin Rapids , WI UFO Sighting Sparks Curiosity For Locals",
-      "url": "https://krforadio.com/ixp/150/p/ufo-sighting-wisconsin-rapids-2026/",
-      "domain": "krforadio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "krforadio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-social-image-2026-02-26-13-52-35.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "6b610f58e17b",
-      "title": "Wisconsin Rapids , WI UFO Sighting Sparks Curiosity For Locals",
-      "url": "https://power96radio.com/ixp/150/p/ufo-sighting-wisconsin-rapids-2026/",
-      "domain": "power96radio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "power96radio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-social-image-2026-02-26-13-52-35.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "3576d89a57bc",
-      "title": "Where the heck in Wyoming did this flying saucer land ?",
-      "url": "https://kisscasper.com/ixp/961/p/wyoming-flying-saucer-site/",
-      "domain": "kisscasper.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kisscasper.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/961/files/2026/02/attachment-wyoming-through-the-lenze-posted-by-jane-hammond.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "4890a1a85a51",
-      "title": "Wisconsin Rapids , WI UFO Sighting Sparks Curiosity For Locals",
-      "url": "https://squatchrocks.com/ixp/150/p/ufo-sighting-wisconsin-rapids-2026/",
-      "domain": "squatchrocks.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "squatchrocks.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-social-image-2026-02-26-13-52-35.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "2759cd2a4f03",
-      "title": "Where the heck in Wyoming did this flying saucer land ?",
-      "url": "https://k2radio.com/ixp/961/p/wyoming-flying-saucer-site/",
-      "domain": "k2radio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "k2radio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/961/files/2026/02/attachment-wyoming-through-the-lenze-posted-by-jane-hammond.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "70621d51ef72",
-      "title": "Spotted a UFO near the mountains ? It was likely a lenticular cloud",
-      "url": "https://fox23maine.com/news/local/spotted-a-ufo-near-the-mountains-it-was-likely-a-lenticular-cloud",
-      "domain": "fox23maine.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "fox23maine.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://fox23maine.com/resources/media2/16x9/800/1320/0x75/90/c3d61174-2bc4-4e50-a8af-597ff8344463-75df996e639049d896f1ae4c66e4e7b2cloud.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "bf278f061055",
-      "title": "Where the heck in Wyoming did this flying saucer land ?",
-      "url": "https://rock967online.com/ixp/961/p/wyoming-flying-saucer-site/",
-      "domain": "rock967online.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "rock967online.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/961/files/2026/02/attachment-wyoming-through-the-lenze-posted-by-jane-hammond.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "9ead963cb813",
-      "title": "Unidentified Aerial Phenomena Reported in NJ",
-      "url": "https://wobm.com/ixp/393/p/new-jersey-ufo-sightings-2026/",
-      "domain": "wobm.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "wobm.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/393/files/2026/02/attachment-mark-de-jong-b3bisfe09y8-unsplash.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "3b3e0f86aaf2",
-      "title": "Unidentified Aerial Phenomena Reported in NJ",
-      "url": "https://1057thehawk.com/ixp/393/p/new-jersey-ufo-sightings-2026/",
-      "domain": "1057thehawk.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "1057thehawk.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/393/files/2026/02/attachment-mark-de-jong-b3bisfe09y8-unsplash.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "7061b217329a",
-      "title": "Wisconsin Proposed Minimum Wage Increase Would Reward Workers",
-      "url": "https://mix108.com/ixp/150/p/increased-minimum-wage-proposed-wisconsin/",
-      "domain": "mix108.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "mix108.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-ret.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "f91589dda353",
-      "title": "Wisconsin Proposed Minimum Wage Increase Would Reward Workers",
-      "url": "https://kdhlradio.com/ixp/150/p/increased-minimum-wage-proposed-wisconsin/",
-      "domain": "kdhlradio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kdhlradio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/02/attachment-ret.jpg?&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "5f976d117dc9",
-      "title": "Hubei  Low - Altitude Ambition  Can No Longer Be Hidden",
-      "url": "https://autonews.gasgoo.com/articles/market-industry/hubeis-low-altitude-ambition-can-no-longer-be-hidden-2026625683768242177",
-      "domain": "autonews.gasgoo.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "autonews.gasgoo.com (China)",
-      "country": "China",
-      "imageUrl": "https://gascloud.gasgoo.com/production/2026/02/1fa69690-d839-4e6d-9182-48fde777c7bc-1772048965.png",
-      "tone": 2.5
-    },
-    {
-      "id": "6d095dc907fa",
-      "title": "Top Idaho Cities For UFO Sightings , According To Tracking Agency",
-      "url": "https://newsradio1310.com/ixp/97/p/idaho-uap-sightings/",
-      "domain": "newsradio1310.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "newsradio1310.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2026/02/attachment-untitled-design-2026-02-24t090548-846-2.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "c4120d6cb45e",
-      "title": "Top Idaho Cities For UFO Sightings , According To Tracking Agency",
-      "url": "https://983thesnake.com/idaho-uap-sightings/",
-      "domain": "983thesnake.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "983thesnake.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2026/02/attachment-untitled-design-2026-02-24t090548-846-2.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "67d19cbb234c",
-      "title": "Top Idaho Cities For UFO Sightings , According To Tracking Agency",
-      "url": "https://kezj.com/ixp/97/p/idaho-uap-sightings/",
-      "domain": "kezj.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kezj.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/97/files/2026/02/attachment-untitled-design-2026-02-24t090548-846-2.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "7cd12203e06b",
-      "title": "Duluth First Ship Contest 2026 Entry Details",
-      "url": "https://squatchrocks.com/ixp/164/p/duluth-first-ship-contest-2026/",
-      "domain": "squatchrocks.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "squatchrocks.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-ship-lake-superior.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "a846b2841cf4",
-      "title": "Martha Stewart Visits Kohler Wisconsin Foundry",
-      "url": "https://kroc.com/ixp/164/p/martha-stewart-kohler-wisconsin-2/",
-      "domain": "kroc.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kroc.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-kohler_co_douglas_friedman.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "482819a5486c",
-      "title": "Martha Stewart Visits Kohler Wisconsin Foundry",
-      "url": "https://kool1017.com/ixp/164/p/martha-stewart-kohler-wisconsin-2/",
-      "domain": "kool1017.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kool1017.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-kohler_co_douglas_friedman.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "fb33a2657427",
-      "title": "50 Cent Courtside at Wolves vs 76ers Game",
-      "url": "https://kdhlradio.com/ixp/164/p/50-cent-timberwolves-game/",
-      "domain": "kdhlradio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "kdhlradio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-gettyimages-1440634052.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "6e67d9c063b3",
-      "title": "Martha Stewart Visits Kohler Wisconsin Foundry",
-      "url": "https://power96radio.com/ixp/164/p/martha-stewart-kohler-wisconsin-2/",
-      "domain": "power96radio.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "power96radio.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-kohler_co_douglas_friedman.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "a7fc7b4f989f",
-      "title": "50 Cent Courtside at Wolves vs 76ers Game",
-      "url": "https://1520theticket.com/ixp/164/p/50-cent-timberwolves-game/",
-      "domain": "1520theticket.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "1520theticket.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/164/files/2026/02/attachment-gettyimages-1440634052.jpg?&q=75&format=natural",
-      "tone": 2.5
-    },
-    {
-      "id": "7ceda69629c4",
-      "title": "Are aliens out there ? UFO sightings logged in Cheshire | Chester and District Standard",
-      "url": "https://www.chesterstandard.co.uk/news/25865869.aliens-ufo-sightings-logged-cheshire/",
-      "domain": "chesterstandard.co.uk",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "chesterstandard.co.uk (United Kingdom)",
-      "country": "United Kingdom",
-      "imageUrl": "https://www.chesterstandard.co.uk/resources/images/19117934.jpg?type=og-image",
-      "tone": 2.5
-    },
-    {
-      "id": "341da0f6acf3",
-      "title": "NASA Reacts To Donald Trump UFO Announcement",
-      "url": "https://www.newsweek.com/nasa-donald-trump-ufo-alien-announcement-11560059",
-      "domain": "newsweek.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "newsweek.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://assets.newsweek.com/wp-content/uploads/2026/02/GettyImages-2262706794.jpg?crop=1",
-      "tone": 2.5
-    },
-    {
-      "id": "dfbbca70cbd8",
-      "title": "Trump Directs Complete Release of UFO Documents in Unprecedented Disclosure",
-      "url": "https://www.ktsa.com/trump-directs-complete-release-of-ufo-documents-in-unprecedented-disclosure/",
-      "domain": "ktsa.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "ktsa.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://www.ktsa.com/wp-content/uploads/2026/02/trump-orders-full-ufo-file-declassification-in-bold-transparency-move.webp?icb=1771595207",
-      "tone": 2.5
-    },
-    {
-      "id": "968d59a6ea63",
-      "title": "Trump directs US government to prepare release of files on aliens and UFOs",
-      "url": "https://island.lk/trump-directs-us-government-to-prepare-release-of-files-on-aliens-and-ufos/",
-      "domain": "island.lk",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "island.lk (Sri Lanka)",
-      "country": "Sri Lanka",
-      "imageUrl": "http://island.lk/wp-content/uploads/2026/01/Donald-Trump-1.png",
-      "tone": 2.5
-    },
-    {
-      "id": "2174e41b3eb5",
-      "title": "Chris Kalb | File 770",
-      "url": "https://file770.com/tag/chris-kalb/",
-      "domain": "file770.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "file770.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 2.5
-    },
-    {
-      "id": "a1fa3e2e8e2c",
-      "title": "Robert Duvall | File 770",
-      "url": "https://file770.com/tag/robert-duvall/",
-      "domain": "file770.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "file770.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 2.5
-    },
-    {
-      "id": "10ad269c8089",
-      "title": "Pixel Scroll 2 / 19 / 26 A Scroll Will Come Out Tomorrow , Bet Your Bottom Pixel !",
-      "url": "https://file770.com/pixel-scroll-2-19-26-a-scroll-will-come-out/comment-page-1/",
-      "domain": "file770.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "file770.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://file770.com/wp-content/uploads/HE-Greatest-Hits-cover.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "fd6b12c0eae5",
-      "title": "Pixel Scroll 2 / 19 / 26 A Scroll Will Come Out Tomorrow , Bet Your Bottom Pixel !",
-      "url": "https://file770.com/pixel-scroll-2-19-26-a-scroll-will-come-out/",
-      "domain": "file770.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "file770.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://file770.com/wp-content/uploads/HE-Greatest-Hits-cover.jpg",
-      "tone": 2.5
-    },
-    {
-      "id": "8ded5832353b",
-      "title": "Gay Ghost | File 770",
-      "url": "https://file770.com/tag/gay-ghost/",
-      "domain": "file770.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "file770.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 2.5
-    },
-    {
-      "id": "a2b4dd9f2fc8",
-      "title": "THX 1138 | File 770",
-      "url": "https://file770.com/tag/thx-1138/",
-      "domain": "file770.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "file770.com (United States)",
-      "country": "United States",
-      "imageUrl": null,
-      "tone": 2.5
-    },
-    {
-      "id": "9ea6d1153517",
-      "title": "Trump Orders Release of Government Files on Aliens , UFOs",
-      "url": "https://www.theepochtimes.com/us/trump-orders-release-of-government-files-on-aliens-ufos-5987983",
-      "domain": "theepochtimes.com",
-      "publishedAt": "2026-03-31T13:07:41.085Z",
-      "language": "English",
-      "sourceName": "theepochtimes.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://img.theepochtimes.com/assets/uploads/2026/02/20/id5987953-GettyImages-2261966373-1080x720.jpg",
       "tone": 2.5
     }
   ]
