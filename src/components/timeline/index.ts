@@ -22,7 +22,7 @@ const BAR_RADIUS = 2
 const LABEL_H = 16
 const PAD_X = 8
 const THUMB_MIN_W = 48
-const CANVAS_H = 180
+const CANVAS_H = 120
 
 // ─── Component ──────────────────────────────────────────────────────
 

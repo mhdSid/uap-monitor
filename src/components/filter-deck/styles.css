@@ -184,9 +184,4 @@
   .filter-deck__group {
     width: auto;
   }
-
-  .filter-deck__actions {
-    width: auto;
-    justify-content: flex-start;
-  }
 }

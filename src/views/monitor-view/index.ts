@@ -121,12 +121,14 @@ export class MonitorView extends Component {
     this.el.appendChild(new Highlights({}).el)
     this.el.appendChild(this.ownChild(new FeaturedHypothesis({})).el)
 
+    // ── Timeline + map + grids ───────────────────────────────────
+    this.el.appendChild(this.timeline.el)
+
     // ── Filter deck (sticky on scroll) + collapsible advanced ────
     this.el.appendChild(this.filterDeck.el)
     this.el.appendChild(this.advancedFilters.el)
 
-    // ── Timeline + map + grids ───────────────────────────────────
-    this.el.appendChild(this.timeline.el)
+    // ──  map + grids ───────────────────────────────────
     this.el.appendChild(this.sightingMap.el)
     this.el.appendChild(this.grids.el)
 
