@@ -101,13 +101,12 @@ export class MonitorView extends Component {
     this.advancedFilters = this.ownChild(new AdvancedFilters({}))
 
     this.filterDeck = this.ownChild(new FilterDeck({
-      onFiltersToggle: () => {
-        const open = this.advancedFilters.toggle()
-        this.filterDeck.setFiltersOpen(open)
-      },
       onSearchOpen: () => {
-        this.advancedFilters.focusSearch()
-        this.filterDeck.setFiltersOpen(true)
+        const open = this.advancedFilters.toggle()
+        if (open) {
+          this.advancedFilters.focusSearch()
+        }
+        this.filterDeck.setFiltersOpen(open)
       }
     }))
 
