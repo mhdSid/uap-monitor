@@ -256,6 +256,7 @@
   --c-overlay: rgba(0, 0, 0, 0.4);
   --c-overlay-70: rgba(0, 0, 0, 0.35);
   --c-panel: rgba(255, 255, 255, 0.92);
+  --c-panel-60: rgba(255, 255, 255, 0.6);
   --c-panel-70: rgba(255, 255, 255, 0.7);
   --c-panel-95: rgba(255, 255, 255, 0.95);
   --c-shadow: rgba(0, 0, 0, 0.12);

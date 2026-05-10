@@ -90,19 +90,12 @@ export class SightingMap extends Component<SightingMapProps> {
 
     const controlsEl = h('div', { className: cx.mapControls }, controls.el)
 
-    this.wrapper.appendChild(mapEl)
     this.wrapper.appendChild(controlsEl)
+    this.wrapper.appendChild(mapEl)
     this.wrapper.appendChild(this.loaderEl)
 
-    const details = h('details', { className: cx.mapDetails })
-    const summary = h('summary', { className: cx.mapSummary }, MAP_INFO.TITLE)
-    const content = h('p', { className: cx.mapDetailsContent }, MAP_INFO.CONTENT)
-    details.appendChild(summary)
-    details.appendChild(content)
-
     const outer = h('div', { className: cx.sightingMapOuter },
-      this.wrapper,
-      details
+      this.wrapper
     )
 
     // Defer map init — double RAF ensures layout is fully resolved
