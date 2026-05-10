@@ -101,12 +101,13 @@ export class MonitorView extends Component {
     this.advancedFilters = this.ownChild(new AdvancedFilters({}))
 
     this.filterDeck = this.ownChild(new FilterDeck({
-      onSearchOpen: () => {
+      onFiltersToggle: () => {
         const open = this.advancedFilters.toggle()
-        if (open) {
-          this.advancedFilters.focusSearch()
-        }
         this.filterDeck.setFiltersOpen(open)
+      },
+      onSearchOpen: () => {
+        this.advancedFilters.focusSearch()
+        this.filterDeck.setFiltersOpen(true)
       }
     }))
 
@@ -244,6 +245,14 @@ export class MonitorView extends Component {
       this.timeline.redraw()
     }))
 
+    // Keep the timeline in sync with the year-counts manifest. The
+    // store may be hydrated *after* the view mounts, so a one-shot
+    // read in renderFromStore() can land an empty Map. This subscriber
+    // refreshes the timeline whenever yearCounts (or availableYears)
+    // changes — including the very first hydration.
+    this.own(this.store.yearCounts.subscribe(() => this.refreshTimelineManifest()))
+    this.own(this.store.availableYears.subscribe(() => this.refreshTimelineManifest()))
+
     // If the filter store already has state from FilterDeck's
     // geo-seeded continent (or a future URL-shared filter), the
     // `filter.subscribe` above only catches *changes* — so we apply
@@ -251,6 +260,20 @@ export class MonitorView extends Component {
     if (this.store.hasActiveFilter.get()) {
       this.onFilterChange()
     }
+  }
+
+  private refreshTimelineManifest (): void {
+    const counts = this.store.yearCounts.get()
+    const years = this.store.availableYears.get()
+    if (counts.size === 0 || years.length === 0) return
+
+    this.timeline.setManifestCounts(
+      counts,
+      years[years.length - 1] ?? 1900,
+      years[0] ?? new Date().getFullYear()
+    )
+    const { from, to } = this.store.yearRange.get()
+    this.timeline.setActiveRange(from, to)
   }
 
   // ─── Loaders ───────────────────────────────────────────────────

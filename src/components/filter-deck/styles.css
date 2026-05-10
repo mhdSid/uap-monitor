@@ -26,6 +26,7 @@
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .filter-deck__row-chips + .filter-deck__row-chips {
@@ -39,6 +40,7 @@
   flex-wrap: wrap;
   min-width: 0;
   width: 100%;
+  flex: 1;
 }
 
 .filter-deck__group-label {
@@ -50,16 +52,13 @@
   text-transform: uppercase;
 }
 
-.filter-deck__spacer {
-  display: none;
-}
-
 .filter-deck__actions {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
   width: 100%;
   justify-content: flex-end;
+  flex: 1;
 }
 
 /* Filters button visual states (open / advanced active) */
@@ -184,12 +183,6 @@
 
   .filter-deck__group {
     width: auto;
-  }
-
-  .filter-deck__spacer {
-    display: block;
-    flex: 1;
-    min-width: var(--space-sm);
   }
 
   .filter-deck__actions {

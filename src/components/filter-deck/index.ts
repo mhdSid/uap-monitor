@@ -178,7 +178,6 @@ export class FilterDeck extends Component<FilterDeckProps> {
           h('span', { className: cx.groupLabel }, FILTER_DECK.SCOPE_LABEL),
           this.scopeChips.el
         ),
-        h('div', { className: cx.spacer }),
         h('div', { className: cx.actions },
           searchBtn.el
         )

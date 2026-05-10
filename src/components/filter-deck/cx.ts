@@ -5,7 +5,6 @@ export const cx = {
   group: 'filter-deck__group',
   groupLabel: 'filter-deck__group-label',
   pulse: 'filter-deck__pulse',
-  spacer: 'filter-deck__spacer',
   actions: 'filter-deck__actions',
   filtersOpen: 'filter-deck__filters--open',
   filtersActive: 'filter-deck__filters--active',
