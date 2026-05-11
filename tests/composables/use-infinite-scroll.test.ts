@@ -10,6 +10,7 @@ class MockIntersectionObserver {
 
   constructor (callback: IntersectionObserverCallback) {
     this.callback = callback
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     lastObserver = this
   }
 

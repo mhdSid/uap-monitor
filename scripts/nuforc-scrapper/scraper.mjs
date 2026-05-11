@@ -56,7 +56,8 @@ async function getPuppeteerPage () {
   let puppeteer
   try {
     puppeteer = (await import("puppeteer")).default
-  } catch (err) {
+  } catch (e) {
+    // eslint-disable-next-line preserve-caught-error
     throw new Error(
       "Puppeteer not installed. Run: yarn add -D puppeteer  (or npm i -D puppeteer)"
     )

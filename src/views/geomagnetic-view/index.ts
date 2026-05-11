@@ -138,10 +138,12 @@ export class GeomagneticView extends Component {
   // Resize observer for responsive canvas redraw
   private resizeObserver: ResizeObserver | null = null
 
+  private yearSelector!: YearSelector
   private yearSelectorEl!: HTMLElement
 
   protected create (): HTMLElement {
-    this.yearSelectorEl = new YearSelector({}).el
+    this.yearSelector = this.ownChild(new YearSelector({}))
+    this.yearSelectorEl = this.yearSelector.el
     this.loaderEl = h('div', { className: appCx.viewLoader }, new Loader({}).el)
     this.contentEl = h('div', { className: appCx.appViewContent })
     hide(this.contentEl)

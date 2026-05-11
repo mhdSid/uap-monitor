@@ -113,12 +113,12 @@ export class MonitorView extends Component {
     clearChildren(this.el)
 
     // ── Hero (above fold) ────────────────────────────────────────
-    const hero = new Hero({
+    const hero = this.ownChild(new Hero({
       onExplore: () => this.sightingMap.el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
+    }))
     this.el.appendChild(hero.el)
 
-    this.el.appendChild(new Highlights({}).el)
+    this.el.appendChild(this.ownChild(new Highlights({})).el)
     this.el.appendChild(this.ownChild(new FeaturedHypothesis({})).el)
 
     // ── Timeline + map + grids ───────────────────────────────────
@@ -344,14 +344,15 @@ export class MonitorView extends Component {
 
     this.store.yearRange.set({ from, to })
 
-    // Wait for loading to complete, then open
-    const unsub = this.store.loading.subscribe((loading) => {
+    // Wait for loading to complete, then open. Owned so navigation
+    // away mid-load disposes the subscription.
+    const off = this.own(this.store.loading.subscribe((loading) => {
       if (loading) return
-      unsub()
+      off()
       const sighting = this.store.sightings.get().find(s => s.id === id)
       if (sighting) {
         requestAnimationFrame(() => SightingModal.open(sighting, document.body))
       }
-    })
+    }))
   }
 }

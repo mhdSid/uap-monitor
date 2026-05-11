@@ -164,11 +164,11 @@ export class App extends Component {
   // ─── Phase: Bind data reactions (shared across all views) ──────
 
   private bindDataReactions (): void {
-    this.store.yearRange.subscribe(async () => {
+    this.own(this.store.yearRange.subscribe(async () => {
       if (!this.yearRangeReady) return
       if (this.store.loading.get()) return
       await this.onYearRangeChange()
-    })
+    }))
 
     this.yearRangeReady = true
   }

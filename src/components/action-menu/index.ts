@@ -111,6 +111,13 @@ export class ActionMenu extends Component<ActionMenuProps> {
         this.open()
       }
     })
+
+    // If this trigger owns the open singleton popup at destroy time, close it.
+    // Otherwise the four global listeners (document.click/keydown +
+    // window.resize/scroll) keep firing against a removed trigger element.
+    this.own(() => {
+      if (activeTrigger === this.triggerEl) closeMenu()
+    })
   }
 
   private open (): void {

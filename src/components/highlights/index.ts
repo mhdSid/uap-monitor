@@ -37,14 +37,15 @@ export class Highlights extends Component {
 
           store.yearRange.set({ from: targetYear, to: targetYear + MAX_YEAR_SPAN })
 
-          // Wait for loading to finish, then search again
-          const unsub = store.loading.subscribe((loading) => {
+          // Wait for loading to finish, then search again. Owned so
+          // navigation away mid-load disposes the subscription.
+          const off = this.own(store.loading.subscribe((loading) => {
             if (loading) return
-            unsub()
+            off()
             const updated = store.sightings.get()
             const found = Highlights.findSighting(updated, item.year, item.searchKey)
             if (found) SightingModal.open(found)
-          })
+          }))
         }
       }).el
     })

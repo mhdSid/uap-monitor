@@ -22,6 +22,8 @@ export default tsEslint.config(
     languageOptions: {
       globals: {
         process: 'readonly',
+        performance: 'readonly',
+        document: 'readonly',
         fetch: 'readonly',
         URL: 'readonly',
         AbortController: 'readonly',

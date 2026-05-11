@@ -90,6 +90,12 @@ export class Tooltip extends Component<TooltipProps> {
         this.open()
       }
     })
+
+    // If this tooltip owns the open singleton popup at destroy time, close
+    // it so the document.click + window.resize/scroll listeners detach.
+    this.own(() => {
+      if (activeWrapper === this.el) closeSharedPopup()
+    })
   }
 
   private open (): void {

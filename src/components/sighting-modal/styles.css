@@ -3,6 +3,7 @@
   align-items: center;
   gap: var(--space-sm);
   flex: 1;
+  padding-right: var(--space-xs);
 }
 
 .modal-sighting__title {

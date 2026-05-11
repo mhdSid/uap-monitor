@@ -4,7 +4,7 @@ import { Component } from '@/core'
 import { h, setText } from '@/core/dom'
 import { Button } from '@/components/button'
 import { HERO } from '@/data/strings'
-import { ButtonSize, ButtonVariant, ButtonColor } from '@/enums'
+import { ButtonSize, ButtonVariant, ButtonColor, DataSourceStatus } from '@/enums'
 import { useAppStore, effect } from '@/composables'
 
 export interface HeroProps {
@@ -16,12 +16,18 @@ export class Hero extends Component<HeroProps> {
     const store = useAppStore()
 
     const sightingsValue = h('span', { className: cx.statValue }, '—')
-    const sourcesValue = h('span', { className: cx.statValue }, '15')
+    const sourcesValue = h('span', { className: cx.statValue }, '—')
     const yearsValue = h('span', { className: cx.statValue }, '—')
 
     this.own(effect(() => {
       const total = store.totalCount.get()
       setText(sightingsValue, total > 0 ? total.toLocaleString() : '—')
+    }))
+
+    this.own(effect(() => {
+      const sources = store.sources.get()
+      const active = sources.filter(s => s.status !== DataSourceStatus.DISABLED).length
+      setText(sourcesValue, active > 0 ? `${active}` : '—')
     }))
 
     this.own(effect(() => {

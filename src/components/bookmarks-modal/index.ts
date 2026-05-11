@@ -28,6 +28,11 @@ export class BookmarksModal {
     const share = useShare()
     const toast = useToast()
 
+    // Collect every subscription opened during this modal session so the
+    // single Modal.onClose hook can dispose them. No MutationObserver on
+    // document.body, no permanent count-subscribe leak.
+    const disposers: (() => void)[] = []
+
     const buildHeader = (): HTMLElement => {
       const ids = bookmarks.ids.get()
       return h('div', { className: cx.title },
@@ -88,18 +93,9 @@ export class BookmarksModal {
       renderList()
 
       // Re-render if bookmarks change while modal is open
-      const unsub = bookmarks.ids.subscribe(() => {
+      disposers.push(bookmarks.ids.subscribe(() => {
         if (Modal.isOpen) renderList()
-      })
-
-      // Clean up subscription when modal DOM is removed
-      const observer = new MutationObserver(() => {
-        if (!container.isConnected) {
-          unsub()
-          observer.disconnect()
-        }
-      })
-      observer.observe(document.body, { childList: true, subtree: true })
+      }))
 
       return container
     }
@@ -126,7 +122,11 @@ export class BookmarksModal {
     Modal.open({
       header: buildHeader,
       content: buildContent,
-      footer: buildFooter
+      footer: buildFooter,
+      onClose: () => {
+        for (const dispose of disposers) dispose()
+        disposers.length = 0
+      }
     }, trigger)
 
     // After modal renders, set up footer visibility watcher
@@ -142,9 +142,9 @@ export class BookmarksModal {
       }
     }
     updateFooter()
-    bookmarks.count.subscribe(() => {
+    disposers.push(bookmarks.count.subscribe(() => {
       if (Modal.isOpen) updateFooter()
-    })
+    }))
   }
 
   private static openSighting (sighting: Sighting): void {
