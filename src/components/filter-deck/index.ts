@@ -84,11 +84,6 @@ export class FilterDeck extends Component<FilterDeckProps> {
   private regionChips!: ChipSelect
   private clearBtn!: Button
 
-  // Status sentence parts (mutated reactively)
-  private statusScopeEl!: HTMLElement
-  private statusRegionEl!: HTMLElement
-  private statusCountEl!: HTMLElement
-
   protected create (): HTMLElement {
     this.store = useAppStore()
 
@@ -150,11 +145,6 @@ export class FilterDeck extends Component<FilterDeckProps> {
       onClick: () => this.props.onSearchOpen()
     }))
 
-    // ── Status sentence parts ─────────────────────────────────────
-    this.statusScopeEl  = h('span', { className: cx.statusScope })
-    this.statusRegionEl = h('span', { className: cx.statusRegion })
-    this.statusCountEl  = h('span', { className: cx.statusCount })
-
     this.clearBtn = this.ownChild(new Button({
       label: FILTER_DECK.CLEAR,
       variant: ButtonVariant.GHOST,
@@ -188,19 +178,6 @@ export class FilterDeck extends Component<FilterDeckProps> {
           h('span', { className: cx.groupLabel }, FILTER_DECK.REGION_LABEL),
           this.regionChips.el
         )
-      ),
-      // Row 3: status sentence + clear
-      h('div', { className: cx.rowStatus },
-        h('div', { className: cx.status },
-          h('span', { className: cx.statusLabel }, FILTER_DECK.WATCHING),
-          h('span', { className: cx.statusSep }, FILTER_DECK.STATUS_SEP),
-          this.statusScopeEl,
-          h('span', { className: cx.statusSep }, FILTER_DECK.STATUS_SEP),
-          this.statusRegionEl,
-          h('span', { className: cx.statusSep }, FILTER_DECK.STATUS_SEP),
-          this.statusCountEl
-        ),
-        this.clearBtn.el
       )
     )
   }
@@ -249,25 +226,6 @@ export class FilterDeck extends Component<FilterDeckProps> {
 
   private syncStatus (): void {
     const f = this.store.filter.get()
-    const shown = this.store.shownCount.get()
-
-    // Scope sentence
-    const scopeKey = FilterDeck.scopeFromDays(f.recencyDays)
-    setText(this.statusScopeEl, SCOPE_SENTENCE[scopeKey])
-
-    // Region sentence + tinted color via custom property
-    if (f.continent) {
-      setText(this.statusRegionEl, CONTINENT_LABELS[f.continent])
-      setStyles(this.statusRegionEl, {
-        color: CONTINENT_COLOR_VARS[f.continent]
-      })
-    } else {
-      setText(this.statusRegionEl, FILTER_DECK.GLOBAL)
-      this.statusRegionEl.style.removeProperty('color')
-    }
-
-    // Count
-    setText(this.statusCountEl, `${shown.toLocaleString()} ${FILTER_DECK.REPORTS}`)
 
     // Clear button visibility — only visible when something is filtered.
     const hasFilter = !!(

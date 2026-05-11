@@ -98,6 +98,9 @@ export interface Sighting {
 
   /** Bibliographic reference / source citation */
   ref?: string
+
+  /** GEIPAN classification verdict (A/B/C/D/D1/D2) — see process-geipan.mjs */
+  classification?: string
 }
 
 export interface RegionStats {

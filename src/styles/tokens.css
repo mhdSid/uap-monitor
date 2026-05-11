@@ -71,6 +71,11 @@
   /* Purple */
   --c-purple-500: #a78bfa;
 
+  /* Pink — GEIPAN */
+  --c-pink-400: #f472b6;
+  --c-pink-400-20: rgba(244, 114, 182, 0.2);
+  --c-pink-400-12: rgba(244, 114, 182, 0.12);
+
   /* Reddit */
   --c-reddit-500: #ff4500;
   --c-reddit-500-20: rgba(255, 69, 0, 0.2);

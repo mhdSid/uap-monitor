@@ -42,6 +42,7 @@ export const palette = {
   cyan500_70: 'rgba(34, 211, 238, 0.7)',
   cyan400: '#00d4ff',
   purple500: '#a78bfa',
+  pink400: '#f472b6',
 
   amber500_70: 'rgba(245, 158, 11, 0.7)',
   amber500_20: 'rgba(245, 158, 11, 0.2)',
@@ -84,6 +85,7 @@ export const colors = {
   sourceHatch: palette.cyan400,
   sourceChronology: palette.amber400,
   sourceExperiencer: palette.purple500,
+  sourceGeipan: palette.pink400,
   sourceFireball: '#ff6b35',
   sourceNuclear: '#fbbf24'
 } as const

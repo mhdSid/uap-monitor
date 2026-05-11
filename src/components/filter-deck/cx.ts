@@ -1,7 +1,6 @@
 export const cx = {
   root: 'filter-deck',
   rowChips: 'filter-deck__row-chips',
-  rowStatus: 'filter-deck__row-status',
   group: 'filter-deck__group',
   groupLabel: 'filter-deck__group-label',
   pulse: 'filter-deck__pulse',

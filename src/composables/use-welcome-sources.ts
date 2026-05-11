@@ -85,6 +85,7 @@ function formatGeneratedDate (value?: string): string {
 export function useDeriveWelcomeData (params: {
   nuforc: ManifestSource
   hatch: ManifestSource
+  geipan: ManifestSource
   chronology: ManifestSource
   chronologyManifest: ChronologyManifest | null
   gdeltCollection: GdeltCollection | null
@@ -97,6 +98,7 @@ export function useDeriveWelcomeData (params: {
   const {
     nuforc,
     hatch,
+    geipan,
     chronology,
     chronologyManifest,
     gdeltCollection,
@@ -112,13 +114,14 @@ export function useDeriveWelcomeData (params: {
   const allYears = [
     ...nuforc.getAvailableYears(),
     ...hatch.getAvailableYears(),
+    ...geipan.getAvailableYears(),
     ...chronology.getAvailableYears()
   ]
 
   const oldestYear = allYears.length > 0 ? Math.min(...allYears) : 1974
   const timespan = `${formatYear(oldestYear)}–present`
 
-  const totalRecords = nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount()
+  const totalRecords = nuforc.getTotalCount() + hatch.getTotalCount() + geipan.getTotalCount() + chronology.getTotalCount()
   const records = totalRecords > 0 ? formatRecordCount(totalRecords) : '230,000+'
 
   const subSourceCount = chronologyManifest
@@ -128,6 +131,7 @@ export function useDeriveWelcomeData (params: {
   const activeCount =
     (nuforc.getTotalCount() > 0 ? 1 : 0) +
     (hatch.getTotalCount() > 0 ? 1 : 0) +
+    (geipan.getTotalCount() > 0 ? 1 : 0) +
     subSourceCount +
     (gdeltCollection != null ? 1 : 0) +
     (gnewsCollection != null ? 1 : 0) +
@@ -163,6 +167,15 @@ export function useDeriveWelcomeData (params: {
     name: 'Hatch *U* Database',
     records: hatchCount > 0 ? formatSourceCount(hatchCount) : '~18K',
     period: '1942–2003',
+    tier: 'high'
+  })
+
+  const geipanCount = geipan.getTotalCount()
+  const geipanYears = geipan.getAvailableYears()
+  sourceList.push({
+    name: 'GEIPAN',
+    records: geipanCount > 0 ? formatSourceCount(geipanCount) : '~2.8K',
+    period: geipanYears.length > 0 ? yearRangeStr(geipanYears) : '1937–present',
     tier: 'high'
   })
 

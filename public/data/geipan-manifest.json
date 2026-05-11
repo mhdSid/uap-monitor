@@ -1,0 +1,381 @@
+{
+  "generatedAt": "2026-05-11T12:17:09.033Z",
+  "source": "GEIPAN",
+  "sourceLabel": "GEIPAN — Groupe d'Études des Phénomènes Aérospatiaux Non identifiés (CNES)",
+  "sourceUrl": "https://geipan.fr",
+  "headerTranslations": {
+    "id_cas": "id_case",
+    "cas_nom_dossier": "case_file_name",
+    "cas_zone_nom": "zone_name",
+    "cas_zone_code": "zone_code",
+    "cas_zone_type": "zone_type",
+    "cas_AAAA": "year",
+    "cas_MM": "month",
+    "cas_JJ": "day",
+    "cas_resume": "case_summary",
+    "cas_resume_web": "case_summary_web",
+    "cas_public": "is_public",
+    "cas_temoignages_nb": "testimonies_count",
+    "cas_temoins_nb": "witnesses_count",
+    "cas_temoins_nb_approx": "witnesses_count_approx",
+    "cas_nb_PAN": "uap_count",
+    "cas_nb_PAN_approx": "uap_count_approx",
+    "cas_MinCercleInscrit_Lat": "inscribed_circle_lat",
+    "cas_MinCercleInscrit_Lng": "inscribed_circle_lng",
+    "cas_MinCercleInscrit_Err": "inscribed_circle_err",
+    "cas_date_maj": "updated_at",
+    "cas_etrangete": "strangeness",
+    "cas_etrangete_err": "strangeness_err",
+    "cas_etrangete_calc": "strangeness_calc",
+    "cas_etrangete_calc_err": "strangeness_calc_err",
+    "cas_fiabilite": "reliability",
+    "cas_fiabilite_err": "reliability_err",
+    "cas_fiabilite_calc": "reliability_calc",
+    "cas_qte_information": "info_quantity",
+    "cas_qte_information_calc": "info_quantity_calc",
+    "cas_consistance": "consistency",
+    "cas_consistance_calc": "consistency_calc",
+    "cas_consistance_calc_err": "consistency_calc_err",
+    "cas_classification": "classification",
+    "cas_classification_calc": "classification_calc",
+    "cas_numEtude": "study_number"
+  },
+  "totalRecords": 2768,
+  "skippedRecords": 0,
+  "years": {
+    "1937": {
+      "count": 1,
+      "file": "geipan-1937.json",
+      "sizeKB": 1
+    },
+    "1947": {
+      "count": 1,
+      "file": "geipan-1947.json",
+      "sizeKB": 2
+    },
+    "1951": {
+      "count": 2,
+      "file": "geipan-1951.json",
+      "sizeKB": 4
+    },
+    "1952": {
+      "count": 2,
+      "file": "geipan-1952.json",
+      "sizeKB": 3
+    },
+    "1953": {
+      "count": 3,
+      "file": "geipan-1953.json",
+      "sizeKB": 4
+    },
+    "1954": {
+      "count": 21,
+      "file": "geipan-1954.json",
+      "sizeKB": 47
+    },
+    "1955": {
+      "count": 4,
+      "file": "geipan-1955.json",
+      "sizeKB": 4
+    },
+    "1956": {
+      "count": 3,
+      "file": "geipan-1956.json",
+      "sizeKB": 5
+    },
+    "1957": {
+      "count": 3,
+      "file": "geipan-1957.json",
+      "sizeKB": 4
+    },
+    "1959": {
+      "count": 2,
+      "file": "geipan-1959.json",
+      "sizeKB": 3
+    },
+    "1960": {
+      "count": 4,
+      "file": "geipan-1960.json",
+      "sizeKB": 7
+    },
+    "1963": {
+      "count": 1,
+      "file": "geipan-1963.json",
+      "sizeKB": 2
+    },
+    "1964": {
+      "count": 1,
+      "file": "geipan-1964.json",
+      "sizeKB": 2
+    },
+    "1965": {
+      "count": 4,
+      "file": "geipan-1965.json",
+      "sizeKB": 7
+    },
+    "1967": {
+      "count": 2,
+      "file": "geipan-1967.json",
+      "sizeKB": 4
+    },
+    "1969": {
+      "count": 1,
+      "file": "geipan-1969.json",
+      "sizeKB": 2
+    },
+    "1970": {
+      "count": 2,
+      "file": "geipan-1970.json",
+      "sizeKB": 3
+    },
+    "1971": {
+      "count": 1,
+      "file": "geipan-1971.json",
+      "sizeKB": 3
+    },
+    "1972": {
+      "count": 1,
+      "file": "geipan-1972.json",
+      "sizeKB": 1
+    },
+    "1973": {
+      "count": 2,
+      "file": "geipan-1973.json",
+      "sizeKB": 3
+    },
+    "1974": {
+      "count": 3,
+      "file": "geipan-1974.json",
+      "sizeKB": 5
+    },
+    "1975": {
+      "count": 6,
+      "file": "geipan-1975.json",
+      "sizeKB": 7
+    },
+    "1976": {
+      "count": 75,
+      "file": "geipan-1976.json",
+      "sizeKB": 78
+    },
+    "1977": {
+      "count": 78,
+      "file": "geipan-1977.json",
+      "sizeKB": 86
+    },
+    "1978": {
+      "count": 88,
+      "file": "geipan-1978.json",
+      "sizeKB": 108
+    },
+    "1979": {
+      "count": 109,
+      "file": "geipan-1979.json",
+      "sizeKB": 146
+    },
+    "1980": {
+      "count": 103,
+      "file": "geipan-1980.json",
+      "sizeKB": 173
+    },
+    "1981": {
+      "count": 57,
+      "file": "geipan-1981.json",
+      "sizeKB": 104
+    },
+    "1982": {
+      "count": 34,
+      "file": "geipan-1982.json",
+      "sizeKB": 74
+    },
+    "1983": {
+      "count": 39,
+      "file": "geipan-1983.json",
+      "sizeKB": 61
+    },
+    "1984": {
+      "count": 20,
+      "file": "geipan-1984.json",
+      "sizeKB": 51
+    },
+    "1985": {
+      "count": 36,
+      "file": "geipan-1985.json",
+      "sizeKB": 59
+    },
+    "1986": {
+      "count": 14,
+      "file": "geipan-1986.json",
+      "sizeKB": 17
+    },
+    "1987": {
+      "count": 13,
+      "file": "geipan-1987.json",
+      "sizeKB": 22
+    },
+    "1988": {
+      "count": 31,
+      "file": "geipan-1988.json",
+      "sizeKB": 43
+    },
+    "1989": {
+      "count": 25,
+      "file": "geipan-1989.json",
+      "sizeKB": 36
+    },
+    "1990": {
+      "count": 28,
+      "file": "geipan-1990.json",
+      "sizeKB": 40
+    },
+    "1991": {
+      "count": 18,
+      "file": "geipan-1991.json",
+      "sizeKB": 24
+    },
+    "1992": {
+      "count": 19,
+      "file": "geipan-1992.json",
+      "sizeKB": 20
+    },
+    "1993": {
+      "count": 60,
+      "file": "geipan-1993.json",
+      "sizeKB": 97
+    },
+    "1994": {
+      "count": 48,
+      "file": "geipan-1994.json",
+      "sizeKB": 72
+    },
+    "1995": {
+      "count": 26,
+      "file": "geipan-1995.json",
+      "sizeKB": 35
+    },
+    "1996": {
+      "count": 22,
+      "file": "geipan-1996.json",
+      "sizeKB": 23
+    },
+    "1997": {
+      "count": 42,
+      "file": "geipan-1997.json",
+      "sizeKB": 81
+    },
+    "1998": {
+      "count": 31,
+      "file": "geipan-1998.json",
+      "sizeKB": 41
+    },
+    "1999": {
+      "count": 20,
+      "file": "geipan-1999.json",
+      "sizeKB": 27
+    },
+    "2000": {
+      "count": 22,
+      "file": "geipan-2000.json",
+      "sizeKB": 34
+    },
+    "2001": {
+      "count": 18,
+      "file": "geipan-2001.json",
+      "sizeKB": 20
+    },
+    "2002": {
+      "count": 23,
+      "file": "geipan-2002.json",
+      "sizeKB": 25
+    },
+    "2003": {
+      "count": 16,
+      "file": "geipan-2003.json",
+      "sizeKB": 17
+    },
+    "2004": {
+      "count": 23,
+      "file": "geipan-2004.json",
+      "sizeKB": 36
+    },
+    "2005": {
+      "count": 15,
+      "file": "geipan-2005.json",
+      "sizeKB": 15
+    },
+    "2006": {
+      "count": 10,
+      "file": "geipan-2006.json",
+      "sizeKB": 14
+    },
+    "2007": {
+      "count": 52,
+      "file": "geipan-2007.json",
+      "sizeKB": 69
+    },
+    "2008": {
+      "count": 109,
+      "file": "geipan-2008.json",
+      "sizeKB": 136
+    },
+    "2009": {
+      "count": 199,
+      "file": "geipan-2009.json",
+      "sizeKB": 237
+    },
+    "2010": {
+      "count": 138,
+      "file": "geipan-2010.json",
+      "sizeKB": 181
+    },
+    "2011": {
+      "count": 132,
+      "file": "geipan-2011.json",
+      "sizeKB": 176
+    },
+    "2012": {
+      "count": 174,
+      "file": "geipan-2012.json",
+      "sizeKB": 272
+    },
+    "2013": {
+      "count": 207,
+      "file": "geipan-2013.json",
+      "sizeKB": 336
+    },
+    "2014": {
+      "count": 185,
+      "file": "geipan-2014.json",
+      "sizeKB": 307
+    },
+    "2015": {
+      "count": 201,
+      "file": "geipan-2015.json",
+      "sizeKB": 394
+    },
+    "2016": {
+      "count": 68,
+      "file": "geipan-2016.json",
+      "sizeKB": 141
+    },
+    "2017": {
+      "count": 50,
+      "file": "geipan-2017.json",
+      "sizeKB": 126
+    },
+    "2018": {
+      "count": 17,
+      "file": "geipan-2018.json",
+      "sizeKB": 47
+    },
+    "ancient": {
+      "count": 3,
+      "file": "geipan-ancient.json",
+      "sizeKB": 4,
+      "years": [
+        198,
+        199
+      ]
+    }
+  }
+}

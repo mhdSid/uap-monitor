@@ -33,6 +33,7 @@ const MARKER_COLORS: Record<string, string> = {
   HATCH_UDB: colors.sourceHatch,
   CHRONOLOGY: colors.sourceChronology,
   EXPERIENCER: colors.sourceExperiencer,
+  GEIPAN: colors.sourceGeipan,
   NASA_CNEOS: colors.sourceFireball
 }
 

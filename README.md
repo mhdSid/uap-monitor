@@ -1,158 +1,146 @@
 # UAP Monitor
 
-**The world's most comprehensive open-source UAP/UFO sighting aggregator.**
+> Open-source geospatial intelligence platform for UAP/UFO sighting analysis. 230K+ records from 15+ heterogeneous sources, cross-referenced against environmental datasets with publicly reproducible statistical methodology.
 
-Live: [uapmonitor.org](https://uapmonitor.org)
-
-238,000+ sighting reports from 15 verified sources across every continent, spanning from 70 AD to present. Zero frameworks. Vanilla TypeScript. Near-zero infrastructure cost.
+🌐 **Live:** [uapmonitor.org](https://uapmonitor.org) · 🛰️ **Stack:** Vanilla TypeScript · Cloudflare Workers · Leaflet · Vite + PWA
 
 ---
 
-## What It Does
+## What this is
 
-UAP Monitor unifies the world's scattered UAP/UFO data into a single searchable, filterable, and shareable platform.
+A research-grade analytics platform that aggregates UAP sightings spanning ancient history to present and tests them against environmental, geophysical, and geopolitical datasets. The goal is to surface statistically meaningful correlations — and, when those correlations don't survive proper controls, to say so publicly.
 
-- **238,000+ sightings** from NUFORC, Hatch UDB, Eberhart's Chronology, NICAP, Vallée's Magonia, Blue Book Unknowns, Russian historical archives, and more
-- **Real-time intelligence feed** merging GDELT, GNews, and X/Twitter
-- **NASA fireball correlation** — CNEOS bolide data overlaid on the sighting map
-- **Nuclear facility proximity** — 140+ reactors, weapons labs, test sites, and enrichment plants worldwide with distance analysis per sighting
-- **Credibility scoring** per report
-- **Offline geocoding** of 135K+ cities for coordinate resolution
-- **Share URLs** — link directly to any sighting with `?s=id&y=year`
-- **Bookmarks** — save sightings locally, browse via header radar icon
+The platform is built around three principles:
 
-## Architecture
+1. **Methodological transparency** — every hypothesis published exposes its algorithm, controls, sample size, effect size, and source link.
+2. **Self-correction over strong claims** — the nuclear-facility clustering finding was revised from 12× → 0.42× after population-density controls were added. We published the correction.
+3. **Reproducibility** — the hypothesis runner uses fixed seeds, time-shifted baselines, and population-density-corrected nulls. Output is committed JSON anyone can audit.
 
-No React. No Vue. No Next.js. Built entirely on the web platform.
+---
 
-### Core (~3KB runtime)
+## Data sources
 
-- **`Component<Props>`** — class-based lifecycle: `create()` → `didMount()` → `destroy()`
-- **Signal store** — `signal()`, `computed()`, `effect()`, `batch()` with microtask-coalesced effects and dependency tracking
-- **DOM utilities** — `h()`, `el()`, `addClass()`, `setStyles()`, `setAttrs()`, `hide()`, `show()` — every DOM operation in the app goes through `dom.ts`
+| Domain | Sources |
+|---|---|
+| Sightings | NUFORC, Hatch UDB, Reddit r/UFOs, X/Twitter |
+| Astronomical | NASA fireballs (CNEOS) |
+| Geophysical | USGS earthquakes, NOAA/SWPC geomagnetic Kp |
+| Infrastructure | Nuclear facility datasets |
+| News/Signal | GDELT, GNews |
+| Other | 230K+ records normalized into a single schema |
 
-### Design System
+All sources are ingested through adapters that normalize to one canonical schema. See [`DATA_PIPELINE.md`](./DATA_PIPELINE.md).
 
-- **Tokens** — CSS custom properties for spacing (base-2 scale), typography, colors, radii, transitions, z-index, shadows
-- **cx files** — every component has a `cx.ts` mapping semantic names to BEM class strings
-- **Enums** — `ComponentSize`, `ButtonSize`, `SightingShape`, `TagVariant`, `DataSourceId` — no string literals
-- **Light/dark** — full theme support via `[data-theme]` attribute, all components adapt
-- **Palette** — JS-side color constants for canvas/Leaflet contexts that can't use CSS vars
+---
 
-### Strict Rules (enforced everywhere)
+## Routes
 
-1. **ALL DOM ops** via `dom.ts` utilities — never raw `el.style.*`, `el.classList.*`, `document.createElement`, `.setAttribute()` in components
-2. **ALL values** use design tokens — never hardcode px/colors/fonts
-3. **ALL sizes** use enums — never string literals
-4. **ALL strings** defined in `src/data/strings.ts` — never in components or composables
-5. **ALL components** use cx files with light/dark support
+| Route | Purpose |
+|---|---|
+| `/` Monitor | Main dashboard — global map, recent sightings, filters |
+| `/geomagnetic` | Sightings × Kp index correlation |
+| `/seismic` | Sightings × earthquake activity (2D density heatmap) |
+| `/intel` | News/social-signal cross-referencing |
+| `/spiritual` | Generative canvas (artistic/exploratory) |
+| `/research` | Published hypothesis results with methodology modals |
 
-### Data Pipeline
+---
 
-```
-scripts/
-  process-nuforc.mjs      ← 151K sightings, dedup, geocode, chunk by year
-  process-hatch.mjs        ← 18K researcher-curated cases (70 AD–2002)
-  process-chronology.mjs   ← 28K from 10 sub-sources (Eberhart, NICAP, Magonia...)
-  process-russian-historical.mjs
-  nuforc-scrapper/         ← Tor-proxied NUFORC scraper with --resume/--merge
-  geocoder.mjs             ← 135K city index, 25+ alias mappings
-  gdelt/fetch.mjs          ← Time-windowed, tone-banded GDELT fetcher
-  gnews/fetch.mjs          ← Paginated GNews with query rotation
-  twitter/fetch.mjs        ← Twitter v2 API with author data + media
-  nuclear/fetch.mjs        ← 140+ worldwide nuclear facilities dataset
-  shared-constants.mjs     ← Dedup, noise filter, merge utilities
-```
+## Tech stack
 
-### Component Tree
+- **Language:** Vanilla TypeScript, zero framework dependencies
+- **Build:** Vite + PWA plugin
+- **Hosting:** Cloudflare Workers
+- **Mapping:** Leaflet
+- **Reactivity:** Custom signals (`signal` / `computed` / `effect` / `batch`)
+- **Components:** Custom `Component` base class with `create()` / `didMount()` / `destroy()` lifecycle
+- **Routing:** History API, lazy-loaded views, `useRouter<K>` composable
+- **Analytics:** Google Analytics 4 with custom event taxonomy
 
-```
-App
-├── Header (clock, bookmarks trigger, theme switch)
-├── Ticker (auto-rotating sighting feed)
-├── Hero + Highlights Carousel
-├── YearSelector + FilterToolbar (desktop inline / mobile drawer+FAB)
-├── SightingGrids (per-continent, infinite scroll, inline search)
-│   └── DataGrid<Sighting> (sortable, PAGE_SIZE=20)
-├── Timeline (canvas density bar, drag-select year range)
-├── SightingMap (Leaflet + MarkerCluster)
-│   ├── Sightings layer (green)
-│   ├── Fireballs layer (orange)
-│   └── Nuclear layer (amber trefoil icons)
-├── NewsFeed (GDELT + GNews + Twitter merged)
-│   └── DataGrid<IntelArticle>
-├── SubmitForm (→ Cloudflare KV)
-├── DataSources (status cards)
-└── Footer
-```
+No React. No Vue. No Svelte. The component system is small enough to read in one sitting and explicit about ownership.
 
-### Modals
+---
 
-- **SightingModal** — status bar, metadata, related fireballs, related news, nearby nuclear facilities, bookmark + share buttons
-- **GdeltModal** / **GnewsModal** / **TwitterModal** — article detail with async image, metadata, source link
-- **BookmarksModal** — saved sightings list with action menu (remove, share)
-- **WelcomeModal** — data loading, source stats, CTA
-
-### Composables
-
-| Composable | Purpose |
-|------------|---------|
-| `use-store` | Signal/computed/effect/batch primitives |
-| `use-app-store` | Singleton AppStore with all reactive state |
-| `use-data-source` | Orchestrates 3 source loaders |
-| `use-nuforc` / `use-hatch-udb` / `use-chronology` | Manifest + chunk loaders |
-| `use-gdelt` / `use-gnews` / `use-twitter` | Article loaders via `createArticleLoader` |
-| `use-fireball` | NASA CNEOS data + proximity search |
-| `use-nuclear` | Nuclear facilities + proximity search |
-| `use-bookmarks` | localStorage persistence + reactive signals |
-| `use-share` | URL params (`?s=id&y=year`) + clipboard/native share |
-| `use-local-storage` | Generic JSON get/set/remove |
-| `use-delayed-load` | Deferred callback after page load + delay |
-| `use-analytics` | GTM injection via `useDelayedLoad` |
-| `use-theme` | Dark/light toggle with persistence |
-| `use-media-query` | SP/PC breakpoint detection |
-| `use-welcome-sources` | Derive stats from loaded data for welcome modal |
-
-### Reusable Components (Atoms)
-
-`Button`, `Select`, `TextInput` (clearable), `Checkbox` / `CheckboxGroup`, `Switch`, `Tag` / `StatusTag` / `LiveTag`, `Tooltip`, `ActionMenu`, `BookmarkButton`, `ShareButton`, `AsyncImage`, `Loader`, `Alert`, `Toast`, `Drawer`, `Modal`, `DataGrid<T>`
-
-## Deployment
-
-See [DEPLOY.md](./DEPLOY.md) for full Cloudflare Pages + KV setup.
+## Quick start
 
 ```bash
-yarn install
-yarn build
-wrangler pages deploy dist
+# install
+pnpm install
+
+# dev
+pnpm dev
+
+# build
+pnpm build
+
+# preview production build
+pnpm preview
+
+# deploy (Cloudflare Workers)
+pnpm deploy
 ```
 
-## Data Sources
+See [`ONBOARDING.md`](./ONBOARDING.md) for a walkthrough of the codebase.
 
-| Source | Records | Period | Status |
-|--------|---------|--------|--------|
-| NUFORC | 151,848 | 1950–2026 | Online |
-| Hatch UDB | 18,116 | 70 AD–2002 | Online |
-| Chronology (10 sub-sources) | 28,228 | 70 AD–2023 | Online |
-| Russian Historical | 20 | 1663–2025 | Online |
-| GDELT News | ~1,250 | Rolling 90 days | Syncing |
-| GNews | ~500 | Rolling 14 days | Syncing |
-| X / Twitter | ~500 | Rolling 7 days | Syncing |
-| NASA CNEOS Fireballs | 900+ | 1988–present | Online |
-| Nuclear Facilities | 140+ | Current | Online |
-| AARO | — | — | Planned |
-| GEIPAN | — | — | Planned |
-| CJK Scraper | — | — | Planned |
+---
 
-## Tech Stack
+## Project structure
 
-- **Language:** TypeScript (strict)
-- **Bundler:** Vite
-- **Hosting:** Cloudflare Pages (free tier)
-- **Storage:** Cloudflare Workers KV (free tier)
-- **Map:** Leaflet + MarkerCluster
-- **Dependencies:** Zero UI frameworks. Leaflet is the only runtime dependency with DOM access.
+```
+src/
+├── components/      atoms + molecules (Button, Tag, Alert, Modal, Card, Chip, DataGrid, …)
+├── views/           one folder per route, orchestrates components
+├── core/            Component base class, h(), signals, router
+├── data/
+│   ├── strings.ts   all user-facing strings (no inline literals)
+│   └── …
+├── stores/          signals-based global state
+├── styles/          design tokens, theme CSS vars
+└── main.ts          app bootstrap
+
+public/
+└── data/
+    ├── hypotheses.json   published statistical results
+    └── …                 normalized sighting + environmental datasets
+
+scripts/
+└── hypotheses/      statistical runners (seeded, idempotent)
+```
+
+---
+
+## Documentation
+
+- [`ONBOARDING.md`](./ONBOARDING.md) — read this first if you're contributing or running Claude Code
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md) — component system, signals, router, design system
+- [`DATA_PIPELINE.md`](./DATA_PIPELINE.md) — source adapters, schema, hypothesis methodology
+
+---
+
+## Methodology highlights
+
+- **Time-shifted controls (±90 days)** for seismic baselines
+- **Population-density-corrected nulls (20 random location sets)** for facility clustering
+- **Cohen's d** for effect size; raw counts alone are not published
+- **Seeded RNG** — every result reproducible from `scripts/hypotheses/`
+- **Self-correction log** — public posts whenever a finding is revised
+
+---
+
+## Contributing
+
+Before touching the codebase, read [`ONBOARDING.md`](./ONBOARDING.md). The codebase has strict conventions (no anonymous strings, no native HTML without justification, design-system CSS variables only). Violating them creates more work than skipping them saves.
+
+Issues and discussion welcome via GitHub Issues. The platform is based in Japan and has an international early-adopter user base.
+
+---
 
 ## License
 
 MIT.
+
+---
+
+## Repo
+
+[`github.com/mhdSid/uap-monitor`](https://github.com/mhdSid/uap-monitor)

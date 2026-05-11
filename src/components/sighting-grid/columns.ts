@@ -12,7 +12,8 @@ const SOURCE_LABELS: Partial<Record<DataSourceId, string>> = {
   [DataSourceId.NUFORC]: 'NUFORC',
   [DataSourceId.HATCH_UDB]: 'HATCH',
   [DataSourceId.CHRONOLOGY]: 'CHRON',
-  [DataSourceId.EXPERIENCER]: 'HUMAN'
+  [DataSourceId.EXPERIENCER]: 'HUMAN',
+  [DataSourceId.GEIPAN]: 'GEIPAN'
 }
 
 const SUB_SOURCE_SHORT: Record<string, string> = {

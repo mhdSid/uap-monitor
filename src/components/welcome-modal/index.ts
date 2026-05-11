@@ -21,6 +21,7 @@ import {
   useAnalytics,
   useNuforc,
   useHatchUdb,
+  useGeipan,
   useChronology,
   useGdelt,
   useGnews,
@@ -99,6 +100,7 @@ export class WelcomeModal {
   private static async loadAndRender (): Promise<void> {
     const nuforc = useNuforc()
     const hatch = useHatchUdb()
+    const geipan = useGeipan()
     const chronology = useChronology()
     const gdelt = useGdelt()
     const gnews = useGnews()
@@ -110,6 +112,7 @@ export class WelcomeModal {
     await Promise.all([
       nuforc.loadManifest(),
       hatch.loadManifest(),
+      geipan.loadManifest(),
       chronology.loadManifest(),
       gdelt.load(),
       gnews.load(),
@@ -125,6 +128,7 @@ export class WelcomeModal {
     const { stats, sources } = useDeriveWelcomeData({
       nuforc,
       hatch,
+      geipan,
       chronology,
       chronologyManifest,
       gdeltCollection: gdelt.getCollection(),

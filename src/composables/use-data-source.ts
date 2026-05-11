@@ -2,6 +2,7 @@ import { DataSourceId, DataSourceStatus } from '@/enums'
 import type { DataSource, Sighting } from '@/types'
 import { useNuforc } from './use-nuforc'
 import { useHatchUdb } from './use-hatch-udb'
+import { useGeipan } from './use-geipan'
 import { useChronology } from './use-chronology'
 import { DATA_SOURCE_DESCRIPTIONS } from '@/data/strings'
 import { useGnews } from './use-gnews'
@@ -123,6 +124,15 @@ const SOURCE_REGISTRY: DataSource[] = [
     url: 'https://github.com/richgel999/ufo_data',
     description: DATA_SOURCE_DESCRIPTIONS.HATCH_UDB
   },
+  {
+    id: DataSourceId.GEIPAN,
+    label: 'GEIPAN',
+    status: DataSourceStatus.SYNCING,
+    url: 'https://www.cnes.fr/en/geipan',
+    description: DATA_SOURCE_DESCRIPTIONS.GEIPAN,
+    dataUrl: '/data/geipan-manifest.json',
+    dataLabel: 'JSON'
+  },
 
   // ── Chronology sub-sources (all share DataSourceId.CHRONOLOGY) ──
   ...CHRONOLOGY_SUB_SOURCES,
@@ -196,13 +206,6 @@ const SOURCE_REGISTRY: DataSource[] = [
     description: DATA_SOURCE_DESCRIPTIONS.AARO
   },
   {
-    id: DataSourceId.GEIPAN,
-    label: 'GEIPAN',
-    status: DataSourceStatus.DISABLED,
-    url: 'https://www.cnes.fr/en/geipan',
-    description: DATA_SOURCE_DESCRIPTIONS.GEIPAN
-  },
-  {
     id: DataSourceId.ENIGMA,
     label: 'ENIGMA',
     status: DataSourceStatus.DISABLED,
@@ -235,6 +238,7 @@ function mergeSorted (a: Sighting[], b: Sighting[]): Sighting[] {
 export function useDataSource () {
   const nuforc = useNuforc()
   const hatch = useHatchUdb()
+  const geipan = useGeipan()
   const chronology = useChronology()
   const gnews = useGnews()
   const gdelt = useGdelt()
@@ -248,6 +252,9 @@ export function useDataSource () {
     await Promise.allSettled([
       nuforc.loadManifest(),
       hatch.loadManifest(),
+      geipan.loadManifest().then((m) => {
+        updateSourceStatus(DataSourceId.GEIPAN, m !== null && m.totalRecords > 0)
+      }),
       chronology.loadManifest().then((m) => {
         // Update all chronology sub-source statuses based on manifest load
         updateSourceStatus(DataSourceId.CHRONOLOGY, m !== null && m.totalRecords > 0)
@@ -268,16 +275,21 @@ export function useDataSource () {
    * Fetch a year range from ALL active sources, merge results.
    */
   async function fetchYearRange (from: number, to: number): Promise<Sighting[]> {
-    const [nuforcData, hatchData, chronData] = await Promise.all([
+    const [nuforcData, hatchData, geipanData, chronData] = await Promise.all([
       nuforc.loadYearRange(from, to),
       hatch.loadYearRange(from, to),
+      geipan.loadYearRange(from, to),
       chronology.loadYearRange(from, to)
     ])
 
     updateSourceStatus(DataSourceId.NUFORC, nuforcData.length > 0)
     updateSourceStatus(DataSourceId.HATCH_UDB, hatchData.length > 0)
+    updateSourceStatus(DataSourceId.GEIPAN, geipanData.length > 0)
 
-    return mergeSorted(mergeSorted(nuforcData, hatchData), chronData)
+    return mergeSorted(
+      mergeSorted(mergeSorted(nuforcData, hatchData), geipanData),
+      chronData
+    )
   }
 
   /**
@@ -289,38 +301,51 @@ export function useDataSource () {
     to: number,
     onChunk: (sightings: Sighting[]) => void
   ): Promise<Sighting[]> {
-    // Start Hatch + Chronology loading in background (non-progressive)
+    // Start Hatch + GEIPAN + Chronology loading in background (non-progressive)
     const hatchPromise = hatch.loadYearRange(from, to)
+    const geipanPromise = geipan.loadYearRange(from, to)
     const chronPromise = chronology.loadYearRange(from, to)
 
     let nuforcAccumulated: Sighting[] = []
     let hatchData: Sighting[] = []
+    let geipanData: Sighting[] = []
     let chronData: Sighting[] = []
     let hatchDone = false
+    let geipanDone = false
     let chronDone = false
 
-    // When Hatch resolves, merge into whatever NUFORC has accumulated so far
+    const emitMerged = (): void => {
+      const merged = mergeSorted(
+        mergeSorted(mergeSorted(nuforcAccumulated, hatchData), geipanData),
+        chronData
+      )
+      onChunk(merged)
+    }
+
     hatchPromise.then((data) => {
       hatchData = data
       hatchDone = true
       updateSourceStatus(DataSourceId.HATCH_UDB, data.length > 0)
-      if (nuforcAccumulated.length > 0) {
-        const merged = mergeSorted(mergeSorted(nuforcAccumulated, hatchData), chronData)
-        onChunk(merged)
-      }
+      if (nuforcAccumulated.length > 0) emitMerged()
     }).catch(() => {
       hatchDone = true
       updateSourceStatus(DataSourceId.HATCH_UDB, false)
     })
 
-    // When Chronology resolves, merge into accumulated
+    geipanPromise.then((data) => {
+      geipanData = data
+      geipanDone = true
+      updateSourceStatus(DataSourceId.GEIPAN, data.length > 0)
+      if (nuforcAccumulated.length > 0) emitMerged()
+    }).catch(() => {
+      geipanDone = true
+      updateSourceStatus(DataSourceId.GEIPAN, false)
+    })
+
     chronPromise.then((data) => {
       chronData = data
       chronDone = true
-      if (nuforcAccumulated.length > 0) {
-        const merged = mergeSorted(mergeSorted(nuforcAccumulated, hatchData), chronData)
-        onChunk(merged)
-      }
+      if (nuforcAccumulated.length > 0) emitMerged()
     }).catch(() => {
       chronDone = true
     })
@@ -328,17 +353,20 @@ export function useDataSource () {
     // Progressive NUFORC loading — each chunk triggers a merge with whatever else has loaded
     const nuforcResult = await nuforc.loadProgressive(from, to, (partial) => {
       nuforcAccumulated = partial
-      const merged = mergeSorted(mergeSorted(partial, hatchData), chronData)
-      onChunk(merged)
+      emitMerged()
     })
 
     updateSourceStatus(DataSourceId.NUFORC, nuforcResult.length > 0)
 
     // Final merge — ensure all sources are included
     if (!hatchDone) hatchData = await hatchPromise
+    if (!geipanDone) geipanData = await geipanPromise
     if (!chronDone) chronData = await chronPromise
 
-    return mergeSorted(mergeSorted(nuforcResult, hatchData), chronData)
+    return mergeSorted(
+      mergeSorted(mergeSorted(nuforcResult, hatchData), geipanData),
+      chronData
+    )
   }
 
   /**
@@ -347,9 +375,10 @@ export function useDataSource () {
   function getAvailableYears (): number[] {
     const nuforcYears = nuforc.getAvailableYears()
     const hatchYears = hatch.getAvailableYears()
+    const geipanYears = geipan.getAvailableYears()
     const chronYears = chronology.getAvailableYears()
 
-    const yearSet = new Set<number>([...nuforcYears, ...hatchYears, ...chronYears])
+    const yearSet = new Set<number>([...nuforcYears, ...hatchYears, ...geipanYears, ...chronYears])
     return [...yearSet].sort((a, b) => b - a)
   }
 
@@ -357,7 +386,7 @@ export function useDataSource () {
    * Total record count across all sources.
    */
   function getTotalCount (): number {
-    return nuforc.getTotalCount() + hatch.getTotalCount() + chronology.getTotalCount() + gnews.getCount() + gdelt.getCount() + twitter.getCount() + reddit.getCount()
+    return nuforc.getTotalCount() + hatch.getTotalCount() + geipan.getTotalCount() + chronology.getTotalCount() + gnews.getCount() + gdelt.getCount() + twitter.getCount() + reddit.getCount()
   }
 
   /**
@@ -365,7 +394,7 @@ export function useDataSource () {
    */
   function getYearCounts (): Map<number, number> {
     const merged = new Map<number, number>()
-    for (const source of [nuforc.getYearCounts(), hatch.getYearCounts(), chronology.getYearCounts()]) {
+    for (const source of [nuforc.getYearCounts(), hatch.getYearCounts(), geipan.getYearCounts(), chronology.getYearCounts()]) {
       for (const [year, count] of source) {
         merged.set(year, (merged.get(year) || 0) + count)
       }
@@ -388,6 +417,7 @@ export function useDataSource () {
     getSources,
     nuforc,
     hatch,
+    geipan,
     chronology
   }
 }
