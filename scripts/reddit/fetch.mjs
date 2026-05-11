@@ -33,11 +33,18 @@ const SOURCE_FILE = resolve(PROJECT_ROOT, '__sources', 'reddit-articles.json')
 // ─── Query plan ─────────────────────────────────────────────────────
 
 const REDDIT_SEARCHES = [
+  // ── Tier 1: Core firehose ────────────────────────────────────────
   { subreddit: 'UFOs',            query: '"ufo sighting" OR "uap sighting" OR "strange lights"' },
   { subreddit: 'UFOs',            query: '"triangle lights" OR "black triangle" OR "orange orb"' },
-  { subreddit: 'UFO',             query: '"ufo sighting" OR "uap report" OR "unidentified object"' },
+  { subreddit: 'UFOs',            query: '"tic tac" OR "metallic sphere" OR "saw something"' },
+  { subreddit: 'UAP',             query: '"sighting" OR "encounter" OR "witness"' },
+  { subreddit: 'aliens',          query: '"ufo sighting" OR "strange lights in the sky" OR "orb"' },
+
+  // ── Tier 2: Specialized, lower-volume, higher signal ─────────────
   { subreddit: 'HighStrangeness', query: '"strange lights" OR "mysterious lights" OR "object in the sky"' },
-  { subreddit: 'aliens',          query: '"ufo sighting" OR "strange lights in the sky" OR "orb"' }
+  { subreddit: 'AcademicUAP',     query: '"sighting" OR "case" OR "incident"' },
+  { subreddit: 'UFOB',            query: '"sighting" OR "encounter" OR "saw"' },
+  { subreddit: 'experiencers',    query: '"sighting" OR "encounter" OR "witnessed"' }
 ]
 
 const USER_AGENT = 'uapmonitor/1.0 (reddit ingestion; contact: hello@uapmonitor.org)'
