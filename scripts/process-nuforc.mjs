@@ -115,9 +115,12 @@ const seenCharacteristics = new Map() // characteristic → count
 
 function parseNuforcDate (raw) {
   if (!raw) return null
-  const match = raw.match(/^(\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2})/)
+  // NUFORC "Approximate Local" entries publish HH:MM with no seconds — accept
+  // those and pad to :00 so we don't silently discard ~18% of the corpus.
+  const match = raw.match(/^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})(:\d{2})?/)
   if (!match) return null
-  return match[1].replace(' ', 'T')
+  const seconds = match[3] || ':00'
+  return `${match[1]}T${match[2]}${seconds}`
 }
 
 function parseLocation (raw) {

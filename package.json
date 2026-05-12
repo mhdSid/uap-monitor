@@ -29,7 +29,7 @@
     "sanitize:nuforc": "node scripts/nuforc-scrapper/sanitize.mjs __sources/nuforc.json --fields text,Text,summary,description",
     "scrape:nuforc:2024": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 195787 --concurrency 3 --delay 300 --years 2024",
     "scrape:nuforc:2025": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 195122 --concurrency 1 --years 2025",
-    "scrape:nuforc:2026:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 197458 --concurrency 1 --years 2026-2026 --puppeteer --past-range-limit 25",
+    "scrape:nuforc:2026:2026": "node scripts/nuforc-scrapper/scraper.mjs --resume --start-id 197554 --concurrency 1 --years 2026-2026 --puppeteer --past-range-limit 25",
     "scrape:nuforc:cache:full": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/full.json",
     "scrape:nuforc:cache:huggingface": "node --max-old-space-size=4096 scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/huggingface.json --output nuforc_scraped.json --merge __sources/nuforc.json",
     "scrape:nuforc:cache:minimal": "node scripts/nuforc-scrapper/scraper.mjs --cache --schema scripts/nuforc-scrapper/schemas/minimal.json",

@@ -61,6 +61,7 @@
 .sighting-map__canvas {
   width: 100%;
   height: 100%;
+  border-radius: var(--radius-md);
 }
 
 .sighting-map__canvas:focus-visible {
