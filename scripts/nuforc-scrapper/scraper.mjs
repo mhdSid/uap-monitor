@@ -63,14 +63,21 @@ async function getPuppeteerPage () {
     )
   }
 
+  const launchArgs = [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-blink-features=AutomationControlled",
+    "--disable-dev-shm-usage"
+  ]
+  // Chrome doesn't pick up the node-fetch SocksProxyAgent — pass the proxy
+  // explicitly via launch arg so Chrome's own networking goes through Tor.
+  if (opts.tor) {
+    launchArgs.push("--proxy-server=socks5://127.0.0.1:9050")
+  }
+
   puppeteerBrowser = await puppeteer.launch({
     headless: false, //opts.puppeteerHeadless !== false,
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-blink-features=AutomationControlled",
-      "--disable-dev-shm-usage"
-    ]
+    args: launchArgs
   })
   puppeteerPage = await puppeteerBrowser.newPage()
   await puppeteerPage.setUserAgent(USER_AGENT)
@@ -248,6 +255,29 @@ async function buildFetchOptions () {
   return fetchOpts
 }
 
+// NUFORC sits behind Wordfence, which serves rate-limit notices as HTTP 503
+// with HTML body text like "Exceeded the maximum number of requests per
+// minute for crawlers." Detect both the status and the body so we can apply
+// a long exponential backoff instead of the generic-error 1s one.
+const RATE_LIMIT_PATTERNS = [
+  /exceeded the (?:maximum )?number of requests per minute/i,
+  /requests per minute for crawlers/i,
+  /access to this site has been limited/i,
+  /wordfence/i
+]
+
+function isRateLimitBody (html) {
+  if (!html || html.length > 20000) return false // real sighting pages are larger
+  return RATE_LIMIT_PATTERNS.some(re => re.test(html))
+}
+
+class RateLimitError extends Error {
+  constructor (url) {
+    super(`Rate-limited by NUFORC for ${url}`)
+    this.name = "RateLimitError"
+  }
+}
+
 async function fetchPagePuppeteer (url) {
   const page = await getPuppeteerPage()
   const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 })
@@ -268,6 +298,10 @@ async function fetchPagePuppeteer (url) {
     }
   }
 
+  // Body-text check runs first: Wordfence may serve 200 or 503 depending on
+  // its config, but the body is always recognizable.
+  if (isRateLimitBody(html)) throw new RateLimitError(url)
+  if (status === 429 || status === 503) throw new RateLimitError(url)
   if (status >= 400) throw new Error(`HTTP ${status} for ${url}`)
   return html
 }
@@ -278,8 +312,15 @@ async function fetchPageHttp (url) {
   const timeout = setTimeout(() => controller.abort(), 10000)
   try {
     const res = await nodeFetch(url, { ...fetchOpts, signal: controller.signal })
+    // 429/503 + Wordfence body-text route through RateLimitError so the
+    // retry loop applies the long backoff rather than the generic 1s one.
+    if (res.status === 429 || res.status === 503) {
+      throw new RateLimitError(url)
+    }
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`)
-    return await res.text()
+    const html = await res.text()
+    if (isRateLimitBody(html)) throw new RateLimitError(url)
+    return html
   } finally {
     clearTimeout(timeout)
   }
@@ -303,11 +344,23 @@ async function fetchWithRetry (url, retries = 3) {
         continue
       }
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      return await res.text()
+      const html = await res.text()
+      if (isRateLimitBody(html)) throw new RateLimitError(url)
+      return html
     } catch (err) {
       if (attempt === retries) throw err
-      const wait = Math.pow(2, attempt) * 1000
-      debug(`Attempt ${attempt} failed for ${url}: ${err.message}, retrying in ${wait}ms`)
+      // Wordfence rate-limit bans run 30–60 min, so escalate aggressively.
+      // 30s → 60s → 120s gives transient throttles room to recover; if it's
+      // a real ban the retry loop exhausts and the URL is marked errored.
+      const isRateLimit = err instanceof RateLimitError
+      const wait = isRateLimit
+        ? Math.pow(2, attempt) * 30000
+        : Math.pow(2, attempt) * 1000
+      if (isRateLimit) {
+        log(`Rate limited by Wordfence, backing off ${Math.round(wait / 1000)}s (attempt ${attempt}/${retries - 1})...`)
+      } else {
+        debug(`Attempt ${attempt} failed for ${url}: ${err.message}, retrying in ${wait}ms`)
+      }
       await sleep(wait)
     }
   }
