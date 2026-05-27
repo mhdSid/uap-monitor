@@ -1,10 +1,118 @@
 {
-  "generatedAt": "2026-05-19T12:54:26.976Z",
+  "generatedAt": "2026-05-27T13:03:11.408Z",
   "query": "(\"UAP sighting\" OR \"UFO sighting\" OR \"UFO report\" OR \"unidentified aerial phenomena\" OR \"unidentified flying object\" OR \"flying saucer\" OR \"non-human intelligence\" OR \"UFO disclosure\" OR AARO OR NUFORC)",
   "days": 90,
   "windows": 3,
   "totalResults": 1250,
   "articles": [
+    {
+      "id": "fe2273ec847d",
+      "title": "Missing in America Wilds : UFO Theorists Claim National Parks Are Hunting Grounds for Aliens",
+      "url": "https://www.ibtimes.co.uk/unexplained-disappearances-national-parks-ufo-theories-1798086",
+      "domain": "ibtimes.co.uk",
+      "publishedAt": "2026-05-21T10:15:00Z",
+      "language": "English",
+      "sourceName": "ibtimes.co.uk (United Kingdom)",
+      "country": "United Kingdom",
+      "imageUrl": "https://d.ibtimes.co.uk/en/full/1807354/ufo.jpg",
+      "tone": -7
+    },
+    {
+      "id": "6961a0054cb4",
+      "title": "UFO Expert Dr Steven Greer on Trump UFO Disclosure , Bob Lazar , Buga Sphere ( Members Only Exclusive )",
+      "url": "https://www.vladtv.com/article/315062/ufo-expert-dr-steven-greer-on-trump-ufo-disclosure-bob-lazar-buga-sphere",
+      "domain": "vladtv.com",
+      "publishedAt": "2026-05-21T00:30:00Z",
+      "language": "English",
+      "sourceName": "vladtv.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://www.vladtv.com/images/size_fs/video-315062.jpg?ver=1779307982",
+      "tone": -7
+    },
+    {
+      "id": "48710d7aff0a",
+      "title": "18 Traffic Signs That Make Little to No Sense",
+      "url": "https://trivia.cracked.com/image-pictofact-21064-18-traffic-signs-that-make-little-to-no-sense",
+      "domain": "trivia.cracked.com",
+      "publishedAt": "2026-05-20T21:30:00Z",
+      "language": "English",
+      "sourceName": "trivia.cracked.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://s3.crackedcdn.com/phpimages/imageset/5/8/5/1511585.jpg",
+      "tone": -7
+    },
+    {
+      "id": "77de02a4a970",
+      "title": "Man arrested after calling 911 to report zombies , ghosts , UFO , deputies say",
+      "url": "https://www.wgauradio.com/news/trending/man-arrested-after-calling-911-report-zombies-ghosts-ufo-deputies-say/GQTJCE5E6ZAEBAIP64FRATRR4I/",
+      "domain": "wgauradio.com",
+      "publishedAt": "2026-05-19T22:30:00Z",
+      "language": "English",
+      "sourceName": "wgauradio.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F4LNMRIPQNJFPBNUECX7QTJ7NEU.jpg?auth=5209fe71e7c6445195aea71a749d5357e43e44cd88acc96403bce31e68062478&smart=true",
+      "tone": -7
+    },
+    {
+      "id": "9a1cdc674747",
+      "title": "Man arrested after calling 911 to report zombies , ghosts , UFO , deputies say",
+      "url": "https://www.wftv.com/news/trending/man-arrested-after-calling-911-report-zombies-ghosts-ufo-deputies-say/GQTJCE5E6ZAEBAIP64FRATRR4I/",
+      "domain": "wftv.com",
+      "publishedAt": "2026-05-19T22:15:00Z",
+      "language": "English",
+      "sourceName": "wftv.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-tv-10070-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F4LNMRIPQNJFPBNUECX7QTJ7NEU.jpg?auth=5209fe71e7c6445195aea71a749d5357e43e44cd88acc96403bce31e68062478&smart=true",
+      "tone": -7
+    },
+    {
+      "id": "1100bb17e384",
+      "title": "Man arrested after calling 911 to report zombies , ghosts , UFO , deputies say",
+      "url": "https://www.kiro7.com/news/trending/man-arrested-after-calling-911-report-zombies-ghosts-ufo-deputies-say/GQTJCE5E6ZAEBAIP64FRATRR4I/",
+      "domain": "kiro7.com",
+      "publishedAt": "2026-05-19T22:00:00Z",
+      "language": "English",
+      "sourceName": "kiro7.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-tv-10090-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F4LNMRIPQNJFPBNUECX7QTJ7NEU.jpg?auth=5209fe71e7c6445195aea71a749d5357e43e44cd88acc96403bce31e68062478&smart=true",
+      "tone": -7
+    },
+    {
+      "id": "cb464925881c",
+      "title": "Man arrested after calling 911 to report zombies , ghosts , UFO , deputies say",
+      "url": "https://www.whio.com/news/trending/man-arrested-after-calling-911-report-zombies-ghosts-ufo-deputies-say/GQTJCE5E6ZAEBAIP64FRATRR4I/",
+      "domain": "whio.com",
+      "publishedAt": "2026-05-19T20:15:00Z",
+      "language": "English",
+      "sourceName": "whio.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-tv-10040-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F4LNMRIPQNJFPBNUECX7QTJ7NEU.jpg?auth=5209fe71e7c6445195aea71a749d5357e43e44cd88acc96403bce31e68062478&smart=true",
+      "tone": -7
+    },
+    {
+      "id": "de2c55cd83f8",
+      "title": "Man arrested after calling 911 to report zombies , ghosts , UFO , deputies say",
+      "url": "https://www.1073theeagle.com/news/trending/man-arrested-after-calling-911-report-zombies-ghosts-ufo-deputies-say/GQTJCE5E6ZAEBAIP64FRATRR4I/",
+      "domain": "1073theeagle.com",
+      "publishedAt": "2026-05-19T20:15:00Z",
+      "language": "English",
+      "sourceName": "1073theeagle.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-rd-20100-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F4LNMRIPQNJFPBNUECX7QTJ7NEU.jpg?auth=5209fe71e7c6445195aea71a749d5357e43e44cd88acc96403bce31e68062478&smart=true",
+      "tone": -7
+    },
+    {
+      "id": "c36419a48b69",
+      "title": "Man arrested after calling 911 to report zombies , ghosts , UFO , deputies say",
+      "url": "https://www.wsoctv.com/news/trending/man-arrested-after-calling-911-report-zombies-ghosts-ufo-deputies-say/GQTJCE5E6ZAEBAIP64FRATRR4I/",
+      "domain": "wsoctv.com",
+      "publishedAt": "2026-05-19T20:00:00Z",
+      "language": "English",
+      "sourceName": "wsoctv.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://cmg-cmg-tv-10030-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F4LNMRIPQNJFPBNUECX7QTJ7NEU.jpg?auth=5209fe71e7c6445195aea71a749d5357e43e44cd88acc96403bce31e68062478&smart=true",
+      "tone": -7
+    },
     {
       "id": "44713bb9da23",
       "title": "Are we not alone ? Declassified UFO files reopen debate on government transparency .",
@@ -411,7 +519,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4648616/pentagon-ufo-photo.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "9c53ce13f04a",
@@ -618,18 +726,6 @@
       "tone": 0
     },
     {
-      "id": "c8eb68ed11fd",
-      "title": "What Caused The Long Streak In The North American Sky ?",
-      "url": "https://kroc.com/ixp/150/p/zhuque2e-launch-explained/",
-      "domain": "kroc.com",
-      "publishedAt": "2026-05-14T18:15:00Z",
-      "language": "English",
-      "sourceName": "kroc.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://townsquare.media/site/150/files/2026/05/attachment-shawn-malone-lake-superior-photo.jpg?&q=75&format=natural",
-      "tone": 0
-    },
-    {
       "id": "fd318ecdfd1c",
       "title": "Fox Nation special examines deaths of scientists tied to top secret work",
       "url": "https://www.foxnews.com/media/late-scientists-chilling-warning-resurfaces-fox-nation-special-missing-researchers",
@@ -639,6 +735,18 @@
       "sourceName": "foxnews.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.foxnews.com/foxnews.com/content/uploads/2026/05/amy-eskridge-top-secret-file-v2.jpeg",
+      "tone": -7
+    },
+    {
+      "id": "c8eb68ed11fd",
+      "title": "What Caused The Long Streak In The North American Sky ?",
+      "url": "https://kroc.com/ixp/150/p/zhuque2e-launch-explained/",
+      "domain": "kroc.com",
+      "publishedAt": "2026-05-14T18:15:00Z",
+      "language": "English",
+      "sourceName": "kroc.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://townsquare.media/site/150/files/2026/05/attachment-shawn-malone-lake-superior-photo.jpg?&q=75&format=natural",
       "tone": 0
     },
     {
@@ -795,7 +903,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "61001b2dc34d",
@@ -807,7 +915,19 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
+      "tone": -7
+    },
+    {
+      "id": "ca3b59cae409",
+      "title": "I Was Freaking Out : Viral Security Footage Has People Arguing Over Whether This  Creature  Is Even Human",
+      "url": "https://www.boredpanda.com/security-camera-mystery-tami/?cexp_id=153088&cexp_var=21&_f=homepage_featured",
+      "domain": "boredpanda.com",
+      "publishedAt": "2026-05-13T14:30:00Z",
+      "language": "English",
+      "sourceName": "boredpanda.com (United States)",
+      "country": "United States",
+      "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
+      "tone": -7
     },
     {
       "id": "fcd62d434dbd",
@@ -822,18 +942,6 @@
       "tone": 0
     },
     {
-      "id": "ca3b59cae409",
-      "title": "I Was Freaking Out : Viral Security Footage Has People Arguing Over Whether This  Creature  Is Even Human",
-      "url": "https://www.boredpanda.com/security-camera-mystery-tami/?cexp_id=153088&cexp_var=21&_f=homepage_featured",
-      "domain": "boredpanda.com",
-      "publishedAt": "2026-05-13T14:30:00Z",
-      "language": "English",
-      "sourceName": "boredpanda.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
-    },
-    {
       "id": "d500800a358f",
       "title": "I Was Freaking Out : Viral Security Footage Has People Arguing Over Whether This  Creature  Is Even Human",
       "url": "https://www.boredpanda.com/security-camera-mystery-tami/?cexp_id=153088&cexp_var=23&_f=homepage_featured",
@@ -843,7 +951,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "d8e8f8329ba9",
@@ -879,7 +987,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "7c914dbc57f6",
@@ -891,7 +999,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "972e57c34319",
@@ -903,7 +1011,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb29.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "9e01e4ff208a",
@@ -915,7 +1023,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "14ddf379b7ba",
@@ -939,7 +1047,7 @@
       "sourceName": "boredpanda.com (United States)",
       "country": "United States",
       "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2026/05/security-camera-mystery-tami-fb.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "d85bf3a586dc",
@@ -1011,7 +1119,7 @@
       "sourceName": "kyivpost.com (Ukraine)",
       "country": "Ukraine",
       "imageUrl": "https://static.kyivpost.com/storage/2026/04/21/2784b390a2ad11ab564807d75568e3b9.jpg?&q=90&f=jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "efd2bfb15dc8",
@@ -6279,7 +6387,7 @@
       "sourceName": "skeptic.com (United States)",
       "country": "United States",
       "imageUrl": "https://storage.ghost.io/c/36/db/36db2d53-b96a-4b7f-9ea6-1e48a1d7715e/content/images/size/w1200/2026/04/img2.png",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "8714e93c40cd",
@@ -6291,7 +6399,7 @@
       "sourceName": "hindustantimes.com (India)",
       "country": "India",
       "imageUrl": "https://www.hindustantimes.com/ht-img/img/2026/04/25/550x309/Untitled_design_1777152128246_1777152137097.png",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "2332f57ec8dc",
@@ -7119,7 +7227,7 @@
       "sourceName": "radaronline.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.radaronline.com/brand-img/v050GDfMd/1200x628/ufos-nearly-ignited-global-war-soviet-files-reveal-3-1771340696293.jpg",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "268c3121bf0c",
@@ -7155,7 +7263,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1803355/david-wilcock.png",
-      "tone": -7
+      "tone": 0
     },
     {
       "id": "a7a4e902fd26",
@@ -9267,7 +9375,7 @@
       "sourceName": "king5.com (United States)",
       "country": "United States",
       "imageUrl": "https://media.king5.com/assets/AssociatedPress/images/5e24eaa8-a20d-47ec-aa4b-20e84d294dcd/20260404T041007/5e24eaa8-a20d-47ec-aa4b-20e84d294dcd_1140x641.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "06a052510cf7",
@@ -9315,7 +9423,7 @@
       "sourceName": "boston.com (United States)",
       "country": "United States",
       "imageUrl": "https://bdc2020.o0bc.com/wp-content/uploads/2026/04/What_on_Earth_79814-69d090739b584-768x432.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9490b58690b1",
@@ -9375,7 +9483,7 @@
       "sourceName": "banglamirrornews.com (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://banglamirrornews.com/files/uploads/2026/04/fcgtryrty.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "006c64dc8b10",
@@ -9387,7 +9495,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-130020949,width-1280,height-720,imgsize-1116194,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "934f1a8c2dbe",
@@ -9399,7 +9507,7 @@
       "sourceName": "lobotero.com (United States)",
       "country": "United States",
       "imageUrl": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvczAud3AuY29tXC9pXC9ibGFuay5qcGciLCJ0eHQiOiJJbiAgU2FuZXIgIFRob3VnaHQiLCJ0ZW1wbGF0ZSI6ImhpZ2h3YXkiLCJmb250IjoiIiwiYmxvZ19pZCI6Mjk0NDA4M30.0-Aooe_aywDCU-7meBJYiOcLkNWHhTBXxqiWMYXX0FgMQ",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "ad387c6b3eb6",
@@ -9411,7 +9519,7 @@
       "sourceName": "timesofindia.indiatimes.com (India)",
       "country": "India",
       "imageUrl": "https://static.toiimg.com/thumb/msid-130020440,width-1280,height-720,imgsize-59882,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "cddb646dab91",
@@ -9423,7 +9531,7 @@
       "sourceName": "lobotero.com (United States)",
       "country": "United States",
       "imageUrl": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvczAud3AuY29tXC9pXC9ibGFuay5qcGciLCJ0eHQiOiJJbiAgU2FuZXIgIFRob3VnaHQiLCJ0ZW1wbGF0ZSI6ImhpZ2h3YXkiLCJmb250IjoiIiwiYmxvZ19pZCI6Mjk0NDA4M30.0-Aooe_aywDCU-7meBJYiOcLkNWHhTBXxqiWMYXX0FgMQ",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "3d1fa49af3c7",
@@ -9507,7 +9615,7 @@
       "sourceName": "mymotherlode.com (United States)",
       "country": "United States",
       "imageUrl": "https://mymotherlode.com/wp-content/uploads/2026/04/AP_7dd3f518a1f04b44b9230d3cfb741375_724620e9a2.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "0d57de7dd31a",
@@ -9519,7 +9627,7 @@
       "sourceName": "smdailyjournal.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/smdailyjournal.com/content/tncms/custom/image/0b0b7a5a-a1d1-11e6-9041-cbc40d61c8f5.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "9b0e3d8bd761",
@@ -9531,7 +9639,7 @@
       "sourceName": "ktar.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktar.com/wp-content/uploads/2026/04/What_on_Earth_88898.jpg",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "f2555bfc4c0d",
@@ -9543,7 +9651,7 @@
       "sourceName": "sitkasentinel.com (United States)",
       "country": "United States",
       "imageUrl": "https://mapi.associatedpress.com/v2/items/7dd3f518a1f04b44b9230d3cfb741375.1/preview/preview.jpg?nfe=true&s=512&wm=false&app=MPK&tag=iid~7dd3f518a1f04b44b9230d3cfb741375!rsn~1!cid~08479f91a64b4ceeaac8efecea979aa9!orgId~48830!qt~qKR5S-6geAeI!orgNm~DAILY%20SITKA%20SENTINEL!role~Preview!mt~photo!fmt~JPEG%20Baseline",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "63dfa2195e76",
@@ -9555,7 +9663,7 @@
       "sourceName": "kelownadailycourier.ca (Canada)",
       "country": "Canada",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/kelownadailycourier.ca/content/tncms/assets/v3/editorial/2/b2/2b21d701-6a79-53a7-bc80-a9b45ec67cd1/69d09aee28b31.image.jpg?crop=640%2C336%2C0%2C22",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "4c02cc937c43",
@@ -9567,7 +9675,7 @@
       "sourceName": "sitkasentinel.com (United States)",
       "country": "United States",
       "imageUrl": "https://mapi.associatedpress.com/v2/items/5a380b927b404ae89c2781700fa3897a.1/preview/preview.jpg?nfe=true&s=512&wm=false&app=MPK&tag=iid~5a380b927b404ae89c2781700fa3897a!rsn~1!cid~d55d2570d3c24f40ad538a16973a032a!orgId~48830!qt~cKyLrMSrwKeI!orgNm~DAILY%20SITKA%20SENTINEL!role~Preview!mt~photo!fmt~JPEG%20Baseline",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "af970d1831fc",
@@ -9591,7 +9699,7 @@
       "sourceName": "mdjonline.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/mdjonline.com/content/tncms/assets/v3/editorial/5/5d/55dbe305-2c8f-54b5-882c-0a901387aa6c/69d08ebdd3314.image.jpg?crop=1867%2C980%2C0%2C64",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c15590655506",
@@ -9603,7 +9711,7 @@
       "sourceName": "wgauradio.com (United States)",
       "country": "United States",
       "imageUrl": "https://cmg-cmg-rd-20015-prod.cdn.arcpublishing.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fcmg%2F3MUGMPRRAM2E5EQDHDSBQ4Z43Y.jpg?auth=9ee3dbeb0e0f16b8201c783a1f991943eef48a85be6fcb493b77c4edc67f7370&smart=true",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "230d32532744",
@@ -9615,7 +9723,7 @@
       "sourceName": "union-bulletin.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/union-bulletin.com/content/tncms/assets/v3/editorial/9/41/941e9b22-a67d-5980-86de-c5b57f81956f/69d08f362123b.image.jpg?crop=1867%2C980%2C0%2C64",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "89f03e0b1a2b",
@@ -9627,7 +9735,7 @@
       "sourceName": "taylorvilledailynews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.srnnews.com/media/2026/04/1775276299561224Cp2eGNUQNb-apn.jpg?x92997",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "90f68a02eb21",
@@ -9639,7 +9747,7 @@
       "sourceName": "union-bulletin.com (United States)",
       "country": "United States",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/union-bulletin.com/content/tncms/assets/v3/editorial/d/ba/dba00abb-75d9-5d61-93cc-816e20b5173c/69d092c29e898.image.jpg?crop=1619%2C850%2C0%2C215",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "85b67022ff47",
@@ -9651,7 +9759,7 @@
       "sourceName": "taylorvilledailynews.com (United States)",
       "country": "United States",
       "imageUrl": "https://www.srnnews.com/media/2026/04/1775276302396535OUn5NsTqic-apn.jpg?x92997",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "c7b1783c97e2",
@@ -9675,7 +9783,7 @@
       "sourceName": "pentictonherald.ca (Canada)",
       "country": "Canada",
       "imageUrl": "https://bloximages.newyork1.vip.townnews.com/pentictonherald.ca/content/tncms/assets/v3/editorial/0/45/045d98c9-eb65-5a62-b63d-4eeadc6204c5/69d09adea9809.image.jpg?crop=640%2C336%2C0%2C22",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "85ff9624e704",
@@ -9687,7 +9795,7 @@
       "sourceName": "wsls.com (United States)",
       "country": "United States",
       "imageUrl": "https://res.cloudinary.com/graham-media-group/image/upload/f_auto/q_auto/c_thumb,w_700/v1/media/gmg/4YVWV6T7XFED7O5Y2PDQ45JOF4.jpg?_a=DATAg1fkZAA0",
-      "tone": 0
+      "tone": -2.5
     },
     {
       "id": "8ae110128821",
@@ -10143,7 +10251,7 @@
       "sourceName": "independent.ie (Ireland)",
       "country": "Ireland",
       "imageUrl": "https://focus.independent.ie/thumbor/wQjrY0DmF_19vrHVGbw4NvZJgoA=/0x0:1024x682/629x0/prod-mh-ireland/40471ba1-0cc2-4ef6-9bab-9f557312a4bc/5c064031-1af6-4cfb-b93c-df569b158b94/40471ba1-0cc2-4ef6-9bab-9f557312a4bc.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c90787fc45ee",
@@ -10191,7 +10299,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1788980/rep-anna-paulina-luna.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "c6ffa6a03378",
@@ -10239,7 +10347,7 @@
       "sourceName": "ibtimes.com (United States)",
       "country": "United States",
       "imageUrl": "https://d.ibtimes.com/en/full/4646935/matt-gaetz.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "cf4e89eace8b",
@@ -10251,7 +10359,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1800039/matt-gaetz.png",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "29f012cbf522",
@@ -10275,7 +10383,7 @@
       "sourceName": "ibtimes.co.uk (United Kingdom)",
       "country": "United Kingdom",
       "imageUrl": "https://d.ibtimes.co.uk/en/full/1799992/alien-human-hybrid-program.jpg",
-      "tone": 0
+      "tone": -7
     },
     {
       "id": "aa2079c6a975",
@@ -14895,114 +15003,6 @@
       "sourceName": "ktxs.com (United States)",
       "country": "United States",
       "imageUrl": "https://ktxs.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "c2aa4d1fd027",
-      "title": "What might we learn from UFO files Trump told the government to release ?",
-      "url": "https://kfoxtv.com/news/nation-world/what-might-we-learn-from-ufo-files-trump-told-the-government-to-release-aliens-extraterrestrial-life-earth-obama-space-science-uap-aerospace-safety",
-      "domain": "kfoxtv.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "kfoxtv.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://kfoxtv.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "137b5bdc3124",
-      "title": "What might we learn from UFO files Trump told the government to release ?",
-      "url": "https://cbs2iowa.com/news/nation-world/what-might-we-learn-from-ufo-files-trump-told-the-government-to-release-aliens-extraterrestrial-life-earth-obama-space-science-uap-aerospace-safety",
-      "domain": "cbs2iowa.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "cbs2iowa.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://cbs2iowa.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "b50f2b1741cd",
-      "title": "Our History : Flying saucers in Citrus County ?",
-      "url": "https://www.chronicleonline.com/news/local/our-history-flying-saucers-in-citrus-county/article_7d14ee06-c758-5700-8fb8-75031ff49451.html",
-      "domain": "chronicleonline.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "chronicleonline.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://bloximages.newyork1.vip.townnews.com/chronicleonline.com/content/tncms/assets/v3/editorial/1/14/114e2c0e-e777-5f5a-a2e2-90f0044fcad5/666c3a36c8448.image.jpg?crop=444%2C445%2C0%2C41",
-      "tone": -2.5
-    },
-    {
-      "id": "0ec85165cfc2",
-      "title": "Fetterman on Trump release of alien files :  I think that fantastic",
-      "url": "https://local21news.com/news/local/senator-john-fetterman-on-president-donald-trumps-release-of-alien-files-i-think-thats-fantastic",
-      "domain": "local21news.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "local21news.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://local21news.com/resources/media2/16x9/6000/1320/0x174/90/3bb05ea5-b82e-44ee-b2ce-91d2525a2671-GettyImages22609281391.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "07fc9d64e0e5",
-      "title": "What might we learn from UFO files Trump told the government to release ?",
-      "url": "https://upnorthlive.com/news/nation-world/what-might-we-learn-from-ufo-files-trump-told-the-government-to-release-aliens-extraterrestrial-life-earth-obama-space-science-uap-aerospace-safety",
-      "domain": "upnorthlive.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "upnorthlive.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://upnorthlive.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "7a9f2ac1903d",
-      "title": "Why has alien  buzz  ramped up ? Chicago astrophysicist , UFO researcher explain – NBC Chicago",
-      "url": "https://www.nbcchicago.com/news/local/why-has-alien-buzz-ramped-up-chicago-astrophysicist-ufo-researcher-explain/3897411/",
-      "domain": "nbcchicago.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "nbcchicago.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://media.nbcchicago.com/2025/04/tlmd-espacio-nasa-GettyImages-1241857240-copy.jpg?quality=85&strip=all",
-      "tone": -2.5
-    },
-    {
-      "id": "72c3cd4016f3",
-      "title": "What might we learn from UFO files Trump told the government to release ?",
-      "url": "https://wach.com/news/nation-world/what-might-we-learn-from-ufo-files-trump-told-the-government-to-release-aliens-extraterrestrial-life-earth-obama-space-science-uap-aerospace-safety",
-      "domain": "wach.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "wach.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://wach.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "915f543c56e1",
-      "title": "What might we learn from UFO files Trump told the government to release ?",
-      "url": "https://wgme.com/news/nation-world/what-might-we-learn-from-ufo-files-trump-told-the-government-to-release-aliens-extraterrestrial-life-earth-obama-space-science-uap-aerospace-safety",
-      "domain": "wgme.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "wgme.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://wgme.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
-      "tone": -2.5
-    },
-    {
-      "id": "710ae82a25a1",
-      "title": "What might we learn from UFO files Trump told the government to release ?",
-      "url": "https://wlos.com/news/nation-world/what-might-we-learn-from-ufo-files-trump-told-the-government-to-release-aliens-extraterrestrial-life-earth-obama-space-science-uap-aerospace-safety",
-      "domain": "wlos.com",
-      "publishedAt": "2026-03-31T13:10:07.439Z",
-      "language": "English",
-      "sourceName": "wlos.com (United States)",
-      "country": "United States",
-      "imageUrl": "https://wlos.com/resources/media2/16x9/987/1320/0x162/90/399ef3a6-34a7-4dd0-b52f-3e53710ef5b9-7201347.jpg",
       "tone": -2.5
     }
   ]

@@ -1,8 +1,63 @@
 {
-  "generatedAt": "2026-05-19T12:54:49.298Z",
+  "generatedAt": "2026-05-27T13:03:26.429Z",
   "queries": 8,
-  "totalResults": 199,
+  "totalResults": 205,
   "articles": [
+    {
+      "id": "e81395371bb8",
+      "title": "Australian Women's Hockey team edge India 2",
+      "description": "The four-match friendly series between the Indian and Australian Women's Hockey Teams commenced on Tuesday with a close encounter that saw Australia secure a narrow 2-1 victory in Perth.",
+      "content": "New Delhi [India], May 26 (ANI): The four-match friendly series between the Indian and Australian Women's Hockey Teams commenced on Tuesday with a close encounter that saw Australia secure a narrow 2-1 victory in Perth.\nIndia struck first in the open... [1394 chars]",
+      "url": "https://www.tribuneindia.com/news/sports/australian-womens-hockey-team-edge-india-2-1-in-opening-match-of-friendly-series/",
+      "imageUrl": "https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYTQ0ZTMzM2EwLTU5MTItMTFmMS1hZmFlLTJkNzNlMTMwYzExYi5qcGc=",
+      "publishedAt": "2026-05-26T14:50:33Z",
+      "sourceName": "The Tribune",
+      "sourceUrl": "https://www.tribuneindia.com"
+    },
+    {
+      "id": "102f3641d817",
+      "title": "Forgotten 1940s Book Reignites Debate Over First UFO Narrative as Flying Saucers Capture America’s Imagination",
+      "description": "The modern UFO phenomenon is often traced to dramatic 1947 sightings, but a deeper look into media history reveals a surprising contender for the earliest “flying saucer book” ever pushed into the public spotlight. At the center of it all is a forgotten work by R. DeWitt Miller and a radio-driven media storm that helped",
+      "content": "The modern UFO phenomenon is often traced to dramatic 1947 sightings, but a deeper look into media history reveals a surprising contender for the earliest “flying saucer book” ever pushed into the public spotlight. At the center of it all is a forgot... [6628 chars]",
+      "url": "https://usaherald.com/forgotten-1940s-book-reignites-debate-over-first-ufo-narrative-as-flying-saucers-capture-americas-imagination/",
+      "imageUrl": "https://usaherald.com/wp-content/uploads/2017/09/usa_favicon32.png",
+      "publishedAt": "2026-05-25T10:41:23Z",
+      "sourceName": "USA Herald",
+      "sourceUrl": "https://usaherald.com"
+    },
+    {
+      "id": "1d84df879b3d",
+      "title": "EXPOSED: Declassified FBI Files Confirm Nazi “Flying Saucer” Existed Years Before Modern UFO Hysteria",
+      "description": "Uncover the mystery of World War II Nazi secret aircraft programs and flying saucer sightings detailed in recently declassified FBI files.",
+      "content": "Declassified FBI documents released under the Trump administration’s UFO transparency initiative contain a detailed account from a man who claimed to have observed a secret Nazi flying saucer during World War II. According to the FBI memo, dated June... [5503 chars]",
+      "url": "https://www.activistpost.com/exposed-declassified-fbi-files-confirm-nazi-flying-saucer-existed-years-before-modern-ufo-hysteria/",
+      "imageUrl": "https://www.activistpost.com/wp-content/uploads/2026/05/fbi-memo-nazi-flying-saucer-declassified-files-1412-original.jpg",
+      "publishedAt": "2026-05-23T09:57:00Z",
+      "sourceName": "Activist Post",
+      "sourceUrl": "https://www.activistpost.com"
+    },
+    {
+      "id": "a80d60665643",
+      "title": "Pentagon UFO Dump Includes Apollo Mystery Lights",
+      "description": "The newly declassified files are part of the Trump administration's ongoing transparency initiative known as PURSUE — the Presidential Unsealing and Reporting System for UAP Encounters — which has already generated significant public interest.",
+      "content": "The War Department's latest release of UFO files on Friday included audio of the Apollo 12 crew describing mysterious \"streaks of light\" while trying to sleep in space, and video of a U.S. fighter jet shooting down a mysterious object flying over Mic... [2679 chars]",
+      "url": "https://www.newsmax.com/us/pentagon-ufo-release/2026/05/22/id/1257230/",
+      "imageUrl": "https://www.newsmax.com/CMSPages/GetFile.aspx?guid=a7dc2a90-160a-4877-997c-85da5edbcfaf&SiteName=Newsmax",
+      "publishedAt": "2026-05-22T18:47:24Z",
+      "sourceName": "Newsmax",
+      "sourceUrl": "https://www.newsmax.com"
+    },
+    {
+      "id": "18583f5633ca",
+      "title": "Mysterious roof poops lead California man to mountain lion encounter",
+      "description": "A California man who noticed mysterious feces on the roof of his guest house ended up in a close encounter with the source -- a mountain lion.",
+      "content": "May 20 (UPI) -- A California man who noticed mysterious feces on the roof of his guest house ended up in a close encounter with the source -- a mountain lion.\nBill Dabney said he spotted the unusual droppings on the roof of his guest house in Pasaden... [1149 chars]",
+      "url": "https://www.upi.com/Odd_News/2026/05/20/mountain-lion-Pasadena-California-poop/9581779293846/",
+      "imageUrl": "https://cdnph.upi.com/ph/st/th/9581779293846/2026/i/17792939897054/v1.5/Mysterious-roof-poops-lead-California-man-to-mountain-lion-encounter.jpg?lg=5",
+      "publishedAt": "2026-05-20T16:20:09Z",
+      "sourceName": "UPI News",
+      "sourceUrl": "https://www.upi.com"
+    },
     {
       "id": "381968a2cb08",
       "title": "Asteroid the size of a cricket pitch will fly past Earth on Monday. Are we at risk?",
@@ -123,6 +178,17 @@
       "publishedAt": "2026-05-13T11:08:13Z",
       "sourceName": "Mashable India",
       "sourceUrl": "https://in.mashable.com"
+    },
+    {
+      "id": "bf91ad1d84d6",
+      "title": "Newly Discovered Asteroid 2026 JH2 Is Set To Have A Close Encounter With Earth Today, At A Distance Of Just 0.00064 AU",
+      "description": "Discovered a few days ago, the asteroid will soon be visible in the sky, reaching magnitude 11.5 on its very close approach to the Earth.",
+      "content": "Astronomers around the world, as well as automated systems constantly scanning the skies, are always on the lookout for potentially-hazardous objects making their way through our Solar System. As well as looking for interesting objects in the sky, th... [1569 chars]",
+      "url": "https://www.iflscience.com/newly-discovered-asteroid-2026-jh2-is-about-to-have-a-very-close-encounter-with-earth-at-a-distance-of-just-000064-au-83481",
+      "imageUrl": "https://assets.iflscience.com/assets/articleNo/83481/aImg/90491/near-earth-asteroid-2026-jh2-meta.png",
+      "publishedAt": "2026-05-12T16:18:44Z",
+      "sourceName": "IFLScience",
+      "sourceUrl": "https://www.iflscience.com"
     },
     {
       "id": "913923a46c37",
