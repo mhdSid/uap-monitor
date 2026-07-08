@@ -1,0 +1,53 @@
+# UAP Monitor
+
+> Open-source geospatial intelligence platform aggregating 200,000+ UAP/UFO sighting reports from 15+ sources spanning 70 AD to present, cross-referenced against environmental datasets: geomagnetic activity (GFZ Potsdam Kp index), seismic events (USGS), NASA CNEOS fireballs, and nuclear facilities. All data is open, all methodology is published, and every statistical finding ships with reproducible test code.
+
+Key facts:
+
+- The platform publicly self-corrected its own headline finding: an initial ~12x nuclear-facility clustering claim reversed to 0.42x (below baseline) after population-density controls were applied. The retraction was published openly.
+- Statistical hypothesis testing across the full dataset includes: fireball temporal coincidence (1.87x mean daily sightings on NASA fireball days, Cohen's d = 0.731), geomagnetic storm suppression (0.70x on Kp >= 5 days), weekend observer bias (45.3% of sightings Fri-Sun vs 42.9% expected), and summer seasonality (July peak).
+- Sources include NUFORC, Hatch UDB, GEIPAN (CNES, France), researcher chronologies (Eberhart, Johnson), Russian historical archives, NASA CNEOS, USGS, GFZ Potsdam, GDELT, GNews, Reddit, and X/Twitter.
+- Non-commercial. No accounts, no tracking cookies. Credibility scores are algorithmically derived and do not constitute endorsement of any claim.
+
+## Pages
+
+- [Monitor](https://uapmonitor.org/): Interactive global map and database of all sighting reports with credibility scoring
+- [Research](https://uapmonitor.org/research): Statistical methodology — hypotheses tested against the full dataset with effect sizes, sample counts, and links to the exact test code
+- [Geomagnetic](https://uapmonitor.org/geomagnetic): Kp index correlation and overrepresentation analysis
+- [Seismic](https://uapmonitor.org/seismic): Earthquake proximity and earthquake-lights candidate analysis
+- [Intel](https://uapmonitor.org/intel): Real-time UAP news feed aggregating GDELT, GNews, X, and Reddit
+
+Note: pages are a client-rendered single-page application. For machine-readable content, use the data endpoints and repository below.
+
+## Data
+
+All sighting and correlation data is open and served as static JSON. Each manifest lists per-year chunk files that carry the actual records; large files may resolve to a chunk index (`__chunked: true`) listing sequential chunk files at the same path prefix.
+
+Sighting corpus (~204,000 reports total):
+
+- [NUFORC manifest](https://uapmonitor.org/data/nuforc-manifest.json): 155,710 National UFO Reporting Center reports (1950-present), per-year chunk files
+- [Chronology manifest](https://uapmonitor.org/data/chronology-manifest.json): 28,228 researcher-chronology records (Eberhart, Johnson; 70 AD-present)
+- [Hatch UDB manifest](https://uapmonitor.org/data/hatch-manifest.json): 18,116 Larry Hatch U-DB catalog entries (1801-present)
+- [GEIPAN manifest](https://uapmonitor.org/data/geipan-manifest.json): 2,768 official French government case files (CNES/GEIPAN)
+- [Russian historical](https://uapmonitor.org/data/russian-historical.json): Declassified FBIS/CIA-referenced Russian archive sightings
+
+Correlation datasets:
+
+- [NASA fireballs](https://uapmonitor.org/data/nasa-fireballs.json): CNEOS fireball events
+- [Geomagnetic Kp](https://uapmonitor.org/data/geomagnetic-kp.json): Daily planetary Kp index history
+- [Earthquakes manifest](https://uapmonitor.org/data/earthquakes-manifest.json): M4.0+ global earthquakes, per-year files
+- [Nuclear facilities](https://uapmonitor.org/data/nuclear-facilities.json): Reactor, weapons lab, and test site locations
+
+Statistical results and news feed:
+
+- [Hypothesis results](https://uapmonitor.org/data/hypotheses.json): Structured output of all statistical tests with sample sizes and effect sizes
+- [GDELT](https://uapmonitor.org/data/gdelt-articles.json), [GNews](https://uapmonitor.org/data/gnews-articles.json), [Reddit](https://uapmonitor.org/data/reddit-articles.json), and [X/Twitter](https://uapmonitor.org/data/twitter-articles.json) real-time UAP news article feeds
+
+## Source Code
+
+- [Repository](https://github.com/mhdSid/uap-monitor): Full platform source, data pipeline, and hypothesis test runner
+- [Hypothesis results](https://raw.githubusercontent.com/mhdSid/uap-monitor/master/results/hypotheses.json): Structured JSON output of all statistical tests with sample sizes and effect sizes
+
+## Attribution
+
+Data may be freely used for research, analysis, journalism, or education. Attribution to UAP Monitor and the original data source is appreciated but not required. Contact: contact@uapmonitor.org

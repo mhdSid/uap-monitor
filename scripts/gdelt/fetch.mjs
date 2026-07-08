@@ -39,6 +39,19 @@ const TONE_BANDS = [
   { filter: 'tone<-5',           tone: -7,   label: 'very negative' }
 ]
 
+// ─── Rate-limit handling ────────────────────────────────────────────
+//
+// GDELT's DOC 2.0 API throttles aggressively and asks callers to space
+// queries ≥5s apart. Below that, bursts come back as HTTP 429. We pace
+// requests at REQUEST_DELAY_MS to avoid most 429s, and when one still
+// slips through we retry the same band with escalating backoff rather
+// than dropping its slice (the old behaviour silently lost a whole
+// tone-band × window on any 429).
+
+const REQUEST_DELAY_MS = 5000
+const RATE_LIMIT_RETRIES = 3
+const RATE_LIMIT_BACKOFF_MS = 15000
+
 // ─── CLI args ───────────────────────────────────────────────────────
 
 function parseArgs () {
@@ -120,6 +133,36 @@ function transformArticle (raw, bandTone) {
   }
 }
 
+// ─── Fetch with rate-limit retry ────────────────────────────────────
+
+function sleep (ms) {
+  return new Promise(r => setTimeout(r, ms))
+}
+
+function isRateLimit (err) {
+  return err?.response?.status === 429 || /\b429\b/.test(err?.message || '')
+}
+
+// Fetch one tone-band slice, retrying on 429 with escalating backoff.
+// Non-429 errors and exhausted retries propagate to the caller, which
+// logs and skips just that slice.
+async function fetchBandWithRetry (client, params, label) {
+  for (let attempt = 0; attempt <= RATE_LIMIT_RETRIES; attempt++) {
+    try {
+      const response = await client.getArticles(params)
+      return response.articles || []
+    } catch (err) {
+      if (isRateLimit(err) && attempt < RATE_LIMIT_RETRIES) {
+        const wait = RATE_LIMIT_BACKOFF_MS * (attempt + 1)
+        console.log(`${label} 429 rate-limited — backing off ${wait / 1000}s (retry ${attempt + 1}/${RATE_LIMIT_RETRIES})`)
+        await sleep(wait)
+        continue
+      }
+      throw err
+    }
+  }
+}
+
 // ─── Main ───────────────────────────────────────────────────────────
 
 async function main () {
@@ -153,17 +196,15 @@ async function main () {
       const query = `${baseQuery} ${band.filter} sourcelang:english`
       const label = `  [${band.label}]`
 
-      // eslint-disable-next-line
-      let rawArticles = []
+      let rawArticles
       try {
-        const response = await client.getArticles({
+        rawArticles = await fetchBandWithRetry(client, {
           query,
           startdatetime: win.startdatetime,
           enddatetime: win.enddatetime,
           maxrecords: 250,
           sort: 'datedesc'
-        })
-        rawArticles = response.articles || []
+        }, label)
       } catch (err) {
         console.log(`${label} Error: ${err.message} — skipping`)
         continue
@@ -185,8 +226,8 @@ async function main () {
 
       console.log(`${label} ${rawArticles.length} fetched, ${added} new${noise > 0 ? `, ${noise} noise` : ''}${nonEn > 0 ? `, ${nonEn} non-en` : ''}`)
 
-      // Courtesy delay between requests
-      await new Promise(r => setTimeout(r, 1200))
+      // Courtesy delay between requests — GDELT asks for ≥5s spacing
+      await sleep(REQUEST_DELAY_MS)
     }
   }
 

@@ -9,7 +9,8 @@
  *   fetch → transform → noise filter → dedupe → merge __sources → copy public/data
  *
  * Usage:
- *   node scripts/reddit/fetch.mjs --out public/data/reddit-articles.json
+ *   REDDIT_CLIENT_ID=xxx REDDIT_CLIENT_SECRET=yyy \
+ *     node scripts/reddit/fetch.mjs --out public/data/reddit-articles.json
  *
  * Options:
  *   --out     Output file path (required)
@@ -17,8 +18,12 @@
  *   --perq    Max results per subreddit/query pair (default: 50, max practical: 100)
  *
  * Notes:
- *   - Uses Reddit public JSON endpoints (no auth required)
- *   - Set a descriptive User-Agent to avoid request rejection
+ *   - Requires Reddit OAuth. As of Reddit's 2023 API changes, unauthenticated
+ *     .json endpoints return HTTP 403. Register a "script" app at
+ *     https://www.reddit.com/prefs/apps to get a client id + secret, then set
+ *     REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET. We use the app-only
+ *     (client_credentials) grant, which is read-only and needs no user password.
+ *   - A descriptive User-Agent is required by Reddit on every request.
  */
 
 import { writeFileSync, mkdirSync, copyFileSync } from 'node:fs'
@@ -48,6 +53,47 @@ const REDDIT_SEARCHES = [
 ]
 
 const USER_AGENT = 'uapmonitor/1.0 (reddit ingestion; contact: hello@uapmonitor.org)'
+
+// ─── OAuth ──────────────────────────────────────────────────────────
+//
+// Reddit blocks unauthenticated .json access (HTTP 403). We use the
+// app-only "client_credentials" grant: exchange a registered app's
+// id + secret for a read-only bearer token, then query oauth.reddit.com.
+
+const REDDIT_CLIENT_ID = process.env.REDDIT_CLIENT_ID
+const REDDIT_CLIENT_SECRET = process.env.REDDIT_CLIENT_SECRET
+const TOKEN_URL = 'https://www.reddit.com/api/v1/access_token'
+const OAUTH_BASE = 'https://oauth.reddit.com'
+
+async function getRedditToken () {
+  if (!REDDIT_CLIENT_ID || !REDDIT_CLIENT_SECRET) {
+    throw new Error(
+      'Reddit OAuth requires REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET. ' +
+      'Register a "script" app at https://www.reddit.com/prefs/apps'
+    )
+  }
+
+  const basic = Buffer.from(`${REDDIT_CLIENT_ID}:${REDDIT_CLIENT_SECRET}`).toString('base64')
+  const res = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'User-Agent': USER_AGENT
+    },
+    body: 'grant_type=client_credentials'
+  })
+
+  if (!res.ok) {
+    throw new Error(`Reddit token request failed: HTTP ${res.status} — check client id/secret`)
+  }
+
+  const json = await res.json()
+  if (!json.access_token) {
+    throw new Error('Reddit token response missing access_token')
+  }
+  return json.access_token
+}
 
 // ─── CLI ────────────────────────────────────────────────────────────
 
@@ -166,7 +212,7 @@ function isNoiseRedditPost (article) {
 
 // ─── Fetch ──────────────────────────────────────────────────────────
 
-async function fetchSearch (subreddit, query, limit) {
+async function fetchSearch (subreddit, query, limit, token) {
   const params = new URLSearchParams({
     q: query,
     restrict_sr: '1',
@@ -176,7 +222,9 @@ async function fetchSearch (subreddit, query, limit) {
     raw_json: '1'
   })
 
-  const url = `https://www.reddit.com/r/${subreddit}/search.json?${params.toString()}`
+  // oauth.reddit.com mirrors the public search endpoint but requires a bearer
+  // token. The path is `/search` (no `.json` suffix) under the OAuth host.
+  const url = `${OAUTH_BASE}/r/${subreddit}/search?${params.toString()}`
 
   console.log(`\n── Search: r/${subreddit} → ${query}`)
 
@@ -186,8 +234,9 @@ async function fetchSearch (subreddit, query, limit) {
   try {
     const res = await fetch(url, {
       headers: {
+        Authorization: `Bearer ${token}`,
         'User-Agent': USER_AGENT,
-        'Accept': 'application/json'
+        Accept: 'application/json'
       }
     })
 
@@ -217,13 +266,17 @@ async function main () {
   console.log('Limit:     ' + opts.limit)
   console.log()
 
+  console.log('Authenticating with Reddit (app-only OAuth)...')
+  const token = await getRedditToken()
+  console.log('✓ Token acquired\n')
+
   const seen = new Set()
   const allArticles = []
 
   for (const search of REDDIT_SEARCHES) {
     if (allArticles.length >= opts.limit) break
 
-    const posts = await fetchSearch(search.subreddit, search.query, opts.perq)
+    const posts = await fetchSearch(search.subreddit, search.query, opts.perq, token)
 
     let added = 0
     let noise = 0

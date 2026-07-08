@@ -80,7 +80,13 @@ async function getPuppeteerPage () {
     args: launchArgs
   })
   puppeteerPage = await puppeteerBrowser.newPage()
-  await puppeteerPage.setUserAgent(USER_AGENT)
+  // Only override Chrome's real UA if a genuine one was configured. Sending the
+  // literal placeholder as the User-Agent is an instant WAF red flag — better to
+  // let the (visible) Chrome instance use its own legitimate UA string. Mirrors
+  // the CF_CLEARANCE guard in buildFetchOptions().
+  if (USER_AGENT && USER_AGENT !== "PASTE_BROWSER_USER_AGENT_HERE") {
+    await puppeteerPage.setUserAgent(USER_AGENT)
+  }
   await puppeteerPage.setExtraHTTPHeaders({
     "Accept-Language": "en-US,en;q=0.9",
     Referer: "https://nuforc.org/subndx/?id=all"
