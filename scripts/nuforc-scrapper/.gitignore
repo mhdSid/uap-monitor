@@ -2,3 +2,5 @@ nuforc_raw_cache.json
 nuforc_output.json
 nuforc_*.json
 !schemas/*.json
+.puppeteer-profile/
+.chrome-debug-profile/

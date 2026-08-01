@@ -4,6 +4,7 @@ import { useNuforc } from './use-nuforc'
 import { useHatchUdb } from './use-hatch-udb'
 import { useGeipan } from './use-geipan'
 import { useChronology } from './use-chronology'
+import { useDowPursue } from './use-dow-pursue'
 import { DATA_SOURCE_DESCRIPTIONS } from '@/data/strings'
 import { useGnews } from './use-gnews'
 import { useGdelt } from './use-gdelt'
@@ -199,6 +200,15 @@ const SOURCE_REGISTRY: DataSource[] = [
     dataLabel: 'JSON'
   },
   {
+    id: DataSourceId.DOW_PURSUE,
+    label: 'DoW / PURSUE',
+    status: DataSourceStatus.SYNCING,
+    url: 'https://www.war.gov/ufo/',
+    description: DATA_SOURCE_DESCRIPTIONS.DOW_PURSUE,
+    dataUrl: '/data/dow-pursue-manifest.json',
+    dataLabel: 'JSON'
+  },
+  {
     id: DataSourceId.AARO,
     label: 'AARO',
     status: DataSourceStatus.DISABLED,
@@ -240,6 +250,7 @@ export function useDataSource () {
   const hatch = useHatchUdb()
   const geipan = useGeipan()
   const chronology = useChronology()
+  const dowPursue = useDowPursue()
   const gnews = useGnews()
   const gdelt = useGdelt()
   const twitter = useTwitter()
@@ -258,6 +269,9 @@ export function useDataSource () {
       chronology.loadManifest().then((m) => {
         // Update all chronology sub-source statuses based on manifest load
         updateSourceStatus(DataSourceId.CHRONOLOGY, m !== null && m.totalRecords > 0)
+      }),
+      dowPursue.loadManifest().then((m) => {
+        updateSourceStatus(DataSourceId.DOW_PURSUE, m !== null && m.totalRecords > 0)
       })
     ])
   }
@@ -275,11 +289,12 @@ export function useDataSource () {
    * Fetch a year range from ALL active sources, merge results.
    */
   async function fetchYearRange (from: number, to: number): Promise<Sighting[]> {
-    const [nuforcData, hatchData, geipanData, chronData] = await Promise.all([
+    const [nuforcData, hatchData, geipanData, chronData, dowData] = await Promise.all([
       nuforc.loadYearRange(from, to),
       hatch.loadYearRange(from, to),
       geipan.loadYearRange(from, to),
-      chronology.loadYearRange(from, to)
+      chronology.loadYearRange(from, to),
+      dowPursue.loadYearRange(from, to)
     ])
 
     updateSourceStatus(DataSourceId.NUFORC, nuforcData.length > 0)
@@ -287,8 +302,8 @@ export function useDataSource () {
     updateSourceStatus(DataSourceId.GEIPAN, geipanData.length > 0)
 
     return mergeSorted(
-      mergeSorted(mergeSorted(nuforcData, hatchData), geipanData),
-      chronData
+      mergeSorted(mergeSorted(mergeSorted(nuforcData, hatchData), geipanData), chronData),
+      dowData
     )
   }
 
@@ -305,19 +320,22 @@ export function useDataSource () {
     const hatchPromise = hatch.loadYearRange(from, to)
     const geipanPromise = geipan.loadYearRange(from, to)
     const chronPromise = chronology.loadYearRange(from, to)
+    const dowPromise = dowPursue.loadYearRange(from, to)
 
     let nuforcAccumulated: Sighting[] = []
     let hatchData: Sighting[] = []
     let geipanData: Sighting[] = []
     let chronData: Sighting[] = []
+    let dowData: Sighting[] = []
     let hatchDone = false
     let geipanDone = false
     let chronDone = false
+    let dowDone = false
 
     const emitMerged = (): void => {
       const merged = mergeSorted(
-        mergeSorted(mergeSorted(nuforcAccumulated, hatchData), geipanData),
-        chronData
+        mergeSorted(mergeSorted(mergeSorted(nuforcAccumulated, hatchData), geipanData), chronData),
+        dowData
       )
       onChunk(merged)
     }
@@ -350,6 +368,15 @@ export function useDataSource () {
       chronDone = true
     })
 
+    dowPromise.then((data) => {
+      dowData = data
+      dowDone = true
+      updateSourceStatus(DataSourceId.DOW_PURSUE, data.length > 0)
+      if (nuforcAccumulated.length > 0) emitMerged()
+    }).catch(() => {
+      dowDone = true
+    })
+
     // Progressive NUFORC loading — each chunk triggers a merge with whatever else has loaded
     const nuforcResult = await nuforc.loadProgressive(from, to, (partial) => {
       nuforcAccumulated = partial
@@ -362,10 +389,11 @@ export function useDataSource () {
     if (!hatchDone) hatchData = await hatchPromise
     if (!geipanDone) geipanData = await geipanPromise
     if (!chronDone) chronData = await chronPromise
+    if (!dowDone) dowData = await dowPromise
 
     return mergeSorted(
-      mergeSorted(mergeSorted(nuforcResult, hatchData), geipanData),
-      chronData
+      mergeSorted(mergeSorted(mergeSorted(nuforcResult, hatchData), geipanData), chronData),
+      dowData
     )
   }
 
@@ -377,8 +405,9 @@ export function useDataSource () {
     const hatchYears = hatch.getAvailableYears()
     const geipanYears = geipan.getAvailableYears()
     const chronYears = chronology.getAvailableYears()
+    const dowYears = dowPursue.getAvailableYears()
 
-    const yearSet = new Set<number>([...nuforcYears, ...hatchYears, ...geipanYears, ...chronYears])
+    const yearSet = new Set<number>([...nuforcYears, ...hatchYears, ...geipanYears, ...chronYears, ...dowYears])
     return [...yearSet].sort((a, b) => b - a)
   }
 
@@ -386,7 +415,7 @@ export function useDataSource () {
    * Total record count across all sources.
    */
   function getTotalCount (): number {
-    return nuforc.getTotalCount() + hatch.getTotalCount() + geipan.getTotalCount() + chronology.getTotalCount() + gnews.getCount() + gdelt.getCount() + twitter.getCount() + reddit.getCount()
+    return nuforc.getTotalCount() + hatch.getTotalCount() + geipan.getTotalCount() + chronology.getTotalCount() + dowPursue.getTotalCount() + gnews.getCount() + gdelt.getCount() + twitter.getCount() + reddit.getCount()
   }
 
   /**
@@ -394,7 +423,7 @@ export function useDataSource () {
    */
   function getYearCounts (): Map<number, number> {
     const merged = new Map<number, number>()
-    for (const source of [nuforc.getYearCounts(), hatch.getYearCounts(), geipan.getYearCounts(), chronology.getYearCounts()]) {
+    for (const source of [nuforc.getYearCounts(), hatch.getYearCounts(), geipan.getYearCounts(), chronology.getYearCounts(), dowPursue.getYearCounts()]) {
       for (const [year, count] of source) {
         merged.set(year, (merged.get(year) || 0) + count)
       }
@@ -418,7 +447,8 @@ export function useDataSource () {
     nuforc,
     hatch,
     geipan,
-    chronology
+    chronology,
+    dowPursue
   }
 }
 

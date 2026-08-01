@@ -19,7 +19,8 @@ const SOURCE_CHIPS: { id: DataSourceId; label: string; color: string }[] = [
   { id: DataSourceId.NUFORC,     label: DataSourceId.NUFORC,     color: colors.sourceNuforc },
   { id: DataSourceId.HATCH_UDB,  label: DataSourceId.HATCH_UDB,  color: colors.sourceHatch },
   { id: DataSourceId.CHRONOLOGY, label: DataSourceId.CHRONOLOGY, color: colors.sourceChronology },
-  { id: DataSourceId.GEIPAN,     label: DataSourceId.GEIPAN,     color: colors.sourceGeipan }
+  { id: DataSourceId.GEIPAN,     label: DataSourceId.GEIPAN,     color: colors.sourceGeipan },
+  { id: DataSourceId.DOW_PURSUE, label: DataSourceId.DOW_PURSUE, color: colors.sourceDowPursue }
 ]
 
 // ─── Option builders ────────────────────────────────────────────────

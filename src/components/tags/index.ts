@@ -30,6 +30,7 @@ const TAG_STYLES: Record<TagVariant, TagStyle> = {
   [TagVariant.SOURCE_CHRONOLOGY]: { color: 'var(--color-amber)', bg: 'var(--c-amber-400-12)', border: 'var(--c-amber-400-20)' },
   [TagVariant.SOURCE_EXPERIENCER]: { color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.12)', border: 'rgba(167, 139, 250, 0.2)' },
   [TagVariant.SOURCE_GEIPAN]: { color: 'var(--c-pink-400)', bg: 'var(--c-pink-400-12)', border: 'var(--c-pink-400-20)' },
+  [TagVariant.SOURCE_DOW_PURSUE]: { color: 'var(--c-blue-400)', bg: 'var(--c-blue-400-12)', border: 'var(--c-blue-400-20)' },
   [TagVariant.SOURCE_NEWS]: { color: 'var(--color-green)', bg: 'var(--c-green-400-08)', border: 'var(--c-green-400-16)' },
   [TagVariant.SOURCE_GDELT]: { color: 'var(--color-amber)', bg: 'transparent', border: 'var(--color-amber)' },
   [TagVariant.SOURCE_GNEWS]: { color: 'var(--color-cyan)', bg: 'transparent', border: 'var(--color-cyan)' },
@@ -108,7 +109,8 @@ const SOURCE_VARIANT: Record<string, TagVariant> = {
   [DataSourceId.HATCH_UDB]: TagVariant.SOURCE_HATCH,
   [DataSourceId.CHRONOLOGY]: TagVariant.SOURCE_CHRONOLOGY,
   [DataSourceId.EXPERIENCER]: TagVariant.SOURCE_EXPERIENCER,
-  [DataSourceId.GEIPAN]: TagVariant.SOURCE_GEIPAN
+  [DataSourceId.GEIPAN]: TagVariant.SOURCE_GEIPAN,
+  [DataSourceId.DOW_PURSUE]: TagVariant.SOURCE_DOW_PURSUE
 }
 
 export function resolveSourceVariant (sourceId: string): TagVariant {

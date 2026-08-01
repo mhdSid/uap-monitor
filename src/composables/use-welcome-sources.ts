@@ -87,6 +87,7 @@ export function useDeriveWelcomeData (params: {
   hatch: ManifestSource
   geipan: ManifestSource
   chronology: ManifestSource
+  dowPursue: ManifestSource
   chronologyManifest: ChronologyManifest | null
   gdeltCollection: GdeltCollection | null
   gnewsCollection: GnewsCollection | null
@@ -100,6 +101,7 @@ export function useDeriveWelcomeData (params: {
     hatch,
     geipan,
     chronology,
+    dowPursue,
     chronologyManifest,
     gdeltCollection,
     gnewsCollection,
@@ -115,13 +117,14 @@ export function useDeriveWelcomeData (params: {
     ...nuforc.getAvailableYears(),
     ...hatch.getAvailableYears(),
     ...geipan.getAvailableYears(),
-    ...chronology.getAvailableYears()
+    ...chronology.getAvailableYears(),
+    ...dowPursue.getAvailableYears()
   ]
 
   const oldestYear = allYears.length > 0 ? Math.min(...allYears) : 1974
   const timespan = `${formatYear(oldestYear)}–present`
 
-  const totalRecords = nuforc.getTotalCount() + hatch.getTotalCount() + geipan.getTotalCount() + chronology.getTotalCount()
+  const totalRecords = nuforc.getTotalCount() + hatch.getTotalCount() + geipan.getTotalCount() + chronology.getTotalCount() + dowPursue.getTotalCount()
   const records = totalRecords > 0 ? formatRecordCount(totalRecords) : '230,000+'
 
   const subSourceCount = chronologyManifest
@@ -133,6 +136,7 @@ export function useDeriveWelcomeData (params: {
     (hatch.getTotalCount() > 0 ? 1 : 0) +
     (geipan.getTotalCount() > 0 ? 1 : 0) +
     subSourceCount +
+    (dowPursue.getTotalCount() > 0 ? 1 : 0) +
     (gdeltCollection != null ? 1 : 0) +
     (gnewsCollection != null ? 1 : 0) +
     (twitterCollection != null ? 1 : 0) +
@@ -206,6 +210,15 @@ export function useDeriveWelcomeData (params: {
       })
     }
   }
+
+  const dowCount = dowPursue.getTotalCount()
+  const dowYears = dowPursue.getAvailableYears()
+  sourceList.push({
+    name: 'DoW / PURSUE',
+    records: dowCount > 0 ? formatSourceCount(dowCount) : '—',
+    period: dowYears.length > 0 ? yearRangeStr(dowYears) : '1944–2023',
+    tier: 'high'
+  })
 
   const gdeltCount = gdeltCollection?.totalResults
   sourceList.push({

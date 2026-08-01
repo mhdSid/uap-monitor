@@ -23,6 +23,7 @@ import {
   useHatchUdb,
   useGeipan,
   useChronology,
+  useDowPursue,
   useGdelt,
   useGnews,
   useTwitter,
@@ -102,6 +103,7 @@ export class WelcomeModal {
     const hatch = useHatchUdb()
     const geipan = useGeipan()
     const chronology = useChronology()
+    const dowPursue = useDowPursue()
     const gdelt = useGdelt()
     const gnews = useGnews()
     const twitter = useTwitter()
@@ -114,6 +116,7 @@ export class WelcomeModal {
       hatch.loadManifest(),
       geipan.loadManifest(),
       chronology.loadManifest(),
+      dowPursue.loadManifest(),
       gdelt.load(),
       gnews.load(),
       twitter.load(),
@@ -130,6 +133,7 @@ export class WelcomeModal {
       hatch,
       geipan,
       chronology,
+      dowPursue,
       chronologyManifest,
       gdeltCollection: gdelt.getCollection(),
       gnewsCollection: gnews.getCollection(),

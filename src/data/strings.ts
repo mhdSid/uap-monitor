@@ -363,6 +363,7 @@ export const DATA_SOURCE_DESCRIPTIONS = {
   NUCLEAR: 'Nuclear facilities worldwide — reactors, weapons labs, test sites, enrichment and reprocessing plants from IAEA, NRC, and public records',
   REDDIT: 'Reddit — public eyewitness posts and discussion threads from UAP/UFO communities',
   AARO: 'All-domain Anomaly Resolution Office — US DoD official UAP investigations',
+  DOW_PURSUE: 'US Department of War PURSUE — declassified government UAP records from DoW, State, FBI, and NASA (war.gov/UFO)',
   GEIPAN: 'French space agency UAP research unit — European sighting database',
   ENIGMA: 'International catalogue of UFO events and encounter classifications',
   CJK_SCRAPER: 'Custom scraper for Chinese, Japanese, and Korean UAP/UFO forums and news',
@@ -428,7 +429,9 @@ export const ERRORS = {
   HATCH_MANIFEST: 'Malformed Hatch UDB manifest',
   HATCH_LOAD: 'Failed to load Hatch UDB manifest',
   CHRONOLOGY_MANIFEST: 'Malformed chronology manifest',
-  CHRONOLOGY_LOAD: 'Failed to load chronology manifest'
+  CHRONOLOGY_LOAD: 'Failed to load chronology manifest',
+  DOW_PURSUE_MANIFEST: 'Malformed DoW PURSUE manifest',
+  DOW_PURSUE_LOAD: 'Failed to load DoW PURSUE manifest'
 } as const
 
 // ─── Historical highlights ──────────────────────────────────────────

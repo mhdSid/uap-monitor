@@ -1,0 +1,165 @@
+{
+  "generatedAt": "2026-08-01T13:38:57.593Z",
+  "totalRecords": 137,
+  "skippedRecords": 4,
+  "release": "PURSUE Release 01 (war.gov/UFO)",
+  "url": "https://www.war.gov/ufo/",
+  "agencies": {
+    "FBI": 40,
+    "Department of War": 75,
+    "NASA": 15,
+    "Department of State": 7
+  },
+  "types": {
+    "PDF": 95,
+    "VID": 28,
+    "IMG": 14
+  },
+  "years": {
+    "1945": {
+      "count": 1,
+      "file": "dow-pursue-1945.json",
+      "sizeKB": 1
+    },
+    "1947": {
+      "count": 2,
+      "file": "dow-pursue-1947.json",
+      "sizeKB": 2
+    },
+    "1948": {
+      "count": 2,
+      "file": "dow-pursue-1948.json",
+      "sizeKB": 2
+    },
+    "1950": {
+      "count": 1,
+      "file": "dow-pursue-1950.json",
+      "sizeKB": 1
+    },
+    "1952": {
+      "count": 1,
+      "file": "dow-pursue-1952.json",
+      "sizeKB": 1
+    },
+    "1955": {
+      "count": 1,
+      "file": "dow-pursue-1955.json",
+      "sizeKB": 1
+    },
+    "1957": {
+      "count": 1,
+      "file": "dow-pursue-1957.json",
+      "sizeKB": 1
+    },
+    "1958": {
+      "count": 1,
+      "file": "dow-pursue-1958.json",
+      "sizeKB": 1
+    },
+    "1963": {
+      "count": 1,
+      "file": "dow-pursue-1963.json",
+      "sizeKB": 1
+    },
+    "1965": {
+      "count": 2,
+      "file": "dow-pursue-1965.json",
+      "sizeKB": 3
+    },
+    "1969": {
+      "count": 7,
+      "file": "dow-pursue-1969.json",
+      "sizeKB": 11
+    },
+    "1972": {
+      "count": 2,
+      "file": "dow-pursue-1972.json",
+      "sizeKB": 4
+    },
+    "1973": {
+      "count": 3,
+      "file": "dow-pursue-1973.json",
+      "sizeKB": 6
+    },
+    "1985": {
+      "count": 1,
+      "file": "dow-pursue-1985.json",
+      "sizeKB": 2
+    },
+    "1994": {
+      "count": 1,
+      "file": "dow-pursue-1994.json",
+      "sizeKB": 2
+    },
+    "1996": {
+      "count": 1,
+      "file": "dow-pursue-1996.json",
+      "sizeKB": 1
+    },
+    "1999": {
+      "count": 1,
+      "file": "dow-pursue-1999.json",
+      "sizeKB": 1
+    },
+    "2000": {
+      "count": 1,
+      "file": "dow-pursue-2000.json",
+      "sizeKB": 1
+    },
+    "2001": {
+      "count": 1,
+      "file": "dow-pursue-2001.json",
+      "sizeKB": 1
+    },
+    "2003": {
+      "count": 1,
+      "file": "dow-pursue-2003.json",
+      "sizeKB": 1
+    },
+    "2004": {
+      "count": 1,
+      "file": "dow-pursue-2004.json",
+      "sizeKB": 1
+    },
+    "2013": {
+      "count": 1,
+      "file": "dow-pursue-2013.json",
+      "sizeKB": 2
+    },
+    "2016": {
+      "count": 1,
+      "file": "dow-pursue-2016.json",
+      "sizeKB": 2
+    },
+    "2020": {
+      "count": 25,
+      "file": "dow-pursue-2020.json",
+      "sizeKB": 45
+    },
+    "2022": {
+      "count": 10,
+      "file": "dow-pursue-2022.json",
+      "sizeKB": 17
+    },
+    "2023": {
+      "count": 16,
+      "file": "dow-pursue-2023.json",
+      "sizeKB": 26
+    },
+    "2024": {
+      "count": 13,
+      "file": "dow-pursue-2024.json",
+      "sizeKB": 23
+    },
+    "2025": {
+      "count": 36,
+      "file": "dow-pursue-2025.json",
+      "sizeKB": 62
+    },
+    "2026": {
+      "count": 2,
+      "file": "dow-pursue-2026.json",
+      "sizeKB": 3
+    }
+  }
+}

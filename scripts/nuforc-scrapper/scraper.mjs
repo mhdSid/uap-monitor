@@ -29,12 +29,20 @@ import * as cheerio from "cheerio"
 import fs from "fs/promises"
 import { createWriteStream, createReadStream } from "fs"
 import path from "path"
+import { fileURLToPath } from "url"
 import nodeFetch from "node-fetch"
 import { parser } from "stream-json"
 import { streamArray } from "stream-json/streamers/stream-array.js"
 import { streamValues } from "stream-json/streamers/stream-values.js"
 import { pick } from "stream-json/filters/pick.js"
 import { chain } from "stream-chain"
+
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
+// Persistent Chrome profile. A fresh (cookie-less) profile every launch reads
+// as a brand-new bot, which is what makes Cloudflare hold the "Performing
+// security verification" interstitial forever. Reusing one profile keeps the
+// cf_clearance cookie between runs and looks like a returning human.
+const PUPPETEER_PROFILE_DIR = path.join(SCRIPT_DIR, ".puppeteer-profile")
 
 // Lazy-load Tor agent only when --tor is used
 let torAgent = null
@@ -53,39 +61,88 @@ let puppeteerPage = null
 async function getPuppeteerPage () {
   if (puppeteerPage) return puppeteerPage
 
-  let puppeteer
-  try {
-    puppeteer = (await import("puppeteer")).default
-  } catch (e) {
-    // eslint-disable-next-line preserve-caught-error
-    throw new Error(
-      "Puppeteer not installed. Run: yarn add -D puppeteer  (or npm i -D puppeteer)"
-    )
-  }
+  // Two backends for getting a Chrome page past Cloudflare:
+  //
+  //   --connect  → ATTACH to a real Chrome you launched yourself with
+  //                --remote-debugging-port and solved the challenge in by hand.
+  //                Most robust: CF's own JS challenge only runs (shows the
+  //                spinner, then redirects) in a genuine, human-driven browser;
+  //                in a launched automation it never even starts. Once you've
+  //                cleared it manually, CF trusts the session's cf_clearance
+  //                cookie and won't re-challenge, so the walk just reuses it.
+  //
+  //   (default)  → LAUNCH via puppeteer-real-browser: rebrowser-puppeteer-core
+  //                (patches the CDP Runtime.enable leak) driving system Chrome,
+  //                with turnstile:true to auto-solve. Works only where CF still
+  //                lets automation solve the challenge.
+  if (opts.connect) {
+    const cdpUrl = typeof opts.connect === "string" ? opts.connect : DEFAULT_CDP_URL
+    let connect
+    try {
+      ({ connect } = await import("rebrowser-puppeteer-core"))
+    } catch {
+      throw new Error(
+        "rebrowser-puppeteer-core not installed. Run: yarn add -D puppeteer-real-browser"
+      )
+    }
+    log(`Puppeteer: attaching to existing Chrome at ${cdpUrl} ...`)
+    try {
+      puppeteerBrowser = await connect({ browserURL: cdpUrl, defaultViewport: null })
+    } catch (err) {
+      // eslint-disable-next-line preserve-caught-error
+      throw new Error(
+        `Could not attach to Chrome at ${cdpUrl}. Launch Chrome with remote ` +
+        `debugging first (see "yarn chrome:debug"), open nuforc.org, and solve ` +
+        `the Cloudflare challenge once. (${err.message})`
+      )
+    }
+    // Every tab in the default context shares the cf_clearance cookie, so any
+    // tab is already authenticated. Reuse an open nuforc tab if there is one,
+    // otherwise open a fresh (still-authenticated) tab.
+    const pages = await puppeteerBrowser.pages()
+    puppeteerPage =
+      pages.find(p => { try { return p.url().includes("nuforc.org") } catch { return false } }) ||
+      await puppeteerBrowser.newPage()
+    // Don't touch the UA — the real Chrome's own UA is exactly what CF issued
+    // the clearance against; overriding it would invalidate the session.
+  } else {
+    let connect
+    try {
+      ({ connect } = await import("puppeteer-real-browser"))
+    } catch {
+      throw new Error(
+        "puppeteer-real-browser not installed. Run: yarn add -D puppeteer-real-browser"
+      )
+    }
 
-  const launchArgs = [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-blink-features=AutomationControlled",
-    "--disable-dev-shm-usage"
-  ]
-  // Chrome doesn't pick up the node-fetch SocksProxyAgent — pass the proxy
-  // explicitly via launch arg so Chrome's own networking goes through Tor.
-  if (opts.tor) {
-    launchArgs.push("--proxy-server=socks5://127.0.0.1:9050")
-  }
+    const launchArgs = []
+    // Chrome needs the proxy passed explicitly. Keep the socks5:// scheme (the
+    // library's `proxy` option is http-oriented), so route Tor through args.
+    if (opts.tor) {
+      launchArgs.push("--proxy-server=socks5://127.0.0.1:9050")
+    }
 
-  puppeteerBrowser = await puppeteer.launch({
-    headless: false, //opts.puppeteerHeadless !== false,
-    args: launchArgs
-  })
-  puppeteerPage = await puppeteerBrowser.newPage()
-  // Only override Chrome's real UA if a genuine one was configured. Sending the
-  // literal placeholder as the User-Agent is an instant WAF red flag — better to
-  // let the (visible) Chrome instance use its own legitimate UA string. Mirrors
-  // the CF_CLEARANCE guard in buildFetchOptions().
-  if (USER_AGENT && USER_AGENT !== "PASTE_BROWSER_USER_AGENT_HERE") {
-    await puppeteerPage.setUserAgent(USER_AGENT)
+    const { browser, page } = await connect({
+      headless: false,
+      turnstile: true,
+      args: launchArgs,
+      // customConfig maps to chrome-launcher options. userDataDir persists the
+      // cf_clearance cookie across runs, so repeat runs skip the challenge.
+      customConfig: {
+        userDataDir: PUPPETEER_PROFILE_DIR
+      }
+    })
+
+    puppeteerBrowser = browser
+    puppeteerPage = page
+
+    // Only override Chrome's real UA if a genuine one was configured. Sending
+    // the literal placeholder is an instant WAF red flag — let the visible
+    // Chrome use its own legitimate UA. Mirrors the CF_CLEARANCE guard in
+    // buildFetchOptions().
+    if (USER_AGENT && USER_AGENT !== "PASTE_BROWSER_USER_AGENT_HERE") {
+      await puppeteerPage.setUserAgent(USER_AGENT)
+    }
   }
   await puppeteerPage.setExtraHTTPHeaders({
     "Accept-Language": "en-US,en;q=0.9",
@@ -93,17 +150,35 @@ async function getPuppeteerPage () {
   })
 
   // Warm up: hit the index page once so Cloudflare can issue clearance cookies
-  log("Puppeteer: warming up (solving Cloudflare challenge if present)...")
+  const warmupUrl = "https://nuforc.org/subndx/?id=all"
+  log(opts.connect
+    ? "Puppeteer: reusing attached Chrome session (solve the challenge in that window if it appears)..."
+    : "Puppeteer(real-browser): warming up (auto-solving Cloudflare Turnstile if present)...")
   try {
-    await puppeteerPage.goto("https://nuforc.org/subndx/?id=all", {
+    await puppeteerPage.goto(warmupUrl, {
       waitUntil: "domcontentloaded",
       timeout: 60000
     })
-    // Allow time for any JS challenge to complete
-    await new Promise(r => setTimeout(r, 8000))
-    log("Puppeteer: ready")
   } catch (err) {
+    // The interstitial redirect can interrupt navigation — the page may still
+    // hold the challenge HTML, so don't bail here. The challenge gate below is
+    // the real check.
     debug(`Warmup navigation note: ${err.message}`)
+  }
+
+  // Do NOT start fetching IDs until the "Performing security verification"
+  // interstitial actually clears. The old fixed 8s sleep let the ID walk begin
+  // mid-challenge — every probe then got the interstitial HTML (no "Occurred")
+  // and was misread as a 404, collapsing the binary search.
+  try {
+    await waitForChallengeCleared(puppeteerPage, warmupUrl, 120000)
+    log("Puppeteer: ready — security verification cleared")
+  } catch (err) {
+    // eslint-disable-next-line preserve-caught-error
+    throw new Error(
+      `NUFORC "Performing security verification" page did not clear within 120s. ` +
+      `Solve it in the open Chrome window, then re-run. (${err.message})`
+    )
   }
 
   return puppeteerPage
@@ -111,7 +186,16 @@ async function getPuppeteerPage () {
 
 async function closePuppeteer () {
   if (puppeteerBrowser) {
-    try { await puppeteerBrowser.close() } catch { /* ignore */ }
+    try {
+      // --connect attaches to a browser we didn't launch — detach and leave it
+      // running so the solved Cloudflare session survives for the next run.
+      // --puppeteer launched it, so close it.
+      if (opts.connect) {
+        await puppeteerBrowser.disconnect()
+      } else {
+        await puppeteerBrowser.close()
+      }
+    } catch { /* ignore */ }
     puppeteerBrowser = null
     puppeteerPage = null
   }
@@ -133,6 +217,10 @@ const PAST_RANGE_LIMIT = 25
 // Typically valid ~24h. Used only when --puppeteer is NOT set.
 const CF_CLEARANCE = "PASTE_CF_CLEARANCE_HERE"
 const USER_AGENT = "PASTE_BROWSER_USER_AGENT_HERE"
+
+// Default CDP endpoint for --connect (attach to a Chrome started with
+// --remote-debugging-port=9222). Override with `--connect http://host:port`.
+const DEFAULT_CDP_URL = "http://127.0.0.1:9222"
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
 
@@ -157,6 +245,7 @@ program
   .option("--tor", "Route requests through Tor (socks5h://127.0.0.1:9050)")
   .option("--puppeteer", "Use headless Chrome (puppeteer) to bypass Cloudflare bot challenges — requires `puppeteer` package installed")
   .option("--puppeteer-headless", "Run puppeteer in headless mode (default: true)", true)
+  .option("--connect [url]", "Attach to a Chrome you started with --remote-debugging-port (default http://127.0.0.1:9222) and reuse its manually-solved Cloudflare session instead of launching")
   .option("--verbose", "Verbose logging")
   .option("--past-range-limit <n>", "When --years is set, stop after N consecutive records older than the range", v => parseInt(v, 10), PAST_RANGE_LIMIT)
   .parse()
@@ -284,24 +373,58 @@ class RateLimitError extends Error {
   }
 }
 
+// ─── Cloudflare Challenge Detection ──────────────────────────────────────────
+//
+// NUFORC sits behind Cloudflare's managed challenge, which serves a black
+// interstitial titled "nuforc.org" with the body text "Performing security
+// verification" (older variant: "Just a moment"). The real page only appears
+// once the challenge clears. Any fetch made before it clears returns the
+// interstitial HTML — no "Occurred" field — which the ID walk misreads as a 404.
+const CHALLENGE_MARKERS = [
+  "Just a moment",
+  "Performing security verification",
+  "Verifying you are human",
+  "needs to review the security of your connection"
+]
+
+function isChallengeHtml (html) {
+  if (!html) return false
+  return CHALLENGE_MARKERS.some(m => html.includes(m))
+}
+
+/**
+ * Block until the Cloudflare interstitial clears on the current puppeteer page.
+ * Resolves with the post-challenge HTML; throws if it never clears in `timeout`.
+ * Because Chrome launches non-headless, the user can also solve it by hand.
+ */
+async function waitForChallengeCleared (page, url, timeout = 30000) {
+  const html = await page.content()
+  if (!isChallengeHtml(html)) return html
+
+  debug(`Puppeteer: challenge detected on ${url}, waiting for resolution...`)
+  await page.waitForFunction(
+    (markers) => {
+      const title = document.title || ""
+      const body = document.body ? document.body.innerText : ""
+      return !markers.some(m => title.includes(m) || body.includes(m))
+    },
+    { timeout, polling: 500 },
+    CHALLENGE_MARKERS
+  )
+  return page.content()
+}
+
 async function fetchPagePuppeteer (url) {
   const page = await getPuppeteerPage()
   const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 })
   const status = response ? response.status() : 0
 
-  // If Cloudflare challenge HTML, wait for real content to appear
-  let html = await page.content()
-  if (html.includes("Just a moment") || html.includes("Performing security verification")) {
-    debug(`Puppeteer: challenge detected on ${url}, waiting for resolution...`)
-    try {
-      await page.waitForFunction(
-        () => !document.title.includes("Just a moment") && !document.body.innerText.includes("Performing security verification"),
-        { timeout: 30000 }
-      )
-      html = await page.content()
-    } catch {
-      throw new Error(`HTTP challenge unresolved for ${url}`)
-    }
+  // If a Cloudflare challenge is showing, wait for the real content to appear.
+  let html
+  try {
+    html = await waitForChallengeCleared(page, url)
+  } catch {
+    throw new Error(`HTTP challenge unresolved for ${url}`)
   }
 
   // Body-text check runs first: Wordfence may serve 200 or 503 depending on
@@ -332,14 +455,20 @@ async function fetchPageHttp (url) {
   }
 }
 
+// Both --puppeteer (launch) and --connect (attach) drive a real Chrome, so
+// they share the puppeteer fetch backend. Everything else uses node-fetch.
+function usePuppeteerBackend () {
+  return opts.puppeteer || opts.connect
+}
+
 async function fetchPage (url) {
-  return opts.puppeteer ? fetchPagePuppeteer(url) : fetchPageHttp(url)
+  return usePuppeteerBackend() ? fetchPagePuppeteer(url) : fetchPageHttp(url)
 }
 
 async function fetchWithRetry (url, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
-      if (opts.puppeteer) return await fetchPagePuppeteer(url)
+      if (usePuppeteerBackend()) return await fetchPagePuppeteer(url)
 
       const fetchOpts = await buildFetchOptions()
       const res = await nodeFetch(url, fetchOpts)
@@ -1037,6 +1166,7 @@ async function runScrapeMode () {
   log(`Miss limit: ${missLimit} consecutive`)
   log(`Tor: ${opts.tor ? "enabled" : "disabled"}`)
   log(`Puppeteer: ${opts.puppeteer ? "enabled" : "disabled"}`)
+  if (opts.connect) log(`Connect: attaching to Chrome at ${typeof opts.connect === "string" ? opts.connect : DEFAULT_CDP_URL}`)
   log(`Raw cache: ${opts.rawFile}`)
   log("")
 

@@ -34,7 +34,8 @@ const MARKER_COLORS: Record<string, string> = {
   CHRONOLOGY: colors.sourceChronology,
   EXPERIENCER: colors.sourceExperiencer,
   GEIPAN: colors.sourceGeipan,
-  NASA_CNEOS: colors.sourceFireball
+  NASA_CNEOS: colors.sourceFireball,
+  DOW_PURSUE: colors.sourceDowPursue
 }
 
 const DEFAULT_CENTER: L.LatLngExpression = [30, 0]
