@@ -8,6 +8,13 @@ export const APP_FOOTER_NAME = 'UAP MONITOR'
 export const APP_FOOTER_TAGLINE = 'Global UAP Intelligence Platform'
 export const APP_URL = import.meta.env.VITE_REPO_URL
 
+// ─── External source URLs ───────────────────────────────────────────
+
+export const SOURCE_URLS = {
+  /** NUFORC per-sighting permalink base; append the report id. */
+  NUFORC_SIGHTING: 'https://nuforc.org/sighting/?id='
+} as const
+
 // ─── Aria labels ────────────────────────────────────────────────────
 
 export const ARIA = {

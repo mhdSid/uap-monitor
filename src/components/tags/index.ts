@@ -60,14 +60,28 @@ export class Tag extends Component<TagProps> {
     const size = this.props.size ?? TagSize.MD
     const borderColor = style.border
       ?? (style.bg === 'transparent' ? style.color : style.bg)
+    const content = this.props.label ?? this.props.variant
+    const baseStyle = {
+      color: style.color,
+      borderColor,
+      backgroundColor: style.bg
+    }
+
+    // When an href is provided, render a real anchor for accessibility.
+    if (this.props.href) {
+      return h('a', {
+        className: `${cx.root} ${cx[size]}`,
+        style: { ...baseStyle, textDecoration: 'none', cursor: 'pointer' },
+        href: this.props.href,
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      }, content)
+    }
+
     return h('span', {
       className: `${cx.root} ${cx[size]}`,
-      style: {
-        color: style.color,
-        borderColor,
-        backgroundColor: style.bg
-      }
-    }, this.props.label ?? this.props.variant)
+      style: baseStyle
+    }, content)
   }
 }
 

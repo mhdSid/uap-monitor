@@ -5,7 +5,7 @@ import { useHatchUdb } from './use-hatch-udb'
 import { useGeipan } from './use-geipan'
 import { useChronology } from './use-chronology'
 import { useDowPursue } from './use-dow-pursue'
-import { DATA_SOURCE_DESCRIPTIONS } from '@/data/strings'
+import { DATA_SOURCE_DESCRIPTIONS, SOURCE_URLS } from '@/data/strings'
 import { useGnews } from './use-gnews'
 import { useGdelt } from './use-gdelt'
 import { useTwitter } from './use-twitter'
@@ -464,4 +464,21 @@ export function getSourceUrl (sourceId: string, subSourceId?: string): string | 
     }
   }
   return undefined
+}
+
+/**
+ * Per-source builders for a sighting's canonical page on the source's site.
+ * Add one arrow per source that exposes a per-report URL. Sources without one
+ * fall through to their `ref` document/permalink, then the source base URL.
+ */
+const SIGHTING_URL_BUILDERS: Partial<Record<DataSourceId, (s: Sighting) => string>> = {
+  [DataSourceId.NUFORC]: (s) => `${SOURCE_URLS.NUFORC_SIGHTING}${s.id}`
+}
+
+/** Best link to the actual sighting (not the provider's base URL). */
+export function getSightingUrl (s: Sighting): string | undefined {
+  const build = SIGHTING_URL_BUILDERS[s.source as DataSourceId]
+  if (build) return build(s)
+  if (s.ref && /^https?:\/\//i.test(s.ref)) return s.ref
+  return getSourceUrl(s.source, s.subSource)
 }

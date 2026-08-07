@@ -378,6 +378,8 @@ export interface TagProps {
   variant: TagVariant
   label?: string
   size?: TagSize
+  /** When set, the tag renders as an accessible link (opens in a new tab). */
+  href?: string
 }
 
 export interface TagStyle {

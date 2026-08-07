@@ -36,6 +36,7 @@ import { streamArray } from "stream-json/streamers/stream-array.js"
 import { streamValues } from "stream-json/streamers/stream-values.js"
 import { pick } from "stream-json/filters/pick.js"
 import { chain } from "stream-chain"
+import { discoverLatestForward } from "./discovery.mjs"
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
 // Persistent Chrome profile. A fresh (cookie-less) profile every launch reads
@@ -209,7 +210,12 @@ const RAW_CACHE_FILE = "nuforc_raw_cache.json"
 const DEFAULT_OUTPUT = "nuforc_output.json"
 const DEFAULT_DELAY_MS = 1000
 const CONSECUTIVE_MISS_LIMIT = 100
-const RESUME_LOOK_AHEAD = 50
+// Resume-mode forward-discovery gap tolerance: stop scanning for newer ids
+// after this many CONSECUTIVE missing ids above the cached max. NUFORC ids are
+// sparse (deleted/spam/out-of-range reports leave holes), so this must exceed
+// the largest hole expected between real sightings. Observed intra-year gaps
+// are <10; 100 gives wide margin. Overridable via --resume-look-ahead.
+const RESUME_LOOK_AHEAD = 100
 const PAST_RANGE_LIMIT = 25
 
 // Paste cf_clearance cookie value from your browser (DevTools → Application → Cookies → nuforc.org)
@@ -239,6 +245,7 @@ program
   .option("--delay <ms>", "Delay between requests in ms", v => parseInt(v, 10), DEFAULT_DELAY_MS)
   .option("--miss-limit <n>", "Stop after N consecutive misses", v => parseInt(v, 10), CONSECUTIVE_MISS_LIMIT)
   .option("--resume", "Resume scraping — skip IDs already in raw cache")
+  .option("--resume-look-ahead <n>", "Resume mode: forward-scan gap tolerance — end latest-id discovery after N consecutive missing ids above the cached max", v => parseInt(v, 10), RESUME_LOOK_AHEAD)
   .option("--merge <file>", "Merge transformed output into this existing JSON file (creates backup)")
   .option("--merge-key <field>", "Field to deduplicate on when merging (dot notation for nested, e.g. 'id' or 'sighting_id')", "id")
   .option("--merge-strategy <s>", "How to handle duplicates: 'keep-existing' or 'keep-new'", "keep-new")
@@ -1203,11 +1210,27 @@ async function runScrapeMode () {
     }
   }
 
-  // Discover start ID — derive from cache only when not explicitly given
+  // Discover start ID — derive from cache only when not explicitly given.
   let startId = opts.startId
   if (opts.resume && cachedMax > 0 && !startId) {
-    startId = cachedMax + RESUME_LOOK_AHEAD
-    log(`Resume: auto-starting from ${startId} (cachedMax=${cachedMax} + lookAhead=${RESUME_LOOK_AHEAD})`)
+    // Forward-scan for the true newest id instead of a blind cachedMax + N
+    // offset (which silently missed sightings whenever more than N had been
+    // posted since the last run). discoverLatestForward walks up from cachedMax
+    // and only stops after `resumeLookAhead` consecutive holes, so it finds any
+    // number of new ids as long as no single hole exceeds that window.
+    const gapTolerance = opts.resumeLookAhead
+    log(`Resume: scanning forward from cachedMax=${cachedMax} for newer ids (gap tolerance ${gapTolerance})...`)
+    startId = await discoverLatestForward(cachedMax, gapTolerance, async (id) => {
+      const exists = await probeId(id)
+      debug(`Probe ID ${id}: ${exists ? "✓ exists" : "✗ empty"}`)
+      await sleep(opts.delay)
+      return exists
+    })
+    if (startId > cachedMax) {
+      log(`Resume: newest id ${startId} (${startId - cachedMax} above cache) — walking down to ${cachedMax}`)
+    } else {
+      log(`Resume: no new sightings above ${cachedMax} — nothing to collect.`)
+    }
   }
   if (!startId) {
     log("No --start-id given, probing for latest sighting ID...")

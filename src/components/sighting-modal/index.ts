@@ -15,7 +15,7 @@ import { BookmarkButton } from '@/components/bookmark-button'
 import { ShareButton } from '@/components/share-button'
 import { Modal } from '@/components/modal'
 import { ENV_CONTEXT, MODAL, RELATED, SUB_SOURCE_LABELS } from '@/data/strings'
-import { useAnalytics, getSourceUrl, useFireball, useGeomagnetic, useNuclear, useSeismic, useAppStore } from '@/composables'
+import { useAnalytics, getSightingUrl, useFireball, useGeomagnetic, useNuclear, useSeismic, useAppStore } from '@/composables'
 import { haversineKm } from '@/composables/use-fireball'
 import type { NearbyFacility } from '@/composables/use-nuclear'
 
@@ -115,9 +115,9 @@ export class SightingModal {
       )
     ))
 
-    // Source row — clickable link if URL exists
+    // Source row — clickable link to the actual sighting (not the provider's base URL)
     const sourceLabel = resolveSourceLabel(s)
-    const sourceUrl = getSourceUrl(s.source, s.subSource)
+    const sourceUrl = getSightingUrl(s)
     const sourceValueEl = sourceUrl
       ? h('a', {
           className: `${cx.value} ${cx.sourceLink}`,
@@ -163,8 +163,13 @@ export class SightingModal {
   }
 
   private static buildFooter (s: Sighting): HTMLElement {
+    const url = getSightingUrl(s)
     return h('div', { className: cx.footer },
-      new Tag({ variant: TagVariant.DISABLED, label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}` }).el
+      new Tag({
+        variant: TagVariant.DISABLED,
+        label: `${MODAL.SOURCE}: ${resolveSourceLabel(s)}`,
+        ...(url && { href: url })
+      }).el
     )
   }
 
