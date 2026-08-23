@@ -1,8 +1,107 @@
 {
-  "generatedAt": "2026-08-07T14:21:25.489Z",
+  "generatedAt": "2026-08-23T03:12:28.238Z",
   "queries": 8,
-  "totalResults": 305,
+  "totalResults": 315,
   "articles": [
+    {
+      "id": "1c07a3ef310d",
+      "title": "Marco Rubio says Trump would hold a primetime UAP address if admin knew more",
+      "description": "Marco Rubio says Donald Trump would hold a primetime address and show UAP videos if the administration knew about unidentified anomalous phenomena over military installations.",
+      "content": "NEWYou can now listen to Fox News articles!\nSecretary of State Marco Rubio said Tuesday that President Donald Trump would be showing pictures and videos of unidentified anomalous phenomena (UAP) and would likely hold a primetime address if the admini... [4960 chars]",
+      "url": "https://www.foxnews.com/media/marco-rubio-addresses-uap-government-cover-up-allegations-says-trump-would-give-speech-admin-knew-more",
+      "imageUrl": "https://static.foxnews.com/foxnews.com/content/uploads/2026/08/marco-rubio-american-mining-industry-roundtable.jpg",
+      "publishedAt": "2026-08-12T20:00:51Z",
+      "sourceName": "Fox News",
+      "sourceUrl": "https://www.foxnews.com"
+    },
+    {
+      "id": "b144b3b29b62",
+      "title": "Pentagon releases new batch of UFO files: ‘Did you see that?’",
+      "description": "The Pentagon on Friday released a new batch of documents and images related to UFOs, also known as unidentified anomalous phenomena or UAP.",
+      "content": "▶ Watch Video: Harvard astronomer leading White House UFO council explains what he hopes to uncover\nWashington — The Pentagon on Friday released a new batch of documents and images related to UFOs, also known as unidentified anomalous phenomena or UA... [4779 chars]",
+      "url": "https://wtop.com/government/2026/08/pentagon-releases-5th-batch-of-ufo-files-with-more-documents-and-videos/",
+      "imageUrl": "https://wtop.com/wp-content/uploads/2026/05/cbsn-fusion-what-we-know-about-new-ufo-file-release-thumbnail.jpg",
+      "publishedAt": "2026-08-09T21:20:24Z",
+      "sourceName": "WTOP",
+      "sourceUrl": "https://wtop.com"
+    },
+    {
+      "id": "0de00ee86e52",
+      "title": "US govt responds to Colorado UFO report: What happened and what we know about the alleged classified videos",
+      "description": "The US Department of War is examining reports of footage depicting a large triangular object in Colorado.",
+      "content": "The US Department of War has responded to a report about alleged classified video showing a large triangular object over a Colorado military base, saying officials are investigating the claims and could release information if anything is uncovered.\nA... [2686 chars]",
+      "url": "https://www.hindustantimes.com/world-news/us-news/us-govt-responds-to-colorado-ufo-report-what-happened-and-what-we-know-about-the-alleged-classified-videos-101786245679989.html",
+      "imageUrl": "https://www.hindustantimes.com/ht-img/img/2026/08/09/1600x900/logo/photo-1591731619717-356551d82dac_1786246388235_1786246397613_a84c61f3-d2cc-4548-880a-ebe5177a412f.jpg",
+      "publishedAt": "2026-08-09T03:51:56Z",
+      "sourceName": "Hindustan Times",
+      "sourceUrl": "https://www.hindustantimes.com"
+    },
+    {
+      "id": "ff0cd2a150ab",
+      "title": "Fifth batch of UFO files released contains CIA notes, artistic renderings",
+      "description": "The Department of War released its fifth batch of unidentified anomalous phenomena sightings, also referred to as UAP or UFO sightings.",
+      "content": "(Gray News) - The Department of War released its fifth batch of unidentified anomalous phenomena sightings, also referred to as UAP or UFO sightings.\nThe newest release of files happened on Aug. 7. Contained within the batch are scanned copies of mem... [516 chars]",
+      "url": "https://www.wistv.com/2026/08/07/fifth-batch-ufo-files-released-contains-cia-notes-artistic-renderings/",
+      "imageUrl": "https://gray-wistv-prod.gtv-cdn.com/resizer/v2/AY5QQQ6CZ5BXFBVOJI2ELT4K6Q.png?auth=fa7b7d9724cf1fa7619b34554d9a3dcb2a393a3ef716052276f99f8310ea289a&width=1200&height=600&smart=true",
+      "publishedAt": "2026-08-07T22:54:43Z",
+      "sourceName": "WIS10",
+      "sourceUrl": "https://www.wistv.com"
+    },
+    {
+      "id": "788d3b66089e",
+      "title": "Fifth batch of UFO files released contains CIA notes, artistic renderings",
+      "description": "The Department of War released its fifth batch of unidentified anomalous phenomena sightings, also referred to as UAP or UFO sightings.",
+      "content": "(Gray News) - The Department of War released its fifth batch of unidentified anomalous phenomena sightings, also referred to as UAP or UFO sightings.\nThe newest release of files happened on Aug. 7. Contained within the batch are scanned copies of mem... [516 chars]",
+      "url": "https://www.live5news.com/2026/08/07/fifth-batch-ufo-files-released-contains-cia-notes-artistic-renderings/",
+      "imageUrl": "https://gray-wcsc-prod.gtv-cdn.com/resizer/v2/AY5QQQ6CZ5BXFBVOJI2ELT4K6Q.png?auth=fa7b7d9724cf1fa7619b34554d9a3dcb2a393a3ef716052276f99f8310ea289a&width=1200&height=600&smart=true",
+      "publishedAt": "2026-08-07T22:54:43Z",
+      "sourceName": "Live 5 News WCSC",
+      "sourceUrl": "https://www.live5news.com"
+    },
+    {
+      "id": "3b8ff2ae7c7c",
+      "title": "Fifth batch of UFO files released contains CIA notes, artistic renderings",
+      "description": "The Department of War released its fifth batch of unidentified anomalous phenomena sightings, also referred to as UAP or UFO sightings.",
+      "content": "(Gray News) - The Department of War released its fifth batch of unidentified anomalous phenomena sightings, also referred to as UAP or UFO sightings.\nThe newest release of files happened on Aug. 7. Contained within the batch are scanned copies of mem... [516 chars]",
+      "url": "https://www.weau.com/2026/08/07/fifth-batch-ufo-files-released-contains-cia-notes-artistic-renderings/",
+      "imageUrl": "https://gray-weau-prod.gtv-cdn.com/resizer/v2/AY5QQQ6CZ5BXFBVOJI2ELT4K6Q.png?auth=fa7b7d9724cf1fa7619b34554d9a3dcb2a393a3ef716052276f99f8310ea289a&width=1200&height=600&smart=true",
+      "publishedAt": "2026-08-07T22:54:43Z",
+      "sourceName": "WEAU",
+      "sourceUrl": "https://www.weau.com"
+    },
+    {
+      "id": "1fe8c1360286",
+      "title": "Pentagon UFO Files: 5 Shocking Revelations From New Declassified Dump",
+      "description": "The Pentagon has unveiled 41 newly declassified records related to Unidentified Anomalous Phenomena (UAP), enhancing the public archive of unexplained aerial encounters., US News, Times Now",
+      "content": "The Pentagon has released 41 newly declassified records involving Unidentified Anomalous Phenomena (UAP), adding videos, images and historical documents to the US government's growing public archive of unexplained aerial sightings. The latest release... [3381 chars]",
+      "url": "https://www.timesnownews.com/world/us/us-news/pentagon-ufo-files-5-shocking-revelations-from-new-declassified-dump-article-155383426",
+      "imageUrl": "https://images.timesnownews.com/thumb/msid-155383428,thumbsize-242232,width-1280,height-720,resizemode-75/155383428.jpg",
+      "publishedAt": "2026-08-07T22:28:13Z",
+      "sourceName": "Times Now",
+      "sourceUrl": "https://www.timesnownews.com"
+    },
+    {
+      "id": "798698bd7a7b",
+      "title": "Department of War unseals files detailing Colorado Springs UAP encounters",
+      "description": "COLORADO SPRINGS, Colo. (KRDO) -- The U.S. Department of War has released information about two potential unidentified anomalous phenomena (UAP) spotted",
+      "content": "COLORADO SPRINGS, Colo. (KRDO) -- The U.S. Department of War has released information about two potential unidentified anomalous phenomena (UAP) spotted in Colorado Springs in 2023.\nThe Department of War says this is part of the fifth release of decl... [2011 chars]",
+      "url": "https://krdo.com/news/2026/08/07/colorado-uap-sightings/",
+      "imageUrl": "https://krdo.b-cdn.net/2026/08/thumbnails-83-84-16.png",
+      "publishedAt": "2026-08-07T22:17:19Z",
+      "sourceName": "KRDO",
+      "sourceUrl": "https://krdo.com"
+    },
+    {
+      "id": "34dff87c5aaf",
+      "title": "Pentagon releases fresh batch of UFO files",
+      "description": "The Pentagon has released more new never-before-seen videos of unidentified anomalous phenomena.",
+      "content": "Videos show a mysterious orb whizzing over a residential area in the Middle East, and footage of a black sphere hovering over the Pacific Ocean, seemingly vanishing for a moment before resurfacing.\nThis latest release contains 41 files in total: over... [2954 chars]",
+      "url": "https://www.bbc.com/news/articles/ce8kr7p2pmdo",
+      "imageUrl": "https://ichef.bbci.co.uk/news/1024/branded_news/6e77/live/9555b600-9274-11f1-b7a2-c7c91f255a18.jpg",
+      "publishedAt": "2026-08-07T16:25:35Z",
+      "sourceName": "BBC News",
+      "sourceUrl": "https://www.bbc.com"
+    },
     {
       "id": "047d6a242cd0",
       "title": "The Hundred: MI London women break their duck with victory over London Spirit thanks to Melie Kerr's defiant half-century",
@@ -35,6 +134,17 @@
       "publishedAt": "2026-08-04T07:06:00Z",
       "sourceName": "Times of India",
       "sourceUrl": "https://timesofindia.indiatimes.com"
+    },
+    {
+      "id": "17f845853011",
+      "title": "UK defence chiefs reject calls for Scots UFO sightings probe as 'no military threat'",
+      "description": "The MOD penned an official response to paranormal investigators in Scotland - just days after the US government released a fourth tranche of records on Unidentified Anomalous Phenomena.",
+      "content": "The MOD penned an official response to paranormal investigators in Scotland - just days after the US government released a fourth tranche of records on Unidentified Anomalous Phenomena.\nUK defence chiefs have rejected calls for a major probe into Sco... [4392 chars]",
+      "url": "https://www.dailyrecord.co.uk/news/scottish-news/uk-defence-chiefs-reject-calls-37508833",
+      "imageUrl": "https://i2-prod.dailyrecord.co.uk/article37205527.ece/ALTERNATES/s1200d/1_UFO-spotters-looking-out-over-the-Forth-Valley-in-central-Scotland.jpg",
+      "publishedAt": "2026-08-04T03:30:00Z",
+      "sourceName": "Daily Record",
+      "sourceUrl": "https://www.dailyrecord.co.uk"
     },
     {
       "id": "b4fc9b27b6d3",
