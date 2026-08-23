@@ -95,7 +95,7 @@ export class SightingModal {
         : []),
       [MODAL.OCCURRED, s.occurredAt],
       [MODAL.REPORTED, s.reportedAt],
-      [MODAL.CONTINENT, s.continent]
+      [MODAL.CONTINENT, s.continent ?? MODAL.EMPTY_VALUE]
     ]
 
     if (s.characteristics.length > 0) {

@@ -47,7 +47,7 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
-const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
+const OUTPUT_DIR = resolve(PROJECT_ROOT, process.env.UAP_OUTPUT_DIR || 'public/data')
 const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
 const INPUT_FILE = resolve(SOURCES_DIR, 'dow-pursue-records.json')
 

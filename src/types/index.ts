@@ -77,8 +77,16 @@ export interface Sighting {
   /** Country parsed from location */
   country: string
 
-  /** Continent (derived from country) */
-  continent: Continent
+  /**
+   * Region derived from the resolved country.
+   *
+   * `null` when the source recorded no usable location at all. It is NOT a
+   * bucket for "we could not be bothered" — MARITIME and SPACE exist for
+   * sightings that genuinely have no country, and null means the location
+   * itself is missing. Such sightings are excluded from region grouping
+   * rather than being assigned one by assumption.
+   */
+  continent: Continent | null
 
   // ─── Computed fields ─────────────────────────────────────────────
 

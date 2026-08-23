@@ -36,7 +36,7 @@ import { resolveWithStats, printStats } from './geocoder.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
-const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
+const OUTPUT_DIR = resolve(PROJECT_ROOT, process.env.UAP_OUTPUT_DIR || 'public/data')
 const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
 const DEFAULT_INPUT = resolve(SOURCES_DIR, 'hatch_udb.json')
 const DOWNLOAD_URL = 'https://raw.githubusercontent.com/richgel999/ufo_data/main/bin/hatch_udb.json'

@@ -29,14 +29,16 @@ import { streamArray } from 'stream-json/streamers/stream-array.js'
 import { chain } from 'stream-chain'
 
 import {
-  Continent, Status, Shape, VALID_SHAPES,
-  COUNTRY_CONTINENT, truncate
+  Status, Shape, VALID_SHAPES, truncate
 } from './shared-constants.mjs'
 import { resolveWithStats, printStats, resetStats } from './geocoder.mjs'
+import { splitLocation, createResolutionReport } from './geo-resolve.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
-const OUTPUT_DIR = resolve(PROJECT_ROOT, 'public/data')
+// UAP_OUTPUT_DIR redirects a run to a scratch directory so pipeline changes can
+// be verified against the committed output before anything overwrites it.
+const OUTPUT_DIR = resolve(PROJECT_ROOT, process.env.UAP_OUTPUT_DIR || 'public/data')
 const SOURCES_DIR = resolve(PROJECT_ROOT, '__sources')
 const DEFAULT_INPUT = resolve(SOURCES_DIR, 'nuforc.json')
 
@@ -66,6 +68,7 @@ const SHAPE_ALIASES = {
   'Rectangular': Shape.RECTANGLE,
   'Egg-shaped': Shape.EGG,
   'Hexagon': Shape.DIAMOND,
+  'Octahedron': Shape.DIAMOND,
   'Bullet/Missile': Shape.CYLINDER,
   'Pellet': Shape.SPHERE,
   'Crescent': Shape.OTHER,
@@ -77,7 +80,7 @@ const SHAPE_ALIASES = {
 }
 
 // ─── Country → default coordinates ──────────────────────────────────
-// COUNTRY_CONTINENT imported from shared-constants.mjs
+// Country → region resolution lives in geo-registry.mjs / geo-resolve.mjs
 
 // US state abbreviations → full name
 const US_STATES = {
@@ -107,7 +110,7 @@ const CA_PROVINCES = {
 
 // ─── Audit trackers ─────────────────────────────────────────────────
 
-const unmappedCountries = new Map()   // country → count
+const geoReport = createResolutionReport()  // country token → region, with provenance
 const unmappedShapes = new Map()      // shape → count
 const seenCharacteristics = new Map() // characteristic → count
 
@@ -124,75 +127,68 @@ function parseNuforcDate (raw) {
 }
 
 function parseLocation (raw) {
-  const fallback = {
-    city: '', state: '', country: Shape.UNKNOWN,
-    region: '', continent: Continent.AMERICAS
-  }
-
-  if (!raw) return fallback
-
-  const parts = raw.split(',').map(s => s.trim())
+  const parts = splitLocation(raw)
 
   let city = parts[0] || ''
   let state = ''
-  let country = Shape.UNKNOWN
+  let countryToken = ''
 
   if (parts.length >= 3) {
     state = parts[1] || ''
-    country = parts[2] || Shape.UNKNOWN
+    countryToken = parts[2] || ''
   } else if (parts.length === 2) {
     const second = parts[1] || ''
     if (US_STATES[second]) {
       state = second
-      country = 'USA'
+      countryToken = 'USA'
     } else if (CA_PROVINCES[second]) {
       state = second
-      country = 'Canada'
+      countryToken = 'Canada'
     } else {
-      country = second
+      countryToken = second
     }
+  } else if (parts.length === 1) {
+    // A lone token is as likely to be a country as a city ("Australia").
+    countryToken = US_STATES[city] || CA_PROVINCES[city] ? city : ''
+    if (countryToken) { state = city; city = '' }
   }
 
-  // Normalize country aliases
-  if (country === 'United States' || country === 'US') country = 'USA'
-
-  // State abbreviations sometimes leak into country field (e.g. "City, DC" or "City, , CA")
-  if (!state && US_STATES[country]) {
-    state = country
-    country = 'USA'
-  } else if (state && US_STATES[country]) {
-    // "City, State, DC" — country is actually another state code, use it
-    state = country
-    country = 'USA'
+  // A subdivision code sometimes lands in the country slot ("City, , CA").
+  // Both directions are handled, for the US *and* Canada — the Canadian half
+  // used to be missing, which is why ON/BC/NS/AB leaked through as countries.
+  if (US_STATES[countryToken]) {
+    state = countryToken
+    countryToken = 'USA'
+  } else if (CA_PROVINCES[countryToken]) {
+    state = countryToken
+    countryToken = 'Canada'
   }
 
-  // Canadian province in country field
-  if (!state && CA_PROVINCES[country]) {
-    state = country
-    country = 'Canada'
-  }
-
-  // Build region string
+  // Region string keeps its existing shape for display.
   let region = city
   if (state && US_STATES[state]) {
     region = city ? `${city}, ${state}` : state
-    country = 'USA'
+    countryToken = 'USA'
   } else if (state && CA_PROVINCES[state]) {
     region = city ? `${city}, ${state}` : state
-    country = 'Canada'
+    countryToken = 'Canada'
   } else if (state) {
     region = city ? `${city}, ${state}` : state
   }
 
-  // Resolve continent — log unmapped countries instead of silently defaulting
-  let continent = COUNTRY_CONTINENT[country]
-  if (!continent) {
-    unmappedCountries.set(country, (unmappedCountries.get(country) || 0) + 1)
-    continent = Continent.AMERICAS // fallback for predominantly US dataset
-  }
+  // Resolve through the tiered registry. Nothing is guessed: an unresolved
+  // token yields a null continent and is reported, never filed under AMERICAS.
+  const resolved = geoReport.resolve(countryToken)
 
-  return { city, state, country, region, continent }
+  return {
+    city,
+    state,
+    country: resolved?.country || countryToken || '',
+    region,
+    continent: resolved ? resolved.region : null
+  }
 }
+
 
 function normalizeShape (raw) {
   if (!raw) return Shape.UNKNOWN
@@ -215,15 +211,37 @@ function normalizeShape (raw) {
  * We do NOT whitelist — NUFORC defines the vocabulary, not us.
  * Unknown characteristics are tracked for awareness but never dropped.
  */
+/**
+ * Variant spellings that must collapse onto one canonical characteristic.
+ *
+ * "Changed Colo" is not a typo of ours: the older live-site scrape truncated
+ * the label, so the corpus carries both "Changed Colo" and "Changed Color" for
+ * the same attribute. Left unaliased they are two separate facets, and a UI
+ * filter on SightingCharacteristic.CHANGED_COLOR silently misses most matches.
+ */
+const CHARACTERISTIC_ALIASES = {
+  'Changed Colo': 'Changed Color',
+  'Changed colour': 'Changed Color',
+  'Changed Colour': 'Changed Color'
+}
+
 function parseCharacteristics (raw) {
   if (!Array.isArray(raw)) return []
 
-  return raw.filter(c => {
-    if (typeof c !== 'string' || !c.trim()) return false
-    const trimmed = c.trim()
-    seenCharacteristics.set(trimmed, (seenCharacteristics.get(trimmed) || 0) + 1)
-    return true
-  }).map(c => c.trim())
+  const out = []
+  const seen = new Set()
+
+  for (const value of raw) {
+    if (typeof value !== 'string' || !value.trim()) continue
+    const canonical = CHARACTERISTIC_ALIASES[value.trim()] || value.trim()
+    seenCharacteristics.set(canonical, (seenCharacteristics.get(canonical) || 0) + 1)
+    // Aliasing can make two source entries collide — keep one.
+    if (seen.has(canonical)) continue
+    seen.add(canonical)
+    out.push(canonical)
+  }
+
+  return out
 }
 
 /**
@@ -434,16 +452,7 @@ async function main () {
   }
 
   // ─ Audit: unmapped data ─
-  if (unmappedCountries.size > 0) {
-    const sorted = [...unmappedCountries.entries()].sort((a, b) => b[1] - a[1])
-    console.log(`\n  ⚠ Unmapped countries (${unmappedCountries.size} unique, defaulted to ${Continent.AMERICAS}):`)
-    for (const [country, count] of sorted.slice(0, 20)) {
-      console.log(`    ${country.padEnd(24)} ${count.toLocaleString()}`)
-    }
-    if (sorted.length > 20) {
-      console.log(`    ... and ${sorted.length - 20} more`)
-    }
-  }
+  geoReport.print('NUFORC Geo')
 
   if (unmappedShapes.size > 0) {
     const sorted = [...unmappedShapes.entries()].sort((a, b) => b[1] - a[1])

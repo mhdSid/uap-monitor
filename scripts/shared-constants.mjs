@@ -22,7 +22,10 @@ export const Continent = {
   ASIA_MIDDLE_EAST: 'ASIA_MIDDLE_EAST',
   ASIA_PACIFIC: 'ASIA_PACIFIC',
   OCEANIA: 'OCEANIA',
-  AFRICA: 'AFRICA'
+  AFRICA: 'AFRICA',
+  // Open water and off-planet are first-class regions, not fallbacks.
+  MARITIME: 'MARITIME',
+  SPACE: 'SPACE'
 }
 
 export const Status = {

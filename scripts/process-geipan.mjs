@@ -38,7 +38,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
 const DEFAULT_CSV = resolve(ROOT, '__sources/geipan.csv')
 const DEFAULT_TRANSLATED_XLSX = resolve(ROOT, '__sources/geipan-en.xlsx')
-const OUT_DIR = resolve(ROOT, 'public/data')
+const OUT_DIR = resolve(ROOT, process.env.UAP_OUTPUT_DIR || 'public/data')
 
 const TRANSLATION_VERSION = 'geipan-fr2en-gtrans-v1'
 

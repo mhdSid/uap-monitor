@@ -93,9 +93,24 @@ describe('parseSighting', () => {
     expect(result?.status).toBe(SightingStatus.PENDING)
   })
 
-  it('falls back invalid continent to AMERICAS', () => {
+  // Deliberately NOT a fallback. An unrecognised region used to become
+  // AMERICAS, which silently relocated every sighting whose country the
+  // pipeline could not resolve. Null keeps it out of region grouping instead.
+  it('leaves an unrecognised continent null rather than assuming AMERICAS', () => {
     const result = parseSighting(rawSighting({ continent: 'ATLANTIS' }), DataSourceId.NUFORC)
-    expect(result?.continent).toBe(Continent.AMERICAS)
+    expect(result?.continent).toBeNull()
+  })
+
+  it('leaves a missing continent null', () => {
+    const result = parseSighting(rawSighting({ continent: undefined }), DataSourceId.NUFORC)
+    expect(result?.continent).toBeNull()
+  })
+
+  it('accepts the first-class MARITIME and SPACE regions', () => {
+    for (const region of [Continent.MARITIME, Continent.SPACE]) {
+      const result = parseSighting(rawSighting({ continent: region }), DataSourceId.NUFORC)
+      expect(result?.continent).toBe(region)
+    }
   })
 
   it('uses defaultSource when source is invalid or missing', () => {

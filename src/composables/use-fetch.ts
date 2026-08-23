@@ -128,9 +128,12 @@ export function parseSighting (raw: unknown, defaultSource: DataSourceId): Sight
     ? (r.status as SightingStatus)
     : SightingStatus.PENDING
 
+  // No fallback: an unrecognised or absent region stays null rather than being
+  // silently filed under the Americas, which used to misplace every sighting
+  // whose country the pipeline could not resolve.
   const continent = typeof r.continent === 'string' && VALID_CONTINENTS.has(r.continent)
     ? (r.continent as Continent)
-    : Continent.AMERICAS
+    : null
 
   const source = typeof r.source === 'string' && VALID_SOURCES.has(r.source)
     ? (r.source as DataSourceId)

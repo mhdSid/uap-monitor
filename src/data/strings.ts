@@ -66,7 +66,9 @@ export const CONTINENT_LABELS: Record<Continent, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'ASIA — MIDDLE EAST',
   [Continent.ASIA_PACIFIC]: 'ASIA — PACIFIC',
   [Continent.OCEANIA]: 'OCEANIA',
-  [Continent.AFRICA]: 'AFRICA'
+  [Continent.AFRICA]: 'AFRICA',
+  [Continent.MARITIME]: 'MARITIME',
+  [Continent.SPACE]: 'SPACE'
 }
 
 /**
@@ -80,7 +82,9 @@ export const CONTINENT_SHORT_LABELS: Record<Continent, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'ASIA-ME',
   [Continent.ASIA_PACIFIC]: 'ASIA-PAC',
   [Continent.OCEANIA]: 'OCEAN',
-  [Continent.AFRICA]: 'AFR'
+  [Continent.AFRICA]: 'AFR',
+  [Continent.MARITIME]: 'SEA',
+  [Continent.SPACE]: 'SPACE'
 }
 
 export const CONTINENT_DISPLAY_NAMES: Record<string, string> = {
@@ -90,7 +94,9 @@ export const CONTINENT_DISPLAY_NAMES: Record<string, string> = {
   ASIA_MIDDLE_EAST: 'Middle East',
   ASIA_PACIFIC: 'Asia-Pacific',
   OCEANIA: 'Oceania',
-  AFRICA: 'Africa'
+  AFRICA: 'Africa',
+  MARITIME: 'Maritime',
+  SPACE: 'Space'
 }
 
 // ─── Continent tooltips ─────────────────────────────────────────────
@@ -102,7 +108,9 @@ export const CONTINENT_TOOLTIPS: Record<string, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'Sightings from the Middle East, Central Asia, and South Asia — including Iran, Saudi Arabia, India, Pakistan, and Afghanistan.',
   [Continent.ASIA_PACIFIC]: 'Sightings from East and Southeast Asia including Japan, China, Korea, and ASEAN nations. CJK scraper integration planned.',
   [Continent.OCEANIA]: 'Sightings from Australia, New Zealand, and Pacific Island nations.',
-  [Continent.AFRICA]: 'Sightings from African nations. Historically underreported in English-language databases.'
+  [Continent.AFRICA]: 'Sightings from African nations. Historically underreported in English-language databases.',
+  [Continent.MARITIME]: 'Sightings over open water — oceans, seas and international waters — where no country has jurisdiction. Reported from ships and aircraft in transit.',
+  [Continent.SPACE]: 'Sightings from orbit or beyond: the ISS, spacecraft, and lunar observations. Off-planet by definition, so no country applies.'
 }
 
 export const CONTINENT_EMPTY: Record<string, string> = {
@@ -112,7 +120,9 @@ export const CONTINENT_EMPTY: Record<string, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'No sightings in the Middle East for current filters.',
   [Continent.ASIA_PACIFIC]: 'No sightings in Asia-Pacific for current filters. CJK scraper integration planned.',
   [Continent.OCEANIA]: 'No sightings in Oceania for current filters.',
-  [Continent.AFRICA]: 'No sightings in Africa for current filters. Coverage is limited in English-language databases.'
+  [Continent.AFRICA]: 'No sightings in Africa for current filters. Coverage is limited in English-language databases.',
+  [Continent.MARITIME]: 'No open-water sightings for current filters.',
+  [Continent.SPACE]: 'No orbital or lunar sightings for current filters.'
 }
 
 // ─── Filter & search ────────────────────────────────────────────────

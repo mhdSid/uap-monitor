@@ -42,6 +42,8 @@ function pick<T> (arr: T[]): T {
 function countByContinent (sightings: Sighting[]): Map<Continent, number> {
   const map = new Map<Continent, number>()
   for (const s of sightings) {
+    // Sightings with no recorded location belong to no region.
+    if (s.continent === null) continue
     map.set(s.continent, (map.get(s.continent) ?? 0) + 1)
   }
   return map

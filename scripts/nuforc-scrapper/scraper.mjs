@@ -37,6 +37,7 @@ import { streamValues } from "stream-json/streamers/stream-values.js"
 import { pick } from "stream-json/filters/pick.js"
 import { chain } from "stream-chain"
 import { discoverLatestForward } from "./discovery.mjs"
+import { mergeRecordPair } from "../nuforc-record-merge.mjs"
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
 // Persistent Chrome profile. A fresh (cookie-less) profile every launch reads
@@ -979,7 +980,7 @@ async function saveRawCache (filePath, data) {
 // Flow:
 //   1. Read existing merge destination → existingRecords[]  (streamed)
 //   2. Create hidden backup:  dir/.filename.backup.json
-//   3. Deduplicate by --merge-key (default: "id")
+//   3. Deduplicate by --merge-key, merging duplicates field-by-field
 //   4. Write merged result to the merge destination              (streamed)
 //
 // The --output file still gets written as-is (just the new transformed data).
@@ -1026,49 +1027,54 @@ async function createBackup (filePath) {
  */
 function mergeRecords (existingRecords, newRecords, mergeKey, strategy) {
   const map = new Map()
-  let kept = 0
+  const conflicts = new Map()
   let updated = 0
+  let missingKey = 0
 
-  // Index existing records
   for (const record of existingRecords) {
     const key = getByPath(record, mergeKey)
-    if (key !== undefined && key !== null) {
-      map.set(String(key), record)
-    } else {
-      // No key — keep as-is (won't be deduped)
-      map.set(`__nokey_${kept++}`, record)
-    }
+    if (key === undefined || key === null) { missingKey++; continue }
+    const keyStr = String(key)
+    const existing = map.get(keyStr)
+    map.set(keyStr, existing ? mergeRecordPair(existing, record, conflicts) : record)
   }
 
   const existingSize = map.size
 
-  // Merge new records
   for (const record of newRecords) {
     const key = getByPath(record, mergeKey)
-    const keyStr = key !== undefined && key !== null ? String(key) : null
+    if (key === undefined || key === null) { missingKey++; continue }
+    const keyStr = String(key)
+    const existing = map.get(keyStr)
 
-    if (keyStr && map.has(keyStr)) {
-      // Duplicate — apply strategy
-      if (strategy === "keep-new") {
-        map.set(keyStr, record)
-        updated++
-      }
-      // "keep-existing" → do nothing, existing stays
-    } else {
-      // New record
-      const mapKey = keyStr || `__nokey_new_${map.size}`
-      map.set(mapKey, record)
+    if (!existing) {
+      map.set(keyStr, record)
+      continue
     }
+
+    if (strategy === "keep-existing") continue
+
+    // Field-level union rather than blind replacement: the two scrape
+    // generations are asymmetrically rich, so overwriting wholesale would
+    // discard timestamp precision that only the older copy carries.
+    map.set(keyStr, mergeRecordPair(existing, record, conflicts))
+    updated++
   }
 
   const merged = Array.from(map.values())
-  const added = merged.length - existingSize
 
   return {
     merged,
-    stats: { kept: existingSize, added, updated }
+    stats: {
+      kept: existingSize,
+      added: merged.length - existingSize,
+      updated,
+      missingKey,
+      conflicts
+    }
   }
 }
+
 
 /**
  * Load a JSON array file via stream-parse.
@@ -1477,9 +1483,13 @@ async function runCacheMode () {
       if (outputRecords.length > 0) {
         const sampleKey = getByPath(outputRecords[0], opts.mergeKey)
         if (sampleKey === undefined) {
-          log(`⚠ Warning: merge key "${opts.mergeKey}" not found in transformed records.`)
+          // Fatal, not a warning. When this silently continued, every record
+          // fell through the dedup and the merge target grew by the full batch
+          // on every run — 764,913 rows holding 160,037 distinct sightings.
+          log(`✗ FATAL: merge key "${opts.mergeKey}" not found in transformed records.`)
           log(`  Available top-level keys: ${Object.keys(outputRecords[0]).join(", ")}`)
-          log(`  Use --merge-key <field> to specify the correct dedup field.`)
+          log(`  Re-run with --merge-key <field>. Refusing to merge without a dedup key.`)
+          process.exit(1)
         }
       }
 
@@ -1496,6 +1506,12 @@ async function runCacheMode () {
       log(`  Previously: ${stats.kept} records`)
       log(`  Added: ${stats.added} new`)
       log(`  Updated: ${stats.updated} (strategy: ${opts.mergeStrategy})`)
+      if (stats.missingKey > 0) log(`  ⚠ Skipped ${stats.missingKey} record(s) with no "${opts.mergeKey}"`)
+      if (stats.conflicts.size > 0) {
+        const summary = [...stats.conflicts].sort((a, b) => b[1] - a[1])
+          .map(([field, n]) => `${field}=${n}`).join(", ")
+        log(`  Field conflicts resolved newest-wins: ${summary}`)
+      }
       log(`  Total: ${merged.length} records`)
     }
   }

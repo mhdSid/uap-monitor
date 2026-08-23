@@ -38,3 +38,4 @@ sippi-personal-sightings.json
 Base_de_données_des_cas.csv
 
 .env.local
+.baseline

@@ -27,7 +27,8 @@ interface SightingShallow {
   source: string
   shape: string
   country: string
-  continent: string
+  /** null when the sighting carries no usable location. */
+  continent: string | null
   credibility: number
   occurredAt: string
 }

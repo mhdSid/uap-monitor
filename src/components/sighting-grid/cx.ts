@@ -24,6 +24,8 @@ export const cx = {
   [Continent.ASIA_MIDDLE_EAST]: 'grids-asia-middleeast',
   [Continent.ASIA_PACIFIC]: 'grids-asia-pacific',
   [Continent.OCEANIA]: 'grids-oceania',
+  [Continent.MARITIME]: 'grids-maritime',
+  [Continent.SPACE]: 'grids-space',
   sectionWrapper: 'grids-section',
   emptyState: 'empty-state',
   emptyStateCompact: 'empty-state--compact',

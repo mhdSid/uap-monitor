@@ -5,7 +5,11 @@ export enum Continent {
   ASIA_MIDDLE_EAST = 'ASIA_MIDDLE_EAST',
   ASIA_PACIFIC = 'ASIA_PACIFIC',
   OCEANIA = 'OCEANIA',
-  AFRICA = 'AFRICA'
+  AFRICA = 'AFRICA',
+  /** Open water — a sighting with no landfall, not a missing value. */
+  MARITIME = 'MARITIME',
+  /** Orbital / lunar — off-planet, not a missing value. */
+  SPACE = 'SPACE'
 }
 
 export enum SightingStatus {

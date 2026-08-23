@@ -13,12 +13,15 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
+import { env } from 'node:process'
 import { resolveWithStats, printStats } from './geocoder.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
 const INPUT = resolve(ROOT, '__sources/russia.json')
-const OUTPUT = resolve(ROOT, 'public/data/russian-historical.json')
+// NB: this module declares `function process ()` below, which hoists and
+// shadows the Node global — hence the explicit env import.
+const OUTPUT = resolve(ROOT, env.UAP_OUTPUT_DIR || 'public/data', 'russian-historical.json')
 
 const SOURCE = 'CHRONOLOGY'
 const SUB_SOURCE = 'RUSSIAN_HISTORICAL'

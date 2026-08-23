@@ -63,7 +63,9 @@ const CONTINENT_COLOR_VARS: Record<Continent, string> = {
   [Continent.ASIA_MIDDLE_EAST]: 'var(--color-continent-asia-middleeast)',
   [Continent.ASIA_PACIFIC]:     'var(--color-continent-asia-pacific)',
   [Continent.OCEANIA]:          'var(--color-continent-oceania)',
-  [Continent.AFRICA]:           'var(--color-continent-africa)'
+  [Continent.AFRICA]:           'var(--color-continent-africa)',
+  [Continent.MARITIME]:         'var(--color-continent-maritime)',
+  [Continent.SPACE]:            'var(--color-continent-space)'
 }
 
 // ─── Props ──────────────────────────────────────────────────────────

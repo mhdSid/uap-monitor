@@ -10,18 +10,22 @@ const CONTINENT_ORDER: Continent[] = [
   Continent.ASIA_MIDDLE_EAST,
   Continent.ASIA_PACIFIC,
   Continent.OCEANIA,
-  Continent.AFRICA
+  Continent.AFRICA,
+  Continent.MARITIME,
+  Continent.SPACE
 ]
 
 /**
- * Group items by continent.
- * Always returns all 5 continents in a stable order,
- * even if some have zero items.
+ * Group items by region, in a stable display order, including empty regions.
+ *
+ * Items whose `continent` is null carry no location at all and are omitted
+ * from every group — they are never folded into a region they do not belong to.
  */
-export function groupByContinent<T extends { continent: Continent }> (items: T[]): ContinentGroup<T>[] {
+export function groupByContinent<T extends { continent: Continent | null }> (items: T[]): ContinentGroup<T>[] {
   const grouped = new Map<Continent, T[]>()
 
   for (const item of items) {
+    if (item.continent === null) continue
     const list = grouped.get(item.continent) ?? []
     list.push(item)
     grouped.set(item.continent, list)

@@ -69,7 +69,7 @@ function sightingToRow (s: Sighting): string {
     s.location,
     s.region,
     s.country,
-    s.continent,
+    s.continent ?? '',
     s.shape,
     s.duration,
     String(s.observers),

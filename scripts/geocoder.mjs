@@ -224,6 +224,24 @@ function buildIndex () {
  * @param {string} country - our format ("USA", "Russia", etc.)
  * @returns {{ lat: number, lng: number } | null}
  */
+/**
+ * ISO2 country of the most populous city bearing this name, or null.
+ *
+ * Last-resort tier for geo-resolve.mjs. Many NUFORC "country" tokens are in
+ * fact city names that landed in the wrong comma-delimited slot ("Milan",
+ * "Grenoble", "Barnsley", "Siauliai"). Resolving them against the existing
+ * 135K-city index beats hand-maintaining a city list, and population ordering
+ * makes the pick deterministic. `minPopulation` guards the weaker
+ * segment-scan caller against matching an obscure hamlet on a common word.
+ */
+export function lookupCountryByCity (name, minPopulation = 0) {
+  buildIndex()
+  const matches = byCityOnly.get(String(name || '').toLowerCase().trim())
+  if (!matches || !matches.length) return null
+  const best = matches[0]
+  return best.pop >= minPopulation ? best.country : null
+}
+
 export function resolveCoordinates (city, state, country) {
   buildIndex()
 

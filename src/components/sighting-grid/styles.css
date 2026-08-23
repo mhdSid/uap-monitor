@@ -194,6 +194,26 @@
   border-bottom: 1px solid var(--color-continent-africa);
 }
 
+/* ── Maritime ───────────────────────────────────────────────────── */
+
+.grids-maritime {
+  border: 1px solid var(--color-continent-maritime);
+}
+
+.grids-maritime .section__header {
+  border-bottom: 1px solid var(--color-continent-maritime);
+}
+
+/* ── Space ──────────────────────────────────────────────────────── */
+
+.grids-space {
+  border: 1px solid var(--color-continent-space);
+}
+
+.grids-space .section__header {
+  border-bottom: 1px solid var(--color-continent-space);
+}
+
 /* Desktop: show all columns with fixed widths */
 @media (min-width: 768px) {
   .cell-report__summary { -webkit-line-clamp: 2; }
